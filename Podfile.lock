@@ -1,0 +1,38 @@
+PODS:
+  - APIKit (1.0.0-beta1):
+    - Result (~> 0.6-beta.1)
+  - Himotoki (0.5.1)
+  - Ocean (1.3.9):
+    - Swim (~> 1.3.8)
+  - Result (0.6-beta.1)
+  - Swim (1.3.8)
+
+DEPENDENCIES:
+  - APIKit (from `https://github.com/ishkawa/APIKit.git`, branch `master`)
+  - Himotoki (from `https://github.com/ikesyo/Himotoki.git`, branch `swift2`)
+  - Ocean (~> 1.3.9)
+
+EXTERNAL SOURCES:
+  APIKit:
+    :branch: master
+    :git: https://github.com/ishkawa/APIKit.git
+  Himotoki:
+    :branch: swift2
+    :git: https://github.com/ikesyo/Himotoki.git
+
+CHECKOUT OPTIONS:
+  APIKit:
+    :commit: 96618acc4e7e1cdc131933c0e90af58c707a8a5b
+    :git: https://github.com/ishkawa/APIKit.git
+  Himotoki:
+    :commit: 9b20c4b278d3db96adee772b6c84ef73c7ff2e50
+    :git: https://github.com/ikesyo/Himotoki.git
+
+SPEC CHECKSUMS:
+  APIKit: cb0ce7ebc5e72d7ae4d71e0061f2f98676287c1f
+  Himotoki: 162194f50e4811b0695bb9e9a1bd4aebf703c82f
+  Ocean: a5df1ea67124f98268d2d028fa92767987991d4b
+  Result: 6c990ec4a72470672f9fc5b6fef009da0f6f40d1
+  Swim: 2be7f760fcf682f3895a00b56ccda1ea16373f50
+
+COCOAPODS: 0.38.0
