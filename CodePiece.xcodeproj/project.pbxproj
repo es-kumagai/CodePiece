@@ -13,6 +13,9 @@
 		B1492FBD1B5BCED80043ED8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1492FBB1B5BCED80043ED8D /* Main.storyboard */; };
 		B1492FC81B5BCED80043ED8D /* CodePieceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FC71B5BCED80043ED8D /* CodePieceTests.swift */; };
 		B1492FD31B5BCED80043ED8D /* CodePieceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FD21B5BCED80043ED8D /* CodePieceUITests.swift */; };
+		B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */; };
+		B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */; };
+		B149301E1B5BDDD50043ED8D /* ESGist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B149301D1B5BDDD50043ED8D /* ESGist.framework */; };
 		C116DA01D05FC73B32E47FFF /* Pods_CodePiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -49,6 +52,9 @@
 		B1492FD21B5BCED80043ED8D /* CodePieceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePieceUITests.swift; sourceTree = "<group>"; };
 		B1492FD41B5BCED80043ED8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1492FE01B5BCF1E0043ED8D /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSetting.swift; sourceTree = "<group>"; };
+		B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSeting.swift; sourceTree = "<group>"; };
+		B149301D1B5BDDD50043ED8D /* ESGist.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ESGist.framework; path = ../../Libraries/ESGist/build/Debug/ESGist.framework; sourceTree = "<group>"; };
 		D6B457359224F9E2FA023078 /* Pods-CodePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodePiece.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B149301E1B5BDDD50043ED8D /* ESGist.framework in Frameworks */,
 				C116DA01D05FC73B32E47FFF /* Pods_CodePiece.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +88,7 @@
 		84FCAD57E3AF93B4392E1F74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B149301D1B5BDDD50043ED8D /* ESGist.framework */,
 				2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */,
 			);
 			name = Frameworks;
@@ -112,6 +120,8 @@
 		B1492FB41B5BCED80043ED8D /* CodePiece */ = {
 			isa = PBXGroup;
 			children = (
+				B1492FE71B5BDA4B0043ED8D /* Windows */,
+				B1492FE21B5BD2510043ED8D /* Settings */,
 				B1492FB51B5BCED80043ED8D /* AppDelegate.swift */,
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
 				B1492FB91B5BCED80043ED8D /* Assets.xcassets */,
@@ -137,6 +147,22 @@
 				B1492FD41B5BCED80043ED8D /* Info.plist */,
 			);
 			path = CodePieceUITests;
+			sourceTree = "<group>";
+		};
+		B1492FE21B5BD2510043ED8D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */,
+				B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		B1492FE71B5BDA4B0043ED8D /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Windows;
 			sourceTree = "<group>";
 		};
 		D44070DA70174B40A6FB9883 /* Pods */ = {
@@ -328,6 +354,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */,
+				B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */,
 				B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */,
 				B1492FB61B5BCED80043ED8D /* AppDelegate.swift in Sources */,
 			);
