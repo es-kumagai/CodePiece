@@ -16,6 +16,15 @@
 		B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */; };
 		B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */; };
 		B149301E1B5BDDD50043ED8D /* ESGist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B149301D1B5BDDD50043ED8D /* ESGist.framework */; };
+		B1D2D66B1B5D44A800794EFD /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D66A1B5D44A800794EFD /* Authorization.swift */; };
+		B1D2D6721B5D490800794EFD /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6711B5D490800794EFD /* Settings.swift */; };
+		B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6751B5D525C00794EFD /* MenuController.swift */; };
+		B1D2D67F1B5D566000794EFD /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D67E1B5D566000794EFD /* Storyboard.swift */; };
+		B1D2D6831B5D5ED400794EFD /* PreferencesWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6811B5D5ED400794EFD /* PreferencesWindow.storyboard */; };
+		B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6821B5D5ED400794EFD /* PreferencesWindowController.swift */; };
+		B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6851B5D5F4000794EFD /* GitHubPreferenceView.storyboard */; };
+		B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6891B5D5FCD00794EFD /* GitHubPreferenceViewController.swift */; };
+		B1D2D6971B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6961B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift */; };
 		C116DA01D05FC73B32E47FFF /* Pods_CodePiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -55,6 +64,15 @@
 		B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSetting.swift; sourceTree = "<group>"; };
 		B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSeting.swift; sourceTree = "<group>"; };
 		B149301D1B5BDDD50043ED8D /* ESGist.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ESGist.framework; path = ../../Libraries/ESGist/build/Debug/ESGist.framework; sourceTree = "<group>"; };
+		B1D2D66A1B5D44A800794EFD /* Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
+		B1D2D6711B5D490800794EFD /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		B1D2D6751B5D525C00794EFD /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		B1D2D67E1B5D566000794EFD /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
+		B1D2D6811B5D5ED400794EFD /* PreferencesWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PreferencesWindow.storyboard; sourceTree = "<group>"; };
+		B1D2D6821B5D5ED400794EFD /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		B1D2D6851B5D5F4000794EFD /* GitHubPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubPreferenceView.storyboard; sourceTree = "<group>"; };
+		B1D2D6891B5D5FCD00794EFD /* GitHubPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubPreferenceViewController.swift; sourceTree = "<group>"; };
+		B1D2D6961B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubPreferenceAuthenticationViewController.swift; sourceTree = "<group>"; };
 		D6B457359224F9E2FA023078 /* Pods-CodePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodePiece.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,7 +138,9 @@
 		B1492FB41B5BCED80043ED8D /* CodePiece */ = {
 			isa = PBXGroup;
 			children = (
-				B1492FE71B5BDA4B0043ED8D /* Windows */,
+				B1D2D6801B5D5EA000794EFD /* Preferences */,
+				B1D2D67D1B5D564100794EFD /* References */,
+				B1492FE71B5BDA4B0043ED8D /* Menu */,
 				B1492FE21B5BD2510043ED8D /* Settings */,
 				B1492FB51B5BCED80043ED8D /* AppDelegate.swift */,
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
@@ -152,17 +172,48 @@
 		B1492FE21B5BD2510043ED8D /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				B1D2D6711B5D490800794EFD /* Settings.swift */,
 				B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */,
 				B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */,
+				B1D2D6691B5D448100794EFD /* Authorization */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		B1492FE71B5BDA4B0043ED8D /* Windows */ = {
+		B1492FE71B5BDA4B0043ED8D /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				B1D2D6751B5D525C00794EFD /* MenuController.swift */,
 			);
-			path = Windows;
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		B1D2D6691B5D448100794EFD /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				B1D2D66A1B5D44A800794EFD /* Authorization.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		B1D2D67D1B5D564100794EFD /* References */ = {
+			isa = PBXGroup;
+			children = (
+				B1D2D67E1B5D566000794EFD /* Storyboard.swift */,
+			);
+			path = References;
+			sourceTree = "<group>";
+		};
+		B1D2D6801B5D5EA000794EFD /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				B1D2D6811B5D5ED400794EFD /* PreferencesWindow.storyboard */,
+				B1D2D6821B5D5ED400794EFD /* PreferencesWindowController.swift */,
+				B1D2D6851B5D5F4000794EFD /* GitHubPreferenceView.storyboard */,
+				B1D2D6891B5D5FCD00794EFD /* GitHubPreferenceViewController.swift */,
+				B1D2D6961B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 		D44070DA70174B40A6FB9883 /* Pods */ = {
@@ -181,12 +232,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B1492FD71B5BCED80043ED8D /* Build configuration list for PBXNativeTarget "CodePiece" */;
 			buildPhases = (
-				BA610E39B59EEBE97ECA6415 /* Check Pods Manifest.lock */,
 				B1492FAE1B5BCED80043ED8D /* Sources */,
 				B1492FAF1B5BCED80043ED8D /* Frameworks */,
 				B1492FB01B5BCED80043ED8D /* Resources */,
-				D9EDE62C8B25D20A6567FFB0 /* Embed Pods Frameworks */,
-				320BABAD8ACD1FC9A670EA34 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,7 +328,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */,
 				B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */,
+				B1D2D6831B5D5ED400794EFD /* PreferencesWindow.storyboard in Resources */,
 				B1492FBD1B5BCED80043ED8D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,63 +351,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		320BABAD8ACD1FC9A670EA34 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BA610E39B59EEBE97ECA6415 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		D9EDE62C8B25D20A6567FFB0 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		B1492FAE1B5BCED80043ED8D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1D2D6971B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift in Sources */,
+				B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */,
+				B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */,
 				B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */,
 				B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */,
+				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
 				B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */,
 				B1492FB61B5BCED80043ED8D /* AppDelegate.swift in Sources */,
+				B1D2D6721B5D490800794EFD /* Settings.swift in Sources */,
+				B1D2D67F1B5D566000794EFD /* Storyboard.swift in Sources */,
+				B1D2D66B1B5D44A800794EFD /* Authorization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

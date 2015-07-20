@@ -7,7 +7,17 @@
 //
 
 import Foundation
+import ESGist
 
 struct AccountSetting {
 	
+	var authorization:GitHubAuthorization?
+}
+
+extension AccountSetting {
+	
+	var isAuthorized:Bool {
+		
+		return self.authorization != nil
+	}
 }

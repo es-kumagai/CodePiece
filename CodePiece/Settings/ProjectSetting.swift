@@ -8,5 +8,4 @@
 
 struct ProjectSetting {
 
-	var hashTag:String
 }
