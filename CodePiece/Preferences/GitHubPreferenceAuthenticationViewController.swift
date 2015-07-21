@@ -15,16 +15,50 @@ class GitHubPreferenceAuthenticationViewController: NSViewController {
 	
 	@IBAction func pushCancelButton(sender:NSButton) {
 	
-		self.dismissViewController(self)
+		self.dismissController(self)
 	}
 	
 	@IBAction func pushAuthenticateButton(sender:NSButton) {
 		
+		let username = self.usernameTextField.stringValue
+		let password = self.passwordTextField.stringValue
+		
+		guard !username.isEmpty && !password.isEmpty else {
+
+			self.showErrorAlert("Invalid account", message: "Please enter your 'Username' and 'Password' for GitHub.")
+			return
+		}
+		
+		Authorization.authorizationWithGitHub(username, password: password) { result in
+			
+			switch result {
+				
+			case .Created:
+				self.dismissController(self)
+				
+			case .AlreadyCreated:
+				self.showInformationAlert("Already authenticated", message: "If you cannot post a code to Gist, please 'reset' authentication and authenticate again.")
+				self.dismissController(self)
+				
+			case .Failed(let message):
+				self.showErrorAlert("Failed to authentication", message: message)
+			}
+		}
 	}
 	
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do view setup here.
+
+		super.viewDidLoad()
     }
-    
+	
+	override func viewWillAppear() {
+		
+		super.viewWillAppear()
+		
+		if let username = settings.account.username {
+			
+			self.usernameTextField.stringValue = username
+			self.passwordTextField.becomeFirstResponder()
+		}
+	}
 }

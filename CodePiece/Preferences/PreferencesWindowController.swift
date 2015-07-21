@@ -24,3 +24,11 @@ class PreferencesWindowController: NSWindowController {
 		self.contentViewController = Storyboard.GitHubPreferenceView.defaultViewController
     }
 }
+
+extension PreferencesWindowController : NSWindowDelegate {
+	
+	func windowWillClose(notification: NSNotification) {
+		
+		NSApp.stopModal()
+	}
+}

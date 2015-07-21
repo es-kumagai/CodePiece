@@ -12,7 +12,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eF3-de-P5v">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eF3-de-P5v">
                                 <rect key="frame" x="26" y="233" width="48" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub" id="UyK-pT-fKy">
                                     <font key="font" metaFont="system"/>
@@ -20,50 +20,76 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8X9-Tf-XVS">
-                                <rect key="frame" x="61" y="197" width="114" height="17"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8X9-Tf-XVS">
+                                <rect key="frame" x="61" y="196" width="121" height="18"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Authorized Status" id="E8g-oe-Wto">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="system" size="14"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-Tx-wOb">
+                            <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-Tx-wOb">
                                 <rect key="frame" x="20" y="221" width="275" height="5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="mSM-Fd-yK5"/>
+                                </constraints>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>
                             </box>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5cj-jM-cXY">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5cj-jM-cXY">
                                 <rect key="frame" x="35" y="195" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="4c7-Xn-3Zo"/>
+                                    <constraint firstAttribute="height" constant="20" id="7SL-qe-gEJ"/>
+                                </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RU2-eg-vOe"/>
                             </imageView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
                                 <rect key="frame" x="337" y="213" width="129" height="32"/>
                                 <buttonCell key="cell" type="push" title="Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRz-PP-aVw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="doAuthentication:" target="ps4-Eu-nrG" id="0AS-l6-cRg"/>
                                     <segue destination="nSm-bR-eB5" kind="sheet" id="S6P-Td-Bfw"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-jY-0Jr">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-jY-0Jr">
                                 <rect key="frame" x="337" y="187" width="129" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DsE-ej-daq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="system" size="15"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="doReset:" target="ps4-Eu-nrG" id="eG2-vm-x3W"/>
                                 </connections>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="AFn-Gq-0En" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="29" id="2hg-td-K3n"/>
+                            <constraint firstItem="5cj-jM-cXY" firstAttribute="top" secondItem="tiQ-Tx-wOb" secondAttribute="bottom" constant="8" id="4Ss-kW-Plq"/>
+                            <constraint firstItem="eF3-de-P5v" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="20" id="50m-UE-CE8"/>
+                            <constraint firstItem="vPC-jY-0Jr" firstAttribute="width" secondItem="AFn-Gq-0En" secondAttribute="width" id="6Ge-be-Zj3"/>
+                            <constraint firstItem="tiQ-Tx-wOb" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="CFS-nN-6G8"/>
+                            <constraint firstItem="vPC-jY-0Jr" firstAttribute="top" secondItem="AFn-Gq-0En" secondAttribute="bottom" constant="5" id="Mmi-Mn-NFS"/>
+                            <constraint firstItem="vPC-jY-0Jr" firstAttribute="leading" secondItem="AFn-Gq-0En" secondAttribute="leading" id="QPp-IE-onU"/>
+                            <constraint firstItem="tiQ-Tx-wOb" firstAttribute="top" secondItem="eF3-de-P5v" secondAttribute="bottom" constant="9" id="WKr-XE-7mN"/>
+                            <constraint firstItem="5cj-jM-cXY" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="35" id="Ym7-hQ-dhw"/>
+                            <constraint firstItem="eF3-de-P5v" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="28" id="adt-6R-Taj"/>
+                            <constraint firstItem="8X9-Tf-XVS" firstAttribute="centerY" secondItem="5cj-jM-cXY" secondAttribute="centerY" id="sPM-Lb-NSW"/>
+                            <constraint firstItem="8X9-Tf-XVS" firstAttribute="leading" secondItem="5cj-jM-cXY" secondAttribute="trailing" constant="8" id="srI-ID-bfq"/>
+                            <constraint firstAttribute="trailing" secondItem="AFn-Gq-0En" secondAttribute="trailing" constant="20" id="tIr-9i-gFL"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="authorizationButton" destination="AFn-Gq-0En" id="1gS-1V-nLJ"/>
                         <outlet property="authorizedStatusImageView" destination="5cj-jM-cXY" id="VwE-XG-fmV"/>
                         <outlet property="authorizedStatusTextField" destination="8X9-Tf-XVS" id="q1b-mO-fap"/>
+                        <outlet property="resetButton" destination="vPC-jY-0Jr" id="n3R-cC-G4s"/>
                     </connections>
                 </viewController>
                 <customObject id="uXz-0g-Yk7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

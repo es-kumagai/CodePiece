@@ -11,13 +11,22 @@ import ESGist
 
 struct AccountSetting {
 	
+	var id:ID?
+	var username:String?
 	var authorization:GitHubAuthorization?
 }
 
 extension AccountSetting {
 	
-	var isAuthorized:Bool {
+	var authorizationState:AuthorizationState {
 		
-		return self.authorization != nil
+		if self.id != nil {
+
+			return authorization != nil ? .Authorized : .AuthorizedWithNoToken
+		}
+		else {
+			
+			return .NotAuthorized
+		}
 	}
 }

@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// Insert code here to initialize your application
+		GitHubClientInfo = CodePieceClientInfo()
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
