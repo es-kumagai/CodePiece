@@ -733,9 +733,14 @@
                                             <buttonCell key="cell" type="smallSquare" title="Post" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="61a-aW-JF6">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" size="15" name="SourceCodePro-Regular"/>
+                                                <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="pushPostButton:" target="XfG-lQ-9wD" id="SgA-V1-atH"/>
+                                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="self.canPost" id="pYS-Ai-csf"/>
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KZX-ml-gl0">
@@ -748,6 +753,9 @@
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <outlet property="delegate" destination="XfG-lQ-9wD" id="s13-AZ-Cp3"/>
+                                            </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KE3-fE-gh7">
                                             <rect key="frame" x="13" y="61" width="75" height="17"/>
@@ -763,7 +771,7 @@
                                                 <constraint firstAttribute="width" constant="134" id="2Lt-u9-TvK"/>
                                                 <constraint firstAttribute="height" constant="34" id="FFS-Uy-smd"/>
                                             </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="#cswift" drawsBackground="YES" id="qRd-iL-Ocn">
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="qRd-iL-Ocn">
                                                 <font key="font" size="15" name="SourceCodePro-Regular"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -820,6 +828,7 @@
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="6Kl-2j-Nad"/>
             </objects>
             <point key="canvasLocation" x="207" y="725"/>
         </scene>

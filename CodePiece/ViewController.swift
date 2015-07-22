@@ -22,7 +22,17 @@ class ViewController: NSViewController {
 	
 	var sns:SNSController!
 	
+	var canPost:Bool {
+	
+		return !self.descriptionTextField.stringValue.isEmpty
+	}
+	
 	@IBAction func pushPostButton(sender:NSButton?) {
+		
+		guard self.canPost else {
+			
+			return
+		}
 		
 		do {
 
@@ -108,6 +118,13 @@ class ViewController: NSViewController {
 		self.focusToDefaultControl()
 		self.verifyCredentials()
 	}
+	
+	override func viewDidDisappear() {
+		
+		super.viewDidDisappear()
+		
+		NSApp.terminate(self)
+	}
 
 	func focusToDefaultControl() {
 		
@@ -142,6 +159,15 @@ class ViewController: NSViewController {
 		super.viewDidAppear()
 		
 		
+	}
+}
+
+extension ViewController : NSTextFieldDelegate {
+
+	override func controlTextDidChange(obj: NSNotification) {
+		
+		self.willChangeValueForKey("canPost")
+		self.didChangeValueForKey("canPost")
 	}
 }
 
