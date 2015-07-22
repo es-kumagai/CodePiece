@@ -688,7 +688,7 @@
                                     <rect key="frame" x="1" y="1" width="687" height="254"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="8OA-rk-WhX">
+                                        <textView importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="8OA-rk-WhX">
                                             <rect key="frame" x="0.0" y="0.0" width="687" height="254"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -757,8 +757,8 @@ DQ
                                                 <constraint firstAttribute="width" constant="134" id="2Lt-u9-TvK"/>
                                                 <constraint firstAttribute="height" constant="23" id="FFS-Uy-smd"/>
                                             </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="qRd-iL-Ocn">
-                                                <font key="font" metaFont="system" size="15"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" drawsBackground="YES" id="qRd-iL-Ocn">
+                                                <font key="font" metaFont="system"/>
                                                 <color key="textColor" red="0.34139323234558105" green="0.44181898236274719" blue="0.9985426664352417" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -776,8 +776,8 @@ DQ
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="23" id="WH5-5N-0DM"/>
                                             </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="1hv-pU-gkv">
-                                                <font key="font" size="15" name="HiraKakuProN-W3"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="1hv-pU-gkv">
+                                                <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -806,6 +806,14 @@ DQ
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xbt-s5-shT">
+                                <rect key="frame" x="668" y="370" width="56" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" title="Swift" bezelStyle="round" id="bOp-9i-4ni">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="top" secondItem="f8Q-oO-N5A" secondAttribute="bottom" constant="8" id="72d-ZC-NhY"/>
@@ -813,8 +821,10 @@ DQ
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="KZA-YY-iff"/>
                             <constraint firstAttribute="bottom" secondItem="3hT-FM-HsJ" secondAttribute="bottom" constant="20" id="L3c-1p-tfv"/>
                             <constraint firstItem="f8Q-oO-N5A" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="RbA-ac-h6D"/>
+                            <constraint firstAttribute="trailing" secondItem="xbt-s5-shT" secondAttribute="trailing" constant="20" id="VpG-1M-i25"/>
                             <constraint firstItem="3hT-FM-HsJ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="aO7-TC-Yo9"/>
                             <constraint firstAttribute="trailing" secondItem="3hT-FM-HsJ" secondAttribute="trailing" constant="20" id="d69-dm-NnX"/>
+                            <constraint firstItem="xbt-s5-shT" firstAttribute="baseline" secondItem="f8Q-oO-N5A" secondAttribute="baseline" id="dUO-Pe-eBH"/>
                             <constraint firstItem="3hT-FM-HsJ" firstAttribute="top" secondItem="Ny3-jn-TOD" secondAttribute="bottom" id="ghw-iE-9Ep"/>
                             <constraint firstItem="f8Q-oO-N5A" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="t54-Qc-PJx"/>
                         </constraints>
