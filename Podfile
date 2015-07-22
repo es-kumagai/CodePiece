@@ -18,6 +18,7 @@ target :CodePiece do
 	use_frameworks!
 
 	pod 'KeychainAccess', :git => 'https://github.com/kishikawakatsumi/KeychainAccess.git', :branch => 'swift-2.0'
+	pod 'STTwitter'
 
 end
 

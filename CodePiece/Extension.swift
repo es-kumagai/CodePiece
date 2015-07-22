@@ -12,9 +12,9 @@ import APIKit
 
 extension String {
 
-	public func appendStringIfNotEmpty(string:String, separator:String = "") -> String {
+	public func appendStringIfNotEmpty(string:String?, separator:String = "") -> String {
 		
-		guard !string.isEmpty else {
+		guard let string = string where !string.isEmpty else {
 			
 			return self
 		}

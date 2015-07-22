@@ -14,6 +14,12 @@ struct AccountSetting {
 	var id:ID?
 	var username:String?
 	var authorization:GitHubAuthorization?
+	
+	var twitterAccount:TwitterAccount?
+}
+
+extension AccountSetting {
+
 }
 
 extension AccountSetting {

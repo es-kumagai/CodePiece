@@ -9,6 +9,7 @@
 import Foundation
 import ESGist
 import APIKit
+import STTwitter
 
 // このプロトコルに準拠したクライアント情報をプロジェクトに実装し、
 // AppDelegate 等から GitHubClientInfo 変数にそのインスタンスを設定してください。
@@ -22,11 +23,18 @@ import APIKit
 //	}
 
 var GitHubClientInfo:GitHubClientInfoType!
+var TwitterClientInfo:TwitterClientInfoType!
 
 protocol GitHubClientInfoType {
 	
 	var id:String { get }
 	var secret:String { get }
+}
+
+protocol TwitterClientInfoType {
+	
+	var consumerKey:String { get }
+	var consumerSecret:String { get }
 }
 
 enum AuthorizationState {
@@ -44,7 +52,18 @@ struct Authorization : AlertDisplayable {
 		case AlreadyCreated
 		case Failed(String)
 	}
-	
+}
+
+// MARK: Twitter
+
+extension Authorization {
+
+}
+
+// MARK: GitHub
+
+extension Authorization {
+
 	static func resetAuthorizationOfGitHub(id:ID) {
 		
 		guard let authorization = settings.account.authorization else {

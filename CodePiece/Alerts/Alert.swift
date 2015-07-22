@@ -33,6 +33,14 @@ extension AlertDisplayable {
 		self.dynamicType.showErrorAlert(title, message: message)
 	}
 	
+	private static func showAlert(alert:NSAlert) {
+	
+		dispatch_async(dispatch_get_main_queue()) {
+			
+			alert.runModal()
+		}
+	}
+	
 	static func showInformationAlert(title:String, message:String) {
 		
 		let alert = NSAlert()
@@ -41,8 +49,8 @@ extension AlertDisplayable {
 		alert.informativeText = message
 		alert.addButtonWithTitle("OK")
 		alert.alertStyle = .InformationalAlertStyle
-		
-		alert.runModal()
+	
+		self.showAlert(alert)
 	}
 	
 	static func showWarningAlert(title:String, message:String) {
@@ -54,7 +62,7 @@ extension AlertDisplayable {
 		alert.addButtonWithTitle("OK")
 		alert.alertStyle = .WarningAlertStyle
 		
-		alert.runModal()
+		self.showAlert(alert)
 	}
 	
 	static func showErrorAlert(title:String, message:String) {
@@ -66,6 +74,6 @@ extension AlertDisplayable {
 		alert.addButtonWithTitle("I see")
 		alert.alertStyle = .CriticalAlertStyle
 
-		alert.runModal()
+		self.showAlert(alert)
 	}
 }

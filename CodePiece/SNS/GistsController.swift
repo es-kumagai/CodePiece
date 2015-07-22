@@ -8,23 +8,23 @@
 
 import Cocoa
 import ESGist
+import Result
 
-final class GistsController : AlertDisplayable {
+final class GistsController : PostController, AlertDisplayable {
 
-	static let filename = "CodePiece"
+	let filename = "CodePiece"
+
+	typealias PostResult = Result<ESGist.Gist,NSError>
 	
-	static func post(content:String, language:ESGist.Language, description:String, hashtag:String, completed:(ESGist.Gist?)->Void) {
+	func post(content:String, language:ESGist.Language, description:String, hashtag:String, completed:(PostResult)->Void) throws {
 
 		guard let authorization = settings.account.authorization else {
 			
-			self.showWarningAlert("Cannot post", message: "The authentication token is not correct. Please re-authentication.")
-			completed(nil)
-			
-			return
+			throw SNSControllerError.NotAuthorized
 		}
 
 		let filename = self.filename.appendStringIfNotEmpty(language.extname, separator: ".")
-		let description = DescriptionGenerator(description, language: nil, hashtag: hashtag)
+		let description = DescriptionGenerator(description, language: nil, hashtag: hashtag, appendAppTag: true)
 		let publicGist = true
 		
 		let file = GistFile(name: filename, content: content)
@@ -43,12 +43,11 @@ final class GistsController : AlertDisplayable {
 				let gist = created.gist
 				
 				NSLog("A Gist posted successfully. \(gist)")
-				completed(gist)
+				completed(PostResult(value: gist))
 				
 			case .Failure(let error):
 				
-				self.showErrorAlert("Failed to post a gist", message: String(error))
-				completed(nil)
+				completed(PostResult(error: NSError(domain: "Failed to post a gist. \(error)", code: -1, userInfo: nil)))
 			}
 		}
 	}

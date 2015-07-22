@@ -6,6 +6,7 @@ PODS:
   - Ocean (1.3.9):
     - Swim (~> 1.3.8)
   - Result (0.6-beta.1)
+  - STTwitter (0.2.1)
   - Swim (1.3.8)
 
 DEPENDENCIES:
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`,
     branch `swift-2.0`)
   - Ocean (~> 1.3.9)
+  - STTwitter
 
 EXTERNAL SOURCES:
   APIKit:
@@ -43,6 +45,7 @@ SPEC CHECKSUMS:
   KeychainAccess: 2ffa8b1b7130263bb7fe90b359d778696fc2d8ce
   Ocean: a5df1ea67124f98268d2d028fa92767987991d4b
   Result: 6c990ec4a72470672f9fc5b6fef009da0f6f40d1
+  STTwitter: 7b348a4600eb9f868a3d1c9031b4fd8533d123e7
   Swim: 2be7f760fcf682f3895a00b56ccda1ea16373f50
 
 COCOAPODS: 0.38.0
