@@ -25,8 +25,13 @@ class ViewController: NSViewController {
 		return !self.descriptionTextField.stringValue.isEmpty
 	}
 	
-	@IBAction func pushPostButton(sender:NSButton?) {
-		
+	@IBAction func pushPostButton(sender:NSObject?) {
+	
+		self.postToSNS()
+	}
+	
+	func postToSNS() {
+
 		guard self.canPost else {
 			
 			return
@@ -114,7 +119,6 @@ class ViewController: NSViewController {
 		self.codeTextView.automaticSpellingCorrectionEnabled = false
 		self.codeTextView.automaticTextReplacementEnabled = false
 		self.codeTextView.continuousSpellCheckingEnabled = false
-		self.codeTextView.grammarCheckingEnabled = false
 	}
 	
 	override func viewWillAppear() {
@@ -133,9 +137,24 @@ class ViewController: NSViewController {
 	}
 
 	func focusToDefaultControl() {
+
+		self.focusToCodeArea()
+	}
+	
+	func focusToCodeArea() {
 		
 		// FIXME: 😟 この方法では NSTextView にフォーカスしてくれません。
 		self.codeScrollView.becomeFirstResponder()
+	}
+	
+	func focusToDescription() {
+		
+		self.descriptionTextField.becomeFirstResponder()
+	}
+	
+	func focusToHashtag() {
+		
+		self.hashTagTextField.becomeFirstResponder()
 	}
 	
 	func verifyCredentials() {

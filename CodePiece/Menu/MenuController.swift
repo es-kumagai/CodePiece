@@ -17,9 +17,24 @@ final class MenuController : NSObject {
 		return self.application.keyWindow
 	}
 	
+	var mainViewController:ViewController? {
+		
+		return self.keyWindow?.contentViewController as? ViewController
+	}
+	
 	override init() {
 		
 		super.init()
+	}
+
+	var isMainViewControllerActive:Bool {
+	
+		return self.mainViewController != nil
+	}
+	
+	var canPostToSNS:Bool {
+		
+		return self.mainViewController?.canPost ?? false
 	}
 	
 	@IBAction func showPreferences(sender:NSMenuItem?) {
@@ -27,5 +42,25 @@ final class MenuController : NSObject {
 		let windowController = Storyboard.PreferencesWindow.defaultController as! PreferencesWindowController
 		
 		self.application.runModalForWindow(windowController.window!)
+	}
+
+	@IBAction func moveFocusToCodeArea(sender:NSObject?) {
+		
+		self.mainViewController?.focusToCodeArea()
+	}
+	
+	@IBAction func moveFocusToDescription(sender:NSObject?) {
+		
+		self.mainViewController?.focusToDescription()
+	}
+	
+	@IBAction func moveFocusToHashtag(sender:NSObject?) {
+		
+		self.mainViewController?.focusToHashtag()
+	}
+	
+	@IBAction func postToSNS(sender:NSMenuItem?) {
+		
+		self.mainViewController?.postToSNS()
 	}
 }
