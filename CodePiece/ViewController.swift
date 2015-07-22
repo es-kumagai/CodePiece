@@ -20,8 +20,6 @@ class ViewController: NSViewController {
 	
 	@IBOutlet weak var codeScrollView:NSScrollView!
 	
-	var sns:SNSController!
-	
 	var canPost:Bool {
 	
 		return !self.descriptionTextField.stringValue.isEmpty
@@ -69,7 +67,7 @@ class ViewController: NSViewController {
 
 		if self.codeTextView.string!.isEmpty {
 			
-			try self.sns.twitter.post(description, hashtag: hashtag) { result in
+			try sns.twitter.post(description, hashtag: hashtag) { result in
 				
 				switch result {
 					
@@ -83,7 +81,7 @@ class ViewController: NSViewController {
 		}
 		else {
 			
-			try self.sns.post(code, language: language, description: description, hashtag: hashtag) { result in
+			try sns.post(code, language: language, description: description, hashtag: hashtag) { result in
 				
 				switch result {
 					
@@ -106,9 +104,7 @@ class ViewController: NSViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.codeTextView.font = NSFont(name: "SourceCodePro-Regular", size: 15.0)
-		
-		self.sns = SNSController()
+		self.codeTextView.font = NSFont(name: "SourceCodePro-Regular", size: 15.0)		
 	}
 	
 	override func viewWillAppear() {
@@ -133,8 +129,13 @@ class ViewController: NSViewController {
 	}
 	
 	func verifyCredentials() {
+
+		guard sns != nil else {
 		
-		self.sns.twitter.verifyCredentialsIfNeed { result in
+			return
+		}
+		
+		sns.twitter.verifyCredentialsIfNeed { result in
 			
 			switch result {
 
@@ -143,7 +144,7 @@ class ViewController: NSViewController {
 				NSLog("Twitter credentials verified successfully.")
 				
 			case .Failure(let error):
-				self.showErrorAlert("Cannot post", message: String(error))
+				self.showErrorAlert("Failed to verify credentials", message: String(error))
 			}
 		}
 	}

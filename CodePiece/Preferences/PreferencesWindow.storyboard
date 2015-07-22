@@ -15,14 +15,20 @@
                         <rect key="screenRect" x="-1920" y="-120" width="1920" height="1177"/>
                         <toolbar key="toolbar" implicitIdentifier="52325FDC-CDF1-4208-B47B-8212B155B661" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="rAV-2P-h6l">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="3B067236-40A4-450B-94FC-C3F99039F9AC" explicitItemIdentifier="GitHubPreference" label="GitHub" paletteLabel="GitHub" tag="-1" image="NSUserAccounts" id="I67-Lh-mBC">
+                                <toolbarItem implicitItemIdentifier="3B067236-40A4-450B-94FC-C3F99039F9AC" label="GitHub" paletteLabel="GitHub" tag="-1" image="NSUserAccounts" id="I67-Lh-mBC">
                                     <connections>
                                         <action selector="showGitHubPreference:" target="Uy3-nO-Z6i" id="h0V-hA-pHm"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="56DD33E5-5153-40AF-BF7C-A76BAEF6FCE9" label="Twitter" paletteLabel="Twitter" tag="-1" image="NSUserAccounts" id="Czy-bE-3CQ">
+                                    <connections>
+                                        <action selector="showTwitterPreference:" target="Uy3-nO-Z6i" id="fQc-4t-df4"/>
                                     </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="I67-Lh-mBC"/>
+                                <toolbarItem reference="Czy-bE-3CQ"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>

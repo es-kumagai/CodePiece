@@ -23,6 +23,8 @@
 		B12460E41B5F865F0036A690 /* STTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E21B5F865F0036A690 /* STTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B12460E61B5F865F0036A690 /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; };
 		B12460E71B5F865F0036A690 /* Swim.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */; };
+		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
 		B1492FB61B5BCED80043ED8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FB51B5BCED80043ED8D /* AppDelegate.swift */; };
 		B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FB71B5BCED80043ED8D /* ViewController.swift */; };
 		B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1492FB91B5BCED80043ED8D /* Assets.xcassets */; };
@@ -106,6 +108,8 @@
 		B12460DF1B5F865F0036A690 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Result.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/Result.framework"; sourceTree = "<absolute>"; };
 		B12460E21B5F865F0036A690 /* STTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = STTwitter.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/STTwitter.framework"; sourceTree = "<absolute>"; };
 		B12460E51B5F865F0036A690 /* Swim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Swim.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/Swim.framework"; sourceTree = "<absolute>"; };
+		B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterPreferenceViewController.swift; sourceTree = "<group>"; };
+		B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TwitterPreferenceView.storyboard; sourceTree = "<group>"; };
 		B1492FB21B5BCED80043ED8D /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1492FB51B5BCED80043ED8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1492FB71B5BCED80043ED8D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +321,8 @@
 				B1D2D6851B5D5F4000794EFD /* GitHubPreferenceView.storyboard */,
 				B1D2D6891B5D5FCD00794EFD /* GitHubPreferenceViewController.swift */,
 				B1D2D6961B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift */,
+				B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */,
+				B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -486,6 +492,7 @@
 			files = (
 				B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */,
 				B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */,
+				B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */,
 				B1D2D6831B5D5ED400794EFD /* PreferencesWindow.storyboard in Resources */,
 				B1D2D6B41B5E620300794EFD /* SourceCodePro-Regular.otf in Resources */,
 				B1492FBD1B5BCED80043ED8D /* Main.storyboard in Resources */,
@@ -518,6 +525,7 @@
 				B1D2D6A21B5E19D100794EFD /* Alert.swift in Sources */,
 				B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */,
 				B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */,
+				B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */,
 				B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */,
 				B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */,
 				B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */,

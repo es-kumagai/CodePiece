@@ -11,6 +11,7 @@ import STTwitter
 import ESGist
 import Accounts
 import Result
+import Ocean
 
 enum TwitterAccount {
 	
@@ -177,6 +178,9 @@ extension STTwitterAPI {
 			callback(VerifyCredentialsResult(error: error))
 		}
 		
-		self.verifyCredentialsWithUserSuccessBlock(verifySucceeded, errorBlock: verifyFailed)
+		invokeAsync(mainQueue) {
+
+			self.verifyCredentialsWithUserSuccessBlock(verifySucceeded, errorBlock: verifyFailed)
+		}
 	}
 }

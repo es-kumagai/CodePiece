@@ -17,6 +17,11 @@ class PreferencesWindowController: NSWindowController {
 		self.contentViewController = Storyboard.GitHubPreferenceView.defaultViewController
 	}
 	
+	@IBAction func showTwitterPreference(sender:NSToolbarItem?) {
+		
+		self.contentViewController = Storyboard.TwitterPreferenceView.defaultViewController
+	}
+	
     override func windowDidLoad() {
 
 		super.windowDidLoad()
