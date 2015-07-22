@@ -16,6 +16,7 @@ class TwitterPreferenceViewController: NSViewController {
 	
 	var credentialsNotVerified:Bool {
 	
+		// FIXME: 🌙 モーダル画面でベリファイしようとすると、メインスレッドで実行しているからか、閉じるまでベリファイ作業が継続されない。
 		return !sns.twitter.credentialsVerified
 	}
 	
