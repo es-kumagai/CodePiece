@@ -444,6 +444,9 @@
 							com.apple.Keychain = {
 								enabled = 1;
 							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
 						};
 					};
 					B1492FC21B5BCED80043ED8D = {

@@ -34,5 +34,7 @@
 	<array>
 		<string>SourceCodePro-Regular.otf</string>
 	</array>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.social-networking</string>
 </dict>
 </plist>
