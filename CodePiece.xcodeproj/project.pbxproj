@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B12460CB1B5F85560036A690 /* Pods_CodePiece.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12460D01B5F865F0036A690 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; };
+		B12460D11B5F865F0036A690 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12460D31B5F865F0036A690 /* Himotoki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D21B5F865F0036A690 /* Himotoki.framework */; };
+		B12460D41B5F865F0036A690 /* Himotoki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D21B5F865F0036A690 /* Himotoki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12460D61B5F865F0036A690 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D51B5F865F0036A690 /* KeychainAccess.framework */; };
+		B12460D71B5F865F0036A690 /* KeychainAccess.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D51B5F865F0036A690 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12460D91B5F865F0036A690 /* Ocean.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D81B5F865F0036A690 /* Ocean.framework */; };
+		B12460DA1B5F865F0036A690 /* Ocean.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D81B5F865F0036A690 /* Ocean.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12460DC1B5F865F0036A690 /* Pods.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CC1B5F85EC0036A690 /* Pods.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12460E01B5F865F0036A690 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460DF1B5F865F0036A690 /* Result.framework */; };
+		B12460E11B5F865F0036A690 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460DF1B5F865F0036A690 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12460E31B5F865F0036A690 /* STTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E21B5F865F0036A690 /* STTwitter.framework */; };
+		B12460E41B5F865F0036A690 /* STTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E21B5F865F0036A690 /* STTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12460E61B5F865F0036A690 /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; };
+		B12460E71B5F865F0036A690 /* Swim.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1492FB61B5BCED80043ED8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FB51B5BCED80043ED8D /* AppDelegate.swift */; };
 		B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FB71B5BCED80043ED8D /* ViewController.swift */; };
 		B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1492FB91B5BCED80043ED8D /* Assets.xcassets */; };
@@ -37,7 +53,6 @@
 		B1D2D6A81B5E3CB300794EFD /* ESGist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1D2D6A71B5E3CB300794EFD /* ESGist.framework */; };
 		B1D2D6A91B5E3CB300794EFD /* ESGist.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1D2D6A71B5E3CB300794EFD /* ESGist.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1D2D6B41B5E620300794EFD /* SourceCodePro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
-		C116DA01D05FC73B32E47FFF /* Pods_CodePiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +79,15 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B12460DC1B5F865F0036A690 /* Pods.framework in Embed Frameworks */,
+				B12460D71B5F865F0036A690 /* KeychainAccess.framework in Embed Frameworks */,
+				B12460DA1B5F865F0036A690 /* Ocean.framework in Embed Frameworks */,
+				B12460CB1B5F85560036A690 /* Pods_CodePiece.framework in Embed Frameworks */,
+				B12460D41B5F865F0036A690 /* Himotoki.framework in Embed Frameworks */,
+				B12460E41B5F865F0036A690 /* STTwitter.framework in Embed Frameworks */,
+				B12460D11B5F865F0036A690 /* APIKit.framework in Embed Frameworks */,
+				B12460E11B5F865F0036A690 /* Result.framework in Embed Frameworks */,
+				B12460E71B5F865F0036A690 /* Swim.framework in Embed Frameworks */,
 				B1D2D6A91B5E3CB300794EFD /* ESGist.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -74,6 +98,14 @@
 /* Begin PBXFileReference section */
 		2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CodePiece.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7325907F2375CBF16B47D026 /* Pods-CodePiece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodePiece.release.xcconfig"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece.release.xcconfig"; sourceTree = "<group>"; };
+		B12460CC1B5F85EC0036A690 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Pods.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/Pods.framework"; sourceTree = "<absolute>"; };
+		B12460CF1B5F865F0036A690 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = APIKit.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/APIKit.framework"; sourceTree = "<absolute>"; };
+		B12460D21B5F865F0036A690 /* Himotoki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Himotoki.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/Himotoki.framework"; sourceTree = "<absolute>"; };
+		B12460D51B5F865F0036A690 /* KeychainAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = KeychainAccess.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/KeychainAccess.framework"; sourceTree = "<absolute>"; };
+		B12460D81B5F865F0036A690 /* Ocean.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Ocean.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/Ocean.framework"; sourceTree = "<absolute>"; };
+		B12460DF1B5F865F0036A690 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Result.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/Result.framework"; sourceTree = "<absolute>"; };
+		B12460E21B5F865F0036A690 /* STTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = STTwitter.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/STTwitter.framework"; sourceTree = "<absolute>"; };
+		B12460E51B5F865F0036A690 /* Swim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Swim.framework; path = "/Volumes/UserData/Home/tomohiro/Library/Developer/Xcode/DerivedData/CodePiece-gjpipzjdcflpdodoucnflrgjijov/Build/Products/Debug/Swim.framework"; sourceTree = "<absolute>"; };
 		B1492FB21B5BCED80043ED8D /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1492FB51B5BCED80043ED8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1492FB71B5BCED80043ED8D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -120,7 +152,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C116DA01D05FC73B32E47FFF /* Pods_CodePiece.framework in Frameworks */,
+				B12460D61B5F865F0036A690 /* KeychainAccess.framework in Frameworks */,
+				B12460D91B5F865F0036A690 /* Ocean.framework in Frameworks */,
+				B12460D31B5F865F0036A690 /* Himotoki.framework in Frameworks */,
+				B12460E31B5F865F0036A690 /* STTwitter.framework in Frameworks */,
+				B12460D01B5F865F0036A690 /* APIKit.framework in Frameworks */,
+				B12460E01B5F865F0036A690 /* Result.framework in Frameworks */,
+				B12460E61B5F865F0036A690 /* Swim.framework in Frameworks */,
 				B1D2D6A81B5E3CB300794EFD /* ESGist.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +183,14 @@
 		84FCAD57E3AF93B4392E1F74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B12460E51B5F865F0036A690 /* Swim.framework */,
+				B12460E21B5F865F0036A690 /* STTwitter.framework */,
+				B12460DF1B5F865F0036A690 /* Result.framework */,
+				B12460D81B5F865F0036A690 /* Ocean.framework */,
+				B12460D51B5F865F0036A690 /* KeychainAccess.framework */,
+				B12460D21B5F865F0036A690 /* Himotoki.framework */,
+				B12460CF1B5F865F0036A690 /* APIKit.framework */,
+				B12460CC1B5F85EC0036A690 /* Pods.framework */,
 				B1BB59F81B5E87D400DE3942 /* Social.framework */,
 				B1D2D6A71B5E3CB300794EFD /* ESGist.framework */,
 				2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */,
