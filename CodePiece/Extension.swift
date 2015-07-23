@@ -41,9 +41,6 @@ extension APIError : CustomDebugStringConvertible {
 		case RequestBodySerializationError(let error):
 			return "Request body serialization error (\(error))"
 			
-		case FailedToCreateURLSessionTask:
-			return "Failed to create URL Session Task."
-			
 		case UnacceptableStatusCode(let code, let error):
 			return "Unacceptable status code \(code) (\(error))"
 			

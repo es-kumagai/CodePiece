@@ -8,7 +8,7 @@ xcodeproj '../../Libraries/ESGist/ESGist.xcodeproj'
 platform :osx, '10.10'
 use_frameworks!
 
-pod 'Ocean', '~> 1.3.9'
+pod 'Ocean', '~> 1.3.10'
 pod 'APIKit', :git => 'https://github.com/ishkawa/APIKit.git', :branch => 'master'
 pod 'Himotoki', :git => 'https://github.com/ikesyo/Himotoki.git', :branch => 'swift2'
 
