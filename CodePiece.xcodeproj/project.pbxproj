@@ -55,6 +55,7 @@
 		B1D2D6A81B5E3CB300794EFD /* ESGist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1D2D6A71B5E3CB300794EFD /* ESGist.framework */; };
 		B1D2D6A91B5E3CB300794EFD /* ESGist.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1D2D6A71B5E3CB300794EFD /* ESGist.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1D2D6B41B5E620300794EFD /* SourceCodePro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
+		B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */; };
 		E660EEBAC0D916E7C64F496D /* Pods_CodePiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -149,6 +150,7 @@
 		B1D2D6A71B5E3CB300794EFD /* ESGist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESGist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D2D6AD1B5E4E1600794EFD /* CodePiece.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CodePiece.entitlements; sourceTree = "<group>"; };
 		B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Regular.otf"; sourceTree = "<group>"; };
+		B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWindowController.swift; sourceTree = "<group>"; };
 		D6B457359224F9E2FA023078 /* Pods-CodePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodePiece.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -242,6 +244,7 @@
 				B1492FE21B5BD2510043ED8D /* Settings */,
 				B1492FB51B5BCED80043ED8D /* AppDelegate.swift */,
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
+				B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */,
 				B1492FB91B5BCED80043ED8D /* Assets.xcassets */,
 				B1492FBB1B5BCED80043ED8D /* Main.storyboard */,
 				B1492FBE1B5BCED80043ED8D /* Info.plist */,
@@ -585,6 +588,7 @@
 				B1D2D6991B5DEA2600794EFD /* DataStore.swift in Sources */,
 				B1BB59F51B5E715B00DE3942 /* TwitterController.swift in Sources */,
 				B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */,
+				B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
 				B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */,
 				B1D2D69C1B5DFF7400794EFD /* Colors.swift in Sources */,
@@ -727,7 +731,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CodePiece/CodePiece.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -744,7 +749,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CodePiece/CodePiece.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
