@@ -109,7 +109,7 @@ class ViewController: NSViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.codeTextView.font = NSFont(name: "SourceCodePro-Regular", size: 15.0)
+//		self.codeTextView.font = NSFont(name: "SourceCodePro-Regular", size: 15.0)
 		
 		// MARK: IB からだと自動書式調整のプロパティを変えても効かないので、ここで調整しています。
 		self.codeTextView.automaticDashSubstitutionEnabled = false
