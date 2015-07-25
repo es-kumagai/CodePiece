@@ -143,7 +143,6 @@ class ViewController: NSViewController {
 	
 	func focusToCodeArea() {
 		
-		// FIXME: 😟 この方法では NSTextView にフォーカスしてくれません。
 		self.codeScrollView.becomeFirstResponder()
 	}
 	
