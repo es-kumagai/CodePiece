@@ -26,7 +26,7 @@
 		B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */; };
 		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
 		B137468D1B6506000068414B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137468C1B6506000068414B /* Fonts.swift */; };
-		B13746921B6511E80068414B /* SourceCodePro-Regular.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
+		B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
 		B13746941B6512360068414B /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13746931B6512360068414B /* FontTests.swift */; };
 		B1492FB61B5BCED80043ED8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FB51B5BCED80043ED8D /* AppDelegate.swift */; };
 		B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FB71B5BCED80043ED8D /* ViewController.swift */; };
@@ -79,14 +79,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B13746911B6511CF0068414B /* CopyFiles */ = {
+		B13746911B6511CF0068414B /* Copy Font Resources */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Fonts;
 			dstSubfolderSpec = 7;
 			files = (
-				B13746921B6511E80068414B /* SourceCodePro-Regular.otf in CopyFiles */,
+				B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */,
 			);
+			name = "Copy Font Resources";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B1D2D6AA1B5E3CB400794EFD /* Embed Frameworks */ = {
@@ -409,7 +410,7 @@
 				B1492FAE1B5BCED80043ED8D /* Sources */,
 				B1492FAF1B5BCED80043ED8D /* Frameworks */,
 				B1492FB01B5BCED80043ED8D /* Resources */,
-				B13746911B6511CF0068414B /* CopyFiles */,
+				B13746911B6511CF0068414B /* Copy Font Resources */,
 				B1D2D6AA1B5E3CB400794EFD /* Embed Frameworks */,
 				F8B9F120ABB856B634077A1F /* Embed Pods Frameworks */,
 				F72213FE2DCABF4F6BB4DD97 /* Copy Pods Resources */,
