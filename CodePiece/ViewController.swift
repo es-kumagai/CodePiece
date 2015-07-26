@@ -15,7 +15,21 @@ class ViewController: NSViewController {
 	typealias PostResult = SNSController.PostResult
 	
 	@IBOutlet weak var hashTagTextField:NSTextField!
-	@IBOutlet var codeTextView:NSTextView!
+
+	@IBOutlet var codeTextView:NSTextView! {
+	
+		didSet {
+			
+			guard let font = SystemFont.FontForCode.fontWithSize(15.0) else {
+				
+				NSLog("Failed to get a font for the CodeTextView.")
+				return
+			}
+			
+			self.codeTextView.font = font
+		}
+	}
+	
 	@IBOutlet weak var descriptionTextField:NSTextField!
 	
 	@IBOutlet weak var codeScrollView:NSScrollView!
@@ -109,8 +123,6 @@ class ViewController: NSViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-//		self.codeTextView.font = NSFont(name: "SourceCodePro-Regular", size: 15.0)
-		
 		// MARK: IB からだと自動書式調整のプロパティを変えても効かないので、ここで調整しています。
 		self.codeTextView.automaticDashSubstitutionEnabled = false
 		self.codeTextView.automaticDataDetectionEnabled = false
