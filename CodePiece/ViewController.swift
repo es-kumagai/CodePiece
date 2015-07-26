@@ -27,6 +27,15 @@ class ViewController: NSViewController {
 			}
 			
 			self.codeTextView.font = font
+
+			// MARK: IB からだと自動書式調整のプロパティを変えても効かないので、ここで調整しています。
+			self.codeTextView.automaticDashSubstitutionEnabled = false
+			self.codeTextView.automaticDataDetectionEnabled = false
+			self.codeTextView.automaticLinkDetectionEnabled = false
+			self.codeTextView.automaticQuoteSubstitutionEnabled = false
+			self.codeTextView.automaticSpellingCorrectionEnabled = false
+			self.codeTextView.automaticTextReplacementEnabled = false
+			self.codeTextView.continuousSpellCheckingEnabled = false
 		}
 	}
 	
@@ -123,14 +132,6 @@ class ViewController: NSViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		// MARK: IB からだと自動書式調整のプロパティを変えても効かないので、ここで調整しています。
-		self.codeTextView.automaticDashSubstitutionEnabled = false
-		self.codeTextView.automaticDataDetectionEnabled = false
-		self.codeTextView.automaticLinkDetectionEnabled = false
-		self.codeTextView.automaticQuoteSubstitutionEnabled = false
-		self.codeTextView.automaticSpellingCorrectionEnabled = false
-		self.codeTextView.automaticTextReplacementEnabled = false
-		self.codeTextView.continuousSpellCheckingEnabled = false
 	}
 	
 	override func viewWillAppear() {
