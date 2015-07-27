@@ -25,7 +25,12 @@ final class GistsController : PostController, AlertDisplayable {
 
 		let filename = self.filename.appendStringIfNotEmpty(language.extname, separator: ".")
 		let description = DescriptionGenerator(description, language: nil, hashtag: hashtag, appendAppTag: true)
-		let publicGist = true
+
+		#if DEBUG
+			let publicGist = false
+		#else
+			let publicGist = true
+		#endif
 		
 		let file = GistFile(name: filename, content: content)
 

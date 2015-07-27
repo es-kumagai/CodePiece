@@ -9,6 +9,8 @@
 import Cocoa
 import ESGist
 import Result
+import Ocean
+import Quartz
 
 class ViewController: NSViewController {
 
@@ -199,8 +201,6 @@ class ViewController: NSViewController {
 	override func viewDidAppear() {
 	
 		super.viewDidAppear()
-		
-		
 	}
 }
 

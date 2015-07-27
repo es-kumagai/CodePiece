@@ -93,21 +93,21 @@ final class TwitterController : PostController, AlertDisplayable {
 		return DescriptionGenerator(description, language: nil, hashtag: hashtag, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
 	}
 	
-	func post(gist:ESGist.Gist, language:ESGist.Language, description:String, hashtag:String, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(gist:ESGist.Gist, language:ESGist.Language, description:String, hashtag:String, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 
 		let status = self.makeStatusFrom(gist, description: description, hashtag: hashtag)!
 		
-		try self.post(status, callback: callback)
+		try self.post(status, image: image, callback: callback)
 	}
 
-	func post(description:String, hashtag:String, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(description:String, hashtag:String, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
 		let status = self.makeStatusFrom(nil, description: description, hashtag: hashtag)!
 		
-		try self.post(status, callback: callback)
+		try self.post(status, image: image, callback: callback)
 	}
 
-	func post(status: String, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(status: String, image:NSImage? = nil, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
 		NSLog("Will post to twitter: \(status)")
 		
@@ -116,7 +116,7 @@ final class TwitterController : PostController, AlertDisplayable {
 			throw SNSControllerError.CredentialsNotVerified
 		}
 
-		self.api.postStatusUpdate(status, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
+		self.api.postStatusUpdate(status, image: image, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
 			
 			switch result {
 				
@@ -151,7 +151,7 @@ extension STTwitterAPI {
 	typealias VerifyCredentialsResult = Result<(username:String,userId:String),NSError>
 	typealias PostStatusUpdateResult = Result<[NSObject:AnyObject],NSError>
 	
-	func postStatusUpdate(status: String, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) {
+	func postStatusUpdate(status: String, image:NSImage? = nil, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) {
 		
 		let tweetSucceeded = { (objects:[NSObject:AnyObject]!) -> Void in
 			
@@ -163,7 +163,26 @@ extension STTwitterAPI {
 			callback(PostStatusUpdateResult(error: error))
 		}
 		
-		self.postStatusUpdate(status, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
+		if let image = image {
+
+			let tweetProgress = { (bytes:Int, processedBytes:Int, totalBytes:Int) -> Void in
+
+				NSLog("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
+			}
+			
+			let data = image.TIFFRepresentation!
+			let bitmap = NSBitmapImageRep(data: data)!
+			let mediaData = bitmap.representationUsingType(NSBitmapImageFileType.NSPNGFileType, properties: [NSImageInterlaced : NSNumber(bool: true)])!
+
+			let mediaDatas:[NSData] = [mediaData]
+			let possiblySensitive:NSNumber = false
+
+			self.postStatusUpdate(status, mediaDataArray: mediaDatas, possiblySensitive: possiblySensitive, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, uploadProgressBlock: tweetProgress, successBlock: tweetSucceeded, errorBlock: tweetFailed)
+		}
+		else {
+
+			self.postStatusUpdate(status, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
+		}
 	}
 	
 	func verifyCredentials(callback:(VerifyCredentialsResult)->Void) {

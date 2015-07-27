@@ -9,6 +9,274 @@
 // 将来的に別のモジュールへ移動できそうな機能を実装しています。
 
 import APIKit
+import AppKit
+import Ocean
+
+// MARK: - Thread
+
+private func ~= (pattern:dispatch_queue_attr_t, value:dispatch_queue_attr_t) -> Bool {
+	
+	return pattern.isEqual(value)
+}
+
+public struct Thread {
+	
+	public enum Type : RawRepresentable {
+		
+		case Serial
+		case Concurrent
+		
+		public init?(rawValue: dispatch_queue_attr_t!) {
+			
+			switch rawValue {
+				
+			case DISPATCH_QUEUE_CONCURRENT:
+				self = .Concurrent
+				
+			case DISPATCH_QUEUE_SERIAL:
+				self = .Serial
+				
+			default:
+				return nil
+			}
+		}
+		
+		public var rawValue:dispatch_queue_attr_t! {
+			
+			switch self {
+				
+			case .Concurrent:
+				return DISPATCH_QUEUE_CONCURRENT
+				
+			case .Serial:
+				return DISPATCH_QUEUE_SERIAL
+			}
+		}
+	}
+	
+	var queue:dispatch_queue_t
+	
+	public init(name:String, type:Type = .Serial) {
+		
+		self.queue = dispatch_queue_create(name, type.rawValue)
+	}
+	
+	public func invokeAsync(predicate:()->Void) {
+		
+		Ocean.invokeAsync(self.queue, predicate: predicate)
+	}
+	
+	public func invoke<Result>(predicate:()->Result) -> Result {
+		
+		return Ocean.invokeSync(self.queue, predicate: predicate)
+	}
+}
+
+// MARK: - Capture
+
+func flip(rect:NSRect, height:CGFloat) -> NSRect {
+
+	let origin = flip(rect.origin, height: height - rect.height)
+	let size = rect.size
+	
+	return NSMakeRect(origin.x, origin.y, size.width, size.height)
+}
+
+func flip(point:NSPoint, height:CGFloat) -> NSPoint {
+	
+	return NSMakePoint(point.x, height - point.y)
+}
+
+protocol Captureable {
+	
+	typealias CaptureTarget
+	
+	var captureTarget:CaptureTarget { get }
+	
+	func capture() -> NSImage
+}
+
+extension Captureable where CaptureTarget == NSView {
+
+	func capture() -> NSImage {
+	
+		return CodePiece.capture(self.captureTarget)
+	}
+	
+	func capture(rect:NSRect) -> NSImage {
+		
+		return CodePiece.capture(self.captureTarget, rect: rect)
+	}
+}
+
+extension Captureable where CaptureTarget == NSWindow {
+	
+	func capture() -> NSImage {
+		
+		return CodePiece.capture(self.captureTarget)
+	}
+}
+
+extension NSView : Captureable {
+	
+	public var captureTarget:NSView {
+		
+		return self
+	}
+}
+
+extension NSWindow : Captureable {
+	
+	public var captureTarget:NSWindow {
+		
+		return self
+	}
+}
+
+func capture(view:NSView) -> NSImage {
+
+	return capture(view, rect: view.bounds)
+}
+
+func capture(view:NSView, rect:NSRect) -> NSImage {
+	
+	guard rect != CGRectZero else {
+
+		fatalError("Bounds is Zero.")
+	}
+	
+	let fullRect = view.bounds
+	
+	let imageRep = view.bitmapImageRepForCachingDisplayInRect(fullRect)!
+	view.cacheDisplayInRect(fullRect, toBitmapImageRep: imageRep)
+	
+	let rectx2 = CGRectMake(rect.origin.x * 2, rect.origin.y * 2, rect.size.width * 2, rect.size.height * 2)
+	
+	let cgImage = imageRep.CGImage!
+	let clippedImage = CGImageCreateWithImageInRect(cgImage, rectx2)!
+
+	let image = NSImage(CGImage: clippedImage, size: rectx2.size)
+
+	// TODO: 画像の見やすさを考えて余白を作れたら良さそう。
+	let horizontal = 0 // Int(max(image.size.height - image.size.width, 0) / 2.0)
+	let vertical = 0 // Int(max(image.size.width - image.size.height, 0) / 2.0)
+	
+	let newImage = createImage(image, margin:Margin(vertical: vertical, horizontal: horizontal))
+
+	return newImage
+}
+
+public struct Margin<Type> {
+
+	public var top:Type
+	public var right:Type
+	public var bottom:Type
+	public var left:Type
+	
+	public init(top:Type, right:Type, bottom:Type, left:Type) {
+		
+		self.top = top
+		self.right = right
+		self.bottom = bottom
+		self.left = left
+	}
+	
+	public init(margin:Type) {
+		
+		self.init(top: margin, right: margin, bottom: margin, left: margin)
+	}
+	
+	public init(vertical:Type, horizontal:Type) {
+		
+		self.init(top: vertical, right: horizontal, bottom: vertical, left: horizontal)
+	}
+	
+	public init(top:Type, horizontal:Type, bottom:Type) {
+		
+		self.init(top: top, right: horizontal, bottom: bottom, left: horizontal)
+	}
+}
+
+extension Margin where Type : IntegerArithmeticType {
+	
+	public var horizontalTotal:Type {
+		
+		return self.left + self.right
+	}
+	
+	public var verticalTotal:Type {
+		
+		return self.top + self.bottom
+	}
+}
+
+extension CGPoint {
+	
+	public init(x:Int, y:Int) {
+		
+		self.init(x: CGFloat(x), y: CGFloat(y))
+	}
+}
+
+extension CGSize {
+	
+	public init(width:Int, height:Int) {
+		
+		self.init(width: CGFloat(width), height: CGFloat(height))
+	}
+}
+
+func createImage(image:NSImage, margin:Margin<Int>) -> NSImage {
+
+	let newWidth = Int(image.size.width) + margin.horizontalTotal
+	let newHeight = Int(image.size.height) + margin.verticalTotal
+	
+	let bitsPerComponent = 8
+	let bytesPerRow = 4 * newWidth
+	let colorSpace = CGColorSpaceCreateDeviceRGB()
+	let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue)
+	
+	let point = NSPoint(x: margin.left, y: margin.top)
+	
+	guard let bitmapContext = CGBitmapContextCreate(nil, newWidth, newHeight, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo.rawValue) else {
+		
+		fatalError("Failed to create a bitmap context.")
+	}
+	
+	
+	let bitmapSize = NSSize(width: newWidth, height: newHeight)
+	let bitmapRect = NSRect(origin: NSZeroPoint, size: NSSize(width: bitmapSize.width, height: bitmapSize.height))
+
+	let graphicsContext = NSGraphicsContext(CGContext: bitmapContext, flipped: false)
+	
+	NSGraphicsContext.saveGraphicsState()
+	NSGraphicsContext.setCurrentContext(graphicsContext)
+	
+	image.drawAtPoint(point, fromRect: bitmapRect, operation: NSCompositingOperation.CompositeCopy, fraction: 1.0)
+
+	NSGraphicsContext.restoreGraphicsState()
+	
+	guard let newImageRef = CGBitmapContextCreateImage(bitmapContext) else {
+		
+		fatalError("Failed to create a bitmap with margin.")
+	}
+
+	let newImage = NSImage(CGImage: newImageRef, size: bitmapSize)
+	
+	return newImage
+}
+
+func capture(window:NSWindow) -> NSImage {
+	
+	let windowId = CGWindowID(window.windowNumber)
+
+	let imageRef = CGWindowListCreateImage(CGRectZero, CGWindowListOption.OptionIncludingWindow, windowId, CGWindowImageOption.Default)
+	let imageData = NSImage(CGImage: imageRef!, size: window.contentView.bounds.size)
+	
+	return imageData
+}
+
+// MARK: - String
 
 extension String {
 

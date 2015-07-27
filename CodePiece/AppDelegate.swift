@@ -11,6 +11,7 @@ import Cocoa
 // FIXME: ⭐️ 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整します。
 
 var sns:SNSController!
+var captureController:WebCaptureController!
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
@@ -21,16 +22,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		TwitterClientInfo = CodePieceTwitterClientInfo()
 
 		sns = SNSController()
+		captureController = WebCaptureController()
 
 		sns.twitter.verifyCredentialsIfNeed { result in
 			
 			switch result {
 				
 			case .Success:
-				NSLog("Twitter credentials verified successfully.")
+				NSLog("Twitter credentials verified successfully. (\(sns.twitter.username))")
 				
 			case .Failure(let error):
-				self.showErrorAlert("Failed to verify credentials", message: String(error))
+				self.showErrorAlert("Failed to verify credentials", message: "\(error) (\(sns.twitter.username))")
 			}
 		}
 	}

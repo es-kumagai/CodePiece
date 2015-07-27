@@ -86,9 +86,9 @@ final class SNSController : PostController {
 			completed(PostResult(error: PostErrorInfo(error, resultInfo)))
 		}
 		
-		let postByTwitter = { (description:String, gist:ESGist.Gist) throws -> Void in
+		let postByTwitter = { (description:String, gist:ESGist.Gist, image:NSImage?) throws -> Void in
 		
-			try self.twitter.post(gist, language: language, description: description, hashtag: hashtag) { result in
+			try self.twitter.post(gist, language: language, description: description, hashtag: hashtag, image: image) { result in
 
 				switch result {
 					
@@ -108,35 +108,48 @@ final class SNSController : PostController {
 
 			try self.gists.post(content, language: language, description: description, hashtag: hashtag) { result in
 
-				do {
-
-					switch result {
-						
-					case .Success(let gist):
-
-						resultInfo.gist = gist
-						try postByTwitter(description, gist)
-						
-					case .Failure(let error):
-
-						failedToPost(error)
-					}					
-				}
-				catch SNSControllerError.NotAuthorized {
+				let capture = { (gist:Gist) -> Void in
 					
-					failedToPost(NSError(domain: SNSControllerError.NotAuthorized.description, code: -1, userInfo: nil))
-				}
-				catch SNSControllerError.CredentialsNotVerified {
+					let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4"
+
+//					let size = NSMakeSize(736.0, 414.0)
+					let size = NSMakeSize(560.0, 560.0)
 					
-					failedToPost(NSError(domain: SNSControllerError.CredentialsNotVerified.description, code: -1, userInfo: nil))
+					captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, userAgent: userAgent) { image in
+						
+						do {
+							
+							resultInfo.gist = gist
+							try postByTwitter(description, gist, image)
+						}
+						catch SNSControllerError.NotAuthorized {
+							
+							failedToPost(NSError(domain: SNSControllerError.NotAuthorized.description, code: -1, userInfo: nil))
+						}
+						catch SNSControllerError.CredentialsNotVerified {
+							
+							failedToPost(NSError(domain: SNSControllerError.CredentialsNotVerified.description, code: -1, userInfo: nil))
+						}
+						catch let error as NSError {
+							
+							failedToPost(error)
+						}
+						catch {
+							
+							failedToPost(NSError(domain: String(error), code: -1, userInfo: nil))
+						}
+					}
 				}
-				catch let error as NSError {
+				
+				switch result {
+					
+				case .Success(let gist):
+					
+					capture(gist)
+					
+				case .Failure(let error):
 					
 					failedToPost(error)
-				}
-				catch {
-
-					failedToPost(NSError(domain: String(error), code: -1, userInfo: nil))
 				}
 			}
 		}
