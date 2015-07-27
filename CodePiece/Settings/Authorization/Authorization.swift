@@ -118,7 +118,7 @@ extension Authorization {
 				switch response {
 					
 				case .Success(let authorized):
-					self.authorizationSucceeded(authorized, username: username, completion: completion)
+					self.authorizationSucceeded(authorized, username: username, password: password, completion: completion)
 					
 				case .Failure(let error):
 					completion(.Failed(String(error)))
@@ -149,7 +149,7 @@ extension Authorization {
 
 	}
 	
-	private static func authorizationSucceeded(response:AuthorizationResponseWithStatus, username:String, completion:(GitHubAuthorizationResult)->Void) {
+	private static func authorizationSucceeded(response:AuthorizationResponseWithStatus, username:String, password:String, completion:(GitHubAuthorizationResult)->Void) {
 		
 		switch response.status {
 			
@@ -157,7 +157,7 @@ extension Authorization {
 			self.authorizationCreateSuccessfully(response.authorization, username: username, completion: completion)
 			
 		case .AlreadyExists:
-			self.authorizationAlreadyCreated(response.authorization, username: username, completion: completion)
+			self.authorizationAlreadyCreated(response.authorization, username: username, password: password, completion: completion)
 		}
 	}
 	
@@ -173,15 +173,26 @@ extension Authorization {
 		completion(.Created)
 	}
 	
-	private static func authorizationAlreadyCreated(response:AuthorizationResponse, username:String, completion:(GitHubAuthorizationResult)->Void) {
+	private static func authorizationAlreadyCreated(response:AuthorizationResponse, username:String, password:String, completion:(GitHubAuthorizationResult)->Void) {
 		
 		defer {
 			
 			AuthorizationStateDidChangeNotification().post()
 		}
 		
+		// アプリが認証後の ID を保持していない場合は、再認証を試みます。（ID 情報があれば削除されるため）
+		let retryAuthorization = settings.account.id == nil
+		
 		settings.updateGitHubAccount(username, authorization: response)
 		
-		completion(.AlreadyCreated)
+		if retryAuthorization {
+
+			NSLog("Retry authorization for GitHub.")
+			self.authorizationWithGitHub(username, password: password, completion: completion)
+		}
+		else {
+
+			completion(.AlreadyCreated)
+		}
 	}
 }
