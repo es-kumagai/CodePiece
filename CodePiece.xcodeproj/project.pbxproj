@@ -446,7 +446,6 @@
 				B1D2D6AA1B5E3CB400794EFD /* Embed Frameworks */,
 				F8B9F120ABB856B634077A1F /* Embed Pods Frameworks */,
 				F72213FE2DCABF4F6BB4DD97 /* Copy Pods Resources */,
-				B17C88C31B66D8FE00CBF20F /* Archive to Zip */,
 			);
 			buildRules = (
 			);
@@ -574,20 +573,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B17C88C31B66D8FE00CBF20F /* Archive to Zip */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Archive to Zip";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "InfoPlistFile=\"${SRCROOT}/${INFOPLIST_FILE}\"\nBuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${InfoPlistFile}\")\n\nWorkPath=\"${BUILT_PRODUCTS_DIR}\"\nTargetName=\"CodePiece_build-${BuildNumber}\"\nArchiveName=\"${TargetName}.zip\"\n\ncd \"${BUILT_PRODUCTS_DIR}\"\nmkdir -p \"${TargetName}\"\n\ncp -rf \"${FULL_PRODUCT_NAME}\" \"${TargetName}\"\ncp -f \"README.md\" \"${TargetName}\"\ncp -f \"CHANGELOG.md\" \"${TargetName}\"\n\nzip -r \"${ArchiveName}\" \"${TargetName}\"\n";
-		};
 		C20072E337D4D256BD8A1159 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
