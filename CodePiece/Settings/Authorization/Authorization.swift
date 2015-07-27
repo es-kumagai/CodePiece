@@ -67,7 +67,7 @@ extension Authorization {
 	static func resetAuthorizationOfGitHub(id:ID) {
 		
 		guard let authorization = settings.account.authorization else {
-			
+
 			self.showWarningAlert("Failed to reset authorization", message: "Could't get the current authentication information. Reset authentication information which saved in this app.")
 			
 			settings.resetGitHubAccount()
@@ -89,8 +89,10 @@ extension Authorization {
 				
 			case .Success:
 				
+				// Token では削除できないようなので、403 で失敗しても認証情報を削除するだけにしています。
 				settings.resetGitHubAccount()
-				self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
+				NSLog("Reset successfully. Please perform authentication before you post to Gist again.")
+				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
 				
 			case .Failure(let error):
 				

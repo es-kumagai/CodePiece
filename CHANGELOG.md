@@ -11,5 +11,6 @@ Change Logs.
 ### Bug Fixes
 
 * When you authenticate with GitHub account and a token already exists, CodePiece delete the token and try to create a new token.
+* When you reset an authorization, CodePiece will only remove the authentication informatin in the app.
 * You will not press the post button until the posting process is finished.
 * Fixed a problem that no controls are displayed on main window.
