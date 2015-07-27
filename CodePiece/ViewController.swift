@@ -11,6 +11,7 @@ import ESGist
 import Result
 import Ocean
 import Quartz
+import Swim
 
 class ViewController: NSViewController {
 
@@ -60,7 +61,13 @@ class ViewController: NSViewController {
 	
 	var canPost:Bool {
 	
-		return !self.posting && !self.descriptionTextField.stringValue.isEmpty
+		let conditions = [
+			
+			!self.posting,
+			!self.descriptionTextField.stringValue.isEmpty
+		]
+		
+		return meetsAllOf(conditions, true)
 	}
 	
 	@IBAction func pushPostButton(sender:NSObject?) {
@@ -72,6 +79,12 @@ class ViewController: NSViewController {
 
 		guard self.canPost else {
 			
+			return
+		}
+
+		guard sns.canPost else {
+		
+			self.showErrorAlert("Not ready", message: "It is not ready to post. Please set SNS accounts by the CodePiece's preferences. (⌘,)")
 			return
 		}
 		

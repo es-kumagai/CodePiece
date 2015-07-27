@@ -42,6 +42,18 @@ enum AuthorizationState {
 	case Authorized
 	case AuthorizedWithNoToken
 	case NotAuthorized
+	
+	var isValid:Bool {
+		
+		switch self {
+			
+		case .Authorized:
+			return true
+			
+		case .AuthorizedWithNoToken, .NotAuthorized:
+			return false
+		}
+	}
 }
 
 struct Authorization : AlertDisplayable {

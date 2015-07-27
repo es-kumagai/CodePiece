@@ -11,6 +11,7 @@ import Result
 
 protocol PostController {
 
+	var canPost:Bool { get }
 }
 
 enum SNSControllerError : ErrorType, CustomStringConvertible {
@@ -71,6 +72,11 @@ final class SNSController : PostController {
 	}
 	
 	typealias PostResult = Result<PostResultInfo,PostErrorInfo>
+	
+	var canPost:Bool {
+	
+		return gists.canPost && twitter.canPost
+	}
 	
 	func post(content: String, language: ESGist.Language, description: String, hashtag: String, completed: (PostResult) -> Void) throws {
 	

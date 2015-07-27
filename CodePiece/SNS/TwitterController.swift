@@ -43,6 +43,11 @@ final class TwitterController : PostController, AlertDisplayable {
 		self.api = api
 	}
 
+	var canPost:Bool {
+		
+		return self.credentialsVerified
+	}
+	
 	func verifyCredentialsIfNeed(callback:(VerifyResult)->Void) {
 		
 		guard !self.credentialsVerified else {

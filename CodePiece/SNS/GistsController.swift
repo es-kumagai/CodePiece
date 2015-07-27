@@ -16,6 +16,11 @@ final class GistsController : PostController, AlertDisplayable {
 
 	typealias PostResult = Result<ESGist.Gist,NSError>
 	
+	var canPost:Bool {
+	
+		return settings.account.authorizationState.isValid
+	}
+	
 	func post(content:String, language:ESGist.Language, description:String, hashtag:String, completed:(PostResult)->Void) throws {
 
 		guard let authorization = settings.account.authorization else {
