@@ -17,6 +17,7 @@ class ViewController: NSViewController {
 
 	typealias PostResult = SNSController.PostResult
 	
+	@IBOutlet weak var postButton:NSButton!
 	@IBOutlet weak var hashTagTextField:NSTextField!
 
 	@IBOutlet var codeTextView:NSTextView! {
@@ -68,6 +69,11 @@ class ViewController: NSViewController {
 		]
 		
 		return meetsAllOf(conditions, true)
+	}
+	
+	var hasCode:Bool {
+		
+		return !self.codeTextView.string!.trimmed().isEmpty
 	}
 	
 	@IBAction func pushPostButton(sender:NSObject?) {
@@ -130,21 +136,7 @@ class ViewController: NSViewController {
 		let description = self.descriptionTextField.stringValue
 		let hashtag = self.hashTagTextField.stringValue
 
-		if self.codeTextView.string!.isEmpty {
-			
-			try sns.twitter.post(description, hashtag: hashtag) { result in
-				
-				switch result {
-					
-				case .Success:
-					callback(PostResult(value: SNSController.PostResultInfo()))
-					
-				case .Failure(let error):
-					callback(PostResult(error: SNSController.PostErrorInfo(error, SNSController.PostResultInfo())))
-				}
-			}
-		}
-		else {
+		if self.hasCode {
 			
 			try sns.post(code, language: language, description: description, hashtag: hashtag) { result in
 				
@@ -155,6 +147,20 @@ class ViewController: NSViewController {
 					
 				case .Failure(let errorInfo):
 					callback(PostResult(error: errorInfo))
+				}
+			}
+		}
+		else {
+			
+			try sns.twitter.post(description, hashtag: hashtag) { result in
+				
+				switch result {
+					
+				case .Success:
+					callback(PostResult(value: SNSController.PostResultInfo()))
+					
+				case .Failure(let error):
+					callback(PostResult(error: SNSController.PostErrorInfo(error, SNSController.PostResultInfo())))
 				}
 			}
 		}
@@ -177,6 +183,8 @@ class ViewController: NSViewController {
 		
 		self.focusToDefaultControl()
 		self.verifyCredentials()
+		
+		self.updatePostButtonTitle()
 	}
 	
 	override func viewDidDisappear() {
@@ -239,12 +247,24 @@ class ViewController: NSViewController {
 	}
 }
 
-extension ViewController : NSTextFieldDelegate {
+extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 
-	override func controlTextDidChange(obj: NSNotification) {
+	func updatePostButtonTitle() {
 		
+		self.postButton.title = (self.hasCode ? "Post Gist" : "Tweet")
+	}
+	
+	func textDidChange(notification: NSNotification) {
+		
+		self.updatePostButtonTitle()
+	}
+	
+	override func controlTextDidChange(obj: NSNotification) {
+	
 		self.willChangeValueForKey("canPost")
 		self.didChangeValueForKey("canPost")
+		
+		self.updatePostButtonTitle()
 	}
 }
 

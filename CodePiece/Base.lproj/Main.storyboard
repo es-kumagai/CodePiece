@@ -357,6 +357,9 @@ DQ
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="687" height="254"/>
                                             <size key="maxSize" width="707" height="10000000"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="XfG-lQ-9wD" id="iqw-bw-P7O"/>
+                                            </connections>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -530,6 +533,7 @@ DQ
                         <outlet property="codeTextView" destination="8OA-rk-WhX" id="Bau-Wy-Mwm"/>
                         <outlet property="descriptionTextField" destination="KZX-ml-gl0" id="J8Q-xu-srr"/>
                         <outlet property="hashTagTextField" destination="8VY-21-QQc" id="poH-qc-18R"/>
+                        <outlet property="postButton" destination="tsY-MH-1c4" id="2x0-uY-e0J"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

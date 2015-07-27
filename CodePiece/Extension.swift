@@ -280,6 +280,11 @@ func capture(window:NSWindow) -> NSImage {
 
 extension String {
 
+	public func trimmed() -> String {
+	
+		return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+	}
+	
 	public func appendStringIfNotEmpty(string:String?, separator:String = "") -> String {
 		
 		guard let string = string where !string.isEmpty else {
