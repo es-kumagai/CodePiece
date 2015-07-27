@@ -115,13 +115,7 @@ extension WebCaptureController.Request : WebFrameLoadDelegate {
 			let content = blobs.item(0)
 			
 			// TODO: content が取得できず nil になる場合もあるので対応が必要
-			let rootBound = dom.boundingBox()
 			let contentBound = content.boundingBox()
-			
-			let rect = flip(contentBound, height: rootBound.height)
-
-			//
-			
 			let image = frame.frameView.documentView.capture(contentBound)
 			
 			self.fulfillRequest(image)

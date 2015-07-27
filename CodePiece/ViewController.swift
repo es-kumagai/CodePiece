@@ -45,9 +45,22 @@ class ViewController: NSViewController {
 	
 	@IBOutlet weak var codeScrollView:NSScrollView!
 	
+	var posting:Bool = false {
+	
+		willSet {
+			
+			self.willChangeValueForKey("canPost")
+		}
+		
+		didSet {
+			
+			self.didChangeValueForKey("canPost")
+		}
+	}
+	
 	var canPost:Bool {
 	
-		return !self.descriptionTextField.stringValue.isEmpty
+		return !self.posting && !self.descriptionTextField.stringValue.isEmpty
 	}
 	
 	@IBAction func pushPostButton(sender:NSObject?) {
@@ -62,10 +75,17 @@ class ViewController: NSViewController {
 			return
 		}
 		
+		self.posting = true
+		
 		do {
 
 			try self.post { result in
-			
+				
+				defer {
+					
+					self.posting = false
+				}
+				
 				switch result {
 					
 				case .Success(let info):
@@ -80,10 +100,12 @@ class ViewController: NSViewController {
 		catch SNSControllerError.NotAuthorized {
 			
 			// from Gists
+			self.posting = false
 			self.showErrorAlert("Cannot post", message: "The authentication token is not correct. Please re-authentication.")
 		}
 		catch {
 			
+			self.posting = false
 			self.showErrorAlert("Cannot post", message: String(error))
 		}
 	}
