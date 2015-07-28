@@ -50,5 +50,6 @@ mkdir -vp "${TargetPath}"
 cp -rf "${AppPath}" "${TargetPath}"
 cp -f "${SourcePath}/README.md" "${TargetPath}"
 cp -f "${SourcePath}/CHANGELOG.md" "${TargetPath}"
+cp -rf "${SourcePath}/ss" "${TargetPath}"
 
 zip -vr "${ArchiveName}" "${TargetName}"
