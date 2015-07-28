@@ -260,11 +260,22 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func updateTweetTextCount() {
 
-		let descriptionCount = self.descriptionTextField.stringValue.utf16.count
-		let hashtagCount = self.hashTagTextField.hashtag.length.nonZeroMap { $0 + 1 }
-		let gistMediaCount = self.hasCode ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0
+		let countsForInputText:[Int] = [
+
+			self.descriptionTextField.stringValue.utf16.count,
+			self.hashTagTextField.hashtag.length.nonZeroMap { $0 + 1 }
+		]
 		
-		self.descriptionCountLabel.stringValue = String(descriptionCount + hashtagCount + gistMediaCount)
+		let countsForReserve:[Int] = [
+
+			self.hasCode ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0,
+			CodePieceApp.hashtag.length.nonZeroMap { $0 + 1 }
+		]
+
+		let counts = countsForInputText + countsForReserve
+		let totalCount = counts.reduce(0, combine: +)
+		
+		self.descriptionCountLabel.stringValue = String(totalCount)
 		self.descriptionCountLabel.textColor = SystemColor.NeutralColor.color
 	}
 	

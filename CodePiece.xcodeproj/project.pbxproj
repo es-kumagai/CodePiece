@@ -27,6 +27,7 @@
 		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
 		B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */; };
 		B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5C1B67853C00859D81 /* Twitter.swift */; };
+		B128CB5F1B67942D00859D81 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5E1B67942D00859D81 /* Application.swift */; };
 		B137468D1B6506000068414B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137468C1B6506000068414B /* Fonts.swift */; };
 		B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
 		B13746941B6512360068414B /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13746931B6512360068414B /* FontTests.swift */; };
@@ -146,6 +147,7 @@
 		B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TwitterPreferenceView.storyboard; sourceTree = "<group>"; };
 		B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
 		B128CB5C1B67853C00859D81 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
+		B128CB5E1B67942D00859D81 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		B137468C1B6506000068414B /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B13746931B6512360068414B /* FontTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontTests.swift; sourceTree = "<group>"; };
 		B1492FB21B5BCED80043ED8D /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,6 +410,7 @@
 		B1D2D69A1B5DFF5200794EFD /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				B128CB5E1B67942D00859D81 /* Application.swift */,
 				B1D2D69B1B5DFF7400794EFD /* Colors.swift */,
 				B137468C1B6506000068414B /* Fonts.swift */,
 				B1D2D6A51B5E2B2800794EFD /* Notifications.swift */,
@@ -660,6 +663,7 @@
 				B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */,
 				B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */,
 				B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */,
+				B128CB5F1B67942D00859D81 /* Application.swift in Sources */,
 				B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */,
 				B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */,
 				B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */,

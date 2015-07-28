@@ -10,7 +10,7 @@ import ESGist
 
 func DescriptionGenerator(var description:String, language:ESGist.Language?, hashtag:Twitter.Hashtag, appendAppTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {
 	
-	let apptag = Twitter.Hashtag(appendAppTag ? "#CodePiece" : "")
+	let apptag = appendAppTag ? CodePieceApp.hashtag : Twitter.Hashtag()
 	let langtag = Twitter.Hashtag(language.map { $0.description } ?? "")
 
 	if let maxLength = maxLength {
