@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 1.0 Build *
+
+### Bug Fixes
+
+* Fixed a problem that failed to get a Gist capture with Non-Retina only and Retina/Non-Retina mixed environment.
+
 ## 1.0 Build 7
 
 ### Enhancements

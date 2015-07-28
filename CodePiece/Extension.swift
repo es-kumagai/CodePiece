@@ -87,6 +87,293 @@ func flip(point:NSPoint, height:CGFloat) -> NSPoint {
 	return NSMakePoint(point.x, height - point.y)
 }
 
+public struct Scale {
+	
+	public var value:CGFloat
+	
+	public init(_ value:CGFloat) {
+		
+		self.value = value
+	}
+}
+
+extension Scale {
+
+	public var isSameMagnification:Bool {
+	
+		return self.value == 1.0
+	}
+	
+	public func applyTo<Value:Scaleable>(value:Value) -> Value {
+		
+		return value.scaled(self)
+	}
+}
+
+extension Scale : IntegerLiteralConvertible {
+	
+	public init(integerLiteral value: Int) {
+
+		self.init(CGFloat(value))
+	}
+}
+
+extension Scale : FloatLiteralConvertible {
+	
+	public init(floatLiteral value: Double) {
+
+		self.init(CGFloat(value))
+	}
+}
+
+extension Scale : Equatable {
+	
+}
+
+extension Scale : CustomStringConvertible {
+	
+	public var description:String {
+		
+		return self.value.description
+	}
+}
+
+public func == (lhs:Scale, rhs:Scale) -> Bool {
+	
+	return lhs.value == rhs.value
+}
+
+public protocol Scaleable {
+	
+	func scaled(scale:Scale) -> Self
+}
+
+extension Scaleable {
+
+	func scaledBy<T:EnclosingScaleProperty>(item:T) -> Self {
+
+		guard let scale = item.scale else {
+
+			fatalError("Cannot get a scale of \(item).")
+		}
+		
+		return self.scaled(scale)
+	}
+}
+
+public protocol EnclosingScaleProperty {
+
+	var scale:Scale? { get }
+}
+
+public protocol Truncateable {
+	
+	func truncate() -> Self
+}
+
+extension Truncateable {
+
+	public func truncate(ifNeed:Bool) -> Self {
+	
+		if ifNeed {
+
+			return self.truncate()
+		}
+		else {
+	
+			return self
+		}
+	}
+}
+
+extension SignedIntegerType where Self : Scaleable {
+	
+	public func scaled(scale: Scale) -> Self {
+
+		return Self(self.toIntMax() * IntMax(scale.value))
+	}
+}
+
+extension UnsignedIntegerType where Self : Scaleable {
+	
+	public func scaled(scale: Scale) -> Self {
+		
+		return Self(self.toUIntMax() * UIntMax(scale.value))
+	}
+}
+
+extension CGFloat : Scaleable, Truncateable {
+	
+	public func scaled(scale: Scale) -> CGFloat {
+		
+		return self * scale.value
+	}
+	
+	public func truncate() -> CGFloat {
+		
+		return CGFloat(IntMax(self))
+	}
+}
+
+extension Double : Scaleable, Truncateable {
+	
+	public func scaled(scale: Scale) -> Double {
+		
+		return self * Double(scale.value)
+	}
+	
+	public func truncate() -> Double {
+		
+		return Double(IntMax(self))
+	}
+}
+
+extension Float : Scaleable, Truncateable {
+	
+	public func scaled(scale: Scale) -> Float {
+		
+		return self * Float(scale.value)
+	}
+	
+	public func truncate() -> Float {
+		
+		return Float(IntMax(self))
+	}
+}
+
+extension Float80 : Scaleable, Truncateable {
+	
+	public func scaled(scale: Scale) -> Float80 {
+		
+		return self * Float80(Float(scale.value))
+	}
+	
+	public func truncate() -> Float80 {
+		
+		return Float80(IntMax(self))
+	}
+}
+
+extension CGPoint : Scaleable, Truncateable {
+	
+	public func scaled(scale:Scale) -> CGPoint {
+		
+		guard !scale.isSameMagnification else {
+		
+			return self
+		}
+		
+		let x = self.x.scaled(scale)
+		let y = self.y.scaled(scale)
+		
+		return CGPoint(x: x, y: y)
+	}
+	
+	public func truncate() -> CGPoint {
+		
+		let x = self.x.truncate()
+		let y = self.y.truncate()
+		
+		return CGPoint(x: x, y: y)
+	}
+}
+
+extension CGSize : Scaleable, Truncateable {
+	
+	public func scaled(scale:Scale) -> CGSize {
+		
+		guard !scale.isSameMagnification else {
+			
+			return self
+		}
+		
+		let width = self.width.scaled(scale)
+		let height = self.height.scaled(scale)
+		
+		return CGSize(width: width, height: height)
+	}
+	
+	public func truncate() -> CGSize {
+		
+		let width = self.width.truncate()
+		let height = self.height.truncate()
+		
+		return CGSize(width: width, height: height)
+	}
+}
+
+extension CGRect : Scaleable, Truncateable {
+	
+	public func scaled(scale:Scale) -> CGRect {
+		
+		guard !scale.isSameMagnification else {
+			
+			return self
+		}
+		
+		let origin = self.origin.scaled(scale)
+		let size = self.size.scaled(scale)
+		
+		return CGRect(origin: origin, size: size)
+	}
+	
+	public func truncate() -> CGRect {
+		
+		let origin = self.origin.truncate()
+		let size = self.size.truncate()
+		
+		return CGRect(origin: origin, size: size)
+	}
+}
+
+extension CGFloat {
+	
+	public func scaleOf(value:CGFloat) -> Scale {
+		
+		return Scale(self / value)
+	}
+	
+}
+
+extension CGSize {
+	
+	public func widthScaleOf(size:CGSize) -> Scale {
+		
+		return self.width.scaleOf(size.width)
+	}
+	
+	public func heightScaleOf(size:CGSize) -> Scale {
+		
+		return self.height.scaleOf(size.height)
+	}
+}
+
+extension CGRect {
+	
+	public func widthScaleOf(rect:CGRect) -> Scale {
+		
+		return self.size.widthScaleOf(rect.size)
+	}
+	
+	public func heightScaleOf(rect:CGRect) -> Scale {
+		
+		return self.size.heightScaleOf(rect.size)
+	}
+}
+
+extension CGImage {
+	
+	public func widthScaleOf(size:CGSize) -> Scale {
+		
+		return CGFloat(CGImageGetWidth(self)).scaleOf(size.width)
+	}
+	
+	public func heightScaleOf(size:CGSize) -> Scale {
+		
+		return CGFloat(CGImageGetHeight(self)).scaleOf(size.height)
+	}
+}
+
 protocol Captureable {
 	
 	typealias CaptureTarget
@@ -125,11 +412,35 @@ extension NSView : Captureable {
 	}
 }
 
+extension NSView : EnclosingScaleProperty {
+	
+	public var scale:Scale? {
+		
+		return (self.window?.backingScaleFactor).map(Scale.init)
+	}
+}
+
 extension NSWindow : Captureable {
 	
 	public var captureTarget:NSWindow {
 		
 		return self
+	}
+}
+
+extension NSWindow : EnclosingScaleProperty {
+	
+	public var scale:Scale? {
+		
+		return Scale(self.backingScaleFactor)
+	}
+}
+
+extension NSApplication : EnclosingScaleProperty {
+	
+	public var scale:Scale? {
+		
+		return self.keyWindow?.scale
 	}
 }
 
@@ -144,24 +455,30 @@ func capture(view:NSView, rect:NSRect) -> NSImage {
 
 		fatalError("Bounds is Zero.")
 	}
+
+	let viewRect = view.bounds
 	
-	let fullRect = view.bounds
-	
-	let imageRep = view.bitmapImageRepForCachingDisplayInRect(fullRect)!
-	view.cacheDisplayInRect(fullRect, toBitmapImageRep: imageRep)
-	
-	let rectx2 = CGRectMake(rect.origin.x * 2, rect.origin.y * 2, rect.size.width * 2, rect.size.height * 2)
+	// Retina が混在した環境ではどの画面でも、サイズ情報はそのまま、ピクセルが倍解像度で得られるようです。
+	// imageRep や、ここから生成した NSImage に対する操作は scale を加味しない座標系で問題ありませんが、
+	// CGImage に対する処理は、スケールを加味した座標指定が必要になるようです。
+	let imageRep = view.bitmapImageRepForCachingDisplayInRect(viewRect)!
+
+	view.cacheDisplayInRect(viewRect, toBitmapImageRep: imageRep)
 	
 	let cgImage = imageRep.CGImage!
-	let clippedImage = CGImageCreateWithImageInRect(cgImage, rectx2)!
+	let cgImageScale = cgImage.widthScaleOf(viewRect.size)
+	let scaledRect = rect.scaled(cgImageScale).truncate()
+	
+	let clippedImage = CGImageCreateWithImageInRect(cgImage, scaledRect)!
 
-	let image = NSImage(CGImage: clippedImage, size: rectx2.size)
+	let image = NSImage(CGImage: clippedImage, size: scaledRect.size)
 
 	// TODO: 画像の見やすさを考えて余白を作れたら良さそう。
 	let horizontal = 0 // Int(max(image.size.height - image.size.width, 0) / 2.0)
 	let vertical = 0 // Int(max(image.size.width - image.size.height, 0) / 2.0)
 	
-	let newImage = createImage(image, margin:Margin(vertical: vertical, horizontal: horizontal))
+	let margin = Margin(vertical: vertical, horizontal: horizontal)
+	let newImage = createImage(image, margin: margin)
 
 	return newImage
 }
