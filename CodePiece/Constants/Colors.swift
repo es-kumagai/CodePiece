@@ -14,6 +14,8 @@ enum SystemColor {
 	case TextForAuthenticatedWithNoTalken
 	case TextForNotAuthenticated
 	
+	case NeutralColor
+	case WarningColor
 	case ErrorColor
 	
 	var color:NSColor {
@@ -28,6 +30,12 @@ enum SystemColor {
 
 		case .TextForNotAuthenticated:
 			return NSColor(red:0.600, green:0.600, blue:0.600, alpha:1.000)
+			
+		case .NeutralColor:
+			return NSColor(white: 0.5, alpha: 1.000)
+			
+		case .WarningColor:
+			return NSColor(red:0.90, green:0.70, blue:0.0, alpha:1.000)
 			
 		case .ErrorColor:
 			return NSColor(red:0.961, green:0.271, blue:0.090, alpha:1.000)

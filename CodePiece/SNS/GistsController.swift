@@ -21,7 +21,7 @@ final class GistsController : PostController, AlertDisplayable {
 		return settings.account.authorizationState.isValid
 	}
 	
-	func post(content:String, language:ESGist.Language, description:String, hashtag:String, completed:(PostResult)->Void) throws {
+	func post(content:String, language:ESGist.Language, description:String, hashtag:Twitter.Hashtag, completed:(PostResult)->Void) throws {
 
 		guard let authorization = settings.account.authorization else {
 			

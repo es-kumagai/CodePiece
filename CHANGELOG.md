@@ -4,6 +4,10 @@ Change Logs.
 
 ## 1.0 Build *
 
+### Enhancements
+
+* Now displaying a text count which will be post. This count includes ```Code```'s media and code url, ```Tweet & Description``` and ```Hashtag```.
+
 ### Bug Fixes
 
 * Fixed a problem that failed to get a Gist capture with Non-Retina only and Retina/Non-Retina mixed environment.

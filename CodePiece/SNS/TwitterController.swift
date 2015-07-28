@@ -83,14 +83,15 @@ final class TwitterController : PostController, AlertDisplayable {
 		}
 	}
 
-	private func makeStatusFrom(gist:ESGist.Gist?, description:String, hashtag:String, var maxLength: Int? = nil) -> String? {
+	private func makeStatusFrom(gist:ESGist.Gist?, description:String, hashtag:Twitter.Hashtag, var maxLength: Int? = nil) -> String? {
 		
 		if gist != nil {
 
 			let twitterTotalCount = maxLength ?? 140
 			let reserveUrlCount = 23
+			let reserveGistCount = gist.map { _ in Twitter.SpecialCounting.Media.length } ?? 0
 			
-			maxLength = twitterTotalCount - reserveUrlCount
+			maxLength = twitterTotalCount - reserveUrlCount - reserveGistCount
 		}
 		
 		let appendAppTag = (gist != nil)
@@ -98,14 +99,14 @@ final class TwitterController : PostController, AlertDisplayable {
 		return DescriptionGenerator(description, language: nil, hashtag: hashtag, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
 	}
 	
-	func post(gist:ESGist.Gist, language:ESGist.Language, description:String, hashtag:String, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(gist:ESGist.Gist, language:ESGist.Language, description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 
 		let status = self.makeStatusFrom(gist, description: description, hashtag: hashtag)!
 		
 		try self.post(status, image: image, callback: callback)
 	}
 
-	func post(description:String, hashtag:String, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
 		let status = self.makeStatusFrom(nil, description: description, hashtag: hashtag)!
 		

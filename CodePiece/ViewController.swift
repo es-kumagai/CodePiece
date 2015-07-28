@@ -18,7 +18,7 @@ class ViewController: NSViewController {
 	typealias PostResult = SNSController.PostResult
 	
 	@IBOutlet weak var postButton:NSButton!
-	@IBOutlet weak var hashTagTextField:NSTextField!
+	@IBOutlet weak var hashTagTextField:HashtagTextField!
 
 	@IBOutlet var codeTextView:NSTextView! {
 	
@@ -44,6 +44,7 @@ class ViewController: NSViewController {
 	}
 	
 	@IBOutlet weak var descriptionTextField:NSTextField!
+	@IBOutlet weak var descriptionCountLabel:NSTextField!
 	
 	@IBOutlet weak var codeScrollView:NSScrollView!
 	
@@ -134,7 +135,7 @@ class ViewController: NSViewController {
 		let code = self.codeTextView.string!
 		let language = Language.Swift
 		let description = self.descriptionTextField.stringValue
-		let hashtag = self.hashTagTextField.stringValue
+		let hashtag = self.hashTagTextField.hashtag
 
 		if self.hasCode {
 			
@@ -184,6 +185,7 @@ class ViewController: NSViewController {
 		self.focusToDefaultControl()
 		self.verifyCredentials()
 		
+		self.updateTweetTextCount()
 		self.updatePostButtonTitle()
 	}
 	
@@ -249,6 +251,16 @@ class ViewController: NSViewController {
 
 extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 
+	func updateTweetTextCount() {
+
+		let descriptionCount = self.descriptionTextField.stringValue.utf16.count
+		let hashtagCount = self.hashTagTextField.hashtag.length.nonZeroMap { $0 + 1 }
+		let gistMediaCount = self.hasCode ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0
+		
+		self.descriptionCountLabel.stringValue = String(descriptionCount + hashtagCount + gistMediaCount)
+		self.descriptionCountLabel.textColor = SystemColor.NeutralColor.color
+	}
+	
 	func updatePostButtonTitle() {
 		
 		self.postButton.title = (self.hasCode ? "Post Gist" : "Tweet")
@@ -256,6 +268,7 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func textDidChange(notification: NSNotification) {
 		
+		self.updateTweetTextCount()
 		self.updatePostButtonTitle()
 	}
 	
@@ -263,7 +276,8 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 		self.willChangeValueForKey("canPost")
 		self.didChangeValueForKey("canPost")
-		
+	
+		self.updateTweetTextCount()
 		self.updatePostButtonTitle()
 	}
 }

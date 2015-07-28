@@ -410,7 +410,7 @@ DQ
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8VY-21-QQc">
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8VY-21-QQc" customClass="HashtagTextField" customModule="CodePiece" customModuleProvider="target">
                                             <rect key="frame" x="414" y="21" width="134" height="23"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="134" id="2Lt-u9-TvK"/>
@@ -421,6 +421,9 @@ DQ
                                                 <color key="textColor" red="0.34139323234558105" green="0.44181898236274719" blue="0.9985426664352417" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <outlet property="delegate" destination="XfG-lQ-9wD" id="hB2-WN-XU2"/>
+                                            </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VRo-Cs-D26">
                                             <rect key="frame" x="412" y="50" width="56" height="17"/>
@@ -468,9 +471,53 @@ DQ
                                                 <color key="backgroundColor" red="0.72432792189999995" green="0.72430622580000004" blue="0.7243185043" alpha="1" colorSpace="calibratedRGB"/>
                                             </textFieldCell>
                                         </textField>
+                                        <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="reO-IA-mtp" userLabel="Tweet Count Stack View">
+                                            <rect key="frame" x="332" y="50" width="74" height="17"/>
+                                            <beginningViews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="usU-k5-2GZ">
+                                                    <rect key="frame" x="-2" y="0.0" width="8" height="17"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(" id="HT4-Q4-1u8">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </beginningViews>
+                                            <middleViews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRA-lG-ufz">
+                                                    <rect key="frame" x="-2" y="0.0" width="42" height="17"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Count" id="fvO-2w-EiQ">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </middleViews>
+                                            <endViews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TC3-uU-CK0">
+                                                    <rect key="frame" x="-2" y="0.0" width="8" height="17"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=")" id="5Ks-3Q-h6U">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </endViews>
+                                            <visibilityPriorities>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                            </visibilityPriorities>
+                                            <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                            </customSpacing>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="8VY-21-QQc" firstAttribute="top" secondItem="KZX-ml-gl0" secondAttribute="top" id="8Ou-8t-X2d"/>
+                                        <constraint firstItem="reO-IA-mtp" firstAttribute="trailing" secondItem="KZX-ml-gl0" secondAttribute="trailing" id="9YO-bC-4ap"/>
                                         <constraint firstItem="8VY-21-QQc" firstAttribute="leading" secondItem="KZX-ml-gl0" secondAttribute="trailing" constant="8" id="Dz3-hs-tnP"/>
                                         <constraint firstItem="KZX-ml-gl0" firstAttribute="leading" secondItem="KE3-fE-gh7" secondAttribute="leading" id="Ipg-QX-8my"/>
                                         <constraint firstItem="8VY-21-QQc" firstAttribute="leading" secondItem="VRo-Cs-D26" secondAttribute="leading" id="KeK-Qw-xLB"/>
@@ -480,9 +527,11 @@ DQ
                                         <constraint firstItem="KE3-fE-gh7" firstAttribute="top" secondItem="lal-n7-YnH" secondAttribute="top" constant="10" id="Vnv-zH-C4G"/>
                                         <constraint firstAttribute="trailing" secondItem="tsY-MH-1c4" secondAttribute="trailing" constant="20" id="Wy6-cc-g3t"/>
                                         <constraint firstItem="enm-qP-X8e" firstAttribute="baseline" secondItem="IxY-aj-69e" secondAttribute="baseline" id="dkS-3H-1xx"/>
+                                        <constraint firstItem="reO-IA-mtp" firstAttribute="bottom" secondItem="KE3-fE-gh7" secondAttribute="bottom" id="ecP-Ds-vRT"/>
                                         <constraint firstAttribute="bottom" secondItem="KZX-ml-gl0" secondAttribute="bottom" constant="21" id="jxv-yI-1CR"/>
                                         <constraint firstItem="IxY-aj-69e" firstAttribute="leading" secondItem="VRo-Cs-D26" secondAttribute="trailing" constant="4" id="ksC-Ud-2VC"/>
                                         <constraint firstItem="tsY-MH-1c4" firstAttribute="leading" secondItem="8VY-21-QQc" secondAttribute="trailing" constant="40" id="mO9-Rh-yxu"/>
+                                        <constraint firstItem="reO-IA-mtp" firstAttribute="top" secondItem="KE3-fE-gh7" secondAttribute="top" id="osE-lB-CeK"/>
                                         <constraint firstItem="VRo-Cs-D26" firstAttribute="baseline" secondItem="KE3-fE-gh7" secondAttribute="baseline" priority="999" id="uay-Ly-0Qg"/>
                                         <constraint firstItem="enm-qP-X8e" firstAttribute="trailing" secondItem="tsY-MH-1c4" secondAttribute="trailing" id="v3E-zq-NnW"/>
                                         <constraint firstItem="IxY-aj-69e" firstAttribute="baseline" secondItem="VRo-Cs-D26" secondAttribute="baseline" id="vcB-od-XxL"/>
@@ -531,6 +580,7 @@ DQ
                     <connections>
                         <outlet property="codeScrollView" destination="Ny3-jn-TOD" id="qak-M3-aXt"/>
                         <outlet property="codeTextView" destination="8OA-rk-WhX" id="Bau-Wy-Mwm"/>
+                        <outlet property="descriptionCountLabel" destination="dRA-lG-ufz" id="KDq-Jw-KjP"/>
                         <outlet property="descriptionTextField" destination="KZX-ml-gl0" id="J8Q-xu-srr"/>
                         <outlet property="hashTagTextField" destination="8VY-21-QQc" id="poH-qc-18R"/>
                         <outlet property="postButton" destination="tsY-MH-1c4" id="2x0-uY-e0J"/>

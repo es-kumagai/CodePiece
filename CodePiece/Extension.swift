@@ -12,6 +12,72 @@ import APIKit
 import AppKit
 import Ocean
 
+// MARK: - General
+
+public protocol Zeroable {
+
+	static var zero:Self { get }
+	var isZero:Bool { get }
+	
+}
+
+extension Zeroable {
+
+	public func nonZeroMap<Result:Zeroable>(predicate:(Self) throws -> Result) rethrows -> Result {
+
+		if self.isZero {
+			
+			return Result.zero
+		}
+		else {
+			
+			return try predicate(self)
+		}
+	}
+}
+
+extension Zeroable where Self : Equatable {
+
+	public var isZero:Bool {
+
+		return self == Self.zero
+	}
+}
+
+extension IntegerType where Self : Zeroable {
+	
+	public static var zero:Self {
+		
+		return 0
+	}
+}
+
+extension String.CharacterView.Index.Distance : Zeroable {
+	
+	public static var zero:String.CharacterView.Index.Distance {
+		
+		return 0
+	}
+	
+	public var isZero:Bool {
+		
+		return self == String.CharacterView.Index.Distance.zero
+	}
+}
+
+extension String : Zeroable {
+	
+	public static var zero:String {
+		
+		return ""
+	}
+	
+	public var isZero:Bool {
+		
+		return self.isEmpty
+	}
+}
+
 // MARK: - Thread
 
 private func ~= (pattern:dispatch_queue_attr_t, value:dispatch_queue_attr_t) -> Bool {

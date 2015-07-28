@@ -78,7 +78,7 @@ final class SNSController : PostController {
 		return gists.canPost && twitter.canPost
 	}
 	
-	func post(content: String, language: ESGist.Language, description: String, hashtag: String, completed: (PostResult) -> Void) throws {
+	func post(content: String, language: ESGist.Language, description: String, hashtag: Twitter.Hashtag, completed: (PostResult) -> Void) throws {
 	
 		var resultInfo = PostResultInfo()
 		

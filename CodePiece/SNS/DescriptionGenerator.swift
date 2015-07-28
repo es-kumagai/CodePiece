@@ -8,17 +8,16 @@
 
 import ESGist
 
-func DescriptionGenerator(var description:String, language:ESGist.Language?, hashtag:String, appendAppTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {
+func DescriptionGenerator(var description:String, language:ESGist.Language?, hashtag:Twitter.Hashtag, appendAppTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {
 	
-	let apptag = appendAppTag ? "#CodePiece" : ""
-	let hashtag = Hashtag(hashtag)
-	let langtag = language.map { Hashtag($0.description) } ?? ""
+	let apptag = Twitter.Hashtag(appendAppTag ? "#CodePiece" : "")
+	let langtag = Twitter.Hashtag(language.map { $0.description } ?? "")
 
 	if let maxLength = maxLength {
 		
-		let apptagLength = apptag.characters.count
-		let hashtagLength = hashtag.characters.count
-		let langtagLength = langtag.characters.count
+		let apptagLength = apptag.length
+		let hashtagLength = hashtag.length
+		let langtagLength = langtag.length
 		
 		let descriptionLength = maxLength - apptagLength - hashtagLength - langtagLength
 		
@@ -35,17 +34,7 @@ func DescriptionGenerator(var description:String, language:ESGist.Language?, has
 	
 	return description
 		.appendStringIfNotEmpty(appendString, separator: " ")
-		.appendStringIfNotEmpty(langtag, separator: " ")
-		.appendStringIfNotEmpty(hashtag, separator: " ")
-		.appendStringIfNotEmpty(apptag, separator: " ")
-}
-
-func Hashtag(string:String) -> String {
-	
-	guard !string.isEmpty else {
-		
-		return ""
-	}
-	
-	return string.hasPrefix("#") ? string : "#\(string)"
+		.appendStringIfNotEmpty(langtag.value, separator: " ")
+		.appendStringIfNotEmpty(hashtag.value, separator: " ")
+		.appendStringIfNotEmpty(apptag.value, separator: " ")
 }

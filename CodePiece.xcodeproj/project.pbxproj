@@ -25,6 +25,8 @@
 		B12460E71B5F865F0036A690 /* Swim.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */; };
 		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
+		B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */; };
+		B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5C1B67853C00859D81 /* Twitter.swift */; };
 		B137468D1B6506000068414B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137468C1B6506000068414B /* Fonts.swift */; };
 		B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
 		B13746941B6512360068414B /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13746931B6512360068414B /* FontTests.swift */; };
@@ -142,6 +144,8 @@
 		B12460E51B5F865F0036A690 /* Swim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterPreferenceViewController.swift; sourceTree = "<group>"; };
 		B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TwitterPreferenceView.storyboard; sourceTree = "<group>"; };
+		B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
+		B128CB5C1B67853C00859D81 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		B137468C1B6506000068414B /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B13746931B6512360068414B /* FontTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontTests.swift; sourceTree = "<group>"; };
 		B1492FB21B5BCED80043ED8D /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +247,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B128CB591B6777A600859D81 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */,
+			);
+			name = Controls;
+			path = ../Controls;
+			sourceTree = "<group>";
+		};
 		B1492FA91B5BCED80043ED8D = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +296,7 @@
 				B1D2D67D1B5D564100794EFD /* References */,
 				B1BB59EF1B5E714800DE3942 /* SNS */,
 				B1492FE71B5BDA4B0043ED8D /* Menu */,
+				B128CB591B6777A600859D81 /* Controls */,
 				B1492FE21B5BD2510043ED8D /* Settings */,
 				B1492FB51B5BCED80043ED8D /* AppDelegate.swift */,
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
@@ -356,6 +370,7 @@
 				B1BB59F61B5E718900DE3942 /* SNSController.swift */,
 				B1BB59F11B5E714800DE3942 /* GistsController.swift */,
 				B1BB59F41B5E715B00DE3942 /* TwitterController.swift */,
+				B128CB5C1B67853C00859D81 /* Twitter.swift */,
 			);
 			path = SNS;
 			sourceTree = "<group>";
@@ -641,6 +656,8 @@
 				B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */,
 				B1D2D6A21B5E19D100794EFD /* Alert.swift in Sources */,
 				B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */,
+				B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */,
+				B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */,
 				B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */,
 				B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */,
 				B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */,
