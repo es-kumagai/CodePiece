@@ -28,6 +28,7 @@
 		B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */; };
 		B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5C1B67853C00859D81 /* Twitter.swift */; };
 		B128CB5F1B67942D00859D81 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5E1B67942D00859D81 /* Application.swift */; };
+		B128CB631B67A8EF00859D81 /* Extension_ESProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB621B67A8EF00859D81 /* Extension_ESProgressHUD.swift */; };
 		B137468D1B6506000068414B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137468C1B6506000068414B /* Fonts.swift */; };
 		B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
 		B13746941B6512360068414B /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13746931B6512360068414B /* FontTests.swift */; };
@@ -148,6 +149,7 @@
 		B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
 		B128CB5C1B67853C00859D81 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		B128CB5E1B67942D00859D81 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		B128CB621B67A8EF00859D81 /* Extension_ESProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension_ESProgressHUD.swift; sourceTree = "<group>"; };
 		B137468C1B6506000068414B /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B13746931B6512360068414B /* FontTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontTests.swift; sourceTree = "<group>"; };
 		B1492FB21B5BCED80043ED8D /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,6 +260,15 @@
 			path = ../Controls;
 			sourceTree = "<group>";
 		};
+		B128CB601B679F8700859D81 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B1492FB91B5BCED80043ED8D /* Assets.xcassets */,
+				B1492FBE1B5BCED80043ED8D /* Info.plist */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
 		B1492FA91B5BCED80043ED8D = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				B1D2D6A31B5E1D5400794EFD /* Extension.swift */,
+				B128CB621B67A8EF00859D81 /* Extension_ESProgressHUD.swift */,
 				B17DAF5C1B652959004CE4D2 /* Codes */,
 				B1D2D6AD1B5E4E1600794EFD /* CodePiece.entitlements */,
 				B1D2D6A01B5E19B900794EFD /* Alerts */,
@@ -303,9 +315,8 @@
 				B1492FB51B5BCED80043ED8D /* AppDelegate.swift */,
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
 				B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */,
-				B1492FB91B5BCED80043ED8D /* Assets.xcassets */,
 				B1492FBB1B5BCED80043ED8D /* Main.storyboard */,
-				B1492FBE1B5BCED80043ED8D /* Info.plist */,
+				B128CB601B679F8700859D81 /* Support Files */,
 			);
 			path = CodePiece;
 			sourceTree = "<group>";
@@ -678,6 +689,7 @@
 				B1492FB61B5BCED80043ED8D /* AppDelegate.swift in Sources */,
 				B1D2D69F1B5E0A1D00794EFD /* CodePieceClientInfo.swift in Sources */,
 				B1D2D6A61B5E2B2800794EFD /* Notifications.swift in Sources */,
+				B128CB631B67A8EF00859D81 /* Extension_ESProgressHUD.swift in Sources */,
 				B1BB59F71B5E718900DE3942 /* SNSController.swift in Sources */,
 				B1D2D6721B5D490800794EFD /* Settings.swift in Sources */,
 				B1D2D67F1B5D566000794EFD /* Storyboard.swift in Sources */,

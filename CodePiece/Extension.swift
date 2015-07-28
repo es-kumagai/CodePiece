@@ -14,6 +14,147 @@ import Ocean
 
 // MARK: - General
 
+protocol HalfValueConvertible {
+
+	var halfValue:Self { get }
+}
+
+extension HalfValueConvertible where Self : FourArithmeticType, Self : IntegerLiteralConvertible {
+
+	var halfValue:Self {
+		
+		return self / 2
+	}
+}
+
+extension CGFloat : HalfValueConvertible {
+	
+}
+
+extension Float : HalfValueConvertible {
+	
+}
+
+extension Double : HalfValueConvertible {
+	
+}
+
+extension Float80 : HalfValueConvertible {
+	
+}
+
+extension Int : HalfValueConvertible {
+	
+}
+
+extension Int8 : HalfValueConvertible {
+	
+}
+
+extension Int16 : HalfValueConvertible {
+	
+}
+
+extension Int32 : HalfValueConvertible {
+	
+}
+
+extension Int64 : HalfValueConvertible {
+	
+}
+
+extension UInt : HalfValueConvertible {
+	
+}
+
+extension UInt8 : HalfValueConvertible {
+	
+}
+
+extension UInt16 : HalfValueConvertible {
+	
+}
+
+extension UInt32 : HalfValueConvertible {
+	
+}
+
+extension UInt64 : HalfValueConvertible {
+	
+}
+
+//extension HalfValueConvertible where Self : IntegerArithmeticType, Self : IntegerLiteralConvertible {
+//	
+//	var halfValue:Self {
+//		
+//		return self / 2
+//	}
+//}
+
+protocol FourArithmeticType {
+
+	func +(lhs: Self, rhs: Self) -> Self
+	func -(lhs: Self, rhs: Self) -> Self
+	func *(lhs: Self, rhs: Self) -> Self
+    func /(lhs: Self, rhs: Self) -> Self
+}
+
+extension Int : FourArithmeticType {
+	
+}
+
+extension Int8 : FourArithmeticType {
+	
+}
+
+extension Int16 : FourArithmeticType {
+	
+}
+
+extension Int32 : FourArithmeticType {
+	
+}
+
+extension Int64 : FourArithmeticType {
+
+}
+
+extension UInt : FourArithmeticType {
+	
+}
+
+extension UInt8 : FourArithmeticType {
+	
+}
+
+extension UInt16 : FourArithmeticType {
+	
+}
+
+extension UInt32 : FourArithmeticType {
+	
+}
+
+extension UInt64 : FourArithmeticType {
+	
+}
+
+extension Float80 : FourArithmeticType {
+	
+}
+
+extension Float : FourArithmeticType {
+	
+}
+
+extension Double : FourArithmeticType {
+	
+}
+
+extension CGFloat : FourArithmeticType {
+	
+}
+
 public protocol Zeroable {
 
 	static var zero:Self { get }
@@ -580,7 +721,76 @@ public struct Margin<Type> {
 	}
 }
 
-extension Margin where Type : IntegerArithmeticType {
+func + (lhs:CGPoint, rhs:CGPoint) -> CGPoint {
+
+	let x = lhs.x + rhs.x
+	let y = lhs.y + rhs.y
+	
+	return CGPoint(x: x, y: y)
+}
+
+func - (lhs:CGPoint, rhs:CGPoint) -> CGPoint {
+	
+	let x = lhs.x - rhs.x
+	let y = lhs.y - rhs.y
+	
+	return CGPoint(x: x, y: y)
+}
+
+func + (lhs:CGSize, rhs:CGSize) -> CGSize {
+	
+	let width = lhs.width + rhs.width
+	let height = lhs.height + rhs.height
+	
+	return CGSize(width: width, height: height)
+}
+
+func - (lhs:CGSize, rhs:CGSize) -> CGSize {
+	
+	guard lhs.width >= rhs.width && lhs.height >= rhs.height else {
+		
+		fatalError()
+	}
+	
+	let width = lhs.width - rhs.width
+	let height = lhs.height - rhs.height
+	
+	return CGSize(width: width, height: height)
+}
+
+extension CGRect {
+
+	func applyMargin(margin:Margin<CGFloat>) -> CGRect {
+		
+		let origin = self.origin - CGPoint(x: margin.left, y: margin.top)
+		let size = self.size + CGSize(width: margin.horizontalTotal, height: margin.verticalTotal)
+
+		return CGRect(origin: origin, size: size)
+	}
+	
+	func applyPadding(padding:Margin<CGFloat>) -> CGRect {
+		
+		let origin = self.origin + CGPoint(x: padding.left, y: padding.top)
+		let size = self.size - CGSize(width: padding.horizontalTotal, height: padding.verticalTotal)
+		
+		return CGRect(origin: origin, size: size)
+	}
+}
+
+//extension Margin where Type : IntegerArithmeticType {
+//	
+//	public var horizontalTotal:Type {
+//		
+//		return self.left + self.right
+//	}
+//	
+//	public var verticalTotal:Type {
+//		
+//		return self.top + self.bottom
+//	}
+//}
+
+extension Margin where Type : FourArithmeticType {
 	
 	public var horizontalTotal:Type {
 		
@@ -599,6 +809,16 @@ extension CGPoint {
 		
 		self.init(x: CGFloat(x), y: CGFloat(y))
 	}
+	
+	public func replaced(x x:CGFloat) -> CGPoint {
+		
+		return CGPoint(x: x, y: self.y)
+	}
+	
+	public func replaced(y y:CGFloat) -> CGPoint {
+		
+		return CGPoint(x: self.x, y: y)
+	}
 }
 
 extension CGSize {
@@ -606,6 +826,59 @@ extension CGSize {
 	public init(width:Int, height:Int) {
 		
 		self.init(width: CGFloat(width), height: CGFloat(height))
+	}
+	
+	public func replaced(width width:CGFloat) -> CGSize {
+		
+		return CGSize(width: width, height: self.height)
+	}
+	
+	public func replaced(height height:CGFloat) -> CGSize {
+		
+		return CGSize(width: self.width, height: height)
+	}
+}
+
+extension CGRect {
+	
+	public func replaced(x x:CGFloat) -> CGRect {
+		
+		return self.replaced(origin: self.origin.replaced(x: x))
+	}
+	
+	public func replaced(y y:CGFloat) -> CGRect {
+		
+		return self.replaced(origin: self.origin.replaced(y: y))
+	}
+	
+	public func replaced(width width:CGFloat) -> CGRect {
+		
+		return self.replaced(size: self.size.replaced(width: width))
+	}
+	
+	public func replaced(height height:CGFloat) -> CGRect {
+		
+		return self.replaced(size: self.size.replaced(height: height))
+	}
+	
+	public func replaced(origin origin:CGPoint) -> CGRect {
+
+		return CGRect(origin: origin, size: self.size)
+	}
+	
+	public func replaced(size size:CGSize) -> CGRect {
+		
+		return CGRect(origin: self.origin, size: size)
+	}
+	
+	public func centerOf(rect:CGRect, truncate truncateIfNeeded:Bool = true) -> CGRect {
+		
+		let x = (rect.width - self.width).halfValue
+		let y = (rect.height - self.height).halfValue
+		
+		let origin = CGPoint(x: x, y: y).truncate(truncateIfNeeded)
+		
+		return self.replaced(origin: origin)
 	}
 }
 

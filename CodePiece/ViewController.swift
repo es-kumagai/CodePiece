@@ -15,6 +15,7 @@ import Swim
 
 class ViewController: NSViewController {
 
+	var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
 	typealias PostResult = SNSController.PostResult
 	
 	@IBOutlet weak var postButton:NSButton!
@@ -96,6 +97,7 @@ class ViewController: NSViewController {
 		}
 		
 		self.posting = true
+		self.postingHUD.show()
 		
 		do {
 
@@ -104,6 +106,7 @@ class ViewController: NSViewController {
 				defer {
 					
 					self.posting = false
+					self.postingHUD.hide()
 				}
 				
 				switch result {
@@ -121,11 +124,15 @@ class ViewController: NSViewController {
 			
 			// from Gists
 			self.posting = false
+			self.postingHUD.hide()
+			
 			self.showErrorAlert("Cannot post", message: "The authentication token is not correct. Please re-authentication.")
 		}
 		catch {
 			
 			self.posting = false
+			self.postingHUD.hide()
+			
 			self.showErrorAlert("Cannot post", message: String(error))
 		}
 	}

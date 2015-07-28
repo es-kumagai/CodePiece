@@ -4,6 +4,9 @@ Change Logs.
 
 ## 1.0 Build 9*
 
+### Enhancements
+
+* Displays a message by progress HUD view during post processing.
 
 ## 1.0 Build 8
 
