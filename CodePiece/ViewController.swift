@@ -171,6 +171,8 @@ class ViewController: NSViewController {
 		
 		self.codeTextView.string = ""
 		self.descriptionTextField.stringValue = ""
+
+		self.updateControlsDisplayText()
 	}
 	
 	override func viewDidLoad() {
@@ -185,8 +187,7 @@ class ViewController: NSViewController {
 		self.focusToDefaultControl()
 		self.verifyCredentials()
 		
-		self.updateTweetTextCount()
-		self.updatePostButtonTitle()
+		self.updateControlsDisplayText()
 	}
 	
 	override func viewDidDisappear() {
@@ -251,6 +252,12 @@ class ViewController: NSViewController {
 
 extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 
+	func updateControlsDisplayText() {
+		
+		self.updateTweetTextCount()
+		self.updatePostButtonTitle()
+	}
+	
 	func updateTweetTextCount() {
 
 		let descriptionCount = self.descriptionTextField.stringValue.utf16.count
@@ -268,8 +275,7 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func textDidChange(notification: NSNotification) {
 		
-		self.updateTweetTextCount()
-		self.updatePostButtonTitle()
+		self.updateControlsDisplayText()
 	}
 	
 	override func controlTextDidChange(obj: NSNotification) {
@@ -277,8 +283,7 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 		self.willChangeValueForKey("canPost")
 		self.didChangeValueForKey("canPost")
 	
-		self.updateTweetTextCount()
-		self.updatePostButtonTitle()
+		self.updateControlsDisplayText()
 	}
 }
 
