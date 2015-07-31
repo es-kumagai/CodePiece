@@ -141,6 +141,7 @@
 /* Begin PBXFileReference section */
 		2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CodePiece.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7325907F2375CBF16B47D026 /* Pods-CodePiece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodePiece.release.xcconfig"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece.release.xcconfig"; sourceTree = "<group>"; };
+		B1118DA01B6BE71D00BFC5FA /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		B12460CC1B5F85EC0036A690 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460CF1B5F865F0036A690 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460D21B5F865F0036A690 /* Himotoki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Himotoki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -479,6 +480,7 @@
 		B1D2D6B11B5E619E00794EFD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B1118DA01B6BE71D00BFC5FA /* Icon */,
 				B12B24821B6B6AC900B284D7 /* Acknowledgements */,
 				B1D2D6B21B5E61B400794EFD /* Fonts */,
 			);
