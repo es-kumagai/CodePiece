@@ -11,7 +11,7 @@ import AppKit
 final class MenuController : NSObject {
 
 	@IBOutlet weak var application:NSApplication!
-	
+
 	var keyWindow:NSWindow? {
 		
 		return self.application.keyWindow
@@ -22,9 +22,19 @@ final class MenuController : NSObject {
 		return self.keyWindow?.contentViewController as? ViewController
 	}
 	
+	var aboutWindowController:AboutWindowController!
+	
 	override init() {
 		
 		super.init()
+	}
+	
+	override func awakeFromNib() {
+		
+		super.awakeFromNib()
+		
+		self.aboutWindowController = AboutWindowController.instantiate()
+		self.aboutWindowController.acknowledgementsName = "Pods-CodePiece-acknowledgements"
 	}
 
 	var isMainViewControllerActive:Bool {
@@ -62,5 +72,10 @@ final class MenuController : NSObject {
 	@IBAction func postToSNS(sender:NSMenuItem?) {
 		
 		self.mainViewController?.postToSNS()
+	}
+	
+	@IBAction func showAboutWindow(sender:NSMenuItem?) {
+		
+		self.aboutWindowController.showWindow()
 	}
 }

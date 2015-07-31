@@ -14,6 +14,144 @@ import Ocean
 import Swim
 import ESCoreGraphicsExtension
 
+public protocol AcknowledgementsIncluded {
+
+	var acknowledgementsName:String! { get }
+	var acknowledgementsBundle:NSBundle? { get }
+}
+
+public protocol AcknowledgementsIncludedAndCustomizable : AcknowledgementsIncluded {
+	
+	var acknowledgementsName:String! { get set }
+	var acknowledgementsBundle:NSBundle? { get set }
+}
+
+extension AcknowledgementsIncluded {
+
+	var acknowledgementsBundle:NSBundle? {
+
+		return nil
+	}
+	
+	var acknowledgements:Acknowledgements {
+
+		return Acknowledgements(name: self.acknowledgementsName, bundle: self.acknowledgementsBundle)!
+	}
+}
+
+/// Acknowledgements for CocoaPods.
+public struct Acknowledgements {
+
+	public struct Pod {
+	
+		public var name:String
+		public var license:String
+	}
+	
+	public var pods:[Pod]
+	public var headerText:String
+	public var footerText:String
+	
+	public init?(name:String, bundle:NSBundle?) {
+	
+		let bundle = bundle ?? NSBundle.mainBundle()
+		
+		guard let path = bundle.pathForResource(name, ofType: "plist") else {
+			
+			return nil
+		}
+		
+		guard let acknowledgements = NSDictionary(contentsOfFile: path) else {
+			
+			return nil
+		}
+		
+		guard let items = acknowledgements["PreferenceSpecifiers"] as? Array<Dictionary<String, String>> else {
+			
+			return nil
+		}
+		
+		guard items.count > 2 else {
+			
+			return nil
+		}
+		
+		self.pods = [Pod]()
+		
+		let header = items.first!
+		let footer = items.last!
+		
+		self.headerText = header["FooterText"]!
+		self.footerText = footer["FooterText"]!
+		
+		for item in items[items.startIndex.successor() ..< items.endIndex.predecessor()] {
+			
+			let name = item["Title"]!
+			let license = item["FooterText"]!
+			
+			self.pods.append(Pod(name: name, license: license))
+		}
+	}
+}
+
+extension Acknowledgements : CustomStringConvertible {
+	
+	public var description:String {
+		
+		var results = [String]()
+		
+		results.append(self.headerText)
+		results.append("")
+		
+		for pod in self.pods {
+			
+			results.append("\(pod.name) : \(pod.license)")
+		}
+		
+		results.append("")
+		results.append(self.footerText)
+		
+		return "\n".join(results)
+	}
+}
+
+// MARK: - Bundle
+
+extension NSBundle {
+	
+	public var appName:String? {
+		
+		let info = self.infoDictionary!
+		
+		if let name = info["CFBundleDisplayName"] as? String {
+			
+			return name
+		}
+		
+		if let name = info["CFBundleName"] as? String {
+			
+			return name
+		}
+		
+		return nil
+	}
+	
+	public var appVersion:(main:String?, build:String?) {
+		
+		let info = self.infoDictionary!
+
+		let main = info["CFBundleShortVersionString"] as? String
+		let build = info["CFBundleVersion"] as? String
+		
+		return (main: main, build: build)
+	}
+	
+	public var appCopyright:String? {
+		
+		return self.infoDictionary!["NSHumanReadableCopyright"] as? String
+	}
+}
+
 // MARK: - Thread
 
 private func ~= (pattern:dispatch_queue_attr_t, value:dispatch_queue_attr_t) -> Bool {

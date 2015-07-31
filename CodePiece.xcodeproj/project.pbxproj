@@ -28,6 +28,12 @@
 		B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */; };
 		B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5C1B67853C00859D81 /* Twitter.swift */; };
 		B128CB5F1B67942D00859D81 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5E1B67942D00859D81 /* Application.swift */; };
+		B12B247B1B6B597400B284D7 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B247A1B6B597400B284D7 /* AboutWindowController.swift */; };
+		B12B247F1B6B599900B284D7 /* AboutWindowController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12B247E1B6B599900B284D7 /* AboutWindowController.storyboard */; };
+		B12B24811B6B59D600B284D7 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B24801B6B59D600B284D7 /* AboutViewController.swift */; };
+		B12B24861B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = B12B24851B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist */; };
+		B12B24891B6B80C200B284D7 /* AcknowledgementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B24871B6B80C200B284D7 /* AcknowledgementsViewController.swift */; };
+		B12B248C1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12B248B1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard */; };
 		B137468D1B6506000068414B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137468C1B6506000068414B /* Fonts.swift */; };
 		B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
 		B13746941B6512360068414B /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13746931B6512360068414B /* FontTests.swift */; };
@@ -148,6 +154,12 @@
 		B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
 		B128CB5C1B67853C00859D81 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		B128CB5E1B67942D00859D81 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		B12B247A1B6B597400B284D7 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
+		B12B247E1B6B599900B284D7 /* AboutWindowController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AboutWindowController.storyboard; sourceTree = "<group>"; };
+		B12B24801B6B59D600B284D7 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		B12B24851B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-CodePiece-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
+		B12B24871B6B80C200B284D7 /* AcknowledgementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementsViewController.swift; sourceTree = "<group>"; };
+		B12B248B1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AcknowledgementsViewController.storyboard; sourceTree = "<group>"; };
 		B137468C1B6506000068414B /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B13746931B6512360068414B /* FontTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontTests.swift; sourceTree = "<group>"; };
 		B1492FB21B5BCED80043ED8D /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,6 +279,27 @@
 			name = "Support Files";
 			sourceTree = "<group>";
 		};
+		B12B24791B6B594300B284D7 /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				B12B247A1B6B597400B284D7 /* AboutWindowController.swift */,
+				B12B24801B6B59D600B284D7 /* AboutViewController.swift */,
+				B12B247E1B6B599900B284D7 /* AboutWindowController.storyboard */,
+				B12B24871B6B80C200B284D7 /* AcknowledgementsViewController.swift */,
+				B12B248B1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard */,
+			);
+			path = Windows;
+			sourceTree = "<group>";
+		};
+		B12B24821B6B6AC900B284D7 /* Acknowledgements */ = {
+			isa = PBXGroup;
+			children = (
+				B12B24851B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist */,
+				B17C88C41B66E66800CBF20F /* Scripts */,
+			);
+			name = Acknowledgements;
+			sourceTree = "<group>";
+		};
 		B1492FA91B5BCED80043ED8D = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +331,7 @@
 		B1492FB41B5BCED80043ED8D /* CodePiece */ = {
 			isa = PBXGroup;
 			children = (
+				B12B24791B6B594300B284D7 /* Windows */,
 				B1D2D6A31B5E1D5400794EFD /* Extension.swift */,
 				B17DAF5C1B652959004CE4D2 /* Codes */,
 				B1D2D6AD1B5E4E1600794EFD /* CodePiece.entitlements */,
@@ -445,7 +479,7 @@
 		B1D2D6B11B5E619E00794EFD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B17C88C41B66E66800CBF20F /* Scripts */,
+				B12B24821B6B6AC900B284D7 /* Acknowledgements */,
 				B1D2D6B21B5E61B400794EFD /* Fonts */,
 			);
 			path = Resources;
@@ -588,6 +622,9 @@
 			files = (
 				B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */,
 				B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */,
+				B12B248C1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard in Resources */,
+				B12B24861B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist in Resources */,
+				B12B247F1B6B599900B284D7 /* AboutWindowController.storyboard in Resources */,
 				B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */,
 				B1D2D6831B5D5ED400794EFD /* PreferencesWindow.storyboard in Resources */,
 				B1492FBD1B5BCED80043ED8D /* Main.storyboard in Resources */,
@@ -677,9 +714,12 @@
 				B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */,
 				B1D2D6991B5DEA2600794EFD /* DataStore.swift in Sources */,
 				B1BB59F51B5E715B00DE3942 /* TwitterController.swift in Sources */,
+				B12B247B1B6B597400B284D7 /* AboutWindowController.swift in Sources */,
+				B12B24891B6B80C200B284D7 /* AcknowledgementsViewController.swift in Sources */,
 				B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */,
 				B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
+				B12B24811B6B59D600B284D7 /* AboutViewController.swift in Sources */,
 				B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */,
 				B1D2D69C1B5DFF7400794EFD /* Colors.swift in Sources */,
 				B137468D1B6506000068414B /* Fonts.swift in Sources */,

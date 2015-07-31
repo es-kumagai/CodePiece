@@ -1,13 +1,15 @@
 PODS:
   - APIKit (1.0.0-beta1):
     - Result (~> 0.6-beta.1)
+  - ESAppKitExtension (0.1.1)
   - ESCoreGraphicsExtension (0.1.2):
     - Swim (~> 1.3.13)
   - ESProgressHUD (0.1.0):
     - ESCoreGraphicsExtension (~> 0.1.2)
   - Himotoki (0.5.1)
   - KeychainAccess (1.2.1)
-  - Ocean (1.3.10):
+  - Ocean (1.3.12):
+    - ESAppKitExtension (~> 0.1.0)
     - ESCoreGraphicsExtension (~> 0.1.2)
     - ESProgressHUD (~> 0.1.0)
   - Result (0.6-beta.1)
@@ -46,11 +48,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   APIKit: cb0ce7ebc5e72d7ae4d71e0061f2f98676287c1f
+  ESAppKitExtension: 3bc92382a286d8ed531c0f2e9e1a0356cae9457c
   ESCoreGraphicsExtension: 017d11d2debc6c0adc618d6f27eaeac6ee393732
   ESProgressHUD: b6e27424c82f91e42ac922fed2ec251071835ffc
   Himotoki: 162194f50e4811b0695bb9e9a1bd4aebf703c82f
   KeychainAccess: 2ffa8b1b7130263bb7fe90b359d778696fc2d8ce
-  Ocean: 67712ce6d8fb2e7253f8dfa087f97a07af7df186
+  Ocean: d865df01e1495c2d2ffb0cf35f17cec83078c4bf
   Result: 6c990ec4a72470672f9fc5b6fef009da0f6f40d1
   STTwitter: 7b348a4600eb9f868a3d1c9031b4fd8533d123e7
   Swim: 9b5184815b6c50971ef0378156225c90fc8e50b5
