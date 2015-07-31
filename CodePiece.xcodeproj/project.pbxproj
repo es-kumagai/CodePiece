@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B1118DA21B6BE77800BFC5FA /* WelcomeBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1118DA11B6BE77800BFC5FA /* WelcomeBoard.storyboard */; };
+		B1118DA51B6BECAD00BFC5FA /* WelcomeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA31B6BECAD00BFC5FA /* WelcomeBoardViewController.swift */; };
+		B1118DA81B6BEF4D00BFC5FA /* AppExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */; };
+		B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */; };
 		B12460CB1B5F85560036A690 /* Pods_CodePiece.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B12460D01B5F865F0036A690 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; };
 		B12460D11B5F865F0036A690 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -142,6 +146,10 @@
 		2CBD1AB5CE1A4BFA8577705B /* Pods_CodePiece.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CodePiece.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7325907F2375CBF16B47D026 /* Pods-CodePiece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodePiece.release.xcconfig"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece.release.xcconfig"; sourceTree = "<group>"; };
 		B1118DA01B6BE71D00BFC5FA /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
+		B1118DA11B6BE77800BFC5FA /* WelcomeBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WelcomeBoard.storyboard; sourceTree = "<group>"; };
+		B1118DA31B6BECAD00BFC5FA /* WelcomeBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBoardViewController.swift; sourceTree = "<group>"; };
+		B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppExtension.swift; sourceTree = "<group>"; };
+		B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBoardWindowController.swift; sourceTree = "<group>"; };
 		B12460CC1B5F85EC0036A690 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460CF1B5F865F0036A690 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460D21B5F865F0036A690 /* Himotoki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Himotoki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +296,9 @@
 				B12B247E1B6B599900B284D7 /* AboutWindowController.storyboard */,
 				B12B24871B6B80C200B284D7 /* AcknowledgementsViewController.swift */,
 				B12B248B1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard */,
+				B1118DA11B6BE77800BFC5FA /* WelcomeBoard.storyboard */,
+				B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */,
+				B1118DA31B6BECAD00BFC5FA /* WelcomeBoardViewController.swift */,
 			);
 			path = Windows;
 			sourceTree = "<group>";
@@ -344,6 +355,7 @@
 				B1492FE71B5BDA4B0043ED8D /* Menu */,
 				B128CB591B6777A600859D81 /* Controls */,
 				B1492FE21B5BD2510043ED8D /* Settings */,
+				B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */,
 				B1492FB51B5BCED80043ED8D /* AppDelegate.swift */,
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
 				B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */,
@@ -623,6 +635,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */,
+				B1118DA21B6BE77800BFC5FA /* WelcomeBoard.storyboard in Resources */,
 				B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */,
 				B12B248C1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard in Resources */,
 				B12B24861B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist in Resources */,
@@ -705,6 +718,7 @@
 				B1D2D6971B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift in Sources */,
 				B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */,
 				B1D2D6A21B5E19D100794EFD /* Alert.swift in Sources */,
+				B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */,
 				B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */,
 				B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */,
 				B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */,
@@ -726,10 +740,12 @@
 				B1D2D69C1B5DFF7400794EFD /* Colors.swift in Sources */,
 				B137468D1B6506000068414B /* Fonts.swift in Sources */,
 				B1492FB61B5BCED80043ED8D /* AppDelegate.swift in Sources */,
+				B1118DA81B6BEF4D00BFC5FA /* AppExtension.swift in Sources */,
 				B1D2D69F1B5E0A1D00794EFD /* CodePieceClientInfo.swift in Sources */,
 				B1D2D6A61B5E2B2800794EFD /* Notifications.swift in Sources */,
 				B1BB59F71B5E718900DE3942 /* SNSController.swift in Sources */,
 				B1D2D6721B5D490800794EFD /* Settings.swift in Sources */,
+				B1118DA51B6BECAD00BFC5FA /* WelcomeBoardViewController.swift in Sources */,
 				B1D2D67F1B5D566000794EFD /* Storyboard.swift in Sources */,
 				B17DAF5E1B6529A0004CE4D2 /* WebCaptureController.swift in Sources */,
 				B1D2D66B1B5D44A800794EFD /* Authorization.swift in Sources */,

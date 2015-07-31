@@ -150,6 +150,18 @@ extension NSBundle {
 		
 		return self.infoDictionary!["NSHumanReadableCopyright"] as? String
 	}
+	
+	public var appVersionString:String {
+		
+		let version = self.appVersion
+		
+		let main = version.main ?? ""
+		let build = version.build.map { "build \($0)" } ?? ""
+		
+		let value = main.appendStringIfNotEmpty(build, separator: " ")
+
+		return value
+	}
 }
 
 // MARK: - Thread

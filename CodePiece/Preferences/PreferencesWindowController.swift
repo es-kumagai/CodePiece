@@ -8,6 +8,11 @@
 
 import Cocoa
 
+enum PreferencesWindowModalResult : Int {
+
+	case Close = 0
+}
+
 class PreferencesWindowController: NSWindowController {
 
 	@IBOutlet weak var toolbar:NSToolbar!
@@ -34,6 +39,6 @@ extension PreferencesWindowController : NSWindowDelegate {
 	
 	func windowWillClose(notification: NSNotification) {
 		
-		NSApp.stopModal()
+		NSApp.stopModalWithCode(PreferencesWindowModalResult.Close.rawValue)
 	}
 }

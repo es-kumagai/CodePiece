@@ -16,9 +16,12 @@ class GitHubPreferenceViewController: NSViewController {
 	@IBOutlet weak var authorizationButton:NSButton!
 	@IBOutlet weak var resetButton:NSButton!
 	
-//	@IBAction func doAuthentication(sender:NSButton) {
-//	
-//	}
+	@IBAction func doAuthentication(sender:NSButton) {
+	
+		let viewController = self.storyboard!.instantiateControllerWithIdentifier("Authentication") as! GitHubPreferenceAuthenticationViewController
+
+		self.presentViewControllerAsSheet(viewController)
+	}
 	
 	@IBAction func doReset(sender:NSButton) {
 		

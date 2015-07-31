@@ -278,6 +278,13 @@ DQ
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="OvY-QO-Yze"/>
+                                        <menuItem title="Welcome To CodePiece" id="JfM-uk-0pM">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showWelcomeBoard:" target="p69-Rc-ib8" id="8Dj-th-7fk"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -471,8 +478,8 @@ DQ
                                                 <color key="backgroundColor" red="0.72432792189999995" green="0.72430622580000004" blue="0.7243185043" alpha="1" colorSpace="calibratedRGB"/>
                                             </textFieldCell>
                                         </textField>
-                                        <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="reO-IA-mtp" userLabel="Tweet Count Stack View">
-                                            <rect key="frame" x="332" y="50" width="74" height="17"/>
+                                        <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="reO-IA-mtp" userLabel="Tweet Count Stack View">
+                                            <rect key="frame" x="344" y="50" width="62" height="17"/>
                                             <beginningViews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="usU-k5-2GZ">
                                                     <rect key="frame" x="-2" y="0.0" width="8" height="17"/>

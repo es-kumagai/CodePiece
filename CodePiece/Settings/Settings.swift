@@ -25,6 +25,12 @@ struct Settings {
 		self.loadAccount()
 	}
 	
+	// 設定がされていることを確認します。有効性は判定しません。
+	var isReady:Bool {
+	
+		return self.account.isReady && self.project.isReady
+	}
+	
 	mutating func loadAccount() {
 		
 		self.loadGitHubAccount()

@@ -7,6 +7,7 @@
 //
 
 import AppKit
+import Ocean
 
 final class MenuController : NSObject {
 
@@ -49,11 +50,14 @@ final class MenuController : NSObject {
 	
 	@IBAction func showPreferences(sender:NSMenuItem?) {
 		
-		let windowController = Storyboard.PreferencesWindow.defaultController as! PreferencesWindowController
-		
-		self.application.runModalForWindow(windowController.window!)
+		NSApp.showPreferencesWindow()
 	}
 
+	@IBAction func showWelcomeBoard(sender:NSMenuItem?) {
+		
+		NSApp.showWelcomeBoard()
+	}
+	
 	@IBAction func moveFocusToCodeArea(sender:NSObject?) {
 		
 		self.mainViewController?.focusToCodeArea()

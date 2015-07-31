@@ -1,5 +1,5 @@
 //
-//  Application.swift
+//  AppExtension.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on H27/08/01.
@@ -7,20 +7,43 @@
 //
 
 import Cocoa
+import Ocean
+
+
+extension NSApplication : AlertDisplayable {
+	
+}
+
+private let welcomeBoardWindowController = Storyboard.WelcomeBoard.defaultController as! WelcomeBoardWindowController
 
 extension NSApplication {
 	
 	func showWelcomeBoard() {
+
+		welcomeBoardWindowController.showWindow(self)
+	}
+	
+	func closeWelcomeBoard() {
 		
-		let windowController = Storyboard.WelcomeBoard.defaultController as! WelcomeBoardWindowController
-		
-		NSApp.runModalForWindow(windowController.window!)
+		welcomeBoardWindowController.close()
 	}
 	
 	func showPreferencesWindow() {
 		
-		let windowController = Storyboard.PreferencesWindow.defaultController as! PreferencesWindowController
+		let preferencesWindowController = Storyboard.PreferencesWindow.defaultController as! PreferencesWindowController
+
+		let code = NSApp.runModalForWindow(preferencesWindowController.window!)
 		
-		NSApp.runModalForWindow(windowController.window!)
+		switch PreferencesWindowModalResult(rawValue: code)! {
+			
+		case .Close:
+			sns.twitter.verifyCredentialsIfNeed { result in
+				
+				if let error = result.error {
+					
+					self.showErrorAlert("Failed to verify credentials", message: String(error))
+				}
+			}
+		}
 	}
 }

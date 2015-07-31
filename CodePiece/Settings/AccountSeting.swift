@@ -20,6 +20,23 @@ struct AccountSetting {
 
 extension AccountSetting {
 
+	// 設定がされていることを確認します。認証の正当性などは判定しません。
+	var isReady:Bool {
+		
+		let isGitHubReady:()->Bool = {
+
+			// GitHub は Token が設定されているかで設定が有効かを判定します。
+			self.authorization != nil
+		}
+		
+		let isTwitterReady:()->Bool = {
+
+			//  現時点ではツイッターアカウント設定の有効性は判定していません。
+			return true
+		}
+		
+		return isGitHubReady() && isTwitterReady()
+	}
 }
 
 extension AccountSetting {

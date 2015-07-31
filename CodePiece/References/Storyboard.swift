@@ -10,6 +10,7 @@ import AppKit
 
 enum Storyboard : String {
 	
+	case WelcomeBoard
 	case PreferencesWindow
 	case GitHubPreferenceView
 	case TwitterPreferenceView

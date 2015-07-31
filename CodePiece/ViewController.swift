@@ -185,7 +185,6 @@ class ViewController: NSViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
 	}
 	
 	override func viewWillAppear() {
@@ -193,9 +192,23 @@ class ViewController: NSViewController {
 		super.viewWillAppear()
 		
 		self.focusToDefaultControl()
-		self.verifyCredentials()
-		
 		self.updateControlsDisplayText()
+
+		self.clearContents()
+	}
+	
+	override func viewDidAppear() {
+		
+		super.viewDidAppear()
+		
+		if settings.isReady {
+			
+			self.verifyCredentials()
+		}
+		else {
+			
+			NSApp.showWelcomeBoard()
+		}
 	}
 	
 	override func viewDidDisappear() {
@@ -237,7 +250,6 @@ class ViewController: NSViewController {
 			switch result {
 
 			case .Success:
-				self.clearContents()
 				NSLog("Twitter credentials verified successfully.")
 				
 			case .Failure(let error):
@@ -250,11 +262,6 @@ class ViewController: NSViewController {
 		didSet {
 		// Update the view, if already loaded.
 		}
-	}
-
-	override func viewDidAppear() {
-	
-		super.viewDidAppear()
 	}
 }
 

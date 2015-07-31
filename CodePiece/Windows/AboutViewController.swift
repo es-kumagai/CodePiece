@@ -48,16 +48,11 @@ public final class AboutViewController: NSViewController {
 		}
 	}
 	
-	public var version:(main: String?, build: String?) {
+	public var version:String? {
 	
 		didSet {
-
-			let main = self.version.main ?? ""
-			let build = self.version.build.map { "build \($0)" } ?? ""
 			
-			let value = main.appendStringIfNotEmpty(build, separator: " ")
-			
-			self.appVersionLabel?.stringValue = value
+			self.appVersionLabel?.stringValue = self.version ?? ""
 		}
 	}
 	
@@ -101,7 +96,7 @@ public final class AboutViewController: NSViewController {
 
 		self.icon = NSApp.applicationIconImage
 		self.name = bundle.appName
-		self.version = bundle.appVersion
+		self.version = bundle.appVersionString
 		self.copyright = bundle.appCopyright
     }
 	
