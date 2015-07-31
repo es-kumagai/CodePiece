@@ -12,22 +12,29 @@ struct Twitter {
 	
 	struct Hashtag {
 		
-		var value:String
+		private var _value:String!
 		
 		init() {
 		
-			self.value = ""
+			self._value = ""
 		}
 		
 		init(_ value:String) {
 			
-			guard !value.isEmpty else {
+			self.value = value
+		}
+		
+		var value:String {
+			
+			get {
 				
-				self.value = ""
-				return
+				return self._value
 			}
 			
-			self.value = value.hasPrefix("#") ? value : "#\(value)"
+			set {
+				
+				self._value = Hashtag.normalize(newValue)
+			}
 		}
 	}
 	
@@ -40,6 +47,18 @@ struct Twitter {
 }
 
 extension Twitter.Hashtag {
+	
+	static func normalize(value:String) -> String {
+		
+		let value = value.trimmed()
+		
+		guard  !value.isEmpty else {
+			
+			return ""
+		}
+		
+		return value.hasPrefix("#") ? value : "#\(value)"
+	}
 	
 	var length:Int {
 		
