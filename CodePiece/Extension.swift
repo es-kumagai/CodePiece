@@ -11,213 +11,8 @@
 import APIKit
 import AppKit
 import Ocean
-
-// MARK: - General
-
-protocol HalfValueConvertible {
-
-	var halfValue:Self { get }
-}
-
-extension HalfValueConvertible where Self : FourArithmeticType, Self : IntegerLiteralConvertible {
-
-	var halfValue:Self {
-		
-		return self / 2
-	}
-}
-
-extension CGFloat : HalfValueConvertible {
-	
-}
-
-extension Float : HalfValueConvertible {
-	
-}
-
-extension Double : HalfValueConvertible {
-	
-}
-
-extension Float80 : HalfValueConvertible {
-	
-}
-
-extension Int : HalfValueConvertible {
-	
-}
-
-extension Int8 : HalfValueConvertible {
-	
-}
-
-extension Int16 : HalfValueConvertible {
-	
-}
-
-extension Int32 : HalfValueConvertible {
-	
-}
-
-extension Int64 : HalfValueConvertible {
-	
-}
-
-extension UInt : HalfValueConvertible {
-	
-}
-
-extension UInt8 : HalfValueConvertible {
-	
-}
-
-extension UInt16 : HalfValueConvertible {
-	
-}
-
-extension UInt32 : HalfValueConvertible {
-	
-}
-
-extension UInt64 : HalfValueConvertible {
-	
-}
-
-//extension HalfValueConvertible where Self : IntegerArithmeticType, Self : IntegerLiteralConvertible {
-//	
-//	var halfValue:Self {
-//		
-//		return self / 2
-//	}
-//}
-
-protocol FourArithmeticType {
-
-	func +(lhs: Self, rhs: Self) -> Self
-	func -(lhs: Self, rhs: Self) -> Self
-	func *(lhs: Self, rhs: Self) -> Self
-    func /(lhs: Self, rhs: Self) -> Self
-}
-
-extension Int : FourArithmeticType {
-	
-}
-
-extension Int8 : FourArithmeticType {
-	
-}
-
-extension Int16 : FourArithmeticType {
-	
-}
-
-extension Int32 : FourArithmeticType {
-	
-}
-
-extension Int64 : FourArithmeticType {
-
-}
-
-extension UInt : FourArithmeticType {
-	
-}
-
-extension UInt8 : FourArithmeticType {
-	
-}
-
-extension UInt16 : FourArithmeticType {
-	
-}
-
-extension UInt32 : FourArithmeticType {
-	
-}
-
-extension UInt64 : FourArithmeticType {
-	
-}
-
-extension Float80 : FourArithmeticType {
-	
-}
-
-extension Float : FourArithmeticType {
-	
-}
-
-extension Double : FourArithmeticType {
-	
-}
-
-extension CGFloat : FourArithmeticType {
-	
-}
-
-public protocol Zeroable {
-
-	static var zero:Self { get }
-	var isZero:Bool { get }
-	
-}
-
-extension Zeroable {
-
-	public func nonZeroMap<Result:Zeroable>(predicate:(Self) throws -> Result) rethrows -> Result {
-
-		if self.isZero {
-			
-			return Result.zero
-		}
-		else {
-			
-			return try predicate(self)
-		}
-	}
-}
-
-extension Zeroable where Self : Equatable {
-
-	public var isZero:Bool {
-
-		return self == Self.zero
-	}
-}
-
-extension IntegerType where Self : Zeroable {
-	
-	public static var zero:Self {
-		
-		return 0
-	}
-}
-
-extension String.CharacterView.Index.Distance : Zeroable {
-	
-	public static var zero:String.CharacterView.Index.Distance {
-		
-		return 0
-	}
-	
-	public var isZero:Bool {
-		
-		return self == String.CharacterView.Index.Distance.zero
-	}
-}
-
-extension String : Zeroable {
-	
-	public static var zero:String {
-		
-		return ""
-	}
-	
-	public var isZero:Bool {
-		
-		return self.isEmpty
-	}
-}
+import Swim
+import ESCoreGraphicsExtension
 
 // MARK: - Thread
 
@@ -281,306 +76,6 @@ public struct Thread {
 
 // MARK: - Capture
 
-func flip(rect:NSRect, height:CGFloat) -> NSRect {
-
-	let origin = flip(rect.origin, height: height - rect.height)
-	let size = rect.size
-	
-	return NSMakeRect(origin.x, origin.y, size.width, size.height)
-}
-
-func flip(point:NSPoint, height:CGFloat) -> NSPoint {
-	
-	return NSMakePoint(point.x, height - point.y)
-}
-
-public struct Scale {
-	
-	public var value:CGFloat
-	
-	public init(_ value:CGFloat) {
-		
-		self.value = value
-	}
-}
-
-extension Scale {
-
-	public var isSameMagnification:Bool {
-	
-		return self.value == 1.0
-	}
-	
-	public func applyTo<Value:Scaleable>(value:Value) -> Value {
-		
-		return value.scaled(self)
-	}
-}
-
-extension Scale : IntegerLiteralConvertible {
-	
-	public init(integerLiteral value: Int) {
-
-		self.init(CGFloat(value))
-	}
-}
-
-extension Scale : FloatLiteralConvertible {
-	
-	public init(floatLiteral value: Double) {
-
-		self.init(CGFloat(value))
-	}
-}
-
-extension Scale : Equatable {
-	
-}
-
-extension Scale : CustomStringConvertible {
-	
-	public var description:String {
-		
-		return self.value.description
-	}
-}
-
-public func == (lhs:Scale, rhs:Scale) -> Bool {
-	
-	return lhs.value == rhs.value
-}
-
-public protocol Scaleable {
-	
-	func scaled(scale:Scale) -> Self
-}
-
-extension Scaleable {
-
-	func scaledBy<T:EnclosingScaleProperty>(item:T) -> Self {
-
-		guard let scale = item.scale else {
-
-			fatalError("Cannot get a scale of \(item).")
-		}
-		
-		return self.scaled(scale)
-	}
-}
-
-public protocol EnclosingScaleProperty {
-
-	var scale:Scale? { get }
-}
-
-public protocol Truncateable {
-	
-	func truncate() -> Self
-}
-
-extension Truncateable {
-
-	public func truncate(ifNeed:Bool) -> Self {
-	
-		if ifNeed {
-
-			return self.truncate()
-		}
-		else {
-	
-			return self
-		}
-	}
-}
-
-extension SignedIntegerType where Self : Scaleable {
-	
-	public func scaled(scale: Scale) -> Self {
-
-		return Self(self.toIntMax() * IntMax(scale.value))
-	}
-}
-
-extension UnsignedIntegerType where Self : Scaleable {
-	
-	public func scaled(scale: Scale) -> Self {
-		
-		return Self(self.toUIntMax() * UIntMax(scale.value))
-	}
-}
-
-extension CGFloat : Scaleable, Truncateable {
-	
-	public func scaled(scale: Scale) -> CGFloat {
-		
-		return self * scale.value
-	}
-	
-	public func truncate() -> CGFloat {
-		
-		return CGFloat(IntMax(self))
-	}
-}
-
-extension Double : Scaleable, Truncateable {
-	
-	public func scaled(scale: Scale) -> Double {
-		
-		return self * Double(scale.value)
-	}
-	
-	public func truncate() -> Double {
-		
-		return Double(IntMax(self))
-	}
-}
-
-extension Float : Scaleable, Truncateable {
-	
-	public func scaled(scale: Scale) -> Float {
-		
-		return self * Float(scale.value)
-	}
-	
-	public func truncate() -> Float {
-		
-		return Float(IntMax(self))
-	}
-}
-
-extension Float80 : Scaleable, Truncateable {
-	
-	public func scaled(scale: Scale) -> Float80 {
-		
-		return self * Float80(Float(scale.value))
-	}
-	
-	public func truncate() -> Float80 {
-		
-		return Float80(IntMax(self))
-	}
-}
-
-extension CGPoint : Scaleable, Truncateable {
-	
-	public func scaled(scale:Scale) -> CGPoint {
-		
-		guard !scale.isSameMagnification else {
-		
-			return self
-		}
-		
-		let x = self.x.scaled(scale)
-		let y = self.y.scaled(scale)
-		
-		return CGPoint(x: x, y: y)
-	}
-	
-	public func truncate() -> CGPoint {
-		
-		let x = self.x.truncate()
-		let y = self.y.truncate()
-		
-		return CGPoint(x: x, y: y)
-	}
-}
-
-extension CGSize : Scaleable, Truncateable {
-	
-	public func scaled(scale:Scale) -> CGSize {
-		
-		guard !scale.isSameMagnification else {
-			
-			return self
-		}
-		
-		let width = self.width.scaled(scale)
-		let height = self.height.scaled(scale)
-		
-		return CGSize(width: width, height: height)
-	}
-	
-	public func truncate() -> CGSize {
-		
-		let width = self.width.truncate()
-		let height = self.height.truncate()
-		
-		return CGSize(width: width, height: height)
-	}
-}
-
-extension CGRect : Scaleable, Truncateable {
-	
-	public func scaled(scale:Scale) -> CGRect {
-		
-		guard !scale.isSameMagnification else {
-			
-			return self
-		}
-		
-		let origin = self.origin.scaled(scale)
-		let size = self.size.scaled(scale)
-		
-		return CGRect(origin: origin, size: size)
-	}
-	
-	public func truncate() -> CGRect {
-		
-		let origin = self.origin.truncate()
-		let size = self.size.truncate()
-		
-		return CGRect(origin: origin, size: size)
-	}
-}
-
-extension CGFloat {
-	
-	public func scaleOf(value:CGFloat) -> Scale {
-		
-		return Scale(self / value)
-	}
-	
-}
-
-extension CGSize {
-	
-	public func widthScaleOf(size:CGSize) -> Scale {
-		
-		return self.width.scaleOf(size.width)
-	}
-	
-	public func heightScaleOf(size:CGSize) -> Scale {
-		
-		return self.height.scaleOf(size.height)
-	}
-}
-
-extension CGRect {
-	
-	public func widthScaleOf(rect:CGRect) -> Scale {
-		
-		return self.size.widthScaleOf(rect.size)
-	}
-	
-	public func heightScaleOf(rect:CGRect) -> Scale {
-		
-		return self.size.heightScaleOf(rect.size)
-	}
-}
-
-extension CGImage {
-	
-	public func widthScaleOf(size:CGSize) -> Scale {
-		
-		return CGFloat(CGImageGetWidth(self)).scaleOf(size.width)
-	}
-	
-	public func heightScaleOf(size:CGSize) -> Scale {
-		
-		return CGFloat(CGImageGetHeight(self)).scaleOf(size.height)
-	}
-}
-
 protocol Captureable {
 	
 	typealias CaptureTarget
@@ -621,7 +116,7 @@ extension NSView : Captureable {
 
 extension NSView : EnclosingScaleProperty {
 	
-	public var scale:Scale? {
+	public var scale:CGScale? {
 		
 		return (self.window?.backingScaleFactor).map(Scale.init)
 	}
@@ -637,7 +132,7 @@ extension NSWindow : Captureable {
 
 extension NSWindow : EnclosingScaleProperty {
 	
-	public var scale:Scale? {
+	public var scale:CGScale? {
 		
 		return Scale(self.backingScaleFactor)
 	}
@@ -645,7 +140,7 @@ extension NSWindow : EnclosingScaleProperty {
 
 extension NSApplication : EnclosingScaleProperty {
 	
-	public var scale:Scale? {
+	public var scale:CGScale? {
 		
 		return self.keyWindow?.scale
 	}
@@ -690,92 +185,6 @@ func capture(view:NSView, rect:NSRect) -> NSImage {
 	return newImage
 }
 
-public struct Margin<Type> {
-
-	public var top:Type
-	public var right:Type
-	public var bottom:Type
-	public var left:Type
-	
-	public init(top:Type, right:Type, bottom:Type, left:Type) {
-		
-		self.top = top
-		self.right = right
-		self.bottom = bottom
-		self.left = left
-	}
-	
-	public init(margin:Type) {
-		
-		self.init(top: margin, right: margin, bottom: margin, left: margin)
-	}
-	
-	public init(vertical:Type, horizontal:Type) {
-		
-		self.init(top: vertical, right: horizontal, bottom: vertical, left: horizontal)
-	}
-	
-	public init(top:Type, horizontal:Type, bottom:Type) {
-		
-		self.init(top: top, right: horizontal, bottom: bottom, left: horizontal)
-	}
-}
-
-func + (lhs:CGPoint, rhs:CGPoint) -> CGPoint {
-
-	let x = lhs.x + rhs.x
-	let y = lhs.y + rhs.y
-	
-	return CGPoint(x: x, y: y)
-}
-
-func - (lhs:CGPoint, rhs:CGPoint) -> CGPoint {
-	
-	let x = lhs.x - rhs.x
-	let y = lhs.y - rhs.y
-	
-	return CGPoint(x: x, y: y)
-}
-
-func + (lhs:CGSize, rhs:CGSize) -> CGSize {
-	
-	let width = lhs.width + rhs.width
-	let height = lhs.height + rhs.height
-	
-	return CGSize(width: width, height: height)
-}
-
-func - (lhs:CGSize, rhs:CGSize) -> CGSize {
-	
-	guard lhs.width >= rhs.width && lhs.height >= rhs.height else {
-		
-		fatalError()
-	}
-	
-	let width = lhs.width - rhs.width
-	let height = lhs.height - rhs.height
-	
-	return CGSize(width: width, height: height)
-}
-
-extension CGRect {
-
-	func applyMargin(margin:Margin<CGFloat>) -> CGRect {
-		
-		let origin = self.origin - CGPoint(x: margin.left, y: margin.top)
-		let size = self.size + CGSize(width: margin.horizontalTotal, height: margin.verticalTotal)
-
-		return CGRect(origin: origin, size: size)
-	}
-	
-	func applyPadding(padding:Margin<CGFloat>) -> CGRect {
-		
-		let origin = self.origin + CGPoint(x: padding.left, y: padding.top)
-		let size = self.size - CGSize(width: padding.horizontalTotal, height: padding.verticalTotal)
-		
-		return CGRect(origin: origin, size: size)
-	}
-}
 
 //extension Margin where Type : IntegerArithmeticType {
 //	
@@ -790,99 +199,7 @@ extension CGRect {
 //	}
 //}
 
-extension Margin where Type : FourArithmeticType {
-	
-	public var horizontalTotal:Type {
-		
-		return self.left + self.right
-	}
-	
-	public var verticalTotal:Type {
-		
-		return self.top + self.bottom
-	}
-}
-
-extension CGPoint {
-	
-	public init(x:Int, y:Int) {
-		
-		self.init(x: CGFloat(x), y: CGFloat(y))
-	}
-	
-	public func replaced(x x:CGFloat) -> CGPoint {
-		
-		return CGPoint(x: x, y: self.y)
-	}
-	
-	public func replaced(y y:CGFloat) -> CGPoint {
-		
-		return CGPoint(x: self.x, y: y)
-	}
-}
-
-extension CGSize {
-	
-	public init(width:Int, height:Int) {
-		
-		self.init(width: CGFloat(width), height: CGFloat(height))
-	}
-	
-	public func replaced(width width:CGFloat) -> CGSize {
-		
-		return CGSize(width: width, height: self.height)
-	}
-	
-	public func replaced(height height:CGFloat) -> CGSize {
-		
-		return CGSize(width: self.width, height: height)
-	}
-}
-
-extension CGRect {
-	
-	public func replaced(x x:CGFloat) -> CGRect {
-		
-		return self.replaced(origin: self.origin.replaced(x: x))
-	}
-	
-	public func replaced(y y:CGFloat) -> CGRect {
-		
-		return self.replaced(origin: self.origin.replaced(y: y))
-	}
-	
-	public func replaced(width width:CGFloat) -> CGRect {
-		
-		return self.replaced(size: self.size.replaced(width: width))
-	}
-	
-	public func replaced(height height:CGFloat) -> CGRect {
-		
-		return self.replaced(size: self.size.replaced(height: height))
-	}
-	
-	public func replaced(origin origin:CGPoint) -> CGRect {
-
-		return CGRect(origin: origin, size: self.size)
-	}
-	
-	public func replaced(size size:CGSize) -> CGRect {
-		
-		return CGRect(origin: self.origin, size: size)
-	}
-	
-	public func centerOf(rect:CGRect, truncate truncateIfNeeded:Bool = true) -> CGRect {
-		
-		let x = (rect.width - self.width).halfValue
-		let y = (rect.height - self.height).halfValue
-		
-		let origin = CGPoint(x: x, y: y).truncate(truncateIfNeeded)
-		
-		return self.replaced(origin: origin)
-	}
-}
-
-func createImage(image:NSImage, margin:Margin<Int>) -> NSImage {
+public func createImage(image:NSImage, margin:IntMargin) -> NSImage {
 
 	let newWidth = Int(image.size.width) + margin.horizontalTotal
 	let newHeight = Int(image.size.height) + margin.verticalTotal
@@ -892,7 +209,7 @@ func createImage(image:NSImage, margin:Margin<Int>) -> NSImage {
 	let colorSpace = CGColorSpaceCreateDeviceRGB()
 	let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue)
 	
-	let point = NSPoint(x: margin.left, y: margin.top)
+	let point = NSPoint(x: CGFloat(margin.left), y: CGFloat(margin.top))
 	
 	guard let bitmapContext = CGBitmapContextCreate(nil, newWidth, newHeight, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo.rawValue) else {
 		
@@ -900,7 +217,7 @@ func createImage(image:NSImage, margin:Margin<Int>) -> NSImage {
 	}
 	
 	
-	let bitmapSize = NSSize(width: newWidth, height: newHeight)
+	let bitmapSize = NSSize(width: CGFloat(newWidth), height: CGFloat(newHeight))
 	let bitmapRect = NSRect(origin: NSZeroPoint, size: NSSize(width: bitmapSize.width, height: bitmapSize.height))
 
 	let graphicsContext = NSGraphicsContext(CGContext: bitmapContext, flipped: false)
@@ -936,11 +253,6 @@ func capture(window:NSWindow) -> NSImage {
 
 extension String {
 
-	public func trimmed() -> String {
-	
-		return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-	}
-	
 	public func appendStringIfNotEmpty(string:String?, separator:String = "") -> String {
 		
 		guard let string = string where !string.isEmpty else {

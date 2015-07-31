@@ -12,6 +12,7 @@ import Result
 import Ocean
 import Quartz
 import Swim
+import ESProgressHUD
 
 class ViewController: NSViewController {
 
