@@ -8,10 +8,12 @@
 
 import Cocoa
 import ESProgressHUD
+import Ocean
 
 class TwitterPreferenceViewController: NSViewController {
 
 	private var verifyingHUD:ProgressHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
+	private var waitingHUD:ProgressHUD = ProgressHUD(message: "Please wait...", useActivityIndicator: true)
 
 	@IBOutlet weak var credentialsVerificationStatusImageView:NSImageView!
 	@IBOutlet weak var credentialsVerificationStatusTextField:NSTextField!
@@ -48,6 +50,14 @@ class TwitterPreferenceViewController: NSViewController {
 	}
 	
 	@IBAction func openPreferences(sender:NSButton) {
+		
+		// 表示に時間がかかるので、気持ち待ち時間を HUD で紛らわします。
+		waitingHUD.show()
+
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(6 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+			
+			self.waitingHUD.hide()
+		}
 		
 		NSWorkspace.sharedWorkspace().openURL(NSURL(fileURLWithPath: "/System/Library/PreferencePanes/InternetAccounts.prefPane"))
 	}
