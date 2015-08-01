@@ -8,8 +8,11 @@
 
 import Cocoa
 import Ocean
+import ESProgressHUD
 
 class GitHubPreferenceViewController: NSViewController {
+
+	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
 
 	@IBOutlet weak var authorizedStatusImageView:NSImageView!
 	@IBOutlet weak var authorizedStatusTextField:NSTextField!
@@ -31,7 +34,22 @@ class GitHubPreferenceViewController: NSViewController {
 			return
 		}
 		
-		Authorization.resetAuthorizationOfGitHub(id)
+		self.authenticatingHUD.show()
+		
+		Authorization.resetAuthorizationOfGitHub(id) { result in
+			
+			self.authenticatingHUD.hide()
+			
+			switch result {
+				
+			case .Success:
+				NSLog("Reset successfully. Please perform authentication before you post to Gist again.")
+				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
+
+			case .Failure(let error):
+				self.showWarningAlert("Failed to reset authorization", message: "Could't reset the current authentication information. Reset authentication information which saved in this app force. (\(error))")
+			}
+		}
 	}
 	
 	var authorizationState:AuthorizationState {

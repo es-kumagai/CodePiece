@@ -6,7 +6,7 @@ Change Logs.
 
 ### Enhancements
 
-* Displays a message by progress HUD view during post processing.
+* Displays a message by progress HUD view during post processing and authenticating.
 
 ## 1.0 Build 8
 

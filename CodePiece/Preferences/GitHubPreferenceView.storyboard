@@ -174,7 +174,7 @@ DQ
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="dismissController:" target="nSm-bR-eB5" id="nG0-Hp-hSQ"/>
+                                    <action selector="pushCancelButton:" target="nSm-bR-eB5" id="EJ0-Ja-n99"/>
                                 </connections>
                             </button>
                         </subviews>

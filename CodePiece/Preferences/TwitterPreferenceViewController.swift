@@ -7,8 +7,11 @@
 //
 
 import Cocoa
+import ESProgressHUD
 
 class TwitterPreferenceViewController: NSViewController {
+
+	private var verifyingHUD:ProgressHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
 
 	@IBOutlet weak var credentialsVerificationStatusImageView:NSImageView!
 	@IBOutlet weak var credentialsVerificationStatusTextField:NSTextField!
@@ -24,10 +27,14 @@ class TwitterPreferenceViewController: NSViewController {
 		
 		self.willChangeValueForKey("credentialsNotVerified")
 		
+		self.verifyingHUD.show()
+		
 		sns.twitter.verifyCredentialsIfNeed { result in
 			
 			self.didChangeValueForKey("credentialsNotVerified")			
 			self.applyAuthorizedStatus()
+			
+			self.verifyingHUD.hide()
 			
 			switch result {
 				

@@ -8,14 +8,17 @@
 
 import Cocoa
 import Ocean
+import ESProgressHUD
 
 class GitHubPreferenceAuthenticationViewController: NSViewController {
+
+	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
 
 	@IBOutlet weak var usernameTextField:NSTextField!
 	@IBOutlet weak var passwordTextField:NSTextField!
 	
 	@IBAction func pushCancelButton(sender:NSButton) {
-	
+
 		self.dismissController(self)
 	}
 	
@@ -29,8 +32,13 @@ class GitHubPreferenceAuthenticationViewController: NSViewController {
 			self.showErrorAlert("Invalid account", message: "Please enter your 'Username' and 'Password' for GitHub.")
 			return
 		}
+
+		self.authenticatingHUD.show()
+//		self.authenticatingHUD.show(onView: self.view.window?.sheetParent?.contentView)
 		
 		Authorization.authorizationWithGitHub(username, password: password) { result in
+			
+			self.authenticatingHUD.hide()
 			
 			switch result {
 				

@@ -10,6 +10,7 @@ import Foundation
 import ESGist
 import APIKit
 import STTwitter
+import Result
 
 // このプロトコルに準拠したクライアント情報をプロジェクトに実装し、
 // AppDelegate 等から GitHubClientInfo 変数にそのインスタンスを設定してください。
@@ -76,7 +77,7 @@ extension Authorization {
 
 extension Authorization {
 
-	static func resetAuthorizationOfGitHub(id:ID) {
+	static func resetAuthorizationOfGitHub(id:ID, completion:(Result<Void,APIError>)->Void) {
 		
 		guard let authorization = settings.account.authorization else {
 
@@ -96,20 +97,19 @@ extension Authorization {
 				
 				AuthorizationStateDidChangeNotification().post()
 			}
-			
+
 			switch response {
 				
 			case .Success:
 				
 				// Token では削除できないようなので、403 で失敗しても認証情報を削除するだけにしています。
 				settings.resetGitHubAccount()
-				NSLog("Reset successfully. Please perform authentication before you post to Gist again.")
-				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
+				completion(response)
 				
-			case .Failure(let error):
-				
+			case .Failure(_):
+
 				settings.resetGitHubAccount()
-				self.showWarningAlert("Failed to reset authorization", message: "Could't reset the current authentication information. Reset authentication information which saved in this app force. (\(error))")
+				completion(response)
 			}
 		}
 	}
@@ -122,7 +122,8 @@ extension Authorization {
 		let authorization = ESGist.GitHubAuthorization(id: username, password: password)
 		
 		NSLog("Try to get or create new authorization for '\(username)' by client '\(client.id)'.")
-		
+
+		// 認証処理は、認証情報が既に記録されているかで実行タイミングが変わるため、融通がきくようにクロージャーで用意しています。
 		let authorize = { () -> Void in
 			
 			let request = GitHubAPI.OAuthAuthorizations.GetOrCreateNewAuthorization(authorization: authorization, clientId: client.id, clientSecret: client.secret, options: [ .Scopes([scope]) ])
@@ -140,6 +141,7 @@ extension Authorization {
 			}
 		}
 		
+		// アプリに ID 情報が記録されていた場合は、それを削除してから認証を行います。
 		if let id = settings.account.id {
 			
 			let request = GitHubAPI.OAuthAuthorizations.DeleteAuthorization(authorization: authorization, id:id)
@@ -147,11 +149,14 @@ extension Authorization {
 			GitHubAPI.sendRequest(request) { response in
 				
 				settings.resetGitHubAccount()
+				
+				// 削除処理の成功の可否に関わらず、処理後に認証を実行します。
 				authorize()
 				
+				// 削除処理の失敗はログに記録しておきます。
 				if case .Failure(let error) = response {
 					
-					settings.resetGitHubAccount()
+					// 認証に失敗していた場合の後始末です。
 					NSLog("Failed to reset authorization. Could't reset the current authentication information. Reset authentication information which saved in this app force. (\(error))")
 				}
 			}
