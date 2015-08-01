@@ -25,10 +25,14 @@
                                         <action selector="showTwitterPreference:" target="Uy3-nO-Z6i" id="fQc-4t-df4"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="30148D3E-5C4D-4EFC-859A-4A2604FF343A" label="Accounts" paletteLabel="Accounts" tag="-1" image="NSUserAccounts" id="UjS-Iz-lW1">
+                                    <connections>
+                                        <action selector="showAccountsPreference:" target="Uy3-nO-Z6i" id="XH3-dy-yne"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="I67-Lh-mBC"/>
-                                <toolbarItem reference="Czy-bE-3CQ"/>
+                                <toolbarItem reference="UjS-Iz-lW1"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>

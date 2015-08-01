@@ -62,12 +62,19 @@ DQ
                                 <rect key="frame" x="337" y="187" width="129" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DsE-ej-daq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="15"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="doReset:" target="ps4-Eu-nrG" id="eG2-vm-x3W"/>
                                 </connections>
                             </button>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="rHU-8p-vg1">
+                                <rect key="frame" x="0.0" y="150" width="12" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="p7Y-Am-idV"/>
+                                    <constraint firstAttribute="width" constant="12" id="sci-Dx-Et9"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="AFn-Gq-0En" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="29" id="2hg-td-K3n"/>
@@ -77,7 +84,9 @@ DQ
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="CFS-nN-6G8"/>
                             <constraint firstItem="vPC-jY-0Jr" firstAttribute="top" secondItem="AFn-Gq-0En" secondAttribute="bottom" constant="5" id="Mmi-Mn-NFS"/>
                             <constraint firstItem="vPC-jY-0Jr" firstAttribute="leading" secondItem="AFn-Gq-0En" secondAttribute="leading" id="QPp-IE-onU"/>
+                            <constraint firstItem="rHU-8p-vg1" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" id="RBD-rh-Uak"/>
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="top" secondItem="eF3-de-P5v" secondAttribute="bottom" constant="9" id="WKr-XE-7mN"/>
+                            <constraint firstItem="rHU-8p-vg1" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" id="XZB-HM-Coi"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="35" id="Ym7-hQ-dhw"/>
                             <constraint firstItem="eF3-de-P5v" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="28" id="adt-6R-Taj"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="centerY" secondItem="5cj-jM-cXY" secondAttribute="centerY" id="sPM-Lb-NSW"/>
