@@ -7,6 +7,12 @@ Change Logs.
 ### Enhancements
 
 * Displays a message by progress HUD view during post processing and authenticating.
+* Hashtag string is now trimmed with whitespace characters.
+* When configuration is not completed in launch time, welcome window will show. 
+
+### Bug Fixes
+
+* Fixed a problem that .
 
 ## 1.0 Build 8
 
