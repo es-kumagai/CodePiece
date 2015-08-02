@@ -16,10 +16,14 @@ PODS:
   - ESThread (0.1.0)
   - Himotoki (0.5.1)
   - KeychainAccess (1.2.1)
-  - Ocean (1.3.12):
-    - ESAppKitExtension (~> 0.1.0)
+  - Ocean (1.3.13):
+    - ESActiveCounter (~> 0.1.0)
+    - ESAppKitExtension (~> 0.1.1)
     - ESCoreGraphicsExtension (~> 0.1.2)
-    - ESProgressHUD (~> 0.1.0)
+    - ESNotification (~> 0.1.0)
+    - ESProgressHUD (~> 0.1.2)
+    - ESThread (~> 0.1.0)
+    - Swim (~> 1.3.14)
   - Result (0.6-beta.1)
   - STTwitter (0.2.1)
   - Swim (1.3.14)
@@ -29,7 +33,7 @@ DEPENDENCIES:
   - Himotoki (from `https://github.com/ikesyo/Himotoki.git`, branch `swift2`)
   - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`,
     branch `swift-2.0`)
-  - Ocean (~> 1.3.10)
+  - Ocean (~> 1.3.13)
   - STTwitter
 
 EXTERNAL SOURCES:
@@ -64,7 +68,7 @@ SPEC CHECKSUMS:
   ESThread: aa7f1d3e412716cef6c62e116a1da761449f5e48
   Himotoki: 162194f50e4811b0695bb9e9a1bd4aebf703c82f
   KeychainAccess: 2ffa8b1b7130263bb7fe90b359d778696fc2d8ce
-  Ocean: d865df01e1495c2d2ffb0cf35f17cec83078c4bf
+  Ocean: dd1dbc22cd2111e733a7f42ca6067e01efa2bf86
   Result: 6c990ec4a72470672f9fc5b6fef009da0f6f40d1
   STTwitter: 7b348a4600eb9f868a3d1c9031b4fd8533d123e7
   Swim: 9b5184815b6c50971ef0378156225c90fc8e50b5

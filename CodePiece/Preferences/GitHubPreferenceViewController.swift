@@ -9,6 +9,7 @@
 import Cocoa
 import Ocean
 import ESProgressHUD
+import ESNotification
 
 class GitHubPreferenceViewController: NSViewController {
 

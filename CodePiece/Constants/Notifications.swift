@@ -7,6 +7,7 @@
 //
 
 import Ocean
+import ESNotification
 
 // MARK: - Settings Notification
 

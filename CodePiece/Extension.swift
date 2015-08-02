@@ -13,6 +13,7 @@ import AppKit
 import Ocean
 import Swim
 import ESCoreGraphicsExtension
+import ESThread
 
 public protocol AcknowledgementsIncluded {
 
@@ -215,12 +216,12 @@ public struct Thread {
 	
 	public func invokeAsync(predicate:()->Void) {
 		
-		Ocean.invokeAsync(self.queue, predicate: predicate)
+		ESThread.invokeAsync(self.queue, predicate: predicate)
 	}
 	
 	public func invoke<Result>(predicate:()->Result) -> Result {
 		
-		return Ocean.invokeSync(self.queue, predicate: predicate)
+		return ESThread.invoke(self.queue, predicate: predicate)
 	}
 }
 

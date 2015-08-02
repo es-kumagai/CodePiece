@@ -1,4 +1,3 @@
-source 'ssh://git@rc.sv.ez-net.ne.jp:2246/tomohiro/espods.git'
 source 'https://github.com/EZ-NET/PodSpecs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
@@ -9,7 +8,7 @@ xcodeproj '../../Libraries/ESGist/ESGist.xcodeproj'
 platform :osx, '10.10'
 use_frameworks!
 
-pod 'Ocean', '~> 1.3.10'
+pod 'Ocean', '~> 1.3.13'
 pod 'APIKit', :git => 'https://github.com/ishkawa/APIKit.git', :branch => 'master'
 pod 'Himotoki', :git => 'https://github.com/ikesyo/Himotoki.git', :branch => 'swift2'
 

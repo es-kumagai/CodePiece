@@ -10,6 +10,7 @@ import Cocoa
 import WebKit
 import Ocean
 import Swift
+import ESThread
 
 private var thread = Thread(name: "jp.ez-style.CodePiece.CodeCaptureController")
 
@@ -105,7 +106,7 @@ extension WebCaptureController.Request : WebFrameLoadDelegate {
 		
 		// frame の bounds が更新される前に呼び出される場合があるようなので、
 		// 応急対応として待ち時間を挿入します。適切な方法に変える必要があります。
-		Ocean.sleep(0.5)
+		sleepForSecond(0.5)
 		
 		invokeAsyncOnMainQueue {
 
