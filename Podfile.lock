@@ -1,11 +1,19 @@
 PODS:
   - APIKit (1.0.0-beta1):
     - Result (~> 0.6-beta.1)
+  - ESActiveCounter (0.1.3):
+    - ESNotification (~> 0.1.0)
   - ESAppKitExtension (0.1.1)
   - ESCoreGraphicsExtension (0.1.2):
     - Swim (~> 1.3.13)
-  - ESProgressHUD (0.1.0):
+  - ESNotification (0.1.0):
+    - ESThread (~> 0.1.0)
+    - Swim (~> 1.3.14)
+  - ESProgressHUD (0.1.2):
+    - ESActiveCounter (~> 0.1.3)
+    - ESAppKitExtension (~> 0.1.1)
     - ESCoreGraphicsExtension (~> 0.1.2)
+  - ESThread (0.1.0)
   - Himotoki (0.5.1)
   - KeychainAccess (1.2.1)
   - Ocean (1.3.12):
@@ -40,7 +48,7 @@ CHECKOUT OPTIONS:
     :commit: 5cfd2e6deca826ffa0ed86168c29d597ffe20d8e
     :git: https://github.com/ishkawa/APIKit.git
   Himotoki:
-    :commit: 9b20c4b278d3db96adee772b6c84ef73c7ff2e50
+    :commit: 2fddd0773f314e6d42d8748048e248c1054d90d6
     :git: https://github.com/ikesyo/Himotoki.git
   KeychainAccess:
     :commit: 7879a49b81c553ad9b40cbafda34a881648e2ff3
@@ -48,9 +56,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   APIKit: cb0ce7ebc5e72d7ae4d71e0061f2f98676287c1f
+  ESActiveCounter: 270bbe32a2d33000e6b4acd40ecc6eefd04da62d
   ESAppKitExtension: 3bc92382a286d8ed531c0f2e9e1a0356cae9457c
   ESCoreGraphicsExtension: 017d11d2debc6c0adc618d6f27eaeac6ee393732
-  ESProgressHUD: b6e27424c82f91e42ac922fed2ec251071835ffc
+  ESNotification: e8386670345eccf6d4b865f3843159cf38f4d3f9
+  ESProgressHUD: 4f8e718e2d04d29652320211b977be013430c3fd
+  ESThread: aa7f1d3e412716cef6c62e116a1da761449f5e48
   Himotoki: 162194f50e4811b0695bb9e9a1bd4aebf703c82f
   KeychainAccess: 2ffa8b1b7130263bb7fe90b359d778696fc2d8ce
   Ocean: d865df01e1495c2d2ffb0cf35f17cec83078c4bf
