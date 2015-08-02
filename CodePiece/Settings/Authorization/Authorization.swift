@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ESGist
+import ESGists
 import APIKit
 import STTwitter
 import Result
@@ -119,7 +119,7 @@ extension Authorization {
 		let client = GitHubClientInfo
 		let scope = Scope.Gist
 		
-		let authorization = ESGist.GitHubAuthorization(id: username, password: password)
+		let authorization = ESGists.GitHubAuthorization(id: username, password: password)
 		
 		NSLog("Try to get or create new authorization for '\(username)' by client '\(client.id)'.")
 

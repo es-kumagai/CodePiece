@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import ESGist
+import ESGists
 import Result
 
 protocol PostController {
@@ -78,7 +78,7 @@ final class SNSController : PostController {
 		return gists.canPost && twitter.canPost
 	}
 	
-	func post(content: String, language: ESGist.Language, description: String, hashtag: Twitter.Hashtag, completed: (PostResult) -> Void) throws {
+	func post(content: String, language: ESGists.Language, description: String, hashtag: Twitter.Hashtag, completed: (PostResult) -> Void) throws {
 	
 		var resultInfo = PostResultInfo()
 		
@@ -92,7 +92,7 @@ final class SNSController : PostController {
 			completed(PostResult(error: PostErrorInfo(error, resultInfo)))
 		}
 		
-		let postByTwitter = { (description:String, gist:ESGist.Gist, image:NSImage?) throws -> Void in
+		let postByTwitter = { (description:String, gist:ESGists.Gist, image:NSImage?) throws -> Void in
 		
 			try self.twitter.post(gist, language: language, description: description, hashtag: hashtag, image: image) { result in
 

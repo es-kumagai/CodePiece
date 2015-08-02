@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import ESGist
+import ESGists
 
 var settings = Settings()
 

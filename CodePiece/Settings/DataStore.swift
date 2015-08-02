@@ -7,7 +7,7 @@
 //
 
 import KeychainAccess
-import ESGist
+import ESGists
 
 struct DataStore {
 	

@@ -7,21 +7,21 @@
 //
 
 import Cocoa
-import ESGist
+import ESGists
 import Result
 
 final class GistsController : PostController, AlertDisplayable {
 
 	let filename = "CodePiece"
 
-	typealias PostResult = Result<ESGist.Gist,NSError>
+	typealias PostResult = Result<ESGists.Gist,NSError>
 	
 	var canPost:Bool {
 	
 		return settings.account.authorizationState.isValid
 	}
 	
-	func post(content:String, language:ESGist.Language, description:String, hashtag:Twitter.Hashtag, completed:(PostResult)->Void) throws {
+	func post(content:String, language:ESGists.Language, description:String, hashtag:Twitter.Hashtag, completed:(PostResult)->Void) throws {
 
 		guard let authorization = settings.account.authorization else {
 			

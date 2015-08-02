@@ -8,7 +8,7 @@
 
 import Cocoa
 import STTwitter
-import ESGist
+import ESGists
 import Accounts
 import Result
 import Ocean
@@ -84,7 +84,7 @@ final class TwitterController : PostController, AlertDisplayable {
 		}
 	}
 
-	private func makeStatusFrom(gist:ESGist.Gist?, description:String, hashtag:Twitter.Hashtag, var maxLength: Int? = nil) -> String? {
+	private func makeStatusFrom(gist:ESGists.Gist?, description:String, hashtag:Twitter.Hashtag, var maxLength: Int? = nil) -> String? {
 		
 		if gist != nil {
 
@@ -100,7 +100,7 @@ final class TwitterController : PostController, AlertDisplayable {
 		return DescriptionGenerator(description, language: nil, hashtag: hashtag, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
 	}
 	
-	func post(gist:ESGist.Gist, language:ESGist.Language, description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(gist:ESGists.Gist, language:ESGists.Language, description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 
 		let status = self.makeStatusFrom(gist, description: description, hashtag: hashtag)!
 		

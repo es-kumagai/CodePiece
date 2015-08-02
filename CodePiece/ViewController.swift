@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import ESGist
+import ESGists
 import Result
 import Ocean
 import Quartz

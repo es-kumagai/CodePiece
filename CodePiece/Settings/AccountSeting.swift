@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ESGist
+import ESGists
 
 struct AccountSetting {
 	
