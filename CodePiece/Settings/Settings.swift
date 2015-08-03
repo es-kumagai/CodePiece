@@ -52,6 +52,8 @@ struct Settings {
 		self.account.authorization = self._store.github.token.map(GitHubAuthorization.init)
 
 		NSLog("GitHub account information restored from data store. (\(self.account.username))")
+		
+		Authorization.GitHubAuthorizationStateDidChangeNotification(username: self.account.username).post()
 	}
 	
 	mutating func saveGitHubAccount() {

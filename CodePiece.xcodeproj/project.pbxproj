@@ -64,6 +64,7 @@
 		B152E2C21B6EE06B008B485A /* STTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E21B5F865F0036A690 /* STTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B152E2C31B6EE06B008B485A /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; };
 		B152E2C41B6EE06B008B485A /* Swim.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B152E2C71B6F6C08008B485A /* MainStatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B152E2C51B6F6C08008B485A /* MainStatusController.swift */; };
 		B17C88C11B66BF0B00CBF20F /* README.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BD1B66BE6800CBF20F /* README.md */; };
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
 		B17C88C61B66FE7F00CBF20F /* ss in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BE1B66BE6800CBF20F /* ss */; };
@@ -213,6 +214,7 @@
 		B152E2AE1B6EE06A008B485A /* ESNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B152E2B11B6EE06A008B485A /* ESProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B152E2B41B6EE06A008B485A /* ESThread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESThread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B152E2C51B6F6C08008B485A /* MainStatusController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStatusController.swift; sourceTree = "<group>"; };
 		B17C88BD1B66BE6800CBF20F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B17C88BE1B66BE6800CBF20F /* ss */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ss; sourceTree = "<group>"; };
 		B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				B1118DA11B6BE77800BFC5FA /* WelcomeBoard.storyboard */,
 				B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */,
 				B1118DA31B6BECAD00BFC5FA /* WelcomeBoardViewController.swift */,
+				B152E2C51B6F6C08008B485A /* MainStatusController.swift */,
 			);
 			path = Windows;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */,
 				B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
+				B152E2C71B6F6C08008B485A /* MainStatusController.swift in Sources */,
 				B12B24811B6B59D600B284D7 /* AboutViewController.swift in Sources */,
 				B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */,
 				B1D2D69C1B5DFF7400794EFD /* Colors.swift in Sources */,
@@ -917,7 +921,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CodePiece/CodePiece.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CodePiece/Info.plist;
@@ -936,7 +939,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CodePiece/CodePiece.entitlements;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CodePiece/Info.plist;
@@ -1042,7 +1044,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CodePiece/CodePiece.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "3rd Party Mac Developer Application: EasyStyle G.K. (89282N6UM7)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CodePiece/Info.plist;
