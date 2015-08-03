@@ -13,7 +13,23 @@ import ESNotification
 
 extension Authorization {
 
-	final class AuthorizationStateDidChangeNotification : Notification {
+	final class GitHubAuthorizationStateDidChangeNotification : Notification {
 		
+		private(set) var username:String?
+		
+		init(username:String?) {
+			
+			self.username = username
+		}
+	}
+
+	final class TwitterAuthorizationStateDidChangeNotification : Notification {
+		
+		private(set) var username:String?
+		
+		init(username:String?) {
+			
+			self.username = username
+		}		
 	}
 }

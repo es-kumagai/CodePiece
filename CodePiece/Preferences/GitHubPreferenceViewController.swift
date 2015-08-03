@@ -105,9 +105,9 @@ class GitHubPreferenceViewController: NSViewController {
 	
 		super.viewWillAppear()
 		
-		Authorization.AuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 
-			NSLog("Detect authorization state changed.")
+			NSLog("Detect GitHub authorization state changed.")
 			
 			self.applyAuthorizedStatus()
 		}

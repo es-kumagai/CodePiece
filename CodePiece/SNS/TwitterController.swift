@@ -64,6 +64,11 @@ final class TwitterController : PostController, AlertDisplayable {
 		
 		self.api.verifyCredentials { result in
 			
+			defer {
+			
+				Authorization.TwitterAuthorizationStateDidChangeNotification(username: self.username).post()
+			}
+			
 			switch result {
 				
 			case let .Success(username, userId):
