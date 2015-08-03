@@ -15,6 +15,7 @@ extension NSApplication : AlertDisplayable {
 }
 
 private let welcomeBoardWindowController = Storyboard.WelcomeBoard.defaultController as! WelcomeBoardWindowController
+private let preferencesWindowController = Storyboard.PreferencesWindow.defaultController as! PreferencesWindowController
 
 extension NSApplication {
 	
@@ -30,20 +31,6 @@ extension NSApplication {
 	
 	func showPreferencesWindow() {
 		
-		let preferencesWindowController = Storyboard.PreferencesWindow.defaultController as! PreferencesWindowController
-
-		let code = NSApp.runModalForWindow(preferencesWindowController.window!)
-		
-		switch PreferencesWindowModalResult(rawValue: code)! {
-			
-		case .Close:
-			sns.twitter.verifyCredentialsIfNeed { result in
-				
-				if let error = result.error {
-					
-					self.showErrorAlert("Failed to verify credentials", message: String(error))
-				}
-			}
-		}
+		preferencesWindowController.showWindow(self)
 	}
 }

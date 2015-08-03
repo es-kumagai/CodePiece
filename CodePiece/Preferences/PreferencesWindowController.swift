@@ -43,7 +43,13 @@ class PreferencesWindowController: NSWindowController {
 extension PreferencesWindowController : NSWindowDelegate {
 	
 	func windowWillClose(notification: NSNotification) {
-		
-		NSApp.stopModalWithCode(PreferencesWindowModalResult.Close.rawValue)
+
+		sns.twitter.verifyCredentialsIfNeed { result in
+			
+			if let error = result.error {
+				
+				NSLog("Failed to verify credentials. \(error)")
+			}
+		}
 	}
 }
