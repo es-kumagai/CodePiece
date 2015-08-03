@@ -17,8 +17,10 @@ class GitHubPreferenceViewController: NSViewController {
 
 	@IBOutlet weak var authorizedStatusImageView:NSImageView!
 	@IBOutlet weak var authorizedStatusTextField:NSTextField!
+	@IBOutlet weak var authorizedAccountName:NSTextField!
 	@IBOutlet weak var authorizationButton:NSButton!
 	@IBOutlet weak var resetButton:NSButton!
+	
 	
 	@IBAction func doAuthentication(sender:NSButton) {
 	
@@ -59,6 +61,8 @@ class GitHubPreferenceViewController: NSViewController {
 	}
 	
 	func applyAuthorizedStatus() {
+		
+		self.authorizedAccountName.stringValue = settings.account.username ?? ""
 		
 		switch self.authorizationState {
 			

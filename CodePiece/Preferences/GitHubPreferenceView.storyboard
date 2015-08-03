@@ -75,6 +75,22 @@ DQ
                                     <constraint firstAttribute="width" constant="12" id="sci-Dx-Et9"/>
                                 </constraints>
                             </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X40-Kf-trQ">
+                                <rect key="frame" x="78" y="233" width="16" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="▶︎" id="jhb-us-wsd">
+                                    <font key="font" size="13" name=".LucidaGrandeUI"/>
+                                    <color key="textColor" red="0.26924949879999999" green="0.23910263179999999" blue="0.1031773165" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-hX-roe">
+                                <rect key="frame" x="98" y="233" width="67" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Username" id="cc9-AA-BeY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="0.26924949879999999" green="0.23910263179999999" blue="0.1031773165" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="AFn-Gq-0En" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="29" id="2hg-td-K3n"/>
@@ -89,13 +105,18 @@ DQ
                             <constraint firstItem="rHU-8p-vg1" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" id="XZB-HM-Coi"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="35" id="Ym7-hQ-dhw"/>
                             <constraint firstItem="eF3-de-P5v" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="28" id="adt-6R-Taj"/>
+                            <constraint firstItem="X40-Kf-trQ" firstAttribute="leading" secondItem="eF3-de-P5v" secondAttribute="trailing" constant="8" id="cbR-Ex-3cS"/>
+                            <constraint firstItem="uLd-hX-roe" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="hXU-7B-rIs"/>
+                            <constraint firstItem="uLd-hX-roe" firstAttribute="leading" secondItem="X40-Kf-trQ" secondAttribute="trailing" constant="8" id="pz9-cL-egc"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="centerY" secondItem="5cj-jM-cXY" secondAttribute="centerY" id="sPM-Lb-NSW"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="leading" secondItem="5cj-jM-cXY" secondAttribute="trailing" constant="8" id="srI-ID-bfq"/>
                             <constraint firstAttribute="trailing" secondItem="AFn-Gq-0En" secondAttribute="trailing" constant="20" id="tIr-9i-gFL"/>
+                            <constraint firstItem="X40-Kf-trQ" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="yro-rf-7Da"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="authorizationButton" destination="AFn-Gq-0En" id="1gS-1V-nLJ"/>
+                        <outlet property="authorizedAccountName" destination="uLd-hX-roe" id="zvN-fg-4nh"/>
                         <outlet property="authorizedStatusImageView" destination="5cj-jM-cXY" id="VwE-XG-fmV"/>
                         <outlet property="authorizedStatusTextField" destination="8X9-Tf-XVS" id="q1b-mO-fap"/>
                         <outlet property="resetButton" destination="vPC-jY-0Jr" id="n3R-cC-G4s"/>

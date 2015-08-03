@@ -18,6 +18,7 @@ class TwitterPreferenceViewController: NSViewController {
 	@IBOutlet weak var credentialsVerificationStatusImageView:NSImageView!
 	@IBOutlet weak var credentialsVerificationStatusTextField:NSTextField!
 	@IBOutlet weak var credentialsVerificationButton:NSButton!
+	@IBOutlet weak var selectedAccountName:NSTextField!
 	
 	var credentialsNotVerified:Bool {
 	
@@ -63,6 +64,8 @@ class TwitterPreferenceViewController: NSViewController {
 	}
 
 	func applyAuthorizedStatus() {
+		
+		self.selectedAccountName.stringValue = sns.twitter.username ?? ""
 		
 		if self.credentialsNotVerified {
 			
