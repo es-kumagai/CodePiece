@@ -15,6 +15,16 @@ import Swim
 import ESCoreGraphicsExtension
 import ESThread
 
+public final class DebugTime {
+
+	public static func print(message:String) {
+
+		#if DEBUG
+		NSLog("\(message)")
+		#endif
+	}
+}
+
 public protocol AcknowledgementsIncluded {
 
 	var acknowledgementsName:String! { get }

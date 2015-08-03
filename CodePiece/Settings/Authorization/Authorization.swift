@@ -181,7 +181,7 @@ extension Authorization {
 		
 		let authorization = ESGists.GitHubAuthorization(id: username, password: password)
 		
-		NSLog("Try to get or create new authorization for '\(username)' by client '\(client.id)'.")
+		NSLog("Try to get or create new authorization for '\(username)'.")
 
 		// 認証処理は、認証情報が既に記録されているかで実行タイミングが変わるため、融通がきくようにクロージャーで用意しています。
 		let authorize = { () -> Void in

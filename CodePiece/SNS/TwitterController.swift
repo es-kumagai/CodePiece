@@ -117,8 +117,6 @@ final class TwitterController : PostController, AlertDisplayable {
 
 	func post(status: String, image:NSImage? = nil, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
-		NSLog("Will post to twitter: \(status)")
-		
 		guard self.credentialsVerified else {
 			
 			throw SNSControllerError.CredentialsNotVerified
