@@ -2,17 +2,18 @@
 
 Change Logs.
 
-## 1.0 Build 9*
+## 1.0 Build 17
 
 ### Enhancements
 
 * Displays a message by progress HUD view during post processing and authenticating.
 * Hashtag string is now trimmed with whitespace characters.
 * When configuration is not completed in launch time, welcome window will show. 
+* You can see your account using with authorization on screen.
 
 ### Bug Fixes
 
-* Fixed a problem that .
+* Fixed a problem that your token is not saved to keychain data store.
 
 ## 1.0 Build 8
 
