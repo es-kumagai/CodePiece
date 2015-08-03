@@ -32,8 +32,8 @@ class TwitterPreferenceViewController: NSViewController {
 		self.verifyingHUD.show()
 		
 		sns.twitter.verifyCredentialsIfNeed { result in
-			
-			self.didChangeValueForKey("credentialsNotVerified")			
+
+			self.didChangeValueForKey("credentialsNotVerified")
 			self.applyAuthorizedStatus()
 			
 			self.verifyingHUD.hide()

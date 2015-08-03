@@ -12,6 +12,7 @@ import ESGists
 struct DataStore {
 	
 	static let service = "jp.ez-style.appid.CodePiece"
+	static let group = "89282N6UM7.jp.ez-style.appid.CodePiece.DataStore"
 
 	var github:GitHub
 
@@ -37,10 +38,17 @@ extension DataStore {
 		var id:ID?
 		var username:String?
 		var token:String?
+
+		var keychain:Keychain {
+			
+			return Keychain(service: DataStore.service, accessGroup:DataStore.group)
+				.synchronizable(true)
+				.accessibility(Accessibility.WhenUnlocked)
+		}
 		
 		init() {
 		
-			let keychain = Keychain(service: DataStore.service).synchronizable(true)
+			let keychain = self.keychain
 
 			self.id = keychain[GitHub.IDKey].flatMap(ID.init)
 			self.username = keychain[GitHub.UsernameKey]
@@ -49,8 +57,8 @@ extension DataStore {
 		
 		func save() {
 			
-			let keychain = Keychain(service: DataStore.service).synchronizable(true)
-			
+			let keychain = self.keychain
+
 			keychain[GitHub.IDKey] = self.id.map { String($0) }
 			keychain[GitHub.UsernameKey] = self.username
 			keychain[GitHub.TokenKey] = self.token

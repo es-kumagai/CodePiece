@@ -43,14 +43,20 @@ struct Settings {
 	
 	mutating func loadGitHubAccount() {
 		
+		NSLog("Restoring GitHub account from data store.")
+		
 		self._store = DataStore()
 		
 		self.account.id = self._store.github.id
 		self.account.username = self._store.github.username
 		self.account.authorization = self._store.github.token.map(GitHubAuthorization.init)
+
+		NSLog("GitHub account information restored from data store. (\(self.account.username))")
 	}
 	
 	mutating func saveGitHubAccount() {
+		
+		NSLog("Writing GitHub account to data store. (\(self.account.username))")
 		
 		self._store.github.id = self.account.id
 		self._store.github.username = self.account.username
@@ -59,30 +65,39 @@ struct Settings {
 		self._store.save()
 	}
 	
-	mutating func replaceGitHubAccount(username:String, authorization:AuthorizationResponse) {
+	mutating func replaceGitHubAccount(username:String, authorization:AuthorizationResponse, saveFinally save:Bool) {
 	
 		self.account.id = authorization.id
 		self.account.username = username
 		self.account.authorization = .Token(authorization.token.value)
-		
-		self.saveGitHubAccount()
+
+		if save {
+			
+			settings.saveGitHubAccount()
+		}
 	}
 	
-	mutating func updateGitHubAccount(username:String, authorization:AuthorizationResponse) {
+	mutating func updateGitHubAccount(username:String, authorization:AuthorizationResponse, saveFinally save:Bool) {
 		
 		// 更新時はトークンを書き換えません。
 		self.account.id = authorization.id
 		self.account.username = username
 		
-		self.saveGitHubAccount()
+		if save {
+			
+			settings.saveGitHubAccount()
+		}
 	}
 	
-	mutating func resetGitHubAccount() {
+	mutating func resetGitHubAccount(saveFinally save:Bool) {
 		
 		self.account.id = nil
 		self.account.username = nil
 		self.account.authorization = nil
 		
-		self.saveGitHubAccount()
+		if save {
+			
+			settings.saveGitHubAccount()
+		}
 	}
 }

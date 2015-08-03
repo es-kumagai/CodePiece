@@ -31,7 +31,7 @@ class GitHubPreferenceViewController: NSViewController {
 		
 		guard let id = settings.account.id else {
 			
-			settings.resetGitHubAccount()
+			settings.resetGitHubAccount(saveFinally: true)
 			return
 		}
 		

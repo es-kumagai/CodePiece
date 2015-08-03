@@ -52,7 +52,8 @@ final class TwitterController : PostController, AlertDisplayable {
 	func verifyCredentialsIfNeed(callback:(VerifyResult)->Void) {
 		
 		guard !self.credentialsVerified else {
-			
+
+			callback(VerifyResult(value: ()))
 			return
 		}
 		

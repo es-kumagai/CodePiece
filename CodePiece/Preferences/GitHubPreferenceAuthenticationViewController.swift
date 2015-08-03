@@ -36,7 +36,7 @@ class GitHubPreferenceAuthenticationViewController: NSViewController {
 		self.authenticatingHUD.show()
 //		self.authenticatingHUD.show(onView: self.view.window?.sheetParent?.contentView)
 		
-		Authorization.authorizationWithGitHub(username, password: password) { result in
+		Authorization.authorizationWithGitHub(username, password: password, retryIfAlreadyCreated: true) { result in
 			
 			self.authenticatingHUD.hide()
 			

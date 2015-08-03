@@ -11,6 +11,7 @@ import ESGists
 import APIKit
 import STTwitter
 import Result
+import ESThread
 
 // このプロトコルに準拠したクライアント情報をプロジェクトに実装し、
 // AppDelegate 等から GitHubClientInfo 変数にそのインスタンスを設定してください。
@@ -83,7 +84,7 @@ extension Authorization {
 
 			self.showWarningAlert("Failed to reset authorization", message: "Could't get the current authentication information. Reset authentication information which saved in this app.")
 			
-			settings.resetGitHubAccount()
+			settings.resetGitHubAccount(saveFinally: true)
 			AuthorizationStateDidChangeNotification().post()
 
 			return
@@ -103,18 +104,77 @@ extension Authorization {
 			case .Success:
 				
 				// Token では削除できないようなので、403 で失敗しても認証情報を削除するだけにしています。
-				settings.resetGitHubAccount()
+				settings.resetGitHubAccount(saveFinally: true)
 				completion(response)
 				
 			case .Failure(_):
 
-				settings.resetGitHubAccount()
+				settings.resetGitHubAccount(saveFinally: true)
 				completion(response)
 			}
 		}
 	}
 	
-	static func authorizationWithGitHub(username:String, password:String, completion:(GitHubAuthorizationResult)->Void) {
+	static func authorizationWithGitHub(username:String, password:String, retryIfAlreadyCreated:Bool, completion:(GitHubAuthorizationResult)->Void) {
+		
+		// 認証に成功したことを確定する関数を定義しておきます。認証情報はデータストアに記録されます。
+		func _authorizationSucceeded(response:AuthorizationResponseWithStatus, username:String, password:String, completion:(GitHubAuthorizationResult)->Void) {
+			
+			switch response.status {
+				
+			case .Created:
+				__authorizationCreateSuccessfully(response.authorization, username: username, completion: completion)
+				
+			case .AlreadyExists:
+				__authorizationAlreadyCreated(response.authorization, username: username, password: password, completion: completion)
+			}
+		}
+		
+		func __authorizationCreateSuccessfully(response:AuthorizationResponse, username:String, completion:(GitHubAuthorizationResult)->Void) {
+			
+			defer {
+				
+				AuthorizationStateDidChangeNotification().post()
+			}
+			
+			settings.replaceGitHubAccount(username, authorization: response, saveFinally: true)
+			
+			completion(.Created)
+		}
+		
+		func __authorizationAlreadyCreated(response:AuthorizationResponse, username:String, password:String, completion:(GitHubAuthorizationResult)->Void) {
+			
+			defer {
+				
+				AuthorizationStateDidChangeNotification().post()
+			}
+			
+			// 取得できた情報（トークンなし）を仮保存します。データストアにはまだ記録しません。
+			settings.updateGitHubAccount(username, authorization: response, saveFinally: false)
+			
+			// 必要に応じて再認証するよう指示されている場合は、再認証を試みます。
+			if retryIfAlreadyCreated {
+				
+				sleepForSecond(0.4)
+				
+				NSLog("Retry authorization for GitHub.")
+				self.authorizationWithGitHub(username, password: password, retryIfAlreadyCreated: false, completion: completion)
+			}
+			else {
+				
+				// 結果が確定したので、データストアに保存します。
+				settings.saveGitHubAccount()
+				completion(.AlreadyCreated)
+			}
+		}
+		
+		func _authorizationFailed(error:APIError, completion:(GitHubAuthorizationResult)->Void) {
+
+			settings.resetGitHubAccount(saveFinally: true)
+			completion(.Failed(String(error)))
+		}
+		
+		// ここから実際の認証処理です。
 		
 		let client = GitHubClientInfo
 		let scope = Scope.Gist
@@ -133,10 +193,10 @@ extension Authorization {
 				switch response {
 					
 				case .Success(let authorized):
-					self.authorizationSucceeded(authorized, username: username, password: password, completion: completion)
+					_authorizationSucceeded(authorized, username: username, password: password, completion: completion)
 					
 				case .Failure(let error):
-					completion(.Failed(String(error)))
+					_authorizationFailed(error, completion: completion)
 				}
 			}
 		}
@@ -148,7 +208,7 @@ extension Authorization {
 			
 			GitHubAPI.sendRequest(request) { response in
 				
-				settings.resetGitHubAccount()
+				settings.resetGitHubAccount(saveFinally: false)
 				
 				// 削除処理の成功の可否に関わらず、処理後に認証を実行します。
 				authorize()
@@ -166,52 +226,5 @@ extension Authorization {
 			authorize()
 		}
 
-	}
-	
-	private static func authorizationSucceeded(response:AuthorizationResponseWithStatus, username:String, password:String, completion:(GitHubAuthorizationResult)->Void) {
-		
-		switch response.status {
-			
-		case .Created:
-			self.authorizationCreateSuccessfully(response.authorization, username: username, completion: completion)
-			
-		case .AlreadyExists:
-			self.authorizationAlreadyCreated(response.authorization, username: username, password: password, completion: completion)
-		}
-	}
-	
-	private static func authorizationCreateSuccessfully(response:AuthorizationResponse, username:String, completion:(GitHubAuthorizationResult)->Void) {
-		
-		defer {
-			
-			AuthorizationStateDidChangeNotification().post()
-		}
-		
-		settings.replaceGitHubAccount(username, authorization: response)
-
-		completion(.Created)
-	}
-	
-	private static func authorizationAlreadyCreated(response:AuthorizationResponse, username:String, password:String, completion:(GitHubAuthorizationResult)->Void) {
-		
-		defer {
-			
-			AuthorizationStateDidChangeNotification().post()
-		}
-		
-		// アプリが認証後の ID を保持していない場合は、再認証を試みます。（ID 情報があれば削除されるため）
-		let retryAuthorization = settings.account.id == nil
-		
-		settings.updateGitHubAccount(username, authorization: response)
-		
-		if retryAuthorization {
-
-			NSLog("Retry authorization for GitHub.")
-			self.authorizationWithGitHub(username, password: password, completion: completion)
-		}
-		else {
-
-			completion(.AlreadyCreated)
-		}
 	}
 }
