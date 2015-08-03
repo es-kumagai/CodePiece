@@ -41,8 +41,9 @@ extension DataStore {
 
 		var keychain:Keychain {
 			
+			// synchronizable すると署名なしのアーカイブ時に読み書きできなくなることがあるため、現在は無効化しています。
 			return Keychain(service: DataStore.service, accessGroup:DataStore.group)
-				.synchronizable(true)
+//				.synchronizable(true)
 				.accessibility(Accessibility.WhenUnlocked)
 		}
 		
