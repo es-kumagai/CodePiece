@@ -6,7 +6,7 @@ PODS:
   - ESAppKitExtension (0.1.1)
   - ESCoreGraphicsExtension (0.1.2):
     - Swim (~> 1.3.13)
-  - ESGists (0.1.0):
+  - ESGists (0.1.1-beta):
     - APIKit (~> 1.0.0-beta1)
     - ESActiveCounter (~> 0.1.3)
     - ESAppKitExtension (~> 0.1.1)
@@ -35,16 +35,17 @@ PODS:
     - Swim (~> 1.3.14)
   - Result (0.6-beta.1)
   - STTwitter (0.2.1)
-  - Swim (1.3.14)
+  - Swim (1.3.16-beta)
 
 DEPENDENCIES:
   - APIKit (from `https://github.com/ishkawa/APIKit.git`, branch `master`)
-  - ESGists (from `https://github.com/EZ-NET/ESGists.git`, tag `0.1.1`)
+  - ESGists (from `https://github.com/EZ-NET/ESGists.git`)
   - Himotoki (from `https://github.com/ikesyo/Himotoki.git`, branch `swift2`)
   - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`,
     branch `swift-2.0`)
   - Ocean (~> 1.3.13)
   - STTwitter
+  - Swim (from `https://github.com/EZ-NET/ESSwim`, branch `beta`)
 
 EXTERNAL SOURCES:
   APIKit:
@@ -52,34 +53,39 @@ EXTERNAL SOURCES:
     :git: https://github.com/ishkawa/APIKit.git
   ESGists:
     :git: https://github.com/EZ-NET/ESGists.git
-    :tag: 0.1.1
   Himotoki:
     :branch: swift2
     :git: https://github.com/ikesyo/Himotoki.git
   KeychainAccess:
     :branch: swift-2.0
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
+  Swim:
+    :branch: beta
+    :git: https://github.com/EZ-NET/ESSwim
 
 CHECKOUT OPTIONS:
   APIKit:
     :commit: 5cfd2e6deca826ffa0ed86168c29d597ffe20d8e
     :git: https://github.com/ishkawa/APIKit.git
   ESGists:
+    :commit: a09e5e4ae774512f265ada199b94b22a885cca8c
     :git: https://github.com/EZ-NET/ESGists.git
-    :tag: 0.1.1
   Himotoki:
     :commit: 2fddd0773f314e6d42d8748048e248c1054d90d6
     :git: https://github.com/ikesyo/Himotoki.git
   KeychainAccess:
     :commit: 7879a49b81c553ad9b40cbafda34a881648e2ff3
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
+  Swim:
+    :commit: dc8bbee99ab6f180b0f3efb91e60cc298e1b81e8
+    :git: https://github.com/EZ-NET/ESSwim
 
 SPEC CHECKSUMS:
   APIKit: cb0ce7ebc5e72d7ae4d71e0061f2f98676287c1f
   ESActiveCounter: 270bbe32a2d33000e6b4acd40ecc6eefd04da62d
   ESAppKitExtension: 3bc92382a286d8ed531c0f2e9e1a0356cae9457c
   ESCoreGraphicsExtension: 017d11d2debc6c0adc618d6f27eaeac6ee393732
-  ESGists: 095ab9d15fd8027bf3ed2f02e95bb82dfef5a334
+  ESGists: 4440a7d80c74879902da3f0abdbcb6f65297bfcb
   ESNotification: e8386670345eccf6d4b865f3843159cf38f4d3f9
   ESProgressHUD: 1ce6537e3813cd96d8fb81ae34d859cd5bd2fad2
   ESThread: aa7f1d3e412716cef6c62e116a1da761449f5e48
@@ -88,6 +94,6 @@ SPEC CHECKSUMS:
   Ocean: dd1dbc22cd2111e733a7f42ca6067e01efa2bf86
   Result: 6c990ec4a72470672f9fc5b6fef009da0f6f40d1
   STTwitter: 7b348a4600eb9f868a3d1c9031b4fd8533d123e7
-  Swim: 9b5184815b6c50971ef0378156225c90fc8e50b5
+  Swim: 99963f44a655da68bbae3a556783be3b1dc4612a
 
 COCOAPODS: 0.38.2

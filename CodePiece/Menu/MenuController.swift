@@ -73,6 +73,11 @@ final class MenuController : NSObject {
 		self.mainViewController?.focusToHashtag()
 	}
 	
+	@IBAction func moveFocusToLanguage(sender:NSObject?) {
+		
+		self.mainViewController?.focusToLanguage()
+	}
+	
 	@IBAction func postToSNS(sender:NSMenuItem?) {
 		
 		self.mainViewController?.postToSNS()

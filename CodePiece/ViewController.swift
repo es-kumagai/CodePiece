@@ -16,11 +16,13 @@ import ESProgressHUD
 
 class ViewController: NSViewController {
 
-	var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
+	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
+	
 	typealias PostResult = SNSController.PostResult
 	
 	@IBOutlet weak var postButton:NSButton!
 	@IBOutlet weak var hashTagTextField:HashtagTextField!
+	@IBOutlet weak var languagePopUpButton:NSPopUpButton!
 
 	@IBOutlet var codeTextView:NSTextView! {
 	
@@ -75,8 +77,13 @@ class ViewController: NSViewController {
 	}
 	
 	var hasCode:Bool {
-		
+	
 		return !self.codeTextView.string!.trimmed().isEmpty
+	}
+	
+	var selectedLanguage:Language {
+		
+		return self.languagePopUpButton.selectedItem.flatMap { Language(displayText: $0.title) }!
 	}
 	
 	@IBAction func pushPostButton(sender:NSObject?) {
@@ -141,7 +148,7 @@ class ViewController: NSViewController {
 	func post(callback:(PostResult)->Void) throws {
 		
 		let code = self.codeTextView.string!
-		let language = Language.Swift
+		let language = self.selectedLanguage
 		let description = self.descriptionTextField.stringValue
 		let hashtag = self.hashTagTextField.hashtag
 
@@ -236,6 +243,11 @@ class ViewController: NSViewController {
 	func focusToHashtag() {
 		
 		self.hashTagTextField.becomeFirstResponder()
+	}
+	
+	func focusToLanguage() {
+		
+		// MARK: 😒 I don't know how to show NSPopUpButton's submenu manually. The corresponding menu item is disabled too.
 	}
 	
 	func verifyCredentials() {

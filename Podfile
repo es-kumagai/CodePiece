@@ -5,10 +5,11 @@ use_frameworks!
 
 def pods
 
+	pod 'Swim', :git => 'https://github.com/EZ-NET/ESSwim', :branch => 'beta'
 	pod 'Ocean', '~> 1.3.13'
 	pod 'APIKit', :git => 'https://github.com/ishkawa/APIKit.git', :branch => 'master'
 	pod 'Himotoki', :git => 'https://github.com/ikesyo/Himotoki.git', :branch => 'swift2'
-	pod 'ESGists', :git => 'https://github.com/EZ-NET/ESGists.git', :tag => '0.1.1'
+	pod 'ESGists', :git => 'https://github.com/EZ-NET/ESGists.git'
 
 end
 

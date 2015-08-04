@@ -250,6 +250,12 @@
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="y5N-re-000"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Move Focus To Language Selector" enabled="NO" keyEquivalent="l" id="yqa-pU-Hlq">
+                                            <connections>
+                                                <action selector="moveFocusToLanguage:" target="p69-Rc-ib8" id="58E-sR-KyF"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="0OT-yM-uAp"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VzD-db-5QY"/>
                                         <menuItem title="Post Code and Description To SNS" id="4pa-G3-8fj">
                                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -551,14 +557,6 @@ DQ
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xbt-s5-shT">
-                                <rect key="frame" x="668" y="400" width="56" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" title="Swift" bezelStyle="round" id="bOp-9i-4ni">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hab-QF-1JP">
                                 <rect key="frame" x="58" y="403" width="29" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="⌘J" drawsBackground="YES" id="1Pl-tS-OYc">
@@ -615,6 +613,17 @@ DQ
                                     <constraint firstAttribute="trailing" secondItem="ZTT-3E-s7B" secondAttribute="trailing" constant="16" id="hIy-Ss-v72"/>
                                 </constraints>
                             </customView>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GDd-Xx-hX6" userLabel="Language">
+                                <rect key="frame" x="601" y="396" width="126" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="IUR-Lg-e6E"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" inset="2" pullsDown="YES" id="Lcw-Gb-51f">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="QCr-cN-4U9"/>
+                                </popUpButtonCell>
+                            </popUpButton>
                         </subviews>
                         <constraints>
                             <constraint firstItem="dTm-OD-heR" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="5Ap-QM-XEv"/>
@@ -623,14 +632,14 @@ DQ
                             <constraint firstAttribute="trailing" secondItem="Ny3-jn-TOD" secondAttribute="trailing" constant="20" id="Gah-4W-Hdo"/>
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="KZA-YY-iff"/>
                             <constraint firstItem="f8Q-oO-N5A" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="RbA-ac-h6D"/>
-                            <constraint firstAttribute="trailing" secondItem="xbt-s5-shT" secondAttribute="trailing" constant="20" id="VpG-1M-i25"/>
+                            <constraint firstItem="GDd-Xx-hX6" firstAttribute="baseline" secondItem="f8Q-oO-N5A" secondAttribute="baseline" id="SD8-1u-wto"/>
                             <constraint firstAttribute="bottom" secondItem="dTm-OD-heR" secondAttribute="bottom" constant="2" id="Xa6-Us-QMA"/>
                             <constraint firstItem="3hT-FM-HsJ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="aO7-TC-Yo9"/>
                             <constraint firstAttribute="trailing" secondItem="3hT-FM-HsJ" secondAttribute="trailing" constant="20" id="d69-dm-NnX"/>
-                            <constraint firstItem="xbt-s5-shT" firstAttribute="baseline" secondItem="f8Q-oO-N5A" secondAttribute="baseline" id="dUO-Pe-eBH"/>
                             <constraint firstAttribute="trailing" secondItem="dTm-OD-heR" secondAttribute="trailing" id="ddV-5y-uYS"/>
                             <constraint firstItem="Hab-QF-1JP" firstAttribute="leading" secondItem="f8Q-oO-N5A" secondAttribute="trailing" constant="4" id="gP4-nb-DNE"/>
                             <constraint firstItem="3hT-FM-HsJ" firstAttribute="top" secondItem="Ny3-jn-TOD" secondAttribute="bottom" id="ghw-iE-9Ep"/>
+                            <constraint firstItem="GDd-Xx-hX6" firstAttribute="trailing" secondItem="Ny3-jn-TOD" secondAttribute="trailing" id="q9b-2y-3iT"/>
                             <constraint firstItem="f8Q-oO-N5A" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="t54-Qc-PJx"/>
                             <constraint firstItem="Hab-QF-1JP" firstAttribute="baseline" secondItem="f8Q-oO-N5A" secondAttribute="baseline" id="zB9-it-zWk"/>
                         </constraints>
@@ -641,6 +650,7 @@ DQ
                         <outlet property="descriptionCountLabel" destination="dRA-lG-ufz" id="KDq-Jw-KjP"/>
                         <outlet property="descriptionTextField" destination="KZX-ml-gl0" id="J8Q-xu-srr"/>
                         <outlet property="hashTagTextField" destination="8VY-21-QQc" id="poH-qc-18R"/>
+                        <outlet property="languagePopUpButton" destination="GDd-Xx-hX6" id="IXf-6q-WDk"/>
                         <outlet property="postButton" destination="tsY-MH-1c4" id="2x0-uY-e0J"/>
                     </connections>
                 </viewController>
@@ -652,20 +662,13 @@ DQ
                         <outlet property="twitterAccountNameTextField" destination="ZTT-3E-s7B" id="mqF-G4-cQb"/>
                     </connections>
                 </customObject>
+                <customObject id="Csn-jJ-GoY" customClass="LanguagePopupDataSource" customModule="CodePiece" customModuleProvider="target">
+                    <connections>
+                        <outlet property="popupButton" destination="GDd-Xx-hX6" id="eXz-wY-01G"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="207" y="725"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Dcg-TA-vT6">
-            <objects>
-                <viewController id="QHK-ko-891" sceneMemberID="viewController">
-                    <view key="view" id="z6f-Vt-YjP">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="BMz-Ro-Qwl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
 </document>

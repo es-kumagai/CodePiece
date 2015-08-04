@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 1.0 Build 18
+
+* Supports language selection.
+
+### Enhancements
+
 ## 1.0 Build 17
 
 ### Enhancements
