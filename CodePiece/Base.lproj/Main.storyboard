@@ -253,7 +253,6 @@
                                         <menuItem title="Move Focus To Language Selector" enabled="NO" keyEquivalent="l" id="yqa-pU-Hlq">
                                             <connections>
                                                 <action selector="moveFocusToLanguage:" target="p69-Rc-ib8" id="58E-sR-KyF"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="0OT-yM-uAp"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VzD-db-5QY"/>
