@@ -24,6 +24,8 @@ class ViewController: NSViewController {
 	@IBOutlet weak var hashTagTextField:HashtagTextField!
 	@IBOutlet weak var languagePopUpButton:NSPopUpButton!
 
+	@IBOutlet weak var languagePopUpDataSource:LanguagePopupDataSource!
+	
 	@IBOutlet var codeTextView:NSTextView! {
 	
 		didSet {
@@ -190,6 +192,19 @@ class ViewController: NSViewController {
 		self.updateControlsDisplayText()
 	}
 	
+	func restoreContents() {
+
+		NSLog("Restoring contents in main window.")
+		settings.appState.selectedLanguage.map(self.languagePopUpDataSource.selectLanguage)
+	}
+	
+	func saveContents() {
+		
+		NSLog("Saving contents in main window.")
+		settings.appState.selectedLanguage = self.selectedLanguage
+		settings.saveAppState()
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
@@ -198,6 +213,7 @@ class ViewController: NSViewController {
 		
 		super.viewWillAppear()
 		
+		self.restoreContents()
 		self.focusToDefaultControl()
 		self.updateControlsDisplayText()
 
@@ -216,6 +232,13 @@ class ViewController: NSViewController {
 			
 			NSApp.showWelcomeBoard()
 		}
+	}
+	
+	override func viewWillDisappear() {
+	
+		self.saveContents()
+		
+		super.viewWillDisappear()
 	}
 	
 	override func viewDidDisappear() {

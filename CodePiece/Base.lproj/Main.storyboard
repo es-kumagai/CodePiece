@@ -651,6 +651,7 @@ DQ
                         <outlet property="descriptionTextField" destination="KZX-ml-gl0" id="J8Q-xu-srr"/>
                         <outlet property="hashTagTextField" destination="8VY-21-QQc" id="poH-qc-18R"/>
                         <outlet property="languagePopUpButton" destination="GDd-Xx-hX6" id="IXf-6q-WDk"/>
+                        <outlet property="languagePopUpDataSource" destination="Csn-jJ-GoY" id="hWu-I7-ebh"/>
                         <outlet property="postButton" destination="tsY-MH-1c4" id="2x0-uY-e0J"/>
                     </connections>
                 </viewController>

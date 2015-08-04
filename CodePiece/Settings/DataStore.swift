@@ -14,15 +14,18 @@ struct DataStore {
 	static let service = "jp.ez-style.appid.CodePiece"
 	static let group = "89282N6UM7.jp.ez-style.appid.CodePiece.DataStore"
 
+	var appState:AppState
 	var github:GitHub
 
 	init() {
 		
+		self.appState = AppState()
 		self.github = GitHub()
 	}
 	
 	func save() {
 	
+		self.appState.save()
 		self.github.save()
 	}
 }

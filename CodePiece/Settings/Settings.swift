@@ -12,23 +12,45 @@ var settings = Settings()
 
 struct Settings {
 	
-	private var _store:DataStore!
+	private var _store:DataStore
 	
+	var appState:AppState
 	var account:AccountSetting
 	var project:ProjectSetting
-	
+
 	private init() {
 	
+		self._store = DataStore()
+
+		self.appState = AppState()
 		self.account = AccountSetting()
 		self.project = ProjectSetting()
 		
-		self.loadAccount()
+		self.loadSettings()
 	}
 	
 	// 設定がされていることを確認します。有効性は判定しません。
 	var isReady:Bool {
 	
 		return self.account.isReady && self.project.isReady
+	}
+	
+	mutating func loadSettings() {
+
+		self.loadAppState()
+		self.loadAccount()
+	}
+	
+	mutating func loadAppState() {
+	
+		self.appState.selectedLanguage = self._store.appState.selectedLanguage
+	}
+	
+	mutating func saveAppState() {
+	
+		self._store.appState.selectedLanguage = self.appState.selectedLanguage
+		
+		self._store.appState.save()
 	}
 	
 	mutating func loadAccount() {
@@ -44,8 +66,6 @@ struct Settings {
 	mutating func loadGitHubAccount() {
 		
 		NSLog("Restoring GitHub account from data store.")
-		
-		self._store = DataStore()
 		
 		self.account.id = self._store.github.id
 		self.account.username = self._store.github.username
@@ -64,7 +84,7 @@ struct Settings {
 		self._store.github.username = self.account.username
 		self._store.github.token = self.account.authorization?.token!
 		
-		self._store.save()
+		self._store.github.save()
 	}
 	
 	mutating func replaceGitHubAccount(username:String, authorization:AuthorizationResponse, saveFinally save:Bool) {

@@ -40,6 +40,12 @@ final class LanguagePopupDataSource : NSObject {
 		super.awakeFromNib()
 	}
 	
+	func selectLanguage(language:Language) {
+	
+		self.popupButton.selectItemWithTitle(language.description)
+		self.popupButton.selectedItem.map(self.popupSelected)
+	}
+	
 	func popupSelected(item:NSMenuItem) {
 		
 		self.popupButton.title = item.title
