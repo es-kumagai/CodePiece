@@ -12,7 +12,15 @@ final class HashtagTextField : NSTextField {
 	
 	var hashtag:Twitter.Hashtag {
 
-		return Twitter.Hashtag(super.stringValue)
+		get {
+
+			return Twitter.Hashtag(super.stringValue)
+		}
+		
+		set {
+			
+			self.stringValue = newValue.value
+		}
 	}
 	
 	override var stringValue:String {

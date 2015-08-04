@@ -5,6 +5,8 @@ Change Logs.
 ## 1.0 Build 18
 
 * Supports language selection.
+* Selected language will save when app terminate and will restore at next launch.
+* Hashtag will save when app terminate and will restore at next launch.
 
 ### Enhancements
 

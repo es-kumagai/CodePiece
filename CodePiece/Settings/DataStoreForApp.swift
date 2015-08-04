@@ -15,6 +15,7 @@ extension DataStore {
 	struct AppState {
 		
 		static let SelectedLanguageKey = "codepiece:selected-language"
+		static let HashtagKey = "codepiece:hashtag"
 		
 		private var userDefaults:NSUserDefaults
 		
@@ -33,6 +34,19 @@ extension DataStore {
 			set {
 				
 				self.userDefaults.setObject(newValue?.description, forKey: AppState.SelectedLanguageKey)
+			}
+		}
+		
+		var hashtag:Twitter.Hashtag? {
+			
+			get {
+				
+				return self.userDefaults.stringForKey(AppState.HashtagKey).map { Twitter.Hashtag($0) }
+			}
+			
+			set {
+				
+				self.userDefaults.setObject(newValue?.value, forKey: AppState.HashtagKey)
 			}
 		}
 		

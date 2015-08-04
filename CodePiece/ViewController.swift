@@ -195,13 +195,18 @@ class ViewController: NSViewController {
 	func restoreContents() {
 
 		NSLog("Restoring contents in main window.")
+		
 		settings.appState.selectedLanguage.map(self.languagePopUpDataSource.selectLanguage)
+		settings.appState.hashtag.map { self.hashTagTextField.hashtag = $0 }
 	}
 	
 	func saveContents() {
 		
 		NSLog("Saving contents in main window.")
+		
 		settings.appState.selectedLanguage = self.selectedLanguage
+		settings.appState.hashtag = self.hashTagTextField.hashtag
+
 		settings.saveAppState()
 	}
 	

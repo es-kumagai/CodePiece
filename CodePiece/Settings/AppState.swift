@@ -12,4 +12,5 @@ import ESGists
 struct AppState {
 	
 	var selectedLanguage:Language?
+	var hashtag:Twitter.Hashtag?
 }

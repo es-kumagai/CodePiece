@@ -44,11 +44,13 @@ struct Settings {
 	mutating func loadAppState() {
 	
 		self.appState.selectedLanguage = self._store.appState.selectedLanguage
+		self.appState.hashtag = self._store.appState.hashtag
 	}
 	
 	mutating func saveAppState() {
 	
 		self._store.appState.selectedLanguage = self.appState.selectedLanguage
+		self._store.appState.hashtag = self.appState.hashtag
 		
 		self._store.appState.save()
 	}
