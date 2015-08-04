@@ -9,17 +9,17 @@
             <objects>
                 <viewController id="87R-u8-Z42" customClass="ESAcknowledgementsViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" focusRingType="none" id="P0Z-HK-dWc">
-                        <rect key="frame" x="0.0" y="0.0" width="550" height="245"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="245"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hs-gS-4m7">
-                                <rect key="frame" x="20" y="49" width="510" height="151"/>
+                                <rect key="frame" x="20" y="49" width="760" height="151"/>
                                 <clipView key="contentView" focusRingType="none" id="qAP-rM-HSx">
-                                    <rect key="frame" x="1" y="17" width="508" height="133"/>
+                                    <rect key="frame" x="1" y="17" width="758" height="133"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="16" headerView="rqo-dA-Ke5" id="erv-EA-PMp">
-                                            <rect key="frame" x="0.0" y="0.0" width="508" height="133"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="758" height="133"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -39,7 +39,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                 </tableColumn>
-                                                <tableColumn identifier="license" editable="NO" width="386" minWidth="40" maxWidth="1000" id="INM-qC-JNO">
+                                                <tableColumn identifier="license" editable="NO" width="636" minWidth="40" maxWidth="1000" id="INM-qC-JNO">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="License">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -66,7 +66,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="rqo-dA-Ke5">
-                                    <rect key="frame" x="0.0" y="0.0" width="508" height="17"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="758" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -79,7 +79,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="waa-mH-00V">
-                                <rect key="frame" x="460" y="13" width="76" height="32"/>
+                                <rect key="frame" x="710" y="13" width="76" height="32"/>
                                 <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Nqq-6C-4CA">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
