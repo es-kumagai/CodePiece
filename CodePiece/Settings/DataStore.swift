@@ -39,7 +39,7 @@ extension DataStore {
 		var username:String?
 		var token:String?
 
-		var keychain:Keychain {
+		private var keychain:Keychain {
 			
 			// synchronizable すると署名なしのアーカイブ時に読み書きできなくなることがあるため、現在は無効化しています。
 			return Keychain(service: DataStore.service, accessGroup:DataStore.group)
