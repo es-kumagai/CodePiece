@@ -7,6 +7,7 @@ Change Logs.
 * Supports language selection.
 * Selected language will save when app terminate and will restore at next launch.
 * Hashtag will save when app terminate and will restore at next launch.
+* Removed unnecessary completions in text fields.
 
 ### Enhancements
 

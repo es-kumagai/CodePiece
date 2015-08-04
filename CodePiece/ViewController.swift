@@ -351,5 +351,22 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 		self.updateControlsDisplayText()
 	}
+	
+	func control(control: NSControl, textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {
+		
+		switch control {
+			
+		case is HashtagTextField:
+			return []
+			
+		default:
+			return []
+		}
+	}
+	
+	func textView(textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {
+		
+		return []
+	}
 }
 
