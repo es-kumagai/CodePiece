@@ -11,8 +11,8 @@ import ESGists
 
 struct DataStore {
 	
-	static let service = "jp.ez-style.appid.CodePiece"
-	static let group = "89282N6UM7.jp.ez-style.appid.CodePiece.DataStore"
+	static let service = "CodePiece App"
+	static let group = "jp.ez-style.appid.CodePiece"
 
 	var appState:AppState
 	var github:GitHub
@@ -46,8 +46,8 @@ extension DataStore {
 			
 			// synchronizable すると署名なしのアーカイブ時に読み書きできなくなることがあるため、現在は無効化しています。
 			return Keychain(service: DataStore.service, accessGroup:DataStore.group)
-//				.synchronizable(true)
 				.accessibility(Accessibility.WhenUnlocked)
+//				.synchronizable(true)
 		}
 		
 		init() {
