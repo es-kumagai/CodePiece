@@ -105,16 +105,27 @@ class GitHubPreferenceViewController: NSViewController {
 	
 		super.viewWillAppear()
 		
-		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
-
-			NSLog("Detect GitHub authorization state changed.")
-			
-			self.applyAuthorizedStatus()
-		}
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "authorizationStateDidChangeNotification:", name: Authorization.GitHubAuthorizationStateDidChangeNotification.notificationIdentifier, object: nil)
+		
+		// FIXME: 😫 runModdal 時（ここ）に新たにモーダルでシートを表示（ストーリーボードから）して、そこで NSAlert を runModal して、閉じると、
+		// FIXME: 😫 自作の Ocean.Notification が receive 時に Notification の解放で BAD_ACCESS になってしまう。
+		// FIXME: 😫 もしかして、メインスレッドがブロックされていて、そこへハンドラ呼び出しをかけたりしている？ または weak の解放処理がブロックされてしまっているのか。
+//		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+//			NSLog("Detect GitHub authorization state changed.")
+//			
+//			self.applyAuthorizedStatus()
+//		}
 	}
 	
 	override func viewWillDisappear() {
 		
 		super.viewWillDisappear()
+	}
+	
+	func authorizationStateDidChangeNotification(notification:NSNotification) {
+		
+		NSLog("Detect authorization state changed.")
+		
+		self.applyAuthorizedStatus()
 	}
 }
