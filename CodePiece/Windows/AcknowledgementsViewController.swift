@@ -113,7 +113,6 @@ public class ESAcknowledgementsViewController: NSViewController, Acknowledgement
 		}
 	}
 	
-	@IBOutlet public weak var headerLabel:NSTextField?
 	@IBOutlet public weak var acknowledgementsTableView:NSTableView! {
 		
 		didSet {
@@ -125,9 +124,17 @@ public class ESAcknowledgementsViewController: NSViewController, Acknowledgement
     public override func viewDidLoad() {
 		
         super.viewDidLoad()
+	
+		let headerText = acknowledgements.headerText
 		
-		self.title = NSBundle.mainBundle().appName
-		self.headerLabel?.stringValue = acknowledgements.headerText
+		if let title = NSBundle.mainBundle().appName {
+			
+			self.title = "\(title) : \(headerText)"
+		}
+		else {
+			
+			self.title = headerText
+		}
 	}
 	
 	public override func viewWillAppear() {
