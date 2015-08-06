@@ -25,7 +25,7 @@
         <!--About View Controller-->
         <scene sceneID="f3B-Pl-LeI">
             <objects>
-                <viewController id="Hsi-k7-nug" customClass="AboutViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="AboutViewController" id="Hsi-k7-nug" customClass="AboutViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="hYI-SJ-14d">
                         <rect key="frame" x="0.0" y="0.0" width="365" height="172"/>
                         <autoresizingMask key="autoresizingMask"/>

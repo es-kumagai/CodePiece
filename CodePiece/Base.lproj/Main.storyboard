@@ -349,7 +349,7 @@ DQ
         <!--CodePiece-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController title="CodePiece" storyboardIdentifier="MainViewController" id="XfG-lQ-9wD" customClass="ViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="CodePiece" identifier="MainViewController" storyboardIdentifier="MainViewController" id="XfG-lQ-9wD" customClass="ViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="744" height="440"/>
                         <autoresizingMask key="autoresizingMask"/>

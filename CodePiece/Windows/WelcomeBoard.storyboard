@@ -29,7 +29,7 @@
         <!--Welcome Board View Controller-->
         <scene sceneID="li8-TU-ptB">
             <objects>
-                <viewController id="JKI-2u-nmq" customClass="WelcomeBoardViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="WelcomeBoardViewController" id="JKI-2u-nmq" customClass="WelcomeBoardViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="eDd-Bf-WuM">
                         <rect key="frame" x="0.0" y="0.0" width="508" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -252,6 +252,12 @@ class ViewController: NSViewController {
 		
 		NSApp.terminate(self)
 	}
+	
+	override func restoreStateWithCoder(coder: NSCoder) {
+		
+		super.restoreStateWithCoder(coder)
+		NSLog("🌴 restoreStateWithCoder Passed.")
+	}
 
 	func focusToDefaultControl() {
 

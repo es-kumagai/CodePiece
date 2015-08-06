@@ -7,7 +7,7 @@
         <!--Acknowledgements View Controller-->
         <scene sceneID="y2J-Uj-LAs">
             <objects>
-                <viewController id="87R-u8-Z42" customClass="ESAcknowledgementsViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="AcknowledgementsViewController" id="87R-u8-Z42" customClass="ESAcknowledgementsViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" focusRingType="none" id="P0Z-HK-dWc">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="245"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -19,7 +19,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="16" headerView="rqo-dA-Ke5" id="erv-EA-PMp">
-                                            <rect key="frame" x="0.0" y="0.0" width="758" height="133"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="758" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
