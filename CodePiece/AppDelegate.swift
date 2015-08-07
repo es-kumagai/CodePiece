@@ -13,7 +13,6 @@ import Cocoa
 var sns:SNSController!
 var captureController:WebCaptureController!
 
-@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {

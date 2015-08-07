@@ -9,6 +9,7 @@
 import Cocoa
 import Ocean
 
+var settings:Settings!
 
 extension NSApplication : AlertDisplayable {
 	

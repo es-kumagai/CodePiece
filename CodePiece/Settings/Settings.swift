@@ -8,8 +8,6 @@
 
 import ESGists
 
-var settings = Settings()
-
 struct Settings {
 	
 	private var _store:DataStore
@@ -18,7 +16,7 @@ struct Settings {
 	var account:AccountSetting
 	var project:ProjectSetting
 
-	private init() {
+	init() {
 	
 		self._store = DataStore()
 
@@ -67,11 +65,9 @@ struct Settings {
 	
 	mutating func loadGitHubAccount() {
 		
-		NSLog("Restoring GitHub account from data store.")
-		
-		self.account.id = self._store.github.id
-		self.account.username = self._store.github.username
-		self.account.authorization = self._store.github.token.map(GitHubAuthorization.init)
+		self.account.id = self._store.github.authInfo.id
+		self.account.username = self._store.github.authInfo.username
+		self.account.authorization = self._store.github.authInfo.token.map(GitHubAuthorization.init)
 
 		NSLog("GitHub account information restored from data store. (\(self.account.username))")
 		
@@ -82,9 +78,9 @@ struct Settings {
 		
 		NSLog("Writing GitHub account to data store. (\(self.account.username))")
 		
-		self._store.github.id = self.account.id
-		self._store.github.username = self.account.username
-		self._store.github.token = self.account.authorization?.token!
+		self._store.github.authInfo.id = self.account.id
+		self._store.github.authInfo.username = self.account.username
+		self._store.github.authInfo.token = self.account.authorization?.token!
 		
 		self._store.github.save()
 	}

@@ -405,7 +405,7 @@ func capture(window:NSWindow) -> NSImage {
 	let windowId = CGWindowID(window.windowNumber)
 
 	let imageRef = CGWindowListCreateImage(CGRectZero, CGWindowListOption.OptionIncludingWindow, windowId, CGWindowImageOption.Default)
-	let imageData = NSImage(CGImage: imageRef!, size: window.contentView.bounds.size)
+	let imageData = NSImage(CGImage: imageRef!, size: window.contentView!.bounds.size)
 	
 	return imageData
 }

@@ -8,6 +8,8 @@
 
 import KeychainAccess
 import ESGists
+import Ocean
+import Swim
 
 struct DataStore {
 	
@@ -34,15 +36,11 @@ extension DataStore {
 	
 	struct GitHub {
 
-		static let IDKey = "github:id"
-		static let UsernameKey = "github:username"
-		static let TokenKey = "github:token"
+		static let AuthorizationKey = "github:auth-info"
 
-		var id:ID?
-		var username:String?
-		var token:String?
-
-		private var keychain:Keychain {
+		var authInfo:AuthInfo
+		
+		private static var keychain:Keychain {
 			
 			// synchronizable すると署名なしのアーカイブ時に読み書きできなくなることがあるため、現在は無効化しています。
 			return Keychain(service: DataStore.service, accessGroup:DataStore.group)
@@ -52,20 +50,50 @@ extension DataStore {
 		
 		init() {
 		
-			let keychain = self.keychain
+			let keychain = GitHub.keychain
+			
+			guard let data = keychain.getData(GitHub.AuthorizationKey) else {
+			
+				self.authInfo = AuthInfo()
+				return
+			}
+			
+			NSLog("Restoring authentication information from Keychain.")
+			
+			guard let authInfo = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? AuthInfo else {
+					
+				self.authInfo = AuthInfo()
+				return
+			}
 
-			self.id = keychain[GitHub.IDKey].flatMap(ID.init)
-			self.username = keychain[GitHub.UsernameKey]
-			self.token = keychain[GitHub.TokenKey]
+			self.authInfo = authInfo
 		}
 		
 		func save() {
 			
-			let keychain = self.keychain
+			let keychain = GitHub.keychain
+			let keyForAuthInfo = GitHub.AuthorizationKey
 
-			keychain[GitHub.IDKey] = self.id.map { String($0) }
-			keychain[GitHub.UsernameKey] = self.username
-			keychain[GitHub.TokenKey] = self.token
+			NSLog("Will save authentication information to Keychain.")
+			
+			if let data = self.archiveAuthorizationData() {
+				
+				keychain.set(data, key: keyForAuthInfo)
+			}
+			else {
+				
+				keychain.remove(keyForAuthInfo)
+			}
+		}
+		
+		private func archiveAuthorizationData() -> NSData? {
+
+			guard !self.authInfo.noData else {
+
+				return nil
+			}
+			
+			return NSKeyedArchiver.archivedDataWithRootObject(self.authInfo)
 		}
 	}
 }

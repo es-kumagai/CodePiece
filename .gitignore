@@ -1,6 +1,6 @@
 /Private/
-xcuserdata
-xcshareddata
+*.xcuserdatad
+*.xcscmblueprint
+/Pods
 .DS_Store
-/Pods/
 
