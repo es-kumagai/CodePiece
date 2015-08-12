@@ -15,6 +15,14 @@ import Swim
 import ESCoreGraphicsExtension
 import ESThread
 
+public extension NSAppleEventDescriptor {
+	
+	public var url:NSURL? {
+		
+		return self.paramDescriptorForKeyword(AEKeyword(keyDirectObject))?.stringValue.flatMap { NSURL(string: $0) }
+	}
+}
+
 public final class DebugTime {
 
 	public static func print(message:String) {

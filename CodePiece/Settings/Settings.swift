@@ -85,24 +85,12 @@ struct Settings {
 		self._store.github.save()
 	}
 	
-	mutating func replaceGitHubAccount(username:String, authorization:AuthorizationResponse, saveFinally save:Bool) {
+	mutating func replaceGitHubAccount(username:String, id:ID, authorization:GitHubAuthorization, saveFinally save:Bool) {
 	
-		self.account.id = authorization.id
+		self.account.id = id
 		self.account.username = username
-		self.account.authorization = .Token(authorization.token.value)
+		self.account.authorization = authorization
 
-		if save {
-			
-			settings.saveGitHubAccount()
-		}
-	}
-	
-	mutating func updateGitHubAccount(username:String, authorization:AuthorizationResponse, saveFinally save:Bool) {
-		
-		// 更新時はトークンを書き換えません。
-		self.account.id = authorization.id
-		self.account.username = username
-		
 		if save {
 			
 			settings.saveGitHubAccount()

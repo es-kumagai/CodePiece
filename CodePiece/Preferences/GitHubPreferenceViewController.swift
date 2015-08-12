@@ -10,10 +10,13 @@ import Cocoa
 import Ocean
 import ESProgressHUD
 import ESNotification
+import p2_OAuth2
+import ESGists
 
 class GitHubPreferenceViewController: NSViewController {
 
-	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
+	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
+	private var removeAuthenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
 
 	@IBOutlet weak var authorizedStatusImageView:NSImageView!
 	@IBOutlet weak var authorizedStatusTextField:NSTextField!
@@ -24,9 +27,21 @@ class GitHubPreferenceViewController: NSViewController {
 	
 	@IBAction func doAuthentication(sender:NSButton) {
 	
-		let viewController = self.storyboard!.instantiateControllerWithIdentifier("Authentication") as! GitHubPreferenceAuthenticationViewController
-
-		self.presentViewControllerAsSheet(viewController)
+		self.authenticatingHUD.show()
+		
+		Authorization.authorizationWithGitHub { result in
+			
+			self.authenticatingHUD.hide()
+			
+			switch result {
+				
+			case .Created:
+				self.dismissController(self)
+				
+			case .Failed(let message):
+				self.showErrorAlert("Failed to authentication", message: message)
+			}
+		}
 	}
 	
 	@IBAction func doReset(sender:NSButton) {
@@ -37,11 +52,11 @@ class GitHubPreferenceViewController: NSViewController {
 			return
 		}
 		
-		self.authenticatingHUD.show()
+		self.removeAuthenticatingHUD.show()
 		
 		Authorization.resetAuthorizationOfGitHub(id) { result in
 			
-			self.authenticatingHUD.hide()
+			self.removeAuthenticatingHUD.hide()
 			
 			switch result {
 				

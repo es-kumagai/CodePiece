@@ -15,6 +15,8 @@ var captureController:WebCaptureController!
 
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
+	var urlSchemeManager:URLSchemeManager!
+	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// Insert code here to initialize your application
 		GitHubClientInfo = CodePieceClientInfo()
@@ -23,6 +25,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		sns = SNSController()
 		captureController = WebCaptureController()
 
+		self.urlSchemeManager = URLSchemeManager()
+		
 		sns.twitter.verifyCredentialsIfNeed { result in
 			
 			switch result {
@@ -39,7 +43,5 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 	func applicationWillTerminate(aNotification: NSNotification) {
 		// Insert code here to tear down your application
 	}
-
-
 }
 

@@ -78,6 +78,9 @@
 		B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F11B5E714800DE3942 /* GistsController.swift */; };
 		B1BB59F51B5E715B00DE3942 /* TwitterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F41B5E715B00DE3942 /* TwitterController.swift */; };
 		B1BB59F71B5E718900DE3942 /* SNSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F61B5E718900DE3942 /* SNSController.swift */; };
+		B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD64DB1B7B44AB002DFDD0 /* URLSchemeManager.swift */; };
+		B1BD64DE1B7B6CB0002DFDD0 /* OAuthScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD64DD1B7B6CB0002DFDD0 /* OAuthScheme.swift */; };
+		B1BD64F21B7B964D002DFDD0 /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD64F11B7B964D002DFDD0 /* URLScheme.swift */; };
 		B1D2D66B1B5D44A800794EFD /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D66A1B5D44A800794EFD /* Authorization.swift */; };
 		B1D2D6721B5D490800794EFD /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6711B5D490800794EFD /* Settings.swift */; };
 		B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6751B5D525C00794EFD /* MenuController.swift */; };
@@ -86,7 +89,6 @@
 		B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6821B5D5ED400794EFD /* PreferencesWindowController.swift */; };
 		B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6851B5D5F4000794EFD /* GitHubPreferenceView.storyboard */; };
 		B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6891B5D5FCD00794EFD /* GitHubPreferenceViewController.swift */; };
-		B1D2D6971B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6961B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift */; };
 		B1D2D6991B5DEA2600794EFD /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6981B5DEA2600794EFD /* DataStore.swift */; };
 		B1D2D69C1B5DFF7400794EFD /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D69B1B5DFF7400794EFD /* Colors.swift */; };
 		B1D2D69F1B5E0A1D00794EFD /* CodePieceClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D69E1B5E0A1D00794EFD /* CodePieceClientInfo.swift */; };
@@ -235,6 +237,9 @@
 		B1BB59F11B5E714800DE3942 /* GistsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistsController.swift; sourceTree = "<group>"; };
 		B1BB59F41B5E715B00DE3942 /* TwitterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterController.swift; sourceTree = "<group>"; };
 		B1BB59F61B5E718900DE3942 /* SNSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNSController.swift; sourceTree = "<group>"; };
+		B1BD64DB1B7B44AB002DFDD0 /* URLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSchemeManager.swift; sourceTree = "<group>"; };
+		B1BD64DD1B7B6CB0002DFDD0 /* OAuthScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthScheme.swift; sourceTree = "<group>"; };
+		B1BD64F11B7B964D002DFDD0 /* URLScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		B1D2D66A1B5D44A800794EFD /* Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		B1D2D6711B5D490800794EFD /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B1D2D6751B5D525C00794EFD /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -243,7 +248,6 @@
 		B1D2D6821B5D5ED400794EFD /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		B1D2D6851B5D5F4000794EFD /* GitHubPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubPreferenceView.storyboard; sourceTree = "<group>"; };
 		B1D2D6891B5D5FCD00794EFD /* GitHubPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubPreferenceViewController.swift; sourceTree = "<group>"; };
-		B1D2D6961B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubPreferenceAuthenticationViewController.swift; sourceTree = "<group>"; };
 		B1D2D6981B5DEA2600794EFD /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		B1D2D69B1B5DFF7400794EFD /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B1D2D69E1B5E0A1D00794EFD /* CodePieceClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodePieceClientInfo.swift; sourceTree = "<group>"; };
@@ -395,6 +399,7 @@
 		B1492FB41B5BCED80043ED8D /* CodePiece */ = {
 			isa = PBXGroup;
 			children = (
+				B1BD64DA1B7B4477002DFDD0 /* URLScheme */,
 				B12B24791B6B594300B284D7 /* Windows */,
 				B1D2D6A31B5E1D5400794EFD /* Extension.swift */,
 				B17DAF5C1B652959004CE4D2 /* Codes */,
@@ -488,6 +493,16 @@
 			path = SNS;
 			sourceTree = "<group>";
 		};
+		B1BD64DA1B7B4477002DFDD0 /* URLScheme */ = {
+			isa = PBXGroup;
+			children = (
+				B1BD64DB1B7B44AB002DFDD0 /* URLSchemeManager.swift */,
+				B1BD64F11B7B964D002DFDD0 /* URLScheme.swift */,
+				B1BD64DD1B7B6CB0002DFDD0 /* OAuthScheme.swift */,
+			);
+			path = URLScheme;
+			sourceTree = "<group>";
+		};
 		B1D2D6691B5D448100794EFD /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,7 +526,6 @@
 				B1D2D6821B5D5ED400794EFD /* PreferencesWindowController.swift */,
 				B1D2D6851B5D5F4000794EFD /* GitHubPreferenceView.storyboard */,
 				B1D2D6891B5D5FCD00794EFD /* GitHubPreferenceViewController.swift */,
-				B1D2D6961B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift */,
 				B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */,
 				B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */,
 				B1118DAB1B6C2BA800BFC5FA /* AccountsPreferenceViewController.swift */,
@@ -768,14 +782,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1D2D6971B5DACE100794EFD /* GitHubPreferenceAuthenticationViewController.swift in Sources */,
 				B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */,
 				B1D2D6A21B5E19D100794EFD /* Alert.swift in Sources */,
+				B1BD64DE1B7B6CB0002DFDD0 /* OAuthScheme.swift in Sources */,
 				B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */,
+				B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */,
 				B13C98F71B70E3C800A5A2B3 /* LanguagePopupDataSource.swift in Sources */,
 				B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */,
 				B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */,
 				B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */,
+				B1BD64F21B7B964D002DFDD0 /* URLScheme.swift in Sources */,
 				B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */,
 				B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */,
 				B128CB5F1B67942D00859D81 /* Application.swift in Sources */,
