@@ -81,6 +81,8 @@
 		B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD64DB1B7B44AB002DFDD0 /* URLSchemeManager.swift */; };
 		B1BD64DE1B7B6CB0002DFDD0 /* OAuthScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD64DD1B7B6CB0002DFDD0 /* OAuthScheme.swift */; };
 		B1BD64F21B7B964D002DFDD0 /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD64F11B7B964D002DFDD0 /* URLScheme.swift */; };
+		B1BD64F41B7B96F2002DFDD0 /* p2_OAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BD64F31B7B96F2002DFDD0 /* p2_OAuth2.framework */; };
+		B1BD64F51B7B96F2002DFDD0 /* p2_OAuth2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1BD64F31B7B96F2002DFDD0 /* p2_OAuth2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1D2D66B1B5D44A800794EFD /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D66A1B5D44A800794EFD /* Authorization.swift */; };
 		B1D2D6721B5D490800794EFD /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6711B5D490800794EFD /* Settings.swift */; };
 		B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6751B5D525C00794EFD /* MenuController.swift */; };
@@ -137,6 +139,7 @@
 				B152E2AA1B6EE06A008B485A /* ESCoreGraphicsExtension.framework in Embed Frameworks */,
 				B152E2C01B6EE06A008B485A /* Result.framework in Embed Frameworks */,
 				B152E2B31B6EE06A008B485A /* ESProgressHUD.framework in Embed Frameworks */,
+				B1BD64F51B7B96F2002DFDD0 /* p2_OAuth2.framework in Embed Frameworks */,
 				B152E2B81B6EE06A008B485A /* Himotoki.framework in Embed Frameworks */,
 				B152E2BE1B6EE06A008B485A /* Pods_CodePiece.framework in Embed Frameworks */,
 				B152E2BA1B6EE06A008B485A /* KeychainAccess.framework in Embed Frameworks */,
@@ -240,6 +243,7 @@
 		B1BD64DB1B7B44AB002DFDD0 /* URLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSchemeManager.swift; sourceTree = "<group>"; };
 		B1BD64DD1B7B6CB0002DFDD0 /* OAuthScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthScheme.swift; sourceTree = "<group>"; };
 		B1BD64F11B7B964D002DFDD0 /* URLScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
+		B1BD64F31B7B96F2002DFDD0 /* p2_OAuth2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = p2_OAuth2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D2D66A1B5D44A800794EFD /* Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		B1D2D6711B5D490800794EFD /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B1D2D6751B5D525C00794EFD /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -269,6 +273,7 @@
 				B152E2A91B6EE06A008B485A /* ESCoreGraphicsExtension.framework in Frameworks */,
 				B152E2BF1B6EE06A008B485A /* Result.framework in Frameworks */,
 				B152E2B21B6EE06A008B485A /* ESProgressHUD.framework in Frameworks */,
+				B1BD64F41B7B96F2002DFDD0 /* p2_OAuth2.framework in Frameworks */,
 				B152E2B71B6EE06A008B485A /* Himotoki.framework in Frameworks */,
 				B152E2BD1B6EE06A008B485A /* Pods_CodePiece.framework in Frameworks */,
 				B152E2B91B6EE06A008B485A /* KeychainAccess.framework in Frameworks */,
@@ -304,6 +309,7 @@
 		84FCAD57E3AF93B4392E1F74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B1BD64F31B7B96F2002DFDD0 /* p2_OAuth2.framework */,
 				B152E2B41B6EE06A008B485A /* ESThread.framework */,
 				B152E2B11B6EE06A008B485A /* ESProgressHUD.framework */,
 				B152E2AE1B6EE06A008B485A /* ESNotification.framework */,
