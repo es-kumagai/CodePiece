@@ -115,6 +115,8 @@ final class TwitterController : PostController, AlertDisplayable {
 
 	func post(description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
+		DebugTime.print("📮 Try to post by Twitter ... #3")
+		
 		let status = self.makeStatusFrom(nil, description: description, hashtag: hashtag)!
 		
 		try self.post(status, image: image, callback: callback)
@@ -122,12 +124,19 @@ final class TwitterController : PostController, AlertDisplayable {
 
 	func post(status: String, image:NSImage? = nil, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
+		DebugTime.print("📮 Verifying credentials of Twitter ... #3.1")
+		
 		guard self.credentialsVerified else {
 			
+			DebugTime.print("📮 Verification failure ... #3.1.1")
 			throw SNSControllerError.CredentialsNotVerified
 		}
 
+		DebugTime.print("📮 Try posting by Twitter ... #3.2")
+		
 		self.api.postStatusUpdate(status, image: image, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
+			
+			DebugTime.print("📮 Posted by Twitter ... #3.2.1")
 			
 			switch result {
 				
