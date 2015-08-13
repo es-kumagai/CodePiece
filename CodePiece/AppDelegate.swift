@@ -14,6 +14,7 @@ import ESNotification
 var sns:SNSController!
 var captureController:WebCaptureController!
 
+@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
 	var urlSchemeManager:URLSchemeManager!
