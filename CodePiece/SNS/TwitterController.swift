@@ -173,18 +173,24 @@ extension STTwitterAPI {
 	
 	func postStatusUpdate(status: String, image:NSImage? = nil, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) {
 		
+		DebugTime.print("📮 Try to post a status by Twitter ... #3.3")
+		
 		let tweetSucceeded = { (objects:[NSObject:AnyObject]!) -> Void in
 			
+			DebugTime.print("📮 A status posted successfully (\(objects))... #3.3.1")
 			callback(PostStatusUpdateResult(value: objects))
 		}
 		
 		let tweetFailed = { (error:NSError!) -> Void in
 			
+			DebugTime.print("📮 Failed to post a status with failure (\(error)) ... #3.3.2")
 			callback(PostStatusUpdateResult(error: error))
 		}
 		
 		if let image = image {
 
+			DebugTime.print("📮 Try posting with image ... #3.3.3.1")
+			
 			let tweetProgress = { (bytes:Int, processedBytes:Int, totalBytes:Int) -> Void in
 
 				NSLog("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
@@ -197,28 +203,40 @@ extension STTwitterAPI {
 			let mediaDatas:[NSData] = [mediaData]
 			let possiblySensitive:NSNumber = false
 
+			DebugTime.print("📮 Try posting by API ... #3.3.3.2")
+			
 			self.postStatusUpdate(status, mediaDataArray: mediaDatas, possiblySensitive: possiblySensitive, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, uploadProgressBlock: tweetProgress, successBlock: tweetSucceeded, errorBlock: tweetFailed)
 		}
 		else {
 
+			DebugTime.print("📮 Try posting with no image by API ... #3.3.3.3")
+			
 			self.postStatusUpdate(status, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
 		}
+
+		DebugTime.print("📮 Post requested by API ... #3.3.4")
 	}
 	
 	func verifyCredentials(callback:(VerifyCredentialsResult)->Void) {
 
 		let verifySucceeded = { (username:String!, userId:String!) -> Void in
 
+			DebugTime.print("📮 Verification successfully (Name:\(username), ID:\(userId)) ... #3.4.2")
 			callback(VerifyCredentialsResult(value:(username, userId)))
 		}
 
 		let verifyFailed = { (error:NSError!) -> Void in
 			
+			DebugTime.print("📮 Verification failed with error '\(error)' ... #3.4.2")
 			callback(VerifyCredentialsResult(error: error))
 		}
 		
+		DebugTime.print("📮 Try to verify credentials ... #3.4")
+		
 		invokeAsync(mainQueue) {
 
+			DebugTime.print("📮 Start verifying ... #3.4.1")
+			
 			self.verifyCredentialsWithUserSuccessBlock(verifySucceeded, errorBlock: verifyFailed)
 		}
 	}
