@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ESNotification
 
 // FIXME: ⭐️ 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整します。
 
@@ -17,8 +18,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
 	var urlSchemeManager:URLSchemeManager!
 	
+	override func awakeFromNib() {
+		
+		super.awakeFromNib()
+
+		NotificationManager.dammingNotifications = true
+		
+		settings = Settings()
+	}
+	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		// Insert code here to initialize your application
+
+		NotificationManager.dammingNotifications = false
+
 		GitHubClientInfo = CodePieceClientInfo()
 		TwitterClientInfo = CodePieceTwitterClientInfo()
 

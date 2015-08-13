@@ -8,6 +8,4 @@
 
 import Cocoa
 
-settings = Settings()
-
 exit(NSApplicationMain(Process.argc, Process.unsafeArgv))

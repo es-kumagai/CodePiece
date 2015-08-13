@@ -16,7 +16,7 @@ PODS:
     - Himotoki (~> 0.5.1)
     - Ocean
     - Swim (~> 1.3.14)
-  - ESNotification (0.1.1-beta):
+  - ESNotification (0.1.3-beta):
     - ESThread (~> 0.1.0)
     - Swim (~> 1.3.14)
   - ESProgressHUD (0.1.2):
@@ -85,7 +85,7 @@ CHECKOUT OPTIONS:
     :commit: 0fc13192c789c9688308e1daaf14ddca286687ad
     :git: https://github.com/EZ-NET/ESGists.git
   ESNotification:
-    :commit: ce75ae7764b6769a09919338f4c657b9bf34289d
+    :commit: d25d29616366f6512c2fb58e68490f1235be19ed
     :git: https://github.com/EZ-NET/ESNotification.git
   Himotoki:
     :commit: 9f6717c4cca558377fe4d1223d443883be401530
@@ -109,7 +109,7 @@ SPEC CHECKSUMS:
   ESAppKitExtension: 3bc92382a286d8ed531c0f2e9e1a0356cae9457c
   ESCoreGraphicsExtension: 017d11d2debc6c0adc618d6f27eaeac6ee393732
   ESGists: f039c926f2d91f5e195c67dddddb40857e215de7
-  ESNotification: cc53ab84d39f6ba9b1993c1494a6f6c507df9ef1
+  ESNotification: dc63533ebdb02f43d36884f021b28585a2581a6a
   ESProgressHUD: 1ce6537e3813cd96d8fb81ae34d859cd5bd2fad2
   ESThread: aa7f1d3e412716cef6c62e116a1da761449f5e48
   Himotoki: e83a10846e4e2739fd9847d8eb23d690d9fc8f88
