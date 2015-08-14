@@ -17,24 +17,51 @@ struct DataStore {
 	static let group = "jp.ez-style.appid.CodePiece"
 
 	var appState:AppState
-	var github:GitHub
+	var twitter:TwitterStore
+	var github:GitHubStore
 
 	init() {
 		
 		self.appState = AppState()
-		self.github = GitHub()
+		self.twitter = TwitterStore()
+		self.github = GitHubStore()
 	}
 	
 	func save() {
 	
 		self.appState.save()
+		self.twitter.save()
 		self.github.save()
 	}
 }
 
 extension DataStore {
+
+	struct TwitterStore {
+		
+		static let AccountIdentifierKey = "twitter:identifier"
+		
+		var identifier:String?
+		
+		init() {
+			
+			let userDefaults = NSUserDefaults.standardUserDefaults()
+			
+			self.identifier = userDefaults.stringForKey(TwitterStore.AccountIdentifierKey)
+		}
+		
+		func save() {
+			
+			let userDefaults = NSUserDefaults.standardUserDefaults()
+			
+			userDefaults.setObject(self.identifier, forKey: TwitterStore.AccountIdentifierKey)
+		}
+	}
+}
+
+extension DataStore {
 	
-	struct GitHub {
+	struct GitHubStore {
 
 		static let AuthorizationKey = "github:auth-info"
 
@@ -50,9 +77,9 @@ extension DataStore {
 		
 		init() {
 		
-			let keychain = GitHub.keychain
+			let keychain = GitHubStore.keychain
 			
-			guard let data = keychain.getData(GitHub.AuthorizationKey) else {
+			guard let data = keychain.getData(GitHubStore.AuthorizationKey) else {
 			
 				self.authInfo = AuthInfo()
 				return
@@ -71,8 +98,8 @@ extension DataStore {
 		
 		func save() {
 			
-			let keychain = GitHub.keychain
-			let keyForAuthInfo = GitHub.AuthorizationKey
+			let keychain = GitHubStore.keychain
+			let keyForAuthInfo = GitHubStore.AuthorizationKey
 
 			NSLog("Will save authentication information to Keychain.")
 			

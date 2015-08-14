@@ -154,11 +154,8 @@ class TwitterPreferenceViewController: NSViewController {
 		
 		TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.observeBy(self) { owner, notification in
 			
-			let account = notification.account
-			
-			settings.account.twitterAccount = account
-			sns.twitter.account = account
-			
+			sns.twitter.account = notification.account
+
 			self.verifyCredentials()
 		}
 

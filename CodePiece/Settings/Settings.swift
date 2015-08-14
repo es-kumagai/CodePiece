@@ -55,12 +55,46 @@ struct Settings {
 	
 	mutating func loadAccount() {
 		
+		self.loadTwitterAccount()
 		self.loadGitHubAccount()
 	}
 	
 	mutating func saveAccount() {
 		
+		self.saveTwitterAccount()
 		self.saveGitHubAccount()
+	}
+	
+	mutating func loadTwitterAccount() {
+		
+		if let identifier = self._store.twitter.identifier {
+			
+			if let account = TwitterAccount(identifier: identifier) {
+
+				NSLog("Twitter account restored from data store. (\(account.username))")
+				self.account.twitterAccount = account
+			}
+			else {
+				
+				NSLog("Twitter account restored from data store but the account is not exists. (\(identifier))")
+			}
+		}
+		else {
+
+			// If no twitter account specified by settings, adopt registered account in OSX only if single account is registered.
+			if let account = TwitterController.getSingleAccount().map(TwitterAccount.init) {
+				
+				NSLog("No Twitter account specified. Using account '\(account.username)' which registered in OS.")
+				self.account.twitterAccount = account
+			}
+			else {
+				
+				NSLog("No Twitter account specified.")
+				self.account.twitterAccount = nil
+			}
+			
+			self.saveTwitterAccount()
+		}
 	}
 	
 	mutating func loadGitHubAccount() {
@@ -73,7 +107,16 @@ struct Settings {
 		
 		Authorization.GitHubAuthorizationStateDidChangeNotification(username: self.account.username).post()
 	}
-	
+
+	mutating func saveTwitterAccount() {
+		
+		NSLog("Writing Twitter account to data store. (\(self.account.twitterAccount?.username))")
+		
+		self._store.twitter.identifier = self.account.twitterAccount?.identifier
+		
+		self._store.twitter.save()
+	}
+
 	mutating func saveGitHubAccount() {
 		
 		NSLog("Writing GitHub account to data store. (\(self.account.username))")

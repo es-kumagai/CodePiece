@@ -61,10 +61,13 @@ final class TwitterController : PostController, AlertDisplayable {
 		
 		didSet {
 			
-			Authorization.TwitterAuthorizationStateDidChangeNotification(username: nil).post()
+			settings.account.twitterAccount = self.account
+			settings.saveTwitterAccount()
 			
 			self.api = nil
 			self.effectiveUserInfo = nil
+
+			Authorization.TwitterAuthorizationStateDidChangeNotification(username: nil).post()
 		}
 	}
 	
@@ -82,7 +85,7 @@ final class TwitterController : PostController, AlertDisplayable {
 	
 	private(set) var effectiveUserInfo:UserInfo?
  
-	init(account:TwitterAccount?) {
+	private init(account:TwitterAccount?) {
 		
 		self.account = account
 		self.effectiveUserInfo = nil
@@ -265,6 +268,20 @@ extension TwitterController {
 	static func getAccount(identifier:String) -> ACAccount? {
 		
 		return self.accountStore.accountWithIdentifier(identifier)
+	}
+	
+	static func getSingleAccount() -> ACAccount? {
+		
+		let accounts = self.getAccounts()
+		
+		if accounts.count == 1 {
+			
+			return accounts.first!
+		}
+		else {
+			
+			return nil
+		}
 	}
 }
 
