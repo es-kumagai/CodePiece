@@ -18,5 +18,6 @@ class WelcomeBoardWindowController: NSWindowController, NSWindowDelegate {
 	
 	func windowWillClose(notification: NSNotification) {
 	
+		NSApp.stopModal()
 	}
 }

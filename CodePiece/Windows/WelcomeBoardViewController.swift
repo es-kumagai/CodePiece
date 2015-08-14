@@ -8,6 +8,7 @@
 
 import Cocoa
 import Ocean
+import ESThread
 
 class WelcomeBoardViewController: NSViewController {
 
@@ -24,7 +25,11 @@ class WelcomeBoardViewController: NSViewController {
 
 		// 視覚的に WelcomeBoard を閉じてから showPreferencesWindow を開きたいところですが dispatch で実行を遅らせると、モーダルな設定画面からの認証で応答が得られなくなるため、表示が残ったまま設定画面をモーダル表示しています。
 		NSApp.closeWelcomeBoard()
-		NSApp.showPreferencesWindow()
+		
+		invokeAsyncOnMainQueue {
+
+			NSApp.showPreferencesWindow()
+		}
 	}
 	
 	override func viewDidLoad() {

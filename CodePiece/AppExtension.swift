@@ -22,7 +22,7 @@ extension NSApplication {
 	
 	func showWelcomeBoard() {
 
-		welcomeBoardWindowController.showWindow(self)
+		NSApp.runModalForWindow(welcomeBoardWindowController.window!)
 	}
 	
 	func closeWelcomeBoard() {
