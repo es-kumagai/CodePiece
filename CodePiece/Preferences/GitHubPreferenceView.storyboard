@@ -46,7 +46,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RU2-eg-vOe"/>
                             </imageView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
-                                <rect key="frame" x="22" y="58" width="129" height="32"/>
+                                <rect key="frame" x="22" y="75" width="129" height="32"/>
                                 <buttonCell key="cell" type="push" title="Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRz-PP-aVw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -56,6 +56,16 @@ DQ
                                 </buttonCell>
                                 <connections>
                                     <action selector="doAuthentication:" target="ps4-Eu-nrG" id="VKT-wo-BB0"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-jY-0Jr">
+                                <rect key="frame" x="297" y="186" width="169" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DsE-ej-daq">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="doReset:" target="ps4-Eu-nrG" id="eG2-vm-x3W"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X40-Kf-trQ">
@@ -75,42 +85,42 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4L-c2-OGD">
-                                <rect key="frame" x="18" y="104" width="444" height="51"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="roN-jh-jrr">
+                                <rect key="frame" x="18" y="121" width="444" height="34"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece request permission only for make Gists. Please authenticate from the Authentication button below." id="roN-jh-jrr">
                                     <font key="font" metaFont="system"/>
-                                    <string key="title">CodePiece request permission only for make Gist. Please authenticate from the Authentication button below. When you push the button, default browser will be opend with GitHub authentication page.</string>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-jY-0Jr">
-                                <rect key="frame" x="151" y="58" width="169" height="32"/>
-                                <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DsE-ej-daq">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pim-Rm-T1g">
+                                <rect key="frame" x="18" y="32" width="444" height="34"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When you push the button, default browser will be opend with GitHub authentication page." id="AQu-dh-ACz">
                                     <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="doReset:" target="ps4-Eu-nrG" id="eG2-vm-x3W"/>
-                                </connections>
-                            </button>
+                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="vPC-jY-0Jr" firstAttribute="baseline" secondItem="8X9-Tf-XVS" secondAttribute="baseline" id="2Hj-Ue-LJE"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="top" secondItem="tiQ-Tx-wOb" secondAttribute="bottom" constant="8" id="4Ss-kW-Plq"/>
                             <constraint firstItem="eF3-de-P5v" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="20" id="50m-UE-CE8"/>
-                            <constraint firstItem="vPC-jY-0Jr" firstAttribute="leading" secondItem="AFn-Gq-0En" secondAttribute="trailing" constant="12" id="CC3-kg-6Jc"/>
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="CFS-nN-6G8"/>
+                            <constraint firstAttribute="trailing" secondItem="Pim-Rm-T1g" secondAttribute="trailing" constant="20" id="CJe-2a-WcC"/>
                             <constraint firstItem="AFn-Gq-0En" firstAttribute="top" secondItem="A4L-c2-OGD" secondAttribute="bottom" constant="18" id="EDK-Hw-bb4"/>
                             <constraint firstItem="AFn-Gq-0En" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="28" id="GnC-Es-anp"/>
+                            <constraint firstAttribute="trailing" secondItem="vPC-jY-0Jr" secondAttribute="trailing" constant="20" id="KKZ-Km-3RU"/>
+                            <constraint firstItem="Pim-Rm-T1g" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="LhA-xs-PiJ"/>
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="top" secondItem="eF3-de-P5v" secondAttribute="bottom" constant="9" id="WKr-XE-7mN"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="35" id="Ym7-hQ-dhw"/>
                             <constraint firstItem="eF3-de-P5v" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="28" id="adt-6R-Taj"/>
                             <constraint firstItem="X40-Kf-trQ" firstAttribute="leading" secondItem="eF3-de-P5v" secondAttribute="trailing" constant="8" id="cbR-Ex-3cS"/>
                             <constraint firstItem="uLd-hX-roe" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="hXU-7B-rIs"/>
-                            <constraint firstItem="vPC-jY-0Jr" firstAttribute="baseline" secondItem="AFn-Gq-0En" secondAttribute="baseline" id="nZK-oN-dmM"/>
                             <constraint firstItem="A4L-c2-OGD" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="oQF-JG-kFn"/>
                             <constraint firstItem="uLd-hX-roe" firstAttribute="leading" secondItem="X40-Kf-trQ" secondAttribute="trailing" constant="8" id="pz9-cL-egc"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="centerY" secondItem="5cj-jM-cXY" secondAttribute="centerY" id="sPM-Lb-NSW"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="leading" secondItem="5cj-jM-cXY" secondAttribute="trailing" constant="8" id="srI-ID-bfq"/>
+                            <constraint firstItem="Pim-Rm-T1g" firstAttribute="top" secondItem="AFn-Gq-0En" secondAttribute="bottom" constant="16" id="vsm-dE-dZY"/>
                             <constraint firstItem="A4L-c2-OGD" firstAttribute="top" secondItem="5cj-jM-cXY" secondAttribute="bottom" constant="40" id="wjk-bA-u1O"/>
                             <constraint firstItem="X40-Kf-trQ" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="yro-rf-7Da"/>
                             <constraint firstAttribute="trailing" secondItem="A4L-c2-OGD" secondAttribute="trailing" constant="20" id="zHS-Fc-RT0"/>
