@@ -56,7 +56,7 @@ final class TwitterController : PostController, AlertDisplayable {
 	
 	private static let APINotReadyError = SNSControllerError.NotReady("Twitter API is not ready.")
 	private static let APINotReadyNSError = NSError(domain: String(APINotReadyError), code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.description])
-	
+
 	var account:TwitterAccount? {
 		
 		didSet {
@@ -101,20 +101,26 @@ final class TwitterController : PostController, AlertDisplayable {
 		return self.credentialsVerified
 	}
 
-	func verifyCredentialsIfNeed() {
+	func verifyCredentialsIfNeed() -> Bool {
 		
-		self.verifyCredentialsIfNeed(self.verifyCredentialsBasicErrorReportCallback)
+		return self.verifyCredentialsIfNeed(self.verifyCredentialsBasicErrorReportCallback)
 	}
 	
-	func verifyCredentialsIfNeed(callback:(VerifyResult)->Void) {
+	func verifyCredentialsIfNeed(callback:(VerifyResult)->Void) -> Bool {
 		
-		guard self.readyToUse && !self.credentialsVerified else {
+		guard self.readyToUse else {
+			
+			return false
+		}
+		
+		guard !self.credentialsVerified else {
 
-			callback(VerifyResult(value: ()))
-			return
+			return false
 		}
 		
 		self.verifyCredentials(callback)
+
+		return true
 	}
 	
 	private func verifyCredentialsBasicErrorReportCallback(result:VerifyResult) -> Void {

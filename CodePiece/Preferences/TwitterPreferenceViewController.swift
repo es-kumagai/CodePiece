@@ -89,9 +89,7 @@ class TwitterPreferenceViewController: NSViewController {
 			return
 		}
 		
-		self.verifying = true
-		
-		sns.twitter.verifyCredentialsIfNeed { result in
+		self.verifying = sns.twitter.verifyCredentialsIfNeed { result in
 			
 			self.verifying = false
 			

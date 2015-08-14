@@ -239,11 +239,7 @@ class ViewController: NSViewController {
 		
 		super.viewDidAppear()
 		
-		if settings.isReady {
-			
-			self.verifyCredentials()
-		}
-		else {
+		if !settings.isReady {
 			
 			NSApp.showWelcomeBoard()
 		}
