@@ -88,16 +88,7 @@ class GitHubPreferenceViewController: NSViewController {
 			
 			self.authorizationButton.enabled = false
 			self.resetButton.enabled = true
-		
-		case .AuthorizedWithNoToken:
-			
-			self.authorizedStatusTextField.textColor = SystemColor.TextForAuthenticatedWithNoTalken.color
-			self.authorizedStatusTextField.stringValue = "Re-Authentication may be needed"
-			
-			self.authorizationButton.enabled = true
-			self.resetButton.enabled = false
-			
-			
+					
 		case .NotAuthorized:
 			
 			self.authorizedStatusTextField.textColor = SystemColor.TextForNotAuthenticated.color

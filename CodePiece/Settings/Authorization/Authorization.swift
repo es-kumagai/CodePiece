@@ -43,7 +43,6 @@ protocol TwitterClientInfoType {
 enum AuthorizationState {
 	
 	case Authorized
-	case AuthorizedWithNoToken
 	case NotAuthorized
 	
 	var isValid:Bool {
@@ -53,7 +52,7 @@ enum AuthorizationState {
 		case .Authorized:
 			return true
 			
-		case .AuthorizedWithNoToken, .NotAuthorized:
+		case .NotAuthorized:
 			return false
 		}
 	}

@@ -43,9 +43,9 @@ extension AccountSetting {
 	
 	var authorizationState:AuthorizationState {
 		
-		if self.id != nil {
+		if self.authorization != nil {
 
-			return authorization != nil ? .Authorized : .AuthorizedWithNoToken
+			return .Authorized
 		}
 		else {
 			
