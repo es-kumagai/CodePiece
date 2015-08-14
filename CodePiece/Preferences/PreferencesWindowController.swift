@@ -17,11 +17,6 @@ class PreferencesWindowController: NSWindowController {
 
 	@IBOutlet weak var toolbar:NSToolbar!
 	
-	@IBAction func showAccountsPreference(sender:NSToolbarItem?) {
-		
-		self.contentViewController = Storyboard.AccountsPreferenceView.defaultViewController
-	}
-	
 	@IBAction func showGitHubPreference(sender:NSToolbarItem?) {
 
 		self.contentViewController = Storyboard.GitHubPreferenceView.defaultViewController

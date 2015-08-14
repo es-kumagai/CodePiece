@@ -14,7 +14,6 @@ enum Storyboard : String {
 	case PreferencesWindow
 	case GitHubPreferenceView
 	case TwitterPreferenceView
-	case AccountsPreferenceView
 	
 	var storyboard:NSStoryboard {
 		
