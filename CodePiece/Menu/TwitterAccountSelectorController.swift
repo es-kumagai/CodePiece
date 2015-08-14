@@ -22,12 +22,26 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 	
 	lazy var accounts:[ACAccount]! = TwitterController.getAccounts()
 	
+	var hasAccount:Bool {
+		
+		return !self.accounts.isEmpty
+	}
+	
 	var headerMenuItem:TwitterAccountMenuItem {
 		
 		return self.accountSelector.menu!.itemAtIndex(0) as! TwitterAccountMenuItem
 	}
 	
 	func updateAccountSelector() {
+		
+		self.willChangeValueForKey("hasAccount")
+		
+		defer {
+			
+			self.didChangeValueForKey("hasAccount")
+		}
+		
+		self.accounts = nil
 		
 		let createMenuItem = TwitterAccountMenuItem.menuItemCreator(action: "accountSelectorDidChange:", target: self)
 		

@@ -11,6 +11,7 @@ import ESProgressHUD
 import Ocean
 import Swim
 import Accounts
+import ESNotification
 
 class TwitterPreferenceViewController: NSViewController {
 
@@ -133,30 +134,35 @@ class TwitterPreferenceViewController: NSViewController {
 		}
 	}
 	
-	override func viewDidLoad() {
-        super.viewDidLoad()
-
+	private func checkCanAccessToAccountsAndUpdateAccountSelector() {
+		
 		TwitterController.requestAccessToAccounts { result in
+			
+			self.clearError()
+			self.updateAccountSelector()
 			
 			switch result {
 				
 			case .Success:
-				NSLog("Access to Twitter account is allowed.")
-				self.clearError()
+				break
 				
 			case .Failure(let error):
 				NSLog("Access to Twitter account is not allowed. \(error)")
 				self.reportError("Access to Twitter account is not allowed. Please give permission to access Twitter account using Privacy settings.")
 			}
 		}
+	}
+	
+	override func viewDidLoad() {
+        super.viewDidLoad()
 		
 		TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.observeBy(self) { owner, notification in
 			
 			sns.twitter.account = notification.account
-
+			
 			self.verifyCredentials()
 		}
-
+		
 		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 			
 			self.willChangeValueForKey("credentialsVerified")
@@ -167,19 +173,37 @@ class TwitterPreferenceViewController: NSViewController {
 			
 			self.applyAuthorizedStatus()
 		}
+		
+		NamedNotification.observe(NSWindowDidBecomeKeyNotification, by: self) { owner, notification in
+			
+			if notification.object === self.view.window {
+			
+				self.checkCanAccessToAccountsAndUpdateAccountSelector()
+			}
+		}
     }
+	
+	func updateAccountSelector() {
+		
+		self.accountSelectorController.updateAccountSelector()
+		
+		if !self.accountSelectorController.hasAccount {
+			
+			self.reportError("No Twitter account found. Please register a twitter account using Account settings.")
+		}
+	}
 	
 	override func viewWillAppear() {
 		
 		super.viewWillAppear()
 		
+		self.updateAccountSelector()
 		self.applyAuthorizedStatus()
 	}
 	
 	override func viewDidAppear() {
 		
 		super.viewDidAppear()
-		
 	}
 		
 	func clearError() {

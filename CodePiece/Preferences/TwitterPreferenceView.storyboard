@@ -45,35 +45,6 @@
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RU2-eg-vOe"/>
                             </imageView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
-                                <rect key="frame" x="318" y="213" width="148" height="32"/>
-                                <buttonCell key="cell" type="push" title="Verify Credentials" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRz-PP-aVw">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="pushVerifyCredentialsButton:" target="ps4-Eu-nrG" id="CCn-hP-eyp"/>
-                                    <binding destination="ps4-Eu-nrG" name="enabled2" keyPath="self.canVerify" previousBinding="5gp-uE-FCb" id="X85-LS-7jN">
-                                        <dictionary key="options">
-                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                            <integer key="NSNullPlaceholder" value="-1"/>
-                                        </dictionary>
-                                    </binding>
-                                    <binding destination="ps4-Eu-nrG" name="enabled" keyPath="self.credentialsNotVerified" id="5gp-uE-FCb"/>
-                                </connections>
-                            </button>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="bAj-R5-xH6">
-                                <rect key="frame" x="0.0" y="101" width="12" height="170"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="170" id="Ryu-gl-IBJ"/>
-                                    <constraint firstAttribute="width" constant="12" id="fdv-d2-9oj"/>
-                                </constraints>
-                            </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FKb-Jz-IKe">
                                 <rect key="frame" x="75" y="233" width="16" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="▶︎" id="yb1-nL-XtZ">
@@ -94,7 +65,7 @@ DQ
                                 <rect key="frame" x="109" y="19" width="175" height="19"/>
                                 <buttonCell key="cell" type="roundRect" title="Open Accounts Preferences" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CSH-Bt-Vs5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="titleBar" size="12"/>
+                                    <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="openAccountsPreferences:" target="ps4-Eu-nrG" id="9hf-B9-u7E"/>
@@ -104,30 +75,25 @@ DQ
                                 <rect key="frame" x="292" y="19" width="168" height="19"/>
                                 <buttonCell key="cell" type="roundRect" title="Open Security Preferences" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t3f-Oy-Koz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="titleBar" size="12"/>
+                                    <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="openSecurityPreferences:" target="ps4-Eu-nrG" id="Ebe-QI-gNF"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z63-aQ-PAY">
-                                <rect key="frame" x="18" y="62" width="444" height="17"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Error Report" id="Gzb-k3-EwK">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="0.43849745392799377" green="0.26094529032707214" blue="0.26579996943473816" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gnp-sb-1wy">
-                                <rect key="frame" x="28" y="133" width="434" height="34"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gnp-sb-1wy">
+                                <rect key="frame" x="18" y="137" width="444" height="34"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="If you wan to use other account, select the account following button or add new account in Accounts Preferences." id="SHa-az-37w">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ol-La-f8R">
-                                <rect key="frame" x="27" y="98" width="189" height="26"/>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Ol-La-f8R">
+                                <rect key="frame" x="17" y="97" width="226" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="CsI-l3-8wi"/>
+                                </constraints>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="oeR-P4-OXw">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -139,27 +105,63 @@ DQ
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <binding destination="PSY-xM-UKI" name="enabled" keyPath="self.hasAccount" id="YCO-HD-EJA"/>
+                                </connections>
                             </popUpButton>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z63-aQ-PAY">
+                                <rect key="frame" x="18" y="71" width="444" height="17"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Error Report" id="Gzb-k3-EwK">
+                                    <font key="font" size="13" name=".HelveticaNeueDeskInterface-Bold"/>
+                                    <color key="textColor" red="0.43849745392799377" green="0.26094529032707214" blue="0.26579996943473816" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
+                                <rect key="frame" x="318" y="187" width="148" height="32"/>
+                                <buttonCell key="cell" type="push" title="Verify Credentials" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRz-PP-aVw">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="pushVerifyCredentialsButton:" target="ps4-Eu-nrG" id="CCn-hP-eyp"/>
+                                    <binding destination="ps4-Eu-nrG" name="enabled2" keyPath="self.canVerify" previousBinding="5gp-uE-FCb" id="X85-LS-7jN">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="ps4-Eu-nrG" name="enabled" keyPath="self.credentialsNotVerified" id="5gp-uE-FCb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="AFn-Gq-0En" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="29" id="2hg-td-K3n"/>
+                            <constraint firstItem="AFn-Gq-0En" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="55" id="2hg-td-K3n"/>
                             <constraint firstAttribute="trailing" secondItem="z63-aQ-PAY" secondAttribute="trailing" constant="20" id="2nU-yA-S1V"/>
+                            <constraint firstAttribute="trailing" secondItem="gnp-sb-1wy" secondAttribute="trailing" constant="20" id="3aX-mG-qXT"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="top" secondItem="tiQ-Tx-wOb" secondAttribute="bottom" constant="8" id="4Ss-kW-Plq"/>
                             <constraint firstItem="eF3-de-P5v" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="20" id="50m-UE-CE8"/>
                             <constraint firstItem="d9B-zQ-BQb" firstAttribute="leading" secondItem="PFs-yu-i48" secondAttribute="trailing" constant="8" id="5QQ-YW-QdV"/>
                             <constraint firstAttribute="bottom" secondItem="d9B-zQ-BQb" secondAttribute="bottom" constant="20" id="68S-AO-3v1"/>
+                            <constraint firstItem="9Ol-La-f8R" firstAttribute="top" secondItem="gnp-sb-1wy" secondAttribute="bottom" constant="16" id="9e1-na-TGC"/>
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="CFS-nN-6G8"/>
                             <constraint firstItem="NS6-hz-jvm" firstAttribute="leading" secondItem="FKb-Jz-IKe" secondAttribute="trailing" constant="8" id="My9-Np-QdE"/>
-                            <constraint firstItem="bAj-R5-xH6" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="-1" id="QdC-zp-WW2"/>
+                            <constraint firstItem="gnp-sb-1wy" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="SpS-mM-thE"/>
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="top" secondItem="eF3-de-P5v" secondAttribute="bottom" constant="9" id="WKr-XE-7mN"/>
                             <constraint firstItem="FKb-Jz-IKe" firstAttribute="leading" secondItem="eF3-de-P5v" secondAttribute="trailing" constant="8" id="WaS-d1-ENS"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="35" id="Ym7-hQ-dhw"/>
                             <constraint firstAttribute="bottom" secondItem="PFs-yu-i48" secondAttribute="bottom" constant="20" id="acG-5A-sQQ"/>
                             <constraint firstItem="eF3-de-P5v" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="28" id="adt-6R-Taj"/>
-                            <constraint firstItem="bAj-R5-xH6" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" id="amo-pc-3kE"/>
                             <constraint firstItem="z63-aQ-PAY" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="fNs-sZ-g6S"/>
                             <constraint firstItem="FKb-Jz-IKe" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="fdj-nT-lJs"/>
-                            <constraint firstItem="d9B-zQ-BQb" firstAttribute="top" secondItem="z63-aQ-PAY" secondAttribute="bottom" constant="24" id="mXW-fk-EUb"/>
+                            <constraint firstItem="gnp-sb-1wy" firstAttribute="top" secondItem="5cj-jM-cXY" secondAttribute="bottom" constant="24" id="iY7-U5-8CK"/>
+                            <constraint firstItem="z63-aQ-PAY" firstAttribute="top" secondItem="9Ol-La-f8R" secondAttribute="bottom" constant="12" id="jDH-7M-a3T"/>
+                            <constraint firstItem="9Ol-La-f8R" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="mJZ-Ig-V39"/>
                             <constraint firstItem="NS6-hz-jvm" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="o6S-Hg-2h7"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="centerY" secondItem="5cj-jM-cXY" secondAttribute="centerY" id="sPM-Lb-NSW"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="leading" secondItem="5cj-jM-cXY" secondAttribute="trailing" constant="8" id="srI-ID-bfq"/>

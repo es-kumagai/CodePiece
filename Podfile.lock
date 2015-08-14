@@ -85,7 +85,7 @@ CHECKOUT OPTIONS:
     :commit: 0fc13192c789c9688308e1daaf14ddca286687ad
     :git: https://github.com/EZ-NET/ESGists.git
   ESNotification:
-    :commit: 450f05cc96d2da02f281230d7b1be4ba546af70d
+    :commit: 3ab022d1b20463818dab5d32224e570aa7dd363b
     :git: https://github.com/EZ-NET/ESNotification.git
   Himotoki:
     :commit: 9f6717c4cca558377fe4d1223d443883be401530
