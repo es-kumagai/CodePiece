@@ -14,6 +14,8 @@
 		B1118DAC1B6C2BA800BFC5FA /* AccountsPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DAB1B6C2BA800BFC5FA /* AccountsPreferenceViewController.swift */; };
 		B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */; };
 		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
+		B1269A601B7D9282009305C6 /* TwitterAccountMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */; };
+		B1269A631B7D9815009305C6 /* TwitterAccountSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1269A611B7D94AD009305C6 /* TwitterAccountSelectorController.swift */; };
 		B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */; };
 		B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5C1B67853C00859D81 /* Twitter.swift */; };
 		B128CB5F1B67942D00859D81 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5E1B67942D00859D81 /* Application.swift */; };
@@ -190,6 +192,8 @@
 		B12460E51B5F865F0036A690 /* Swim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterPreferenceViewController.swift; sourceTree = "<group>"; };
 		B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TwitterPreferenceView.storyboard; sourceTree = "<group>"; };
+		B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccountMenuItem.swift; sourceTree = "<group>"; };
+		B1269A611B7D94AD009305C6 /* TwitterAccountSelectorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccountSelectorController.swift; sourceTree = "<group>"; };
 		B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
 		B128CB5C1B67853C00859D81 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		B128CB5E1B67942D00859D81 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */,
+				B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */,
 			);
 			name = Controls;
 			path = ../Controls;
@@ -463,6 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				B1D2D6751B5D525C00794EFD /* MenuController.swift */,
+				B1269A611B7D94AD009305C6 /* TwitterAccountSelectorController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -788,6 +794,7 @@
 				B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */,
 				B1D2D6A21B5E19D100794EFD /* Alert.swift in Sources */,
 				B1BD64DE1B7B6CB0002DFDD0 /* OAuthScheme.swift in Sources */,
+				B1269A601B7D9282009305C6 /* TwitterAccountMenuItem.swift in Sources */,
 				B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */,
 				B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */,
 				B13C98F71B70E3C800A5A2B3 /* LanguagePopupDataSource.swift in Sources */,
@@ -826,6 +833,7 @@
 				B1118DA51B6BECAD00BFC5FA /* WelcomeBoardViewController.swift in Sources */,
 				B1D2D67F1B5D566000794EFD /* Storyboard.swift in Sources */,
 				B17DAF5E1B6529A0004CE4D2 /* WebCaptureController.swift in Sources */,
+				B1269A631B7D9815009305C6 /* TwitterAccountSelectorController.swift in Sources */,
 				B1D2D66B1B5D44A800794EFD /* Authorization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

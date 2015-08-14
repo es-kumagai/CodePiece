@@ -22,7 +22,25 @@ enum TwitterAccount {
 
 final class TwitterController : PostController, AlertDisplayable {
 	
-	private(set) var api:STTwitterAPI
+	var account:TwitterAccount {
+		
+		didSet {
+			
+			defer {
+				
+				Authorization.TwitterAuthorizationStateDidChangeNotification(username: self.account.ACAccount?.username).post()
+			}
+			
+			self.api = nil
+			self.credentialsVerified = false
+		}
+	}
+	
+	private lazy var api:STTwitterAPI! = self.account.api
+
+	private static let accountStore:ACAccountStore = ACAccountStore()
+	private let accountType:ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+	private let accountOptions:[NSObject:AnyObject]? = nil
 	
 	private(set) var credentialsVerified:Bool
 	private(set) var username:String!
@@ -33,15 +51,13 @@ final class TwitterController : PostController, AlertDisplayable {
 
 	init?(account:TwitterAccount) {
 		
+		self.account = account
 		self.credentialsVerified = false
 		
-		guard let api = account.api else {
+		guard self.api != nil else {
 			
-			self.api = STTwitterAPI()
 			return nil
 		}
-		
-		self.api = api
 	}
 
 	var canPost:Bool {
@@ -150,6 +166,41 @@ final class TwitterController : PostController, AlertDisplayable {
 	}
 }
 
+extension TwitterController {
+
+	typealias RequestAccessResult = Result<Void,NSError>
+	
+	func requestAccessToAccounts(completion:(RequestAccessResult) -> Void) {
+		
+		TwitterController.accountStore.requestAccessToAccountsWithType(self.accountType, options: self.accountOptions) { granted, error in
+			
+			if granted {
+				
+				completion(RequestAccessResult(value:()))
+			}
+			else {
+				
+				completion(RequestAccessResult(error: error ?? NSError(domain: "Not Permitted", code: 0, userInfo: nil)))
+			}
+		}
+	}
+	
+	func getAccounts() -> [ACAccount] {
+		
+		guard let accounts = TwitterController.accountStore.accountsWithAccountType(self.accountType) as? [ACAccount] else {
+			
+			return []
+		}
+		
+		return accounts
+	}
+	
+	func getAccount(identifier:String) -> ACAccount? {
+		
+		return TwitterController.accountStore.accountWithIdentifier(identifier)
+	}
+}
+
 extension TwitterAccount {
 	
 	private var api:STTwitterAPI? {
@@ -159,9 +210,20 @@ extension TwitterAccount {
 		case .First:
 			return STTwitterAPI.twitterAPIOSWithFirstAccount()
 			
+		case .Specified:
+			return self.ACAccount.map(STTwitterAPI.twitterAPIOSWithAccount)
+		}
+	}
+	
+	var ACAccount:Accounts.ACAccount? {
+		
+		switch self {
+			
+		case .First:
+			return sns.twitter.getAccounts().first?.identifier.flatMap(sns.twitter.getAccount)
+			
 		case .Specified(let identifier):
-			let account:ACAccount? = ACAccountStore().accountWithIdentifier(identifier)
-			return account.map(STTwitterAPI.twitterAPIOSWithAccount)
+			return sns.twitter.getAccount(identifier)
 		}
 	}
 }

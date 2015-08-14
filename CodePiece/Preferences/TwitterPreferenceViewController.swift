@@ -9,6 +9,8 @@
 import Cocoa
 import ESProgressHUD
 import Ocean
+import Swim
+import Accounts
 
 class TwitterPreferenceViewController: NSViewController {
 
@@ -19,6 +21,16 @@ class TwitterPreferenceViewController: NSViewController {
 	@IBOutlet weak var credentialsVerificationStatusTextField:NSTextField!
 	@IBOutlet weak var credentialsVerificationButton:NSButton!
 	@IBOutlet weak var selectedAccountName:NSTextField!
+	
+	@IBOutlet weak var errorReportTextField:NSTextField? {
+		
+		didSet {
+			
+			self.clearError()
+		}
+	}
+	
+	@IBOutlet weak var accountSelectorController:TwitterAccountSelectorController!
 	
 	var credentialsNotVerified:Bool {
 	
@@ -50,19 +62,30 @@ class TwitterPreferenceViewController: NSViewController {
 		}
 	}
 	
-	@IBAction func openPreferences(sender:NSButton) {
+	@IBAction func openAccountsPreferences(sender:NSButton) {
 		
+		self.openSystemPreferences("InternetAccounts")
+	}
+
+	@IBAction func openSecurityPreferences(sender:NSButton) {
+
+		// TODO: I want to open Security preferences directly.
+		self.openSystemPreferences("Security")
+	}
+	
+	func openSystemPreferences(panel:String) {
+	
 		// 表示に時間がかかるので、気持ち待ち時間を HUD で紛らわします。
 		waitingHUD.show()
-
+		
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(6 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
 			
 			self.waitingHUD.hide()
 		}
 		
-		NSWorkspace.sharedWorkspace().openURL(NSURL(fileURLWithPath: "/System/Library/PreferencePanes/InternetAccounts.prefPane"))
+		NSWorkspace.sharedWorkspace().openURL(NSURL(fileURLWithPath: "/System/Library/PreferencePanes/\(panel).prefPane"))
 	}
-
+	
 	func applyAuthorizedStatus() {
 		
 		self.selectedAccountName.stringValue = sns.twitter.username ?? ""
@@ -81,7 +104,20 @@ class TwitterPreferenceViewController: NSViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+
+		sns.twitter.requestAccessToAccounts { result in
+			
+			switch result {
+				
+			case .Success:
+				NSLog("Access to Twitter account is allowed.")
+				self.clearError()
+				
+			case .Failure(let error):
+				NSLog("Access to Twitter account is not allowed. \(error)")
+				self.reportError("Access to Twitter account is not allowed. Please give permission to access Twitter account using Privacy settings.")
+			}
+		}
     }
 	
 	override func viewWillAppear() {
@@ -89,5 +125,26 @@ class TwitterPreferenceViewController: NSViewController {
 		super.viewWillAppear()
 		
 		self.applyAuthorizedStatus()
+	}
+	
+	override func viewDidAppear() {
+		
+		super.viewDidAppear()
+		
+	}
+		
+	func clearError() {
+	
+		self.reportError("")
+	}
+	
+	func reportError(message:String) {
+		
+		if !message.isEmpty {
+			
+			NSLog(message)
+		}
+		
+		self.errorReportTextField?.stringValue = message
 	}
 }

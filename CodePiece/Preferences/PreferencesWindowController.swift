@@ -36,7 +36,7 @@ class PreferencesWindowController: NSWindowController {
 
 		super.windowDidLoad()
 
-		self.contentViewController = Storyboard.AccountsPreferenceView.defaultViewController
+		self.contentViewController = Storyboard.GitHubPreferenceView.defaultViewController
     }
 }
 
