@@ -31,8 +31,8 @@ extension AccountSetting {
 		
 		let isTwitterReady:()->Bool = {
 
-			//  現時点ではツイッターアカウント設定の有効性は判定していません。
-			return true
+			//  Twitter は アカウントが設定されていれば準備完了とします。その有効性は判定していません。
+			return self.twitterAccount != nil
 		}
 		
 		return isGitHubReady() && isTwitterReady()

@@ -13,61 +13,99 @@ import Accounts
 import Result
 import Ocean
 import ESThread
+import Swim
 
-enum TwitterAccount {
+struct TwitterAccount {
 	
-	case First
-	case Specified(String)
+	var ACAccount:Accounts.ACAccount
+	
+	init(account:Accounts.ACAccount) {
+	
+		self.ACAccount = account
+	}
+	
+	init?(identifier:String) {
+	
+		guard let account = TwitterController.getAccount(identifier) else {
+			
+			return nil
+		}
+		
+		self.ACAccount = account
+	}
+	
+	var username:String {
+		
+		return self.ACAccount.username
+	}
+	
+	var identifier:String {
+		
+		return self.ACAccount.identifier!
+	}
 }
 
 final class TwitterController : PostController, AlertDisplayable {
 	
-	var account:TwitterAccount {
+	typealias VerifyResult = Result<Void,NSError>
+	typealias PostStatusUpdateResult = Result<String,NSError>
+	
+	private static let accountStore:ACAccountStore = ACAccountStore()
+	private static let accountType:ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+	private static let accountOptions:[NSObject:AnyObject]? = nil
+	
+	private static let APINotReadyError = SNSControllerError.NotReady("Twitter API is not ready.")
+	private static let APINotReadyNSError = NSError(domain: String(APINotReadyError), code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.description])
+	
+	var account:TwitterAccount? {
 		
 		didSet {
 			
-			defer {
-				
-				Authorization.TwitterAuthorizationStateDidChangeNotification(username: self.account.ACAccount?.username).post()
-			}
+			Authorization.TwitterAuthorizationStateDidChangeNotification(username: nil).post()
 			
 			self.api = nil
-			self.credentialsVerified = false
+			self.effectiveUserInfo = nil
 		}
 	}
 	
-	private lazy var api:STTwitterAPI! = self.account.api
-
-	private static let accountStore:ACAccountStore = ACAccountStore()
-	private let accountType:ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-	private let accountOptions:[NSObject:AnyObject]? = nil
+	var readyToUse:Bool {
+		
+		return self.account != nil
+	}
 	
-	private(set) var credentialsVerified:Bool
-	private(set) var username:String!
-	private(set) var userId:String!
- 
-	typealias VerifyResult = Result<Void,NSError>
-	typealias PostStatusUpdateResult = Result<String,NSError>
+	private lazy var api:STTwitterAPI! = (self.account?.ACAccount).map(STTwitterAPI.twitterAPIOSWithAccount)
 
-	init?(account:TwitterAccount) {
+	var credentialsVerified:Bool {
+		
+		return self.effectiveUserInfo != nil
+	}
+	
+	private(set) var effectiveUserInfo:UserInfo?
+ 
+	init(account:TwitterAccount?) {
 		
 		self.account = account
-		self.credentialsVerified = false
-		
-		guard self.api != nil else {
-			
-			return nil
-		}
+		self.effectiveUserInfo = nil
 	}
-
+	
+	convenience init() {
+	
+		self.init(account: settings.account.twitterAccount)
+	}
+	
 	var canPost:Bool {
 		
 		return self.credentialsVerified
 	}
+
+	func verifyCredentialsIfNeed() {
+		
+		self.verifyCredentialsIfNeed(self.verifyCredentialsBasicErrorReportCallback)
+	}
 	
 	func verifyCredentialsIfNeed(callback:(VerifyResult)->Void) {
 		
-		guard !self.credentialsVerified else {
+		guard self.readyToUse && !self.credentialsVerified else {
 
 			callback(VerifyResult(value: ()))
 			return
@@ -76,31 +114,48 @@ final class TwitterController : PostController, AlertDisplayable {
 		self.verifyCredentials(callback)
 	}
 	
+	private func verifyCredentialsBasicErrorReportCallback(result:VerifyResult) -> Void {
+		
+		switch result {
+			
+		case .Success:
+			NSLog("Twitter credentials verified successfully. (\(sns.twitter.effectiveUserInfo?.username))")
+			
+		case .Failure(let error):
+			self.showErrorAlert("Failed to verify credentials", message: "\(error.localizedDescription) (\(sns.twitter.effectiveUserInfo?.username))")
+		}
+	}
+	
+	func verifyCredentials() {
+	
+		self.verifyCredentials(self.verifyCredentialsBasicErrorReportCallback)
+	}
+	
 	func verifyCredentials(callback:(VerifyResult)->Void) {
 		
-		self.api.verifyCredentials { result in
+		guard let api = self.api else {
+		
+			callback(VerifyResult(error: TwitterController.APINotReadyNSError))
+			return
+		}
+		
+		api.verifyCredentials { result in
 			
 			defer {
 			
-				Authorization.TwitterAuthorizationStateDidChangeNotification(username: self.username).post()
+				Authorization.TwitterAuthorizationStateDidChangeNotification(username: self.effectiveUserInfo?.username).post()
 			}
 			
 			switch result {
 				
 			case let .Success(username, userId):
 				
-				self.credentialsVerified = true
-				self.username = username
-				self.userId = userId
-				
+				self.effectiveUserInfo = UserInfo(username: username, id: userId)
 				callback(VerifyResult(value:()))
 				
 			case let .Failure(error):
 
-				self.credentialsVerified = false
-				self.username = nil
-				self.userId = nil
-				
+				self.effectiveUserInfo = nil
 				callback(VerifyResult(error: error))
 			}
 		}
@@ -142,6 +197,12 @@ final class TwitterController : PostController, AlertDisplayable {
 		
 		DebugTime.print("📮 Verifying credentials of Twitter ... #3.1")
 		
+		guard let api = self.api else {
+			
+			DebugTime.print("📮 Twitter API for Verification is not ready ... #3.1.0")
+			throw TwitterController.APINotReadyError
+		}
+		
 		guard self.credentialsVerified else {
 			
 			DebugTime.print("📮 Verification failure ... #3.1.1")
@@ -150,7 +211,7 @@ final class TwitterController : PostController, AlertDisplayable {
 
 		DebugTime.print("📮 Try posting by Twitter ... #3.2")
 		
-		self.api.postStatusUpdate(status, image: image, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
+		api.postStatusUpdate(status, image: image, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
 			
 			DebugTime.print("📮 Posted by Twitter ... #3.2.1")
 			
@@ -170,7 +231,13 @@ extension TwitterController {
 
 	typealias RequestAccessResult = Result<Void,NSError>
 	
-	func requestAccessToAccounts(completion:(RequestAccessResult) -> Void) {
+	struct UserInfo {
+	
+		var username:String
+		var id:String
+	}
+	
+	static func requestAccessToAccounts(completion:(RequestAccessResult) -> Void) {
 		
 		TwitterController.accountStore.requestAccessToAccountsWithType(self.accountType, options: self.accountOptions) { granted, error in
 			
@@ -185,9 +252,9 @@ extension TwitterController {
 		}
 	}
 	
-	func getAccounts() -> [ACAccount] {
+	static func getAccounts() -> [ACAccount] {
 		
-		guard let accounts = TwitterController.accountStore.accountsWithAccountType(self.accountType) as? [ACAccount] else {
+		guard let accounts = self.accountStore.accountsWithAccountType(self.accountType) as? [ACAccount] else {
 			
 			return []
 		}
@@ -195,36 +262,9 @@ extension TwitterController {
 		return accounts
 	}
 	
-	func getAccount(identifier:String) -> ACAccount? {
+	static func getAccount(identifier:String) -> ACAccount? {
 		
-		return TwitterController.accountStore.accountWithIdentifier(identifier)
-	}
-}
-
-extension TwitterAccount {
-	
-	private var api:STTwitterAPI? {
-		
-		switch self {
-			
-		case .First:
-			return STTwitterAPI.twitterAPIOSWithFirstAccount()
-			
-		case .Specified:
-			return self.ACAccount.map(STTwitterAPI.twitterAPIOSWithAccount)
-		}
-	}
-	
-	var ACAccount:Accounts.ACAccount? {
-		
-		switch self {
-			
-		case .First:
-			return sns.twitter.getAccounts().first?.identifier.flatMap(sns.twitter.getAccount)
-			
-		case .Specified(let identifier):
-			return sns.twitter.getAccount(identifier)
-		}
+		return self.accountStore.accountWithIdentifier(identifier)
 	}
 }
 

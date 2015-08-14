@@ -40,17 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
 		self.urlSchemeManager = URLSchemeManager()
 		
-		sns.twitter.verifyCredentialsIfNeed { result in
-			
-			switch result {
-				
-			case .Success:
-				NSLog("Twitter credentials verified successfully. (\(sns.twitter.username))")
-				
-			case .Failure(let error):
-				self.showErrorAlert("Failed to verify credentials", message: "\(error) (\(sns.twitter.username))")
-			}
-		}
+		sns.twitter.verifyCredentialsIfNeed()
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {

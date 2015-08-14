@@ -13,7 +13,7 @@ final class TwitterAccountMenuItem: NSMenuItem {
 
 	private static let IdentifierCoderKey = "TwitterAccountMenuItemIdentifierKey"
 	
-	var account:ACAccount? {
+	var account:TwitterAccount? {
 		
 		didSet {
 			
@@ -33,16 +33,37 @@ final class TwitterAccountMenuItem: NSMenuItem {
 		
 		super.init(title: TwitterAccountMenuItem.titleOfAccount(account), action: action, keyEquivalent: keyEquivalent)
 
-		self.account = account
+		self.account = account.map(TwitterAccount.init)
 		self.target = target
 	}
 
 	required init?(coder aDecoder: NSCoder) {
 
-		let accountIdentifier = aDecoder.decodeObjectForKey(TwitterAccountMenuItem.IdentifierCoderKey) as! String
-		self.account = sns.twitter.getAccount(accountIdentifier)
+		if let accountIdentifier = aDecoder.decodeObjectForKey(TwitterAccountMenuItem.IdentifierCoderKey) as? String {
+			
+			self.account = TwitterAccount(identifier: accountIdentifier)
+		}
+		else {
+			
+			self.account = nil
+		}
 		
 		super.init(coder: aDecoder)
+	}
+	
+	func differentAccount(account:TwitterAccount) -> Bool {
+	
+		guard let myAccount = self.account else {
+			
+			return true
+		}
+		
+		return myAccount.identifier != account.identifier
+	}
+	
+	private static func titleOfAccount(account:TwitterAccount?) -> String {
+		
+		return self.titleOfAccount(account?.ACAccount)
 	}
 	
 	private static func titleOfAccount(account:ACAccount?) -> String {

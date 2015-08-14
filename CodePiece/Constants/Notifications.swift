@@ -8,6 +8,7 @@
 
 import Ocean
 import ESNotification
+import Accounts
 
 // MARK: - Settings Notification
 
@@ -31,5 +32,18 @@ extension Authorization {
 			
 			self.username = username
 		}		
+	}
+}
+
+extension TwitterAccountSelectorController {
+	
+	final class TwitterAccountSelectorDidChangeNotification : Notification {
+		
+		private(set) var account:TwitterAccount
+		
+		init(account:TwitterAccount) {
+			
+			self.account = account
+		}
 	}
 }

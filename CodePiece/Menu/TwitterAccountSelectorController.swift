@@ -10,7 +10,7 @@ import Cocoa
 import Accounts
 import Swim
 
-final class TwitterAccountSelectorController : NSObject {
+final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 	
 	@IBOutlet weak var accountSelector:NSPopUpButton! {
 		
@@ -20,7 +20,12 @@ final class TwitterAccountSelectorController : NSObject {
 		}
 	}
 	
-	lazy var accounts:[ACAccount]! = sns.twitter.getAccounts()
+	lazy var accounts:[ACAccount]! = TwitterController.getAccounts()
+	
+	var headerMenuItem:TwitterAccountMenuItem {
+		
+		return self.accountSelector.menu!.itemAtIndex(0) as! TwitterAccountMenuItem
+	}
 	
 	func updateAccountSelector() {
 		
@@ -42,15 +47,16 @@ final class TwitterAccountSelectorController : NSObject {
 	
 	func accountSelectorDidChange(sender:TwitterAccountMenuItem!) {
 
-		let account = sender.account
+		let headerMenuItem = self.headerMenuItem
 		
-		tweak (self.accountSelector.menu!.itemAtIndex(0) as! TwitterAccountMenuItem) {
+		guard let account = sender.account where headerMenuItem.differentAccount(account) else {
 			
-			$0.account = account
+			return
 		}
 		
-		settings.account.twitterAccount = TwitterAccount.Specified(account!.identifier!)
-		sns.twitter.account = TwitterAccount.Specified(account!.identifier!)
+		headerMenuItem.account = account
+		
+		TwitterAccountSelectorDidChangeNotification(account: account).post()
 	}
 	
 	func accountByIdentifier(identifier:String!) -> ACAccount? {

@@ -56,6 +56,14 @@ DQ
                                 </buttonCell>
                                 <connections>
                                     <action selector="pushVerifyCredentialsButton:" target="ps4-Eu-nrG" id="CCn-hP-eyp"/>
+                                    <binding destination="ps4-Eu-nrG" name="enabled2" keyPath="self.canVerify" previousBinding="5gp-uE-FCb" id="X85-LS-7jN">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                        </dictionary>
+                                    </binding>
                                     <binding destination="ps4-Eu-nrG" name="enabled" keyPath="self.credentialsNotVerified" id="5gp-uE-FCb"/>
                                 </connections>
                             </button>

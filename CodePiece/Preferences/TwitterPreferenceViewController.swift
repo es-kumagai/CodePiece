@@ -32,6 +32,34 @@ class TwitterPreferenceViewController: NSViewController {
 	
 	@IBOutlet weak var accountSelectorController:TwitterAccountSelectorController!
 	
+	var canVerify:Bool {
+	
+		return !self.verifying && self.credentialsNotVerified
+	}
+	
+	var verifying:Bool = false {
+		
+		willSet {
+		
+			self.willChangeValueForKey("canVerify")
+			
+			if newValue {
+				
+				self.verifyingHUD.show()
+			}
+		}
+		
+		didSet {
+			
+			self.didChangeValueForKey("canVerify")
+			
+			if !self.verifying {
+				
+				self.verifyingHUD.hide()
+			}
+		}
+	}
+	
 	var credentialsNotVerified:Bool {
 	
 		// FIXME: 🌙 モーダル画面でベリファイしようとすると、メインスレッドで実行しているからか、閉じるまでベリファイ作業が継続されない。
@@ -40,26 +68,7 @@ class TwitterPreferenceViewController: NSViewController {
 	
 	@IBAction func pushVerifyCredentialsButton(sender:NSButton) {
 		
-		self.willChangeValueForKey("credentialsNotVerified")
-		
-		self.verifyingHUD.show()
-		
-		sns.twitter.verifyCredentialsIfNeed { result in
-
-			self.didChangeValueForKey("credentialsNotVerified")
-			self.applyAuthorizedStatus()
-			
-			self.verifyingHUD.hide()
-			
-			switch result {
-				
-			case .Success:
-				NSLog("Twitter credentials verified successfully.")
-				
-			case .Failure(let error):
-				self.showErrorAlert("Failed to verify credentials", message: String(error))
-			}
-		}
+		self.verifyCredentials()
 	}
 	
 	@IBAction func openAccountsPreferences(sender:NSButton) {
@@ -71,6 +80,30 @@ class TwitterPreferenceViewController: NSViewController {
 
 		// TODO: I want to open Security preferences directly.
 		self.openSystemPreferences("Security")
+	}
+	
+	func verifyCredentials() {
+		
+		guard self.canVerify else {
+			
+			return
+		}
+		
+		self.verifying = true
+		
+		sns.twitter.verifyCredentialsIfNeed { result in
+			
+			self.verifying = false
+			
+			switch result {
+				
+			case .Success:
+				NSLog("Twitter credentials verified successfully.")
+				
+			case .Failure(let error):
+				self.showErrorAlert("Failed to verify credentials", message: error.localizedDescription)
+			}
+		}
 	}
 	
 	func openSystemPreferences(panel:String) {
@@ -88,7 +121,7 @@ class TwitterPreferenceViewController: NSViewController {
 	
 	func applyAuthorizedStatus() {
 		
-		self.selectedAccountName.stringValue = sns.twitter.username ?? ""
+		self.selectedAccountName.stringValue = sns.twitter.effectiveUserInfo?.username ?? ""
 		
 		if self.credentialsNotVerified {
 			
@@ -105,7 +138,7 @@ class TwitterPreferenceViewController: NSViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 
-		sns.twitter.requestAccessToAccounts { result in
+		TwitterController.requestAccessToAccounts { result in
 			
 			switch result {
 				
@@ -117,6 +150,27 @@ class TwitterPreferenceViewController: NSViewController {
 				NSLog("Access to Twitter account is not allowed. \(error)")
 				self.reportError("Access to Twitter account is not allowed. Please give permission to access Twitter account using Privacy settings.")
 			}
+		}
+		
+		TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.observeBy(self) { owner, notification in
+			
+			let account = notification.account
+			
+			settings.account.twitterAccount = account
+			sns.twitter.account = account
+			
+			self.verifyCredentials()
+		}
+
+		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+			
+			self.willChangeValueForKey("credentialsVerified")
+			self.willChangeValueForKey("credentialsNotVerified")
+			
+			self.didChangeValueForKey("credentialsVerified")
+			self.didChangeValueForKey("credentialsNotVerified")
+			
+			self.applyAuthorizedStatus()
 		}
     }
 	

@@ -18,6 +18,7 @@ enum SNSControllerError : ErrorType, CustomStringConvertible {
 
 	case CredentialsNotVerified
 	case NotAuthorized
+	case NotReady(String)
 	
 	var description:String {
 		
@@ -28,6 +29,9 @@ enum SNSControllerError : ErrorType, CustomStringConvertible {
 			
 		case .NotAuthorized:
 			return "Not authorized."
+			
+		case .NotReady(let message):
+			return message
 		}
 	}
 }
@@ -40,7 +44,7 @@ final class SNSController : PostController {
 	init() {
 
 		self.gists = GistsController()
-		self.twitter = TwitterController(account: .First)!
+		self.twitter = TwitterController()
 	}
 	
 	struct PostResultInfo {

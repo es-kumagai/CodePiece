@@ -309,7 +309,7 @@ class ViewController: NSViewController {
 				NSLog("Twitter credentials verified successfully.")
 				
 			case .Failure(let error):
-				self.showErrorAlert("Failed to verify credentials", message: String(error))
+				self.showErrorAlert("Failed to verify credentials", message: error.localizedDescription)
 			}
 		}
 	}
