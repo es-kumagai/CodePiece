@@ -50,6 +50,7 @@ final class TwitterController : PostController, AlertDisplayable {
 	typealias VerifyResult = Result<Void,NSError>
 	typealias PostStatusUpdateResult = Result<String,NSError>
 	
+	private static let timeout:NSTimeInterval = 15.0
 	private static let accountStore:ACAccountStore = ACAccountStore()
 	private static let accountType:ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 	private static let accountOptions:[NSObject:AnyObject]? = nil
@@ -64,7 +65,6 @@ final class TwitterController : PostController, AlertDisplayable {
 			settings.account.twitterAccount = self.account
 			settings.saveTwitterAccount()
 			
-			self.api = nil
 			self.effectiveUserInfo = nil
 
 			Authorization.TwitterAuthorizationStateDidChangeNotification(username: nil).post()
@@ -76,8 +76,19 @@ final class TwitterController : PostController, AlertDisplayable {
 		return self.account != nil
 	}
 	
-	private lazy var api:STTwitterAPI! = (self.account?.ACAccount).map(STTwitterAPI.twitterAPIOSWithAccount)
-
+	private var api:STTwitterAPI? {
+		
+		guard let account = self.account else {
+			
+			return nil
+		}
+		
+		return tweak (STTwitterAPI.twitterAPIOSWithAccount(account.ACAccount)) {
+			
+			$0.setTimeoutInSeconds(TwitterController.timeout)
+		}
+	}
+	
 	var credentialsVerified:Bool {
 		
 		return self.effectiveUserInfo != nil
