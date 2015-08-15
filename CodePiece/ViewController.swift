@@ -222,10 +222,14 @@ class ViewController: NSViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		NSLog("Main window loaded.")
 	}
 	
 	override func viewWillAppear() {
 		
+		NSLog("Main window will show.")
+
 		super.viewWillAppear()
 		
 		self.restoreContents()
@@ -237,6 +241,8 @@ class ViewController: NSViewController {
 	
 	override func viewDidAppear() {
 		
+		NSLog("Main window did show.")
+		
 		super.viewDidAppear()
 		
 		if !settings.isReady {
@@ -247,12 +253,16 @@ class ViewController: NSViewController {
 	
 	override func viewWillDisappear() {
 	
+		NSLog("Main window will hide.")
+		
 		self.saveContents()
 		
 		super.viewWillDisappear()
 	}
 	
 	override func viewDidDisappear() {
+		
+		NSLog("Main window did hide.")
 		
 		super.viewDidDisappear()
 		

@@ -21,6 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 	
 	override func awakeFromNib() {
 		
+		NSLog("Application awoke.")
+		
 		super.awakeFromNib()
 
 		NotificationManager.dammingNotifications = true
@@ -30,6 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 
+		NSLog("Application launched.")
+		
 		NotificationManager.dammingNotifications = false
 
 		GitHubClientInfo = CodePieceClientInfo()
@@ -44,7 +48,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
-		// Insert code here to tear down your application
+
+		NSLog("Application terminated.")
 	}
 }
 
