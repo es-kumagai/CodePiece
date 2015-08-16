@@ -15,6 +15,21 @@ import Swim
 import ESCoreGraphicsExtension
 import ESThread
 
+extension NSObject {
+
+	public func withChangeValue(keys:String..., @noescape body:()->Void) {
+		
+		keys.forEach(self.willChangeValueForKey)
+		
+		defer {
+			
+			keys.forEach(self.didChangeValueForKey)
+		}
+		
+		body()
+	}
+}
+
 public class ObjectKeeper<T:AnyObject> {
 
 	public private(set) var instance:T?

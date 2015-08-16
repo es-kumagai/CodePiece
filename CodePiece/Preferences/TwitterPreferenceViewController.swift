@@ -35,7 +35,7 @@ class TwitterPreferenceViewController: NSViewController {
 	
 	var canVerify:Bool {
 	
-		return !self.verifying && self.credentialsNotVerified
+		return !self.verifying && self.hasAccount && self.credentialsNotVerified
 	}
 	
 	var verifying:Bool = false {
@@ -61,15 +61,30 @@ class TwitterPreferenceViewController: NSViewController {
 		}
 	}
 	
+	var hasAccount:Bool {
+	
+		return sns.twitter.account != nil
+	}
+	
 	var credentialsNotVerified:Bool {
 	
 		// FIXME: 🌙 モーダル画面でベリファイしようとすると、メインスレッドで実行しているからか、閉じるまでベリファイ作業が継続されない。
 		return !sns.twitter.credentialsVerified
 	}
 	
+	var credentialsVerified:Bool {
+		
+		return sns.twitter.credentialsVerified
+	}
+	
 	@IBAction func pushVerifyCredentialsButton(sender:NSButton) {
 		
 		self.verifyCredentials()
+	}
+	
+	@IBAction func pushResetAuthorizationButton(sender:NSButton) {
+	
+		self.resetAuthorization()
 	}
 	
 	@IBAction func openAccountsPreferences(sender:NSButton) {
@@ -81,6 +96,15 @@ class TwitterPreferenceViewController: NSViewController {
 
 		// TODO: I want to open Security preferences directly.
 		self.openSystemPreferences("Security")
+	}
+	
+	func resetAuthorization() {
+
+		self.withChangeValue("hasAccount") {
+
+			sns.twitter.account = nil
+			self.updateAccountSelector()
+		}
 	}
 	
 	func verifyCredentials() {
@@ -158,18 +182,19 @@ class TwitterPreferenceViewController: NSViewController {
 		
 		TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.observeBy(self) { owner, notification in
 			
-			sns.twitter.account = notification.account
-			
+			self.withChangeValue("hasAccount") {
+				
+				sns.twitter.account = notification.account
+			}
+
 			self.verifyCredentials()
 		}
 		
 		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 			
-			self.willChangeValueForKey("credentialsVerified")
-			self.willChangeValueForKey("credentialsNotVerified")
-			
-			self.didChangeValueForKey("credentialsVerified")
-			self.didChangeValueForKey("credentialsNotVerified")
+			self.withChangeValue("credentialsVerified", "credentialsNotVerified") {
+				
+			}
 			
 			self.applyAuthorizedStatus()
 		}

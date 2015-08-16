@@ -118,7 +118,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
-                                <rect key="frame" x="318" y="187" width="148" height="32"/>
+                                <rect key="frame" x="297" y="222" width="169" height="32"/>
                                 <buttonCell key="cell" type="push" title="Verify Credentials" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRz-PP-aVw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -139,9 +139,22 @@ DQ
                                     <binding destination="ps4-Eu-nrG" name="enabled" keyPath="self.credentialsNotVerified" id="5gp-uE-FCb"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EKd-Nw-Kpc">
+                                <rect key="frame" x="297" y="193" width="169" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CcN-ZS-3ll">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="pushResetAuthorizationButton:" target="ps4-Eu-nrG" id="KaA-pS-Khx"/>
+                                    <binding destination="ps4-Eu-nrG" name="enabled" keyPath="self.credentialsVerified" id="wwr-9c-hDQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="AFn-Gq-0En" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="55" id="2hg-td-K3n"/>
                             <constraint firstAttribute="trailing" secondItem="z63-aQ-PAY" secondAttribute="trailing" constant="20" id="2nU-yA-S1V"/>
                             <constraint firstAttribute="trailing" secondItem="gnp-sb-1wy" secondAttribute="trailing" constant="20" id="3aX-mG-qXT"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="top" secondItem="tiQ-Tx-wOb" secondAttribute="bottom" constant="8" id="4Ss-kW-Plq"/>
@@ -149,8 +162,10 @@ DQ
                             <constraint firstItem="d9B-zQ-BQb" firstAttribute="leading" secondItem="PFs-yu-i48" secondAttribute="trailing" constant="8" id="5QQ-YW-QdV"/>
                             <constraint firstAttribute="bottom" secondItem="d9B-zQ-BQb" secondAttribute="bottom" constant="20" id="68S-AO-3v1"/>
                             <constraint firstItem="9Ol-La-f8R" firstAttribute="top" secondItem="gnp-sb-1wy" secondAttribute="bottom" constant="16" id="9e1-na-TGC"/>
+                            <constraint firstItem="AFn-Gq-0En" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="20" id="BFa-SC-eFB"/>
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="CFS-nN-6G8"/>
                             <constraint firstItem="NS6-hz-jvm" firstAttribute="leading" secondItem="FKb-Jz-IKe" secondAttribute="trailing" constant="8" id="My9-Np-QdE"/>
+                            <constraint firstItem="AFn-Gq-0En" firstAttribute="leading" secondItem="EKd-Nw-Kpc" secondAttribute="leading" id="RYp-9b-JfH"/>
                             <constraint firstItem="gnp-sb-1wy" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="SpS-mM-thE"/>
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="top" secondItem="eF3-de-P5v" secondAttribute="bottom" constant="9" id="WKr-XE-7mN"/>
                             <constraint firstItem="FKb-Jz-IKe" firstAttribute="leading" secondItem="eF3-de-P5v" secondAttribute="trailing" constant="8" id="WaS-d1-ENS"/>
@@ -161,7 +176,9 @@ DQ
                             <constraint firstItem="FKb-Jz-IKe" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="fdj-nT-lJs"/>
                             <constraint firstItem="gnp-sb-1wy" firstAttribute="top" secondItem="5cj-jM-cXY" secondAttribute="bottom" constant="24" id="iY7-U5-8CK"/>
                             <constraint firstItem="z63-aQ-PAY" firstAttribute="top" secondItem="9Ol-La-f8R" secondAttribute="bottom" constant="12" id="jDH-7M-a3T"/>
+                            <constraint firstItem="EKd-Nw-Kpc" firstAttribute="top" secondItem="AFn-Gq-0En" secondAttribute="bottom" constant="8" id="kOL-6D-XlA"/>
                             <constraint firstItem="9Ol-La-f8R" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="mJZ-Ig-V39"/>
+                            <constraint firstItem="AFn-Gq-0En" firstAttribute="trailing" secondItem="EKd-Nw-Kpc" secondAttribute="trailing" id="mqL-Yr-CgM"/>
                             <constraint firstItem="NS6-hz-jvm" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="o6S-Hg-2h7"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="centerY" secondItem="5cj-jM-cXY" secondAttribute="centerY" id="sPM-Lb-NSW"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="leading" secondItem="5cj-jM-cXY" secondAttribute="trailing" constant="8" id="srI-ID-bfq"/>
