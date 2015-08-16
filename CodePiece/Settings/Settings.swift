@@ -105,7 +105,7 @@ struct Settings {
 
 		NSLog("GitHub account information restored from data store. (\(self.account.username))")
 		
-		Authorization.GitHubAuthorizationStateDidChangeNotification(username: self.account.username).post()
+		Authorization.GitHubAuthorizationStateDidChangeNotification(isValid: self.account.authorizationState == .Authorized, username: self.account.username).post()
 	}
 
 	mutating func saveTwitterAccount() {

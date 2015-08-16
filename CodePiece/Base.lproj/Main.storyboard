@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8164.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8173.3"/>
         <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
@@ -351,23 +351,23 @@ DQ
             <objects>
                 <viewController title="CodePiece" identifier="MainViewController" storyboardIdentifier="MainViewController" id="XfG-lQ-9wD" customClass="ViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="440"/>
+                        <rect key="frame" x="0.0" y="0.0" width="744" height="438"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny3-jn-TOD">
-                                <rect key="frame" x="20" y="113" width="704" height="282"/>
+                                <rect key="frame" x="20" y="113" width="704" height="280"/>
                                 <clipView key="contentView" id="wHI-8z-ON5">
-                                    <rect key="frame" x="1" y="1" width="687" height="280"/>
+                                    <rect key="frame" x="1" y="1" width="687" height="278"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="8OA-rk-WhX">
-                                            <rect key="frame" x="0.0" y="0.0" width="687" height="280"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="687" height="278"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="687" height="280"/>
+                                            <size key="minSize" width="687" height="278"/>
                                             <size key="maxSize" width="707" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="687" height="280"/>
+                                            <size key="minSize" width="687" height="278"/>
                                             <size key="maxSize" width="707" height="10000000"/>
                                             <connections>
                                                 <outlet property="delegate" destination="XfG-lQ-9wD" id="iqw-bw-P7O"/>
@@ -381,12 +381,12 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="oKF-WK-zwD">
-                                    <rect key="frame" x="688" y="1" width="15" height="280"/>
+                                    <rect key="frame" x="688" y="1" width="15" height="278"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-oO-N5A">
-                                <rect key="frame" x="18" y="403" width="38" height="17"/>
+                                <rect key="frame" x="18" y="401" width="38" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Code" id="ADW-dv-PzJ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -557,7 +557,7 @@ DQ
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hab-QF-1JP">
-                                <rect key="frame" x="58" y="403" width="29" height="17"/>
+                                <rect key="frame" x="58" y="401" width="29" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="⌘J" drawsBackground="YES" id="1Pl-tS-OYc">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
@@ -568,7 +568,7 @@ DQ
                                 <rect key="frame" x="0.0" y="2" width="744" height="20"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OvW-pp-unQ">
-                                        <rect key="frame" x="527" y="3" width="49" height="14"/>
+                                        <rect key="frame" x="507" y="3" width="49" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub :" id="o59-La-vqh">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -576,7 +576,7 @@ DQ
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VV1-A9-obp">
-                                        <rect key="frame" x="576" y="3" width="48" height="14"/>
+                                        <rect key="frame" x="556" y="3" width="48" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="RVn-HG-PWU">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -599,21 +599,43 @@ DQ
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ziZ-O4-zLg" userLabel="GitHub Status" customClass="StatusImageView" customModule="CodePiece" customModuleProvider="target">
+                                        <rect key="frame" x="493" y="4" width="12" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="Mvz-Hp-pUw"/>
+                                            <constraint firstAttribute="width" constant="12" id="nJu-V7-ib0"/>
+                                        </constraints>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="GzY-Nk-gkr"/>
+                                    </imageView>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1a-PY-hWq" userLabel="Twitter Status" customClass="StatusImageView" customModule="CodePiece" customModuleProvider="target">
+                                        <rect key="frame" x="622" y="4" width="12" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="4rv-ID-ZBu"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="RgI-nK-aKQ"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="12" id="VB0-nY-GBx"/>
+                                            <constraint firstAttribute="width" constant="12" id="oez-FQ-HXv"/>
+                                        </constraints>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="tbL-j1-OuW"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="J1a-PY-hWq" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="3LN-ed-T7v"/>
                                     <constraint firstItem="VV1-A9-obp" firstAttribute="leading" secondItem="OvW-pp-unQ" secondAttribute="trailing" constant="4" id="8DZ-bh-Ahr"/>
+                                    <constraint firstItem="ziZ-O4-zLg" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="ARg-aP-kxP"/>
                                     <constraint firstItem="ZTT-3E-s7B" firstAttribute="leading" secondItem="Llm-UZ-Ec0" secondAttribute="trailing" constant="4" id="CNf-Wu-4Dt"/>
+                                    <constraint firstItem="Llm-UZ-Ec0" firstAttribute="leading" secondItem="J1a-PY-hWq" secondAttribute="trailing" constant="4" id="Glp-FK-JuG"/>
                                     <constraint firstItem="ZTT-3E-s7B" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="Q9P-o0-zGt"/>
                                     <constraint firstItem="OvW-pp-unQ" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="UMv-oa-Vlk"/>
                                     <constraint firstItem="Llm-UZ-Ec0" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="Xmo-2Q-nS9"/>
                                     <constraint firstAttribute="height" constant="20" id="auc-4O-aEC"/>
                                     <constraint firstItem="VV1-A9-obp" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="fTZ-2s-PyR"/>
-                                    <constraint firstItem="Llm-UZ-Ec0" firstAttribute="leading" secondItem="VV1-A9-obp" secondAttribute="trailing" constant="16" id="h0W-FN-uTP"/>
                                     <constraint firstAttribute="trailing" secondItem="ZTT-3E-s7B" secondAttribute="trailing" constant="16" id="hIy-Ss-v72"/>
+                                    <constraint firstItem="J1a-PY-hWq" firstAttribute="leading" secondItem="VV1-A9-obp" secondAttribute="trailing" constant="20" id="me5-SV-Sxw"/>
+                                    <constraint firstItem="OvW-pp-unQ" firstAttribute="leading" secondItem="ziZ-O4-zLg" secondAttribute="trailing" constant="4" id="yht-RU-VsT"/>
                                 </constraints>
                             </customView>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GDd-Xx-hX6" userLabel="Language">
-                                <rect key="frame" x="601" y="396" width="126" height="26"/>
+                                <rect key="frame" x="601" y="394" width="126" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="IUR-Lg-e6E"/>
                                 </constraints>
@@ -659,7 +681,9 @@ DQ
                 <customObject id="8Rz-OR-HYX" customClass="MainStatusController" customModule="CodePiece" customModuleProvider="target">
                     <connections>
                         <outlet property="githubAccountNameTextField" destination="VV1-A9-obp" id="fy1-zf-x4d"/>
+                        <outlet property="githubAccountStatusImageView" destination="ziZ-O4-zLg" id="5Hc-En-3zf"/>
                         <outlet property="twitterAccountNameTextField" destination="ZTT-3E-s7B" id="mqF-G4-cQb"/>
+                        <outlet property="twitterAccountStatusImageView" destination="J1a-PY-hWq" id="wdL-xw-Fzh"/>
                     </connections>
                 </customObject>
                 <customObject id="Csn-jJ-GoY" customClass="LanguagePopupDataSource" customModule="CodePiece" customModuleProvider="target">
@@ -668,7 +692,7 @@ DQ
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="207" y="725"/>
+            <point key="canvasLocation" x="207" y="724"/>
         </scene>
     </scenes>
 </document>

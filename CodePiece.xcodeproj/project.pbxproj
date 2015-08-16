@@ -13,6 +13,9 @@
 		B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */; };
 		B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */; };
 		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
+		B125A3F11B808CC600AFAB89 /* Mark in Resources */ = {isa = PBXBuildFile; fileRef = B125A3F01B808CC500AFAB89 /* Mark */; };
+		B125A3F31B808D5900AFAB89 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B125A3F21B808D5900AFAB89 /* StatusImageView.swift */; };
+		B125A3F51B808DD600AFAB89 /* StatusImageView.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B125A3F41B808DD600AFAB89 /* StatusImageView.xcassets */; };
 		B1269A601B7D9282009305C6 /* TwitterAccountMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */; };
 		B1269A631B7D9815009305C6 /* TwitterAccountSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1269A611B7D94AD009305C6 /* TwitterAccountSelectorController.swift */; };
 		B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */; };
@@ -189,6 +192,9 @@
 		B12460E51B5F865F0036A690 /* Swim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterPreferenceViewController.swift; sourceTree = "<group>"; };
 		B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TwitterPreferenceView.storyboard; sourceTree = "<group>"; };
+		B125A3F01B808CC500AFAB89 /* Mark */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mark; sourceTree = "<group>"; };
+		B125A3F21B808D5900AFAB89 /* StatusImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusImageView.swift; sourceTree = "<group>"; };
+		B125A3F41B808DD600AFAB89 /* StatusImageView.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = StatusImageView.xcassets; sourceTree = "<group>"; };
 		B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccountMenuItem.swift; sourceTree = "<group>"; };
 		B1269A611B7D94AD009305C6 /* TwitterAccountSelectorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccountSelectorController.swift; sourceTree = "<group>"; };
 		B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
@@ -332,6 +338,8 @@
 			children = (
 				B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */,
 				B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */,
+				B125A3F21B808D5900AFAB89 /* StatusImageView.swift */,
+				B125A3F41B808DD600AFAB89 /* StatusImageView.xcassets */,
 			);
 			name = Controls;
 			path = ../Controls;
@@ -568,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				B1118DA01B6BE71D00BFC5FA /* Icon */,
+				B125A3F01B808CC500AFAB89 /* Mark */,
 				B12B24821B6B6AC900B284D7 /* Acknowledgements */,
 				B1D2D6B21B5E61B400794EFD /* Fonts */,
 			);
@@ -721,6 +730,8 @@
 				B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */,
 				B1118DA21B6BE77800BFC5FA /* WelcomeBoard.storyboard in Resources */,
 				B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */,
+				B125A3F11B808CC600AFAB89 /* Mark in Resources */,
+				B125A3F51B808DD600AFAB89 /* StatusImageView.xcassets in Resources */,
 				B12B248C1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard in Resources */,
 				B12B24861B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist in Resources */,
 				B12B247F1B6B599900B284D7 /* AboutWindowController.storyboard in Resources */,
@@ -798,6 +809,7 @@
 				B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */,
 				B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */,
 				B128CB5F1B67942D00859D81 /* Application.swift in Sources */,
+				B125A3F31B808D5900AFAB89 /* StatusImageView.swift in Sources */,
 				B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */,
 				B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */,
 				B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */,

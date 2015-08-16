@@ -16,20 +16,24 @@ extension Authorization {
 
 	final class GitHubAuthorizationStateDidChangeNotification : Notification {
 		
+		private(set) var isValid:Bool
 		private(set) var username:String?
 		
-		init(username:String?) {
+		init(isValid:Bool, username:String?) {
 			
+			self.isValid = isValid
 			self.username = username
 		}
 	}
 
 	final class TwitterAuthorizationStateDidChangeNotification : Notification {
 		
+		private(set) var isValid:Bool
 		private(set) var username:String?
 		
-		init(username:String?) {
+		init(isValid:Bool, username:String?) {
 			
+			self.isValid = isValid
 			self.username = username
 		}		
 	}

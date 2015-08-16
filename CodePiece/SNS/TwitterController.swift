@@ -131,7 +131,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		
 		self.effectiveUserInfo = nil
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification(username: nil).post()
+		Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
 	}
 
 	func verifyCredentialsIfNeed() -> Bool {
@@ -199,7 +199,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			DebugTime.print("📮 Passed verify-credentials #8")
 			defer {
 			
-				Authorization.TwitterAuthorizationStateDidChangeNotification(username: self.effectiveUserInfo?.username).post()
+				Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: self.credentialsVerified, username: self.effectiveUserInfo?.username).post()
 			}
 			
 			switch result {

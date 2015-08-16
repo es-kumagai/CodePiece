@@ -110,7 +110,7 @@ extension Authorization {
 			self.showWarningAlert("Failed to reset authorization", message: "Could't get the current authentication information. Reset authentication information which saved in this app.")
 			
 			settings.resetGitHubAccount(saveFinally: true)
-			GitHubAuthorizationStateDidChangeNotification(username: nil).post()
+			GitHubAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
 
 			return
 		}
@@ -121,7 +121,7 @@ extension Authorization {
 			
 			defer {
 				
-				GitHubAuthorizationStateDidChangeNotification(username: nil).post()
+				GitHubAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
 			}
 
 			switch response {
@@ -147,7 +147,7 @@ extension Authorization {
 		
 		defer {
 			
-			GitHubAuthorizationStateDidChangeNotification(username: username).post()
+			GitHubAuthorizationStateDidChangeNotification(isValid: true, username: username).post()
 		}
 		
 		settings.replaceGitHubAccount(username, id: id, authorization: authorization, saveFinally: true)

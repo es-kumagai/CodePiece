@@ -14,6 +14,8 @@ final class MainStatusController: NSObject {
 
 	@IBOutlet var githubAccountNameTextField:NSTextField!
 	@IBOutlet var twitterAccountNameTextField:NSTextField!
+	@IBOutlet var githubAccountStatusImageView:StatusImageView!
+	@IBOutlet var twitterAccountStatusImageView:StatusImageView!
 
 	override func awakeFromNib() {
 
@@ -23,11 +25,13 @@ final class MainStatusController: NSObject {
 		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 			
 			self.twitterAccountNameTextField.stringValue = notification.username ?? none
+			self.twitterAccountStatusImageView.status = notification.isValid ? .Green : .Red
 		}
 		
 		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 			
 			self.githubAccountNameTextField.stringValue = notification.username ?? none
+			self.githubAccountStatusImageView.status = notification.isValid ? .Green : .Red
 		}
 	}
 }
