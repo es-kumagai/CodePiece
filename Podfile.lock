@@ -16,7 +16,7 @@ PODS:
     - Himotoki (~> 0.5.1)
     - Ocean
     - Swim (~> 1.3.14)
-  - ESNotification (0.1.4-beta):
+  - ESNotification (0.1.5-beta):
     - ESThread (~> 0.1.0)
     - Swim (~> 1.3.14)
   - ESProgressHUD (0.1.2):
@@ -48,7 +48,7 @@ DEPENDENCIES:
     branch `swift-2.0`)
   - Ocean (from `https://github.com/EZ-NET/ESOcean.git`, branch `Swift2`)
   - p2.OAuth2 (from `https://github.com/p2/OAuth2`, branch `swift-2.0`)
-  - STTwitter
+  - STTwitter (from `https://github.com/EZ-NET/STTwitter.git`, branch `develop`)
   - Swim (from `https://github.com/EZ-NET/ESSwim`, branch `beta`)
 
 EXTERNAL SOURCES:
@@ -73,6 +73,9 @@ EXTERNAL SOURCES:
     :branch: swift-2.0
     :git: https://github.com/p2/OAuth2
     :submodules: true
+  STTwitter:
+    :branch: develop
+    :git: https://github.com/EZ-NET/STTwitter.git
   Swim:
     :branch: beta
     :git: https://github.com/EZ-NET/ESSwim
@@ -85,7 +88,7 @@ CHECKOUT OPTIONS:
     :commit: 0fc13192c789c9688308e1daaf14ddca286687ad
     :git: https://github.com/EZ-NET/ESGists.git
   ESNotification:
-    :commit: 3ab022d1b20463818dab5d32224e570aa7dd363b
+    :commit: 9b16ef1cc916e438c64eb760938afa5de556dcb8
     :git: https://github.com/EZ-NET/ESNotification.git
   Himotoki:
     :commit: 9f6717c4cca558377fe4d1223d443883be401530
@@ -99,6 +102,9 @@ CHECKOUT OPTIONS:
   p2.OAuth2:
     :commit: f141489b2060e6c9627ab03313e1b6d6823f3517
     :git: https://github.com/p2/OAuth2
+  STTwitter:
+    :commit: 1cda311046b5f5e40e7b40ed6bca8fe8bccd315a
+    :git: https://github.com/EZ-NET/STTwitter.git
   Swim:
     :commit: 83159bd112691528f8e8dd6bd5b6127b0be98600
     :git: https://github.com/EZ-NET/ESSwim
@@ -109,7 +115,7 @@ SPEC CHECKSUMS:
   ESAppKitExtension: 3bc92382a286d8ed531c0f2e9e1a0356cae9457c
   ESCoreGraphicsExtension: 017d11d2debc6c0adc618d6f27eaeac6ee393732
   ESGists: f039c926f2d91f5e195c67dddddb40857e215de7
-  ESNotification: 7d7b4c1eaab2245bdb02ac68a2e32a7ab0774d09
+  ESNotification: ec1a0d28a555f939c47818dd13a1126d06801503
   ESProgressHUD: 1ce6537e3813cd96d8fb81ae34d859cd5bd2fad2
   ESThread: aa7f1d3e412716cef6c62e116a1da761449f5e48
   Himotoki: e83a10846e4e2739fd9847d8eb23d690d9fc8f88

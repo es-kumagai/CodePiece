@@ -45,7 +45,7 @@ struct TwitterAccount {
 	}
 }
 
-final class TwitterController : PostController, AlertDisplayable {
+final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	typealias VerifyResult = Result<Void,NSError>
 	typealias PostStatusUpdateResult = Result<String,NSError>
@@ -64,10 +64,8 @@ final class TwitterController : PostController, AlertDisplayable {
 			
 			settings.account.twitterAccount = self.account
 			settings.saveTwitterAccount()
-			
-			self.effectiveUserInfo = nil
 
-			Authorization.TwitterAuthorizationStateDidChangeNotification(username: nil).post()
+			self.clearEffectiveUserInfo()
 		}
 	}
 	
@@ -75,15 +73,17 @@ final class TwitterController : PostController, AlertDisplayable {
 		
 		return self.account != nil
 	}
+
+	private lazy var api:STTwitterAPI! = self._getAPI()
 	
-	private var api:STTwitterAPI? {
-		
+	private func _getAPI() -> STTwitterAPI? {
+
 		guard let account = self.account else {
 			
 			return nil
 		}
 		
-		return tweak (STTwitterAPI.twitterAPIOSWithAccount(account.ACAccount)) {
+		return tweak (STTwitterAPI.twitterAPIOSWithAccount(account.ACAccount, withDelegate:self)) {
 			
 			$0.setTimeoutInSeconds(TwitterController.timeout)
 		}
@@ -94,15 +94,30 @@ final class TwitterController : PostController, AlertDisplayable {
 		return self.effectiveUserInfo != nil
 	}
 	
-	private(set) var effectiveUserInfo:UserInfo?
+	private(set) var effectiveUserInfo:UserInfo? {
+		
+		willSet {
+			
+			self.willChangeValueForKey("credentialsVerified")
+			self.willChangeValueForKey("canPost")
+		}
+		
+		didSet {
+			
+			self.didChangeValueForKey("credentialsVerified")
+			self.didChangeValueForKey("canPost")
+		}
+	}
  
 	private init(account:TwitterAccount?) {
 		
 		self.account = account
 		self.effectiveUserInfo = nil
+		
+		super.init()
 	}
 	
-	convenience init() {
+	convenience override init() {
 	
 		self.init(account: settings.account.twitterAccount)
 	}
@@ -111,37 +126,54 @@ final class TwitterController : PostController, AlertDisplayable {
 		
 		return self.credentialsVerified
 	}
+	
+	func clearEffectiveUserInfo() {
+		
+		self.effectiveUserInfo = nil
+		
+		Authorization.TwitterAuthorizationStateDidChangeNotification(username: nil).post()
+	}
 
 	func verifyCredentialsIfNeed() -> Bool {
 		
+		DebugTime.print("📮 Passed verify-credentials #1")
 		return self.verifyCredentialsIfNeed(self.verifyCredentialsBasicErrorReportCallback)
 	}
 	
 	func verifyCredentialsIfNeed(callback:(VerifyResult)->Void) -> Bool {
 		
+		DebugTime.print("📮 Passed verify-credentials #2")
 		guard self.readyToUse else {
 			
+			NSLog("Credentials verification skipped because it is not ready to use Twitter.")
 			return false
 		}
 		
+		DebugTime.print("📮 Passed verify-credentials #3")
 		guard !self.credentialsVerified else {
 
+			NSLog("Credentials already verifyed.")
 			return false
 		}
 		
+		DebugTime.print("📮 Passed verify-credentials #4")
 		self.verifyCredentials(callback)
 
+		DebugTime.print("📮 Passed verify-credentials #5")
 		return true
 	}
 	
 	private func verifyCredentialsBasicErrorReportCallback(result:VerifyResult) -> Void {
 		
+		DebugTime.print("📮 Passed verify-credentials #11")
 		switch result {
 			
 		case .Success:
+			DebugTime.print("📮 Passed verify-credentials #12")
 			NSLog("Twitter credentials verified successfully. (\(sns.twitter.effectiveUserInfo?.username))")
 			
 		case .Failure(let error):
+			DebugTime.print("📮 Passed verify-credentials #13")
 			self.showErrorAlert("Failed to verify credentials", message: "\(error.localizedDescription) (\(sns.twitter.effectiveUserInfo?.username))")
 		}
 	}
@@ -153,14 +185,18 @@ final class TwitterController : PostController, AlertDisplayable {
 	
 	func verifyCredentials(callback:(VerifyResult)->Void) {
 		
+		DebugTime.print("📮 Passed verify-credentials #6")
+
 		guard let api = self.api else {
 		
 			callback(VerifyResult(error: TwitterController.APINotReadyNSError))
 			return
 		}
 		
+		DebugTime.print("📮 Passed verify-credentials #7")
 		api.verifyCredentials { result in
 			
+			DebugTime.print("📮 Passed verify-credentials #8")
 			defer {
 			
 				Authorization.TwitterAuthorizationStateDidChangeNotification(username: self.effectiveUserInfo?.username).post()
@@ -170,11 +206,13 @@ final class TwitterController : PostController, AlertDisplayable {
 				
 			case let .Success(username, userId):
 				
+				DebugTime.print("📮 Passed verify-credentials #9")
 				self.effectiveUserInfo = UserInfo(username: username, id: userId)
 				callback(VerifyResult(value:()))
 				
 			case let .Failure(error):
 
+				DebugTime.print("📮 Passed verify-credentials #10")
 				self.effectiveUserInfo = nil
 				callback(VerifyResult(error: error))
 			}
@@ -299,6 +337,36 @@ extension TwitterController {
 			
 			return nil
 		}
+	}
+}
+
+extension TwitterController : STTwitterAPIDelegate {
+	
+	func twitterAPI(api: STTwitterAPI!, shouldDisableCurrentOAuth oauth: STTwitterOS!, accountStore: ACAccountStore!) -> Bool {
+		
+		NSLog("Detected OS Account Store change.")
+		
+		guard self.credentialsVerified else {
+			
+			NSLog("This change is no effect on the current account because the account's credentials is not verifyed yet.")
+			return false
+		}
+		
+		api.verifyCredentials { result in
+			
+			switch result {
+				
+			case .Success:
+				NSLog("This change is no effect on the current account.")
+				
+			case .Failure:
+				
+				self.clearEffectiveUserInfo()
+				self.showWarningAlert("Twitter Account is invalid.", message: "Your twitter account setting may be changed by OS. Please check your settings in Internet Account preferences pane.")
+			}
+		}
+		
+		return false
 	}
 }
 

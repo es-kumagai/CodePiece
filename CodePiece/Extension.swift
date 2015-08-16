@@ -15,6 +15,21 @@ import Swim
 import ESCoreGraphicsExtension
 import ESThread
 
+public class ObjectKeeper<T:AnyObject> {
+
+	public private(set) var instance:T?
+	
+	public init(_ instance:T) {
+
+		self.instance = instance
+	}
+	
+	public func release() {
+		
+		self.instance = nil
+	}
+}
+
 public extension NSAppleEventDescriptor {
 	
 	public var url:NSURL? {

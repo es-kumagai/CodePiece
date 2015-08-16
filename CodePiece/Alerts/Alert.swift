@@ -55,6 +55,8 @@ extension AlertDisplayable {
 	
 	static func showWarningAlert(title:String, message:String) {
 		
+		NSLog("Warning: \(title) : \(message)")
+		
 		let alert = NSAlert()
 		
 		alert.messageText = title
@@ -67,6 +69,8 @@ extension AlertDisplayable {
 	
 	static func showErrorAlert(title:String, message:String) {
 
+		NSLog("Error: \(title) : \(message)")
+		
 		let alert = NSAlert()
 		
 		alert.messageText = title
