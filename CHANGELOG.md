@@ -2,6 +2,18 @@
 
 Change Logs.
 
+## 1.1 (beta)
+
+### Enhancements
+
+* Displays account status in main window.
+* Authentication using OAuth2 with GitHub.
+* Twitter account for using CodePiece can be selected now.
+
+### Bug Fixes
+
+* Fix a problem that CodePiece cannot be post a tweet if CodePiece isn't be used for a while.
+
 ## 1.0 Build 18
 
 * Supports language selection.
