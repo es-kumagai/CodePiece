@@ -196,6 +196,7 @@
 		B125A3F21B808D5900AFAB89 /* StatusImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusImageView.swift; sourceTree = "<group>"; };
 		B125A3F41B808DD600AFAB89 /* StatusImageView.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = StatusImageView.xcassets; sourceTree = "<group>"; };
 		B125A3F61B80DABC00AFAB89 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		B125A3F71B80DE3E00AFAB89 /* HowToBuild.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = HowToBuild.md; sourceTree = "<group>"; };
 		B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccountMenuItem.swift; sourceTree = "<group>"; };
 		B1269A611B7D94AD009305C6 /* TwitterAccountSelectorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccountSelectorController.swift; sourceTree = "<group>"; };
 		B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
@@ -388,6 +389,7 @@
 				B17C88BD1B66BE6800CBF20F /* README.md */,
 				B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */,
 				B125A3F61B80DABC00AFAB89 /* LICENSE.md */,
+				B125A3F71B80DE3E00AFAB89 /* HowToBuild.md */,
 				B17C88BE1B66BE6800CBF20F /* ss */,
 				B1D2D6B11B5E619E00794EFD /* Resources */,
 				B1D2D69D1B5E09CF00794EFD /* Private */,
