@@ -34,27 +34,23 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 	
 	func updateAccountSelector() {
 		
-		self.willChangeValueForKey("hasAccount")
+		self.withChangeValue("hasAccount") {
 		
-		defer {
+			self.accounts = nil
 			
-			self.didChangeValueForKey("hasAccount")
-		}
-		
-		self.accounts = nil
-		
-		let createMenuItem = TwitterAccountMenuItem.menuItemCreator(action: "accountSelectorDidChange:", target: self)
-		
-		tweak (self.accountSelector) {
+			let createMenuItem = TwitterAccountMenuItem.menuItemCreator(action: "accountSelectorDidChange:", target: self)
 			
-			let currentAccount = settings.account.twitterAccount?.ACAccount
-			
-			$0.removeAllItems()
-			$0.menu!.addItem(createMenuItem(account: currentAccount, keyEquivalent: ""))
-			
-			for account in self.accounts {
+			tweak (self.accountSelector) {
 				
-				$0.menu!.addItem(createMenuItem(account: account, keyEquivalent: ""))
+				let currentAccount = settings.account.twitterAccount?.ACAccount
+				
+				$0.removeAllItems()
+				$0.menu!.addItem(createMenuItem(account: currentAccount, keyEquivalent: ""))
+				
+				for account in self.accounts {
+					
+					$0.menu!.addItem(createMenuItem(account: account, keyEquivalent: ""))
+				}
 			}
 		}
 	}
