@@ -2,5 +2,6 @@
 *.xcuserdatad
 *.xcscmblueprint
 /Pods
+Podfile.lock
 .DS_Store
 
