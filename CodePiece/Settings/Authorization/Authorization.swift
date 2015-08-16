@@ -26,18 +26,11 @@ import p2_OAuth2
 //	}
 
 var GitHubClientInfo:GitHubClientInfoType!
-var TwitterClientInfo:TwitterClientInfoType!
 
 protocol GitHubClientInfoType {
 	
 	var id:String { get }
 	var secret:String { get }
-}
-
-protocol TwitterClientInfoType {
-	
-	var consumerKey:String { get }
-	var consumerSecret:String { get }
 }
 
 enum AuthorizationState {

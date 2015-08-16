@@ -37,7 +37,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		NotificationManager.dammingNotifications = false
 
 		GitHubClientInfo = CodePieceClientInfo()
-		TwitterClientInfo = CodePieceTwitterClientInfo()
 
 		sns = SNSController()
 		captureController = WebCaptureController()
