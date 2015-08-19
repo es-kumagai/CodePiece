@@ -2,7 +2,7 @@
 
 Change Logs.
 
-## *
+## 1.2 (beta)
 
 ### Enhancements
 
