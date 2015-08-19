@@ -2,6 +2,13 @@
 
 Change Logs.
 
+## *
+
+### Enhancements
+
+* Add a hashtag of language with tweet.
+* remove #CodePiece hashtag from tweet.
+
 ## 1.1 (beta)
 
 ### Enhancements
