@@ -346,7 +346,8 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 		let countsForReserve:[Int] = [
 
 			self.hasCode ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0,
-			self.hasCode ? CodePieceApp.hashtag.length.nonZeroMap { $0 + 1 } : 0
+			self.hasCode ? self.selectedLanguage.hashtag.length.nonZeroMap { $0 + 1 } : 0
+//			self.hasCode ? CodePieceApp.hashtag.length.nonZeroMap { $0 + 1 } : 0
 		]
 
 		let counts = countsForInputText + countsForReserve

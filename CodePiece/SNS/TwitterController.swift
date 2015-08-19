@@ -230,9 +230,10 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			maxLength = twitterTotalCount - reserveUrlCount - reserveGistCount
 		}
 		
-		let appendAppTag = (gist != nil)
+		let appendAppTag = false
+		let language:Language? = gist?.files.first?.1.language
 		
-		return DescriptionGenerator(description, language: nil, hashtag: hashtag, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
+		return DescriptionGenerator(description, language: language, hashtag: hashtag, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
 	}
 	
 	func post(gist:ESGists.Gist, language:ESGists.Language, description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
