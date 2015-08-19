@@ -1,6 +1,7 @@
 /Private/
 *.xcuserdatad
 *.xcscmblueprint
+*.xccheckout
 /Pods
 Podfile.lock
 .DS_Store
