@@ -87,4 +87,19 @@ final class MenuController : NSObject {
 		
 		self.aboutWindowController.showWindow()
 	}
+	
+	@IBAction func clearTweetAndDescription(sender:NSMenuItem?) {
+		
+		self.mainViewController?.clearDescriptionText()
+	}
+	
+	@IBAction func clearHashtag(sender:NSMenuItem?) {
+		
+		self.mainViewController?.clearHashtag()
+	}
+	
+	@IBAction func clearCode(sender:NSMenuItem?) {
+		
+		self.mainViewController?.clearCodeText()
+	}
 }

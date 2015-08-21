@@ -196,10 +196,25 @@ class ViewController: NSViewController {
 	
 	func clearContents() {
 		
-		self.codeTextView.string = ""
-		self.descriptionTextField.stringValue = ""
+		self.clearCodeText()
+		self.clearDescriptionText()
 
 		self.updateControlsDisplayText()
+	}
+	
+	func clearCodeText() {
+		
+		self.codeTextView.string = ""
+	}
+	
+	func clearDescriptionText() {
+		
+		self.descriptionTextField.stringValue = ""
+	}
+	
+	func clearHashtag() {
+		
+		self.hashTagTextField.hashtag = ""
 	}
 	
 	func restoreContents() {
