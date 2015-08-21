@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8173.3"/>
         <capability name="box content view" minToolsVersion="7.0"/>
@@ -268,6 +268,34 @@ DQ
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Editor" id="FAs-Ui-ixp">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Editor" id="ufy-Hc-iBV">
+                                    <items>
+                                        <menuItem title="Clear Code" keyEquivalent="J" id="Wve-PS-wLT">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="clearCode:" target="p69-Rc-ib8" id="Mjp-LZ-Xnl"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="Qye-5A-wcx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Clear Tweet &amp; Description" keyEquivalent="T" id="dWd-q2-zPv">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="clearTweetAndDescription:" target="p69-Rc-ib8" id="YSQ-s2-WSf"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="rJh-tt-DVh"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Clear Hashtag" keyEquivalent="H" id="XGy-vZ-8rK">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="clearHashtag:" target="p69-Rc-ib8" id="w7P-JH-1EK"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="mIg-Dg-glM"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Window" id="aUF-d1-5bR">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -325,6 +353,7 @@ DQ
                     </connections>
                 </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="IIP-oo-arA"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
