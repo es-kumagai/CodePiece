@@ -18,9 +18,19 @@ final class MenuController : NSObject {
 		return self.application.keyWindow
 	}
 	
+	var baseViewController:BaseViewController? {
+		
+		return self.keyWindow?.contentViewController as? BaseViewController
+	}
+	
 	var mainViewController:ViewController? {
 		
-		return self.keyWindow?.contentViewController as? ViewController
+		return self.baseViewController?.mainViewController
+	}
+	
+	var timelineViewController:TimelineViewController? {
+		
+		return self.baseViewController?.timelineViewController
 	}
 	
 	var aboutWindowController:AboutWindowController!

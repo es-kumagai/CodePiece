@@ -28,6 +28,9 @@
 		B12B24891B6B80C200B284D7 /* AcknowledgementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B24871B6B80C200B284D7 /* AcknowledgementsViewController.swift */; };
 		B12B248C1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12B248B1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard */; };
 		B12C99BF1B850B27003E651F /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12C99BE1B850B27003E651F /* Language.swift */; };
+		B12E04411B8864DD0032DC6F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12E04401B8864DD0032DC6F /* BaseViewController.swift */; };
+		B12E04431B8868FF0032DC6F /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12E04421B8868FF0032DC6F /* TimelineViewController.swift */; };
+		B12E04451B8871F80032DC6F /* TimelineTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12E04441B8871F80032DC6F /* TimelineTableCellView.swift */; };
 		B137468D1B6506000068414B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137468C1B6506000068414B /* Fonts.swift */; };
 		B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
 		B13746941B6512360068414B /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13746931B6512360068414B /* FontTests.swift */; };
@@ -210,6 +213,9 @@
 		B12B24871B6B80C200B284D7 /* AcknowledgementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementsViewController.swift; sourceTree = "<group>"; };
 		B12B248B1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AcknowledgementsViewController.storyboard; sourceTree = "<group>"; };
 		B12C99BE1B850B27003E651F /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		B12E04401B8864DD0032DC6F /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B12E04421B8868FF0032DC6F /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		B12E04441B8871F80032DC6F /* TimelineTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableCellView.swift; sourceTree = "<group>"; };
 		B137468C1B6506000068414B /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B13746931B6512360068414B /* FontTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontTests.swift; sourceTree = "<group>"; };
 		B13C98F61B70E3C800A5A2B3 /* LanguagePopupDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagePopupDataSource.swift; sourceTree = "<group>"; };
@@ -344,6 +350,7 @@
 				B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */,
 				B125A3F21B808D5900AFAB89 /* StatusImageView.swift */,
 				B125A3F41B808DD600AFAB89 /* StatusImageView.xcassets */,
+				B12E04441B8871F80032DC6F /* TimelineTableCellView.swift */,
 			);
 			name = Controls;
 			path = ../Controls;
@@ -433,7 +440,9 @@
 				B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */,
 				B1492FB51B5BCED80043ED8D /* AppDelegate.swift */,
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
+				B12E04421B8868FF0032DC6F /* TimelineViewController.swift */,
 				B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */,
+				B12E04401B8864DD0032DC6F /* BaseViewController.swift */,
 				B1492FBB1B5BCED80043ED8D /* Main.storyboard */,
 				B128CB601B679F8700859D81 /* Support Files */,
 			);
@@ -805,6 +814,7 @@
 				B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */,
 				B1D2D6A21B5E19D100794EFD /* Alert.swift in Sources */,
 				B1BD64DE1B7B6CB0002DFDD0 /* OAuthScheme.swift in Sources */,
+				B12E04411B8864DD0032DC6F /* BaseViewController.swift in Sources */,
 				B1269A601B7D9282009305C6 /* TwitterAccountMenuItem.swift in Sources */,
 				B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */,
 				B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */,
@@ -833,6 +843,7 @@
 				B152E2C71B6F6C08008B485A /* MainStatusController.swift in Sources */,
 				B12B24811B6B59D600B284D7 /* AboutViewController.swift in Sources */,
 				B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */,
+				B12E04451B8871F80032DC6F /* TimelineTableCellView.swift in Sources */,
 				B13C99011B711BD200A5A2B3 /* AppState.swift in Sources */,
 				B1D2D69C1B5DFF7400794EFD /* Colors.swift in Sources */,
 				B137468D1B6506000068414B /* Fonts.swift in Sources */,
@@ -842,6 +853,7 @@
 				B1D2D6A61B5E2B2800794EFD /* Notifications.swift in Sources */,
 				B1BB59F71B5E718900DE3942 /* SNSController.swift in Sources */,
 				B1D2D6721B5D490800794EFD /* Settings.swift in Sources */,
+				B12E04431B8868FF0032DC6F /* TimelineViewController.swift in Sources */,
 				B1118DA51B6BECAD00BFC5FA /* WelcomeBoardViewController.swift in Sources */,
 				B1D2D67F1B5D566000794EFD /* Storyboard.swift in Sources */,
 				B17DAF5E1B6529A0004CE4D2 /* WebCaptureController.swift in Sources */,
