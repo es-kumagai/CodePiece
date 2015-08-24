@@ -22,7 +22,7 @@ class BaseViewController: NSSplitViewController {
 		
 		didSet {
 			
-			self.timelineViewController = self.mainSplitViewItem.map { $0.viewController as! TimelineViewController }
+			self.timelineViewController = self.timelineSplitViewItem.map { $0.viewController as! TimelineViewController }
 		}
 	}
 

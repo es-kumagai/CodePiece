@@ -10,9 +10,19 @@ import Cocoa
 
 class TimelineViewController: NSViewController {
 
+	@IBOutlet weak var timelineTableView:NSTableView!
+	@IBOutlet weak var timelineDataSource:TimelineTableDataSource!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+		
+		HashtagDidChangeNotification.observeBy(self) { owner, notification in
+			
+			let hashtag = notification.hashtag
+			
+			NSLog("Hashtag did change (\(hashtag))")
+			
+			self.timelineDataSource.hashtag = hashtag
+		}
     }
-    
 }

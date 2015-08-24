@@ -79,6 +79,15 @@ extension Twitter.Hashtag : CustomStringConvertible {
 	}
 }
 
+extension Twitter.Hashtag : Equatable {
+
+}
+
+func == (lhs:Twitter.Hashtag, rhs:Twitter.Hashtag) -> Bool{
+	
+	return lhs.value == rhs.value
+}
+
 extension Twitter.Hashtag : StringLiteralConvertible {
 	
 	init(extendedGraphemeClusterLiteral value: String) {

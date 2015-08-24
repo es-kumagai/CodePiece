@@ -20,6 +20,8 @@ final class HashtagTextField : NSTextField {
 		set {
 			
 			self.stringValue = newValue.value
+
+			HashtagDidChangeNotification(hashtag: newValue).post()
 		}
 	}
 	
@@ -40,5 +42,9 @@ final class HashtagTextField : NSTextField {
 		
 		// 代入し直して正規化します。
 		self.stringValue = self.hashtag.value
+		
+		super.textDidEndEditing(notification)
+		
+		HashtagDidChangeNotification(hashtag: self.hashtag).post()
 	}
 }

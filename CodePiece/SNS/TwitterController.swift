@@ -49,6 +49,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	typealias VerifyResult = Result<Void,NSError>
 	typealias PostStatusUpdateResult = Result<String,NSError>
+	typealias GetStatusesResult = Result<[Twitter.Status], NSError>
 	
 	private static let timeout:NSTimeInterval = 15.0
 	private static let accountStore:ACAccountStore = ACAccountStore()
@@ -284,6 +285,21 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 				callback(PostStatusUpdateResult(error: error))
 			}
 		}
+	}
+	
+	func getStatusesWithQuery(query:String, since:String?, callback:(GetStatusesResult)->Void) {
+		
+		let successHandler = { (query:[NSObject : AnyObject]!, resultData:[AnyObject]!) -> Void in
+			
+			NSLog("DEBUG : Get Statuses : \(query), \(resultData)")
+		}
+		
+		let errorHandler = { (error: NSError!) -> Void in
+			
+			callback(GetStatusesResult(error: error))
+		}
+		
+		self.api.getSearchTweetsWithQuery(query, geocode: nil, lang: nil, locale: nil, resultType: "mixed", count: nil, until: nil, sinceID: since, maxID: nil, includeEntities: NSNumber(bool: false), callback: nil, successBlock: successHandler, errorBlock: errorHandler)
 	}
 }
 

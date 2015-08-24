@@ -22,6 +22,7 @@ class ViewController: NSViewController {
 	
 	@IBOutlet weak var postButton:NSButton!
 	@IBOutlet weak var hashTagTextField:HashtagTextField!
+	
 	@IBOutlet weak var languagePopUpButton:NSPopUpButton!
 
 	@IBOutlet weak var languagePopUpDataSource:LanguagePopupDataSource!
@@ -53,6 +54,11 @@ class ViewController: NSViewController {
 	@IBOutlet weak var descriptionCountLabel:NSTextField!
 	
 	@IBOutlet weak var codeScrollView:NSScrollView!
+	
+	var baseViewController:BaseViewController {
+		
+		return self.parentViewController as! BaseViewController
+	}
 	
 	var posting:Bool = false {
 	
@@ -380,7 +386,7 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 		self.updateControlsDisplayText()
 	}
 	
-	override func controlTextDidChange(obj: NSNotification) {
+	override func controlTextDidChange(notification: NSNotification) {
 	
 		self.willChangeValueForKey("canPost")
 		self.didChangeValueForKey("canPost")
