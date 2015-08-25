@@ -8,7 +8,7 @@ def pods
 	pod 'Swim', :git => 'https://github.com/EZ-NET/ESSwim', :branch => 'master'
 	pod 'Ocean', :git => 'https://github.com/EZ-NET/ESOcean.git', :branch => 'master'
 	pod 'ESNotification', :git => 'https://github.com/EZ-NET/ESNotification.git', :branch => 'master'
-	pod 'APIKit', :git => 'https://github.com/ishkawa/APIKit.git', :branch => 'master'
+	pod 'APIKit', :git => 'https://github.com/ishkawa/APIKit.git', :branch => 'xcode7-beta6'
 	pod 'Himotoki', :git => 'https://github.com/ikesyo/Himotoki.git', :branch => 'swift2'
 	pod 'ESGists', :git => 'https://github.com/EZ-NET/ESGists.git'
 	pod 'p2.OAuth2'

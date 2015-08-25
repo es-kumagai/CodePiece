@@ -1,5 +1,9 @@
 PODS:
+<<<<<<< HEAD
   - APIKit (1.0.0-beta4):
+=======
+  - APIKit (1.0.0-beta3):
+>>>>>>> Update for Xcode 7 beta 6.
     - Result (~> 0.6-beta.1)
   - ESActiveCounter (0.1.4):
     - ESNotification (~> 0.2.0)
@@ -40,20 +44,25 @@ PODS:
   - Swim (1.4.1-beta)
 
 DEPENDENCIES:
-  - APIKit (from `https://github.com/ishkawa/APIKit.git`, branch `master`)
+  - APIKit (from `https://github.com/ishkawa/APIKit.git`, branch `xcode7-beta6`)
   - ESGists (from `https://github.com/EZ-NET/ESGists.git`)
   - ESNotification (from `https://github.com/EZ-NET/ESNotification.git`, branch `master`)
   - Himotoki (from `https://github.com/ikesyo/Himotoki.git`, branch `swift2`)
   - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`,
     branch `swift-2.0`)
+<<<<<<< HEAD
   - Ocean (from `https://github.com/EZ-NET/ESOcean.git`, branch `master`)
   - p2.OAuth2
+=======
+  - Ocean (from `https://github.com/EZ-NET/ESOcean.git`, branch `Swift2`)
+  - p2.OAuth2 (from `https://github.com/EZ-NET/OAuth2`, branch `Xcode7Beta6`)
+>>>>>>> Update for Xcode 7 beta 6.
   - STTwitter (from `https://github.com/EZ-NET/STTwitter.git`, branch `develop`)
   - Swim (from `https://github.com/EZ-NET/ESSwim`, branch `master`)
 
 EXTERNAL SOURCES:
   APIKit:
-    :branch: master
+    :branch: xcode7-beta6
     :git: https://github.com/ishkawa/APIKit.git
   ESGists:
     :git: https://github.com/EZ-NET/ESGists.git
@@ -69,6 +78,13 @@ EXTERNAL SOURCES:
   Ocean:
     :branch: master
     :git: https://github.com/EZ-NET/ESOcean.git
+<<<<<<< HEAD
+=======
+  p2.OAuth2:
+    :branch: Xcode7Beta6
+    :git: https://github.com/EZ-NET/OAuth2
+    :submodules: true
+>>>>>>> Update for Xcode 7 beta 6.
   STTwitter:
     :branch: develop
     :git: https://github.com/EZ-NET/STTwitter.git
@@ -78,7 +94,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   APIKit:
+<<<<<<< HEAD
     :commit: 7731dafb7ab0f0f903a6f0d2185719378ac9bbf1
+=======
+    :commit: 2e524959b80262c3ff19e4af030b1ccfce2bf368
+>>>>>>> Update for Xcode 7 beta 6.
     :git: https://github.com/ishkawa/APIKit.git
   ESGists:
     :commit: 3606a7c007a80aad12f8c11a12f8fe612f44d3d6
@@ -90,21 +110,40 @@ CHECKOUT OPTIONS:
     :commit: a8854a7252c2c9aa8d016770173d1b29c0985813
     :git: https://github.com/ikesyo/Himotoki.git
   KeychainAccess:
+<<<<<<< HEAD
     :commit: d1799b703b6b58e2d6ad7becb3cde620a20fcce2
+=======
+    :commit: 561e03d38cb17227051b6dccad1fcc33599fa509
+>>>>>>> Update for Xcode 7 beta 6.
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
   Ocean:
     :commit: 1234aac116cd1903ac386a760d23f456fc3fdbaf
     :git: https://github.com/EZ-NET/ESOcean.git
+<<<<<<< HEAD
+=======
+  p2.OAuth2:
+    :commit: 349edb241ce0c97f8eea8dba583db2e32e533206
+    :git: https://github.com/EZ-NET/OAuth2
+>>>>>>> Update for Xcode 7 beta 6.
   STTwitter:
     :commit: 1cda311046b5f5e40e7b40ed6bca8fe8bccd315a
     :git: https://github.com/EZ-NET/STTwitter.git
   Swim:
+<<<<<<< HEAD
     :commit: 843cc1aa5d019da000c0f0e9091b654e11e08fe0
     :git: https://github.com/EZ-NET/ESSwim
 
 SPEC CHECKSUMS:
   APIKit: a97f19c5cbfec551ce6975fb67999df0dcfbd153
   ESActiveCounter: 222f94afbe6cd9276eaadf142c88c4ea1a8750b8
+=======
+    :commit: 927bfc43046147737391e1e607096858e0ba8aae
+    :git: https://github.com/EZ-NET/ESSwim
+
+SPEC CHECKSUMS:
+  APIKit: 82cc9e00e7a40702d02084d9397ae41ad367cbc2
+  ESActiveCounter: 270bbe32a2d33000e6b4acd40ecc6eefd04da62d
+>>>>>>> Update for Xcode 7 beta 6.
   ESAppKitExtension: 3bc92382a286d8ed531c0f2e9e1a0356cae9457c
   ESCoreGraphicsExtension: 187eae3d0bec6a1f6328956305cd9a61fdd6b183
   ESGists: 1ce8c198bd54c85d56be4bb175dcb50c31820132
