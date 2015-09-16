@@ -5,13 +5,13 @@ use_frameworks!
 
 def pods
 
-	pod 'Swim', :git => 'https://github.com/EZ-NET/ESSwim', :branch => 'beta'
-	pod 'Ocean', :git => 'https://github.com/EZ-NET/ESOcean.git', :branch => 'Swift2'
+	pod 'Swim', :git => 'https://github.com/EZ-NET/ESSwim', :branch => 'master'
+	pod 'Ocean', :git => 'https://github.com/EZ-NET/ESOcean.git', :branch => 'master'
 	pod 'ESNotification', :git => 'https://github.com/EZ-NET/ESNotification.git', :branch => 'master'
 	pod 'APIKit', :git => 'https://github.com/ishkawa/APIKit.git', :branch => 'master'
 	pod 'Himotoki', :git => 'https://github.com/ikesyo/Himotoki.git', :branch => 'swift2'
 	pod 'ESGists', :git => 'https://github.com/EZ-NET/ESGists.git'
-	pod 'p2.OAuth2', :git => 'https://github.com/p2/OAuth2', :branch => 'swift-2.0', :submodules => true
+	pod 'p2.OAuth2'
 
 end
 

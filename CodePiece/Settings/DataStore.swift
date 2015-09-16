@@ -11,6 +11,20 @@ import ESGists
 import Ocean
 import Swim
 
+enum DataStoreError : ErrorType, CustomStringConvertible {
+	
+	case FailedToSave(String)
+	
+	var description:String {
+		
+		switch self {
+			
+		case .FailedToSave(let reason):
+			return "Failed to save to data store. \(reason)"
+		}
+	}
+}
+
 struct DataStore {
 	
 	static let service = "CodePiece App"
@@ -27,11 +41,11 @@ struct DataStore {
 		self.github = GitHubStore()
 	}
 	
-	func save() {
+	func save() throws {
 	
 		self.appState.save()
 		self.twitter.save()
-		self.github.save()
+		try self.github.save()
 	}
 }
 
@@ -79,37 +93,44 @@ extension DataStore {
 		
 			let keychain = GitHubStore.keychain
 			
-			guard let data = keychain.getData(GitHubStore.AuthorizationKey) else {
-			
+			guard let data = handleError(try keychain.getData(GitHubStore.AuthorizationKey), to: &OutputStream) where data != nil else {
+		
 				self.authInfo = AuthInfo()
 				return
 			}
 			
 			NSLog("Restoring authentication information from Keychain.")
 			
-			guard let authInfo = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? AuthInfo else {
-					
+			guard let authInfo = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? AuthInfo else {
+				
 				self.authInfo = AuthInfo()
 				return
 			}
-
+			
 			self.authInfo = authInfo
 		}
 		
-		func save() {
+		func save() throws {
 			
 			let keychain = GitHubStore.keychain
 			let keyForAuthInfo = GitHubStore.AuthorizationKey
 
 			NSLog("Will save authentication information to Keychain.")
 			
-			if let data = self.archiveAuthorizationData() {
+			do {
+
+				if let data = self.archiveAuthorizationData() {
 				
-				keychain.set(data, key: keyForAuthInfo)
+					try keychain.set(data, key: keyForAuthInfo)
+				}
+				else {
+				
+					try keychain.remove(keyForAuthInfo)
+				}
 			}
-			else {
+			catch let error as NSError {
 				
-				keychain.remove(keyForAuthInfo)
+				throw DataStoreError.FailedToSave(error.localizedDescription)
 			}
 		}
 		

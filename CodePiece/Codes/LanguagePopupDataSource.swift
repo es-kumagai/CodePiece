@@ -43,7 +43,7 @@ final class LanguagePopupDataSource : NSObject {
 	func selectLanguage(language:Language) {
 	
 		self.popupButton.selectItemWithTitle(language.description)
-		self.popupButton.selectedItem.map(self.popupSelected)
+		self.popupButton.selectedItem.invokeIfExists(self.popupSelected)
 	}
 	
 	func popupSelected(item:NSMenuItem) {

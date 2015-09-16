@@ -26,7 +26,7 @@ func DescriptionGenerator(var description:String, language:ESGists.Language?, ha
 			let sourceDescription = description.characters
 			
 			let start = sourceDescription.startIndex
-			let end = advance(start, descriptionLength - 2)
+			let end = start.advancedBy(descriptionLength - 2)
 			
 			description = String(sourceDescription[start ..< end]) + " …"
 		}

@@ -125,7 +125,7 @@ struct Settings {
 		self._store.github.authInfo.username = self.account.username
 		self._store.github.authInfo.token = self.account.authorization?.token!
 		
-		self._store.github.save()
+		handleError(try self._store.github.save())
 	}
 	
 	mutating func replaceGitHubAccount(username:String, id:ID, authorization:GitHubAuthorization, saveFinally save:Bool) {

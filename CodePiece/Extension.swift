@@ -15,6 +15,138 @@ import Swim
 import ESCoreGraphicsExtension
 import ESThread
 
+public var OutputStream = StandardOutputStream()
+public var ErrorStream = StandardErrorStream()
+public var NullStream = NullOutputStream()
+
+public class StandardOutputStream : OutputStreamType {
+	
+	public func write(string: String) {
+		
+		print(string)
+	}
+}
+
+public class StandardErrorStream : OutputStreamType {
+	
+	public func write(string: String) {
+		
+		debugPrint(string)
+	}
+}
+
+public class NullOutputStream : OutputStreamType {
+	
+	public func write(string: String) {
+		
+	}
+}
+
+extension Optional {
+	
+	public func invokeIfExists(@noescape expression:(Wrapped) throws -> Void) rethrows -> Void {
+		
+		if let value = self {
+
+			try expression(value)
+		}
+	}
+}
+
+/// Execute `exression`. If an error occurred, write the error to standard output stream.
+public func handleError(@autoclosure expression:() throws -> Void) -> Void {
+	
+	handleError(expression, to: &OutputStream)
+}
+
+/// Execute `exression`. If an error occurred, write the error to standard output stream.
+public func handleError<R>(@autoclosure expression:() throws -> R) -> R? {
+
+	return handleError(expression, to: &OutputStream)
+}
+
+/// Execute `exression`. If an error occurred, write the error to `stream`.
+public func handleError<STREAM:OutputStreamType>(@autoclosure expression:() throws -> Void, inout to stream:STREAM) -> Void {
+	
+	handleError(expression) { (error:ErrorType)->Void in
+		
+		stream.write("Error Handling: \(error)")
+	}
+}
+
+/// Execute `exression`. If an error occurred, write the error to `stream`.
+public func handleError<R,STREAM:OutputStreamType>(@autoclosure expression:() throws -> R, inout to stream:STREAM) -> R? {
+	
+	return handleError(expression) { (error:ErrorType)->Void in
+		
+		stream.write("Error Handling: \(error)")
+	}
+}
+
+/// Execute `exression`. If an error occurred, write the error to `stream`.
+public func handleError(@autoclosure expression:() throws -> Void, by handler:(ErrorType)->Void) -> Void {
+	
+	do {
+		
+		try expression()
+	}
+	catch {
+		
+		handler(error)
+	}
+}
+
+/// Execute `exression`. If an error occurred, write the error to `stream`.
+public func handleError<R>(@autoclosure expression:() throws -> R, by handler:(ErrorType)->Void) -> R? {
+	
+	do {
+		
+		return try expression()
+	}
+	catch {
+		
+		handler(error)
+		
+		return nil
+	}
+}
+
+/// Execute `exression`. If an error occurred, write the error to `stream`.
+public func handleError<E:ErrorType>(@autoclosure expression:() throws -> Void, by handler:(E)->Void) -> Void {
+	
+	do {
+		
+		try expression()
+	}
+	catch let error as E {
+		
+		handler(error)
+	}
+	catch {
+		
+		fatalError("Unexpected Error: \(error)")
+	}
+}
+
+/// Execute `exression`. If an error occurred, write the error to `stream`.
+public func handleError<R,E:ErrorType>(@autoclosure expression:() throws -> R, by handler:(E)->Void) -> R? {
+	
+	do {
+		
+		return try expression()
+	}
+	catch let error as E {
+		
+		handler(error)
+		
+		return nil
+	}
+	catch {
+		
+		fatalError("Unexpected Error: \(error)")
+	}
+}
+
 extension NSObject {
 
 	public func withChangeValue(keys:String..., @noescape body:()->Void) {
@@ -160,7 +292,7 @@ extension Acknowledgements : CustomStringConvertible {
 		results.append("")
 		results.append(self.footerText)
 		
-		return "\n".join(results)
+		return results.joinWithSeparator("\n")
 	}
 }
 

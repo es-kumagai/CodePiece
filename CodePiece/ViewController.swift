@@ -221,8 +221,8 @@ class ViewController: NSViewController {
 
 		NSLog("Restoring contents in main window.")
 		
-		settings.appState.selectedLanguage.map(self.languagePopUpDataSource.selectLanguage)
-		settings.appState.hashtag.map { self.hashTagTextField.hashtag = $0 }
+		settings.appState.selectedLanguage.invokeIfExists(self.languagePopUpDataSource.selectLanguage)
+		settings.appState.hashtag.invokeIfExists { self.hashTagTextField.hashtag = $0 }
 	}
 	
 	func saveContents() {
