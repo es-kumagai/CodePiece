@@ -65,6 +65,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			settings.account.twitterAccount = self.account
 			settings.saveTwitterAccount()
 
+			self.api = nil
 			self.clearEffectiveUserInfo()
 		}
 	}
