@@ -219,7 +219,7 @@ class ViewController: NSViewController {
 	
 	func restoreContents() {
 
-		NSLog("Restoring contents in main window.")
+		DebugTime.print("Restoring contents in main window.")
 		
 		settings.appState.selectedLanguage.invokeIfExists(self.languagePopUpDataSource.selectLanguage)
 		settings.appState.hashtag.invokeIfExists { self.hashTagTextField.hashtag = $0 }
@@ -227,7 +227,7 @@ class ViewController: NSViewController {
 	
 	func saveContents() {
 		
-		NSLog("Saving contents in main window.")
+		DebugTime.print("Saving contents in main window.")
 		
 		settings.appState.selectedLanguage = self.selectedLanguage
 		settings.appState.hashtag = self.hashTagTextField.hashtag
@@ -238,12 +238,12 @@ class ViewController: NSViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		NSLog("Main window loaded.")
+		DebugTime.print("Main window loaded.")
 	}
 	
 	override func viewWillAppear() {
 		
-		NSLog("Main window will show.")
+		DebugTime.print("Main window will show.")
 
 		super.viewWillAppear()
 		
@@ -256,7 +256,7 @@ class ViewController: NSViewController {
 	
 	override func viewDidAppear() {
 		
-		NSLog("Main window did show.")
+		DebugTime.print("Main window did show.")
 		
 		super.viewDidAppear()
 		
@@ -268,7 +268,7 @@ class ViewController: NSViewController {
 	
 	override func viewWillDisappear() {
 	
-		NSLog("Main window will hide.")
+		DebugTime.print("Main window will hide.")
 		
 		self.saveContents()
 		
@@ -277,11 +277,9 @@ class ViewController: NSViewController {
 	
 	override func viewDidDisappear() {
 		
-		NSLog("Main window did hide.")
+		DebugTime.print("Main window did hide.")
 		
-		super.viewDidDisappear()
-		
-		NSApp.terminate(self)
+		super.viewDidDisappear()		
 	}
 	
 	override func restoreStateWithCoder(coder: NSCoder) {

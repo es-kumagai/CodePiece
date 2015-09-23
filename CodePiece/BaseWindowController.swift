@@ -7,13 +7,32 @@
 //
 
 import Cocoa
+import ESThread
 
-class BaseWindowController: NSWindowController {
+final class BaseWindowController: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
 		
 		NSLog("Base window did load.")
     }
+}
 
+extension BaseWindowController : NSWindowDelegate {
+	
+	func windowShouldClose(sender: AnyObject) -> Bool {
+		
+		return true
+	}
+	
+	func windowWillClose(notification: NSNotification) {
+		
+		DebugTime.print("Closing window ...")
+
+		invokeAsyncOnMainQueue {
+			
+			DebugTime.print("Application will terminate.")
+			NSApp.terminate(self)
+		}
+	}
 }
