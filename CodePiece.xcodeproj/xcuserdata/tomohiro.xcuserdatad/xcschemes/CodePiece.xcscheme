@@ -96,6 +96,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "CodePiece (AppStore)"
       revealArchiveInOrganizer = "YES">
       <PostActions>
          <ExecutionAction
