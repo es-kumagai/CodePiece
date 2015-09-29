@@ -19,19 +19,19 @@ class PreferencesWindowController: NSWindowController {
 	
 	@IBAction func showGitHubPreference(sender:NSToolbarItem?) {
 
-		self.contentViewController = Storyboard.GitHubPreferenceView.defaultViewController
+		self.contentViewController = try! Storyboard.GitHubPreferenceView.getInitialController()
 	}
 	
 	@IBAction func showTwitterPreference(sender:NSToolbarItem?) {
 		
-		self.contentViewController = Storyboard.TwitterPreferenceView.defaultViewController
+		self.contentViewController = try! Storyboard.TwitterPreferenceView.getInitialController()
 	}
 	
     override func windowDidLoad() {
 
 		super.windowDidLoad()
 
-		self.contentViewController = Storyboard.GitHubPreferenceView.defaultViewController
+		self.contentViewController = try! Storyboard.GitHubPreferenceView.getInitialController()
     }
 }
 

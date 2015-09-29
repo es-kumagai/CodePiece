@@ -15,8 +15,8 @@ extension NSApplication : AlertDisplayable {
 	
 }
 
-private let welcomeBoardWindowController = Storyboard.WelcomeBoard.defaultController as! WelcomeBoardWindowController
-private let preferencesWindowController = Storyboard.PreferencesWindow.defaultController as! PreferencesWindowController
+private let welcomeBoardWindowController = try! Storyboard.WelcomeBoard.getInitialController()
+private let preferencesWindowController = try! Storyboard.PreferencesWindow.getInitialController()
 
 extension NSApplication {
 	
