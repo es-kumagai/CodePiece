@@ -7,7 +7,29 @@
 //
 
 import Cocoa
+import ESTwitter
 
 class TimelineTableCellView: NSTableCellView {
 
+	var status:ESTwitter.Status? {
+		
+		didSet {
+			
+			self.applyStatus(self.status)
+		}
+	}
+	
+	@IBOutlet var textLabel:NSTextField!
+	
+	private func applyStatus(status:ESTwitter.Status?) {
+		
+		if let status = self.status {
+			
+			self.textLabel.stringValue = status.text
+		}
+		else {
+			
+			self.textLabel.stringValue = ""
+		}
+	}
 }

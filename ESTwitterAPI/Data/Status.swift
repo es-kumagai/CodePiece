@@ -1,0 +1,86 @@
+//
+//  Status.swift
+//  CodePiece
+//
+//  Created by Tomohiro Kumagai on H27/10/04.
+//  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
+//
+
+import Himotoki
+
+public enum RetweetedStatus {
+	
+	indirect case Value(Status)
+}
+
+public struct Status {
+	
+	public var coordinates:String?
+	public var favorited:Bool
+	public var createdAt:Date
+	public var truncated:Bool
+	public var idStr:String
+	public var entities:Entities?
+	public var inReplyTo:InReplyTo?
+	public var text:String
+	public var contributors:String?
+	public var retweetCount:Int
+	public var id:UInt64
+	public var geo:String?
+	public var retweeted:Bool
+	internal var retweetedStatus:RetweetedStatus?
+	public var place:Place?
+	public var possiblySensitive: Bool?
+	public var user:User
+	public var lang:String?
+	public var source:String
+}
+
+extension RetweetedStatus {
+
+	public var status:Status {
+		
+		switch self {
+			
+		case .Value(let value):
+			return value
+		}
+	}
+}
+
+extension RetweetedStatus : Decodable {
+	
+	public static func decode(e: Extractor) throws -> RetweetedStatus {
+		
+		return try RetweetedStatus.Value(Status.decode(e))
+	}
+}
+
+extension Status : Decodable {
+	
+	public static func decode(e: Extractor) throws -> Status {
+		
+		return try build(Status.init)(
+			
+			e <|? "coordinates",
+			e <| "favorited",
+			e <| "created_at",
+			e <| "truncated",
+			e <| "id_str",
+			e <|? "entities",
+			InReplyTo.decodeOptional(e),
+			e <| "text",
+			e <|? "contributors",
+			e <| "retweet_count",
+			e <| "id",
+			e <|? "geo",
+			e <| "retweeted",
+			e <|? "retweeted_status",
+			e <|? "place",
+			e <|? "possibly_sensitive",
+			e <| "user",
+			e <|? "lang",
+			e <| "source"
+		)
+	}
+}

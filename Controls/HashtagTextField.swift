@@ -7,14 +7,15 @@
 //
 
 import Cocoa
+import ESTwitter
 
 final class HashtagTextField : NSTextField {
 	
-	var hashtag:Twitter.Hashtag {
+	var hashtag:ESTwitter.Hashtag {
 
 		get {
 
-			return Twitter.Hashtag(super.stringValue)
+			return ESTwitter.Hashtag(super.stringValue)
 		}
 		
 		set {

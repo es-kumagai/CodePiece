@@ -8,12 +8,14 @@
 
 import Cocoa
 import STTwitter
+import ESTwitter
 import ESGists
 import Accounts
 import Result
 import Ocean
 import ESThread
 import Swim
+import Himotoki
 
 struct TwitterAccount {
 	
@@ -49,7 +51,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	typealias VerifyResult = Result<Void,NSError>
 	typealias PostStatusUpdateResult = Result<String,NSError>
-	typealias GetStatusesResult = Result<[Twitter.Status], NSError>
+	typealias GetStatusesResult = Result<[ESTwitter.Status], NSError>
 	
 	private static let timeout:NSTimeInterval = 15.0
 	private static let accountStore:ACAccountStore = ACAccountStore()
@@ -221,7 +223,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 	}
 
-	private func makeStatusFrom(gist:ESGists.Gist?, description:String, hashtag:Twitter.Hashtag, var maxLength: Int? = nil) -> String? {
+	private func makeStatusFrom(gist:ESGists.Gist?, description:String, hashtag:ESTwitter.Hashtag, var maxLength: Int? = nil) -> String? {
 		
 		if gist != nil {
 
@@ -238,14 +240,14 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		return DescriptionGenerator(description, language: language, hashtag: hashtag, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
 	}
 	
-	func post(gist:ESGists.Gist, language:ESGists.Language, description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(gist:ESGists.Gist, language:ESGists.Language, description:String, hashtag:ESTwitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 
 		let status = self.makeStatusFrom(gist, description: description, hashtag: hashtag)!
 		
 		try self.post(status, image: image, callback: callback)
 	}
 
-	func post(description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(description:String, hashtag:ESTwitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
 		DebugTime.print("📮 Try to post by Twitter ... #3")
 		
@@ -292,6 +294,21 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		let successHandler = { (query:[NSObject : AnyObject]!, resultData:[AnyObject]!) -> Void in
 			
 			NSLog("DEBUG : Get Statuses : \(query), \(resultData)")
+			
+			do {
+
+				let status = try decodeArray(resultData) as [ESTwitter.Status]
+				
+				callback(GetStatusesResult(status))
+			}
+			catch let error as DecodeError {
+				
+				callback(GetStatusesResult(error: NSError(domain: "DecodeError", code: 0, userInfo: [ NSLocalizedDescriptionKey : "\(error.description)" ])))
+			}
+			catch let error as NSError {
+				
+				callback(GetStatusesResult(error: error))
+			}
 		}
 		
 		let errorHandler = { (error: NSError!) -> Void in

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
         <capability name="box content view" minToolsVersion="7.0"/>
@@ -296,14 +296,14 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-eV-U58">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-eV-U58">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                 <clipView key="contentView" id="RPV-kG-gAc">
                                     <rect key="frame" x="1" y="1" width="298" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc">
-                                            <rect key="frame" x="0.0" y="0.0" width="298" height="0.0"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc">
+                                            <rect key="frame" x="0.0" y="0.0" width="298" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -324,12 +324,12 @@ DQ
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="PIX-TI-qfa" customClass="TimelineTableCellView" customModule="CodePiece" customModuleProvider="target">
+                                                        <tableCellView identifier="TimelineCell" id="PIX-TI-qfa" customClass="TimelineTableCellView" customModule="CodePiece" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="295" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kj2-kT-BoQ">
-                                                                    <rect key="frame" x="0.0" y="43" width="100" height="17"/>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kj2-kT-BoQ">
+                                                                    <rect key="frame" x="6" y="35" width="283" height="17"/>
                                                                     <animations/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="efq-iz-mnd">
                                                                         <font key="font" metaFont="system"/>
@@ -338,9 +338,14 @@ DQ
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="kj2-kT-BoQ" firstAttribute="leading" secondItem="PIX-TI-qfa" secondAttribute="leading" constant="8" id="4FI-yb-ZS2"/>
+                                                                <constraint firstAttribute="trailing" secondItem="kj2-kT-BoQ" secondAttribute="trailing" constant="8" id="Qlw-lv-x8k"/>
+                                                                <constraint firstItem="kj2-kT-BoQ" firstAttribute="top" secondItem="PIX-TI-qfa" secondAttribute="top" constant="8" id="qzw-Ot-tQH"/>
+                                                            </constraints>
                                                             <animations/>
                                                             <connections>
-                                                                <outlet property="textField" destination="kj2-kT-BoQ" id="L7M-AN-0Nq"/>
+                                                                <outlet property="textLabel" destination="kj2-kT-BoQ" id="AaS-TR-PDw"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -348,6 +353,7 @@ DQ
                                             </tableColumns>
                                             <connections>
                                                 <outlet property="dataSource" destination="zPm-Mr-oy7" id="6Jj-hy-Guc"/>
+                                                <outlet property="delegate" destination="gED-XW-6vA" id="kIc-9M-M20"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -360,12 +366,12 @@ DQ
                                 </constraints>
                                 <animations/>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="JwN-2C-eKa">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <rect key="frame" x="1" y="284" width="291" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="QaD-GY-diU">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <rect key="frame" x="-100" y="-100" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
@@ -386,6 +392,7 @@ DQ
                 </viewController>
                 <customObject id="rsG-e1-hQh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="zPm-Mr-oy7" customClass="TimelineTableDataSource" customModule="CodePiece" customModuleProvider="target"/>
+                <userDefaultsController id="6D8-kG-lSc"/>
             </objects>
             <point key="canvasLocation" x="1273" y="415"/>
         </scene>
@@ -408,10 +415,10 @@ DQ
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <animations/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="702" height="278"/>
+                                            <size key="minSize" width="687" height="278"/>
                                             <size key="maxSize" width="707" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="702" height="278"/>
+                                            <size key="minSize" width="687" height="278"/>
                                             <size key="maxSize" width="707" height="10000000"/>
                                             <connections>
                                                 <outlet property="delegate" destination="XfG-lQ-9wD" id="iqw-bw-P7O"/>
@@ -431,7 +438,7 @@ DQ
                                     <animations/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="oKF-WK-zwD">
-                                    <rect key="frame" x="687" y="1" width="16" height="278"/>
+                                    <rect key="frame" x="688" y="1" width="15" height="278"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>

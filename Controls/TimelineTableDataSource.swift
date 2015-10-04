@@ -8,39 +8,24 @@
 
 import Cocoa
 import APIKit
+import ESTwitter
 
 final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
-	var hashtag:Twitter.Hashtag = "" {
+	var tweets = Array<ESTwitter.Status>()
+	
+	func appendTweets(tweets: [ESTwitter.Status]) {
 		
-		didSet {
-			
-			if self.hashtag != oldValue {
-				
-				self.updateStatuses()
-			}
-		}
+		self.tweets = tweets + self.tweets
 	}
 	
-	var lastTweetID:String?
-	
-	func updateStatuses() {
+	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
 		
-		sns.twitter.getStatusesWithQuery(self.hashtag.description, since: self.lastTweetID) { result in
-			
-			switch result {
-				
-			case .Success(let tweets):
-				break
-				
-			case .Failure(let error):
-				break
-				
-			}
-		}
+		return self.tweets.count
 	}
-	
-	func clearStatuses() {
+
+	func estimateCellHeightOfRow(row:Int) -> CGFloat {
 		
+		return 60.0
 	}
 }

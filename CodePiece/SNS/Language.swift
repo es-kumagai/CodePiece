@@ -7,10 +7,11 @@
 //
 
 import ESGists
+import ESTwitter
 
 extension PopularLanguage {
 	
-	var hashtag:Twitter.Hashtag {
+	var hashtag:ESTwitter.Hashtag {
 		
 		return self.language.hashtag
 	}
@@ -18,7 +19,7 @@ extension PopularLanguage {
 
 extension Language {
 
-	var hashtag:Twitter.Hashtag {
+	var hashtag:ESTwitter.Hashtag {
 		
 		switch self {
 			

@@ -9,6 +9,7 @@
 import Ocean
 import ESNotification
 import Accounts
+import ESTwitter
 
 // MARK: - Settings Notification
 
@@ -54,9 +55,9 @@ extension TwitterAccountSelectorController {
 
 final class HashtagDidChangeNotification : Notification {
 	
-	private(set) var hashtag:Twitter.Hashtag
+	private(set) var hashtag:ESTwitter.Hashtag
 	
-	init(hashtag:Twitter.Hashtag) {
+	init(hashtag:ESTwitter.Hashtag) {
 		
 		self.hashtag = hashtag
 	}

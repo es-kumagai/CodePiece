@@ -9,6 +9,7 @@
 // 将来的に別のモジュールへ移動できそうな機能を実装しています。
 
 import APIKit
+import Himotoki
 import AppKit
 import Ocean
 import Swim
@@ -624,6 +625,21 @@ extension APIError : CustomDebugStringConvertible {
 			
 		case NotHTTPURLResponse(let response):
 			return "Not HTTP URL Response (\(response))"
+		}
+	}
+}
+
+extension DecodeError : CustomStringConvertible {
+	
+	public var description:String {
+		
+		switch self {
+			
+		case let .MissingKeyPath(keyPath):
+			return "Missing KeyPath (\(keyPath))"
+			
+		case let .TypeMismatch(expected: expected, actual: actual, keyPath: keyPath):
+			return "Type Mismatch (expected: \(expected), actual: \(actual), keyPath: \(keyPath))"
 		}
 	}
 }

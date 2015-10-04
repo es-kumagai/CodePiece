@@ -8,9 +8,10 @@
 
 import Foundation
 import ESGists
+import ESTwitter
 
 struct AppState {
 	
 	var selectedLanguage:Language?
-	var hashtag:Twitter.Hashtag?
+	var hashtag:ESTwitter.Hashtag?
 }

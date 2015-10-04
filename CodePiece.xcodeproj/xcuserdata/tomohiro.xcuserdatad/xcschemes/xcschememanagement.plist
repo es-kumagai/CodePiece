@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ESTwitterAPI.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>B12674E21BC0ECCA00F38464</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B1492FB11B5BCED80043ED8D</key>
 		<dict>
 			<key>primary</key>

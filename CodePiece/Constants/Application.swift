@@ -6,7 +6,9 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
+import ESTwitter
+
 final class CodePieceApp {
 	
-	static let hashtag:Twitter.Hashtag = "CodePiece"
+	static let hashtag:ESTwitter.Hashtag = "CodePiece"
 }

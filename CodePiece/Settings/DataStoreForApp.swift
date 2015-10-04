@@ -8,6 +8,7 @@
 
 import Foundation
 import ESGists
+import ESTwitter
 import Swim
 
 extension DataStore {
@@ -37,11 +38,11 @@ extension DataStore {
 			}
 		}
 		
-		var hashtag:Twitter.Hashtag? {
+		var hashtag:ESTwitter.Hashtag? {
 			
 			get {
 				
-				return self.userDefaults.stringForKey(AppState.HashtagKey).map { Twitter.Hashtag($0) }
+				return self.userDefaults.stringForKey(AppState.HashtagKey).map { ESTwitter.Hashtag($0) }
 			}
 			
 			set {

@@ -7,6 +7,7 @@
 //
 
 import ESGists
+import ESTwitter
 import Result
 
 protocol PostController {
@@ -82,7 +83,7 @@ final class SNSController : PostController {
 		return gists.canPost && twitter.canPost
 	}
 	
-	func post(content: String, language: ESGists.Language, description: String, hashtag: Twitter.Hashtag, completed: (PostResult) -> Void) throws {
+	func post(content: String, language: ESGists.Language, description: String, hashtag: ESTwitter.Hashtag, completed: (PostResult) -> Void) throws {
 	
 		DebugTime.print("📮 Try posting to SNS ... #2")
 		
