@@ -122,4 +122,24 @@ final class MenuController : NSObject {
 		
 		self.mainViewController?.openBrowserWithSearchHashtagPage()
 	}
+	
+	var canOpenBrowserWithTwitterHome:Bool {
+		
+		return self.application.canOpenTwitterHome()
+	}
+	
+	@IBAction func openBrowserWithTwitterHome(sender:NSMenuItem?) {
+		
+		self.application.openTwitterHome()
+	}
+	
+	var canOpenBrowserWithGitHubHome:Bool {
+		
+		return self.application.canOpenGitHubHome()
+	}
+	
+	@IBAction func openBrowserWithGitHubHome(sender:NSMenuItem?) {
+		
+		self.application.openGitHubHome()
+	}
 }

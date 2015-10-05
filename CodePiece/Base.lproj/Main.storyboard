@@ -208,6 +208,35 @@ DQ
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Browser" id="ycU-sM-BPz">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Browser" id="2G8-Th-w1k">
+                                    <items>
+                                        <menuItem title="Search Current Hashtag Using Twitter" keyEquivalent="H" id="oLV-JD-69o">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openBrowserWithSearchHashtagPage:" target="p69-Rc-ib8" id="Slu-5F-UTT"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canOpenBrowserWithSearchHashtagPage" id="ydB-pS-lTr"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                                        <menuItem title="Open Twitter Home" keyEquivalent="T" id="uQw-tc-WtZ">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openBrowserWithTwitterHome:" target="p69-Rc-ib8" id="bHn-wp-rpQ"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canOpenBrowserWithTwitterHome" id="WTU-iz-dvA"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Open GitHub Home" keyEquivalent="G" id="cBq-DM-e57" userLabel="Open GitHub Home">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openBrowserWithGitHubHome:" target="p69-Rc-ib8" id="dWr-Qz-n8b"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canOpenBrowserWithGitHubHome" id="zAk-xx-pIV"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Window" id="aUF-d1-5bR">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -218,7 +247,7 @@ DQ
                                                 <action selector="showWelcomeBoard:" target="p69-Rc-ib8" id="8Dj-th-7fk"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                                        <menuItem isSeparatorItem="YES" id="RMw-jb-Hr7"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -230,17 +259,6 @@ DQ
                             </menuItem>
                             <menuItem title="Help" id="fTv-VK-C17">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Help" id="jBh-VW-Ziv">
-                                    <items>
-                                        <menuItem title="Search Current Hashtag Using Twitter" keyEquivalent="1" id="oLV-JD-69o">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="openBrowserWithSearchHashtagPage:" target="p69-Rc-ib8" id="Slu-5F-UTT"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canOpenBrowserWithSearchHashtagPage" id="ydB-pS-lTr"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
                             </menuItem>
                         </items>
                     </menu>
@@ -257,6 +275,7 @@ DQ
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="IIP-oo-arA"/>
                 <userDefaultsController id="9K9-ir-1p7"/>
+                <userDefaultsController id="rQ8-82-LQj"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
@@ -318,7 +337,7 @@ DQ
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc">
-                                            <rect key="frame" x="0.0" y="0.0" width="298" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="298" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -380,8 +399,8 @@ DQ
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="wje-9U-hN5"/>
                                 </constraints>
                                 <animations/>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="JwN-2C-eKa">
-                                    <rect key="frame" x="1" y="284" width="291" height="15"/>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.99999999227045355" horizontal="YES" id="JwN-2C-eKa">
+                                    <rect key="frame" x="1" y="284" width="298" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>

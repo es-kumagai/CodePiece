@@ -20,6 +20,25 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+extension BooleanType {
+
+	public func ifTrue(@noescape predicate:() throws -> Void) rethrows {
+		
+		if self {
+			
+			try predicate()
+		}
+	}
+	
+	public func ifFalse(@noescape predicate:() throws -> Void) rethrows {
+		
+		if !self {
+			
+			try predicate()
+		}
+	}
+}
+
 public class StandardOutputStream : OutputStreamType {
 	
 	public func write(string: String) {

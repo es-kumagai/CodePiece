@@ -7,6 +7,8 @@ Change Logs.
 ### Enhancements
 
 * Add a feature which open twitter search page with current hashtag.
+* Add a feature which open twitter home page.
+* Add a feature which open GitHub home page.
 
 ## 1.3
 
