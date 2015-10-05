@@ -112,4 +112,14 @@ final class MenuController : NSObject {
 		
 		self.mainViewController?.clearCodeText()
 	}
+	
+	var canOpenBrowserWithSearchHashtagPage:Bool {
+	
+		return self.mainViewController?.canOpenBrowserWithSearchHashtagPage ?? false
+	}
+	
+	@IBAction func openBrowserWithSearchHashtagPage(sender:NSMenuItem?) {
+		
+		self.mainViewController?.openBrowserWithSearchHashtagPage()
+	}
 }

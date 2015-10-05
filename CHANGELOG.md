@@ -2,6 +2,16 @@
 
 Change Logs.
 
+## ****
+
+### Enhancements
+
+* Add a feature which open twitter search page with current hashtag.
+
+## 1.3
+
+Release by Mac App Store.
+
 ## 1.2 (beta)
 
 ### Enhancements

@@ -13,6 +13,7 @@ import Ocean
 import Quartz
 import Swim
 import ESProgressHUD
+import ESTwitter
 
 class ViewController: NSViewController {
 
@@ -342,6 +343,32 @@ class ViewController: NSViewController {
 	override var representedObject: AnyObject? {
 		didSet {
 		// Update the view, if already loaded.
+		}
+	}
+	
+	var canOpenBrowserWithSearchHashtagPage:Bool {
+	
+		return !self.hashTagTextField.hashtag.isEmpty
+	}
+	
+	func openBrowserWithSearchHashtagPage() {
+		
+		guard self.canOpenBrowserWithSearchHashtagPage else {
+			
+			fatalError("Cannot open browser.")
+		}
+		
+		do {
+
+			try ESTwitter.Browser.openWithQuery(self.hashTagTextField.hashtag.value)
+		}
+		catch let ESTwitter.Browser.Error.OperationFailure(reason: reason) {
+			
+			self.showErrorAlert("Failed to open browser", message: reason)
+		}
+		catch {
+
+			self.showErrorAlert("Failed to open browser", message: "Unknown error : \(error)")
 		}
 	}
 }

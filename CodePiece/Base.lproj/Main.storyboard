@@ -228,6 +228,20 @@ DQ
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Help" id="fTv-VK-C17">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Help" id="jBh-VW-Ziv">
+                                    <items>
+                                        <menuItem title="Search Current Hashtag Using Twitter" keyEquivalent="1" id="oLV-JD-69o">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openBrowserWithSearchHashtagPage:" target="p69-Rc-ib8" id="Slu-5F-UTT"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canOpenBrowserWithSearchHashtagPage" id="ydB-pS-lTr"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
@@ -242,6 +256,7 @@ DQ
                 </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="IIP-oo-arA"/>
+                <userDefaultsController id="9K9-ir-1p7"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>

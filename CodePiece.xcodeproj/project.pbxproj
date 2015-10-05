@@ -65,6 +65,7 @@
 		B1492FD31B5BCED80043ED8D /* CodePieceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FD21B5BCED80043ED8D /* CodePieceUITests.swift */; };
 		B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */; };
 		B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */; };
+		B14AF3731BC22EA10005F4CF /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3721BC22EA10005F4CF /* Browse.swift */; settings = {ASSET_TAGS = (); }; };
 		B152E2A01B6EE06A008B485A /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; };
 		B152E2A11B6EE06A008B485A /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B152E2A31B6EE06A008B485A /* ESActiveCounter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2A21B6EE06A008B485A /* ESActiveCounter.framework */; };
@@ -288,6 +289,7 @@
 		B1492FE01B5BCF1E0043ED8D /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSetting.swift; sourceTree = "<group>"; };
 		B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSeting.swift; sourceTree = "<group>"; };
+		B14AF3721BC22EA10005F4CF /* Browse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
 		B152E2A21B6EE06A008B485A /* ESActiveCounter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESActiveCounter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B152E2A51B6EE06A008B485A /* ESAppKitExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESAppKitExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B152E2A81B6EE06A008B485A /* ESCoreGraphicsExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESCoreGraphicsExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -410,6 +412,7 @@
 		B12674E41BC0ECCA00F38464 /* ESTwitterAPI */ = {
 			isa = PBXGroup;
 			children = (
+				B14AF3711BC22E5C0005F4CF /* Browse */,
 				B12674EF1BC0ED7800F38464 /* Data */,
 				B12674E51BC0ECCA00F38464 /* ESTwitterAPI.h */,
 				B12674E71BC0ECCB00F38464 /* Info.plist */,
@@ -590,6 +593,14 @@
 				B1269A611B7D94AD009305C6 /* TwitterAccountSelectorController.swift */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		B14AF3711BC22E5C0005F4CF /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				B14AF3721BC22EA10005F4CF /* Browse.swift */,
+			);
+			path = Browse;
 			sourceTree = "<group>";
 		};
 		B17C88C41B66E66800CBF20F /* Scripts */ = {
@@ -992,6 +1003,7 @@
 				B12674FE1BC0EFE500F38464 /* InReplyTo.swift in Sources */,
 				B12674F41BC0EE2400F38464 /* User.swift in Sources */,
 				B12674FC1BC0EFC300F38464 /* Indicis.swift in Sources */,
+				B14AF3731BC22EA10005F4CF /* Browse.swift in Sources */,
 				B12675021BC0F00C00F38464 /* Date.swift in Sources */,
 				B126750D1BC0FBC700F38464 /* Color.swift in Sources */,
 				B12675131BC12CCD00F38464 /* PlaceBoundingBox.swift in Sources */,
