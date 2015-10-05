@@ -49,10 +49,6 @@ class TimelineViewController: NSViewController {
 				
 				self.updateStatuses()
 			}
-			else {
-				
-				self.clearStatuses()
-			}
 		}
 	}
 }

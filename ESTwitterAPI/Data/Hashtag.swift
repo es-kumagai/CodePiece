@@ -43,7 +43,12 @@ extension Hashtag {
 		
 		let value = value.trimmed()
 		
-		guard  !value.isEmpty else {
+		guard !value.isEmpty else {
+			
+			return ""
+		}
+		
+		guard !meetsAllOf(value.characters, "#") else {
 			
 			return ""
 		}
