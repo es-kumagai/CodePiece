@@ -54,6 +54,11 @@ extension Optional {
 	}
 }
 
+public func whether(@autoclosure condition:() throws -> Bool) rethrows -> YesNoState {
+	
+	return try condition() ? .Yes : .No
+}
+
 /// Execute `exression`. If an error occurred, write the error to standard output stream.
 public func handleError(@autoclosure expression:() throws -> Void) -> Void {
 	

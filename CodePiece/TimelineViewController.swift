@@ -90,20 +90,37 @@ extension TimelineViewController {
 		let query = self.timeline.hashtag.description
 		let lastTweetID = self.timeline.lastTweetID
 		
-		sns.twitter.getStatusesWithQuery(query, since: lastTweetID) { result in
+		let getTimelineSpecifiedQuery = {
 			
-			switch result {
+			sns.twitter.getStatusesWithQuery(query, since: lastTweetID) { result in
 				
-			case .Success(let tweets) where !tweets.isEmpty:
-				self.timelineDataSource.appendTweets(tweets)
-				self.timelineTableView.reloadData()
-				
-			case .Success:
-				break
-				
-			case .Failure(let error):
-				self.showErrorAlert("Failed to get Timelines", message: error.localizedDescription)
+				switch result {
+					
+				case .Success(let tweets) where !tweets.isEmpty:
+					self.timelineDataSource.appendTweets(tweets)
+					self.timelineTableView.reloadData()
+					
+				case .Success:
+					break
+					
+				case .Failure(let error):
+					self.showErrorAlert("Failed to get Timelines", message: error.localizedDescription)
+				}
 			}
+		}
+		
+		let clearTimeline = {
+			
+			self.clearStatuses()
+		}
+		
+		switch whether(!query.isEmpty) {
+			
+		case .Yes:
+			getTimelineSpecifiedQuery()
+			
+		case .No:
+			clearTimeline()
 		}
 	}
 	
