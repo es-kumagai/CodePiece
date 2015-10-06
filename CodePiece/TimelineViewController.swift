@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Swim
 import ESTwitter
 
 class TimelineViewController: NSViewController {
@@ -133,18 +134,16 @@ extension TimelineViewController : NSTableViewDelegate {
 
 	func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		
-		guard let view = tableView.makeViewWithIdentifier("TimelineCell", owner: self) as? TimelineTableCellView else {
+		let view = tweak(tableView.makeViewWithIdentifier("TimelineCell", owner: self) as! TimelineTableCellView) {
 			
-			return nil
+			$0.status = self.timelineDataSource.tweets[row]
 		}
-		
-		view.status = self.timelineDataSource.tweets[row]
 		
 		return view
 	}
 	
 	func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		
-		return self.timelineDataSource.estimateCellHeightOfRow(row)
+		return self.timelineDataSource.estimateCellHeightOfRow(row, tableView: tableView)
 	}
 }

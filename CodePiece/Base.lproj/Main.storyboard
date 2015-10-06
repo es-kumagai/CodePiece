@@ -330,14 +330,14 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-eV-U58">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="35" horizontalPageScroll="10" verticalLineScroll="35" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-eV-U58">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                 <clipView key="contentView" id="RPV-kG-gAc">
                                     <rect key="frame" x="1" y="1" width="298" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc">
-                                            <rect key="frame" x="0.0" y="0.0" width="298" height="298"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="33" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc">
+                                            <rect key="frame" x="0.0" y="0.0" width="298" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -358,12 +358,12 @@ DQ
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="TimelineCell" id="PIX-TI-qfa" customClass="TimelineTableCellView" customModule="CodePiece" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="295" height="60"/>
+                                                        <tableCellView identifier="TimelineCell" verticalHuggingPriority="200" id="PIX-TI-qfa" customClass="TimelineTableCellView" customModule="CodePiece" customModuleProvider="target">
+                                                            <rect key="frame" x="1" y="1" width="295" height="33"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kj2-kT-BoQ">
-                                                                    <rect key="frame" x="6" y="35" width="283" height="17"/>
+                                                                    <rect key="frame" x="6" y="8" width="283" height="17"/>
                                                                     <animations/>
                                                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="efq-iz-mnd">
                                                                         <font key="font" metaFont="system"/>
@@ -376,6 +376,7 @@ DQ
                                                                 <constraint firstItem="kj2-kT-BoQ" firstAttribute="leading" secondItem="PIX-TI-qfa" secondAttribute="leading" constant="8" id="4FI-yb-ZS2"/>
                                                                 <constraint firstAttribute="trailing" secondItem="kj2-kT-BoQ" secondAttribute="trailing" constant="8" id="Qlw-lv-x8k"/>
                                                                 <constraint firstItem="kj2-kT-BoQ" firstAttribute="top" secondItem="PIX-TI-qfa" secondAttribute="top" constant="8" id="qzw-Ot-tQH"/>
+                                                                <constraint firstAttribute="bottom" secondItem="kj2-kT-BoQ" secondAttribute="bottom" constant="8" id="wd6-Jt-asZ"/>
                                                             </constraints>
                                                             <animations/>
                                                             <connections>

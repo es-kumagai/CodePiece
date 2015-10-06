@@ -9,6 +9,7 @@
 import Cocoa
 import APIKit
 import ESTwitter
+import Swim
 
 final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
@@ -24,8 +25,15 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		return self.tweets.count
 	}
 
-	func estimateCellHeightOfRow(row:Int) -> CGFloat {
+	func estimateCellHeightOfRow(row:Int, tableView:NSTableView) -> CGFloat {
 		
-		return 60.0
+		// 現行では、実際にビューを作ってサイズを確認しています。
+		let view = tweak(tableView.makeViewWithIdentifier("TimelineCell", owner: self) as! TimelineTableCellView) {
+			
+			$0.willSetStatusForEstimateHeightOnce()
+			$0.status = self.tweets[row]
+		}
+		
+		return view.fittingSize.height
 	}
 }
