@@ -32,7 +32,7 @@ extension NSDate {
 	}
 }
 
-extension Date{
+extension Date {
 	
 	public init(_ date:NSDate) {
 		
