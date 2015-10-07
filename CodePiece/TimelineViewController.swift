@@ -192,9 +192,16 @@ extension TimelineViewController : NSTableViewDelegate {
 
 	func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		
+		let tweets = self.timelineDataSource.tweets
+		
+		guard row < tweets.count else {
+			
+			return nil
+		}
+		
 		let view = tweak(tableView.makeViewWithIdentifier("TimelineCell", owner: self) as! TimelineTableCellView) {
 			
-			$0.status = self.timelineDataSource.tweets[row]
+			$0.status = tweets[row]
 		}
 		
 		return view
