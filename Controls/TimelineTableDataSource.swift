@@ -25,7 +25,7 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 
 	func appendTweets(tweets: [ESTwitter.Status]) {
 		
-		self.tweets = tweets + self.tweets
+		self.tweets = tweets.orderByNewCreationDate() + self.tweets
 	}
 	
 	func numberOfRowsInTableView(tableView: NSTableView) -> Int {

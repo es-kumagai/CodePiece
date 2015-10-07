@@ -50,6 +50,20 @@ extension Date {
 	}
 }
 
+extension Date : Comparable {
+	
+}
+
+public func == (lhs:Date, rhs:Date) -> Bool {
+	
+	return lhs.rawValue.isEqualToDate(rhs.rawValue)
+}
+
+public func < (lhs:Date, rhs:Date) -> Bool {
+	
+	return lhs.rawValue.compare(rhs.rawValue) == NSComparisonResult.OrderedAscending
+}
+
 extension Date : Decodable {
 	
 	public static func decode(e: Extractor) throws -> Date {

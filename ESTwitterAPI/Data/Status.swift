@@ -59,6 +59,11 @@ extension RetweetedStatus : Decodable {
 
 extension SequenceType where Generator.Element == Status {
 
+	public func orderByNewCreationDate() -> [Generator.Element] {
+	
+		return self.sort { $0.0.createdAt > $0.1.createdAt }
+	}
+	
 	public func excludeRetweets() -> [Generator.Element] {
 		
 		return self.filter { !$0.retweeted }
