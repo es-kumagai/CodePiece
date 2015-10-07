@@ -13,6 +13,8 @@ import Swim
 
 final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
+	var maxTweets = 200
+	
 	var tweets = Array<ESTwitter.Status>() {
 		
 		didSet {
@@ -25,7 +27,9 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 
 	func appendTweets(tweets: [ESTwitter.Status]) {
 		
-		self.tweets = tweets.orderByNewCreationDate() + self.tweets
+		let newTweets = (tweets.orderByNewCreationDate() + self.tweets).prefix(self.maxTweets)
+		
+		self.tweets = Array(newTweets)
 	}
 	
 	func numberOfRowsInTableView(tableView: NSTableView) -> Int {

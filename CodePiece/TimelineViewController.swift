@@ -121,12 +121,28 @@ extension TimelineViewController {
 		
 		let updateTable = { (tweets:[Status]) in
 
-			let nextSelection = self.timelineTableView.selectedRow.advancedBy(tweets.count)
-			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count.predecessor()))
+			let getNextSelection:()->Int = {
+				
+				let next = self.timelineTableView.selectedRow + tweets.count
+				let maxRows = self.timelineDataSource.maxTweets
+				
+				if next < maxRows {
+					
+					return next
+				}
+				else {
+					
+					return -1
+				}
+			}
+			
+			let nextSelection = getNextSelection()
+//			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count.predecessor()))
 
 			self.timelineDataSource.appendTweets(tweets)
 
-			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: [.SlideUp, .EffectFade])			
+//			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: [.SlideUp, .EffectFade])
+			self.timelineTableView.reloadData()
 			self.timelineTableView.selectRowIndexes(NSIndexSet(index: nextSelection), byExtendingSelection: false)
 		}
 		
