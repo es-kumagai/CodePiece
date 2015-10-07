@@ -328,25 +328,28 @@ DQ
             <objects>
                 <viewController id="gED-XW-6vA" customClass="TimelineViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="CWQ-kz-Sxg">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="230" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ovw-EQ-6td">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="300" verticalStackHuggingPriority="250" horizontalClippingResistancePriority="750" verticalClippingResistancePriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ovw-EQ-6td">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
                                 <subviews>
+                                    <stackView distribution="equalSpacing" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tUT-xX-k8S">
+                                        <rect key="frame" x="0.0" y="320" width="300" height="0.0"/>
+                                        <animations/>
+                                    </stackView>
                                     <scrollView horizontalLineScroll="63" horizontalPageScroll="10" verticalLineScroll="63" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-eV-U58">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
                                         <clipView key="contentView" id="RPV-kG-gAc">
-                                            <rect key="frame" x="1" y="1" width="283" height="298"/>
+                                            <rect key="frame" x="1" y="1" width="283" height="318"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="61" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc" customClass="TimelineTableView" customModule="CodePiece" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="283" height="298"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="283" height="318"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <animations/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn width="280" minWidth="40" maxWidth="1000" id="RRX-xc-pTL">
@@ -447,12 +450,22 @@ DQ
                                                                                 <real value="3.4028234663852886e+38"/>
                                                                             </customSpacing>
                                                                         </stackView>
+                                                                        <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="eYG-fk-Loy">
+                                                                            <rect key="frame" x="4" y="-2" width="272" height="5"/>
+                                                                            <animations/>
+                                                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                            <font key="titleFont" metaFont="system"/>
+                                                                        </box>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstAttribute="bottom" secondItem="hcC-SE-Ak9" secondAttribute="bottom" constant="8" id="R9E-2v-BPa"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="eYG-fk-Loy" secondAttribute="bottom" id="SoR-oU-70a"/>
                                                                         <constraint firstItem="hcC-SE-Ak9" firstAttribute="leading" secondItem="PIX-TI-qfa" secondAttribute="leading" constant="8" id="WyA-Ow-wf8"/>
                                                                         <constraint firstAttribute="trailing" secondItem="hcC-SE-Ak9" secondAttribute="trailing" constant="8" id="Zcp-p5-KnZ"/>
                                                                         <constraint firstItem="hcC-SE-Ak9" firstAttribute="top" secondItem="PIX-TI-qfa" secondAttribute="top" constant="8" id="c4R-ot-WIh"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="eYG-fk-Loy" secondAttribute="trailing" constant="4" id="kT5-2K-zT1"/>
+                                                                        <constraint firstItem="eYG-fk-Loy" firstAttribute="leading" secondItem="PIX-TI-qfa" secondAttribute="leading" constant="4" id="xwB-ld-XXi"/>
                                                                     </constraints>
                                                                     <animations/>
                                                                     <connections>
@@ -481,7 +494,7 @@ DQ
                                             <animations/>
                                         </scroller>
                                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="QaD-GY-diU">
-                                            <rect key="frame" x="284" y="1" width="15" height="298"/>
+                                            <rect key="frame" x="284" y="1" width="15" height="318"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </scroller>
@@ -493,8 +506,10 @@ DQ
                                 </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
