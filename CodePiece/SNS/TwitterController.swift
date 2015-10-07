@@ -316,7 +316,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			callback(GetStatusesResult(error: error))
 		}
 		
-		self.api.getSearchTweetsWithQuery(query, geocode: nil, lang: nil, locale: nil, resultType: "mixed", count: nil, until: nil, sinceID: since, maxID: nil, includeEntities: NSNumber(bool: false), callback: nil, successBlock: successHandler, errorBlock: errorHandler)
+		self.api.getSearchTweetsWithQuery(query, geocode: nil, lang: nil, locale: nil, resultType: "mixed", count: "50", until: nil, sinceID: since, maxID: nil, includeEntities: NSNumber(bool: false), callback: nil, successBlock: successHandler, errorBlock: errorHandler)
 	}
 }
 
