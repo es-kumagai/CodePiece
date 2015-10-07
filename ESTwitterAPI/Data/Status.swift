@@ -16,7 +16,7 @@ public enum RetweetedStatus {
 
 public struct Status {
 	
-	public var coordinates:String?
+	public var coordinates:CoordinatesBox?
 	public var favorited:Bool
 	public var createdAt:Date
 	public var truncated:Bool
@@ -27,7 +27,7 @@ public struct Status {
 	public var contributors:String?
 	public var retweetCount:Int
 	public var id:UInt64
-	public var geo:String?
+	public var geo:CoordinatesBox?
 	public var retweeted:Bool
 	internal var retweetedStatus:RetweetedStatus?
 	public var place:Place?
