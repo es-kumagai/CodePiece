@@ -13,8 +13,16 @@ import Swim
 
 final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
-	var tweets = Array<ESTwitter.Status>()
+	var tweets = Array<ESTwitter.Status>() {
+		
+		didSet {
 	
+			self.lastTweetID = self.tweets.first?.idStr
+		}
+	}
+	
+	private(set) var lastTweetID:String?
+
 	func appendTweets(tweets: [ESTwitter.Status]) {
 		
 		self.tweets = tweets + self.tweets

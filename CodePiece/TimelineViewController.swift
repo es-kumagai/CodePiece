@@ -16,27 +16,20 @@ class TimelineViewController: NSViewController {
 	struct TimelineInformation {
 	
 		var hashtag:ESTwitter.Hashtag
-		var lastTweetID:String?
 		
 		init() {
 		
-			self.init(hashtag: "", lastTweetID: nil)
+			self.init(hashtag: "")
 		}
 		
-		init(hashtag: ESTwitter.Hashtag, lastTweetID:String?) {
+		init(hashtag: ESTwitter.Hashtag) {
 			
 			self.hashtag = hashtag
-			self.lastTweetID = lastTweetID
 		}
 		
 		func replaceHashtag(hashtag: ESTwitter.Hashtag) -> TimelineInformation {
 			
-			return TimelineInformation(hashtag: hashtag, lastTweetID: self.lastTweetID)
-		}
-		
-		func replaceLastTweetID(lastTweetID: String?) -> TimelineInformation {
-			
-			return TimelineInformation(hashtag: self.hashtag, lastTweetID: lastTweetID)
+			return TimelineInformation(hashtag: hashtag)
 		}
 	}
 	
@@ -52,9 +45,7 @@ class TimelineViewController: NSViewController {
 			
 			if self.timeline.hashtag != oldValue.hashtag {
 				
-				self.timeline.lastTweetID = nil
 				self.timelineDataSource.tweets = []
-				
 				self.updateStatuses()
 			}
 		}
@@ -127,25 +118,21 @@ extension TimelineViewController {
 	private func updateStatuses() {
 		
 		let query = self.timeline.hashtag.description
-		let lastTweetID = self.timeline.lastTweetID
 		
 		let updateTable = { (tweets:[Status]) in
 
-			let lastTweetID = tweets.first!.idStr
 			let nextSelection = self.timelineTableView.selectedRow.advancedBy(tweets.count)
-
-			self.timeline.lastTweetID = lastTweetID
-			self.timelineDataSource.appendTweets(tweets)
-		
 			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count.predecessor()))
-			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: [.SlideUp, .EffectFade])
-			
+
+			self.timelineDataSource.appendTweets(tweets)
+
+			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: [.SlideUp, .EffectFade])			
 			self.timelineTableView.selectRowIndexes(NSIndexSet(index: nextSelection), byExtendingSelection: false)
 		}
 		
 		let getTimelineSpecifiedQuery = {
 			
-			sns.twitter.getStatusesWithQuery(query, since: lastTweetID) { result in
+			sns.twitter.getStatusesWithQuery(query, since: self.timelineDataSource.lastTweetID) { result in
 				
 				switch result {
 					

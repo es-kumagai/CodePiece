@@ -7,6 +7,7 @@
 //
 
 import Himotoki
+import Swim
 
 public enum RetweetedStatus {
 	
@@ -53,6 +54,24 @@ extension RetweetedStatus : Decodable {
 	public static func decode(e: Extractor) throws -> RetweetedStatus {
 		
 		return try RetweetedStatus.Value(Status.decode(e))
+	}
+}
+
+extension SequenceType where Generator.Element == Status {
+
+	public func excludeRetweets() -> [Generator.Element] {
+		
+		return self.filter { !$0.retweeted }
+	}
+	
+	public func originalTweetAtFirst() -> Generator.Element? {
+		
+		guard let found = self.findElement({$0.retweeted}) else {
+			
+			return nil
+		}
+		
+		return found.element
 	}
 }
 
