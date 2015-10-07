@@ -8,6 +8,7 @@
 
 import Cocoa
 import Swim
+import ESThread
 import ESTwitter
 
 class TimelineViewController: NSViewController {
@@ -16,7 +17,7 @@ class TimelineViewController: NSViewController {
 	
 		var hashtag:ESTwitter.Hashtag
 		var lastTweetID:String?
-
+		
 		init() {
 		
 			self.init(hashtag: "", lastTweetID: nil)
@@ -41,6 +42,9 @@ class TimelineViewController: NSViewController {
 	
 	@IBOutlet weak var timelineTableView:NSTableView!
 	@IBOutlet weak var timelineDataSource:TimelineTableDataSource!
+	
+	private var _statusesAutoLoadThread:NSThread?
+	let statusesAutoUpdateInterval:NSTimeInterval = 15
 	
 	var timeline = TimelineInformation() {
 		
@@ -75,12 +79,47 @@ extension TimelineViewController {
 
 		super.viewDidAppear()
 		
+		self._statusesAutoLoadThread.ifHasValue {
+		
+			$0.cancel()
+		}
+		
+		self._statusesAutoLoadThread = tweak(NSThread(target: self, selector: "updateStatusTimerAction:", object: nil)){
+			
+			$0.start()
+		}
+	}
+	
+	override func viewWillDisappear() {
+		
+		super.viewWillDisappear()
+		
+		self._statusesAutoLoadThread?.cancel()
 	}
 }
 
 // MARK: - Tweets control
 
 extension TimelineViewController {
+	
+	func updateStatusTimerAction(object: AnyObject?) {
+		
+		NSLog("Start updating twitter timeline automatically.")
+		
+		let thread = NSThread.currentThread()
+		
+		while !thread.cancelled {
+			
+			invokeOnMainQueue {
+				
+				self.updateStatuses()
+			}
+			
+			NSThread.sleepForTimeInterval(self.statusesAutoUpdateInterval)
+		}
+		
+		NSLog("Stop updating twitter timeline.")
+	}
 	
 	private func updateStatuses() {
 		
@@ -94,6 +133,8 @@ extension TimelineViewController {
 				switch result {
 					
 				case .Success(let tweets) where !tweets.isEmpty:
+
+					self.timeline.lastTweetID = tweets.first!.idStr
 					self.timelineDataSource.appendTweets(tweets)
 					self.timelineTableView.reloadData()
 					

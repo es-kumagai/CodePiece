@@ -20,6 +20,17 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+extension Optional {
+
+	public func ifHasValue(@noescape predicate:(Wrapped) throws -> Void) rethrows {
+		
+		if case let value? = self {
+			
+			try predicate(value)
+		}
+	}
+}
+
 extension BooleanType {
 
 	public func ifTrue(@noescape predicate:() throws -> Void) rethrows {
