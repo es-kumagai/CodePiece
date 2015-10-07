@@ -33,6 +33,10 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		return self.tweets.count
 	}
 
+	func setNeedsEstimateHeight() {
+	
+	}
+	
 	func estimateCellHeightOfRow(row:Int, tableView:NSTableView) -> CGFloat {
 		
 		// 現行では、実際にビューを作ってサイズを確認しています。
