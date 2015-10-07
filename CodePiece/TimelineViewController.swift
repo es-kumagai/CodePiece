@@ -52,6 +52,9 @@ class TimelineViewController: NSViewController {
 			
 			if self.timeline.hashtag != oldValue.hashtag {
 				
+				self.timeline.lastTweetID = nil
+				self.timelineDataSource.tweets = []
+				
 				self.updateStatuses()
 			}
 		}
@@ -126,6 +129,20 @@ extension TimelineViewController {
 		let query = self.timeline.hashtag.description
 		let lastTweetID = self.timeline.lastTweetID
 		
+		let updateTable = { (tweets:[Status]) in
+
+			let lastTweetID = tweets.first!.idStr
+			let nextSelection = self.timelineTableView.selectedRow.advancedBy(tweets.count)
+
+			self.timeline.lastTweetID = lastTweetID
+			self.timelineDataSource.appendTweets(tweets)
+		
+			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count.predecessor()))
+			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: [.SlideUp, .EffectFade])
+			
+			self.timelineTableView.selectRowIndexes(NSIndexSet(index: nextSelection), byExtendingSelection: false)
+		}
+		
 		let getTimelineSpecifiedQuery = {
 			
 			sns.twitter.getStatusesWithQuery(query, since: lastTweetID) { result in
@@ -133,10 +150,7 @@ extension TimelineViewController {
 				switch result {
 					
 				case .Success(let tweets) where !tweets.isEmpty:
-
-					self.timeline.lastTweetID = tweets.first!.idStr
-					self.timelineDataSource.appendTweets(tweets)
-					self.timelineTableView.reloadData()
+					updateTable(tweets)
 					
 				case .Success:
 					break
