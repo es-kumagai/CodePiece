@@ -201,6 +201,7 @@ extension TimelineViewController : NSTableViewDelegate {
 		
 		let view = tweak(tableView.makeViewWithIdentifier("TimelineCell", owner: self) as! TimelineTableCellView) {
 			
+			$0.textLabel.selectable = false
 			$0.status = tweets[row]
 		}
 		
