@@ -341,18 +341,18 @@ DQ
                                     <scrollView horizontalLineScroll="63" horizontalPageScroll="10" verticalLineScroll="63" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-eV-U58">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
                                         <clipView key="contentView" id="RPV-kG-gAc">
-                                            <rect key="frame" x="1" y="1" width="283" height="318"/>
+                                            <rect key="frame" x="1" y="1" width="298" height="318"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="61" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc" customClass="TimelineTableView" customModule="CodePiece" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="283" height="318"/>
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="61" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc" customClass="TimelineTableView" customModule="CodePiece" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="298" height="318"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <animations/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="280" minWidth="40" maxWidth="1000" id="RRX-xc-pTL">
+                                                        <tableColumn width="295" minWidth="40" maxWidth="1000" id="RRX-xc-pTL">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -366,11 +366,11 @@ DQ
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="TimelineCell" verticalHuggingPriority="200" id="PIX-TI-qfa" customClass="TimelineTableCellView" customModule="CodePiece" customModuleProvider="target">
-                                                                    <rect key="frame" x="1" y="1" width="280" height="61"/>
+                                                                    <rect key="frame" x="1" y="1" width="295" height="61"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hcC-SE-Ak9">
-                                                                            <rect key="frame" x="8" y="8" width="264" height="45"/>
+                                                                            <rect key="frame" x="8" y="8" width="279" height="45"/>
                                                                             <subviews>
                                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="eaT-Yb-KdN">
                                                                                     <rect key="frame" x="0.0" y="21" width="24" height="24"/>
@@ -385,22 +385,22 @@ DQ
                                                                                     </buttonCell>
                                                                                 </button>
                                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="11" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mf3-YQ-e92">
-                                                                                    <rect key="frame" x="32" y="0.0" width="232" height="45"/>
+                                                                                    <rect key="frame" x="32" y="0.0" width="247" height="45"/>
                                                                                     <subviews>
                                                                                         <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kj2-kT-BoQ">
-                                                                                            <rect key="frame" x="-2" y="28" width="236" height="17"/>
+                                                                                            <rect key="frame" x="-2" y="28" width="251" height="17"/>
                                                                                             <animations/>
-                                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="efq-iz-mnd">
+                                                                                            <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="efq-iz-mnd">
                                                                                                 <font key="font" metaFont="system"/>
                                                                                                 <color key="textColor" red="0.208450675" green="0.33309835199999999" blue="0.41607216000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
                                                                                         </textField>
                                                                                         <stackView distribution="equalSpacing" orientation="horizontal" alignment="firstBaseline" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O8z-mT-xGr">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="232" height="17"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="247" height="17"/>
                                                                                             <subviews>
                                                                                                 <textField horizontalHuggingPriority="100" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LZz-oQ-fjr">
-                                                                                                    <rect key="frame" x="-2" y="0.0" width="204" height="17"/>
+                                                                                                    <rect key="frame" x="-2" y="0.0" width="219" height="17"/>
                                                                                                     <animations/>
                                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Username" id="nym-UL-Y5F">
                                                                                                         <font key="font" metaFont="systemBold"/>
@@ -409,7 +409,7 @@ DQ
                                                                                                     </textFieldCell>
                                                                                                 </textField>
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="pgZ-aP-321">
-                                                                                                    <rect key="frame" x="206" y="0.0" width="28" height="14"/>
+                                                                                                    <rect key="frame" x="221" y="0.0" width="28" height="14"/>
                                                                                                     <animations/>
                                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="date" id="i03-Vk-1xE">
                                                                                                         <font key="font" metaFont="smallSystem"/>
@@ -451,7 +451,7 @@ DQ
                                                                             </customSpacing>
                                                                         </stackView>
                                                                         <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="eYG-fk-Loy">
-                                                                            <rect key="frame" x="4" y="-2" width="272" height="5"/>
+                                                                            <rect key="frame" x="4" y="-2" width="287" height="5"/>
                                                                             <animations/>
                                                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -488,12 +488,12 @@ DQ
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <animations/>
-                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.99999999227045355" horizontal="YES" id="JwN-2C-eKa">
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.99999999227045355" horizontal="YES" id="JwN-2C-eKa">
                                             <rect key="frame" x="-100" y="-100" width="283" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </scroller>
-                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="QaD-GY-diU">
+                                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="QaD-GY-diU">
                                             <rect key="frame" x="284" y="1" width="15" height="318"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
@@ -552,10 +552,10 @@ DQ
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <animations/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="687" height="278"/>
+                                            <size key="minSize" width="702" height="278"/>
                                             <size key="maxSize" width="707" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="687" height="278"/>
+                                            <size key="minSize" width="702" height="278"/>
                                             <size key="maxSize" width="707" height="10000000"/>
                                             <connections>
                                                 <outlet property="delegate" destination="XfG-lQ-9wD" id="iqw-bw-P7O"/>
@@ -569,13 +569,13 @@ DQ
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="cMV-6R-EhE"/>
                                 </constraints>
                                 <animations/>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="QNm-JD-hR4">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="QNm-JD-hR4">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="oKF-WK-zwD">
-                                    <rect key="frame" x="688" y="1" width="15" height="278"/>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="oKF-WK-zwD">
+                                    <rect key="frame" x="687" y="1" width="16" height="278"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
