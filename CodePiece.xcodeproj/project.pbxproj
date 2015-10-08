@@ -103,6 +103,7 @@
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
 		B17C88C61B66FE7F00CBF20F /* ss in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BE1B66BE6800CBF20F /* ss */; };
 		B17DAF5E1B6529A0004CE4D2 /* WebCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DAF5D1B6529A0004CE4D2 /* WebCaptureController.swift */; };
+		B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA9611BC60D9B00056E86 /* Extension.swift */; settings = {ASSET_TAGS = (); }; };
 		B1A6976A1B8ADA5100D0F6FF /* TimelineTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A697691B8ADA5100D0F6FF /* TimelineTableDataSource.swift */; };
 		B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F01B5E714800DE3942 /* DescriptionGenerator.swift */; };
 		B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F11B5E714800DE3942 /* GistsController.swift */; };
@@ -307,6 +308,7 @@
 		B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		B17C88C51B66E68D00CBF20F /* ArchiveZip.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ArchiveZip.sh; sourceTree = "<group>"; };
 		B17DAF5D1B6529A0004CE4D2 /* WebCaptureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebCaptureController.swift; sourceTree = "<group>"; };
+		B18AA9611BC60D9B00056E86 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B1A697691B8ADA5100D0F6FF /* TimelineTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableDataSource.swift; sourceTree = "<group>"; };
 		B1BB59F01B5E714800DE3942 /* DescriptionGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionGenerator.swift; sourceTree = "<group>"; };
 		B1BB59F11B5E714800DE3942 /* GistsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistsController.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				B12674EF1BC0ED7800F38464 /* Data */,
 				B12674E51BC0ECCA00F38464 /* ESTwitterAPI.h */,
 				B12674E71BC0ECCB00F38464 /* Info.plist */,
+				B18AA9611BC60D9B00056E86 /* Extension.swift */,
 			);
 			path = ESTwitterAPI;
 			sourceTree = "<group>";
@@ -1019,6 +1022,7 @@
 				B12675041BC0F02400F38464 /* UserEntities.swift in Sources */,
 				B126750A1BC0F2E300F38464 /* StatusEntities.swift in Sources */,
 				B12674F61BC0EE5B00F38464 /* UserProfile.swift in Sources */,
+				B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */,
 				B13371EB1BC5009600D1C793 /* StatusCoordinates.swift in Sources */,
 				B12675061BC0F06000F38464 /* Hashtag.swift in Sources */,
 				B12674F81BC0EE8B00F38464 /* URLInfo.swift in Sources */,

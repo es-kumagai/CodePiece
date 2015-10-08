@@ -13,6 +13,11 @@ public struct Date : RawRepresentable {
 	
 	public var rawValue:NSDate
 	
+	public init() {
+	
+		self.init(NSDate())
+	}
+	
 	public init(rawValue: NSDate) {
 		
 		self.rawValue = rawValue
@@ -47,6 +52,21 @@ extension Date {
 		}
 		
 		self.rawValue = date
+	}
+}
+
+extension Date : DateCalculatable, ReferenceDateConvertible {
+
+	public typealias DateType = Date
+	
+	public init(timeIntervalSinceReferenceDate: NSTimeInterval) {
+	
+		self.init(NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate))
+	}
+
+	public var timeIntervalSinceReferenceDate: NSTimeInterval {
+	
+		return self.rawValue.timeIntervalSinceReferenceDate
 	}
 }
 
