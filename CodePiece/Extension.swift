@@ -20,6 +20,107 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+public func cast<R:AnyObject, T:AnyObject>(obj:T) -> R? {
+
+	return obj as? R
+}
+
+public func castForce<R:AnyObject, T:AnyObject>(obj:T) -> R {
+	
+	return obj as! R
+}
+
+public struct Repeater<Element> : SequenceType {
+
+	private var generator:RepeaterGenerator<Element>
+	
+	public init(_ value:Element) {
+		
+		self.init { value }
+	}
+	
+	public init (_ generate:()->Element) {
+		
+		self.generator = RepeaterGenerator(generate)
+	}
+	
+	public func generate() -> RepeaterGenerator<Element> {
+		
+		return self.generator
+	}
+	
+	public func zipLeftOf<S:SequenceType>(s:S) -> Zip2Sequence<Repeater,S> {
+		
+		return zip(self, s)
+	}
+	
+	public func zipRightOf<S:SequenceType>(s:S) -> Zip2Sequence<S,Repeater> {
+		
+		return zip(s, self)
+	}
+}
+
+public struct RepeaterGenerator<Element> : GeneratorType {
+	
+	private var _generate:()->Element
+	
+	init(_ value:Element) {
+		
+		self.init { value }
+	}
+	
+	init (_ generate:()->Element) {
+		
+		self._generate = generate
+	}
+	
+	public func next() -> Element? {
+		
+		return self._generate()
+	}
+}
+
+
+public protocol Selectable : AnyObject {
+	
+	var selected:Bool { get set }
+}
+
+extension Selectable {
+	
+	public static func selected(instance:Self) -> () -> Bool {
+		
+		return { instance.selected }
+	}
+	
+	public static func setSelected(instance:Self) -> (Bool) -> Void {
+		
+		return { instance.selected = $0 }
+	}
+}
+
+extension SequenceType where Generator.Element : Selectable {
+
+	public mutating func selectAll() {
+		
+		self.forEach { $0.selected = true }
+	}
+	
+	public mutating func deselectAll() {
+		
+		self.forEach { $0.selected = false }
+	}
+}
+
+extension SequenceType where Generator.Element : AnyObject {
+	
+	public var selectableElementsOnly:[Selectable] {
+		
+		return self.map { $0 as? Selectable }.flatMap { $0 }
+	}
+}
+
+
 extension Optional {
 
 	public func ifHasValue(@noescape predicate:(Wrapped) throws -> Void) rethrows {

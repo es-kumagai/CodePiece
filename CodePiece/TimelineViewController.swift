@@ -211,4 +211,22 @@ extension TimelineViewController : NSTableViewDelegate {
 		
 		return self.timelineDataSource.estimateCellHeightOfRow(row, tableView: tableView)
 	}
+	
+	func tableViewSelectionDidChange(notification: NSNotification) {
+		
+		guard let tableView = notification.object as? TimelineTableView where tableView === self.timelineTableView else {
+			
+			fatalError("Invalid table view. \(notification.object)")
+		}
+		
+		let selectedIndexes = tableView.selectedRowIndexes
+		
+		for row in 0 ..< tableView.numberOfRows {
+		
+			if let cell = tableView.viewAtColumn(0, row: row, makeIfNecessary: false) as? TimelineTableCellView {
+				
+				cell.selected = selectedIndexes.containsIndex(row)
+			}
+		}
+	}
 }

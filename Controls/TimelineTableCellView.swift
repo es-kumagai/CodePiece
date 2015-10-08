@@ -11,7 +11,7 @@ import Swim
 import ESThread
 import ESTwitter
 
-class TimelineTableCellView: NSTableCellView {
+class TimelineTableCellView: NSTableCellView, Selectable {
 
 	enum Style {
 	
