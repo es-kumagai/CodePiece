@@ -216,7 +216,7 @@ extension TimelineViewController : NSTableViewDelegate {
 		
 		guard let tableView = notification.object as? TimelineTableView where tableView === self.timelineTableView else {
 			
-			fatalError("Invalid table view. \(notification.object)")
+			return
 		}
 		
 		let selectedIndexes = tableView.selectedRowIndexes

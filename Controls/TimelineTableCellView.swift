@@ -41,14 +41,15 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 		
 		didSet {
 			
+			self.textLabel.selectable = self.selected
 			self.setNeedsDisplayInRect(self.frame)
 		}
 	}
 	
-	@IBOutlet var usernameLabel:NSTextField!
-	@IBOutlet var textLabel:NSTextField!
-	@IBOutlet var iconButton:NSButton!
-	@IBOutlet var dateLabel:NSTextField!
+	@IBOutlet weak var usernameLabel:NSTextField!
+	@IBOutlet weak var textLabel:NSTextField!
+	@IBOutlet weak var iconButton:NSButton!
+	@IBOutlet weak var dateLabel:NSTextField!
 	
 	override func drawRect(dirtyRect: NSRect) {
 		
