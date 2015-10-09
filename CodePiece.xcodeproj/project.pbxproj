@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14D00E0F96AD373709CD09D7 /* Pods_ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42A5EAE8BAE526CDC6F06BC /* Pods_ESTwitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		14D00E0F96AD373709CD09D7 /* Pods_ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42A5EAE8BAE526CDC6F06BC /* Pods_ESTwitter.framework */; };
 		B1118DA21B6BE77800BFC5FA /* WelcomeBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1118DA11B6BE77800BFC5FA /* WelcomeBoard.storyboard */; };
 		B1118DA51B6BECAD00BFC5FA /* WelcomeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA31B6BECAD00BFC5FA /* WelcomeBoardViewController.swift */; };
 		B1118DA81B6BEF4D00BFC5FA /* AppExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */; };
@@ -818,6 +818,7 @@
 				B17C88C01B66BEF300CBF20F /* Copy Documents */,
 				F72213FE2DCABF4F6BB4DD97 /* Copy Pods Resources */,
 				B152E29F1B6EDF60008B485A /* Embed Frameworks */,
+				2755F0336C7DA05BFC69E209 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1001,6 +1002,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2755F0336C7DA05BFC69E209 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		83CF8FECC9EF030C98113153 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1511,6 +1527,7 @@
 				B18AA9721BC6903A00056E86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
