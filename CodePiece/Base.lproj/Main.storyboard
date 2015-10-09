@@ -547,7 +547,7 @@ DQ
                                     <rect key="frame" x="1" y="1" width="702" height="278"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="8OA-rk-WhX">
+                                        <textView identifier="CodeTextIdentifier" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="8OA-rk-WhX">
                                             <rect key="frame" x="0.0" y="0.0" width="702" height="278"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <animations/>
@@ -557,6 +557,7 @@ DQ
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="702" height="278"/>
                                             <size key="maxSize" width="707" height="10000000"/>
+                                            <accessibility description="Code Text Field" help="Input text for post." identifier="TextFieldForInputCode"/>
                                             <connections>
                                                 <outlet property="delegate" destination="XfG-lQ-9wD" id="iqw-bw-P7O"/>
                                             </connections>
@@ -595,7 +596,7 @@ DQ
                                     <rect key="frame" x="1" y="1" width="708" height="77"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tsY-MH-1c4">
+                                        <button identifier="PostButtonIdentifier" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tsY-MH-1c4">
                                             <rect key="frame" x="588" y="20" width="100" height="26"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="Ctm-eF-5d3"/>
@@ -620,7 +621,7 @@ DQ
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8VY-21-QQc" customClass="HashtagTextField" customModule="CodePiece" customModuleProvider="target">
+                                        <textField identifier="HashtagTextFieldIdentifier" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8VY-21-QQc" customClass="HashtagTextField" customModule="CodePiece" customModuleProvider="target">
                                             <rect key="frame" x="414" y="21" width="134" height="23"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="134" id="2Lt-u9-TvK"/>
@@ -645,7 +646,7 @@ DQ
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KZX-ml-gl0">
+                                        <textField identifier="TweetTextFieldIdentifier" horizontalHuggingPriority="200" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KZX-ml-gl0">
                                             <rect key="frame" x="15" y="21" width="391" height="23"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="23" id="WH5-5N-0DM"/>
