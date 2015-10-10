@@ -12,7 +12,7 @@
                 <controllerPlaceholder storyboardName="AboutWindowController" id="yQC-UB-5yF" sceneMemberID="viewController"/>
                 <customObject id="xRo-hR-GxQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="510" y="-212"/>
+            <point key="canvasLocation" x="154" y="-92"/>
         </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
@@ -298,7 +298,7 @@ DQ
                 <userDefaultsController id="9K9-ir-1p7"/>
                 <userDefaultsController id="rQ8-82-LQj"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="75.5" y="-235"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
