@@ -51,8 +51,8 @@
                                 <animations/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ulH-lm-x75" userLabel="Icon Cell"/>
                             </imageView>
-                            <stackView orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a3O-Og-Gub">
-                                <rect key="frame" x="98" y="88" width="52" height="64"/>
+                            <stackView orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="a3O-Og-Gub">
+                                <rect key="frame" x="98" y="88" width="51" height="64"/>
                                 <animations/>
                                 <middleViews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nqy-zA-HrR">
@@ -83,8 +83,8 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9hf-0s-Toh">
-                                <rect key="frame" x="218" y="19" width="127" height="19"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9hf-0s-Toh">
+                                <rect key="frame" x="220" y="19" width="125" height="19"/>
                                 <animations/>
                                 <buttonCell key="cell" type="roundRect" title="Acknowledgements" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yUa-53-Dcj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ps4-Eu-nrG">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ps4-Eu-nrG">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
@@ -13,7 +13,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eF3-de-P5v">
-                                <rect key="frame" x="26" y="233" width="48" height="17"/>
+                                <rect key="frame" x="26" y="233" width="47" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub" id="UyK-pT-fKy">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -21,7 +22,8 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8X9-Tf-XVS">
-                                <rect key="frame" x="61" y="196" width="121" height="18"/>
+                                <rect key="frame" x="61" y="196" width="120" height="18"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Authorized Status" id="E8g-oe-Wto">
                                     <font key="font" metaFont="system" size="14"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -33,6 +35,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="mSM-Fd-yK5"/>
                                 </constraints>
+                                <animations/>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>
@@ -43,10 +46,12 @@
                                     <constraint firstAttribute="width" constant="20" id="4c7-Xn-3Zo"/>
                                     <constraint firstAttribute="height" constant="20" id="7SL-qe-gEJ"/>
                                 </constraints>
+                                <animations/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RU2-eg-vOe"/>
                             </imageView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
-                                <rect key="frame" x="22" y="75" width="129" height="32"/>
+                                <rect key="frame" x="22" y="75" width="128" height="32"/>
+                                <animations/>
                                 <buttonCell key="cell" type="push" title="Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRz-PP-aVw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -59,7 +64,8 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-jY-0Jr">
-                                <rect key="frame" x="297" y="186" width="169" height="32"/>
+                                <rect key="frame" x="300" y="186" width="166" height="32"/>
+                                <animations/>
                                 <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DsE-ej-daq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -69,7 +75,8 @@ DQ
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X40-Kf-trQ">
-                                <rect key="frame" x="78" y="233" width="16" height="17"/>
+                                <rect key="frame" x="77" y="233" width="16" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="▶︎" id="jhb-us-wsd">
                                     <font key="font" size="13" name=".LucidaGrandeUI"/>
                                     <color key="textColor" red="0.26924949879999999" green="0.23910263179999999" blue="0.1031773165" alpha="1" colorSpace="calibratedRGB"/>
@@ -77,7 +84,8 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-hX-roe">
-                                <rect key="frame" x="98" y="233" width="67" height="17"/>
+                                <rect key="frame" x="97" y="233" width="66" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Username" id="cc9-AA-BeY">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="0.26924949879999999" green="0.23910263179999999" blue="0.1031773165" alpha="1" colorSpace="calibratedRGB"/>
@@ -86,6 +94,7 @@ DQ
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4L-c2-OGD">
                                 <rect key="frame" x="18" y="121" width="444" height="34"/>
+                                <animations/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece request permission only for make Gists. Please authenticate from the Authentication button below." id="roN-jh-jrr">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -94,6 +103,7 @@ DQ
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pim-Rm-T1g">
                                 <rect key="frame" x="18" y="32" width="444" height="34"/>
+                                <animations/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When you push the button, default browser will be opend with GitHub authentication page." id="AQu-dh-ACz">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -125,6 +135,7 @@ DQ
                             <constraint firstItem="X40-Kf-trQ" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="yro-rf-7Da"/>
                             <constraint firstAttribute="trailing" secondItem="A4L-c2-OGD" secondAttribute="trailing" constant="20" id="zHS-Fc-RT0"/>
                         </constraints>
+                        <animations/>
                     </view>
                     <connections>
                         <outlet property="authorizationButton" destination="AFn-Gq-0En" id="1gS-1V-nLJ"/>
