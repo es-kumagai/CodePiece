@@ -6,6 +6,14 @@
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
+        <!--AboutWindowController-->
+        <scene sceneID="VV4-bR-Oip">
+            <objects>
+                <controllerPlaceholder storyboardName="AboutWindowController" id="yQC-UB-5yF" sceneMemberID="viewController"/>
+                <customObject id="xRo-hR-GxQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="510" y="-212"/>
+        </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
@@ -19,7 +27,7 @@
                                         <menuItem title="About CodePiece" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="showAboutWindow:" target="p69-Rc-ib8" id="Uge-ch-BWd"/>
+                                                <segue destination="yQC-UB-5yF" kind="modal" identifier="" customClass="AboutWindowControllerSegue" customModule="CodePiece" customModuleProvider="target" id="nXU-7e-ZW7"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -37,6 +45,18 @@
                                         <menuItem title="Quit CodePiece" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="File" id="v4p-hB-g9S">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="File" id="lNN-8F-hJB">
+                                    <items>
+                                        <menuItem title="Close" keyEquivalent="w" id="fkg-Hu-yFn">
+                                            <connections>
+                                                <action selector="performClose:" target="Ady-hI-5gd" id="InI-5i-h5o"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -536,6 +556,21 @@ DQ
         <!--CodePiece-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
+                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="8Rz-OR-HYX" customClass="MainStatusController" customModule="CodePiece" customModuleProvider="target">
+                    <connections>
+                        <outlet property="githubAccountNameTextField" destination="VV1-A9-obp" id="fy1-zf-x4d"/>
+                        <outlet property="githubAccountStatusImageView" destination="ziZ-O4-zLg" id="5Hc-En-3zf"/>
+                        <outlet property="twitterAccountNameTextField" destination="ZTT-3E-s7B" id="mqF-G4-cQb"/>
+                        <outlet property="twitterAccountStatusImageView" destination="J1a-PY-hWq" id="wdL-xw-Fzh"/>
+                    </connections>
+                </customObject>
+                <userDefaultsController representsSharedInstance="YES" id="6Kl-2j-Nad"/>
+                <customObject id="Csn-jJ-GoY" customClass="LanguagePopupDataSource" customModule="CodePiece" customModuleProvider="target">
+                    <connections>
+                        <outlet property="popupButton" destination="GDd-Xx-hX6" id="eXz-wY-01G"/>
+                    </connections>
+                </customObject>
                 <viewController title="CodePiece" identifier="MainViewController" storyboardIdentifier="MainViewController" id="XfG-lQ-9wD" customClass="ViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="744" height="438"/>
@@ -898,21 +933,6 @@ DQ
                         <outlet property="postButton" destination="tsY-MH-1c4" id="2x0-uY-e0J"/>
                     </connections>
                 </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <userDefaultsController representsSharedInstance="YES" id="6Kl-2j-Nad"/>
-                <customObject id="8Rz-OR-HYX" customClass="MainStatusController" customModule="CodePiece" customModuleProvider="target">
-                    <connections>
-                        <outlet property="githubAccountNameTextField" destination="VV1-A9-obp" id="fy1-zf-x4d"/>
-                        <outlet property="githubAccountStatusImageView" destination="ziZ-O4-zLg" id="5Hc-En-3zf"/>
-                        <outlet property="twitterAccountNameTextField" destination="ZTT-3E-s7B" id="mqF-G4-cQb"/>
-                        <outlet property="twitterAccountStatusImageView" destination="J1a-PY-hWq" id="wdL-xw-Fzh"/>
-                    </connections>
-                </customObject>
-                <customObject id="Csn-jJ-GoY" customClass="LanguagePopupDataSource" customModule="CodePiece" customModuleProvider="target">
-                    <connections>
-                        <outlet property="popupButton" destination="GDd-Xx-hX6" id="eXz-wY-01G"/>
-                    </connections>
-                </customObject>
             </objects>
             <point key="canvasLocation" x="585" y="882"/>
         </scene>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ps4-Eu-nrG">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ps4-Eu-nrG">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
@@ -12,16 +12,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eF3-de-P5v">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eF3-de-P5v">
                                 <rect key="frame" x="26" y="233" width="45" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Twitter" id="UyK-pT-fKy">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8X9-Tf-XVS">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8X9-Tf-XVS">
                                 <rect key="frame" x="61" y="196" width="165" height="18"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Verify Credentials Status" id="E8g-oe-Wto">
                                     <font key="font" metaFont="system" size="14"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -33,6 +35,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="mSM-Fd-yK5"/>
                                 </constraints>
+                                <animations/>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>
@@ -43,26 +46,30 @@
                                     <constraint firstAttribute="width" constant="20" id="4c7-Xn-3Zo"/>
                                     <constraint firstAttribute="height" constant="20" id="7SL-qe-gEJ"/>
                                 </constraints>
+                                <animations/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RU2-eg-vOe"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FKb-Jz-IKe">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FKb-Jz-IKe">
                                 <rect key="frame" x="75" y="233" width="16" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="▶︎" id="yb1-nL-XtZ">
                                     <font key="font" size="13" name=".LucidaGrandeUI"/>
                                     <color key="textColor" red="0.26924949879999999" green="0.23910263179999999" blue="0.1031773165" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NS6-hz-jvm">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NS6-hz-jvm">
                                 <rect key="frame" x="95" y="233" width="67" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Username" id="d8A-nt-9EO">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="0.26924949884414673" green="0.23910263180732727" blue="0.10317731648683548" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PFs-yu-i48">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFs-yu-i48">
                                 <rect key="frame" x="109" y="19" width="175" height="19"/>
+                                <animations/>
                                 <buttonCell key="cell" type="roundRect" title="Open Accounts Preferences" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CSH-Bt-Vs5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -71,8 +78,9 @@
                                     <action selector="openAccountsPreferences:" target="ps4-Eu-nrG" id="9hf-B9-u7E"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d9B-zQ-BQb">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9B-zQ-BQb">
                                 <rect key="frame" x="292" y="19" width="168" height="19"/>
+                                <animations/>
                                 <buttonCell key="cell" type="roundRect" title="Open Security Preferences" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t3f-Oy-Koz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -83,6 +91,7 @@
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gnp-sb-1wy">
                                 <rect key="frame" x="18" y="137" width="444" height="34"/>
+                                <animations/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="If you wan to use other account, select the account following button or add new account in Accounts Preferences." id="SHa-az-37w">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -94,6 +103,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="CsI-l3-8wi"/>
                                 </constraints>
+                                <animations/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="oeR-P4-OXw">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -111,14 +121,16 @@
                             </popUpButton>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z63-aQ-PAY">
                                 <rect key="frame" x="18" y="71" width="444" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Error Report" id="Gzb-k3-EwK">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="0.43849745392799377" green="0.26094529032707214" blue="0.26579996943473816" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EKd-Nw-Kpc">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EKd-Nw-Kpc">
                                 <rect key="frame" x="297" y="93" width="169" height="32"/>
+                                <animations/>
                                 <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CcN-ZS-3ll">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -133,6 +145,7 @@ DQ
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
                                 <rect key="frame" x="318" y="186" width="148" height="32"/>
+                                <animations/>
                                 <buttonCell key="cell" type="push" title="Verify Credentials" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRz-PP-aVw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -184,6 +197,7 @@ DQ
                             <constraint firstAttribute="trailing" secondItem="d9B-zQ-BQb" secondAttribute="trailing" constant="20" id="tal-n0-sZA"/>
                             <constraint firstItem="AFn-Gq-0En" firstAttribute="baseline" secondItem="8X9-Tf-XVS" secondAttribute="baseline" id="zjD-S4-sjc"/>
                         </constraints>
+                        <animations/>
                     </view>
                     <connections>
                         <outlet property="accountSelectorController" destination="PSY-xM-UKI" id="Vij-uS-5sC"/>

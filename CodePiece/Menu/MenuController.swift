@@ -33,8 +33,6 @@ final class MenuController : NSObject {
 		return self.baseViewController?.timelineViewController
 	}
 	
-	var aboutWindowController:AboutWindowController!
-	
 	override init() {
 		
 		super.init()
@@ -43,9 +41,6 @@ final class MenuController : NSObject {
 	override func awakeFromNib() {
 		
 		super.awakeFromNib()
-		
-		self.aboutWindowController = AboutWindowController.instantiate()
-		self.aboutWindowController.acknowledgementsName = "Pods-CodePiece-acknowledgements"
 	}
 
 	var isMainViewControllerActive:Bool {
@@ -91,11 +86,6 @@ final class MenuController : NSObject {
 	@IBAction func postToSNS(sender:NSMenuItem?) {
 		
 		self.mainViewController?.postToSNS()
-	}
-	
-	@IBAction func showAboutWindow(sender:NSMenuItem?) {
-		
-		self.aboutWindowController.showWindow()
 	}
 	
 	@IBAction func clearTweetAndDescription(sender:NSMenuItem?) {

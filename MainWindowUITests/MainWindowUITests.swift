@@ -27,6 +27,32 @@ class MainWindowUITests: XCTestCase {
         super.tearDown()
     }
 	
+	func testAboutWindowController() {
+		
+		let app = XCUIApplication()
+		
+		app.launch()
+
+		let mainWindow = app.windows["CodePiece"]
+		let menuBarsQuery = app.menuBars
+		let aboutWindow = app.dialogs["Untitled"]
+		
+		XCTAssertTrue(mainWindow.exists)
+		XCTAssertFalse(aboutWindow.exists)
+		
+		menuBarsQuery.menuItems["About CodePiece"].click()
+		XCTAssertTrue(aboutWindow.exists)
+		
+		mainWindow.buttons[XCUIIdentifierCloseWindow].click()
+		XCTAssertTrue(mainWindow.exists, "Expected main window will not colse because other modal window is appeared.")
+		
+		aboutWindow.buttons[XCUIIdentifierCloseWindow].click()
+		XCTAssertFalse(aboutWindow.exists, "Expected modal window closed.")
+
+		mainWindow.buttons[XCUIIdentifierCloseWindow].click()
+		XCTAssertFalse(mainWindow.exists, "Expected main window will close because modal window is already finished.")
+	}
+	
 	func testApplicationEnvironments() {
 		
 		let application = XCUIApplication()

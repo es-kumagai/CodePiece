@@ -99,6 +99,7 @@
 		B152E2C41B6EE06B008B485A /* Swim.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B152E2C71B6F6C08008B485A /* MainStatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B152E2C51B6F6C08008B485A /* MainStatusController.swift */; };
 		B15E04881BC4CF6800FD81B6 /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */; settings = {ASSET_TAGS = (); }; };
+		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; settings = {ASSET_TAGS = (); }; };
 		B17C88C11B66BF0B00CBF20F /* README.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BD1B66BE6800CBF20F /* README.md */; };
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
 		B17C88C61B66FE7F00CBF20F /* ss in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BE1B66BE6800CBF20F /* ss */; };
@@ -311,6 +312,7 @@
 		B152E2B41B6EE06A008B485A /* ESThread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESThread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B152E2C51B6F6C08008B485A /* MainStatusController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStatusController.swift; sourceTree = "<group>"; };
 		B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableView.swift; sourceTree = "<group>"; };
+		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
 		B17C88BD1B66BE6800CBF20F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B17C88BE1B66BE6800CBF20F /* ss */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ss; sourceTree = "<group>"; };
 		B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 		B1492FB41B5BCED80043ED8D /* CodePiece */ = {
 			isa = PBXGroup;
 			children = (
+				B16DA71D1BC8FE4E00ED1599 /* Editors */,
 				B1BD64DA1B7B4477002DFDD0 /* URLScheme */,
 				B12B24791B6B594300B284D7 /* Windows */,
 				B1D2D6A31B5E1D5400794EFD /* Extension.swift */,
@@ -619,6 +622,7 @@
 			isa = PBXGroup;
 			children = (
 				B1D2D6751B5D525C00794EFD /* MenuController.swift */,
+				B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */,
 				B1269A611B7D94AD009305C6 /* TwitterAccountSelectorController.swift */,
 			);
 			path = Menu;
@@ -630,6 +634,13 @@
 				B14AF3721BC22EA10005F4CF /* Browse.swift */,
 			);
 			path = Browse;
+			sourceTree = "<group>";
+		};
+		B16DA71D1BC8FE4E00ED1599 /* Editors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Editors;
 			sourceTree = "<group>";
 		};
 		B17C88C41B66E66800CBF20F /* Scripts */ = {
@@ -1129,6 +1140,7 @@
 				B125A3F31B808D5900AFAB89 /* StatusImageView.swift in Sources */,
 				B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */,
 				B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */,
+				B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */,
 				B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */,
 				B1D2D6991B5DEA2600794EFD /* DataStore.swift in Sources */,
 				B1BB59F51B5E715B00DE3942 /* TwitterController.swift in Sources */,
