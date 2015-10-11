@@ -105,6 +105,8 @@
 		B17DAF5E1B6529A0004CE4D2 /* WebCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DAF5D1B6529A0004CE4D2 /* WebCaptureController.swift */; };
 		B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA9611BC60D9B00056E86 /* Extension.swift */; settings = {ASSET_TAGS = (); }; };
 		B18AA96C1BC6903A00056E86 /* MainWindowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */; };
+		B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */; settings = {ASSET_TAGS = (); }; };
+		B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */; settings = {ASSET_TAGS = (); }; };
 		B1A6976A1B8ADA5100D0F6FF /* TimelineTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A697691B8ADA5100D0F6FF /* TimelineTableDataSource.swift */; };
 		B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F01B5E714800DE3942 /* DescriptionGenerator.swift */; };
 		B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F11B5E714800DE3942 /* GistsController.swift */; };
@@ -321,6 +323,8 @@
 		B18AA9691BC6903A00056E86 /* MainWindowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MainWindowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowUITests.swift; sourceTree = "<group>"; };
 		B18AA96D1BC6903A00056E86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterOpenFeatures.swift; sourceTree = "<group>"; };
+		B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOpenFeatures.swift; sourceTree = "<group>"; };
 		B1A697691B8ADA5100D0F6FF /* TimelineTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableDataSource.swift; sourceTree = "<group>"; };
 		B1BB59F01B5E714800DE3942 /* DescriptionGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionGenerator.swift; sourceTree = "<group>"; };
 		B1BB59F11B5E714800DE3942 /* GistsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistsController.swift; sourceTree = "<group>"; };
@@ -571,6 +575,7 @@
 				B1492FE71B5BDA4B0043ED8D /* Menu */,
 				B128CB591B6777A600859D81 /* Controls */,
 				B1492FE21B5BD2510043ED8D /* Settings */,
+				B18FAC641BCA31B20041874A /* GlobalFeatures */,
 				B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */,
 				B1492FB51B5BCED80043ED8D /* AppDelegate.swift */,
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
@@ -666,6 +671,15 @@
 				B18AA96D1BC6903A00056E86 /* Info.plist */,
 			);
 			path = MainWindowUITests;
+			sourceTree = "<group>";
+		};
+		B18FAC641BCA31B20041874A /* GlobalFeatures */ = {
+			isa = PBXGroup;
+			children = (
+				B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */,
+				B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */,
+			);
+			name = GlobalFeatures;
 			sourceTree = "<group>";
 		};
 		B1BB59EF1B5E714800DE3942 /* SNS */ = {
@@ -1126,6 +1140,7 @@
 				B1269A601B7D9282009305C6 /* TwitterAccountMenuItem.swift in Sources */,
 				B1A6976A1B8ADA5100D0F6FF /* TimelineTableDataSource.swift in Sources */,
 				B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */,
+				B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */,
 				B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */,
 				B13C98F71B70E3C800A5A2B3 /* LanguagePopupDataSource.swift in Sources */,
 				B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */,
@@ -1151,6 +1166,7 @@
 				B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
 				B152E2C71B6F6C08008B485A /* MainStatusController.swift in Sources */,
+				B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */,
 				B12B24811B6B59D600B284D7 /* AboutViewController.swift in Sources */,
 				B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */,
 				B12E04451B8871F80032DC6F /* TimelineTableCellView.swift in Sources */,

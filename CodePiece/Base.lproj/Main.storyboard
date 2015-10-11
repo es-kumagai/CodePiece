@@ -245,15 +245,15 @@ DQ
                                         <menuItem title="Open Twitter Home" keyEquivalent="T" id="uQw-tc-WtZ">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
                                             <connections>
-                                                <action selector="openBrowserWithTwitterHome:" target="p69-Rc-ib8" id="bHn-wp-rpQ"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canOpenBrowserWithTwitterHome" id="WTU-iz-dvA"/>
+                                                <action selector="openTwitterHomeAction:" target="k6Z-Lx-p1R" id="h8X-Nk-vJP"/>
+                                                <binding destination="k6Z-Lx-p1R" name="enabled" keyPath="self.canOpenTwitterHome" id="L91-Mn-k2k"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open GitHub Home" keyEquivalent="G" id="cBq-DM-e57" userLabel="Open GitHub Home">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
                                             <connections>
-                                                <action selector="openBrowserWithGitHubHome:" target="p69-Rc-ib8" id="dWr-Qz-n8b"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canOpenBrowserWithGitHubHome" id="zAk-xx-pIV"/>
+                                                <action selector="openGitHubHomeAction:" target="noF-Hz-Tly" id="tj4-Fk-2Fp"/>
+                                                <binding destination="noF-Hz-Tly" name="enabled" keyPath="self.canOpenGitHubHome" id="dxd-Dq-wxv"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -298,6 +298,9 @@ DQ
                 <userDefaultsController id="IIP-oo-arA"/>
                 <userDefaultsController id="9K9-ir-1p7"/>
                 <userDefaultsController id="rQ8-82-LQj"/>
+                <customObject id="k6Z-Lx-p1R" customClass="TwitterOpenFeatures" customModule="CodePiece" customModuleProvider="target"/>
+                <customObject id="noF-Hz-Tly" customClass="GitHubOpenFeatures" customModule="CodePiece" customModuleProvider="target"/>
+                <userDefaultsController id="vXH-nv-6MI"/>
             </objects>
             <point key="canvasLocation" x="75.5" y="-235"/>
         </scene>
@@ -572,6 +575,8 @@ DQ
                         <outlet property="popupButton" destination="GDd-Xx-hX6" id="eXz-wY-01G"/>
                     </connections>
                 </customObject>
+                <customObject id="ywT-dB-cPR" customClass="TwitterOpenFeatures" customModule="CodePiece" customModuleProvider="target"/>
+                <customObject id="qrO-od-Svn" customClass="GitHubOpenFeatures" customModule="CodePiece" customModuleProvider="target"/>
                 <viewController title="CodePiece" identifier="MainViewController" storyboardIdentifier="MainViewController" id="XfG-lQ-9wD" customClass="ViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="744" height="438"/>
@@ -815,74 +820,172 @@ DQ
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="dTm-OD-heR" userLabel="Statusbar">
                                 <rect key="frame" x="0.0" y="2" width="744" height="20"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OvW-pp-unQ">
-                                        <rect key="frame" x="503" y="3" width="48" height="14"/>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nt2-w1-9c2" userLabel="Account Stack View">
+                                        <rect key="frame" x="464" y="0.0" width="272" height="20"/>
+                                        <subviews>
+                                            <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cv4-bH-JYt" userLabel="GitHub Stack View">
+                                                <rect key="frame" x="0.0" y="2" width="128" height="16"/>
+                                                <subviews>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ziZ-O4-zLg" userLabel="GitHub Status" customClass="StatusImageView" customModule="CodePiece" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="ziZ-O4-zLg" secondAttribute="height" multiplier="1:1" id="Sjk-O3-OhU"/>
+                                                        </constraints>
+                                                        <animations/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusNone" id="GzY-Nk-gkr"/>
+                                                    </imageView>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OvW-pp-unQ">
+                                                        <rect key="frame" x="18" y="1" width="41" height="14"/>
+                                                        <animations/>
+                                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub" id="o59-La-vqh">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CRM-dS-pmg">
+                                                        <rect key="frame" x="59" y="1" width="8" height="14"/>
+                                                        <animations/>
+                                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=":" id="gce-f9-xV6">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VV1-A9-obp">
+                                                        <rect key="frame" x="67" y="1" width="48" height="14"/>
+                                                        <animations/>
+                                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="RVn-HG-PWU">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <button alphaValue="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="qhD-hJ-muR">
+                                                        <rect key="frame" x="117" y="3" width="11" height="11"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="11" id="hJ6-pE-OtP"/>
+                                                            <constraint firstAttribute="width" secondItem="qhD-hJ-muR" secondAttribute="height" multiplier="1:1" id="kZZ-qR-tLk"/>
+                                                        </constraints>
+                                                        <animations/>
+                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="49Z-PP-m2o">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="openGitHubHomeAction:" target="qrO-od-Svn" id="IM1-Bg-Fq4"/>
+                                                            <binding destination="qrO-od-Svn" name="enabled" keyPath="self.canOpenGitHubHome" id="NUI-TK-3TZ"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <animations/>
+                                                <visibilityPriorities>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                </visibilityPriorities>
+                                                <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                </customSpacing>
+                                            </stackView>
+                                            <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nFE-IN-Em0" userLabel="Twitter Stack View">
+                                                <rect key="frame" x="144" y="2" width="128" height="16"/>
+                                                <subviews>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1a-PY-hWq" userLabel="Twitter Status" customClass="StatusImageView" customModule="CodePiece" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="J1a-PY-hWq" secondAttribute="height" multiplier="1:1" id="oOd-4C-haA"/>
+                                                        </constraints>
+                                                        <animations/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusNone" id="tbL-j1-OuW"/>
+                                                    </imageView>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Llm-UZ-Ec0">
+                                                        <rect key="frame" x="18" y="1" width="41" height="14"/>
+                                                        <animations/>
+                                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Twitter" id="CpL-rT-JYL">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Yp-Rl-YKt">
+                                                        <rect key="frame" x="59" y="1" width="8" height="14"/>
+                                                        <animations/>
+                                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=":" id="MiR-gG-ZjF">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZTT-3E-s7B">
+                                                        <rect key="frame" x="67" y="1" width="48" height="14"/>
+                                                        <animations/>
+                                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="fkj-wv-GTZ">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <button alphaValue="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="0As-uo-qYi">
+                                                        <rect key="frame" x="117" y="3" width="11" height="11"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="11" id="MES-A1-ZD2"/>
+                                                            <constraint firstAttribute="width" secondItem="0As-uo-qYi" secondAttribute="height" multiplier="1:1" id="bis-p1-t0y"/>
+                                                        </constraints>
+                                                        <animations/>
+                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="kYV-7U-uap">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="openTwitterHomeAction:" target="ywT-dB-cPR" id="nMb-NU-rhS"/>
+                                                            <binding destination="ywT-dB-cPR" name="enabled" keyPath="self.canOpenTwitterHome" id="LpV-3v-S49"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstItem="0As-uo-qYi" firstAttribute="width" secondItem="0As-uo-qYi" secondAttribute="height" multiplier="1:1" id="yrQ-Pt-MYd"/>
+                                                </constraints>
+                                                <visibilityPriorities>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                </visibilityPriorities>
+                                                <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                </customSpacing>
+                                            </stackView>
+                                        </subviews>
                                         <animations/>
-                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub :" id="o59-La-vqh">
-                                            <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VV1-A9-obp">
-                                        <rect key="frame" x="551" y="3" width="48" height="14"/>
-                                        <animations/>
-                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="RVn-HG-PWU">
-                                            <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Llm-UZ-Ec0">
-                                        <rect key="frame" x="635" y="3" width="47" height="14"/>
-                                        <animations/>
-                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Twitter :" id="CpL-rT-JYL">
-                                            <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZTT-3E-s7B">
-                                        <rect key="frame" x="682" y="3" width="48" height="14"/>
-                                        <animations/>
-                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="fkj-wv-GTZ">
-                                            <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ziZ-O4-zLg" userLabel="GitHub Status" customClass="StatusImageView" customModule="CodePiece" customModuleProvider="target">
-                                        <rect key="frame" x="485" y="2" width="16" height="16"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="ziZ-O4-zLg" secondAttribute="height" multiplier="1:1" id="Sjk-O3-OhU"/>
-                                        </constraints>
-                                        <animations/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusNone" id="GzY-Nk-gkr"/>
-                                    </imageView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1a-PY-hWq" userLabel="Twitter Status" customClass="StatusImageView" customModule="CodePiece" customModuleProvider="target">
-                                        <rect key="frame" x="617" y="2" width="16" height="16"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="J1a-PY-hWq" secondAttribute="height" multiplier="1:1" id="oOd-4C-haA"/>
-                                        </constraints>
-                                        <animations/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusNone" id="tbL-j1-OuW"/>
-                                    </imageView>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="J1a-PY-hWq" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="3LN-ed-T7v"/>
-                                    <constraint firstItem="VV1-A9-obp" firstAttribute="leading" secondItem="OvW-pp-unQ" secondAttribute="trailing" constant="4" id="8DZ-bh-Ahr"/>
-                                    <constraint firstItem="ziZ-O4-zLg" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="ARg-aP-kxP"/>
-                                    <constraint firstItem="ZTT-3E-s7B" firstAttribute="leading" secondItem="Llm-UZ-Ec0" secondAttribute="trailing" constant="4" id="CNf-Wu-4Dt"/>
-                                    <constraint firstItem="Llm-UZ-Ec0" firstAttribute="leading" secondItem="J1a-PY-hWq" secondAttribute="trailing" constant="4" id="Glp-FK-JuG"/>
-                                    <constraint firstItem="ZTT-3E-s7B" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="Q9P-o0-zGt"/>
-                                    <constraint firstItem="OvW-pp-unQ" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="UMv-oa-Vlk"/>
-                                    <constraint firstItem="Llm-UZ-Ec0" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="Xmo-2Q-nS9"/>
+                                    <constraint firstItem="nt2-w1-9c2" firstAttribute="top" secondItem="dTm-OD-heR" secondAttribute="top" id="TVY-xx-13X"/>
+                                    <constraint firstAttribute="bottom" secondItem="nt2-w1-9c2" secondAttribute="bottom" id="YTB-w6-JGy"/>
                                     <constraint firstAttribute="height" constant="20" id="auc-4O-aEC"/>
-                                    <constraint firstItem="VV1-A9-obp" firstAttribute="centerY" secondItem="dTm-OD-heR" secondAttribute="centerY" id="fTZ-2s-PyR"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="600" id="hBX-Mc-Ecf"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZTT-3E-s7B" secondAttribute="trailing" constant="16" id="hIy-Ss-v72"/>
-                                    <constraint firstItem="J1a-PY-hWq" firstAttribute="leading" secondItem="VV1-A9-obp" secondAttribute="trailing" constant="20" id="me5-SV-Sxw"/>
-                                    <constraint firstItem="OvW-pp-unQ" firstAttribute="leading" secondItem="ziZ-O4-zLg" secondAttribute="trailing" constant="4" id="yht-RU-VsT"/>
+                                    <constraint firstAttribute="trailing" secondItem="nt2-w1-9c2" secondAttribute="trailing" constant="8" id="xiR-Jo-gCV"/>
                                 </constraints>
                                 <animations/>
                             </customView>
@@ -935,6 +1038,7 @@ DQ
         </scene>
     </scenes>
     <resources>
+        <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
         <image name="NSStatusNone" width="16" height="16"/>
         <image name="NSUserGuest" width="32" height="32"/>
     </resources>
