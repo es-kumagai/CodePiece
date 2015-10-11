@@ -8,7 +8,7 @@
         <scene sceneID="LpZ-md-yfK">
             <objects>
                 <windowController id="Uy3-nO-Z6i" customClass="PreferencesWindowController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="S6O-Tj-Y3D">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="S6O-Tj-Y3D">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <rect key="contentRect" x="0.0" y="0.0" width="480" height="270"/>
                         <rect key="screenRect" x="-1920" y="-120" width="1920" height="1177"/>
@@ -36,26 +36,26 @@
                     </window>
                     <connections>
                         <outlet property="toolbar" destination="rAV-2P-h6l" id="JOw-P9-REz"/>
-                        <segue destination="1eL-bp-C8v" kind="relationship" relationship="window.shadowedContentViewController" id="o7T-n9-yCJ"/>
+                        <segue destination="uYU-pq-jgi" kind="relationship" relationship="window.shadowedContentViewController" id="Ohd-Gb-gpn"/>
                     </connections>
                 </windowController>
                 <customObject id="7yZ-BV-ky1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="113" y="361"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="2Tt-Kl-hKt">
+        <!--Dummy View Controller-->
+        <scene sceneID="Lcz-Qh-h6i">
             <objects>
-                <viewController id="1eL-bp-C8v" sceneMemberID="viewController">
-                    <view key="view" id="ajg-Ee-ZDE">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                <viewController id="uYU-pq-jgi" userLabel="Dummy View Controller" sceneMemberID="viewController">
+                    <view key="view" id="r0n-2d-skG">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </view>
                 </viewController>
-                <customObject id="0pM-bb-453" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="Cwu-I7-s0q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679" y="328"/>
+            <point key="canvasLocation" x="722" y="361"/>
         </scene>
     </scenes>
     <resources>

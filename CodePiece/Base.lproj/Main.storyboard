@@ -399,7 +399,7 @@ DQ
                                                                                         <constraint firstAttribute="width" constant="24" id="XzU-Lb-T5G"/>
                                                                                     </constraints>
                                                                                     <animations/>
-                                                                                    <buttonCell key="cell" type="bevel" bezelStyle="circular" image="CodePiece.32x32" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="D67-Tb-u39">
+                                                                                    <buttonCell key="cell" type="bevel" bezelStyle="circular" image="NSUserGuest" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="D67-Tb-u39">
                                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                         <font key="font" metaFont="system"/>
                                                                                     </buttonCell>
@@ -938,6 +938,6 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="CodePiece.32x32" width="32" height="32"/>
+        <image name="NSUserGuest" width="32" height="32"/>
     </resources>
 </document>
