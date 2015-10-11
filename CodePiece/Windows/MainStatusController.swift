@@ -25,13 +25,13 @@ final class MainStatusController: NSObject {
 		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 			
 			self.twitterAccountNameTextField.stringValue = notification.username ?? none
-			self.twitterAccountStatusImageView.status = notification.isValid ? .Green : .Red
+			self.twitterAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
 		}
 		
 		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 			
 			self.githubAccountNameTextField.stringValue = notification.username ?? none
-			self.githubAccountStatusImageView.status = notification.isValid ? .Green : .Red
+			self.githubAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
 		}
 	}
 }

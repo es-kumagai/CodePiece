@@ -14,7 +14,6 @@
 		B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */; };
 		B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */; };
 		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
-		B125A3F11B808CC600AFAB89 /* Mark in Resources */ = {isa = PBXBuildFile; fileRef = B125A3F01B808CC500AFAB89 /* Mark */; };
 		B125A3F31B808D5900AFAB89 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B125A3F21B808D5900AFAB89 /* StatusImageView.swift */; };
 		B125A3F51B808DD600AFAB89 /* StatusImageView.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B125A3F41B808DD600AFAB89 /* StatusImageView.xcassets */; };
 		B12674E61BC0ECCA00F38464 /* ESTwitterAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = B12674E51BC0ECCA00F38464 /* ESTwitterAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -978,7 +977,6 @@
 				B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */,
 				B1118DA21B6BE77800BFC5FA /* WelcomeBoard.storyboard in Resources */,
 				B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */,
-				B125A3F11B808CC600AFAB89 /* Mark in Resources */,
 				B125A3F51B808DD600AFAB89 /* StatusImageView.xcassets in Resources */,
 				B12B248C1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard in Resources */,
 				B12B24861B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist in Resources */,

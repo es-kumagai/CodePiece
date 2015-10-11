@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
@@ -815,7 +816,7 @@ DQ
                                 <rect key="frame" x="0.0" y="2" width="744" height="20"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OvW-pp-unQ">
-                                        <rect key="frame" x="507" y="3" width="48" height="14"/>
+                                        <rect key="frame" x="503" y="3" width="48" height="14"/>
                                         <animations/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub :" id="o59-La-vqh">
                                             <font key="font" metaFont="smallSystem"/>
@@ -824,7 +825,7 @@ DQ
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VV1-A9-obp">
-                                        <rect key="frame" x="555" y="3" width="48" height="14"/>
+                                        <rect key="frame" x="551" y="3" width="48" height="14"/>
                                         <animations/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="RVn-HG-PWU">
                                             <font key="font" metaFont="smallSystem"/>
@@ -851,24 +852,20 @@ DQ
                                         </textFieldCell>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ziZ-O4-zLg" userLabel="GitHub Status" customClass="StatusImageView" customModule="CodePiece" customModuleProvider="target">
-                                        <rect key="frame" x="493" y="4" width="12" height="12"/>
+                                        <rect key="frame" x="485" y="2" width="16" height="16"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="Mvz-Hp-pUw"/>
-                                            <constraint firstAttribute="width" constant="12" id="nJu-V7-ib0"/>
+                                            <constraint firstAttribute="width" secondItem="ziZ-O4-zLg" secondAttribute="height" multiplier="1:1" id="Sjk-O3-OhU"/>
                                         </constraints>
                                         <animations/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="GzY-Nk-gkr"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusNone" id="GzY-Nk-gkr"/>
                                     </imageView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1a-PY-hWq" userLabel="Twitter Status" customClass="StatusImageView" customModule="CodePiece" customModuleProvider="target">
-                                        <rect key="frame" x="621" y="4" width="12" height="12"/>
+                                        <rect key="frame" x="617" y="2" width="16" height="16"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="4rv-ID-ZBu"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="RgI-nK-aKQ"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="12" id="VB0-nY-GBx"/>
-                                            <constraint firstAttribute="width" constant="12" id="oez-FQ-HXv"/>
+                                            <constraint firstAttribute="width" secondItem="J1a-PY-hWq" secondAttribute="height" multiplier="1:1" id="oOd-4C-haA"/>
                                         </constraints>
                                         <animations/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="tbL-j1-OuW"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusNone" id="tbL-j1-OuW"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -938,6 +935,7 @@ DQ
         </scene>
     </scenes>
     <resources>
+        <image name="NSStatusNone" width="16" height="16"/>
         <image name="NSUserGuest" width="32" height="32"/>
     </resources>
 </document>
