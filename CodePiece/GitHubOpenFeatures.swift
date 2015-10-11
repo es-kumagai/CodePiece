@@ -14,9 +14,7 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable {
 		
 		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 			
-			self.withChangeValue("canOpenGitHubHome") {
-				
-			}
+			self.withChangeValue("canOpenGitHubHome")
 		}
 	}
 	

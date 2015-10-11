@@ -15,9 +15,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable {
 		
 		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 
-			self.withChangeValue("canOpenTwitterHome") {
-				
-			}
+			self.withChangeValue("canOpenTwitterHome")
 		}		
 	}
 	

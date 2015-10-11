@@ -415,9 +415,7 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	override func controlTextDidChange(notification: NSNotification) {
 	
-		self.willChangeValueForKey("canPost")
-		self.didChangeValueForKey("canPost")
-	
+		self.withChangeValue("canPost")
 		self.updateControlsDisplayText()
 	}
 	

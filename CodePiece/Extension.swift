@@ -286,7 +286,17 @@ public func handleError<R,E:ErrorType>(@autoclosure expression:() throws -> R, b
 
 extension NSObject {
 
+	public func withChangeValue(keys:String...) {
+		
+		self.withChangeValue(keys, body: {})
+	}
+
 	public func withChangeValue(keys:String..., @noescape body:()->Void) {
+
+		self.withChangeValue(keys, body: body)
+	}
+
+	public func withChangeValue<S:SequenceType where S.Generator.Element == String>(keys:S, @noescape body:()->Void) {
 		
 		keys.forEach(self.willChangeValueForKey)
 		

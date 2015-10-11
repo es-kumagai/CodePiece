@@ -192,10 +192,7 @@ class TwitterPreferenceViewController: NSViewController {
 		
 		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 			
-			self.withChangeValue("credentialsVerified", "credentialsNotVerified") {
-				
-			}
-			
+			self.withChangeValue("credentialsVerified", "credentialsNotVerified")
 			self.applyAuthorizedStatus()
 		}
 		
