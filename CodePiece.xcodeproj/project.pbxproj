@@ -15,7 +15,6 @@
 		B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */; };
 		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
 		B125A3F31B808D5900AFAB89 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B125A3F21B808D5900AFAB89 /* StatusImageView.swift */; };
-		B125A3F51B808DD600AFAB89 /* StatusImageView.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B125A3F41B808DD600AFAB89 /* StatusImageView.xcassets */; };
 		B12674E61BC0ECCA00F38464 /* ESTwitterAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = B12674E51BC0ECCA00F38464 /* ESTwitterAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B12674EA1BC0ECCB00F38464 /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12674E31BC0ECCA00F38464 /* ESTwitter.framework */; };
 		B12674EB1BC0ECCB00F38464 /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12674E31BC0ECCA00F38464 /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -244,7 +243,6 @@
 		B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TwitterPreferenceView.storyboard; sourceTree = "<group>"; };
 		B125A3F01B808CC500AFAB89 /* Mark */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mark; sourceTree = "<group>"; };
 		B125A3F21B808D5900AFAB89 /* StatusImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusImageView.swift; sourceTree = "<group>"; };
-		B125A3F41B808DD600AFAB89 /* StatusImageView.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = StatusImageView.xcassets; sourceTree = "<group>"; };
 		B125A3F61B80DABC00AFAB89 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		B125A3F71B80DE3E00AFAB89 /* HowToBuild.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = HowToBuild.md; sourceTree = "<group>"; };
 		B12674E31BC0ECCA00F38464 /* ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -480,7 +478,6 @@
 				B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */,
 				B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */,
 				B125A3F21B808D5900AFAB89 /* StatusImageView.swift */,
-				B125A3F41B808DD600AFAB89 /* StatusImageView.xcassets */,
 				B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */,
 				B12E04441B8871F80032DC6F /* TimelineTableCellView.swift */,
 				B1A697691B8ADA5100D0F6FF /* TimelineTableDataSource.swift */,
@@ -991,7 +988,6 @@
 				B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */,
 				B1118DA21B6BE77800BFC5FA /* WelcomeBoard.storyboard in Resources */,
 				B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */,
-				B125A3F51B808DD600AFAB89 /* StatusImageView.xcassets in Resources */,
 				B12B248C1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard in Resources */,
 				B12B24861B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist in Resources */,
 				B12B247F1B6B599900B284D7 /* AboutWindowController.storyboard in Resources */,
