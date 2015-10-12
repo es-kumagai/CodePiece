@@ -781,7 +781,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/XcodeGenerateConstants CodePieceClientInfo \"/private/tmp\"";
+			shellScript = "";
 		};
 		C20072E337D4D256BD8A1159 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
