@@ -59,6 +59,11 @@ extension TimelineViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		
+			self.updateStatuses()
+		}
+		
 		HashtagDidChangeNotification.observeBy(self) { owner, notification in
 			
 			let hashtag = notification.hashtag
