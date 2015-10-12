@@ -12,6 +12,7 @@
 		B1118DA81B6BEF4D00BFC5FA /* AppExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */; };
 		B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */; };
 		B12210521BCBB955004DBB9A /* CodePieceClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12210511BCBB955004DBB9A /* CodePieceClientInfo.swift */; settings = {ASSET_TAGS = (); }; };
+		B12210541BCBC476004DBB9A /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12210531BCBC476004DBB9A /* ClientInfo.swift */; settings = {ASSET_TAGS = (); }; };
 		B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */; };
 		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
 		B125A3F11B808CC600AFAB89 /* Mark in Resources */ = {isa = PBXBuildFile; fileRef = B125A3F01B808CC500AFAB89 /* Mark */; };
@@ -185,6 +186,7 @@
 		B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppExtension.swift; sourceTree = "<group>"; };
 		B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBoardWindowController.swift; sourceTree = "<group>"; };
 		B12210511BCBB955004DBB9A /* CodePieceClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodePieceClientInfo.swift; path = /Data/Development/Projects/CodePiece/Resources/../../../../../private/tmp/CodePieceClientInfo.swift; sourceTree = "<absolute>"; };
+		B12210531BCBC476004DBB9A /* ClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
 		B12460CF1B5F865F0036A690 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460D21B5F865F0036A690 /* Himotoki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Himotoki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460D51B5F865F0036A690 /* KeychainAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -567,6 +569,7 @@
 				B1D2D69B1B5DFF7400794EFD /* Colors.swift */,
 				B137468C1B6506000068414B /* Fonts.swift */,
 				B1D2D6A51B5E2B2800794EFD /* Notifications.swift */,
+				B12210531BCBC476004DBB9A /* ClientInfo.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -844,6 +847,7 @@
 				B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */,
 				B1E89A7C1B7472770062E12E /* DataStore_AuthInfo.swift in Sources */,
 				B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */,
+				B12210541BCBC476004DBB9A /* ClientInfo.swift in Sources */,
 				B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
 				B152E2C71B6F6C08008B485A /* MainStatusController.swift in Sources */,
