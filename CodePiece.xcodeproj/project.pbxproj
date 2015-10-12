@@ -61,7 +61,6 @@
 		B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1492FB91B5BCED80043ED8D /* Assets.xcassets */; };
 		B1492FBD1B5BCED80043ED8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1492FBB1B5BCED80043ED8D /* Main.storyboard */; };
 		B1492FC81B5BCED80043ED8D /* CodePieceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FC71B5BCED80043ED8D /* CodePieceTests.swift */; };
-		B1492FD31B5BCED80043ED8D /* CodePieceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FD21B5BCED80043ED8D /* CodePieceUITests.swift */; };
 		B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */; };
 		B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */; };
 		B14AF3731BC22EA10005F4CF /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3721BC22EA10005F4CF /* Browse.swift */; settings = {ASSET_TAGS = (); }; };
@@ -296,7 +295,6 @@
 		B1492FC71B5BCED80043ED8D /* CodePieceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePieceTests.swift; sourceTree = "<group>"; };
 		B1492FC91B5BCED80043ED8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1492FCE1B5BCED80043ED8D /* CodePieceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodePieceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1492FD21B5BCED80043ED8D /* CodePieceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePieceUITests.swift; sourceTree = "<group>"; };
 		B1492FD41B5BCED80043ED8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1492FE01B5BCF1E0043ED8D /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSetting.swift; sourceTree = "<group>"; };
@@ -598,7 +596,6 @@
 		B1492FD11B5BCED80043ED8D /* CodePieceUITests */ = {
 			isa = PBXGroup;
 			children = (
-				B1492FD21B5BCED80043ED8D /* CodePieceUITests.swift */,
 				B1492FD41B5BCED80043ED8D /* Info.plist */,
 			);
 			path = CodePieceUITests;
@@ -1198,7 +1195,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1492FD31B5BCED80043ED8D /* CodePieceUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
