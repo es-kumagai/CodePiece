@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		14D00E0F96AD373709CD09D7 /* Pods_ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42A5EAE8BAE526CDC6F06BC /* Pods_ESTwitter.framework */; };
+		B10CB6931BCCBBBC001C9E02 /* Pods_ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42A5EAE8BAE526CDC6F06BC /* Pods_ESTwitter.framework */; };
+		B10CB6941BCCBBBC001C9E02 /* Pods_ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B42A5EAE8BAE526CDC6F06BC /* Pods_ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1118DA21B6BE77800BFC5FA /* WelcomeBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1118DA11B6BE77800BFC5FA /* WelcomeBoard.storyboard */; };
 		B1118DA51B6BECAD00BFC5FA /* WelcomeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA31B6BECAD00BFC5FA /* WelcomeBoardViewController.swift */; };
 		B1118DA81B6BEF4D00BFC5FA /* AppExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */; };
@@ -196,6 +198,7 @@
 				B152E2B01B6EE06A008B485A /* ESNotification.framework in Embed Frameworks */,
 				B152E2C41B6EE06B008B485A /* Swim.framework in Embed Frameworks */,
 				B152E2C21B6EE06B008B485A /* STTwitter.framework in Embed Frameworks */,
+				B10CB6941BCCBBBC001C9E02 /* Pods_ESTwitter.framework in Embed Frameworks */,
 				B152E2A71B6EE06A008B485A /* ESAppKitExtension.framework in Embed Frameworks */,
 				B152E2BC1B6EE06A008B485A /* Ocean.framework in Embed Frameworks */,
 				B152E2A41B6EE06A008B485A /* ESActiveCounter.framework in Embed Frameworks */,
@@ -380,6 +383,7 @@
 				B152E2AF1B6EE06A008B485A /* ESNotification.framework in Frameworks */,
 				B152E2C31B6EE06B008B485A /* Swim.framework in Frameworks */,
 				B152E2C11B6EE06B008B485A /* STTwitter.framework in Frameworks */,
+				B10CB6931BCCBBBC001C9E02 /* Pods_ESTwitter.framework in Frameworks */,
 				B152E2A61B6EE06A008B485A /* ESAppKitExtension.framework in Frameworks */,
 				B152E2BB1B6EE06A008B485A /* Ocean.framework in Frameworks */,
 				B152E2A31B6EE06A008B485A /* ESActiveCounter.framework in Frameworks */,
