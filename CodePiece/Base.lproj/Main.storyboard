@@ -167,6 +167,19 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="View" id="1on-hC-tNb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="View" id="6ng-Ta-apn">
+                                    <items>
+                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="Fey-Q3-GG0">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="1Be-of-ehx"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Navigate" id="zX9-Iq-OH1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Navigate" id="plw-yh-OX5">
