@@ -11,12 +11,12 @@ PODS:
     - ESActiveCounter (~> 0.1.4)
     - ESAppKitExtension (~> 0.1.1)
     - ESCoreGraphicsExtension (~> 0.1.3)
-    - ESNotification (~> 0.2.0)
+    - ESNotification (~> 0.2.4)
     - ESThread (~> 0.1.0)
-    - Himotoki (~> 1.0.0)
+    - Himotoki (~> 1.1)
     - Ocean (~> 1.4.0)
     - Swim (~> 1.4.0)
-  - ESNotification (0.2.2):
+  - ESNotification (0.2.4):
     - ESThread (~> 0.1.0)
     - Swim (~> 1.4.0)
   - ESProgressHUD (0.1.2):
@@ -24,8 +24,8 @@ PODS:
     - ESAppKitExtension (~> 0.1.1)
     - ESCoreGraphicsExtension (~> 0.1.2)
   - ESThread (0.1.0)
-  - Himotoki (1.0.0)
-  - KeychainAccess (2.0.1)
+  - Himotoki (1.1.0)
+  - KeychainAccess (2.2.0)
   - Ocean (1.4.0):
     - ESActiveCounter (~> 0.1.4)
     - ESAppKitExtension (~> 0.1.1)
@@ -35,7 +35,7 @@ PODS:
     - ESThread (~> 0.1.0)
     - Swim (~> 1.4.0)
   - p2.OAuth2 (2.0.1)
-  - Result (0.6.0-beta.3)
+  - Result (0.6.0-beta.4)
   - STTwitter (0.2.2)
   - Swim (1.4.1-beta)
 
@@ -74,16 +74,16 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ESGists:
-    :commit: 87d48a074e3ec882aa2f3ae2b00ffcaaf688cd37
+    :commit: 328fe5778a8c8773c61d77b178b2bc866a079b82
     :git: https://github.com/EZ-NET/ESGists.git
   ESNotification:
-    :commit: ed925af278ac2e5426c5e4d6e13a81fb828b8bb2
+    :commit: cc4212b74c5a18e91aec9bf21dffda13faf40403
     :git: https://github.com/EZ-NET/ESNotification.git
   Himotoki:
-    :commit: 1654ca0584f75f3e934bf8c02c30db115e310954
+    :commit: b765828edb9ed1c2b80189ebcda3f320e12d0409
     :git: https://github.com/ikesyo/Himotoki
   KeychainAccess:
-    :commit: a25fbce761f331b4ef3deb5cccaf3a821dffcaf0
+    :commit: 1d9da37517b6c2bcd998bf39f61d39b2bf7a4861
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
   Ocean:
     :commit: 1234aac116cd1903ac386a760d23f456fc3fdbaf
@@ -100,15 +100,15 @@ SPEC CHECKSUMS:
   ESActiveCounter: 222f94afbe6cd9276eaadf142c88c4ea1a8750b8
   ESAppKitExtension: 3bc92382a286d8ed531c0f2e9e1a0356cae9457c
   ESCoreGraphicsExtension: 187eae3d0bec6a1f6328956305cd9a61fdd6b183
-  ESGists: 8cab99a2069bf98357e7ecdf81f1a7e739d13d08
-  ESNotification: 1f9a56b5210abb998b8dfb1c4e153ea5e3305d80
+  ESGists: ef92b70f21c99fb024573e16e9af0ae9a508d16f
+  ESNotification: 94063ce745ddee2f041f233acd3836e50414fa92
   ESProgressHUD: 1ce6537e3813cd96d8fb81ae34d859cd5bd2fad2
   ESThread: aa7f1d3e412716cef6c62e116a1da761449f5e48
-  Himotoki: 248b55af276aef1af1a326e918aed30bc5ee25dd
-  KeychainAccess: 4f43261905701098847f6995a2de3fe8b90284df
+  Himotoki: a15cb17fafe96a86bef9229c25cf0d1d0f6b32dc
+  KeychainAccess: c14a391a45bb3efbd63ab9f5a95b5b4e8753a506
   Ocean: f6eeb71ff6df0693660ddb4524a2ee7ff43d7530
   p2.OAuth2: 6d4183a4dcec05cc6df3bab1110551854a116b9c
-  Result: b80bca7becdda9a2e44c4fd65b4b4a7b5db4cf9a
+  Result: f7927152cbaec0c043abb06ba0bc432678818418
   STTwitter: eb85d8770ddb0f8989f341cf41ea875e90ac6e7f
   Swim: 5d6b294188fd7ecde95450ca3e45e9d6db7df470
 
