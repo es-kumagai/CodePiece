@@ -39,7 +39,7 @@ extension PreferencesWindowController : NSWindowDelegate {
 	
 	func windowWillClose(notification: NSNotification) {
 
-		sns.twitter.verifyCredentialsIfNeed { result in
+		NSApp.twitterController.verifyCredentialsIfNeed { result in
 			
 			if let error = result.error {
 				

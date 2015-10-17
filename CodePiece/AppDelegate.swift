@@ -11,9 +11,6 @@ import ESNotification
 
 // FIXME: ⭐️ 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整します。
 
-var sns:SNSController!
-var captureController:WebCaptureController!
-
 private var reachabilityController:ReachabilityController!
 
 @NSApplicationMain
@@ -42,13 +39,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		
 		NotificationManager.dammingNotifications = false
 		
-		// FIXME: 各コントローラーを AppControllers に入れたい。初期化タイミングの変化に注意
-		sns = SNSController()
-		captureController = WebCaptureController()
-
 		self.urlSchemeManager = URLSchemeManager()
 		
-		sns.twitter.verifyCredentialsIfNeed()
+		NSApp.twitterController.verifyCredentialsIfNeed()
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {

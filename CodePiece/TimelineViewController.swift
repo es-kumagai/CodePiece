@@ -122,7 +122,7 @@ extension TimelineViewController {
 	
 	private func updateStatuses() {
 		
-		guard sns.twitter.credentialsVerified else {
+		guard NSApp.twitterController.credentialsVerified else {
 		
 			NSLog("Cancel update for twitter timeline because current twitter account's credentials is not verified.")
 			return
@@ -159,7 +159,7 @@ extension TimelineViewController {
 		
 		let getTimelineSpecifiedQuery = {
 			
-			sns.twitter.getStatusesWithQuery(query, since: self.timelineDataSource.lastTweetID) { result in
+			NSApp.twitterController.getStatusesWithQuery(query, since: self.timelineDataSource.lastTweetID) { result in
 				
 				switch result {
 					

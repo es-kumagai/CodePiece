@@ -174,11 +174,11 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			
 		case .Success:
 			DebugTime.print("📮 Passed verify-credentials #12")
-			NSLog("Twitter credentials verified successfully. (\(sns.twitter.effectiveUserInfo?.username))")
+			NSLog("Twitter credentials verified successfully. (\(NSApp.twitterController.effectiveUserInfo?.username))")
 			
 		case .Failure(let error):
 			DebugTime.print("📮 Passed verify-credentials #13")
-			self.showErrorAlert("Failed to verify credentials", message: "\(error.localizedDescription) (\(sns.twitter.effectiveUserInfo?.username))")
+			self.showErrorAlert("Failed to verify credentials", message: "\(error.localizedDescription) (\(NSApp.twitterController.effectiveUserInfo?.username))")
 		}
 	}
 	

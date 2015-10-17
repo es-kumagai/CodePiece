@@ -107,7 +107,7 @@ class ViewController: NSViewController {
 			return
 		}
 
-		guard sns.canPost else {
+		guard NSApp.snsController.canPost else {
 		
 			self.showErrorAlert("Not ready", message: "It is not ready to post. Please set SNS accounts by the CodePiece's preferences. (⌘,)")
 			return
@@ -167,7 +167,7 @@ class ViewController: NSViewController {
 			
 			DebugTime.print("📮 Try posting with a Code ... #1.1")
 
-			try sns.post(code, language: language, description: description, hashtag: hashtag) { result in
+			try NSApp.snsController.post(code, language: language, description: description, hashtag: hashtag) { result in
 				
 				DebugTime.print("📮 Posted \(result) ... #1.1.1")
 				
@@ -185,7 +185,7 @@ class ViewController: NSViewController {
 			
 			DebugTime.print("📮 Try posting without Codes ... #1.2")
 			
-			try sns.twitter.post(description, hashtag: hashtag) { result in
+			try NSApp.twitterController.post(description, hashtag: hashtag) { result in
 				
 				DebugTime.print("📮 Posted \(result) ... #1.2.1")
 				
@@ -322,12 +322,12 @@ class ViewController: NSViewController {
 	
 	func verifyCredentials() {
 
-		guard sns != nil else {
+		guard NSApp.snsController != nil else {
 		
 			return
 		}
 		
-		sns.twitter.verifyCredentialsIfNeed { result in
+		NSApp.twitterController.verifyCredentialsIfNeed { result in
 			
 			switch result {
 

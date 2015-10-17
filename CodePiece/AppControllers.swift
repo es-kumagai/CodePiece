@@ -8,14 +8,14 @@
 
 final class AppGlobalControllers {
 	
-//	private(set) var sns:SNSController!
-//	private(set) var captureController:WebCaptureController!
+	private(set) var sns:SNSController!
+	private(set) var captureController:WebCaptureController!
 	private(set) var reachabilityController:ReachabilityController!
 	
 	func prepare() {
 		
-//		self.sns = SNSController()
-//		self.captureController = WebCaptureController()
+		self.sns = SNSController()
+		self.captureController = WebCaptureController()
 		self.reachabilityController = ReachabilityController()
 	}
 }

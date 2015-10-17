@@ -18,6 +18,8 @@ extension NSApplication : AlertDisplayable {
 	
 }
 
+// MARK: - Controllers
+
 extension NSApplication {
 	
 	static let controllers = AppGlobalControllers()
@@ -26,10 +28,37 @@ extension NSApplication {
 
 		return self.dynamicType.controllers
 	}
+	
+	var snsController:SNSController! {
+		
+		return self.controllers.sns
+	}
+	
+	var twitterController:TwitterController! {
+		
+		return self.snsController?.twitter
+	}
+	
+	var gistsController:GistsController! {
+		
+		return self.snsController?.gists
+	}
+	
+	var captureController:WebCaptureController! {
+		
+		return self.controllers.captureController
+	}
+	
+	var reachabilityController:ReachabilityController! {
+		
+		return self.controllers.reachabilityController
+	}
 }
 
 private let welcomeBoardWindowController = try! Storyboard.WelcomeBoard.getInitialController()
 private let preferencesWindowController = try! Storyboard.PreferencesWindow.getInitialController()
+
+// MARK: - Windows
 
 extension NSApplication {
 	

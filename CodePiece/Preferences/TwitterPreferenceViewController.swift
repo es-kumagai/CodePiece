@@ -63,18 +63,18 @@ class TwitterPreferenceViewController: NSViewController {
 	
 	var hasAccount:Bool {
 	
-		return sns.twitter.account != nil
+		return NSApp.twitterController.account != nil
 	}
 	
 	var credentialsNotVerified:Bool {
 	
 		// FIXME: 🌙 モーダル画面でベリファイしようとすると、メインスレッドで実行しているからか、閉じるまでベリファイ作業が継続されない。
-		return !sns.twitter.credentialsVerified
+		return !NSApp.twitterController.credentialsVerified
 	}
 	
 	var credentialsVerified:Bool {
 		
-		return sns.twitter.credentialsVerified
+		return NSApp.twitterController.credentialsVerified
 	}
 	
 	@IBAction func pushVerifyCredentialsButton(sender:NSButton) {
@@ -102,7 +102,7 @@ class TwitterPreferenceViewController: NSViewController {
 
 		self.withChangeValue("hasAccount") {
 
-			sns.twitter.account = nil
+			NSApp.twitterController.account = nil
 			self.updateAccountSelector()
 		}
 	}
@@ -114,7 +114,7 @@ class TwitterPreferenceViewController: NSViewController {
 			return
 		}
 		
-		self.verifying = sns.twitter.verifyCredentialsIfNeed { result in
+		self.verifying = NSApp.twitterController.verifyCredentialsIfNeed { result in
 			
 			self.verifying = false
 			
@@ -144,7 +144,7 @@ class TwitterPreferenceViewController: NSViewController {
 	
 	func applyAuthorizedStatus() {
 		
-		self.selectedAccountName.stringValue = sns.twitter.effectiveUserInfo?.username ?? ""
+		self.selectedAccountName.stringValue = NSApp.twitterController.effectiveUserInfo?.username ?? ""
 		
 		if self.credentialsNotVerified {
 			
@@ -184,7 +184,7 @@ class TwitterPreferenceViewController: NSViewController {
 			
 			self.withChangeValue("hasAccount") {
 				
-				sns.twitter.account = notification.account
+				NSApp.twitterController.account = notification.account
 			}
 
 			self.verifyCredentials()

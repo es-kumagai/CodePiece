@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+import AppKit
 import ESTwitter
 
 final class TwitterOpenFeatures : NSObject, AlertDisplayable {
@@ -21,7 +21,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable {
 	
 	var canOpenTwitterHome:Bool {
 		
-		return sns?.twitter.credentialsVerified ?? false
+		return NSApp.twitterController?.credentialsVerified ?? false
 	}
 	
 	@IBAction func openTwitterHomeAction(sender:AnyObject) {
@@ -31,7 +31,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable {
 	
 	func openTwitterHome() {
 		
-		guard let username = sns.twitter.account?.username else {
+		guard let username = NSApp.twitterController.account?.username else {
 			
 			return self.showErrorAlert("Failed to open Twitter", message: "Twitter user is not set.")
 		}

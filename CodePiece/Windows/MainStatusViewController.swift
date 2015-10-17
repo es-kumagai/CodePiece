@@ -60,7 +60,7 @@ final class MainStatusViewController: NSViewController {
 	
 	func updateReachability() {
 		
-		let state = NSApp.controllers.reachabilityController.state
+		let state = NSApp.reachabilityController.state
 		
 		self.reachabilityTextField.stringValue = state.description
 		self.reachabilityStatusImageView.status = StatusImageView.Status(reachabilityState: state)

@@ -139,8 +139,8 @@ final class SNSController : PostController {
 
 //					let size = NSMakeSize(736.0, 414.0)
 					let size = NSMakeSize(560.0, 560.0)
-					
-					captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, userAgent: userAgent) { image in
+
+					NSApp.captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, userAgent: userAgent) { image in
 						
 						DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
 						
