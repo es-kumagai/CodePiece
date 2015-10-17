@@ -11,45 +11,71 @@ import Swim
 import Ocean
 import ESTwitter
 
-// FIXME: Settings を NSApp の静的プロパティとして実装したい
-var settings:Settings!
+private var isReadyForUse:Bool = false
 
 extension NSApplication : AlertDisplayable {
 	
+}
+
+extension NSApplication {
+	
+	static func readyForUse() {
+		
+		guard !CodePiece.isReadyForUse else {
+		
+			fatalError("Application is already ready.")
+		}
+		
+		self.settings = Settings()
+		self.controllers = AppGlobalControllers()
+		
+		CodePiece.isReadyForUse = true
+	}
+	
+	var isReadyForUse:Bool {
+	
+		return CodePiece.isReadyForUse
+	}
 }
 
 // MARK: - Controllers
 
 extension NSApplication {
 	
-	static let controllers = AppGlobalControllers()
+	private static var controllers:AppGlobalControllers!
+	private static var settings:Settings!
+	
+	var settings:Settings {
+	
+		return self.dynamicType.settings
+	}
 	
 	var controllers:AppGlobalControllers {
 
 		return self.dynamicType.controllers
 	}
 	
-	var snsController:SNSController! {
+	var snsController:SNSController {
 		
 		return self.controllers.sns
 	}
 	
-	var twitterController:TwitterController! {
+	var twitterController:TwitterController {
 		
-		return self.snsController?.twitter
+		return self.snsController.twitter
 	}
 	
-	var gistsController:GistsController! {
+	var gistsController:GistsController {
 		
-		return self.snsController?.gists
+		return self.snsController.gists
 	}
 	
-	var captureController:WebCaptureController! {
+	var captureController:WebCaptureController {
 		
 		return self.controllers.captureController
 	}
 	
-	var reachabilityController:ReachabilityController! {
+	var reachabilityController:ReachabilityController {
 		
 		return self.controllers.reachabilityController
 	}

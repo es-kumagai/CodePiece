@@ -21,7 +21,12 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable {
 	
 	var canOpenTwitterHome:Bool {
 		
-		return NSApp.twitterController?.credentialsVerified ?? false
+		guard NSApp.isReadyForUse else {
+			
+			return false
+		}
+
+		return NSApp.twitterController.credentialsVerified
 	}
 	
 	@IBAction func openTwitterHomeAction(sender:AnyObject) {

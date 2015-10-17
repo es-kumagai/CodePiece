@@ -11,8 +11,6 @@ import ESNotification
 
 // FIXME: ⭐️ 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整します。
 
-private var reachabilityController:ReachabilityController!
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
@@ -26,11 +24,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
 		NotificationManager.dammingNotifications = true
 
-		// FIXME: GitHubClientInfo を settings 内に入れたい
-		settings = Settings()
+		// FIXME: GitHubClientInfo を NSApp.settings 内に入れたい
 		GitHubClientInfo = CodePieceClientInfo()
 		
-		NSApp.controllers.prepare()
+		NSApplication.readyForUse()
 	}
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {

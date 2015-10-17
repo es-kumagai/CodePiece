@@ -228,18 +228,18 @@ class ViewController: NSViewController {
 
 		DebugTime.print("Restoring contents in main window.")
 		
-		settings.appState.selectedLanguage.invokeIfExists(self.languagePopUpDataSource.selectLanguage)
-		settings.appState.hashtag.invokeIfExists { self.hashTagTextField.hashtag = $0 }
+		NSApp.settings.appState.selectedLanguage.invokeIfExists(self.languagePopUpDataSource.selectLanguage)
+		NSApp.settings.appState.hashtag.invokeIfExists { self.hashTagTextField.hashtag = $0 }
 	}
 	
 	func saveContents() {
 		
 		DebugTime.print("Saving contents in main window.")
 		
-		settings.appState.selectedLanguage = self.selectedLanguage
-		settings.appState.hashtag = self.hashTagTextField.hashtag
+		NSApp.settings.appState.selectedLanguage = self.selectedLanguage
+		NSApp.settings.appState.hashtag = self.hashTagTextField.hashtag
 
-		settings.saveAppState()
+		NSApp.settings.saveAppState()
 	}
 	
 	override func viewDidLoad() {
@@ -267,7 +267,7 @@ class ViewController: NSViewController {
 		
 		super.viewDidAppear()
 		
-		if !settings.isReady {
+		if !NSApp.settings.isReady {
 			
 			NSApp.showWelcomeBoard()
 		}
@@ -322,7 +322,7 @@ class ViewController: NSViewController {
 	
 	func verifyCredentials() {
 
-		guard NSApp.snsController != nil else {
+		guard NSApp.isReadyForUse else {
 		
 			return
 		}

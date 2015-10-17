@@ -46,9 +46,9 @@ class GitHubPreferenceViewController: NSViewController {
 	
 	@IBAction func doReset(sender:NSButton) {
 		
-		guard let id = settings.account.id else {
+		guard let id = NSApp.settings.account.id else {
 			
-			settings.resetGitHubAccount(saveFinally: true)
+			NSApp.settings.resetGitHubAccount(saveFinally: true)
 			return
 		}
 		
@@ -72,12 +72,12 @@ class GitHubPreferenceViewController: NSViewController {
 	
 	var authorizationState:AuthorizationState {
 		
-		return settings.account.authorizationState
+		return NSApp.settings.account.authorizationState
 	}
 	
 	func applyAuthorizedStatus() {
 		
-		self.authorizedAccountName.stringValue = settings.account.username ?? ""
+		self.authorizedAccountName.stringValue = NSApp.settings.account.username ?? ""
 		
 		switch self.authorizationState {
 			

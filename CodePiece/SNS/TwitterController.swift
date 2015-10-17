@@ -65,8 +65,8 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		
 		didSet {
 			
-			settings.account.twitterAccount = self.account
-			settings.saveTwitterAccount()
+			NSApp.settings.account.twitterAccount = self.account
+			NSApp.settings.saveTwitterAccount()
 
 			self.api = nil
 			self.clearEffectiveUserInfo()
@@ -123,7 +123,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	convenience override init() {
 	
-		self.init(account: settings.account.twitterAccount)
+		self.init(account: NSApp.settings.account.twitterAccount)
 	}
 	
 	var canPost:Bool {

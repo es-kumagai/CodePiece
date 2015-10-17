@@ -98,11 +98,11 @@ extension Authorization {
 
 	static func resetAuthorizationOfGitHub(id:ID, completion:(Result<Void,APIError>)->Void) {
 		
-		guard let authorization = settings.account.authorization else {
+		guard let authorization = NSApp.settings.account.authorization else {
 
 			self.showWarningAlert("Failed to reset authorization", message: "Could't get the current authentication information. Reset authentication information which saved in this app.")
 			
-			settings.resetGitHubAccount(saveFinally: true)
+			NSApp.settings.resetGitHubAccount(saveFinally: true)
 			GitHubAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
 
 			return
@@ -122,12 +122,12 @@ extension Authorization {
 			case .Success:
 				
 				// Token では削除できないようなので、403 で失敗しても認証情報を削除するだけにしています。
-				settings.resetGitHubAccount(saveFinally: true)
+				NSApp.settings.resetGitHubAccount(saveFinally: true)
 				completion(response)
 				
 			case .Failure(_):
 
-				settings.resetGitHubAccount(saveFinally: true)
+				NSApp.settings.resetGitHubAccount(saveFinally: true)
 				completion(response)
 			}
 		}
@@ -143,14 +143,14 @@ extension Authorization {
 			GitHubAuthorizationStateDidChangeNotification(isValid: true, username: username).post()
 		}
 		
-		settings.replaceGitHubAccount(username, id: id, authorization: authorization, saveFinally: true)
+		NSApp.settings.replaceGitHubAccount(username, id: id, authorization: authorization, saveFinally: true)
 		
 		completion(.Created)
 	}
 	
 	private static func _authorizationFailed(error:String, completion:(GitHubAuthorizationResult)->Void) {
 		
-		settings.resetGitHubAccount(saveFinally: true)
+		NSApp.settings.resetGitHubAccount(saveFinally: true)
 		completion(.Failed(error))
 	}
 	

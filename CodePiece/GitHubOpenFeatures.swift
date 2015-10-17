@@ -20,7 +20,12 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable {
 	
 	var canOpenGitHubHome:Bool {
 		
-		return settings?.account.authorizationState.isValid ?? false
+		guard NSApp.isReadyForUse else {
+			
+			return false
+		}
+
+		return NSApp.settings.account.authorizationState.isValid
 	}
 	
 	@IBAction func openGitHubHomeAction(sender:AnyObject) {
@@ -30,7 +35,7 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable {
 	
 	func openGitHubHome() {
 		
-		guard let username = settings.account.username else {
+		guard let username = NSApp.settings.account.username else {
 			
 			return self.showErrorAlert("Failed to open GitHub", message: "GitHub user is not set.")
 		}

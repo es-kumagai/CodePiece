@@ -12,7 +12,7 @@ final class AppGlobalControllers {
 	private(set) var captureController:WebCaptureController!
 	private(set) var reachabilityController:ReachabilityController!
 	
-	func prepare() {
+	init() {
 		
 		self.sns = SNSController()
 		self.captureController = WebCaptureController()
