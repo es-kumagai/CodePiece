@@ -14,6 +14,8 @@ import ESNotification
 var sns:SNSController!
 var captureController:WebCaptureController!
 
+private var reachabilityController:ReachabilityController!
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
@@ -26,8 +28,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		super.awakeFromNib()
 
 		NotificationManager.dammingNotifications = true
-		
+
+		// FIXME: GitHubClientInfo を settings 内に入れたい
 		settings = Settings()
+		GitHubClientInfo = CodePieceClientInfo()
+		
+		NSApp.controllers.prepare()
 	}
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -35,9 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		NSLog("Application launched.")
 		
 		NotificationManager.dammingNotifications = false
-
-		GitHubClientInfo = CodePieceClientInfo()
-
+		
+		// FIXME: 各コントローラーを AppControllers に入れたい。初期化タイミングの変化に注意
 		sns = SNSController()
 		captureController = WebCaptureController()
 

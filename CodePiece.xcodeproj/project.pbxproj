@@ -96,7 +96,7 @@
 		B152E2C21B6EE06B008B485A /* STTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E21B5F865F0036A690 /* STTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B152E2C31B6EE06B008B485A /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; };
 		B152E2C41B6EE06B008B485A /* Swim.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2C71B6F6C08008B485A /* MainStatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B152E2C51B6F6C08008B485A /* MainStatusController.swift */; };
+		B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */; };
 		B15E04881BC4CF6800FD81B6 /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */; settings = {ASSET_TAGS = (); }; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; settings = {ASSET_TAGS = (); }; };
 		B17C88C11B66BF0B00CBF20F /* README.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BD1B66BE6800CBF20F /* README.md */; };
@@ -107,6 +107,8 @@
 		B18AA96C1BC6903A00056E86 /* MainWindowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */; };
 		B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */; settings = {ASSET_TAGS = (); }; };
 		B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */; settings = {ASSET_TAGS = (); }; };
+		B19005231BD1CCCC00A05957 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19005221BD1CCCC00A05957 /* ReachabilityController.swift */; settings = {ASSET_TAGS = (); }; };
+		B19005251BD1DC2D00A05957 /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19005241BD1DC2D00A05957 /* AppControllers.swift */; settings = {ASSET_TAGS = (); }; };
 		B1A6976A1B8ADA5100D0F6FF /* TimelineTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A697691B8ADA5100D0F6FF /* TimelineTableDataSource.swift */; };
 		B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F01B5E714800DE3942 /* DescriptionGenerator.swift */; };
 		B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F11B5E714800DE3942 /* GistsController.swift */; };
@@ -310,7 +312,7 @@
 		B152E2AE1B6EE06A008B485A /* ESNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B152E2B11B6EE06A008B485A /* ESProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B152E2B41B6EE06A008B485A /* ESThread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESThread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B152E2C51B6F6C08008B485A /* MainStatusController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStatusController.swift; sourceTree = "<group>"; };
+		B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStatusViewController.swift; sourceTree = "<group>"; };
 		B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableView.swift; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
 		B17C88BD1B66BE6800CBF20F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -324,6 +326,8 @@
 		B18AA96D1BC6903A00056E86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterOpenFeatures.swift; sourceTree = "<group>"; };
 		B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOpenFeatures.swift; sourceTree = "<group>"; };
+		B19005221BD1CCCC00A05957 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
+		B19005241BD1DC2D00A05957 /* AppControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppControllers.swift; sourceTree = "<group>"; };
 		B1A697691B8ADA5100D0F6FF /* TimelineTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableDataSource.swift; sourceTree = "<group>"; };
 		B1BB59F01B5E714800DE3942 /* DescriptionGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionGenerator.swift; sourceTree = "<group>"; };
 		B1BB59F11B5E714800DE3942 /* GistsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistsController.swift; sourceTree = "<group>"; };
@@ -509,7 +513,7 @@
 				B1118DA11B6BE77800BFC5FA /* WelcomeBoard.storyboard */,
 				B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */,
 				B1118DA31B6BECAD00BFC5FA /* WelcomeBoardViewController.swift */,
-				B152E2C51B6F6C08008B485A /* MainStatusController.swift */,
+				B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */,
 			);
 			path = Windows;
 			sourceTree = "<group>";
@@ -561,6 +565,7 @@
 		B1492FB41B5BCED80043ED8D /* CodePiece */ = {
 			isa = PBXGroup;
 			children = (
+				B19005211BD1CCA500A05957 /* Network */,
 				B16DA71D1BC8FE4E00ED1599 /* Editors */,
 				B1BD64DA1B7B4477002DFDD0 /* URLScheme */,
 				B12B24791B6B594300B284D7 /* Windows */,
@@ -577,6 +582,7 @@
 				B18FAC641BCA31B20041874A /* GlobalFeatures */,
 				B1118DA71B6BEF4D00BFC5FA /* AppExtension.swift */,
 				B1492FB51B5BCED80043ED8D /* AppDelegate.swift */,
+				B19005241BD1DC2D00A05957 /* AppControllers.swift */,
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
 				B12E04421B8868FF0032DC6F /* TimelineViewController.swift */,
 				B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */,
@@ -678,6 +684,14 @@
 				B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */,
 			);
 			name = GlobalFeatures;
+			sourceTree = "<group>";
+		};
+		B19005211BD1CCA500A05957 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B19005221BD1CCCC00A05957 /* ReachabilityController.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		B1BB59EF1B5E714800DE3942 /* SNS */ = {
@@ -1152,17 +1166,19 @@
 				B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */,
 				B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */,
 				B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */,
+				B19005231BD1CCCC00A05957 /* ReachabilityController.swift in Sources */,
 				B1D2D6991B5DEA2600794EFD /* DataStore.swift in Sources */,
 				B1BB59F51B5E715B00DE3942 /* TwitterController.swift in Sources */,
 				B12B247B1B6B597400B284D7 /* AboutWindowController.swift in Sources */,
 				B12C99BF1B850B27003E651F /* Language.swift in Sources */,
+				B19005251BD1DC2D00A05957 /* AppControllers.swift in Sources */,
 				B12B24891B6B80C200B284D7 /* AcknowledgementsViewController.swift in Sources */,
 				B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */,
 				B1E89A7C1B7472770062E12E /* DataStore_AuthInfo.swift in Sources */,
 				B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */,
 				B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
-				B152E2C71B6F6C08008B485A /* MainStatusController.swift in Sources */,
+				B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */,
 				B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */,
 				B12B24811B6B59D600B284D7 /* AboutViewController.swift in Sources */,
 				B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */,

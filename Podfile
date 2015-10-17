@@ -12,6 +12,7 @@ def pods
 	pod 'Himotoki', :git => 'https://github.com/ikesyo/Himotoki'
 	pod 'ESGists', :git => 'https://github.com/EZ-NET/ESGists.git'
 	pod 'p2.OAuth2'
+	pod 'ReachabilitySwift', '~> 2.0'
 
 end
 

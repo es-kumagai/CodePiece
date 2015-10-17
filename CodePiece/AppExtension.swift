@@ -11,10 +11,21 @@ import Swim
 import Ocean
 import ESTwitter
 
+// FIXME: Settings を NSApp の静的プロパティとして実装したい
 var settings:Settings!
 
 extension NSApplication : AlertDisplayable {
 	
+}
+
+extension NSApplication {
+	
+	static let controllers = AppGlobalControllers()
+	
+	var controllers:AppGlobalControllers {
+
+		return self.dynamicType.controllers
+	}
 }
 
 private let welcomeBoardWindowController = try! Storyboard.WelcomeBoard.getInitialController()
