@@ -20,16 +20,6 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
-public func cast<R:AnyObject, T:AnyObject>(obj:T) -> R? {
-
-	return obj as? R
-}
-
-public func castForce<R:AnyObject, T:AnyObject>(obj:T) -> R {
-	
-	return obj as! R
-}
-
 public struct Repeater<Element> : SequenceType {
 
 	private var generator:RepeaterGenerator<Element>
