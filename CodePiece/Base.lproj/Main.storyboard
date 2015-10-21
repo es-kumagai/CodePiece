@@ -993,8 +993,8 @@ DQ
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                         <connections>
-                                                            <action selector="openGitHubHomeAction:" target="qrO-od-Svn" id="jDW-Oo-NNb"/>
-                                                            <binding destination="qrO-od-Svn" name="enabled" keyPath="self.canOpenGitHubHome" id="qof-gm-hBV"/>
+                                                            <action selector="openGitHubHomeAction:" target="o0R-tN-Tsc" id="Vsr-2q-YXg"/>
+                                                            <binding destination="o0R-tN-Tsc" name="enabled" keyPath="self.canOpenGitHubHome" id="0W7-Fg-J26"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1064,8 +1064,8 @@ DQ
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                         <connections>
-                                                            <action selector="openTwitterHomeAction:" target="ywT-dB-cPR" id="lVY-ui-Znz"/>
-                                                            <binding destination="ywT-dB-cPR" name="enabled" keyPath="self.canOpenTwitterHome" id="48N-Cb-3Ex"/>
+                                                            <action selector="openTwitterHomeAction:" target="x52-sW-VEo" id="aI5-03-wJt"/>
+                                                            <binding destination="x52-sW-VEo" name="enabled" keyPath="self.canOpenTwitterHome" id="qxu-Fe-0bv"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1133,6 +1133,8 @@ DQ
                     </connections>
                 </viewController>
                 <customObject id="uCX-yZ-76T" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="x52-sW-VEo" customClass="TwitterOpenFeatures" customModule="CodePiece" customModuleProvider="target"/>
+                <customObject id="o0R-tN-Tsc" customClass="GitHubOpenFeatures" customModule="CodePiece" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="585" y="1230"/>
         </scene>
