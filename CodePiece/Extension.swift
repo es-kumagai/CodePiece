@@ -20,6 +20,369 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+public class Semaphore : RawRepresentable {
+
+	public enum WaitResult {
+	
+		case Success
+		case Timeout
+	}
+	
+	public struct Time : RawRepresentable {
+	
+		public var rawValue:dispatch_time_t
+		
+		public init() {
+			
+			self.rawValue = DISPATCH_TIME_NOW
+		}
+		
+		public init(rawValue time:dispatch_time_t) {
+			
+			self.rawValue = time
+		}
+		
+		public func delta(second time:Double) -> Time {
+			
+			return Time(rawValue: dispatch_time(self.rawValue, Interval(second: time).rawValue))
+		}
+		
+		public func delta(millisecond time:Double) -> Time {
+		
+			return Time(rawValue: dispatch_time(self.rawValue, Interval(millisecond: time).rawValue))
+		}
+		
+		public func delta(microsecond time:Double) -> Time {
+			
+			return Time(rawValue: dispatch_time(self.rawValue, Interval(microsecond: time).rawValue))
+		}
+		
+		public func delta(nanosecond time:Int64) -> Time {
+			
+			return Time(rawValue: dispatch_time(self.rawValue, Interval(nanosecond: time).rawValue))
+		}
+	}
+	
+	public struct Interval : RawRepresentable {
+		
+		public var rawValue:Int64
+		
+		public init(second delta:Double) {
+			
+			self.rawValue = Int64(delta * NSEC_PER_SEC.toDouble())
+		}
+		
+		public init(millisecond delta:Double) {
+			
+			self.rawValue = Int64(delta * NSEC_PER_MSEC.toDouble())
+		}
+		
+		public init(microsecond delta:Double) {
+			
+			self.rawValue = Int64(delta * NSEC_PER_USEC.toDouble())
+		}
+		
+		public init(nanosecond delta:Int64) {
+			
+			self.rawValue = delta
+		}
+		
+		public init(rawValue:Int64) {
+			
+			self.rawValue = rawValue
+		}
+	}
+	
+	private var semaphore:dispatch_semaphore_t
+	
+	public init(value:Int = 1) {
+		
+		self.semaphore = dispatch_semaphore_create(value)
+	}
+	
+	public required init(rawValue semaphore: dispatch_semaphore_t) {
+		
+		self.semaphore = semaphore
+	}
+	
+	public var rawValue:dispatch_semaphore_t {
+		
+		return self.semaphore
+	}
+	
+	public func wait() {
+		
+		self.waitWithTimeout(Time())
+	}
+	
+	public func waitWithTimeout(timeout:dispatch_time_t) -> WaitResult {
+		
+		switch dispatch_semaphore_wait(self.semaphore, timeout) {
+			
+		case 0:
+			return .Success
+			
+		default:
+			return .Timeout
+		}
+	}
+	
+	public func waitWithTimeout(timeout:Time) -> WaitResult {
+
+		return self.waitWithTimeout(timeout.rawValue)
+	}
+	
+	public func signal() {
+		
+		dispatch_semaphore_signal(self.semaphore)
+	}
+	
+	public func execute(timeout:Time = Time(), @noescape body:() throws -> Void) rethrows -> WaitResult {
+		
+		return try self.execute(timeout.rawValue, body: body)
+	}
+
+	public func execute(timeout:dispatch_time_t = DISPATCH_TIME_FOREVER, @noescape body:() throws ->Void) rethrows -> WaitResult {
+
+		switch self.waitWithTimeout(timeout) {
+			
+		case .Success:
+		
+			defer {
+			
+				self.signal()
+			}
+		
+			try body()
+		
+			return .Success
+			
+		case .Timeout:
+		
+			return .Timeout
+		}
+	}
+	
+	public func executeOnQueue(queue:dispatch_queue_t, timeout:Time, body:(WaitResult) -> Void) {
+		
+		self.executeOnQueue(queue, timeout: timeout.rawValue, body: body)
+	}
+	
+	public func executeOnQueue(queue:dispatch_queue_t, timeout:dispatch_time_t = DISPATCH_TIME_FOREVER, body:(WaitResult) -> Void) {
+		
+		dispatch_async(queue) {
+			
+			switch self.waitWithTimeout(timeout) {
+				
+			case .Success:
+				
+				defer {
+					
+					self.signal()
+				}
+				
+				body(.Success)
+				
+				
+			case .Timeout:
+			
+				body(.Timeout)
+			}
+		}
+	}
+}
+
+public protocol UnsignedIntegerConvertible {
+
+	func toUInt() -> UInt
+}
+
+extension UIntMax {
+	
+	public init<T:UIntMaxConvertible>(_ value:T) {
+		
+		self = value.toUIntMax()
+	}
+}
+
+extension Semaphore.Interval : UIntMaxConvertible {
+	
+	public init(_ value:UIntMax) {
+	
+		self.init(rawValue: value.toIntMax())
+	}
+	
+	public func toUIntMax() -> UIntMax {
+		
+		return self.rawValue.toUIntMax()
+	}
+}
+
+public class MessageQueue<Message> {
+	
+	public typealias MessageErrorHandler = (ErrorType) throws -> Void
+	public typealias MessageHandler = (Message) throws -> Void
+	public typealias MessageHandlerNoThrows = (Message) -> Void
+	
+	private(set) var identifier:String
+	
+	private var messageHandler:MessageHandler
+	private var messageErrorHandler:MessageErrorHandler?
+	private var messageQueue:Queue<Message>
+	
+	private var messageProcessingQueue:dispatch_queue_t
+	private var messageHandlerExecutionQueue:dispatch_queue_t
+	private var messageLoopSource:dispatch_source_t?
+	
+	public init(identifier:String, executionQueue:dispatch_queue_t? = nil, messageHandler:MessageHandler, errorHandler:MessageErrorHandler?) {
+		
+		self.identifier = identifier
+		self.messageHandler = messageHandler
+		self.messageErrorHandler = errorHandler
+		
+		self.messageProcessingQueue = dispatch_queue_create("\(identifier)", nil)
+		self.messageHandlerExecutionQueue = executionQueue ?? dispatch_queue_create("\(identifier).Handler", nil)
+		
+		self.messageQueue = []
+		
+		self._startMessageLoop()
+	}
+
+	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, messageHandler:MessageHandlerNoThrows) {
+		
+		self.init(identifier: identifier, executionQueue: executionQueue, messageHandler: messageHandler, errorHandler: nil)
+	}
+
+	deinit {
+		
+		self._stopMessageLoop()
+	}
+	
+	public var isRunning:Bool {
+
+		return self.executeSyncOnProcessingQueue {
+			
+			self._isRunning
+		}
+	}
+	
+	public func send(message: MessageQueueControl) {
+		
+		self.executeOnProcessingQueue {
+
+			switch message {
+				
+			case .Start:
+				self._startMessageLoop()
+				
+			case .Stop:
+				self._stopMessageLoop()
+			}
+		}
+	}
+	
+	public func send(message: Message) {
+		
+		self.executeOnProcessingQueue {
+			
+			self.messageQueue.enqueue(message)
+		}
+	}
+}
+
+public enum MessageQueueControl {
+	
+	case Start
+	case Stop
+}
+
+extension MessageQueue {
+
+	func executeSyncOnProcessingQueue<R>(execute:()->R) -> R {
+
+		var result:R?
+		
+		dispatch_sync(self.messageProcessingQueue) {
+		
+			result = execute()
+		}
+		
+		return result!
+	}
+
+	func executeOnProcessingQueue(execute:dispatch_block_t) {
+		
+		dispatch_async(self.messageProcessingQueue) {
+			
+			execute()
+		}
+	}
+	
+	var _isRunning:Bool {
+		
+		return self.messageLoopSource != nil
+	}
+	
+	func _startMessageLoop() {
+
+		guard self.messageLoopSource == nil else {
+			
+			return
+		}
+		
+		self.messageLoopSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.messageProcessingQueue)
+		
+		dispatch_source_set_event_handler(self.messageLoopSource!, self._messageLoopBody)
+		dispatch_source_set_timer(self.messageLoopSource!, DISPATCH_TIME_NOW, Semaphore.Interval(second: 0.3).toUIntMax(), 0)
+	}
+	
+	func _stopMessageLoop() {
+		
+		guard let source = self.messageLoopSource else {
+			
+			return
+		}
+		
+		dispatch_source_cancel(source)
+		
+		self.messageLoopSource = nil
+	}
+
+	func _messageLoopBody() {
+	
+		guard let message = self.messageQueue.dequeue() else {
+			
+			return
+		}
+		
+		let handler = self.messageHandler
+		
+		dispatch_async(self.messageHandlerExecutionQueue) {
+
+			func executeErrorHandlerIfNeeds(error:ErrorType) {
+				
+				do {
+					
+					try self.messageErrorHandler?(error)
+				}
+				catch {
+					
+					fatalError("An error occurred during executing message handler. \(error)")
+				}
+			}
+			
+			do {
+				
+				try handler(message)
+			}
+			catch {
+
+				executeErrorHandlerIfNeeds(error)
+			}
+		}
+	}
+}
+
 public struct Repeater<Element> : SequenceType {
 
 	private var generator:RepeaterGenerator<Element>

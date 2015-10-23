@@ -33,8 +33,12 @@ class TimelineViewController: NSViewController {
 		}
 	}
 	
-	@IBOutlet weak var timelineTableView:NSTableView!	
-	@IBOutlet weak var timelineDataSource:TimelineTableDataSource!
+	enum Message {
+		
+	}
+	
+	@IBOutlet var timelineTableView:NSTableView!
+	@IBOutlet var timelineDataSource:TimelineTableDataSource!
 	
 	private var _statusesAutoLoadThread:NSThread?
 	let statusesAutoUpdateInterval:NSTimeInterval = 15

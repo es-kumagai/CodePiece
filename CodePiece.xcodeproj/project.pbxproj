@@ -20,22 +20,22 @@
 		B12674E61BC0ECCA00F38464 /* ESTwitterAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = B12674E51BC0ECCA00F38464 /* ESTwitterAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B12674EA1BC0ECCB00F38464 /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12674E31BC0ECCA00F38464 /* ESTwitter.framework */; };
 		B12674EB1BC0ECCB00F38464 /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12674E31BC0ECCA00F38464 /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B12674F21BC0ED9E00F38464 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F11BC0ED9E00F38464 /* Status.swift */; settings = {ASSET_TAGS = (); }; };
-		B12674F41BC0EE2400F38464 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F31BC0EE2400F38464 /* User.swift */; settings = {ASSET_TAGS = (); }; };
-		B12674F61BC0EE5B00F38464 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F51BC0EE5B00F38464 /* UserProfile.swift */; settings = {ASSET_TAGS = (); }; };
-		B12674F81BC0EE8B00F38464 /* URLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F71BC0EE8B00F38464 /* URLInfo.swift */; settings = {ASSET_TAGS = (); }; };
-		B12674FC1BC0EFC300F38464 /* Indicis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674FB1BC0EFC300F38464 /* Indicis.swift */; settings = {ASSET_TAGS = (); }; };
-		B12674FE1BC0EFE500F38464 /* InReplyTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674FD1BC0EFE500F38464 /* InReplyTo.swift */; settings = {ASSET_TAGS = (); }; };
-		B12675001BC0EFFA00F38464 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674FF1BC0EFFA00F38464 /* URL.swift */; settings = {ASSET_TAGS = (); }; };
-		B12675021BC0F00C00F38464 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675011BC0F00C00F38464 /* Date.swift */; settings = {ASSET_TAGS = (); }; };
-		B12675041BC0F02400F38464 /* UserEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675031BC0F02400F38464 /* UserEntities.swift */; settings = {ASSET_TAGS = (); }; };
-		B12675061BC0F06000F38464 /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675051BC0F06000F38464 /* Hashtag.swift */; settings = {ASSET_TAGS = (); }; };
-		B126750A1BC0F2E300F38464 /* StatusEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675091BC0F2E300F38464 /* StatusEntities.swift */; settings = {ASSET_TAGS = (); }; };
-		B126750C1BC0F44E00F38464 /* HashtagEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B126750B1BC0F44E00F38464 /* HashtagEntity.swift */; settings = {ASSET_TAGS = (); }; };
-		B126750D1BC0FBC700F38464 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F91BC0EF9900F38464 /* Color.swift */; settings = {ASSET_TAGS = (); }; };
-		B126750F1BC12AF300F38464 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B126750E1BC12AF300F38464 /* Place.swift */; settings = {ASSET_TAGS = (); }; };
-		B12675111BC12B6000F38464 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675101BC12B6000F38464 /* Coordinate.swift */; settings = {ASSET_TAGS = (); }; };
-		B12675131BC12CCD00F38464 /* PlaceBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675121BC12CCD00F38464 /* PlaceBoundingBox.swift */; settings = {ASSET_TAGS = (); }; };
+		B12674F21BC0ED9E00F38464 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F11BC0ED9E00F38464 /* Status.swift */; };
+		B12674F41BC0EE2400F38464 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F31BC0EE2400F38464 /* User.swift */; };
+		B12674F61BC0EE5B00F38464 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F51BC0EE5B00F38464 /* UserProfile.swift */; };
+		B12674F81BC0EE8B00F38464 /* URLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F71BC0EE8B00F38464 /* URLInfo.swift */; };
+		B12674FC1BC0EFC300F38464 /* Indicis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674FB1BC0EFC300F38464 /* Indicis.swift */; };
+		B12674FE1BC0EFE500F38464 /* InReplyTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674FD1BC0EFE500F38464 /* InReplyTo.swift */; };
+		B12675001BC0EFFA00F38464 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674FF1BC0EFFA00F38464 /* URL.swift */; };
+		B12675021BC0F00C00F38464 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675011BC0F00C00F38464 /* Date.swift */; };
+		B12675041BC0F02400F38464 /* UserEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675031BC0F02400F38464 /* UserEntities.swift */; };
+		B12675061BC0F06000F38464 /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675051BC0F06000F38464 /* Hashtag.swift */; };
+		B126750A1BC0F2E300F38464 /* StatusEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675091BC0F2E300F38464 /* StatusEntities.swift */; };
+		B126750C1BC0F44E00F38464 /* HashtagEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B126750B1BC0F44E00F38464 /* HashtagEntity.swift */; };
+		B126750D1BC0FBC700F38464 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F91BC0EF9900F38464 /* Color.swift */; };
+		B126750F1BC12AF300F38464 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B126750E1BC12AF300F38464 /* Place.swift */; };
+		B12675111BC12B6000F38464 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675101BC12B6000F38464 /* Coordinate.swift */; };
+		B12675131BC12CCD00F38464 /* PlaceBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12675121BC12CCD00F38464 /* PlaceBoundingBox.swift */; };
 		B1269A601B7D9282009305C6 /* TwitterAccountMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */; };
 		B1269A631B7D9815009305C6 /* TwitterAccountSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1269A611B7D94AD009305C6 /* TwitterAccountSelectorController.swift */; };
 		B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */; };
@@ -51,7 +51,7 @@
 		B12E04411B8864DD0032DC6F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12E04401B8864DD0032DC6F /* BaseViewController.swift */; };
 		B12E04431B8868FF0032DC6F /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12E04421B8868FF0032DC6F /* TimelineViewController.swift */; };
 		B12E04451B8871F80032DC6F /* TimelineTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12E04441B8871F80032DC6F /* TimelineTableCellView.swift */; };
-		B13371EB1BC5009600D1C793 /* StatusCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13371E91BC5009200D1C793 /* StatusCoordinates.swift */; settings = {ASSET_TAGS = (); }; };
+		B13371EB1BC5009600D1C793 /* StatusCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13371E91BC5009200D1C793 /* StatusCoordinates.swift */; };
 		B137468D1B6506000068414B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137468C1B6506000068414B /* Fonts.swift */; };
 		B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
 		B13746941B6512360068414B /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13746931B6512360068414B /* FontTests.swift */; };
@@ -65,7 +65,7 @@
 		B1492FC81B5BCED80043ED8D /* CodePieceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FC71B5BCED80043ED8D /* CodePieceTests.swift */; };
 		B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */; };
 		B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */; };
-		B14AF3731BC22EA10005F4CF /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3721BC22EA10005F4CF /* Browse.swift */; settings = {ASSET_TAGS = (); }; };
+		B14AF3731BC22EA10005F4CF /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3721BC22EA10005F4CF /* Browse.swift */; };
 		B152E2A01B6EE06A008B485A /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; };
 		B152E2A11B6EE06A008B485A /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B152E2A31B6EE06A008B485A /* ESActiveCounter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2A21B6EE06A008B485A /* ESActiveCounter.framework */; };
@@ -97,18 +97,20 @@
 		B152E2C31B6EE06B008B485A /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; };
 		B152E2C41B6EE06B008B485A /* Swim.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */; };
-		B15E04881BC4CF6800FD81B6 /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */; settings = {ASSET_TAGS = (); }; };
-		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; settings = {ASSET_TAGS = (); }; };
+		B15E04881BC4CF6800FD81B6 /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */; };
+		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
 		B17C88C11B66BF0B00CBF20F /* README.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BD1B66BE6800CBF20F /* README.md */; };
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
 		B17C88C61B66FE7F00CBF20F /* ss in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BE1B66BE6800CBF20F /* ss */; };
 		B17DAF5E1B6529A0004CE4D2 /* WebCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DAF5D1B6529A0004CE4D2 /* WebCaptureController.swift */; };
-		B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA9611BC60D9B00056E86 /* Extension.swift */; settings = {ASSET_TAGS = (); }; };
+		B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA9611BC60D9B00056E86 /* Extension.swift */; };
 		B18AA96C1BC6903A00056E86 /* MainWindowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */; };
-		B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */; settings = {ASSET_TAGS = (); }; };
-		B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */; settings = {ASSET_TAGS = (); }; };
-		B19005231BD1CCCC00A05957 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19005221BD1CCCC00A05957 /* ReachabilityController.swift */; settings = {ASSET_TAGS = (); }; };
-		B19005251BD1DC2D00A05957 /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19005241BD1DC2D00A05957 /* AppControllers.swift */; settings = {ASSET_TAGS = (); }; };
+		B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */; };
+		B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */; };
+		B19005231BD1CCCC00A05957 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19005221BD1CCCC00A05957 /* ReachabilityController.swift */; };
+		B19005251BD1DC2D00A05957 /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19005241BD1DC2D00A05957 /* AppControllers.swift */; };
+		B19B36861BD9C01D000D10F9 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B19B36851BD9C01D000D10F9 /* MainWindow.storyboard */; };
+		B19B36AC1BD9EA69000D10F9 /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B19B36AB1BD9EA69000D10F9 /* Timeline.storyboard */; };
 		B1A6976A1B8ADA5100D0F6FF /* TimelineTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A697691B8ADA5100D0F6FF /* TimelineTableDataSource.swift */; };
 		B1BB59F21B5E714800DE3942 /* DescriptionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F01B5E714800DE3942 /* DescriptionGenerator.swift */; };
 		B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F11B5E714800DE3942 /* GistsController.swift */; };
@@ -328,6 +330,8 @@
 		B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOpenFeatures.swift; sourceTree = "<group>"; };
 		B19005221BD1CCCC00A05957 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
 		B19005241BD1DC2D00A05957 /* AppControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppControllers.swift; sourceTree = "<group>"; };
+		B19B36851BD9C01D000D10F9 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
+		B19B36AB1BD9EA69000D10F9 /* Timeline.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Timeline.storyboard; sourceTree = "<group>"; };
 		B1A697691B8ADA5100D0F6FF /* TimelineTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableDataSource.swift; sourceTree = "<group>"; };
 		B1BB59F01B5E714800DE3942 /* DescriptionGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionGenerator.swift; sourceTree = "<group>"; };
 		B1BB59F11B5E714800DE3942 /* GistsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistsController.swift; sourceTree = "<group>"; };
@@ -505,6 +509,7 @@
 		B12B24791B6B594300B284D7 /* Windows */ = {
 			isa = PBXGroup;
 			children = (
+				B19B36871BD9C039000D10F9 /* CodePieceMain */,
 				B12B247A1B6B597400B284D7 /* AboutWindowController.swift */,
 				B12B24801B6B59D600B284D7 /* AboutViewController.swift */,
 				B12B247E1B6B599900B284D7 /* AboutWindowController.storyboard */,
@@ -692,6 +697,15 @@
 				B19005221BD1CCCC00A05957 /* ReachabilityController.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		B19B36871BD9C039000D10F9 /* CodePieceMain */ = {
+			isa = PBXGroup;
+			children = (
+				B19B36851BD9C01D000D10F9 /* MainWindow.storyboard */,
+				B19B36AB1BD9EA69000D10F9 /* Timeline.storyboard */,
+			);
+			path = CodePieceMain;
 			sourceTree = "<group>";
 		};
 		B1BB59EF1B5E714800DE3942 /* SNS */ = {
@@ -1003,12 +1017,14 @@
 				B1D2D6861B5D5F4000794EFD /* GitHubPreferenceView.storyboard in Resources */,
 				B1118DA21B6BE77800BFC5FA /* WelcomeBoard.storyboard in Resources */,
 				B1492FBA1B5BCED80043ED8D /* Assets.xcassets in Resources */,
+				B19B36861BD9C01D000D10F9 /* MainWindow.storyboard in Resources */,
 				B12B248C1B6B80E500B284D7 /* AcknowledgementsViewController.storyboard in Resources */,
 				B12B24861B6B6AEF00B284D7 /* Pods-CodePiece-acknowledgements.plist in Resources */,
 				B12B247F1B6B599900B284D7 /* AboutWindowController.storyboard in Resources */,
 				B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */,
 				B1D2D6831B5D5ED400794EFD /* PreferencesWindow.storyboard in Resources */,
 				B1492FBD1B5BCED80043ED8D /* Main.storyboard in Resources */,
+				B19B36AC1BD9EA69000D10F9 /* Timeline.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
