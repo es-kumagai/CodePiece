@@ -21,12 +21,12 @@ class ViewController: NSViewController {
 	
 	typealias PostResult = SNSController.PostResult
 	
-	@IBOutlet weak var postButton:NSButton!
-	@IBOutlet weak var hashTagTextField:HashtagTextField!
+	@IBOutlet var postButton:NSButton!
+	@IBOutlet var hashTagTextField:HashtagTextField!
 	
-	@IBOutlet weak var languagePopUpButton:NSPopUpButton!
+	@IBOutlet var languagePopUpButton:NSPopUpButton!
 
-	@IBOutlet weak var languagePopUpDataSource:LanguagePopupDataSource!
+	@IBOutlet var languagePopUpDataSource:LanguagePopupDataSource!
 	
 	@IBOutlet var codeTextView:NSTextView! {
 	
