@@ -20,6 +20,16 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+public func bundle<First,Second>(first:First)(second:Second) -> (First, Second) {
+
+	return (first, second)
+}
+
+public func bundle<First,Second>(first:First, second:Second) -> (First, Second) {
+	
+	return (first, second)
+}
+
 public class Semaphore : RawRepresentable {
 
 	public enum WaitResult {
@@ -218,6 +228,68 @@ extension Semaphore.Interval : UIntMaxConvertible {
 	}
 }
 
+public final class Dispatch {
+		
+	public static func makeTimer(interval: UInt64, queue: dispatch_queue_t, start:Bool, eventHandler:dispatch_block_t) -> dispatch_source_t {
+		
+		return self.makeTimer(interval, queue: queue, start: start, eventHandler: eventHandler, cancelHandler: nil)
+	}
+	
+	public static func makeTimer(interval: UInt64, queue: dispatch_queue_t, start:Bool, eventHandler:dispatch_block_t, cancelHandler: dispatch_block_t?) -> dispatch_source_t {
+		
+		let source = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+		
+		source.setEventHandler(eventHandler)
+		
+		if let cancelHandler = cancelHandler {
+			
+			source.setCancelHandler(cancelHandler)
+		}
+		
+		source.setTimer(interval)
+		
+		if start {
+			
+			source.resume()
+		}
+		
+		return source
+	}
+}
+
+extension dispatch_source_t {
+	
+	public func resume() {
+		
+		return dispatch_resume(self)
+	}
+	
+	public func suspend() {
+		
+		return dispatch_suspend(self)
+	}
+	
+	public func sourceCancel() {
+		
+		return dispatch_source_cancel(self)
+	}
+	
+	public func setEventHandler(handler:dispatch_block_t) {
+		
+		return dispatch_source_set_event_handler(self, handler)
+	}
+	
+	public func setCancelHandler(handler:dispatch_block_t) {
+		
+		return dispatch_source_set_cancel_handler(self, handler)
+	}
+	
+	public func setTimer(interval: UInt64, start: dispatch_time_t = DISPATCH_TIME_NOW, leeway: UInt64 = 0) {
+		
+		return dispatch_source_set_timer(self, start, interval, leeway)
+	}
+}
+
 internal enum MessageQueueHandler<Message> {
 
 	typealias Queue = MessageQueue<Message>
@@ -271,19 +343,24 @@ public class MessageQueue<Message> : MessageQueueType {
 	
 	private var messageProcessingQueue:dispatch_queue_t
 	private var messageHandlerExecutionQueue:dispatch_queue_t
-	private var messageLoopSource:dispatch_source_t?
+	private var messageLoopSource:dispatch_source_t!
 	
+	public private(set) var isRunning:Bool
+
 	internal init(identifier:String, executionQueue:dispatch_queue_t? = nil, handler:MessageQueueHandler<Message>) {
 		
 		self.identifier = identifier
 		self.handler = handler
 		
-		self.messageProcessingQueue = dispatch_queue_create("\(identifier)", nil)
-		self.messageHandlerExecutionQueue = executionQueue ?? dispatch_queue_create("\(identifier).Handler", nil)
+		let queue = dispatch_queue_create("\(identifier)", nil)
+		
+		self.messageProcessingQueue = queue
+		self.messageHandlerExecutionQueue = executionQueue ?? queue
 		
 		self.messageQueue = []
-		
-		self._startMessageLoop()
+		self.isRunning = false
+
+		self.messageLoopSource = self.makeTimer(Semaphore.Interval(second: 0.03), start: true, timerAction: _messageLoopBody)
 	}
 
 	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, messageHandler:MessageHandler, errorHandler:MessageErrorHandler?) {
@@ -310,14 +387,17 @@ public class MessageQueue<Message> : MessageQueueType {
 	deinit {
 		
 		self._stopMessageLoop()
+		self.messageLoopSource.sourceCancel()
 	}
 
-	public var isRunning:Bool {
+	public func makeTimer(interval: Semaphore.Interval, start: Bool, timerAction: () -> Void) -> dispatch_source_t {
 
-		return self.executeSyncOnProcessingQueue {
-			
-			self._isRunning
-		}
+		return Dispatch.makeTimer(interval.toUIntMax(), queue: self.messageProcessingQueue, start: start, eventHandler: timerAction)
+	}
+
+	public func makeTimer(interval: Semaphore.Interval, start: Bool, timerAction: () -> Void, cancelAction: () -> Void) -> dispatch_source_t {
+	
+		return Dispatch.makeTimer(interval.toUIntMax(), queue: self.messageProcessingQueue, start: start, eventHandler: timerAction, cancelHandler: cancelAction)
 	}
 	
 	public func send(message: MessageQueueControl) {
@@ -341,6 +421,16 @@ public class MessageQueue<Message> : MessageQueueType {
 			
 			self.messageQueue.enqueue(message)
 		}
+	}
+	
+	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> dispatch_source_t {
+		
+		let action = { [weak self] () -> Void in
+			
+			self?.send(message)
+		}
+		
+		return self.makeTimer(interval, start: true, timerAction: action)
 	}
 }
 
@@ -426,45 +516,23 @@ extension MessageQueue {
 		}
 	}
 	
-	var _isRunning:Bool {
-		
-		return self.messageLoopSource != nil
-	}
-	
 	func _startMessageLoop() {
 
-		guard self.messageLoopSource == nil else {
-			
-			return
-		}
-		
-		let source = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.messageProcessingQueue)
-		
-		defer {
-			
-			self.messageLoopSource = source
-		}
-		
-		dispatch_source_set_event_handler(source, self._messageLoopBody)
-		dispatch_source_set_timer(source, DISPATCH_TIME_NOW, Semaphore.Interval(second: 0.3).toUIntMax(), 0)
-		
-		dispatch_resume(source)
+		self.isRunning = true
 	}
 	
 	func _stopMessageLoop() {
-		
-		guard let source = self.messageLoopSource else {
-			
-			return
-		}
-		
-		dispatch_source_cancel(source)
-		
-		self.messageLoopSource = nil
+
+		self.isRunning = false
 	}
 
 	func _messageLoopBody() {
 	
+		guard self.isRunning else {
+			
+			return
+		}
+		
 		guard let message = self.messageQueue.dequeue() else {
 			
 			return

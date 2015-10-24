@@ -10,6 +10,7 @@ import Cocoa
 import Swim
 import ESThread
 import ESTwitter
+import ESNotification
 
 class TimelineViewController: NSViewController {
 
@@ -35,6 +36,8 @@ class TimelineViewController: NSViewController {
 	
 	enum Message {
 		
+		case SetAutoUpdateInterval(Double)
+		case SetReachability(ReachabilityController.State)
 		case AutoUpdate(enable: Bool)
 		case UpdateStatuses
 	}
@@ -42,10 +45,12 @@ class TimelineViewController: NSViewController {
 	@IBOutlet var timelineTableView:NSTableView!
 	@IBOutlet var timelineDataSource:TimelineTableDataSource!
 	
-	private var _statusesAutoLoadThread:NSThread?
-	let statusesAutoUpdateInterval:NSTimeInterval = 15
+	let statusesAutoUpdateInterval:Double = 15
+	
+	private var autoUpdateState = AutoUpdateState()
 	
 	private(set) var message:MessageQueue<Message>!
+	private var updateTimerSource:dispatch_source_t!
 	
 	var timeline = TimelineInformation() {
 		
@@ -62,6 +67,88 @@ class TimelineViewController: NSViewController {
 
 // MARK: - Message Handler
 
+extension TimelineViewController {
+	
+	struct AutoUpdateState {
+		
+		var enabled:Bool = false {
+		
+			didSet {
+				
+				if self.enabled {
+					
+					self.setNeedsUpdate()
+				}
+			}
+		}
+		
+		var hasInternetConnection:Bool = false
+		
+		var updateInterval:Int64 = 0
+		var nextUpdateTime:dispatch_time_t? = nil
+		
+		var isUpdateTimeOver:Bool {
+		
+			guard let nextUpdateTime = self.nextUpdateTime else {
+				
+				return false
+			}
+			
+			return nextUpdateTime < dispatch_time(DISPATCH_TIME_NOW, 0)
+		}
+		
+		mutating func setUpdated() {
+			
+			self.nextUpdateTime = nil
+		}
+		
+		mutating func setNeedsUpdate() {
+			
+			if self.updateInterval > 0 {
+				
+				self.nextUpdateTime = dispatch_time(DISPATCH_TIME_NOW, 0)
+			}
+			else {
+				
+				self.nextUpdateTime = nil
+			}
+		}
+		
+		mutating func updateNextUpdateTime() {
+			
+			if self.updateInterval > 0 {
+				
+				self.nextUpdateTime = dispatch_time(DISPATCH_TIME_NOW, self.updateInterval)
+			}
+			else {
+				
+				self.nextUpdateTime = nil
+			}
+		}
+	}
+	
+	func autoUpdateAction() {
+		
+		guard self.autoUpdateState.enabled else {
+			
+			return
+		}
+		
+		if self.autoUpdateState.isUpdateTimeOver {
+
+			guard self.autoUpdateState.hasInternetConnection else {
+				
+				NSLog("No internet connection found.")
+				self.autoUpdateState.updateNextUpdateTime()
+				return
+			}
+			
+			self.autoUpdateState.setUpdated()
+			self.message.send(.UpdateStatuses)
+		}
+	}
+}
+
 extension TimelineViewController : MessageQueueHandlerProtocol {
 	
 	func messageQueue(queue: MessageQueue<Message>, handlingMessage message: Message) throws {
@@ -69,10 +156,16 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		switch message {
 			
 		case .UpdateStatuses:
-			invokeAsyncOnMainQueue(self.updateStatuses)
+			self._updateStatuses()
 			
 		case .AutoUpdate(enable: let enable):
 			self._changeAutoUpdateState(enable)
+			
+		case .SetAutoUpdateInterval(let interval):
+			self._changeAutoUpdateInterval(interval)
+			
+		case .SetReachability(let state):
+			self._changeReachability(state)
 		}
 	}
 	
@@ -81,8 +174,42 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		fatalError(String(error))
 	}
 	
+	private func _updateStatuses() {
+		
+		self.autoUpdateState.updateNextUpdateTime()
+		
+		invokeAsyncOnMainQueue(self.updateStatuses)
+	}
+	
+	private func _changeAutoUpdateInterval(interval: Double) {
+		
+		self.autoUpdateState.updateInterval = Semaphore.Interval(second: interval).rawValue
+	}
+	
 	private func _changeAutoUpdateState(enable: Bool) {
 		
+		self.autoUpdateState.enabled = enable
+		NSLog("Timeline update automatically is \(enable)d.")
+		
+		if enable {
+			
+			self.autoUpdateState.setNeedsUpdate()
+		}
+	}
+	
+	private func _changeReachability(state: ReachabilityController.State) {
+		
+		switch state {
+			
+		case .ViaWiFi, .ViaCellular:
+			NSLog("CodePiece has get internet connection.")
+			self.autoUpdateState.hasInternetConnection = true
+			self.autoUpdateState.setNeedsUpdate()
+			
+		case .Unreachable:
+			NSLog("CodePiece has lost internet connection.")
+			self.autoUpdateState.hasInternetConnection = false
+		}
 	}
 }
 
@@ -94,7 +221,8 @@ extension TimelineViewController {
         super.viewDidLoad()
 		
 		self.message = MessageQueue(identifier: "CodePiece.Timeline", handler: self)
-			
+		self.updateTimerSource = self.message.makeTimer(Semaphore.Interval(second: 0.03), start: true, timerAction: self.autoUpdateAction)
+		
 		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 		
 			self.message.send(.UpdateStatuses)
@@ -108,51 +236,46 @@ extension TimelineViewController {
 			
 			owner.timeline = owner.timeline.replaceHashtag(hashtag)
 		}
+		
+		NamedNotification.observe(NSWorkspaceWillSleepNotification, by: self) { owner, notification in
+			
+			self.message.send(.AutoUpdate(enable: false))
+		}
+		
+		NamedNotification.observe(NSWorkspaceDidWakeNotification, by: self) { owner, notification in
+		
+			self.message.send(.AutoUpdate(enable: true))
+		}
+
+		ReachabilityController.ReachabilityChangedNotification.observeBy(self) { observer, notification in
+			
+			self.message.send(.SetReachability(notification.state))
+		}
+		
+		self.message.send(.SetAutoUpdateInterval(self.statusesAutoUpdateInterval))
+		self.message.send(.SetReachability(NSApp.reachabilityController.state))
+		self.message.send(.AutoUpdate(enable: true))
     }
 	
 	override func viewDidAppear() {
 
 		super.viewDidAppear()
 		
-		self._statusesAutoLoadThread.ifHasValue {
-		
-			$0.cancel()
-		}
-		
-		self._statusesAutoLoadThread = tweak(NSThread(target: self, selector: "updateStatusTimerAction:", object: nil)){
-			
-			$0.start()
-		}
+		self.message.send(.Start)
 	}
 	
 	override func viewWillDisappear() {
 		
 		super.viewWillDisappear()
 		
-		self._statusesAutoLoadThread?.cancel()
+		self.message.send(.Stop)
 	}
 }
 
 // MARK: - Tweets control
 
 extension TimelineViewController {
-	
-	func updateStatusTimerAction(object: AnyObject?) {
 		
-		NSLog("Start updating twitter timeline automatically.")
-		
-		let thread = NSThread.currentThread()
-		
-		while !thread.cancelled {
-			
-			self.message.send(.UpdateStatuses)
-			
-			NSThread.sleepForTimeInterval(self.statusesAutoUpdateInterval)
-		}
-		
-		NSLog("Stop updating twitter timeline.")
-	}
-	
 	private func updateStatuses() {
 		
 		guard NSApp.twitterController.credentialsVerified else {
