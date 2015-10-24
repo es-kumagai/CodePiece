@@ -35,6 +35,8 @@ class TimelineViewController: NSViewController {
 	
 	enum Message {
 		
+		case AutoUpdate(enable: Bool)
+		case UpdateStatuses
 	}
 	
 	@IBOutlet var timelineTableView:NSTableView!
@@ -43,6 +45,8 @@ class TimelineViewController: NSViewController {
 	private var _statusesAutoLoadThread:NSThread?
 	let statusesAutoUpdateInterval:NSTimeInterval = 15
 	
+	private(set) var message:MessageQueue<Message>!
+	
 	var timeline = TimelineInformation() {
 		
 		didSet {
@@ -50,9 +54,35 @@ class TimelineViewController: NSViewController {
 			if self.timeline.hashtag != oldValue.hashtag {
 				
 				self.timelineDataSource.tweets = []
-				self.updateStatuses()
+				self.message.send(.UpdateStatuses)
 			}
 		}
+	}
+}
+
+// MARK: - Message Handler
+
+extension TimelineViewController : MessageQueueHandlerProtocol {
+	
+	func messageQueue(queue: MessageQueue<Message>, handlingMessage message: Message) throws {
+		
+		switch message {
+			
+		case .UpdateStatuses:
+			invokeAsyncOnMainQueue(self.updateStatuses)
+			
+		case .AutoUpdate(enable: let enable):
+			self._changeAutoUpdateState(enable)
+		}
+	}
+	
+	func messageQueue<Queue : MessageQueueType>(queue: Queue, handlingError error: ErrorType) throws {
+		
+		fatalError(String(error))
+	}
+	
+	private func _changeAutoUpdateState(enable: Bool) {
+		
 	}
 }
 
@@ -63,9 +93,11 @@ extension TimelineViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		self.message = MessageQueue(identifier: "CodePiece.Timeline", handler: self)
+			
 		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 		
-			self.updateStatuses()
+			self.message.send(.UpdateStatuses)
 		}
 		
 		HashtagDidChangeNotification.observeBy(self) { owner, notification in
@@ -113,10 +145,7 @@ extension TimelineViewController {
 		
 		while !thread.cancelled {
 			
-			invokeOnMainQueue {
-				
-				self.updateStatuses()
-			}
+			self.message.send(.UpdateStatuses)
 			
 			NSThread.sleepForTimeInterval(self.statusesAutoUpdateInterval)
 		}
