@@ -26,6 +26,7 @@ extension NSApplication {
 			fatalError("Application is already ready.")
 		}
 		
+		self.environment = Environment()
 		self.settings = Settings()
 		self.controllers = AppGlobalControllers()
 		
@@ -42,8 +43,14 @@ extension NSApplication {
 
 extension NSApplication {
 	
+	private static var environment:Environment!
 	private static var controllers:AppGlobalControllers!
 	private static var settings:Settings!
+	
+	var environment:Environment {
+		
+		return self.dynamicType.environment
+	}
 	
 	var settings:Settings {
 	

@@ -90,9 +90,27 @@ extension DataStore {
 		}
 		
 		init() {
+			
+			if NSApp.environment.useKeychain {
+				
+				self.init(useKeychain:())
+			}
+			else {
+				
+				self.init(unuseKeychain:())
+			}
+		}
+		
+		private init(unuseKeychain:Void) {
+			
+			NSLog("To using keychain is disabled by CodePiece.")
+			self.authInfo = AuthInfo()
+		}
+		
+		private init(useKeychain:Void) {
 		
 			let keychain = GitHubStore.keychain
-			
+
 			guard let data = handleError(try keychain.getData(GitHubStore.AuthorizationKey), to: &OutputStream) where data != nil else {
 		
 				self.authInfo = AuthInfo()
@@ -111,6 +129,12 @@ extension DataStore {
 		}
 		
 		func save() throws {
+			
+			guard NSApp.environment.useKeychain else {
+			
+				NSLog("Settings are not keep because to using keychain is disabled by CodePiece.")
+				return
+			}
 			
 			let keychain = GitHubStore.keychain
 			let keyForAuthInfo = GitHubStore.AuthorizationKey

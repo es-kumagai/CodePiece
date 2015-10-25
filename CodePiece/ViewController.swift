@@ -267,7 +267,7 @@ class ViewController: NSViewController {
 		
 		super.viewDidAppear()
 		
-		if !NSApp.settings.isReady {
+		if !NSApp.settings.isReady && NSApp.environment.showWelcomeBoardOnStartup {
 			
 			NSApp.showWelcomeBoard()
 		}
