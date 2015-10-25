@@ -423,6 +423,19 @@ public class MessageQueue<Message> : MessageQueueType {
 		}
 	}
 	
+	public func send(message: Message, preAction:(Queue<Message>, Message) -> ContinuousState) {
+		
+		self.executeOnProcessingQueue {
+
+			guard preAction(self.messageQueue, message) else {
+			
+				return
+			}
+			
+			self.messageQueue.enqueue(message)
+		}
+	}
+	
 	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> dispatch_source_t {
 		
 		let action = { [weak self] () -> Void in
