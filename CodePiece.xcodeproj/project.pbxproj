@@ -99,6 +99,7 @@
 		B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */; };
 		B15E04881BC4CF6800FD81B6 /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */; };
 		B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE61BDC60770013AFF6 /* Environments.swift */; };
+		B1630AE91BDC97580013AFF6 /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE81BDC97580013AFF6 /* ClientInfo.swift */; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
 		B17C88C11B66BF0B00CBF20F /* README.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BD1B66BE6800CBF20F /* README.md */; };
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
@@ -318,6 +319,7 @@
 		B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStatusViewController.swift; sourceTree = "<group>"; };
 		B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableView.swift; sourceTree = "<group>"; };
 		B1630AE61BDC60770013AFF6 /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
+		B1630AE81BDC97580013AFF6 /* ClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
 		B17C88BD1B66BE6800CBF20F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B17C88BE1B66BE6800CBF20F /* ss */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ss; sourceTree = "<group>"; };
@@ -770,6 +772,7 @@
 				B1D2D69B1B5DFF7400794EFD /* Colors.swift */,
 				B137468C1B6506000068414B /* Fonts.swift */,
 				B1D2D6A51B5E2B2800794EFD /* Notifications.swift */,
+				B1630AE81BDC97580013AFF6 /* ClientInfo.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1170,6 +1173,7 @@
 				B1269A601B7D9282009305C6 /* TwitterAccountMenuItem.swift in Sources */,
 				B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */,
 				B1A6976A1B8ADA5100D0F6FF /* TimelineTableDataSource.swift in Sources */,
+				B1630AE91BDC97580013AFF6 /* ClientInfo.swift in Sources */,
 				B1118DAA1B6BF01200BFC5FA /* WelcomeBoardWindowController.swift in Sources */,
 				B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */,
 				B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */,
