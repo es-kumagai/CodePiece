@@ -29,7 +29,7 @@ extension StatusImageView.Status {
 
 final class ReachabilityController {
 
-	private let reachability:Reachability
+	private let reachability:Reachability!
 	
 	enum State {
 		
@@ -63,13 +63,23 @@ final class ReachabilityController {
 		}
 	}
 
-	init() {
+	/// - throws: ReachabilityError
+	init() throws {
 		
-		self.reachability = Reachability.reachabilityForInternetConnection()!
+		do {
+			
+			self.reachability = try Reachability.reachabilityForInternetConnection()
+		}
+		catch {
+			
+			self.reachability = nil
+			throw error
+		}
+		
 		
 		NamedNotification.observe(ReachabilitySwift.ReachabilityChangedNotification, by: self, handler: reachabilityDidChange)
 		
-		self.reachability.startNotifier()
+		try self.reachability.startNotifier()
 	}
 	
 	var state:State {
