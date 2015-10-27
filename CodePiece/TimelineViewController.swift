@@ -34,24 +34,23 @@ class TimelineViewController: NSViewController {
 		}
 	}
 	
-	enum Message {
+	enum Message : MessageTypeIgnoreInQuickSuccession {
 		
 		case SetAutoUpdateInterval(Double)
 		case SetReachability(ReachabilityController.State)
 		case AutoUpdate(enable: Bool)
 		case UpdateStatuses
-	}
-	
-	private func ignoreIfUpdateStatusesMessageQueuedAtLast(queue:Queue<Message>, message:Message) -> ContinuousState {
 		
-		if let lastMessage = queue.back, case (.UpdateStatuses, .UpdateStatuses) = (message, lastMessage) {
-		
-			NSLog("Ignoring duplicated `Update Statuses` message.")
-			return .Abort
-		}
-		else {
+		func blockInQuickSuccession(lastMessage: Message) -> Bool {
 			
-			return .Continue
+			switch (self, lastMessage) {
+				
+			case (.UpdateStatuses, .UpdateStatuses):
+				return true
+				
+			default:
+				return false
+			}
 		}
 	}
 
@@ -72,7 +71,7 @@ class TimelineViewController: NSViewController {
 			if self.timeline.hashtag != oldValue.hashtag {
 				
 				self.timelineDataSource.tweets = []
-				self.message.send(.UpdateStatuses, preAction: self.ignoreIfUpdateStatusesMessageQueuedAtLast)
+				self.message.send(.UpdateStatuses)
 			}
 		}
 	}
@@ -157,7 +156,7 @@ extension TimelineViewController {
 			}
 			
 			self.autoUpdateState.setUpdated()
-			self.message.send(.UpdateStatuses, preAction: self.ignoreIfUpdateStatusesMessageQueuedAtLast)
+			self.message.send(.UpdateStatuses)
 		}
 	}
 }
@@ -238,7 +237,7 @@ extension TimelineViewController {
 		
 		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
 		
-			self.message.send(.UpdateStatuses, preAction: owner.ignoreIfUpdateStatusesMessageQueuedAtLast)
+			self.message.send(.UpdateStatuses)
 		}
 		
 		HashtagDidChangeNotification.observeBy(self) { owner, notification in

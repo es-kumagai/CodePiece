@@ -61,6 +61,23 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	private static let APINotReadyError = SNSControllerError.NotReady("Twitter API is not ready.")
 	private static let APINotReadyNSError = NSError(domain: String(APINotReadyError), code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.description])
 
+	private enum AutoVerifyingQueueMessage : MessageTypeIgnoreInQuickSuccession {
+	
+		case RequestVerification;
+		
+		private func messageBlocked() {
+
+			NSLog("Ignoring duplicated `Request Verification` message.")
+		}
+		
+		private func messageQueued() {
+			
+			NSLog("queued")
+		}
+	}
+	
+	private var autoVerifyingQueue:MessageQueue<AutoVerifyingQueueMessage>!
+	
 	var account:TwitterAccount? {
 		
 		didSet {
@@ -119,11 +136,45 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		self.effectiveUserInfo = nil
 		
 		super.init()
+		
+		self.autoVerifyingQueue = MessageQueue<AutoVerifyingQueueMessage>(identifier: "\(self.dynamicType)", executionQueue: dispatch_get_main_queue(), processingInterval: 5.0) { message in
+
+			switch message {
+				
+			case .RequestVerification:
+				self.autoVerifyingAction()
+			}
+		}
+		
+		self.autoVerifyingQueue.start()
 	}
 	
 	convenience override init() {
 	
 		self.init(account: NSApp.settings.account.twitterAccount)
+	}
+	
+	private func autoVerifyingAction() {
+		
+		guard self.credentialsVerified else {
+			
+			NSLog("This change is no effect on the current account because the account's credentials is not verifyed yet.")
+			return
+		}
+		
+		api.verifyCredentials { result in
+			
+			switch result {
+				
+			case .Success:
+				NSLog("This change is no effect on the current account.")
+				
+			case .Failure:
+				
+				self.clearEffectiveUserInfo()
+				self.showWarningAlert("Twitter Account is invalid.", message: "Your twitter account setting may be changed by OS. Please check your settings in Internet Account preferences pane.")
+			}
+		}
 	}
 	
 	var canPost:Bool {
@@ -380,26 +431,7 @@ extension TwitterController : STTwitterAPIDelegate {
 	func twitterAPI(api: STTwitterAPI!, shouldDisableCurrentOAuth oauth: STTwitterOS!, accountStore: ACAccountStore!) -> Bool {
 		
 		NSLog("Detected OS Account Store change.")
-		
-		guard self.credentialsVerified else {
-			
-			NSLog("This change is no effect on the current account because the account's credentials is not verifyed yet.")
-			return false
-		}
-		
-		api.verifyCredentials { result in
-			
-			switch result {
-				
-			case .Success:
-				NSLog("This change is no effect on the current account.")
-				
-			case .Failure:
-				
-				self.clearEffectiveUserInfo()
-				self.showWarningAlert("Twitter Account is invalid.", message: "Your twitter account setting may be changed by OS. Please check your settings in Internet Account preferences pane.")
-			}
-		}
+		self.autoVerifyingQueue.send(.RequestVerification)
 		
 		return false
 	}

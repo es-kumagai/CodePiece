@@ -290,7 +290,7 @@ extension dispatch_source_t {
 	}
 }
 
-internal enum MessageQueueHandler<Message> {
+internal enum MessageQueueHandler<Message : MessageType> {
 
 	typealias Queue = MessageQueue<Message>
 	typealias MessageHandler = Queue.MessageHandler
@@ -326,12 +326,82 @@ internal enum MessageQueueHandler<Message> {
 
 public protocol MessageQueueType : AnyObject {
 	
-	typealias MessageType
+	typealias Message : MessageType
 }
 
-public class MessageQueue<Message> : MessageQueueType {
+public protocol MessageType {
 	
-	public typealias MessageType = Message
+	/// Call when the message send completely.
+	func messageQueued()
+	
+	/// Call when the message blocked.
+	func messageBlocked()
+}
+
+extension MessageType {
+	
+	/// Call when the message send completely.
+	public func messageQueued() {
+		
+	}
+	
+	/// Call when the message blocked.
+	public func messageBlocked() {
+		
+	}
+}
+
+public protocol PreActionMessageType : MessageType {
+	
+	func messagePreAction(queue:Queue<Self>) -> ContinuousState
+}
+
+public protocol MessageTypeIgnoreInQuickSuccession : PreActionMessageType {
+	
+	/// Returns true if the message may block in quick succession.
+	var mayBlockInQuickSuccession:Bool { get }
+	
+	func blockInQuickSuccession(lastMessage:Self) -> Bool
+}
+
+extension MessageTypeIgnoreInQuickSuccession {
+	
+	public var mayBlockInQuickSuccession:Bool {
+		
+		return true
+	}
+	
+	public func messagePreAction(queue:Queue<Self>) -> ContinuousState {
+		
+		guard self.mayBlockInQuickSuccession else {
+		
+			return .Continue
+		}
+		
+		if let lastMessage = queue.back where self.blockInQuickSuccession(lastMessage) {
+			
+			return .Abort
+		}
+		else {
+			
+			return .Continue
+		}
+	}
+}
+
+extension MessageTypeIgnoreInQuickSuccession where Self : Equatable {
+	
+	public func blockInQuickSuccession(lastMessage:Self) -> Bool {
+		
+		return self == lastMessage
+	}
+}
+
+private let MessageQueueDefaultProcessingInterval:Double = 0.03
+
+public class MessageQueue<M:MessageType> : MessageQueueType {
+	
+	public typealias Message = M
 	public typealias MessageErrorHandler = (ErrorType) throws -> Void
 	public typealias MessageHandler = (Message) throws -> Void
 	public typealias MessageHandlerNoThrows = (Message) -> Void
@@ -347,7 +417,7 @@ public class MessageQueue<Message> : MessageQueueType {
 	
 	public private(set) var isRunning:Bool
 
-	internal init(identifier:String, executionQueue:dispatch_queue_t? = nil, handler:MessageQueueHandler<Message>) {
+	internal init(identifier:String, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, handler:MessageQueueHandler<Message>) {
 		
 		self.identifier = identifier
 		self.handler = handler
@@ -360,28 +430,28 @@ public class MessageQueue<Message> : MessageQueueType {
 		self.messageQueue = []
 		self.isRunning = false
 
-		self.messageLoopSource = self.makeTimer(Semaphore.Interval(second: 0.03), start: true, timerAction: _messageLoopBody)
+		self.messageLoopSource = self.makeTimer(Semaphore.Interval(second: processingInterval), start: true, timerAction: _messageLoopBody)
 	}
 
-	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, messageHandler:MessageHandler, errorHandler:MessageErrorHandler?) {
+	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, messageHandler:MessageHandler, errorHandler:MessageErrorHandler?) {
 
 		let handler = MessageQueueHandler.Closure(messageHandler: messageHandler, errorHandler: errorHandler)
 		
-		self.init(identifier: identifier, executionQueue: executionQueue, handler: handler)
+		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
 	}
 
-	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, messageHandler:MessageHandlerNoThrows) {
+	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, messageHandler:MessageHandlerNoThrows) {
 		
 		let handler = MessageQueueHandler.Closure(messageHandler: messageHandler, errorHandler: nil)
 		
-		self.init(identifier: identifier, executionQueue: executionQueue, handler: handler)
+		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
 	}
 	
-	public convenience init<T:_MessageQueueHandlerProtocol>(identifier:String, handler:T, executionQueue:dispatch_queue_t? = nil) {
+	public convenience init<T:_MessageQueueHandlerProtocol>(identifier:String, handler:T, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval) {
 		
 		let handler = MessageQueueHandler<Message>.Delegate(handler: handler)
 		
-		self.init(identifier: identifier, executionQueue: executionQueue, handler: handler)
+		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
 	}
 	
 	deinit {
@@ -400,6 +470,16 @@ public class MessageQueue<Message> : MessageQueueType {
 		return Dispatch.makeTimer(interval.toUIntMax(), queue: self.messageProcessingQueue, start: start, eventHandler: timerAction, cancelHandler: cancelAction)
 	}
 	
+	public func start() {
+	
+		self.send(.Start)
+	}
+	
+	public func stop() {
+		
+		self.send(.Stop)
+	}
+	
 	public func send(message: MessageQueueControl) {
 		
 		self.executeOnProcessingQueue {
@@ -415,35 +495,54 @@ public class MessageQueue<Message> : MessageQueueType {
 		}
 	}
 	
-	public func send(message: Message) {
-		
-		self.executeOnProcessingQueue {
-			
-			self.messageQueue.enqueue(message)
-		}
-	}
-	
 	public func send(message: Message, preAction:(Queue<Message>, Message) -> ContinuousState) {
 		
 		self.executeOnProcessingQueue {
 
 			guard preAction(self.messageQueue, message) else {
-			
+		
+				message.messageBlocked()
 				return
 			}
 			
 			self.messageQueue.enqueue(message)
+			message.messageQueued()
+		}
+	}
+}
+
+extension MessageQueue where M : MessageType {
+	
+	public func send(message: Message) {
+		
+		self.send(message) { (queue, message) -> ContinuousState in .Continue }
+	}
+	
+	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> dispatch_source_t {
+		
+		return self.makeTimer(interval, start: true) { [weak self] () -> Void in
+			
+			self?.send(message)
+		}
+	}
+}
+
+extension MessageQueue where M : PreActionMessageType {
+	
+	public func send(message: Message) {
+		
+		self.send(message) { (queue, message) -> ContinuousState in
+			
+			return message.messagePreAction(queue)
 		}
 	}
 	
 	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> dispatch_source_t {
 		
-		let action = { [weak self] () -> Void in
+		return self.makeTimer(interval, start: true) { [weak self] () -> Void in
 			
 			self?.send(message)
 		}
-		
-		return self.makeTimer(interval, start: true, timerAction: action)
 	}
 }
 
@@ -451,31 +550,31 @@ public class MessageQueue<Message> : MessageQueueType {
 /// let conforms to the protocol, then the instance pass to MessageQueue's initializer.
 public protocol _MessageQueueHandlerProtocol {
 	
-	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingMessage:Queue.MessageType) throws
+	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingMessage:Queue.Message) throws
 	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError:ErrorType) throws
 }
 
 public protocol MessageQueueHandlerProtocol : _MessageQueueHandlerProtocol {
 	
-	typealias MessageType
+	typealias Message : MessageType
 
-	func messageQueue(queue:MessageQueue<MessageType>, handlingMessage:MessageType) throws
-	func messageQueue(queue:MessageQueue<MessageType>, handlingError:ErrorType) throws
+	func messageQueue(queue:MessageQueue<Message>, handlingMessage:Message) throws
+	func messageQueue(queue:MessageQueue<Message>, handlingError:ErrorType) throws
 }
 
 extension MessageQueueHandlerProtocol {
 	
-	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingMessage message:Queue.MessageType) throws {
+	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingMessage message:Queue.Message) throws {
 
-		let queue = queue as! MessageQueue<MessageType>
-		let message = message as! MessageType
+		let queue = queue as! MessageQueue<Message>
+		let message = message as! Message
 		
 		try self.messageQueue(queue, handlingMessage: message)
 	}
 	
 	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError error:ErrorType) throws {
 		
-		let queue = queue as! MessageQueue<MessageType>
+		let queue = queue as! MessageQueue<Message>
 		
 		try self.messageQueue(queue, handlingError: error)
 	}
