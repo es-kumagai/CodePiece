@@ -73,3 +73,12 @@ public class AboutWindowController: NSWindowController {
 		self.showWindow(self)
 	}
 }
+
+extension AboutWindowController : NSWindowDelegate {
+	
+	// FIXME: 😨 リサイズさせたくないのですが IB でリサイズを無効化してもできてしまいます。NSWindowDelegate での調整を試みましたが、呼ばれず、効果がないようでした。メニューからストーリーボードで直接インスタンス化しているのが問題なのかもしれません。
+	public func windowShouldZoom(window: NSWindow, toFrame newFrame: NSRect) -> Bool {
+		
+		return false
+	}
+}

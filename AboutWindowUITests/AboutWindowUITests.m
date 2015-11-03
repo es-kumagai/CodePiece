@@ -47,7 +47,14 @@
 
 	XCTAssertTrue(window.exists);
 	XCTAssertTrue(titleLabel.exists);
+}
+
+- (void)testCannotResizing {
 	
+	XCUIApplication* app = [[XCUIApplication alloc] init];
+	XCUIElement* button = [app.buttons objectForKeyedSubscript:XCUIIdentifierZoomWindow];
+	
+	XCTAssertFalse(button.enabled, "Button for resize is expected to always disabled.");
 }
 
 @end
