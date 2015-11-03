@@ -30,6 +30,81 @@ public func bundle<First,Second>(first:First, second:Second) -> (First, Second) 
 	return (first, second)
 }
 
+func mask(mask:Int, reset values:Int...) -> Int {
+	
+	return values.reduce(mask) { $0 & ~$1 }
+}
+
+func mask(inout mask:Int, reset values:Int...) {
+	
+	values.forEach { mask = mask & ~$0 }
+}
+
+protocol MaskOperatable {
+	
+	func masked(reset values:Self...) -> Self
+	func masked(reset values:[Self]) -> Self
+	func masked(set values:Self...) -> Self
+	func masked(set values:[Self]) -> Self
+	
+	mutating func modifyMask(reset values:Self...)
+	mutating func modifyMask(reset values:[Self])
+	mutating func modifyMask(set values:Self...)
+	mutating func modifyMask(set values:[Self])
+}
+
+extension MaskOperatable {
+	
+	func masked(reset values:Self...) -> Self {
+		
+		return self.masked(reset: values)
+	}
+	
+	func masked(set values:Self...) -> Self {
+		
+		return self.masked(set: values)
+	}
+	
+	mutating func modifyMask(reset values:Self...) {
+		
+		self.modifyMask(reset: values)
+	}
+	
+	mutating func modifyMask(reset values:[Self]) {
+		
+		for value in values {
+			
+			self = self.masked(reset: value)
+		}
+	}
+	
+	mutating func modifyMask(set values:Self...) {
+		
+		self.modifyMask(set: values)
+	}
+	
+	mutating func modifyMask(set values:[Self]) {
+		
+		for value in values {
+			
+			self = self.masked(set: value)
+		}
+	}
+}
+
+extension Int : MaskOperatable {
+	
+	func masked(reset values: [Int]) -> Int {
+		
+		return values.reduce(self) { $0 & ~$1 }
+	}
+	
+	func masked(set values: [Int]) -> Int {
+		
+		return values.reduce(self) { $0 | $1 }
+	}
+}
+
 public class Semaphore : RawRepresentable {
 
 	public enum WaitResult {

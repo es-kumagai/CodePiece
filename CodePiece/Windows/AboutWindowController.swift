@@ -7,13 +7,15 @@
 //
 
 import Cocoa
+import Swim
 
 public class AboutWindowController: NSWindowController {
 
     public override func windowDidLoad() {
         super.windowDidLoad()
-    
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+
+		// FIXME: 😨 リサイズさせたくないのですが IB でリサイズを無効化してもできてしまいます。コードでマスクを操作してみましたが、それでも効果がないようでした。メニューからストーリーボードで直接インスタンス化しているのが問題なのかもしれません。
+		self.window!.styleMask.modifyMask(reset: NSResizableWindowMask)
     }
 
 	public static func instantiate() -> AboutWindowController {

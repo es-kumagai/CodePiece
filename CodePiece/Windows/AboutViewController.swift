@@ -32,6 +32,19 @@ public final class AboutViewController: NSViewController {
 		self.presentViewControllerAsModalWindow(viewController)
 	}
 	
+	public override var title:String? {
+	
+		get {
+
+			return super.title ?? ""
+		}
+		
+		set {
+			
+			super.title = newValue
+		}
+	}
+	
 	public var name:String? {
 
 		didSet {

@@ -97,6 +97,8 @@
 		B152E2C31B6EE06B008B485A /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; };
 		B152E2C41B6EE06B008B485A /* Swim.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */; };
+		B1587C431BE843D0001E0E1D /* AboutWindowUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1587C421BE843D0001E0E1D /* AboutWindowUITests.m */; };
+		B1587C4B1BE84CDE001E0E1D /* AboutWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1587C4A1BE84CDE001E0E1D /* AboutWindow.swift */; };
 		B15E04881BC4CF6800FD81B6 /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */; };
 		B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE61BDC60770013AFF6 /* Environments.swift */; };
 		B1630AE91BDC97580013AFF6 /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE81BDC97580013AFF6 /* ClientInfo.swift */; };
@@ -157,6 +159,13 @@
 			remoteInfo = CodePiece;
 		};
 		B1492FCF1B5BCED80043ED8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1492FAA1B5BCED80043ED8D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1492FB11B5BCED80043ED8D;
+			remoteInfo = CodePiece;
+		};
+		B1587C451BE843D0001E0E1D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B1492FAA1B5BCED80043ED8D /* Project object */;
 			proxyType = 1;
@@ -317,6 +326,10 @@
 		B152E2B11B6EE06A008B485A /* ESProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B152E2B41B6EE06A008B485A /* ESThread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESThread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStatusViewController.swift; sourceTree = "<group>"; };
+		B1587C401BE843D0001E0E1D /* AboutWindowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AboutWindowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1587C421BE843D0001E0E1D /* AboutWindowUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutWindowUITests.m; sourceTree = "<group>"; };
+		B1587C441BE843D0001E0E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1587C4A1BE84CDE001E0E1D /* AboutWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindow.swift; sourceTree = "<group>"; };
 		B15E04871BC4CF6800FD81B6 /* TimelineTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableView.swift; sourceTree = "<group>"; };
 		B1630AE61BDC60770013AFF6 /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		B1630AE81BDC97580013AFF6 /* ClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
@@ -410,6 +423,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B1492FCB1B5BCED80043ED8D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1587C3D1BE843D0001E0E1D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -515,6 +535,7 @@
 			children = (
 				B19B36871BD9C039000D10F9 /* CodePieceMain */,
 				B12B247A1B6B597400B284D7 /* AboutWindowController.swift */,
+				B1587C4A1BE84CDE001E0E1D /* AboutWindow.swift */,
 				B12B24801B6B59D600B284D7 /* AboutViewController.swift */,
 				B12B247E1B6B599900B284D7 /* AboutWindowController.storyboard */,
 				B12B24871B6B80C200B284D7 /* AcknowledgementsViewController.swift */,
@@ -552,6 +573,7 @@
 				B1492FD11B5BCED80043ED8D /* CodePieceUITests */,
 				B12674E41BC0ECCA00F38464 /* ESTwitterAPI */,
 				B18AA96A1BC6903A00056E86 /* MainWindowUITests */,
+				B1587C411BE843D0001E0E1D /* AboutWindowUITests */,
 				B1492FB31B5BCED80043ED8D /* Products */,
 				D44070DA70174B40A6FB9883 /* Pods */,
 				84FCAD57E3AF93B4392E1F74 /* Frameworks */,
@@ -567,6 +589,7 @@
 				B1492FCE1B5BCED80043ED8D /* CodePieceUITests.xctest */,
 				B12674E31BC0ECCA00F38464 /* ESTwitter.framework */,
 				B18AA9691BC6903A00056E86 /* MainWindowUITests.xctest */,
+				B1587C401BE843D0001E0E1D /* AboutWindowUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -652,6 +675,15 @@
 				B14AF3721BC22EA10005F4CF /* Browse.swift */,
 			);
 			path = Browse;
+			sourceTree = "<group>";
+		};
+		B1587C411BE843D0001E0E1D /* AboutWindowUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B1587C421BE843D0001E0E1D /* AboutWindowUITests.m */,
+				B1587C441BE843D0001E0E1D /* Info.plist */,
+			);
+			path = AboutWindowUITests;
 			sourceTree = "<group>";
 		};
 		B16DA71D1BC8FE4E00ED1599 /* Editors */ = {
@@ -922,6 +954,24 @@
 			productReference = B1492FCE1B5BCED80043ED8D /* CodePieceUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B1587C3F1BE843D0001E0E1D /* AboutWindowUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1587C491BE843D0001E0E1D /* Build configuration list for PBXNativeTarget "AboutWindowUITests" */;
+			buildPhases = (
+				B1587C3C1BE843D0001E0E1D /* Sources */,
+				B1587C3D1BE843D0001E0E1D /* Frameworks */,
+				B1587C3E1BE843D0001E0E1D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1587C461BE843D0001E0E1D /* PBXTargetDependency */,
+			);
+			name = AboutWindowUITests;
+			productName = AboutWindowUITests;
+			productReference = B1587C401BE843D0001E0E1D /* AboutWindowUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B18AA9681BC6903A00056E86 /* MainWindowUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B18AA9701BC6903A00056E86 /* Build configuration list for PBXNativeTarget "MainWindowUITests" */;
@@ -980,6 +1030,10 @@
 						CreatedOnToolsVersion = 7.0;
 						TestTargetID = B1492FB11B5BCED80043ED8D;
 					};
+					B1587C3F1BE843D0001E0E1D = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = B1492FB11B5BCED80043ED8D;
+					};
 					B18AA9681BC6903A00056E86 = {
 						CreatedOnToolsVersion = 7.0.1;
 						TestTargetID = B1492FB11B5BCED80043ED8D;
@@ -1004,6 +1058,7 @@
 				B1492FCD1B5BCED80043ED8D /* CodePieceUITests */,
 				B12674E21BC0ECCA00F38464 /* ESTwitter */,
 				B18AA9681BC6903A00056E86 /* MainWindowUITests */,
+				B1587C3F1BE843D0001E0E1D /* AboutWindowUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1042,6 +1097,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B1492FCC1B5BCED80043ED8D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1587C3E1BE843D0001E0E1D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1207,6 +1269,7 @@
 				B12B24811B6B59D600B284D7 /* AboutViewController.swift in Sources */,
 				B1492FB81B5BCED80043ED8D /* ViewController.swift in Sources */,
 				B12E04451B8871F80032DC6F /* TimelineTableCellView.swift in Sources */,
+				B1587C4B1BE84CDE001E0E1D /* AboutWindow.swift in Sources */,
 				B13C99011B711BD200A5A2B3 /* AppState.swift in Sources */,
 				B1D2D69C1B5DFF7400794EFD /* Colors.swift in Sources */,
 				B137468D1B6506000068414B /* Fonts.swift in Sources */,
@@ -1242,6 +1305,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1587C3C1BE843D0001E0E1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1587C431BE843D0001E0E1D /* AboutWindowUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B18AA9651BC6903A00056E86 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1267,6 +1338,11 @@
 			isa = PBXTargetDependency;
 			target = B1492FB11B5BCED80043ED8D /* CodePiece */;
 			targetProxy = B1492FCF1B5BCED80043ED8D /* PBXContainerItemProxy */;
+		};
+		B1587C461BE843D0001E0E1D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1492FB11B5BCED80043ED8D /* CodePiece */;
+			targetProxy = B1587C451BE843D0001E0E1D /* PBXContainerItemProxy */;
 		};
 		B18AA96F1BC6903A00056E86 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1506,6 +1582,34 @@
 			};
 			name = Release;
 		};
+		B1587C471BE843D0001E0E1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = AboutWindowUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.AboutWindowUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CodePiece;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		B1587C481BE843D0001E0E1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = AboutWindowUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.AboutWindowUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CodePiece;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		B18AA9711BC6903A00056E86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1581,6 +1685,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B1587C491BE843D0001E0E1D /* Build configuration list for PBXNativeTarget "AboutWindowUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1587C471BE843D0001E0E1D /* Debug */,
+				B1587C481BE843D0001E0E1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		B18AA9701BC6903A00056E86 /* Build configuration list for PBXNativeTarget "MainWindowUITests" */ = {
 			isa = XCConfigurationList;
