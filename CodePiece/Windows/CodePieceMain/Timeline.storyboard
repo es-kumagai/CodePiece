@@ -18,17 +18,52 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
                                 <subviews>
                                     <stackView distribution="equalSpacing" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tUT-xX-k8S">
-                                        <rect key="frame" x="0.0" y="320" width="300" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="298" width="300" height="22"/>
+                                        <subviews>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Rvt-xa-mmo" customClass="TimelineStatusView" customModule="CodePiece" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="22"/>
+                                                <subviews>
+                                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-Kq-TYx">
+                                                        <rect key="frame" x="6" y="4" width="288" height="14"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="14" id="DaJ-WU-KEF"/>
+                                                        </constraints>
+                                                        <animations/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="obn-11-IGu">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="bcL-Kq-TYx" secondAttribute="bottom" constant="4" id="6qB-oR-sMs"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bcL-Kq-TYx" secondAttribute="trailing" constant="8" id="849-Ea-r3u"/>
+                                                    <constraint firstItem="bcL-Kq-TYx" firstAttribute="leading" secondItem="Rvt-xa-mmo" secondAttribute="leading" constant="8" id="FhA-jQ-eM1"/>
+                                                    <constraint firstItem="bcL-Kq-TYx" firstAttribute="top" secondItem="Rvt-xa-mmo" secondAttribute="top" constant="4" id="zgw-uw-CRi"/>
+                                                </constraints>
+                                                <animations/>
+                                                <connections>
+                                                    <outlet property="statusLabel" destination="bcL-Kq-TYx" id="YqM-d4-Wwf"/>
+                                                </connections>
+                                            </customView>
+                                        </subviews>
                                         <animations/>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
                                     </stackView>
                                     <scrollView horizontalLineScroll="63" horizontalPageScroll="10" verticalLineScroll="63" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="xoJ-eV-U58">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="298"/>
                                         <clipView key="contentView" id="RPV-kG-gAc">
-                                            <rect key="frame" x="1" y="1" width="298" height="318"/>
+                                            <rect key="frame" x="1" y="1" width="298" height="296"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="61" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc" customClass="TimelineTableView" customModule="CodePiece" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="298" height="318"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="298" height="296"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <animations/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -177,7 +212,7 @@
                                             <animations/>
                                         </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="QaD-GY-diU">
-                                            <rect key="frame" x="284" y="1" width="15" height="318"/>
+                                            <rect key="frame" x="283" y="1" width="16" height="296"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </scroller>
@@ -207,6 +242,7 @@
                     </view>
                     <connections>
                         <outlet property="timelineDataSource" destination="zPm-Mr-oy7" id="nS5-eP-bqO"/>
+                        <outlet property="timelineStatusView" destination="Rvt-xa-mmo" id="rKx-yD-c6c"/>
                         <outlet property="timelineTableView" destination="TsF-qR-Gkc" id="36U-Wc-31I"/>
                     </connections>
                 </viewController>

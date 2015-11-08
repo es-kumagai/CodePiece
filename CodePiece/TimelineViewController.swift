@@ -58,6 +58,13 @@ class TimelineViewController: NSViewController {
 
 	@IBOutlet var timelineTableView:NSTableView!
 	@IBOutlet var timelineDataSource:TimelineTableDataSource!
+	@IBOutlet var timelineStatusView: TimelineStatusView! {
+		
+		didSet {
+			
+			self.timelineStatusView.clearMessage()
+		}
+	}
 	
 	let statusesAutoUpdateInterval:Double = 15
 	
@@ -413,6 +420,95 @@ extension TimelineViewController {
 			self.timelineTableView.selectRowIndexes(NSIndexSet(index: nextSelection), byExtendingSelection: false)
 		}
 		
+		let gotTimelineSuccessfully = { () -> Void in
+			
+			self.message.send(.ResetAutoUpdateIntervalDeray)
+			self.timelineStatusView.errorMessage = ""
+		}
+		
+		let failedToGetTimeline = { (error: GetStatusesError) -> Void in
+			
+			if case .RateLimitExceeded = error.type {
+				
+				self.message.send(.AddAutoUpdateIntervalDelay(7.0))
+			}
+			
+			let needAlert = { () -> Bool in
+			
+				switch error.type {
+					
+				case .DecodeResultError:
+					return true
+					
+				case .UnexpectedError:
+					return true
+					
+				case .CouldNotAuthenticate:
+					return true
+					
+				case .PageDoesNotExist:
+					return true
+					
+				case .AccountSuspended:
+					return true
+					
+				case .APIv1Inactive:
+					return true
+					
+				case .RateLimitExceeded:
+					return false
+				
+				case .InvalidOrExpiredToken:
+					return true
+					
+				case .SSLRequired:
+					return true
+					
+				case .OverCapacity:
+					return false
+					
+				case .InternalError:
+					return true
+					
+				case .CouldNotAuthenticateYou:
+					return false
+					
+				case .UnableToFollow:
+					return true
+					
+				case .NotAuthorizedToSeeStatus:
+					return true
+					
+				case .DailyStatuUpdateLimitExceeded:
+					return true
+					
+				case .DuplicatedStatus:
+					return true
+					
+				case .BadAuthenticationData:
+					return true
+					
+				case .UserMustVerifyLogin:
+					return true
+					
+				case .RetiredEndpoint:
+					return true
+					
+				case .ApplicationCannotWrite:
+					return true
+				}
+			}
+			
+			if needAlert() {
+
+				self.showErrorAlert("Failed to get Timelines", message: error.description)
+			}
+			else {
+				
+				self.timelineStatusView.errorMessage = error.description
+			}
+		}
+		
 		let getTimelineSpecifiedQuery = {
 			
 			NSApp.twitterController.getStatusesWithQuery(query, since: self.timelineDataSource.lastTweetID) { result in
@@ -421,18 +517,13 @@ extension TimelineViewController {
 					
 				case .Success(let tweets) where !tweets.isEmpty:
 					updateTable(tweets)
+					gotTimelineSuccessfully()
 					
 				case .Success:
-					self.message.send(.ResetAutoUpdateIntervalDeray)
+					gotTimelineSuccessfully()
 					
 				case .Failure(let error):
-					
-					if case .RateLimitExceeded = error.type {
-						
-						self.message.send(.AddAutoUpdateIntervalDelay(7.0))
-					}
-					
-					self.showErrorAlert("Failed to get Timelines", message: error.description)
+					failedToGetTimeline(error)
 				}
 			}
 		}
