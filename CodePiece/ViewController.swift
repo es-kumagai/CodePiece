@@ -14,6 +14,7 @@ import Quartz
 import Swim
 import ESProgressHUD
 import ESTwitter
+import ESNotification
 
 class ViewController: NSViewController {
 
@@ -129,11 +130,10 @@ class ViewController: NSViewController {
 				switch result {
 					
 				case .Success(let info):
-					self.clearContents()
-					NSLog("Posted completely \(info)")
+					PostCompletelyNotification(info: info).post()
 					
 				case .Failure(let info):
-					self.showErrorAlert("Cannot post", message: info.error.localizedDescription)
+					PostFailedNotification(info: info).post()
 				}
 			}
 		}
@@ -259,6 +259,17 @@ class ViewController: NSViewController {
 		self.updateControlsDisplayText()
 
 		self.clearContents()
+		
+		PostCompletelyNotification.observeBy(self) { owner, notification in
+			
+			self.clearContents()
+			NSLog("Posted completely \(notification.info)")
+		}
+		
+		PostFailedNotification.observeBy(self) { owner, notification in
+		
+			self.showErrorAlert("Cannot post", message: notification.info.error.localizedDescription)
+		}
 	}
 	
 	override func viewDidAppear() {
@@ -278,6 +289,8 @@ class ViewController: NSViewController {
 		DebugTime.print("Main window will hide.")
 		
 		self.saveContents()
+		
+		NotificationManager.release(owner: self)
 		
 		super.viewWillDisappear()
 	}

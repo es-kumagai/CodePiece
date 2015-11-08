@@ -40,6 +40,29 @@ extension Authorization {
 	}
 }
 
+extension ViewController {
+
+	final class PostCompletelyNotification : Notification {
+		
+		var info: SNSController.PostResultInfo
+		
+		init(info: SNSController.PostResultInfo) {
+			
+			self.info = info
+		}
+	}
+	
+	final class PostFailedNotification : Notification {
+		
+		var info: SNSController.PostErrorInfo
+		
+		init(info: SNSController.PostErrorInfo) {
+			
+			self.info = info
+		}
+	}
+}
+
 extension TwitterAccountSelectorController {
 	
 	final class TwitterAccountSelectorDidChangeNotification : Notification {

@@ -312,8 +312,17 @@ extension TimelineViewController {
 		self.message = MessageQueue(identifier: "CodePiece.Timeline", handler: self)
 		self.updateTimerSource = self.message.makeTimer(Semaphore.Interval(second: 0.03), start: true, timerAction: self.autoUpdateAction)
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		self.message.send(.SetAutoUpdateInterval(self.statusesAutoUpdateInterval))
+		self.message.send(.SetReachability(NSApp.reachabilityController.state))
+		self.message.send(.AutoUpdate(enable: true))
+    }
+	
+	override func viewDidAppear() {
+
+		super.viewDidAppear()
 		
+		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+			
 			self.message.send(.UpdateStatuses)
 		}
 		
@@ -324,6 +333,7 @@ extension TimelineViewController {
 			NSLog("Hashtag did change (\(hashtag))")
 			
 			owner.timeline = owner.timeline.replaceHashtag(hashtag)
+			self.message.send(.UpdateStatuses)
 		}
 		
 		NamedNotification.observe(NSWorkspaceWillSleepNotification, by: self) { owner, notification in
@@ -332,23 +342,22 @@ extension TimelineViewController {
 		}
 		
 		NamedNotification.observe(NSWorkspaceDidWakeNotification, by: self) { owner, notification in
-		
+			
 			self.message.send(.AutoUpdate(enable: true))
 		}
-
+		
 		ReachabilityController.ReachabilityChangedNotification.observeBy(self) { observer, notification in
 			
 			self.message.send(.SetReachability(notification.state))
 		}
-		
-		self.message.send(.SetAutoUpdateInterval(self.statusesAutoUpdateInterval))
-		self.message.send(.SetReachability(NSApp.reachabilityController.state))
-		self.message.send(.AutoUpdate(enable: true))
-    }
-	
-	override func viewDidAppear() {
 
-		super.viewDidAppear()
+		ViewController.PostCompletelyNotification.observeBy(self) { owner, notification in
+		
+			invokeAsyncOnMainQueue(after: 3.0) {
+				
+				self.message.send(.UpdateStatuses)
+			}
+		}
 		
 		self.message.send(.Start)
 	}
@@ -356,6 +365,8 @@ extension TimelineViewController {
 	override func viewWillDisappear() {
 		
 		super.viewWillDisappear()
+		
+		NotificationManager.release(owner: self)
 		
 		self.message.send(.Stop)
 	}
