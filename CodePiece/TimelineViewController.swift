@@ -266,8 +266,12 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 	
 	private func _resetAutoUpdateIntervalDelay() {
 		
-		self.autoUpdateState.resetUpdateIntervalDelay()
+		guard self.autoUpdateState.updateIntervalDelay.isNonZero else {
+			
+			return
+		}
 		
+		self.autoUpdateState.resetUpdateIntervalDelay()
 		NSLog("Delay for update of timeline was solved.")
 	}
 	
