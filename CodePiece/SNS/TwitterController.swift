@@ -47,11 +47,116 @@ struct TwitterAccount {
 	}
 }
 
+struct GetStatusesError : ErrorType, CustomStringConvertible {
+
+	enum Type {
+	
+		case DecodeResultError
+		case UnexpectedError
+		
+		// STTwitter
+		case CouldNotAuthenticate
+		case PageDoesNotExist
+		case AccountSuspended
+		case APIv1Inactive
+		case RateLimitExceeded
+		case InvalidOrExpiredToken
+		case SSLRequired
+		case OverCapacity
+		case InternalError
+		case CouldNotAuthenticateYou
+		case UnableToFollow
+		case NotAuthorizedToSeeStatus
+		case DailyStatuUpdateLimitExceeded
+		case DuplicatedStatus
+		case BadAuthenticationData
+		case UserMustVerifyLogin
+		case RetiredEndpoint
+		case ApplicationCannotWrite
+	}
+	
+	var type: Type
+	var reason: String
+	
+	var description: String {
+		
+		return "\(self.reason) (\(self.type))"
+	}
+	
+	init(type: Type, reason: String) {
+	
+		self.type = type
+		self.reason = reason
+	}
+	
+	init(code: STTwitterTwitterErrorCode, reason: String) {
+		
+		self.reason = reason
+		
+		switch code {
+			
+		case .CouldNotAuthenticate:
+			self.type = .CouldNotAuthenticate
+			
+		case .PageDoesNotExist:
+			self.type = .PageDoesNotExist
+			
+		case .AccountSuspended:
+			self.type = .AccountSuspended
+			
+		case .APIv1Inactive:
+			self.type = .APIv1Inactive
+			
+		case .RateLimitExceeded:
+			self.type = .RateLimitExceeded
+			
+		case .InvalidOrExpiredToken:
+			self.type = .InvalidOrExpiredToken
+			
+		case .SSLRequired:
+			self.type = .SSLRequired
+			
+		case .OverCapacity:
+			self.type = .OverCapacity
+			
+		case .InternalError:
+			self.type = .InternalError
+			
+		case .CouldNotAuthenticateYou:
+			self.type = .CouldNotAuthenticateYou
+			
+		case .UnableToFollow:
+			self.type = .UnableToFollow
+			
+		case .NotAuthorizedToSeeStatus:
+			self.type = .NotAuthorizedToSeeStatus
+			
+		case .DailyStatuUpdateLimitExceeded:
+			self.type = .DailyStatuUpdateLimitExceeded
+			
+		case .DuplicatedStatus:
+			self.type = .DuplicatedStatus
+			
+		case .BadAuthenticationData:
+			self.type = .BadAuthenticationData
+			
+		case .UserMustVerifyLogin:
+			self.type = .UserMustVerifyLogin
+			
+		case .RetiredEndpoint:
+			self.type = .RetiredEndpoint
+			
+		case .ApplicationCannotWrite:
+			self.type = .ApplicationCannotWrite
+		}
+	}
+}
+
 final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	typealias VerifyResult = Result<Void,NSError>
 	typealias PostStatusUpdateResult = Result<String,NSError>
-	typealias GetStatusesResult = Result<[ESTwitter.Status], NSError>
+	typealias GetStatusesResult = Result<[ESTwitter.Status], GetStatusesError>
 	
 	private static let timeout:NSTimeInterval = 15.0
 	private static let accountStore:ACAccountStore = ACAccountStore()
@@ -354,15 +459,24 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			}
 			catch let error as DecodeError {
 				
-				callback(GetStatusesResult(error: NSError(domain: "DecodeError", code: 0, userInfo: [ NSLocalizedDescriptionKey : "\(error.description)" ])))
+				let error = GetStatusesError(type: .DecodeResultError, reason: error.description)
+
+				callback(GetStatusesResult(error: error))
 			}
 			catch let error as NSError {
+				
+				let error = GetStatusesError(type: .UnexpectedError, reason: error.localizedDescription)
 				
 				callback(GetStatusesResult(error: error))
 			}
 		}
 		
 		let errorHandler = { (error: NSError!) -> Void in
+			
+			let code = STTwitterTwitterErrorCode(rawValue: error.code)!
+			let reason = error.localizedDescription
+			
+			let error = GetStatusesError(code: code, reason: reason)
 			
 			callback(GetStatusesResult(error: error))
 		}

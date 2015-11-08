@@ -176,6 +176,26 @@ public class Semaphore : RawRepresentable {
 			
 			self.rawValue = rawValue
 		}
+		
+		public var second: Double {
+			
+			return self.rawValue.toDouble() / NSEC_PER_SEC.toDouble()
+		}
+		
+		public var millisecond: Double {
+			
+			return self.rawValue.toDouble() / NSEC_PER_MSEC.toDouble()
+		}
+		
+		public var microsecond: Double {
+			
+			return self.rawValue.toDouble() / NSEC_PER_USEC.toDouble()
+		}
+		
+		public var nanosecond: Int64 {
+			
+			return self.rawValue
+		}
 	}
 	
 	private var semaphore:dispatch_semaphore_t
@@ -274,6 +294,14 @@ public class Semaphore : RawRepresentable {
 				body(.Timeout)
 			}
 		}
+	}
+}
+
+extension Semaphore.Interval : CustomStringConvertible {
+
+	public var description: String {
+		
+		return "\(self.second)"
 	}
 }
 

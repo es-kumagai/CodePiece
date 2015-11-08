@@ -37,6 +37,8 @@ class TimelineViewController: NSViewController {
 	enum Message : MessageTypeIgnoreInQuickSuccession {
 		
 		case SetAutoUpdateInterval(Double)
+		case AddAutoUpdateIntervalDelay(Double)
+		case ResetAutoUpdateIntervalDeray
 		case SetReachability(ReachabilityController.State)
 		case AutoUpdate(enable: Bool)
 		case UpdateStatuses
@@ -96,7 +98,23 @@ extension TimelineViewController {
 		
 		var hasInternetConnection:Bool = false
 		
-		var updateInterval:Int64 = 0
+		private var _updateInterval:Int64 = 0
+		
+		var updateInterval:Int64 {
+			
+			get {
+				
+				return self._updateInterval + self.updateIntervalDelay
+			}
+			
+			set {
+				
+				self._updateInterval = newValue
+			}
+		}
+
+		private(set) var updateIntervalDelay:Int64 = 0
+		var updateIntervalDelayMax:Int64 = 60
 		var nextUpdateTime:dispatch_time_t? = nil
 		
 		var isUpdateTimeOver:Bool {
@@ -137,6 +155,41 @@ extension TimelineViewController {
 				self.nextUpdateTime = nil
 			}
 		}
+		
+		mutating func resetUpdateIntervalDelay() {
+			
+			self.setUpdateIntervalDelay(0)
+		}
+
+		mutating func addUpdateIntervalDelayBySecond(second: Double) {
+			
+			self.addUpdateIntervalDelayByInterval(Semaphore.Interval(second: second))
+		}
+
+		mutating func addUpdateIntervalDelayByInterval(interval: Semaphore.Interval) {
+			
+			self.addUpdateIntervalDelay(interval.rawValue)
+		}
+		
+		mutating func setUpdateIntervalDelayBySecond(second: Double) {
+			
+			self.setUpdateIntervalDelayByInterval(Semaphore.Interval(second: second))
+		}
+		
+		mutating func setUpdateIntervalDelayByInterval(interval: Semaphore.Interval) {
+			
+			self.setUpdateIntervalDelay(interval.rawValue)
+		}
+
+		mutating func addUpdateIntervalDelay(delay: Int64) {
+			
+			self.updateIntervalDelay = min(self.updateIntervalDelay + delay, self.updateIntervalDelayMax)
+		}
+		
+		mutating func setUpdateIntervalDelay(delay: Int64) {
+			
+			self.updateIntervalDelay = delay
+		}
 	}
 	
 	func autoUpdateAction() {
@@ -176,6 +229,12 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		case .SetAutoUpdateInterval(let interval):
 			self._changeAutoUpdateInterval(interval)
 			
+		case .AddAutoUpdateIntervalDelay(let interval):
+			self._changeAutoUpdateIntervalDelay(interval)
+			
+		case .ResetAutoUpdateIntervalDeray:
+			self._resetAutoUpdateIntervalDelay()
+			
 		case .SetReachability(let state):
 			self._changeReachability(state)
 		}
@@ -196,6 +255,20 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 	private func _changeAutoUpdateInterval(interval: Double) {
 		
 		self.autoUpdateState.updateInterval = Semaphore.Interval(second: interval).rawValue
+	}
+	
+	private func _changeAutoUpdateIntervalDelay(interval: Double) {
+		
+		self.autoUpdateState.addUpdateIntervalDelayBySecond(interval)
+		
+		NSLog("Next update of timeline will delay %@ seconds.", Semaphore.Interval(rawValue: self.autoUpdateState.updateIntervalDelay).description)
+	}
+	
+	private func _resetAutoUpdateIntervalDelay() {
+		
+		self.autoUpdateState.resetUpdateIntervalDelay()
+		
+		NSLog("Delay for update of timeline was solved.")
 	}
 	
 	private func _changeAutoUpdateState(enable: Bool) {
@@ -335,10 +408,16 @@ extension TimelineViewController {
 					updateTable(tweets)
 					
 				case .Success:
-					break
+					self.message.send(.ResetAutoUpdateIntervalDeray)
 					
 				case .Failure(let error):
-					self.showErrorAlert("Failed to get Timelines", message: error.localizedDescription)
+					
+					if case .RateLimitExceeded = error.type {
+						
+						self.message.send(.AddAutoUpdateIntervalDelay(7.0))
+					}
+					
+					self.showErrorAlert("Failed to get Timelines", message: error.description)
 				}
 			}
 		}

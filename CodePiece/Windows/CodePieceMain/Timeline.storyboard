@@ -216,6 +216,19 @@
             </objects>
             <point key="canvasLocation" x="1273" y="415"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="IuA-no-UGu">
+            <objects>
+                <viewController id="RDN-3Q-fJS" sceneMemberID="viewController">
+                    <view key="view" id="TYc-IP-uSB">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </view>
+                </viewController>
+                <customObject id="br6-0f-FzL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="NSUserGuest" width="32" height="32"/>
