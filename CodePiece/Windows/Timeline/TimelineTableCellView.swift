@@ -13,6 +13,8 @@ import ESTwitter
 
 class TimelineTableCellView: NSTableCellView, Selectable {
 
+	private static var cellForEstimateHeight: TimelineTableCellView!
+	
 	enum Style {
 	
 		case Recent
@@ -155,18 +157,35 @@ extension TimelineTableCellView : TimelineTableCellType {
 	
 	static func estimateCellHeightForItem(item:TimelineTableItem, tableView:NSTableView) -> CGFloat {
 	
-		// 現行では、実際にビューを作ってサイズを確認しています。
-		let view = tweak(self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView) {
+		let item = item as! TimelineTweetItem
+
+		let baseHeight: CGFloat = 61
+		let textLabelWidthAdjuster: CGFloat = 50.0
+		
+		let view = self.getCellForEstimateHeightForTableView(tableView)
+		let font = view.textLabel.font
+		let labelSize = item.status.text.sizeWithFont(font, lineBreakMode: .ByWordWrapping, maxWidth: view.textLabel.bounds.width + textLabelWidthAdjuster)
+
+		let textLabelHeight = view.textLabel.bounds.height
+		
+		let estimateHeight = baseHeight + labelSize.height - textLabelHeight
+
+		return estimateHeight
+	}
+	
+	private static func getCellForEstimateHeightForTableView(tableView: NSTableView) -> TimelineTableCellView {
+		
+		
+		if self.cellForEstimateHeight == nil {
 			
-			$0.willSetStatusForEstimateHeightOnce()
-			$0.item = (item as! TimelineTweetItem)
+			let cell = self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView
 			
-			let size = $0.fittingSize
+			cell.frame = tableView.rectOfColumn(0)
 			
-			$0.bounds = NSMakeRect(0, 0, size.width, size.height)
+			self.cellForEstimateHeight = cell
 		}
 		
-		return view.fittingSize.height
+		return self.cellForEstimateHeight
 	}
 }
 

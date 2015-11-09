@@ -467,7 +467,6 @@ extension TimelineViewController {
 			self.timelineDataSource.appendTweets(tweets, hashtag: hashtag)
 
 			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: TableViewInsertAnimationOptions)
-//			self.timelineTableView.reloadData()
 			self.timelineTableView.selectRowIndexes(NSIndexSet(index: nextSelection), byExtendingSelection: false)
 		}
 		
