@@ -18,12 +18,12 @@ class TwitterPreferenceViewController: NSViewController {
 	private var verifyingHUD:ProgressHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
 	private var waitingHUD:ProgressHUD = ProgressHUD(message: "Please wait...", useActivityIndicator: true)
 
-	@IBOutlet weak var credentialsVerificationStatusImageView:NSImageView!
-	@IBOutlet weak var credentialsVerificationStatusTextField:NSTextField!
-	@IBOutlet weak var credentialsVerificationButton:NSButton!
-	@IBOutlet weak var selectedAccountName:NSTextField!
+	@IBOutlet var credentialsVerificationStatusImageView:NSImageView!
+	@IBOutlet var credentialsVerificationStatusTextField:NSTextField!
+	@IBOutlet var credentialsVerificationButton:NSButton!
+	@IBOutlet var selectedAccountName:NSTextField!
 	
-	@IBOutlet weak var errorReportTextField:NSTextField? {
+	@IBOutlet var errorReportTextField:NSTextField? {
 		
 		didSet {
 			
@@ -31,7 +31,7 @@ class TwitterPreferenceViewController: NSViewController {
 		}
 	}
 	
-	@IBOutlet weak var accountSelectorController:TwitterAccountSelectorController!
+	@IBOutlet var accountSelectorController:TwitterAccountSelectorController!
 	
 	var canVerify:Bool {
 	

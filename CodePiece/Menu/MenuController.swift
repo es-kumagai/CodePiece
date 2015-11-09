@@ -11,7 +11,7 @@ import Ocean
 
 final class MenuController : NSObject {
 
-	@IBOutlet weak var application:NSApplication!
+	@IBOutlet var application:NSApplication!
 
 	var keyWindow:NSWindow? {
 		

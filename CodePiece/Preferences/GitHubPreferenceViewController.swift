@@ -18,11 +18,11 @@ class GitHubPreferenceViewController: NSViewController {
 	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
 	private var removeAuthenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
 
-	@IBOutlet weak var authorizedStatusImageView:NSImageView!
-	@IBOutlet weak var authorizedStatusTextField:NSTextField!
-	@IBOutlet weak var authorizedAccountName:NSTextField!
-	@IBOutlet weak var authorizationButton:NSButton!
-	@IBOutlet weak var resetButton:NSButton!
+	@IBOutlet var authorizedStatusImageView:NSImageView!
+	@IBOutlet var authorizedStatusTextField:NSTextField!
+	@IBOutlet var authorizedAccountName:NSTextField!
+	@IBOutlet var authorizationButton:NSButton!
+	@IBOutlet var resetButton:NSButton!
 	
 	
 	@IBAction func doAuthentication(sender:NSButton) {

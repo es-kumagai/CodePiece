@@ -52,10 +52,10 @@ class ViewController: NSViewController {
 		}
 	}
 	
-	@IBOutlet weak var descriptionTextField:NSTextField!
-	@IBOutlet weak var descriptionCountLabel:NSTextField!
+	@IBOutlet var descriptionTextField:NSTextField!
+	@IBOutlet var descriptionCountLabel:NSTextField!
 	
-	@IBOutlet weak var codeScrollView:NSScrollView!
+	@IBOutlet var codeScrollView:NSScrollView!
 	
 	var baseViewController:BaseViewController {
 		

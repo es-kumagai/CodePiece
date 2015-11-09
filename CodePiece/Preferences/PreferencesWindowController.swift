@@ -15,7 +15,7 @@ enum PreferencesWindowModalResult : Int {
 
 class PreferencesWindowController: NSWindowController {
 
-	@IBOutlet weak var toolbar:NSToolbar!
+	@IBOutlet var toolbar:NSToolbar!
 	
 	@IBAction func showGitHubPreference(sender:NSToolbarItem?) {
 

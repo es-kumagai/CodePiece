@@ -48,10 +48,10 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 		}
 	}
 	
-	@IBOutlet weak var usernameLabel:NSTextField!
-	@IBOutlet weak var textLabel:NSTextField!
-	@IBOutlet weak var iconButton:NSButton!
-	@IBOutlet weak var dateLabel:NSTextField!
+	@IBOutlet var usernameLabel:NSTextField!
+	@IBOutlet var textLabel:NSTextField!
+	@IBOutlet var iconButton:NSButton!
+	@IBOutlet var dateLabel:NSTextField!
 	
 	override func drawRect(dirtyRect: NSRect) {
 		

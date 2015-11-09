@@ -12,7 +12,7 @@ import Swim
 
 final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 	
-	@IBOutlet weak var accountSelector:NSPopUpButton! {
+	@IBOutlet var accountSelector:NSPopUpButton! {
 		
 		didSet {
 			
