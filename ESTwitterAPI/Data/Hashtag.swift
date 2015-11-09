@@ -75,6 +75,14 @@ extension Hashtag : CustomStringConvertible {
 	}
 }
 
+extension Hashtag : Hashable {
+	
+	public var hashValue: Int {
+		
+		return self.value.hashValue
+	}
+}
+
 extension Hashtag : Equatable {
 	
 }

@@ -13,7 +13,13 @@ import ESTwitter
 struct TimelineHashtagTableCellItem{
 
 	var previousHashtag: Hashtag?
-	var currentHashtag: Hashtag?
+	var currentHashtag: Hashtag
+	
+	init(previousHashtag: Hashtag?, currentHashtag: Hashtag) {
+		
+		self.previousHashtag = previousHashtag
+		self.currentHashtag = currentHashtag
+	}
 }
 
 extension TimelineHashtagTableCellItem : TimelineTableItem  {
@@ -31,17 +37,21 @@ extension TimelineHashtagTableCellItem : TimelineTableItem  {
 	
 @IBDesignable final class TimelineHashtagTableCellView: NSTableCellView {
 
-	var item = TimelineHashtagTableCellItem() {
+	var item = TimelineHashtagTableCellItem(previousHashtag: nil, currentHashtag: Hashtag()) {
 	
 		didSet {
 
 			self.previousHashtagLabel.stringValue = self.item.previousHashtag?.description ?? ""
-			self.currentHashtagLabel.stringValue = self.item.currentHashtag?.description ?? ""
+			self.currentHashtagLabel.stringValue = self.item.currentHashtag.description
+			
+			self.previousHashtagView.hidden = (self.item.previousHashtag == nil)
 		}
 	}
 	
 	@IBOutlet var previousHashtagLabel: NSTextField!
 	@IBOutlet var currentHashtagLabel: NSTextField!
+	@IBOutlet var previousHashtagView: NSView!
+	@IBOutlet var currentHashtagView: NSView!
 	
 	@IBInspectable var backgroundColor: NSColor?
 	

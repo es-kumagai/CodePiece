@@ -92,7 +92,7 @@ class TimelineStatusView: NSView {
 		switch state {
 			
 		case .OK:
-			return NSColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 1.0)
+			return NSColor.windowFrameColor()
 			
 		case .Error:
 			return NSColor(red: 0.5, green: 0.2, blue: 0.2, alpha: 1.0)
@@ -104,7 +104,7 @@ class TimelineStatusView: NSView {
 		switch state {
 			
 		case .OK:
-			return NSColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
+			return NSColor.windowBackgroundColor()
 			
 		case .Error:
 			return NSColor(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)

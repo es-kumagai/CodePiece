@@ -19,26 +19,47 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		
 		didSet {
 	
-			self.lastTweetID = self.items.timelineItemFirstTweetId
+			self.items.timelineLatestTweetItem.invokeIfExists(self.setLatestTweet)
 		}
 	}
 	
-	private(set) var lastTweetID:String?
+	private var _lastTweetID = Dictionary<ESTwitter.Hashtag, String>()
 
-	func appendTweets(tweets: [ESTwitter.Status]) {
+	func latestTweetIdForHashtag(hashtag: ESTwitter.Hashtag) -> String? {
 		
-		let newTweets = tweets.orderByNewCreationDate().timelineItemsAppend(self.items).prefix(self.maxTweets)
+		return self._lastTweetID[hashtag]
+	}
+	
+	func setLatestTweet(item: TimelineTweetItem) {
+		
+		self._lastTweetID[item.currentHashtag] = item.timelineItemTweetId!
+	}
+	
+	func appendTweets(tweets: [ESTwitter.Status], hashtag: ESTwitter.Hashtag) {
+		
+		let newTweets = tweets.orderByNewCreationDate().toTimelineTweetItems(hashtag).timelineItemsAppend(self.items).prefix(self.maxTweets)
 		
 		self.items = Array(newTweets)
 	}
 	
 	func appendHashtag(hashtag: ESTwitter.Hashtag) -> ProcessingState {
 		
-		let latestItem = self.items.first as? TimelineHashtagTableCellItem
-		
-		if latestItem == nil || latestItem!.currentHashtag != hashtag {
+		let latestHashtag = self.items.first?.currentHashtag
+		let needAppending = { () -> Bool in
 			
-			let item = TimelineHashtagTableCellItem(previousHashtag: nil, currentHashtag: hashtag)
+			switch latestHashtag {
+				
+			case .None:
+				return true
+				
+			case .Some(let v):
+				return v != hashtag
+			}
+		}
+		
+		if needAppending() {
+			
+			let item = TimelineHashtagTableCellItem(previousHashtag: latestHashtag, currentHashtag: hashtag)
 			
 			self.items.insert(item, atIndex: 0)
 			

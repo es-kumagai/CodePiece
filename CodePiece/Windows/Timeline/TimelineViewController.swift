@@ -269,6 +269,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		if self.timelineDataSource.appendHashtag(hashtag) {
 		
 			self.timelineTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: NSTableViewAnimationOptions.SlideDown)
+			self._updateStatuses()
 		}
 	}
 	
@@ -403,7 +404,8 @@ extension TimelineViewController {
 			return
 		}
 		
-		let query = self.timeline.hashtag.description
+		let hashtag = self.timeline.hashtag
+		let query = hashtag.description
 		
 		let updateTable = { (tweets:[Status]) in
 
@@ -425,7 +427,7 @@ extension TimelineViewController {
 			let nextSelection = getNextSelection()
 //			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count.predecessor()))
 
-			self.timelineDataSource.appendTweets(tweets)
+			self.timelineDataSource.appendTweets(tweets, hashtag: hashtag)
 
 //			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: [.SlideUp, .EffectFade])
 			self.timelineTableView.reloadData()
@@ -523,7 +525,7 @@ extension TimelineViewController {
 		
 		let getTimelineSpecifiedQuery = {
 			
-			NSApp.twitterController.getStatusesWithQuery(query, since: self.timelineDataSource.lastTweetID) { result in
+			NSApp.twitterController.getStatusesWithQuery(query, since: self.timelineDataSource.latestTweetIdForHashtag(hashtag)) { result in
 				
 				switch result {
 					

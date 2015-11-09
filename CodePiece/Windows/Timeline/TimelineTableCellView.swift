@@ -21,11 +21,11 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 	
 	private var _useForEstimateHeightFlag = false
 	
-	var status:ESTwitter.Status? {
+	var item:TimelineTweetItem? {
 		
 		didSet {
 			
-			self.applyStatus(self.status)
+			self.applyItem(self.item)
 		}
 	}
 	
@@ -72,7 +72,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 		self._useForEstimateHeightFlag = true
 	}
 	
-	private func applyStatus(status:ESTwitter.Status?) {
+	private func applyItem(item:TimelineTweetItem?) {
 		
 		let forEstimateHeight = self._useForEstimateHeightFlag
 		
@@ -81,7 +81,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 			self._useForEstimateHeightFlag = false
 		}
 		
-		if let status = self.status {
+		if let status = self.item?.status {
 			
 			self.textLabel.stringValue = status.text
 			
@@ -91,8 +91,10 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 					
 					let formatter = tweak(NSDateFormatter()) {
 						
-						$0.dateFormat = "yyyy-MM-dd HH:mm"
-						$0.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+						$0.dateStyle = .ShortStyle
+						$0.timeStyle = .ShortStyle
+//						$0.dateFormat = "yyyy-MM-dd HH:mm"
+//						$0.locale = NSLocale(localeIdentifier: "en_US_POSIX")
 					}
 					
 					return formatter.stringFromDate($0.rawValue)
@@ -145,7 +147,7 @@ extension TimelineTableCellView : TimelineTableCellType {
 		let view = tweak(self.makeCellForTableView(tableView, owner: owner) as! TimelineTableCellView) {
 			
 			$0.textLabel.selectable = false
-			$0.status = (item as! ESTwitter.Status)
+			$0.item = (item as! TimelineTweetItem)
 		}
 		
 		return view
@@ -157,7 +159,7 @@ extension TimelineTableCellView : TimelineTableCellType {
 		let view = tweak(self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView) {
 			
 			$0.willSetStatusForEstimateHeightOnce()
-			$0.status = (item as! ESTwitter.Status)
+			$0.item = (item as! TimelineTweetItem)
 			
 			let size = $0.fittingSize
 			

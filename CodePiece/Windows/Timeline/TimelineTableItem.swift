@@ -11,7 +11,8 @@ import Swim
 import ESTwitter
 
 protocol TimelineTableItem {
-	
+
+	var currentHashtag: ESTwitter.Hashtag { get }
 	var timelineItemTweetId: String? { get }
 	var timelineCellType: TimelineTableCellType.Type { get }
 }
@@ -33,11 +34,19 @@ extension TimelineTableCellType {
 	}
 }
 
-extension ESTwitter.Status : TimelineTableItem {
+struct TimelineTweetItem : TimelineTableItem {
+	
+	var status: ESTwitter.Status
+	var hashtag: ESTwitter.Hashtag
 	
 	var timelineItemTweetId: String? {
 		
-		return self.idStr
+		return self.status.idStr
+	}
+
+	var currentHashtag: ESTwitter.Hashtag {
+		
+		return self.hashtag
 	}
 	
 	var timelineCellType: TimelineTableCellType.Type {
@@ -46,13 +55,21 @@ extension ESTwitter.Status : TimelineTableItem {
 	}
 }
 
+extension SequenceType where Generator.Element == ESTwitter.Status {
+	
+	func toTimelineTweetItems(hashtag: ESTwitter.Hashtag) -> [TimelineTweetItem] {
+		
+		return self.map { TimelineTweetItem(status: $0, hashtag: hashtag) }
+	}
+}
+
 extension SequenceType where Generator.Element == TimelineTableItem {
 	
-	var timelineItemFirstTweetId: String? {
-
-		let validTweetIds = self.flatMap { $0.timelineItemTweetId }
+	var timelineLatestTweetItem: TimelineTweetItem? {
 		
-		return validTweetIds.first
+		let validTweetItems = self.flatMap { $0 as? TimelineTweetItem }
+		
+		return validTweetItems.first
 	}
 }
 
