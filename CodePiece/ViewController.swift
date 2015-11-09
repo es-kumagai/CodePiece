@@ -296,7 +296,7 @@ class ViewController: NSViewController {
 	}
 	
 	override func viewDidDisappear() {
-		
+
 		DebugTime.print("Main window did hide.")
 		
 		super.viewDidDisappear()		
