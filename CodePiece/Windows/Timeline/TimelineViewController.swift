@@ -13,8 +13,11 @@ import ESTwitter
 import ESNotification
 import ESGists
 
+private let TableViewInsertAnimationOptions: NSTableViewAnimationOptions = [.SlideDown, .EffectFade]
+
 class TimelineViewController: NSViewController {
 
+	
 	struct TimelineInformation {
 	
 		var hashtag:ESTwitter.Hashtag
@@ -270,7 +273,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		
 			invokeOnMainQueue {
 
-				self.timelineTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: NSTableViewAnimationOptions.SlideDown)
+				self.timelineTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: TableViewInsertAnimationOptions)
 				self.message.send(.UpdateStatuses)
 			}
 		}
@@ -428,12 +431,12 @@ extension TimelineViewController {
 			}
 			
 			let nextSelection = getNextSelection()
-//			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count.predecessor()))
+			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count.predecessor()))
 
 			self.timelineDataSource.appendTweets(tweets, hashtag: hashtag)
 
-//			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: [.SlideUp, .EffectFade])
-			self.timelineTableView.reloadData()
+			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: TableViewInsertAnimationOptions)
+//			self.timelineTableView.reloadData()
 			self.timelineTableView.selectRowIndexes(NSIndexSet(index: nextSelection), byExtendingSelection: false)
 		}
 		
