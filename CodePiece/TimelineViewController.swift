@@ -285,7 +285,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 	private func _changeAutoUpdateState(enable: Bool) {
 		
 		self.autoUpdateState.enabled = enable
-		NSLog("Timeline update automatically is \(enable)d.")
+		NSLog("Timeline update automatically is \(enable ? "enabled" : "disabled").")
 		
 		if enable {
 			
