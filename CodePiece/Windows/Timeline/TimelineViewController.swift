@@ -268,8 +268,11 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		
 		if self.timelineDataSource.appendHashtag(hashtag) {
 		
-			self.timelineTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: NSTableViewAnimationOptions.SlideDown)
-			self._updateStatuses()
+			invokeOnMainQueue {
+
+				self.timelineTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: NSTableViewAnimationOptions.SlideDown)
+				self.message.send(.UpdateStatuses)
+			}
 		}
 	}
 	
