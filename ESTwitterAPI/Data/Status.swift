@@ -29,7 +29,7 @@ public struct Status {
 	public var id:UInt64
 	public var geo:CoordinatesBox?
 	public var retweeted:Bool
-	internal var retweetedStatus:RetweetedStatus?
+	public var retweetedStatus:RetweetedStatus?
 	public var place:Place?
 	public var possiblySensitive: Bool?
 	public var user:User
@@ -46,6 +46,14 @@ extension RetweetedStatus {
 		case .Value(let value):
 			return value
 		}
+	}
+}
+
+extension Status {
+	
+	public var isRetweetedTweet: Bool {
+		
+		return self.retweetedStatus.isExists
 	}
 }
 

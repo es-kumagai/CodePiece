@@ -52,7 +52,8 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 	@IBOutlet var textLabel:NSTextField!
 	@IBOutlet var iconButton:NSButton!
 	@IBOutlet var dateLabel:NSTextField!
-	
+	@IBOutlet var retweetMark: NSView!
+
 	override func drawRect(dirtyRect: NSRect) {
 		
 		if self.selected {
@@ -105,6 +106,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 				self.usernameLabel.stringValue = status.user.name
 				self.dateLabel.stringValue = dateToString(status.createdAt)
 				self.iconButton.image = nil
+				self.retweetMark.hidden = !status.isRetweetedTweet
 				self.style = (status.createdAt > Date().yesterday ? .Recent : .Past)
 				
 				self.updateIconImage(status)
