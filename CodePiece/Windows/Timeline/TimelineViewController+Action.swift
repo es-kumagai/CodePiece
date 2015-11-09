@@ -12,6 +12,6 @@ extension TimelineViewController {
 	
 	@IBAction func pushTimelineRefreshButton(sender: AnyObject!) {
 		
-		self.message.send(.UpdateStatuses)
+		self.reloadTimeline()
 	}
 }

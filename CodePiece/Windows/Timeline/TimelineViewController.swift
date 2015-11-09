@@ -91,6 +91,11 @@ class TimelineViewController: NSViewController {
 	private(set) var message:MessageQueue<Message>!
 	private var updateTimerSource:dispatch_source_t!
 	
+	var isTimelineActive: Bool {
+	
+		return true
+	}
+	
 	var timeline = TimelineInformation() {
 		
 		didSet {
@@ -422,7 +427,12 @@ extension TimelineViewController {
 // MARK: - Tweets control
 
 extension TimelineViewController {
-		
+	
+	func reloadTimeline() {
+	
+		self.message.send(.UpdateStatuses)
+	}
+	
 	private func updateStatuses() {
 		
 		guard NSApp.twitterController.credentialsVerified else {

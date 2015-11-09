@@ -240,6 +240,13 @@ DQ
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="mIg-Dg-glM"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="hWk-5O-fe1"/>
+                                        <menuItem title="Reload Timeline" keyEquivalent="r" id="SaP-vc-ZWX">
+                                            <connections>
+                                                <action selector="reloadTimeline:" target="p69-Rc-ib8" id="xgV-eS-cgL"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isTimelineActive" id="t8s-4R-xaw"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -314,6 +321,7 @@ DQ
                 <customObject id="k6Z-Lx-p1R" customClass="TwitterOpenFeatures" customModule="CodePiece" customModuleProvider="target"/>
                 <customObject id="noF-Hz-Tly" customClass="GitHubOpenFeatures" customModule="CodePiece" customModuleProvider="target"/>
                 <userDefaultsController id="vXH-nv-6MI"/>
+                <userDefaultsController representsSharedInstance="YES" id="Jgm-JX-ekP"/>
             </objects>
             <point key="canvasLocation" x="75.5" y="-235"/>
         </scene>

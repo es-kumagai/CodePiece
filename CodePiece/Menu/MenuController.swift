@@ -112,4 +112,14 @@ final class MenuController : NSObject {
 		
 		self.mainViewController?.openBrowserWithSearchHashtagPage()
 	}
+	
+	var isTimelineActive: Bool {
+	
+		return self.timelineViewController?.isTimelineActive ?? false
+	}
+	
+	@IBAction func reloadTimeline(sender: NSMenuItem?) {
+		
+		self.timelineViewController?.reloadTimeline()
+	}
 }
