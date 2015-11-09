@@ -27,7 +27,7 @@
                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="izy-dV-Ecq">
                                                         <rect key="frame" x="8" y="4" width="284" height="14"/>
                                                         <subviews>
-                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-Kq-TYx">
+                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-Kq-TYx">
                                                                 <rect key="frame" x="-2" y="0.0" width="242" height="14"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="14" id="DaJ-WU-KEF"/>
@@ -39,7 +39,7 @@
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
-                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-Jk-7by">
+                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-Jk-7by">
                                                                 <rect key="frame" x="246" y="0.0" width="14" height="14"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="2Wo-Jk-7by" secondAttribute="height" multiplier="1:1" id="BfS-hN-Vfo"/>
@@ -53,7 +53,7 @@
                                                                     <action selector="pushTimelineRefreshButton:" target="gED-XW-6vA" id="85s-D8-q8y"/>
                                                                 </connections>
                                                             </button>
-                                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="6wO-Lf-gc9">
+                                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="6wO-Lf-gc9">
                                                                 <rect key="frame" x="268" y="0.0" width="16" height="14"/>
                                                                 <animations/>
                                                             </progressIndicator>

@@ -567,7 +567,7 @@ extension TimelineViewController {
 			NSApp.twitterController.getStatusesWithQuery(query, since: self.timelineDataSource.latestTweetIdForHashtag(hashtag)) { result in
 				
 				self.displayControlState = .Updated
-				
+
 				switch result {
 					
 				case .Success(let tweets) where !tweets.isEmpty:

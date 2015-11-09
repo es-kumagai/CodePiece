@@ -41,10 +41,12 @@ extension TimelineViewController {
 		switch state {
 			
 		case .Updating:
+			self.timelineUpdateIndicator?.startAnimation(self)
 			controlsForShow = self.displayControlsForUpdating
 			controlsForHide = self.displayControlsForUpdated
 			
 		case .Updated:
+			self.timelineUpdateIndicator?.stopAnimation(self)
 			controlsForShow = self.displayControlsForUpdated
 			controlsForHide = self.displayControlsForUpdating
 		}
