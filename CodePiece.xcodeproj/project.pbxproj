@@ -105,6 +105,7 @@
 		B15E71C11BF06E41009CCB0E /* TimelineHashtagTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C01BF06E41009CCB0E /* TimelineHashtagTableCellView.swift */; };
 		B15E71C31BF07010009CCB0E /* TimelineTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C21BF07010009CCB0E /* TimelineTableItem.swift */; };
 		B15E71C51BF0BC70009CCB0E /* TimelineViewController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C41BF0BC70009CCB0E /* TimelineViewController+Action.swift */; };
+		B15E71C71BF0CD84009CCB0E /* TimelineViewController+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */; };
 		B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE61BDC60770013AFF6 /* Environments.swift */; };
 		B1630AE91BDC97580013AFF6 /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE81BDC97580013AFF6 /* ClientInfo.swift */; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
@@ -340,6 +341,7 @@
 		B15E71C01BF06E41009CCB0E /* TimelineHashtagTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineHashtagTableCellView.swift; sourceTree = "<group>"; };
 		B15E71C21BF07010009CCB0E /* TimelineTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableItem.swift; sourceTree = "<group>"; };
 		B15E71C41BF0BC70009CCB0E /* TimelineViewController+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Action.swift"; sourceTree = "<group>"; };
+		B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Display.swift"; sourceTree = "<group>"; };
 		B1630AE61BDC60770013AFF6 /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		B1630AE81BDC97580013AFF6 /* ClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				B15E71B81BF06CDF009CCB0E /* TimelineViewController.swift */,
+				B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */,
 				B15E71C41BF0BC70009CCB0E /* TimelineViewController+Action.swift */,
 				B10182CA1BEF8F6B0077873B /* TimelineStatusView.swift */,
 				B15E71BC1BF06D26009CCB0E /* TimelineTableView.swift */,
@@ -1304,6 +1307,7 @@
 				B1BB59F71B5E718900DE3942 /* SNSController.swift in Sources */,
 				B1D2D6721B5D490800794EFD /* Settings.swift in Sources */,
 				B1118DA51B6BECAD00BFC5FA /* WelcomeBoardViewController.swift in Sources */,
+				B15E71C71BF0CD84009CCB0E /* TimelineViewController+Display.swift in Sources */,
 				B1D2D67F1B5D566000794EFD /* Storyboard.swift in Sources */,
 				B17DAF5E1B6529A0004CE4D2 /* WebCaptureController.swift in Sources */,
 				B1269A631B7D9815009305C6 /* TwitterAccountSelectorController.swift in Sources */,

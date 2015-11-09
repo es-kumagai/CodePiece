@@ -71,7 +71,20 @@ class TimelineViewController: NSViewController {
 		}
 	}
 	
+	@IBOutlet var timelineUpdateIndicator: NSProgressIndicator?
+	@IBOutlet var timelineRefreshButton: NSButton?
+	
 	let statusesAutoUpdateInterval:Double = 20
+	
+	private(set) var displayControlState = DisplayControlState.Updated {
+		
+		didSet {
+			
+			precondition(NSThread.isMainThread())
+			
+			self.updateDisplayControlsForState()
+		}
+	}
 	
 	private var autoUpdateState = AutoUpdateState()
 	
@@ -339,10 +352,18 @@ extension TimelineViewController {
 		self.message = MessageQueue(identifier: "CodePiece.Timeline", handler: self)
 		self.updateTimerSource = self.message.makeTimer(Semaphore.Interval(second: 0.03), start: true, timerAction: self.autoUpdateAction)
 		
+		self.updateDisplayControlsForState()
+		
 		self.message.send(.SetAutoUpdateInterval(self.statusesAutoUpdateInterval))
 		self.message.send(.SetReachability(NSApp.reachabilityController.state))
 		self.message.send(.AutoUpdate(enable: true))
     }
+	
+	override func viewWillAppear() {
+		
+		super.viewWillAppear()
+	
+	}
 	
 	override func viewDidAppear() {
 
@@ -447,7 +468,7 @@ extension TimelineViewController {
 		}
 		
 		let failedToGetTimeline = { (error: GetStatusesError) -> Void in
-			
+						
 			if case .RateLimitExceeded = error.type {
 				
 				self.message.send(.AddAutoUpdateIntervalDelay(7.0))
@@ -531,7 +552,11 @@ extension TimelineViewController {
 		
 		let getTimelineSpecifiedQuery = {
 			
+			self.displayControlState = .Updating
+			
 			NSApp.twitterController.getStatusesWithQuery(query, since: self.timelineDataSource.latestTweetIdForHashtag(hashtag)) { result in
+				
+				self.displayControlState = .Updated
 				
 				switch result {
 					

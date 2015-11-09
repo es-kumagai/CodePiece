@@ -448,8 +448,11 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	func getStatusesWithQuery(query:String, since:String?, callback:(GetStatusesResult)->Void) {
 		
 		let successHandler = { (query:[NSObject : AnyObject]!, resultData:[AnyObject]!) -> Void in
+
+			let report = { (error: GetStatusesError) -> Void in
 			
-			NSLog("DEBUG : Get Statuses : \(query), \(resultData)")
+				NSLog("ERROR : Failed to get statuses :\n\tReason: \(error)\n\tQuery: \(query)\n\n \(resultData)\n")
+			}
 			
 			do {
 
@@ -461,12 +464,14 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 				
 				let error = GetStatusesError(type: .DecodeResultError, reason: error.description)
 
+				report(error)
 				callback(GetStatusesResult(error: error))
 			}
 			catch let error as NSError {
 				
 				let error = GetStatusesError(type: .UnexpectedError, reason: error.localizedDescription)
-				
+
+				report(error)
 				callback(GetStatusesResult(error: error))
 			}
 		}
