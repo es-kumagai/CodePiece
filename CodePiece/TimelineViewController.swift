@@ -66,7 +66,7 @@ class TimelineViewController: NSViewController {
 		}
 	}
 	
-	let statusesAutoUpdateInterval:Double = 15
+	let statusesAutoUpdateInterval:Double = 20
 	
 	private var autoUpdateState = AutoUpdateState()
 	
