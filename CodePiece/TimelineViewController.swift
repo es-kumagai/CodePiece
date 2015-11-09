@@ -11,6 +11,7 @@ import Swim
 import ESThread
 import ESTwitter
 import ESNotification
+import ESGists
 
 class TimelineViewController: NSViewController {
 
@@ -423,7 +424,7 @@ extension TimelineViewController {
 		let gotTimelineSuccessfully = { () -> Void in
 			
 			self.message.send(.ResetAutoUpdateIntervalDeray)
-			self.timelineStatusView.errorMessage = ""
+			self.timelineStatusView.OKMessage = "Last Update: \(NSDate().displayString)"
 		}
 		
 		let failedToGetTimeline = { (error: GetStatusesError) -> Void in

@@ -20,6 +20,21 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+extension NSDate {
+
+	var displayString: String {
+		
+		let calendar = NSCalendar.currentCalendar()
+		let formatter = NSDateFormatter()
+		
+		formatter.calendar = calendar
+		formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+		formatter.timeStyle = NSDateFormatterStyle.MediumStyle
+		
+		return formatter.stringFromDate(self)
+	}
+}
+
 public func bundle<First,Second>(first:First)(second:Second) -> (First, Second) {
 
 	return (first, second)
