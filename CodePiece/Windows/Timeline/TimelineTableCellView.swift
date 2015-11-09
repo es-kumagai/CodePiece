@@ -133,6 +133,41 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 	}
 }
 
+extension TimelineTableCellView : TimelineTableCellType {
+
+	static var prototypeCellIdentifier: String {
+		
+		return "TimelineCell"
+	}
+
+	static func makeCellWithItem(item: TimelineTableItem, tableView: NSTableView, owner: AnyObject?) -> NSTableCellView {
+		
+		let view = tweak(self.makeCellForTableView(tableView, owner: owner) as! TimelineTableCellView) {
+			
+			$0.textLabel.selectable = false
+			$0.status = (item as! ESTwitter.Status)
+		}
+		
+		return view
+	}
+	
+	static func estimateCellHeightForItem(item:TimelineTableItem, tableView:NSTableView) -> CGFloat {
+	
+		// 現行では、実際にビューを作ってサイズを確認しています。
+		let view = tweak(self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView) {
+			
+			$0.willSetStatusForEstimateHeightOnce()
+			$0.status = (item as! ESTwitter.Status)
+			
+			let size = $0.fittingSize
+			
+			$0.bounds = NSMakeRect(0, 0, size.width, size.height)
+		}
+		
+		return view.fittingSize.height
+	}
+}
+
 extension TimelineTableCellView.Style {
 	
 	var backgroundColor:NSColor {

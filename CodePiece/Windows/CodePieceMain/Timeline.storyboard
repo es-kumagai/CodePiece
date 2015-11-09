@@ -193,6 +193,116 @@
                                                                         <outlet property="usernameLabel" destination="LZz-oQ-fjr" id="LN0-dt-WVF"/>
                                                                     </connections>
                                                                 </tableCellView>
+                                                                <tableCellView identifier="TimelineHashtagCell" id="i0d-rn-ugi" customClass="TimelineHashtagTableCellView" customModule="CodePiece" customModuleProvider="target">
+                                                                    <rect key="frame" x="1" y="64" width="295" height="20"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <subviews>
+                                                                        <stackView distribution="equalSpacing" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="glD-pD-d9O">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="295" height="20"/>
+                                                                            <subviews>
+                                                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bS7-fV-5fL">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="104" height="20"/>
+                                                                                    <subviews>
+                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="gu3-Kb-1uH">
+                                                                                            <rect key="frame" x="6" y="4" width="12" height="14"/>
+                                                                                            <animations/>
+                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↑" id="cDS-Qe-HoX">
+                                                                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                                                                <color key="textColor" red="1" green="0.9841841764" blue="0.79432447520000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            </textFieldCell>
+                                                                                        </textField>
+                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="0SF-DB-qdw">
+                                                                                            <rect key="frame" x="22" y="4" width="84" height="14"/>
+                                                                                            <animations/>
+                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="xAo-9Z-cs6">
+                                                                                                <font key="font" metaFont="smallSystem"/>
+                                                                                                <color key="textColor" red="1" green="0.9841841764" blue="0.79432447520000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            </textFieldCell>
+                                                                                        </textField>
+                                                                                    </subviews>
+                                                                                    <animations/>
+                                                                                    <edgeInsets key="edgeInsets" left="8" right="0.0" top="2" bottom="0.0"/>
+                                                                                    <visibilityPriorities>
+                                                                                        <integer value="1000"/>
+                                                                                        <integer value="1000"/>
+                                                                                    </visibilityPriorities>
+                                                                                    <customSpacing>
+                                                                                        <real value="3.4028234663852886e+38"/>
+                                                                                        <real value="3.4028234663852886e+38"/>
+                                                                                    </customSpacing>
+                                                                                </stackView>
+                                                                                <stackView distribution="fill" orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nVR-K7-OgL">
+                                                                                    <rect key="frame" x="191" y="0.0" width="104" height="20"/>
+                                                                                    <subviews>
+                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="Ro0-SP-0ba">
+                                                                                            <rect key="frame" x="-2" y="2" width="84" height="14"/>
+                                                                                            <animations/>
+                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="PA1-DH-PRB">
+                                                                                                <font key="font" metaFont="smallSystem"/>
+                                                                                                <color key="textColor" red="1" green="0.9841841764" blue="0.79432447520000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            </textFieldCell>
+                                                                                        </textField>
+                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GU9-2u-J5K">
+                                                                                            <rect key="frame" x="86" y="2" width="12" height="14"/>
+                                                                                            <animations/>
+                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↓" id="3a6-mp-bbg">
+                                                                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                                                                <color key="textColor" red="1" green="0.9841841764" blue="0.79432447520000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            </textFieldCell>
+                                                                                        </textField>
+                                                                                    </subviews>
+                                                                                    <animations/>
+                                                                                    <edgeInsets key="edgeInsets" left="0.0" right="8" top="0.0" bottom="-2"/>
+                                                                                    <visibilityPriorities>
+                                                                                        <integer value="1000"/>
+                                                                                        <integer value="1000"/>
+                                                                                    </visibilityPriorities>
+                                                                                    <customSpacing>
+                                                                                        <real value="3.4028234663852886e+38"/>
+                                                                                        <real value="3.4028234663852886e+38"/>
+                                                                                    </customSpacing>
+                                                                                </stackView>
+                                                                            </subviews>
+                                                                            <animations/>
+                                                                            <constraints>
+                                                                                <constraint firstItem="nVR-K7-OgL" firstAttribute="top" secondItem="glD-pD-d9O" secondAttribute="top" id="PgS-EM-L67"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="bS7-fV-5fL" secondAttribute="bottom" id="Qwz-Me-daH"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="nVR-K7-OgL" secondAttribute="bottom" id="rIe-dm-VIU"/>
+                                                                                <constraint firstItem="bS7-fV-5fL" firstAttribute="top" secondItem="glD-pD-d9O" secondAttribute="top" id="svl-va-Nx7"/>
+                                                                                <constraint firstItem="bS7-fV-5fL" firstAttribute="leading" secondItem="glD-pD-d9O" secondAttribute="leading" id="vGl-BG-9ch"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="nVR-K7-OgL" secondAttribute="trailing" id="yfS-hd-wJd"/>
+                                                                            </constraints>
+                                                                            <visibilityPriorities>
+                                                                                <integer value="1000"/>
+                                                                                <integer value="1000"/>
+                                                                            </visibilityPriorities>
+                                                                            <customSpacing>
+                                                                                <real value="3.4028234663852886e+38"/>
+                                                                                <real value="3.4028234663852886e+38"/>
+                                                                            </customSpacing>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="glD-pD-d9O" firstAttribute="top" secondItem="i0d-rn-ugi" secondAttribute="top" id="7GM-tl-DiF"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="glD-pD-d9O" secondAttribute="trailing" id="FI9-xN-bFM"/>
+                                                                        <constraint firstItem="glD-pD-d9O" firstAttribute="leading" secondItem="i0d-rn-ugi" secondAttribute="leading" id="eLM-43-xze"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="glD-pD-d9O" secondAttribute="bottom" id="q1v-hY-b8e"/>
+                                                                    </constraints>
+                                                                    <animations/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                            <color key="value" red="0.4384974539" green="0.26094529030000002" blue="0.2657999694" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <outlet property="currentHashtagLabel" destination="0SF-DB-qdw" id="HOr-i1-ePG"/>
+                                                                        <outlet property="previousHashtagLabel" destination="Ro0-SP-0ba" id="m1W-C3-sB9"/>
+                                                                    </connections>
+                                                                </tableCellView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>

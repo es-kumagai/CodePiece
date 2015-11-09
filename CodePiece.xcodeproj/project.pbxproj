@@ -102,6 +102,8 @@
 		B15E71BD1BF06D26009CCB0E /* TimelineTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71BA1BF06D26009CCB0E /* TimelineTableCellView.swift */; };
 		B15E71BE1BF06D26009CCB0E /* TimelineTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71BB1BF06D26009CCB0E /* TimelineTableDataSource.swift */; };
 		B15E71BF1BF06D26009CCB0E /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71BC1BF06D26009CCB0E /* TimelineTableView.swift */; };
+		B15E71C11BF06E41009CCB0E /* TimelineHashtagTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C01BF06E41009CCB0E /* TimelineHashtagTableCellView.swift */; };
+		B15E71C31BF07010009CCB0E /* TimelineTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C21BF07010009CCB0E /* TimelineTableItem.swift */; };
 		B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE61BDC60770013AFF6 /* Environments.swift */; };
 		B1630AE91BDC97580013AFF6 /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE81BDC97580013AFF6 /* ClientInfo.swift */; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
@@ -334,6 +336,8 @@
 		B15E71BA1BF06D26009CCB0E /* TimelineTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableCellView.swift; sourceTree = "<group>"; };
 		B15E71BB1BF06D26009CCB0E /* TimelineTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableDataSource.swift; sourceTree = "<group>"; };
 		B15E71BC1BF06D26009CCB0E /* TimelineTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableView.swift; sourceTree = "<group>"; };
+		B15E71C01BF06E41009CCB0E /* TimelineHashtagTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineHashtagTableCellView.swift; sourceTree = "<group>"; };
+		B15E71C21BF07010009CCB0E /* TimelineTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableItem.swift; sourceTree = "<group>"; };
 		B1630AE61BDC60770013AFF6 /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		B1630AE81BDC97580013AFF6 /* ClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
@@ -478,8 +482,10 @@
 				B15E71B81BF06CDF009CCB0E /* TimelineViewController.swift */,
 				B10182CA1BEF8F6B0077873B /* TimelineStatusView.swift */,
 				B15E71BC1BF06D26009CCB0E /* TimelineTableView.swift */,
+				B15E71C21BF07010009CCB0E /* TimelineTableItem.swift */,
 				B15E71BB1BF06D26009CCB0E /* TimelineTableDataSource.swift */,
 				B15E71BA1BF06D26009CCB0E /* TimelineTableCellView.swift */,
+				B15E71C01BF06E41009CCB0E /* TimelineHashtagTableCellView.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -1254,6 +1260,7 @@
 				B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */,
 				B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */,
 				B1BD64F21B7B964D002DFDD0 /* URLScheme.swift in Sources */,
+				B15E71C11BF06E41009CCB0E /* TimelineHashtagTableCellView.swift in Sources */,
 				B15E71BF1BF06D26009CCB0E /* TimelineTableView.swift in Sources */,
 				B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */,
 				B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */,
@@ -1298,6 +1305,7 @@
 				B1269A631B7D9815009305C6 /* TwitterAccountSelectorController.swift in Sources */,
 				B15E71B91BF06CDF009CCB0E /* TimelineViewController.swift in Sources */,
 				B1D2D66B1B5D44A800794EFD /* Authorization.swift in Sources */,
+				B15E71C31BF07010009CCB0E /* TimelineTableItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

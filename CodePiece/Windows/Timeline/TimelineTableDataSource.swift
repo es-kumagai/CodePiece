@@ -15,11 +15,11 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
 	var maxTweets = 200
 	
-	var tweets = Array<ESTwitter.Status>() {
+	var items = Array<TimelineTableItem>() {
 		
 		didSet {
 	
-			self.lastTweetID = self.tweets.first?.idStr
+			self.lastTweetID = self.items.timelineItemFirstTweetId
 		}
 	}
 	
@@ -27,14 +27,32 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 
 	func appendTweets(tweets: [ESTwitter.Status]) {
 		
-		let newTweets = (tweets.orderByNewCreationDate() + self.tweets).prefix(self.maxTweets)
+		let newTweets = tweets.orderByNewCreationDate().timelineItemsAppend(self.items).prefix(self.maxTweets)
 		
-		self.tweets = Array(newTweets)
+		self.items = Array(newTweets)
+	}
+	
+	func appendHashtag(hashtag: ESTwitter.Hashtag) -> ProcessingState {
+		
+		let latestItem = self.items.first as? TimelineHashtagTableCellItem
+		
+		if latestItem == nil || latestItem!.currentHashtag != hashtag {
+			
+			let item = TimelineHashtagTableCellItem(previousHashtag: nil, currentHashtag: hashtag)
+			
+			self.items.insert(item, atIndex: 0)
+			
+			return .Passed
+		}
+		else {
+
+			return .Aborted
+		}
 	}
 	
 	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
 		
-		return self.tweets.count
+		return self.items.count
 	}
 
 	func setNeedsEstimateHeight() {
@@ -43,13 +61,8 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
 	func estimateCellHeightOfRow(row:Int, tableView:NSTableView) -> CGFloat {
 		
-		// 現行では、実際にビューを作ってサイズを確認しています。
-		let view = tweak(tableView.makeViewWithIdentifier("TimelineCell", owner: self) as! TimelineTableCellView) {
-			
-			$0.willSetStatusForEstimateHeightOnce()
-			$0.status = self.tweets[row]
-		}
+		let item = self.items[row]
 		
-		return view.fittingSize.height
+		return item.timelineCellType.estimateCellHeightForItem(item, tableView: tableView)
 	}
 }

@@ -43,6 +43,7 @@ class TimelineViewController: NSViewController {
 		case SetReachability(ReachabilityController.State)
 		case AutoUpdate(enable: Bool)
 		case UpdateStatuses
+		case ChangeHashtag(ESTwitter.Hashtag)
 		
 		func blockInQuickSuccession(lastMessage: Message) -> Bool {
 			
@@ -80,8 +81,8 @@ class TimelineViewController: NSViewController {
 			
 			if self.timeline.hashtag != oldValue.hashtag {
 				
-				self.timelineDataSource.tweets = []
-				self.message.send(.UpdateStatuses)
+//				self.timelineDataSource.items = []
+				self.message.send(.ChangeHashtag(self.timeline.hashtag))
 			}
 		}
 	}
@@ -245,6 +246,9 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 			
 		case .SetReachability(let state):
 			self._changeReachability(state)
+			
+		case .ChangeHashtag(let hashtag):
+			self._changeHashtag(hashtag)
 		}
 	}
 	
@@ -258,6 +262,14 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		self.autoUpdateState.updateNextUpdateTime()
 		
 		invokeAsyncOnMainQueue(self.updateStatuses)
+	}
+	
+	private func _changeHashtag(hashtag: ESTwitter.Hashtag) {
+		
+		if self.timelineDataSource.appendHashtag(hashtag) {
+		
+			self.timelineTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: NSTableViewAnimationOptions.SlideDown)
+		}
 	}
 	
 	private func _changeAutoUpdateInterval(interval: Double) {
@@ -341,7 +353,6 @@ extension TimelineViewController {
 			NSLog("Hashtag did change (\(hashtag))")
 			
 			owner.timeline = owner.timeline.replaceHashtag(hashtag)
-			self.message.send(.UpdateStatuses)
 		}
 		
 		NamedNotification.observe(NSWorkspaceWillSleepNotification, by: self) { owner, notification in
@@ -546,7 +557,7 @@ extension TimelineViewController {
 	
 	private func clearStatuses() {
 		
-		self.timelineDataSource.tweets = []
+		self.timelineDataSource.items = []
 		self.timelineTableView.reloadData()
 	}
 }
@@ -557,20 +568,16 @@ extension TimelineViewController : NSTableViewDelegate {
 
 	func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		
-		let tweets = self.timelineDataSource.tweets
+		let items = self.timelineDataSource.items
 		
-		guard row < tweets.count else {
+		guard row < items.count else {
 			
 			return nil
 		}
 		
-		let view = tweak(tableView.makeViewWithIdentifier("TimelineCell", owner: self) as! TimelineTableCellView) {
-			
-			$0.textLabel.selectable = false
-			$0.status = tweets[row]
-		}
+		let item = items[row]
 		
-		return view
+		return item.timelineCellType.makeCellWithItem(item, tableView: tableView, owner: self)
 	}
 	
 	func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
