@@ -23,24 +23,52 @@
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Rvt-xa-mmo" customClass="TimelineStatusView" customModule="CodePiece" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="22"/>
                                                 <subviews>
-                                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-Kq-TYx">
-                                                        <rect key="frame" x="6" y="4" width="288" height="14"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="14" id="DaJ-WU-KEF"/>
-                                                        </constraints>
+                                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="izy-dV-Ecq">
+                                                        <rect key="frame" x="8" y="4" width="284" height="14"/>
+                                                        <subviews>
+                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-Kq-TYx">
+                                                                <rect key="frame" x="-2" y="0.0" width="230" height="14"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="14" id="DaJ-WU-KEF"/>
+                                                                </constraints>
+                                                                <animations/>
+                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="obn-11-IGu">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                            </textField>
+                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-Jk-7by">
+                                                                <rect key="frame" x="234" y="0.0" width="50" height="14"/>
+                                                                <animations/>
+                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="YSE-Js-fA4">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="pushTimelineRefreshButton:" target="gED-XW-6vA" id="85s-D8-q8y"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
                                                         <animations/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="obn-11-IGu">
-                                                            <font key="font" metaFont="smallSystem"/>
-                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="14" id="wt5-vO-hoF"/>
+                                                        </constraints>
+                                                        <visibilityPriorities>
+                                                            <integer value="1000"/>
+                                                            <integer value="1000"/>
+                                                        </visibilityPriorities>
+                                                        <customSpacing>
+                                                            <real value="3.4028234663852886e+38"/>
+                                                            <real value="3.4028234663852886e+38"/>
+                                                        </customSpacing>
+                                                    </stackView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="bcL-Kq-TYx" secondAttribute="bottom" constant="4" id="6qB-oR-sMs"/>
-                                                    <constraint firstAttribute="trailing" secondItem="bcL-Kq-TYx" secondAttribute="trailing" constant="8" id="849-Ea-r3u"/>
-                                                    <constraint firstItem="bcL-Kq-TYx" firstAttribute="leading" secondItem="Rvt-xa-mmo" secondAttribute="leading" constant="8" id="FhA-jQ-eM1"/>
-                                                    <constraint firstItem="bcL-Kq-TYx" firstAttribute="top" secondItem="Rvt-xa-mmo" secondAttribute="top" constant="4" id="zgw-uw-CRi"/>
+                                                    <constraint firstAttribute="bottom" secondItem="izy-dV-Ecq" secondAttribute="bottom" constant="4" id="RZS-jf-UKA"/>
+                                                    <constraint firstItem="izy-dV-Ecq" firstAttribute="top" secondItem="Rvt-xa-mmo" secondAttribute="top" constant="4" id="kYC-FB-kkJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="izy-dV-Ecq" secondAttribute="trailing" constant="8" id="maq-Bb-fv4"/>
+                                                    <constraint firstItem="izy-dV-Ecq" firstAttribute="leading" secondItem="Rvt-xa-mmo" secondAttribute="leading" constant="8" id="vuS-pI-qjh"/>
                                                 </constraints>
                                                 <animations/>
                                                 <connections>
@@ -207,7 +235,7 @@
                                                                                             <rect key="frame" x="6" y="3" width="12" height="14"/>
                                                                                             <animations/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↑" id="cDS-Qe-HoX">
-                                                                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                                                                <font key="font" metaFont="smallSystemBold"/>
                                                                                                 <color key="textColor" red="1" green="0.94568324079999999" blue="0.55230108789999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
@@ -249,7 +277,7 @@
                                                                                             <rect key="frame" x="86" y="3" width="12" height="14"/>
                                                                                             <animations/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↓" id="3a6-mp-bbg">
-                                                                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                                                                <font key="font" metaFont="smallSystemBold"/>
                                                                                                 <color key="textColor" red="0.85522877559999999" green="0.63923549229999999" blue="0.50031248230000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
@@ -364,21 +392,9 @@
             </objects>
             <point key="canvasLocation" x="1273" y="415"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="IuA-no-UGu">
-            <objects>
-                <viewController id="RDN-3Q-fJS" sceneMemberID="viewController">
-                    <view key="view" id="TYc-IP-uSB">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </view>
-                </viewController>
-                <customObject id="br6-0f-FzL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
+        <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
         <image name="NSUserGuest" width="32" height="32"/>
     </resources>
 </document>
