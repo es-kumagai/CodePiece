@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
@@ -26,8 +27,8 @@
                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="izy-dV-Ecq">
                                                         <rect key="frame" x="8" y="4" width="284" height="14"/>
                                                         <subviews>
-                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-Kq-TYx">
-                                                                <rect key="frame" x="-2" y="0.0" width="230" height="14"/>
+                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-Kq-TYx">
+                                                                <rect key="frame" x="-2" y="0.0" width="266" height="14"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="14" id="DaJ-WU-KEF"/>
                                                                 </constraints>
@@ -38,10 +39,13 @@
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
-                                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-Jk-7by">
-                                                                <rect key="frame" x="234" y="0.0" width="50" height="14"/>
+                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-Jk-7by">
+                                                                <rect key="frame" x="270" y="0.0" width="14" height="14"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="2Wo-Jk-7by" secondAttribute="height" multiplier="1:1" id="BfS-hN-Vfo"/>
+                                                                </constraints>
                                                                 <animations/>
-                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="YSE-Js-fA4">
+                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="YSE-Js-fA4">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
                                                                 </buttonCell>
@@ -51,6 +55,7 @@
                                                             </button>
                                                         </subviews>
                                                         <animations/>
+                                                        <edgeInsets key="edgeInsets" left="0.0" right="0.0" top="4" bottom="4"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="14" id="wt5-vO-hoF"/>
                                                         </constraints>
@@ -394,7 +399,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSUserGuest" width="32" height="32"/>
     </resources>
 </document>
