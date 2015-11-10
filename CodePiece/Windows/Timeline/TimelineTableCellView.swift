@@ -21,13 +21,14 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 		case Past
 	}
 	
-	private var _useForEstimateHeightFlag = false
-	
 	var item:TimelineTweetItem? {
 		
 		didSet {
 			
-			self.applyItem(self.item)
+			if item?.status.id != oldValue?.status.id {
+
+				self.applyItem(self.item)
+			}
 		}
 	}
 	
@@ -35,7 +36,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 		
 		didSet {
 			
-			self.setNeedsDisplayInRect(self.frame)
+			self.needsDisplay = true
 		}
 	}
 	
@@ -73,47 +74,32 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 		super.drawRect(dirtyRect)
 	}
 	
-	func willSetStatusForEstimateHeightOnce() {
-	
-		self._useForEstimateHeightFlag = true
-	}
-	
 	private func applyItem(item:TimelineTweetItem?) {
-		
-		let forEstimateHeight = self._useForEstimateHeightFlag
-		
-		defer {
-			
-			self._useForEstimateHeightFlag = false
-		}
-		
-		if let status = self.item?.status {
+
+		if let status = item?.status {
 			
 			self.textLabel.stringValue = status.text
 			
-			if !forEstimateHeight {
-			
-				let dateToString:(Date) -> String = {
+			let dateToString:(Date) -> String = {
+				
+				let formatter = tweak(NSDateFormatter()) {
 					
-					let formatter = tweak(NSDateFormatter()) {
-						
-						$0.dateStyle = .ShortStyle
-						$0.timeStyle = .ShortStyle
-//						$0.dateFormat = "yyyy-MM-dd HH:mm"
-//						$0.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-					}
-					
-					return formatter.stringFromDate($0.rawValue)
+					$0.dateStyle = .ShortStyle
+					$0.timeStyle = .ShortStyle
+//					$0.dateFormat = "yyyy-MM-dd HH:mm"
+//					$0.locale = NSLocale(localeIdentifier: "en_US_POSIX")
 				}
 				
-				self.usernameLabel.stringValue = status.user.name
-				self.dateLabel.stringValue = dateToString(status.createdAt)
-				self.iconButton.image = nil
-				self.retweetMark.hidden = !status.isRetweetedTweet
-				self.style = (status.createdAt > Date().yesterday ? .Recent : .Past)
-				
-				self.updateIconImage(status)
+				return formatter.stringFromDate($0.rawValue)
 			}
+			
+			self.usernameLabel.stringValue = status.user.name
+			self.dateLabel.stringValue = dateToString(status.createdAt)
+			self.iconButton.image = nil
+			self.retweetMark.hidden = !status.isRetweetedTweet
+			self.style = (status.createdAt > Date().yesterday ? .Recent : .Past)
+			
+			self.updateIconImage(status)
 		}
 		else {
 
@@ -121,7 +107,12 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 			self.textLabel.stringValue = ""
 			self.dateLabel.stringValue = ""
 			self.iconButton.image = nil
+			self.retweetMark.hidden = true
+			self.style = .Recent
+			self.iconButton.image = nil
 		}
+		
+		self.needsDisplay = true
 	}
 	
 	private func updateIconImage(status:ESTwitter.Status) {
@@ -202,7 +193,7 @@ extension TimelineTableCellView.Style {
 	var backgroundColor:NSColor {
 
 		switch self {
-			
+
 		case .Recent:
 			return NSColor.whiteColor()
 			
