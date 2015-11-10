@@ -393,12 +393,12 @@
 		B19DA95F1C04A276000881AE /* PostData+Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PostData+Twitter.swift"; sourceTree = "<group>"; };
 		B19DA9611C04A27F000881AE /* PostData+Gists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PostData+Gists.swift"; sourceTree = "<group>"; };
 		B1BB59F11B5E714800DE3942 /* GistsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistsController.swift; sourceTree = "<group>"; };
+		B1BB59F41B5E715B00DE3942 /* TwitterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterController.swift; sourceTree = "<group>"; };
+		B1BB59F61B5E718900DE3942 /* SNSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNSController.swift; sourceTree = "<group>"; };
 		B1BD64DB1B7B44AB002DFDD0 /* URLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSchemeManager.swift; sourceTree = "<group>"; };
 		B1BD64DD1B7B6CB0002DFDD0 /* OAuthScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthScheme.swift; sourceTree = "<group>"; };
 		B1BD64F11B7B964D002DFDD0 /* URLScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		B1BD64F31B7B96F2002DFDD0 /* p2_OAuth2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = p2_OAuth2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1BB59F41B5E715B00DE3942 /* TwitterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterController.swift; sourceTree = "<group>"; };
-		B1BB59F61B5E718900DE3942 /* SNSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNSController.swift; sourceTree = "<group>"; };
 		B1C5445C1B720CF200170BD3 /* CodePiece.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CodePiece.entitlements; sourceTree = "<group>"; };
 		B1D2D66A1B5D44A800794EFD /* Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		B1D2D6711B5D490800794EFD /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -1601,7 +1601,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D6B457359224F9E2FA023078 /* Pods-CodePiece.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CodePiece/CodePiece.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
@@ -1623,7 +1623,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7325907F2375CBF16B47D026 /* Pods-CodePiece.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CodePiece/CodePiece.entitlements;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: EasyStyle G.K. (89282N6UM7)";
