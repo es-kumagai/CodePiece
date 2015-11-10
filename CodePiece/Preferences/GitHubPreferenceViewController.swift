@@ -18,11 +18,11 @@ class GitHubPreferenceViewController: NSViewController {
 	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
 	private var removeAuthenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
 
-	@IBOutlet weak var authorizedStatusImageView:NSImageView!
-	@IBOutlet weak var authorizedStatusTextField:NSTextField!
-	@IBOutlet weak var authorizedAccountName:NSTextField!
-	@IBOutlet weak var authorizationButton:NSButton!
-	@IBOutlet weak var resetButton:NSButton!
+	@IBOutlet var authorizedStatusImageView:NSImageView!
+	@IBOutlet var authorizedStatusTextField:NSTextField!
+	@IBOutlet var authorizedAccountName:NSTextField!
+	@IBOutlet var authorizationButton:NSButton!
+	@IBOutlet var resetButton:NSButton!
 	
 	
 	@IBAction func doAuthentication(sender:NSButton) {
@@ -46,9 +46,9 @@ class GitHubPreferenceViewController: NSViewController {
 	
 	@IBAction func doReset(sender:NSButton) {
 		
-		guard let id = settings.account.id else {
+		guard let id = NSApp.settings.account.id else {
 			
-			settings.resetGitHubAccount(saveFinally: true)
+			NSApp.settings.resetGitHubAccount(saveFinally: true)
 			return
 		}
 		
@@ -72,12 +72,12 @@ class GitHubPreferenceViewController: NSViewController {
 	
 	var authorizationState:AuthorizationState {
 		
-		return settings.account.authorizationState
+		return NSApp.settings.account.authorizationState
 	}
 	
 	func applyAuthorizedStatus() {
 		
-		self.authorizedAccountName.stringValue = settings.account.username ?? ""
+		self.authorizedAccountName.stringValue = NSApp.settings.account.username ?? ""
 		
 		switch self.authorizationState {
 			

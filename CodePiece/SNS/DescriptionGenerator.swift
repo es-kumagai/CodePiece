@@ -7,11 +7,12 @@
 //
 
 import ESGists
+import ESTwitter
 
-func DescriptionGenerator(var description:String, language:ESGists.Language?, hashtag:Twitter.Hashtag, appendAppTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {
+func DescriptionGenerator(var description:String, language:ESGists.Language?, hashtag:ESTwitter.Hashtag, appendAppTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {
 	
-	let apptag = appendAppTag ? CodePieceApp.hashtag : Twitter.Hashtag()
-	let langtag = language?.hashtag ?? Twitter.Hashtag()
+	let apptag = appendAppTag ? CodePieceApp.hashtag : ESTwitter.Hashtag()
+	let langtag = language?.hashtag ?? ESTwitter.Hashtag()
 
 	if let maxLength = maxLength {
 		

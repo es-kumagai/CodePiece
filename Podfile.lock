@@ -1,22 +1,22 @@
 PODS:
-  - APIKit (1.0.0-beta4):
+  - APIKit (1.0.0-beta.9):
     - Result (~> 0.6-beta.1)
   - ESActiveCounter (0.1.4):
     - ESNotification (~> 0.2.0)
   - ESAppKitExtension (0.1.1)
   - ESCoreGraphicsExtension (0.1.3):
     - Swim (~> 1.4.0)
-  - ESGists (0.1.2):
+  - ESGists (0.1.4-beta.2):
     - APIKit (~> 1.0.0-beta4)
     - ESActiveCounter (~> 0.1.4)
     - ESAppKitExtension (~> 0.1.1)
     - ESCoreGraphicsExtension (~> 0.1.3)
-    - ESNotification (~> 0.2.0)
+    - ESNotification (~> 0.2.4)
     - ESThread (~> 0.1.0)
-    - Himotoki (~> 0.6.3)
+    - Himotoki (~> 1.1)
     - Ocean (~> 1.4.0)
     - Swim (~> 1.4.0)
-  - ESNotification (0.2.0):
+  - ESNotification (0.2.4):
     - ESThread (~> 0.1.0)
     - Swim (~> 1.4.0)
   - ESProgressHUD (0.1.2):
@@ -24,8 +24,8 @@ PODS:
     - ESAppKitExtension (~> 0.1.1)
     - ESCoreGraphicsExtension (~> 0.1.2)
   - ESThread (0.1.0)
-  - Himotoki (0.6.3)
-  - KeychainAccess (1.2.1)
+  - Himotoki (1.1.2)
+  - KeychainAccess (2.2.0)
   - Ocean (1.4.0):
     - ESActiveCounter (~> 0.1.4)
     - ESAppKitExtension (~> 0.1.1)
@@ -34,37 +34,35 @@ PODS:
     - ESProgressHUD (~> 0.1.2)
     - ESThread (~> 0.1.0)
     - Swim (~> 1.4.0)
-  - p2.OAuth2 (2.0.0)
-  - Result (0.6-beta.1)
+  - p2.OAuth2 (2.0.1)
+  - ReachabilitySwift (2.1)
+  - Result (0.6.0-beta.4)
   - STTwitter (0.2.2)
   - Swim (1.4.1-beta)
 
 DEPENDENCIES:
-  - APIKit (from `https://github.com/ishkawa/APIKit.git`, branch `master`)
+  - APIKit
   - ESGists (from `https://github.com/EZ-NET/ESGists.git`)
   - ESNotification (from `https://github.com/EZ-NET/ESNotification.git`, branch `master`)
-  - Himotoki (from `https://github.com/ikesyo/Himotoki.git`, branch `swift2`)
+  - Himotoki (from `https://github.com/ikesyo/Himotoki`)
   - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`,
-    branch `swift-2.0`)
+    branch `master`)
   - Ocean (from `https://github.com/EZ-NET/ESOcean.git`, branch `master`)
   - p2.OAuth2
+  - ReachabilitySwift (~> 2.0)
   - STTwitter (from `https://github.com/EZ-NET/STTwitter.git`, branch `develop`)
   - Swim (from `https://github.com/EZ-NET/ESSwim`, branch `master`)
 
 EXTERNAL SOURCES:
-  APIKit:
-    :branch: master
-    :git: https://github.com/ishkawa/APIKit.git
   ESGists:
     :git: https://github.com/EZ-NET/ESGists.git
   ESNotification:
     :branch: master
     :git: https://github.com/EZ-NET/ESNotification.git
   Himotoki:
-    :branch: swift2
-    :git: https://github.com/ikesyo/Himotoki.git
+    :git: https://github.com/ikesyo/Himotoki
   KeychainAccess:
-    :branch: swift-2.0
+    :branch: master
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
   Ocean:
     :branch: master
@@ -77,20 +75,17 @@ EXTERNAL SOURCES:
     :git: https://github.com/EZ-NET/ESSwim
 
 CHECKOUT OPTIONS:
-  APIKit:
-    :commit: 7731dafb7ab0f0f903a6f0d2185719378ac9bbf1
-    :git: https://github.com/ishkawa/APIKit.git
   ESGists:
-    :commit: 3606a7c007a80aad12f8c11a12f8fe612f44d3d6
+    :commit: 39708252c8705ff5502e8be6480469c55129f5d4
     :git: https://github.com/EZ-NET/ESGists.git
   ESNotification:
-    :commit: 9538d75e829423aa1117a74167dc2fe3c1dd5826
+    :commit: cc4212b74c5a18e91aec9bf21dffda13faf40403
     :git: https://github.com/EZ-NET/ESNotification.git
   Himotoki:
-    :commit: a8854a7252c2c9aa8d016770173d1b29c0985813
-    :git: https://github.com/ikesyo/Himotoki.git
+    :commit: 93fbc1ae9af9280a8637402b53b4aa8f138c63e8
+    :git: https://github.com/ikesyo/Himotoki
   KeychainAccess:
-    :commit: d1799b703b6b58e2d6ad7becb3cde620a20fcce2
+    :commit: 820c6ff7a02e10262be611e2eb0a1edc6bc449ab
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
   Ocean:
     :commit: 1234aac116cd1903ac386a760d23f456fc3fdbaf
@@ -103,20 +98,21 @@ CHECKOUT OPTIONS:
     :git: https://github.com/EZ-NET/ESSwim
 
 SPEC CHECKSUMS:
-  APIKit: a97f19c5cbfec551ce6975fb67999df0dcfbd153
+  APIKit: 7df2a96c962a65411e37e6da2e0d3ef0b4bb6c4b
   ESActiveCounter: 222f94afbe6cd9276eaadf142c88c4ea1a8750b8
   ESAppKitExtension: 3bc92382a286d8ed531c0f2e9e1a0356cae9457c
   ESCoreGraphicsExtension: 187eae3d0bec6a1f6328956305cd9a61fdd6b183
-  ESGists: 1ce8c198bd54c85d56be4bb175dcb50c31820132
-  ESNotification: 6f1afe65e4b94dbf44066343ef293cb94af514c4
+  ESGists: b8b80c0461866ced742dcdf1d9465731eeaab541
+  ESNotification: 94063ce745ddee2f041f233acd3836e50414fa92
   ESProgressHUD: 1ce6537e3813cd96d8fb81ae34d859cd5bd2fad2
   ESThread: aa7f1d3e412716cef6c62e116a1da761449f5e48
-  Himotoki: adc0874e4f46e0b7515bca18549ac5ca9477fd49
-  KeychainAccess: 2ffa8b1b7130263bb7fe90b359d778696fc2d8ce
+  Himotoki: 688cbaff084dd1ef44c4eb37222f4a92ecc4a70b
+  KeychainAccess: c14a391a45bb3efbd63ab9f5a95b5b4e8753a506
   Ocean: f6eeb71ff6df0693660ddb4524a2ee7ff43d7530
-  p2.OAuth2: 15cdd26cc56d229eca1f0a82398cf38290afff51
-  Result: af24e3e57ab81005ec4221a53fd36dc1e7a52869
+  p2.OAuth2: 6d4183a4dcec05cc6df3bab1110551854a116b9c
+  ReachabilitySwift: 99bb7acceebb90b2048b4a8fd6539be96454dcb2
+  Result: f7927152cbaec0c043abb06ba0bc432678818418
   STTwitter: eb85d8770ddb0f8989f341cf41ea875e90ac6e7f
   Swim: 5d6b294188fd7ecde95450ca3e45e9d6db7df470
 
-COCOAPODS: 0.39.0.beta.4
+COCOAPODS: 0.39.0.beta.5

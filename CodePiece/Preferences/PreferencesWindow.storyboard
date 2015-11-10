@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Uy3-nO-Z6i">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Uy3-nO-Z6i">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
     </dependencies>
     <scenes>
         <!--Window Controller-->
@@ -36,25 +37,26 @@
                     </window>
                     <connections>
                         <outlet property="toolbar" destination="rAV-2P-h6l" id="JOw-P9-REz"/>
-                        <segue destination="1eL-bp-C8v" kind="relationship" relationship="window.shadowedContentViewController" id="o7T-n9-yCJ"/>
+                        <segue destination="uYU-pq-jgi" kind="relationship" relationship="window.shadowedContentViewController" id="Ohd-Gb-gpn"/>
                     </connections>
                 </windowController>
                 <customObject id="7yZ-BV-ky1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="113" y="361"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="2Tt-Kl-hKt">
+        <!--Dummy View Controller-->
+        <scene sceneID="Lcz-Qh-h6i">
             <objects>
-                <viewController id="1eL-bp-C8v" sceneMemberID="viewController">
-                    <view key="view" id="ajg-Ee-ZDE">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                <viewController id="uYU-pq-jgi" userLabel="Dummy View Controller" sceneMemberID="viewController">
+                    <view key="view" id="r0n-2d-skG">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </view>
                 </viewController>
-                <customObject id="0pM-bb-453" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="Cwu-I7-s0q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679" y="328"/>
+            <point key="canvasLocation" x="722" y="361"/>
         </scene>
     </scenes>
     <resources>

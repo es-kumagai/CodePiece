@@ -10,16 +10,20 @@ import Cocoa
 
 @IBDesignable public class StatusImageView: NSImageView {
 
-	private let ImageNamePrefix = "StatusImageViewStatus16-"
 	private let StatusCodingKey = "StatusImageViewStatusCoding"
-	private let StatusDefault = Status.Neutral
+	private let StatusDefault = Status.None
 	
 	public enum Status : Int {
 
-		case Neutral
-		case Green
-		case Yellow
-		case Red
+		case None
+		case Available
+		case PartiallyAvailable
+		case Unavailable
+		
+		var image:NSImage {
+			
+			return NSImage(named: "NSStatus\(self)")!
+		}
 	}
 	
 	public override init(frame frameRect: NSRect) {
@@ -63,7 +67,6 @@ import Cocoa
 	
 	private func updateStatusImage() {
 		
-		let name = "\(self.ImageNamePrefix)\(self.status)"
-		self.image = NSImage(named: name)
+		self.image = self.status.image
 	}
 }

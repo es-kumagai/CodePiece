@@ -9,6 +9,7 @@
 import Ocean
 import ESNotification
 import Accounts
+import ESTwitter
 
 // MARK: - Settings Notification
 
@@ -39,6 +40,29 @@ extension Authorization {
 	}
 }
 
+extension ViewController {
+
+	final class PostCompletelyNotification : Notification {
+		
+		var info: SNSController.PostResultInfo
+		
+		init(info: SNSController.PostResultInfo) {
+			
+			self.info = info
+		}
+	}
+	
+	final class PostFailedNotification : Notification {
+		
+		var info: SNSController.PostErrorInfo
+		
+		init(info: SNSController.PostErrorInfo) {
+			
+			self.info = info
+		}
+	}
+}
+
 extension TwitterAccountSelectorController {
 	
 	final class TwitterAccountSelectorDidChangeNotification : Notification {
@@ -49,5 +73,15 @@ extension TwitterAccountSelectorController {
 			
 			self.account = account
 		}
+	}
+}
+
+final class HashtagDidChangeNotification : Notification {
+	
+	private(set) var hashtag:ESTwitter.Hashtag
+	
+	init(hashtag:ESTwitter.Hashtag) {
+		
+		self.hashtag = hashtag
 	}
 }

@@ -15,23 +15,23 @@ enum PreferencesWindowModalResult : Int {
 
 class PreferencesWindowController: NSWindowController {
 
-	@IBOutlet weak var toolbar:NSToolbar!
+	@IBOutlet var toolbar:NSToolbar!
 	
 	@IBAction func showGitHubPreference(sender:NSToolbarItem?) {
 
-		self.contentViewController = Storyboard.GitHubPreferenceView.defaultViewController
+		self.contentViewController = try! Storyboard.GitHubPreferenceView.getInitialController()
 	}
 	
 	@IBAction func showTwitterPreference(sender:NSToolbarItem?) {
 		
-		self.contentViewController = Storyboard.TwitterPreferenceView.defaultViewController
+		self.contentViewController = try! Storyboard.TwitterPreferenceView.getInitialController()
 	}
 	
     override func windowDidLoad() {
 
 		super.windowDidLoad()
 
-		self.contentViewController = Storyboard.GitHubPreferenceView.defaultViewController
+		self.contentViewController = try! Storyboard.GitHubPreferenceView.getInitialController()
     }
 }
 
@@ -39,7 +39,7 @@ extension PreferencesWindowController : NSWindowDelegate {
 	
 	func windowWillClose(notification: NSNotification) {
 
-		sns.twitter.verifyCredentialsIfNeed { result in
+		NSApp.twitterController.verifyCredentialsIfNeed { result in
 			
 			if let error = result.error {
 				

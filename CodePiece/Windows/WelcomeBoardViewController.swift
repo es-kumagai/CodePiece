@@ -12,9 +12,9 @@ import ESThread
 
 class WelcomeBoardViewController: NSViewController {
 
-	@IBOutlet weak var iconView:NSImageView!
-	@IBOutlet weak var appNameLabel:NSTextField!
-	@IBOutlet weak var appVersionLabel:NSTextField!
+	@IBOutlet var iconView:NSImageView!
+	@IBOutlet var appNameLabel:NSTextField!
+	@IBOutlet var appVersionLabel:NSTextField!
 
 	@IBAction func pushQuitAppButton(sender:AnyObject!) {
 

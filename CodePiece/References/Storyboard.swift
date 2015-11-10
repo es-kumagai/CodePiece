@@ -8,31 +8,50 @@
 
 import AppKit
 
-enum Storyboard : String {
+struct StoryboardItem<InitialController> {
+
+	var name:String
+	var initialControllerType:InitialController.Type
+	var bundle:NSBundle?
 	
-	case WelcomeBoard
-	case PreferencesWindow
-	case GitHubPreferenceView
-	case TwitterPreferenceView
+	init(name:String, controllerType type: InitialController.Type, bundle:NSBundle? = nil) {
+		
+		self.name = name
+		self.initialControllerType = type
+		self.bundle = bundle
+	}
 	
 	var storyboard:NSStoryboard {
 		
-		return NSStoryboard(name: self.rawValue, bundle: nil)
+		return NSStoryboard(name: self.name, bundle: self.bundle)
 	}
 	
-	var defaultController:AnyObject {
+	func getInitialController() throws -> InitialController {
 		
-		return self.storyboard.instantiateInitialController()!
-	}
-	
-	var defaultWindowController:NSWindowController {
+		guard let instance = self.storyboard.instantiateInitialController() else {
+			
+			throw StoryboardError.FailedToGetController
+		}
 		
-		return self.defaultController as! NSWindowController
-	}
-	
-	var defaultViewController:NSViewController {
+		guard let controller = instance as? InitialController else {
+			
+			throw StoryboardError.UnexpectedControllerType
+		}
 		
-		return self.defaultController as! NSViewController
+		return controller
 	}
 }
 
+enum StoryboardError : ErrorType {
+	
+	case FailedToGetController
+	case UnexpectedControllerType
+}
+
+struct Storyboard {
+	
+	static let WelcomeBoard = StoryboardItem(name: "WelcomeBoard", controllerType: WelcomeBoardWindowController.self)
+	static let PreferencesWindow = StoryboardItem(name: "PreferencesWindow", controllerType: PreferencesWindowController.self)
+	static let GitHubPreferenceView = StoryboardItem(name: "GitHubPreferenceView", controllerType: GitHubPreferenceViewController.self)
+	static let TwitterPreferenceView = StoryboardItem(name: "TwitterPreferenceView", controllerType: TwitterPreferenceViewController.self)
+}

@@ -13,6 +13,8 @@ import Ocean
 import Quartz
 import Swim
 import ESProgressHUD
+import ESTwitter
+import ESNotification
 
 class ViewController: NSViewController {
 
@@ -20,11 +22,12 @@ class ViewController: NSViewController {
 	
 	typealias PostResult = SNSController.PostResult
 	
-	@IBOutlet weak var postButton:NSButton!
-	@IBOutlet weak var hashTagTextField:HashtagTextField!
-	@IBOutlet weak var languagePopUpButton:NSPopUpButton!
+	@IBOutlet var postButton:NSButton!
+	@IBOutlet var hashTagTextField:HashtagTextField!
+	
+	@IBOutlet var languagePopUpButton:NSPopUpButton!
 
-	@IBOutlet weak var languagePopUpDataSource:LanguagePopupDataSource!
+	@IBOutlet var languagePopUpDataSource:LanguagePopupDataSource!
 	
 	@IBOutlet var codeTextView:NSTextView! {
 	
@@ -49,10 +52,15 @@ class ViewController: NSViewController {
 		}
 	}
 	
-	@IBOutlet weak var descriptionTextField:NSTextField!
-	@IBOutlet weak var descriptionCountLabel:NSTextField!
+	@IBOutlet var descriptionTextField:NSTextField!
+	@IBOutlet var descriptionCountLabel:NSTextField!
 	
-	@IBOutlet weak var codeScrollView:NSScrollView!
+	@IBOutlet var codeScrollView:NSScrollView!
+	
+	var baseViewController:BaseViewController {
+		
+		return self.parentViewController as! BaseViewController
+	}
 	
 	var posting:Bool = false {
 	
@@ -100,7 +108,7 @@ class ViewController: NSViewController {
 			return
 		}
 
-		guard sns.canPost else {
+		guard NSApp.snsController.canPost else {
 		
 			self.showErrorAlert("Not ready", message: "It is not ready to post. Please set SNS accounts by the CodePiece's preferences. (⌘,)")
 			return
@@ -122,11 +130,10 @@ class ViewController: NSViewController {
 				switch result {
 					
 				case .Success(let info):
-					self.clearContents()
-					NSLog("Posted completely \(info)")
+					PostCompletelyNotification(info: info).post()
 					
 				case .Failure(let info):
-					self.showErrorAlert("Cannot post", message: info.error.localizedDescription)
+					PostFailedNotification(info: info).post()
 				}
 			}
 		}
@@ -160,7 +167,7 @@ class ViewController: NSViewController {
 			
 			DebugTime.print("📮 Try posting with a Code ... #1.1")
 
-			try sns.post(code, language: language, description: description, hashtag: hashtag) { result in
+			try NSApp.snsController.post(code, language: language, description: description, hashtag: hashtag) { result in
 				
 				DebugTime.print("📮 Posted \(result) ... #1.1.1")
 				
@@ -178,7 +185,7 @@ class ViewController: NSViewController {
 			
 			DebugTime.print("📮 Try posting without Codes ... #1.2")
 			
-			try sns.twitter.post(description, hashtag: hashtag) { result in
+			try NSApp.twitterController.post(description, hashtag: hashtag) { result in
 				
 				DebugTime.print("📮 Posted \(result) ... #1.2.1")
 				
@@ -221,18 +228,18 @@ class ViewController: NSViewController {
 
 		DebugTime.print("Restoring contents in main window.")
 		
-		settings.appState.selectedLanguage.invokeIfExists(self.languagePopUpDataSource.selectLanguage)
-		settings.appState.hashtag.invokeIfExists { self.hashTagTextField.hashtag = $0 }
+		NSApp.settings.appState.selectedLanguage.invokeIfExists(self.languagePopUpDataSource.selectLanguage)
+		NSApp.settings.appState.hashtag.invokeIfExists { self.hashTagTextField.hashtag = $0 }
 	}
 	
 	func saveContents() {
 		
 		DebugTime.print("Saving contents in main window.")
 		
-		settings.appState.selectedLanguage = self.selectedLanguage
-		settings.appState.hashtag = self.hashTagTextField.hashtag
+		NSApp.settings.appState.selectedLanguage = self.selectedLanguage
+		NSApp.settings.appState.hashtag = self.hashTagTextField.hashtag
 
-		settings.saveAppState()
+		NSApp.settings.saveAppState()
 	}
 	
 	override func viewDidLoad() {
@@ -252,6 +259,17 @@ class ViewController: NSViewController {
 		self.updateControlsDisplayText()
 
 		self.clearContents()
+		
+		PostCompletelyNotification.observeBy(self) { owner, notification in
+			
+			self.clearContents()
+			NSLog("Posted completely \(notification.info)")
+		}
+		
+		PostFailedNotification.observeBy(self) { owner, notification in
+		
+			self.showErrorAlert("Cannot post", message: notification.info.error.localizedDescription)
+		}
 	}
 	
 	override func viewDidAppear() {
@@ -260,7 +278,7 @@ class ViewController: NSViewController {
 		
 		super.viewDidAppear()
 		
-		if !settings.isReady {
+		if !NSApp.settings.isReady && NSApp.environment.showWelcomeBoardOnStartup {
 			
 			NSApp.showWelcomeBoard()
 		}
@@ -272,11 +290,13 @@ class ViewController: NSViewController {
 		
 		self.saveContents()
 		
+		NotificationManager.release(owner: self)
+		
 		super.viewWillDisappear()
 	}
 	
 	override func viewDidDisappear() {
-		
+
 		DebugTime.print("Main window did hide.")
 		
 		super.viewDidDisappear()		
@@ -315,12 +335,12 @@ class ViewController: NSViewController {
 	
 	func verifyCredentials() {
 
-		guard sns != nil else {
+		guard NSApp.isReadyForUse else {
 		
 			return
 		}
 		
-		sns.twitter.verifyCredentialsIfNeed { result in
+		NSApp.twitterController.verifyCredentialsIfNeed { result in
 			
 			switch result {
 
@@ -336,6 +356,32 @@ class ViewController: NSViewController {
 	override var representedObject: AnyObject? {
 		didSet {
 		// Update the view, if already loaded.
+		}
+	}
+	
+	var canOpenBrowserWithSearchHashtagPage:Bool {
+	
+		return !self.hashTagTextField.hashtag.isEmpty
+	}
+	
+	func openBrowserWithSearchHashtagPage() {
+		
+		guard self.canOpenBrowserWithSearchHashtagPage else {
+			
+			fatalError("Cannot open browser.")
+		}
+		
+		do {
+
+			try ESTwitter.Browser.openWithQuery(self.hashTagTextField.hashtag.value)
+		}
+		catch let ESTwitter.Browser.Error.OperationFailure(reason: reason) {
+			
+			self.showErrorAlert("Failed to open browser", message: reason)
+		}
+		catch {
+
+			self.showErrorAlert("Failed to open browser", message: "Unknown error : \(error)")
 		}
 	}
 }
@@ -380,11 +426,9 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 		self.updateControlsDisplayText()
 	}
 	
-	override func controlTextDidChange(obj: NSNotification) {
+	override func controlTextDidChange(notification: NSNotification) {
 	
-		self.willChangeValueForKey("canPost")
-		self.didChangeValueForKey("canPost")
-	
+		self.withChangeValue("canPost")
 		self.updateControlsDisplayText()
 	}
 	

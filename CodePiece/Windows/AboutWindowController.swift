@@ -7,13 +7,15 @@
 //
 
 import Cocoa
+import Swim
 
 public class AboutWindowController: NSWindowController {
 
     public override func windowDidLoad() {
         super.windowDidLoad()
-    
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+
+		// FIXME: 😨 リサイズさせたくないのですが IB でリサイズを無効化してもできてしまいます。コードでマスクを操作してみましたが、それでも効果がないようでした。メニューからストーリーボードで直接インスタンス化しているのが問題なのかもしれません。
+		self.window!.styleMask.modifyMask(reset: NSResizableWindowMask)
     }
 
 	public static func instantiate() -> AboutWindowController {
@@ -69,5 +71,14 @@ public class AboutWindowController: NSWindowController {
 	public func showWindow() {
 		
 		self.showWindow(self)
+	}
+}
+
+extension AboutWindowController : NSWindowDelegate {
+	
+	// FIXME: 😨 リサイズさせたくないのですが IB でリサイズを無効化してもできてしまいます。NSWindowDelegate での調整を試みましたが、呼ばれず、効果がないようでした。メニューからストーリーボードで直接インスタンス化しているのが問題なのかもしれません。
+	public func windowShouldZoom(window: NSWindow, toFrame newFrame: NSRect) -> Bool {
+		
+		return false
 	}
 }
