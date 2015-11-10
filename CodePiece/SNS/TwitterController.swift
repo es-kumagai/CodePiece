@@ -8,12 +8,14 @@
 
 import Cocoa
 import STTwitter
+import ESTwitter
 import ESGists
 import Accounts
 import Result
 import Ocean
 import ESThread
 import Swim
+import Himotoki
 
 struct TwitterAccount {
 	
@@ -45,10 +47,116 @@ struct TwitterAccount {
 	}
 }
 
+struct GetStatusesError : ErrorType, CustomStringConvertible {
+
+	enum Type {
+	
+		case DecodeResultError
+		case UnexpectedError
+		
+		// STTwitter
+		case CouldNotAuthenticate
+		case PageDoesNotExist
+		case AccountSuspended
+		case APIv1Inactive
+		case RateLimitExceeded
+		case InvalidOrExpiredToken
+		case SSLRequired
+		case OverCapacity
+		case InternalError
+		case CouldNotAuthenticateYou
+		case UnableToFollow
+		case NotAuthorizedToSeeStatus
+		case DailyStatuUpdateLimitExceeded
+		case DuplicatedStatus
+		case BadAuthenticationData
+		case UserMustVerifyLogin
+		case RetiredEndpoint
+		case ApplicationCannotWrite
+	}
+	
+	var type: Type
+	var reason: String
+	
+	var description: String {
+		
+		return "\(self.reason) (\(self.type))"
+	}
+	
+	init(type: Type, reason: String) {
+	
+		self.type = type
+		self.reason = reason
+	}
+	
+	init(code: STTwitterTwitterErrorCode, reason: String) {
+		
+		self.reason = reason
+		
+		switch code {
+			
+		case .CouldNotAuthenticate:
+			self.type = .CouldNotAuthenticate
+			
+		case .PageDoesNotExist:
+			self.type = .PageDoesNotExist
+			
+		case .AccountSuspended:
+			self.type = .AccountSuspended
+			
+		case .APIv1Inactive:
+			self.type = .APIv1Inactive
+			
+		case .RateLimitExceeded:
+			self.type = .RateLimitExceeded
+			
+		case .InvalidOrExpiredToken:
+			self.type = .InvalidOrExpiredToken
+			
+		case .SSLRequired:
+			self.type = .SSLRequired
+			
+		case .OverCapacity:
+			self.type = .OverCapacity
+			
+		case .InternalError:
+			self.type = .InternalError
+			
+		case .CouldNotAuthenticateYou:
+			self.type = .CouldNotAuthenticateYou
+			
+		case .UnableToFollow:
+			self.type = .UnableToFollow
+			
+		case .NotAuthorizedToSeeStatus:
+			self.type = .NotAuthorizedToSeeStatus
+			
+		case .DailyStatuUpdateLimitExceeded:
+			self.type = .DailyStatuUpdateLimitExceeded
+			
+		case .DuplicatedStatus:
+			self.type = .DuplicatedStatus
+			
+		case .BadAuthenticationData:
+			self.type = .BadAuthenticationData
+			
+		case .UserMustVerifyLogin:
+			self.type = .UserMustVerifyLogin
+			
+		case .RetiredEndpoint:
+			self.type = .RetiredEndpoint
+			
+		case .ApplicationCannotWrite:
+			self.type = .ApplicationCannotWrite
+		}
+	}
+}
+
 final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	typealias VerifyResult = Result<Void,NSError>
 	typealias PostStatusUpdateResult = Result<String,NSError>
+	typealias GetStatusesResult = Result<[ESTwitter.Status], GetStatusesError>
 	
 	private static let timeout:NSTimeInterval = 15.0
 	private static let accountStore:ACAccountStore = ACAccountStore()
@@ -58,12 +166,29 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	private static let APINotReadyError = SNSControllerError.NotReady("Twitter API is not ready.")
 	private static let APINotReadyNSError = NSError(domain: String(APINotReadyError), code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.description])
 
+	private enum AutoVerifyingQueueMessage : MessageTypeIgnoreInQuickSuccession {
+	
+		case RequestVerification;
+		
+		private func messageBlocked() {
+
+			NSLog("Ignoring duplicated `Request Verification` message.")
+		}
+		
+		private func messageQueued() {
+			
+			NSLog("queued")
+		}
+	}
+	
+	private var autoVerifyingQueue:MessageQueue<AutoVerifyingQueueMessage>!
+	
 	var account:TwitterAccount? {
 		
 		didSet {
 			
-			settings.account.twitterAccount = self.account
-			settings.saveTwitterAccount()
+			NSApp.settings.account.twitterAccount = self.account
+			NSApp.settings.saveTwitterAccount()
 
 			self.api = nil
 			self.clearEffectiveUserInfo()
@@ -116,11 +241,45 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		self.effectiveUserInfo = nil
 		
 		super.init()
+		
+		self.autoVerifyingQueue = MessageQueue<AutoVerifyingQueueMessage>(identifier: "\(self.dynamicType)", executionQueue: dispatch_get_main_queue(), processingInterval: 5.0) { message in
+
+			switch message {
+				
+			case .RequestVerification:
+				self.autoVerifyingAction()
+			}
+		}
+		
+		self.autoVerifyingQueue.start()
 	}
 	
 	convenience override init() {
 	
-		self.init(account: settings.account.twitterAccount)
+		self.init(account: NSApp.settings.account.twitterAccount)
+	}
+	
+	private func autoVerifyingAction() {
+		
+		guard self.credentialsVerified else {
+			
+			NSLog("This change is no effect on the current account because the account's credentials is not verifyed yet.")
+			return
+		}
+		
+		api.verifyCredentials { result in
+			
+			switch result {
+				
+			case .Success:
+				NSLog("This change is no effect on the current account.")
+				
+			case .Failure:
+				
+				self.clearEffectiveUserInfo()
+				self.showWarningAlert("Twitter Account is invalid.", message: "Your twitter account setting may be changed by OS. Please check your settings in Internet Account preferences pane.")
+			}
+		}
 	}
 	
 	var canPost:Bool {
@@ -171,11 +330,11 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			
 		case .Success:
 			DebugTime.print("📮 Passed verify-credentials #12")
-			NSLog("Twitter credentials verified successfully. (\(sns.twitter.effectiveUserInfo?.username))")
+			NSLog("Twitter credentials verified successfully. (\(NSApp.twitterController.effectiveUserInfo?.username))")
 			
 		case .Failure(let error):
 			DebugTime.print("📮 Passed verify-credentials #13")
-			self.showErrorAlert("Failed to verify credentials", message: "\(error.localizedDescription) (\(sns.twitter.effectiveUserInfo?.username))")
+			self.showErrorAlert("Failed to verify credentials", message: "\(error.localizedDescription) (\(NSApp.twitterController.effectiveUserInfo?.username))")
 		}
 	}
 	
@@ -220,7 +379,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 	}
 
-	private func makeStatusFrom(gist:ESGists.Gist?, description:String, hashtag:Twitter.Hashtag, var maxLength: Int? = nil) -> String? {
+	private func makeStatusFrom(gist:ESGists.Gist?, description:String, hashtag:ESTwitter.Hashtag, var maxLength: Int? = nil) -> String? {
 		
 		if gist != nil {
 
@@ -237,14 +396,14 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		return DescriptionGenerator(description, language: language, hashtag: hashtag, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
 	}
 	
-	func post(gist:ESGists.Gist, language:ESGists.Language, description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(gist:ESGists.Gist, language:ESGists.Language, description:String, hashtag:ESTwitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 
 		let status = self.makeStatusFrom(gist, description: description, hashtag: hashtag)!
 		
 		try self.post(status, image: image, callback: callback)
 	}
 
-	func post(description:String, hashtag:Twitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(description:String, hashtag:ESTwitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
 		DebugTime.print("📮 Try to post by Twitter ... #3")
 		
@@ -284,6 +443,45 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 				callback(PostStatusUpdateResult(error: error))
 			}
 		}
+	}
+	
+	func getStatusesWithQuery(query:String, since:String?, callback:(GetStatusesResult)->Void) {
+		
+		let successHandler = { (query:[NSObject : AnyObject]!, resultData:[AnyObject]!) -> Void in
+
+			DebugTime.print("Get Statuses : \(query)\n\(resultData)")
+			
+			do {
+
+				let status = try decodeArray(resultData) as [ESTwitter.Status]
+				
+				callback(GetStatusesResult(status))
+			}
+			catch let error as DecodeError {
+				
+				let error = GetStatusesError(type: .DecodeResultError, reason: error.description)
+
+				callback(GetStatusesResult(error: error))
+			}
+			catch let error as NSError {
+				
+				let error = GetStatusesError(type: .UnexpectedError, reason: error.localizedDescription)
+
+				callback(GetStatusesResult(error: error))
+			}
+		}
+		
+		let errorHandler = { (error: NSError!) -> Void in
+			
+			let code = STTwitterTwitterErrorCode(rawValue: error.code)!
+			let reason = error.localizedDescription
+			
+			let error = GetStatusesError(code: code, reason: reason)
+			
+			callback(GetStatusesResult(error: error))
+		}
+		
+		self.api.getSearchTweetsWithQuery(query, geocode: nil, lang: nil, locale: nil, resultType: "mixed", count: "50", until: nil, sinceID: since, maxID: nil, includeEntities: NSNumber(bool: false), callback: nil, successBlock: successHandler, errorBlock: errorHandler)
 	}
 }
 
@@ -347,26 +545,7 @@ extension TwitterController : STTwitterAPIDelegate {
 	func twitterAPI(api: STTwitterAPI!, shouldDisableCurrentOAuth oauth: STTwitterOS!, accountStore: ACAccountStore!) -> Bool {
 		
 		NSLog("Detected OS Account Store change.")
-		
-		guard self.credentialsVerified else {
-			
-			NSLog("This change is no effect on the current account because the account's credentials is not verifyed yet.")
-			return false
-		}
-		
-		api.verifyCredentials { result in
-			
-			switch result {
-				
-			case .Success:
-				NSLog("This change is no effect on the current account.")
-				
-			case .Failure:
-				
-				self.clearEffectiveUserInfo()
-				self.showWarningAlert("Twitter Account is invalid.", message: "Your twitter account setting may be changed by OS. Please check your settings in Internet Account preferences pane.")
-			}
-		}
+		self.autoVerifyingQueue.send(.RequestVerification)
 		
 		return false
 	}

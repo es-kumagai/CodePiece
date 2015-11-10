@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="wqE-eN-Aul">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="wqE-eN-Aul">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8164.2"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
     </dependencies>
     <scenes>
         <!--Window Controller-->
         <scene sceneID="H78-qi-25b">
             <objects>
                 <windowController id="wqE-eN-Aul" customClass="AboutWindowController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="QmF-gi-tCJ">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="QmF-gi-tCJ" customClass="AboutWindow" customModule="CodePiece" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="-1626" y="242" width="480" height="270"/>
                         <rect key="screenRect" x="-1920" y="-120" width="1920" height="1177"/>
+                        <connections>
+                            <outlet property="delegate" destination="wqE-eN-Aul" id="7aS-H8-86Q"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="Hsi-k7-nug" kind="relationship" relationship="window.shadowedContentViewController" id="Mog-2d-Sem"/>
@@ -35,6 +39,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Yku-8h-Gb9"/>
                                 </constraints>
+                                <animations/>
                                 <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" alignment="center" title="Copyright" id="6sP-oG-GFA">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" red="0.35825946927070618" green="0.35824874043464661" blue="0.3582548201084137" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,13 +52,16 @@
                                     <constraint firstAttribute="width" constant="64" id="05Y-1v-Qdm"/>
                                     <constraint firstAttribute="height" constant="64" id="yEI-d2-12N"/>
                                 </constraints>
+                                <animations/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ulH-lm-x75" userLabel="Icon Cell"/>
                             </imageView>
                             <stackView orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="a3O-Og-Gub">
-                                <rect key="frame" x="98" y="88" width="52" height="64"/>
+                                <rect key="frame" x="98" y="88" width="51" height="64"/>
+                                <animations/>
                                 <middleViews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nqy-zA-HrR">
-                                        <rect key="frame" x="-2" y="20" width="56" height="22"/>
+                                        <rect key="frame" x="-2" y="31" width="55" height="22"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Name" id="Zcu-wn-US1">
                                             <font key="font" metaFont="systemBold" size="18"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -61,7 +69,8 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTi-vb-mi8">
-                                        <rect key="frame" x="-2" y="0.0" width="53" height="18"/>
+                                        <rect key="frame" x="-2" y="11" width="53" height="18"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version" id="YCi-7V-9gk">
                                             <font key="font" metaFont="system" size="14"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -79,7 +88,8 @@
                                 </customSpacing>
                             </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9hf-0s-Toh">
-                                <rect key="frame" x="218" y="19" width="127" height="19"/>
+                                <rect key="frame" x="220" y="19" width="125" height="19"/>
+                                <animations/>
                                 <buttonCell key="cell" type="roundRect" title="Acknowledgements" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yUa-53-Dcj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -101,6 +111,7 @@
                             <constraint firstAttribute="trailing" secondItem="7Vd-vs-UaS" secondAttribute="trailing" constant="20" id="y8e-nm-bQ8"/>
                             <constraint firstItem="a3O-Og-Gub" firstAttribute="top" secondItem="l3D-8y-ecD" secondAttribute="top" id="yJb-2X-ybN"/>
                         </constraints>
+                        <animations/>
                     </view>
                     <connections>
                         <outlet property="appCopyrightLabel" destination="7Vd-vs-UaS" id="wvL-De-diZ"/>

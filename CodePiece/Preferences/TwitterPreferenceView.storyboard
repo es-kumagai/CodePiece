@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ps4-Eu-nrG">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ps4-Eu-nrG">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Twitter-->
@@ -13,7 +15,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eF3-de-P5v">
-                                <rect key="frame" x="26" y="233" width="45" height="17"/>
+                                <rect key="frame" x="26" y="233" width="46" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Twitter" id="UyK-pT-fKy">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -21,7 +24,8 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8X9-Tf-XVS">
-                                <rect key="frame" x="61" y="196" width="165" height="18"/>
+                                <rect key="frame" x="61" y="196" width="164" height="18"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Verify Credentials Status" id="E8g-oe-Wto">
                                     <font key="font" metaFont="system" size="14"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -33,6 +37,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="mSM-Fd-yK5"/>
                                 </constraints>
+                                <animations/>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>
@@ -43,10 +48,12 @@
                                     <constraint firstAttribute="width" constant="20" id="4c7-Xn-3Zo"/>
                                     <constraint firstAttribute="height" constant="20" id="7SL-qe-gEJ"/>
                                 </constraints>
+                                <animations/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RU2-eg-vOe"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FKb-Jz-IKe">
-                                <rect key="frame" x="75" y="233" width="16" height="17"/>
+                                <rect key="frame" x="76" y="233" width="16" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="▶︎" id="yb1-nL-XtZ">
                                     <font key="font" size="13" name=".LucidaGrandeUI"/>
                                     <color key="textColor" red="0.26924949879999999" green="0.23910263179999999" blue="0.1031773165" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,7 +61,8 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NS6-hz-jvm">
-                                <rect key="frame" x="95" y="233" width="67" height="17"/>
+                                <rect key="frame" x="96" y="233" width="66" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Username" id="d8A-nt-9EO">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="0.26924949884414673" green="0.23910263180732727" blue="0.10317731648683548" alpha="1" colorSpace="calibratedRGB"/>
@@ -62,7 +70,8 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PFs-yu-i48">
-                                <rect key="frame" x="109" y="19" width="175" height="19"/>
+                                <rect key="frame" x="114" y="19" width="172" height="19"/>
+                                <animations/>
                                 <buttonCell key="cell" type="roundRect" title="Open Accounts Preferences" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CSH-Bt-Vs5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -72,7 +81,8 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d9B-zQ-BQb">
-                                <rect key="frame" x="292" y="19" width="168" height="19"/>
+                                <rect key="frame" x="294" y="19" width="166" height="19"/>
+                                <animations/>
                                 <buttonCell key="cell" type="roundRect" title="Open Security Preferences" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t3f-Oy-Koz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -81,58 +91,98 @@
                                     <action selector="openSecurityPreferences:" target="ps4-Eu-nrG" id="Ebe-QI-gNF"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gnp-sb-1wy">
-                                <rect key="frame" x="18" y="137" width="444" height="34"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="If you wan to use other account, select the account following button or add new account in Accounts Preferences." id="SHa-az-37w">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Ol-La-f8R">
-                                <rect key="frame" x="17" y="97" width="226" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="220" id="CsI-l3-8wi"/>
-                                </constraints>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="oeR-P4-OXw">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="ZQM-eJ-6F9">
-                                        <items>
-                                            <menuItem title="Item 1" state="on" hidden="YES" id="dsv-12-HIx"/>
-                                            <menuItem title="Item 2" id="vC1-nH-yQE"/>
-                                            <menuItem title="Item 3" id="EhY-LA-rff"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <binding destination="PSY-xM-UKI" name="enabled" keyPath="self.hasAccount" id="YCO-HD-EJA"/>
-                                </connections>
-                            </popUpButton>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z63-aQ-PAY">
-                                <rect key="frame" x="18" y="71" width="444" height="17"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Error Report" id="Gzb-k3-EwK">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="0.43849745392799377" green="0.26094529032707214" blue="0.26579996943473816" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EKd-Nw-Kpc">
-                                <rect key="frame" x="297" y="93" width="169" height="32"/>
-                                <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CcN-ZS-3ll">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SUV-b7-kcN">
+                                <rect key="frame" x="20" y="59" width="440" height="112"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gnp-sb-1wy">
+                                        <rect key="frame" x="-2" y="78" width="434" height="34"/>
+                                        <animations/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="If you wan to use other account, select the account following button or add new account in Accounts Preferences." id="SHa-az-37w">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <stackView distribution="equalCentering" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kvp-2j-yAa">
+                                        <rect key="frame" x="0.0" y="37" width="440" height="21"/>
+                                        <subviews>
+                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Ol-La-f8R">
+                                                <rect key="frame" x="-3" y="-3" width="226" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="220" id="CsI-l3-8wi"/>
+                                                </constraints>
+                                                <animations/>
+                                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="oeR-P4-OXw">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" id="ZQM-eJ-6F9">
+                                                        <items>
+                                                            <menuItem title="Item 1" state="on" hidden="YES" id="dsv-12-HIx"/>
+                                                            <menuItem title="Item 2" id="vC1-nH-yQE"/>
+                                                            <menuItem title="Item 3" id="EhY-LA-rff"/>
+                                                        </items>
+                                                    </menu>
+                                                </popUpButtonCell>
+                                                <connections>
+                                                    <binding destination="PSY-xM-UKI" name="enabled" keyPath="self.hasAccount" id="YCO-HD-EJA"/>
+                                                </connections>
+                                            </popUpButton>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EKd-Nw-Kpc">
+                                                <rect key="frame" x="280" y="-7" width="166" height="32"/>
+                                                <animations/>
+                                                <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CcN-ZS-3ll">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="pushResetAuthorizationButton:" target="ps4-Eu-nrG" id="KaA-pS-Khx"/>
-                                    <binding destination="ps4-Eu-nrG" name="enabled" keyPath="self.credentialsVerified" id="wwr-9c-hDQ"/>
-                                </connections>
-                            </button>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="pushResetAuthorizationButton:" target="ps4-Eu-nrG" id="KaA-pS-Khx"/>
+                                                    <binding destination="ps4-Eu-nrG" name="enabled" keyPath="self.credentialsVerified" id="wwr-9c-hDQ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <animations/>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z63-aQ-PAY">
+                                        <rect key="frame" x="-2" y="0.0" width="79" height="17"/>
+                                        <animations/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Error Report" id="Gzb-k3-EwK">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" red="0.43849745392799377" green="0.26094529032707214" blue="0.26579996943473816" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstItem="kvp-2j-yAa" firstAttribute="leading" secondItem="SUV-b7-kcN" secondAttribute="leading" id="FdT-gV-YqI"/>
+                                    <constraint firstAttribute="width" constant="440" id="M6S-4w-xUh"/>
+                                    <constraint firstAttribute="trailing" secondItem="kvp-2j-yAa" secondAttribute="trailing" id="oqm-dv-ZtI"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
                                 <rect key="frame" x="318" y="186" width="148" height="32"/>
+                                <animations/>
                                 <buttonCell key="cell" type="push" title="Verify Credentials" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRz-PP-aVw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -155,35 +205,29 @@ DQ
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="EKd-Nw-Kpc" firstAttribute="top" secondItem="9Ol-La-f8R" secondAttribute="top" id="0hU-DX-Zpu"/>
-                            <constraint firstAttribute="trailing" secondItem="z63-aQ-PAY" secondAttribute="trailing" constant="20" id="2nU-yA-S1V"/>
-                            <constraint firstAttribute="trailing" secondItem="gnp-sb-1wy" secondAttribute="trailing" constant="20" id="3aX-mG-qXT"/>
+                            <constraint firstAttribute="trailing" secondItem="SUV-b7-kcN" secondAttribute="trailing" constant="20" id="036-K4-akj"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="top" secondItem="tiQ-Tx-wOb" secondAttribute="bottom" constant="8" id="4Ss-kW-Plq"/>
                             <constraint firstItem="eF3-de-P5v" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="20" id="50m-UE-CE8"/>
                             <constraint firstItem="d9B-zQ-BQb" firstAttribute="leading" secondItem="PFs-yu-i48" secondAttribute="trailing" constant="8" id="5QQ-YW-QdV"/>
                             <constraint firstAttribute="bottom" secondItem="d9B-zQ-BQb" secondAttribute="bottom" constant="20" id="68S-AO-3v1"/>
-                            <constraint firstItem="9Ol-La-f8R" firstAttribute="top" secondItem="gnp-sb-1wy" secondAttribute="bottom" constant="16" id="9e1-na-TGC"/>
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="CFS-nN-6G8"/>
                             <constraint firstItem="NS6-hz-jvm" firstAttribute="leading" secondItem="FKb-Jz-IKe" secondAttribute="trailing" constant="8" id="My9-Np-QdE"/>
-                            <constraint firstItem="gnp-sb-1wy" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="SpS-mM-thE"/>
+                            <constraint firstItem="SUV-b7-kcN" firstAttribute="top" secondItem="AFn-Gq-0En" secondAttribute="bottom" constant="22" id="Uq7-mm-qP8"/>
                             <constraint firstItem="tiQ-Tx-wOb" firstAttribute="top" secondItem="eF3-de-P5v" secondAttribute="bottom" constant="9" id="WKr-XE-7mN"/>
                             <constraint firstItem="FKb-Jz-IKe" firstAttribute="leading" secondItem="eF3-de-P5v" secondAttribute="trailing" constant="8" id="WaS-d1-ENS"/>
                             <constraint firstAttribute="trailing" secondItem="AFn-Gq-0En" secondAttribute="trailing" constant="20" id="XxS-qb-wvk"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="35" id="Ym7-hQ-dhw"/>
                             <constraint firstAttribute="bottom" secondItem="PFs-yu-i48" secondAttribute="bottom" constant="20" id="acG-5A-sQQ"/>
                             <constraint firstItem="eF3-de-P5v" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="28" id="adt-6R-Taj"/>
-                            <constraint firstAttribute="trailing" secondItem="EKd-Nw-Kpc" secondAttribute="trailing" constant="20" id="f2g-dS-CT9"/>
-                            <constraint firstItem="z63-aQ-PAY" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="fNs-sZ-g6S"/>
                             <constraint firstItem="FKb-Jz-IKe" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="fdj-nT-lJs"/>
-                            <constraint firstItem="gnp-sb-1wy" firstAttribute="top" secondItem="5cj-jM-cXY" secondAttribute="bottom" constant="24" id="iY7-U5-8CK"/>
-                            <constraint firstItem="z63-aQ-PAY" firstAttribute="top" secondItem="9Ol-La-f8R" secondAttribute="bottom" constant="12" id="jDH-7M-a3T"/>
-                            <constraint firstItem="9Ol-La-f8R" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="mJZ-Ig-V39"/>
                             <constraint firstItem="NS6-hz-jvm" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="o6S-Hg-2h7"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="centerY" secondItem="5cj-jM-cXY" secondAttribute="centerY" id="sPM-Lb-NSW"/>
                             <constraint firstItem="8X9-Tf-XVS" firstAttribute="leading" secondItem="5cj-jM-cXY" secondAttribute="trailing" constant="8" id="srI-ID-bfq"/>
                             <constraint firstAttribute="trailing" secondItem="d9B-zQ-BQb" secondAttribute="trailing" constant="20" id="tal-n0-sZA"/>
+                            <constraint firstItem="SUV-b7-kcN" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="whb-lD-Ioa"/>
                             <constraint firstItem="AFn-Gq-0En" firstAttribute="baseline" secondItem="8X9-Tf-XVS" secondAttribute="baseline" id="zjD-S4-sjc"/>
                         </constraints>
+                        <animations/>
                     </view>
                     <connections>
                         <outlet property="accountSelectorController" destination="PSY-xM-UKI" id="Vij-uS-5sC"/>

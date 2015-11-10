@@ -12,7 +12,7 @@ import Swim
 
 final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 	
-	@IBOutlet weak var accountSelector:NSPopUpButton! {
+	@IBOutlet var accountSelector:NSPopUpButton! {
 		
 		didSet {
 			
@@ -42,7 +42,7 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 			
 			tweak (self.accountSelector) {
 				
-				let currentAccount = settings.account.twitterAccount?.ACAccount
+				let currentAccount = NSApp.settings.account.twitterAccount?.ACAccount
 				
 				$0.removeAllItems()
 				$0.menu!.addItem(createMenuItem(account: currentAccount, keyEquivalent: ""))

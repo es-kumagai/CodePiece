@@ -11,9 +11,6 @@ import ESNotification
 
 // FIXME: ⭐️ 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整します。
 
-var sns:SNSController!
-var captureController:WebCaptureController!
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
@@ -26,8 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		super.awakeFromNib()
 
 		NotificationManager.dammingNotifications = true
+
+		// FIXME: GitHubClientInfo を NSApp.settings 内に入れたい
+		GitHubClientInfo = CodePieceClientInfo()
 		
-		settings = Settings()
+		NSApplication.readyForUse()
 	}
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -35,15 +35,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		NSLog("Application launched.")
 		
 		NotificationManager.dammingNotifications = false
-
-		GitHubClientInfo = CodePieceClientInfo()
-
-		sns = SNSController()
-		captureController = WebCaptureController()
-
+		
 		self.urlSchemeManager = URLSchemeManager()
 		
-		sns.twitter.verifyCredentialsIfNeed()
+		NSApp.twitterController.verifyCredentialsIfNeed()
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {

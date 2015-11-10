@@ -15,7 +15,7 @@ final class LanguagePopupDataSource : NSObject {
 	
 	let defaultLanguage = Language.Swift
 	
-	@IBOutlet weak var popupButton:NSPopUpButton! {
+	@IBOutlet var popupButton:NSPopUpButton! {
 		
 		didSet {
 

@@ -8,7 +8,7 @@
 
 import ESGists
 
-struct Settings {
+final class Settings {
 	
 	private var _store:DataStore
 	
@@ -33,19 +33,19 @@ struct Settings {
 		return self.account.isReady && self.project.isReady
 	}
 	
-	mutating func loadSettings() {
+	func loadSettings() {
 
 		self.loadAppState()
 		self.loadAccount()
 	}
 	
-	mutating func loadAppState() {
+	func loadAppState() {
 	
 		self.appState.selectedLanguage = self._store.appState.selectedLanguage
 		self.appState.hashtag = self._store.appState.hashtag
 	}
 	
-	mutating func saveAppState() {
+	func saveAppState() {
 	
 		self._store.appState.selectedLanguage = self.appState.selectedLanguage
 		self._store.appState.hashtag = self.appState.hashtag
@@ -53,19 +53,19 @@ struct Settings {
 		self._store.appState.save()
 	}
 	
-	mutating func loadAccount() {
+	func loadAccount() {
 		
 		self.loadTwitterAccount()
 		self.loadGitHubAccount()
 	}
 	
-	mutating func saveAccount() {
+	func saveAccount() {
 		
 		self.saveTwitterAccount()
 		self.saveGitHubAccount()
 	}
 	
-	mutating func loadTwitterAccount() {
+	func loadTwitterAccount() {
 		
 		if let identifier = self._store.twitter.identifier {
 			
@@ -97,7 +97,7 @@ struct Settings {
 		}
 	}
 	
-	mutating func loadGitHubAccount() {
+	func loadGitHubAccount() {
 		
 		self.account.id = self._store.github.authInfo.id
 		self.account.username = self._store.github.authInfo.username
@@ -108,7 +108,7 @@ struct Settings {
 		Authorization.GitHubAuthorizationStateDidChangeNotification(isValid: self.account.authorizationState == .Authorized, username: self.account.username).post()
 	}
 
-	mutating func saveTwitterAccount() {
+	func saveTwitterAccount() {
 		
 		NSLog("Writing Twitter account to data store. (\(self.account.twitterAccount?.username))")
 		
@@ -117,7 +117,7 @@ struct Settings {
 		self._store.twitter.save()
 	}
 
-	mutating func saveGitHubAccount() {
+	func saveGitHubAccount() {
 		
 		NSLog("Writing GitHub account to data store. (\(self.account.username))")
 		
@@ -128,7 +128,7 @@ struct Settings {
 		handleError(try self._store.github.save())
 	}
 	
-	mutating func replaceGitHubAccount(username:String, id:ID, authorization:GitHubAuthorization, saveFinally save:Bool) {
+	func replaceGitHubAccount(username:String, id:ID, authorization:GitHubAuthorization, saveFinally save:Bool) {
 	
 		self.account.id = id
 		self.account.username = username
@@ -136,11 +136,11 @@ struct Settings {
 
 		if save {
 			
-			settings.saveGitHubAccount()
+			self.saveGitHubAccount()
 		}
 	}
 	
-	mutating func resetGitHubAccount(saveFinally save:Bool) {
+	func resetGitHubAccount(saveFinally save:Bool) {
 		
 		self.account.id = nil
 		self.account.username = nil
@@ -148,7 +148,7 @@ struct Settings {
 		
 		if save {
 			
-			settings.saveGitHubAccount()
+			self.saveGitHubAccount()
 		}
 	}
 }

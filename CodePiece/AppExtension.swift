@@ -7,16 +7,91 @@
 //
 
 import Cocoa
+import Swim
 import Ocean
+import ESTwitter
 
-var settings:Settings!
+private var isReadyForUse:Bool = false
 
 extension NSApplication : AlertDisplayable {
 	
 }
 
+extension NSApplication {
+	
+	static func readyForUse() {
+		
+		guard !CodePiece.isReadyForUse else {
+		
+			fatalError("Application is already ready.")
+		}
+		
+		self.environment = Environment()
+		self.settings = Settings()
+		self.controllers = AppGlobalControllers()
+		
+		CodePiece.isReadyForUse = true
+	}
+	
+	var isReadyForUse:Bool {
+	
+		return CodePiece.isReadyForUse
+	}
+}
+
+// MARK: - Controllers
+
+extension NSApplication {
+	
+	private static var environment:Environment!
+	private static var controllers:AppGlobalControllers!
+	private static var settings:Settings!
+	
+	var environment:Environment {
+		
+		return self.dynamicType.environment
+	}
+	
+	var settings:Settings {
+	
+		return self.dynamicType.settings
+	}
+	
+	var controllers:AppGlobalControllers {
+
+		return self.dynamicType.controllers
+	}
+	
+	var snsController:SNSController {
+		
+		return self.controllers.sns
+	}
+	
+	var twitterController:TwitterController {
+		
+		return self.snsController.twitter
+	}
+	
+	var gistsController:GistsController {
+		
+		return self.snsController.gists
+	}
+	
+	var captureController:WebCaptureController {
+		
+		return self.controllers.captureController
+	}
+	
+	var reachabilityController:ReachabilityController {
+		
+		return self.controllers.reachabilityController
+	}
+}
+
 private let welcomeBoardWindowController = try! Storyboard.WelcomeBoard.getInitialController()
 private let preferencesWindowController = try! Storyboard.PreferencesWindow.getInitialController()
+
+// MARK: - Windows
 
 extension NSApplication {
 	
@@ -33,5 +108,5 @@ extension NSApplication {
 	func showPreferencesWindow() {
 		
 		preferencesWindowController.showWindow(self)
-	}
+	}	
 }

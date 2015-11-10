@@ -11,19 +11,27 @@ import Ocean
 
 final class MenuController : NSObject {
 
-	@IBOutlet weak var application:NSApplication!
+	@IBOutlet var application:NSApplication!
 
 	var keyWindow:NSWindow? {
 		
 		return self.application.keyWindow
 	}
 	
-	var mainViewController:ViewController? {
+	var baseViewController:BaseViewController? {
 		
-		return self.keyWindow?.contentViewController as? ViewController
+		return self.keyWindow?.contentViewController as? BaseViewController
 	}
 	
-	var aboutWindowController:AboutWindowController!
+	var mainViewController:ViewController? {
+		
+		return self.baseViewController?.mainViewController
+	}
+	
+	var timelineViewController:TimelineViewController? {
+		
+		return self.baseViewController?.timelineViewController
+	}
 	
 	override init() {
 		
@@ -33,9 +41,6 @@ final class MenuController : NSObject {
 	override func awakeFromNib() {
 		
 		super.awakeFromNib()
-		
-		self.aboutWindowController = AboutWindowController.instantiate()
-		self.aboutWindowController.acknowledgementsName = "Pods-CodePiece-acknowledgements"
 	}
 
 	var isMainViewControllerActive:Bool {
@@ -83,11 +88,6 @@ final class MenuController : NSObject {
 		self.mainViewController?.postToSNS()
 	}
 	
-	@IBAction func showAboutWindow(sender:NSMenuItem?) {
-		
-		self.aboutWindowController.showWindow()
-	}
-	
 	@IBAction func clearTweetAndDescription(sender:NSMenuItem?) {
 		
 		self.mainViewController?.clearDescriptionText()
@@ -101,5 +101,25 @@ final class MenuController : NSObject {
 	@IBAction func clearCode(sender:NSMenuItem?) {
 		
 		self.mainViewController?.clearCodeText()
+	}
+	
+	var canOpenBrowserWithSearchHashtagPage:Bool {
+	
+		return self.mainViewController?.canOpenBrowserWithSearchHashtagPage ?? false
+	}
+	
+	@IBAction func openBrowserWithSearchHashtagPage(sender:NSMenuItem?) {
+		
+		self.mainViewController?.openBrowserWithSearchHashtagPage()
+	}
+	
+	var isTimelineActive: Bool {
+	
+		return self.timelineViewController?.isTimelineActive ?? false
+	}
+	
+	@IBAction func reloadTimeline(sender: NSMenuItem?) {
+		
+		self.timelineViewController?.reloadTimeline()
 	}
 }

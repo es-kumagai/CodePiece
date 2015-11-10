@@ -9,6 +9,7 @@
 // 将来的に別のモジュールへ移動できそうな機能を実装しています。
 
 import APIKit
+import Himotoki
 import AppKit
 import Ocean
 import Swim
@@ -18,6 +19,933 @@ import ESThread
 public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
+
+extension NSIndexSet {
+
+	public convenience init<S:SequenceType where S.Generator.Element == Int>(sequence s:S) {
+		
+		let indexes = s.reduce(NSMutableIndexSet()) { $0.addIndex($1); return $0 }
+		
+		self.init(indexSet: indexes.copy() as! NSIndexSet)
+	}
+}
+
+extension NSTableView {
+
+	func topObjectsInRegisteredNibByIdentifier(identifier: String) -> [AnyObject]? {
+		
+		guard let nib = self.registeredNibsByIdentifier![identifier] else {
+			
+			return nil
+		}
+		
+		var topObjects = NSArray?()
+		
+		guard nib.instantiateWithOwner(nil, topLevelObjects: &topObjects) else {
+			
+			fatalError("Failed to load nib '\(nib)'.")
+		}
+		
+		return (topObjects as! [AnyObject])
+	}
+}
+
+extension NSDate {
+
+	var displayString: String {
+		
+		let calendar = NSCalendar.currentCalendar()
+		let formatter = NSDateFormatter()
+		
+		formatter.calendar = calendar
+		formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+		formatter.timeStyle = NSDateFormatterStyle.MediumStyle
+		
+		return formatter.stringFromDate(self)
+	}
+}
+
+public func bundle<First,Second>(first:First)(second:Second) -> (First, Second) {
+
+	return (first, second)
+}
+
+public func bundle<First,Second>(first:First, second:Second) -> (First, Second) {
+	
+	return (first, second)
+}
+
+func mask(mask:Int, reset values:Int...) -> Int {
+	
+	return values.reduce(mask) { $0 & ~$1 }
+}
+
+func mask(inout mask:Int, reset values:Int...) {
+	
+	values.forEach { mask = mask & ~$0 }
+}
+
+protocol MaskOperatable {
+	
+	func masked(reset values:Self...) -> Self
+	func masked(reset values:[Self]) -> Self
+	func masked(set values:Self...) -> Self
+	func masked(set values:[Self]) -> Self
+	
+	mutating func modifyMask(reset values:Self...)
+	mutating func modifyMask(reset values:[Self])
+	mutating func modifyMask(set values:Self...)
+	mutating func modifyMask(set values:[Self])
+}
+
+extension MaskOperatable {
+	
+	func masked(reset values:Self...) -> Self {
+		
+		return self.masked(reset: values)
+	}
+	
+	func masked(set values:Self...) -> Self {
+		
+		return self.masked(set: values)
+	}
+	
+	mutating func modifyMask(reset values:Self...) {
+		
+		self.modifyMask(reset: values)
+	}
+	
+	mutating func modifyMask(reset values:[Self]) {
+		
+		for value in values {
+			
+			self = self.masked(reset: value)
+		}
+	}
+	
+	mutating func modifyMask(set values:Self...) {
+		
+		self.modifyMask(set: values)
+	}
+	
+	mutating func modifyMask(set values:[Self]) {
+		
+		for value in values {
+			
+			self = self.masked(set: value)
+		}
+	}
+}
+
+extension Int : MaskOperatable {
+	
+	func masked(reset values: [Int]) -> Int {
+		
+		return values.reduce(self) { $0 & ~$1 }
+	}
+	
+	func masked(set values: [Int]) -> Int {
+		
+		return values.reduce(self) { $0 | $1 }
+	}
+}
+
+public class Semaphore : RawRepresentable {
+
+	public enum WaitResult {
+	
+		case Success
+		case Timeout
+	}
+	
+	public struct Time : RawRepresentable {
+	
+		public var rawValue:dispatch_time_t
+		
+		public init() {
+			
+			self.rawValue = DISPATCH_TIME_NOW
+		}
+		
+		public init(rawValue time:dispatch_time_t) {
+			
+			self.rawValue = time
+		}
+		
+		public func delta(second time:Double) -> Time {
+			
+			return Time(rawValue: dispatch_time(self.rawValue, Interval(second: time).rawValue))
+		}
+		
+		public func delta(millisecond time:Double) -> Time {
+		
+			return Time(rawValue: dispatch_time(self.rawValue, Interval(millisecond: time).rawValue))
+		}
+		
+		public func delta(microsecond time:Double) -> Time {
+			
+			return Time(rawValue: dispatch_time(self.rawValue, Interval(microsecond: time).rawValue))
+		}
+		
+		public func delta(nanosecond time:Int64) -> Time {
+			
+			return Time(rawValue: dispatch_time(self.rawValue, Interval(nanosecond: time).rawValue))
+		}
+	}
+	
+	public struct Interval : RawRepresentable {
+		
+		public var rawValue:Int64
+		
+		public init(second delta:Double) {
+			
+			self.rawValue = Int64(delta * NSEC_PER_SEC.toDouble())
+		}
+		
+		public init(millisecond delta:Double) {
+			
+			self.rawValue = Int64(delta * NSEC_PER_MSEC.toDouble())
+		}
+		
+		public init(microsecond delta:Double) {
+			
+			self.rawValue = Int64(delta * NSEC_PER_USEC.toDouble())
+		}
+		
+		public init(nanosecond delta:Int64) {
+			
+			self.rawValue = delta
+		}
+		
+		public init(rawValue:Int64) {
+			
+			self.rawValue = rawValue
+		}
+		
+		public var second: Double {
+			
+			return self.rawValue.toDouble() / NSEC_PER_SEC.toDouble()
+		}
+		
+		public var millisecond: Double {
+			
+			return self.rawValue.toDouble() / NSEC_PER_MSEC.toDouble()
+		}
+		
+		public var microsecond: Double {
+			
+			return self.rawValue.toDouble() / NSEC_PER_USEC.toDouble()
+		}
+		
+		public var nanosecond: Int64 {
+			
+			return self.rawValue
+		}
+	}
+	
+	private var semaphore:dispatch_semaphore_t
+	
+	public init(value:Int = 1) {
+		
+		self.semaphore = dispatch_semaphore_create(value)
+	}
+	
+	public required init(rawValue semaphore: dispatch_semaphore_t) {
+		
+		self.semaphore = semaphore
+	}
+	
+	public var rawValue:dispatch_semaphore_t {
+		
+		return self.semaphore
+	}
+	
+	public func wait() {
+		
+		self.waitWithTimeout(Time())
+	}
+	
+	public func waitWithTimeout(timeout:dispatch_time_t) -> WaitResult {
+		
+		switch dispatch_semaphore_wait(self.semaphore, timeout) {
+			
+		case 0:
+			return .Success
+			
+		default:
+			return .Timeout
+		}
+	}
+	
+	public func waitWithTimeout(timeout:Time) -> WaitResult {
+
+		return self.waitWithTimeout(timeout.rawValue)
+	}
+	
+	public func signal() {
+		
+		dispatch_semaphore_signal(self.semaphore)
+	}
+	
+	public func execute(timeout:Time = Time(), @noescape body:() throws -> Void) rethrows -> WaitResult {
+		
+		return try self.execute(timeout.rawValue, body: body)
+	}
+
+	public func execute(timeout:dispatch_time_t = DISPATCH_TIME_FOREVER, @noescape body:() throws ->Void) rethrows -> WaitResult {
+
+		switch self.waitWithTimeout(timeout) {
+			
+		case .Success:
+		
+			defer {
+			
+				self.signal()
+			}
+		
+			try body()
+		
+			return .Success
+			
+		case .Timeout:
+		
+			return .Timeout
+		}
+	}
+	
+	public func executeOnQueue(queue:dispatch_queue_t, timeout:Time, body:(WaitResult) -> Void) {
+		
+		self.executeOnQueue(queue, timeout: timeout.rawValue, body: body)
+	}
+	
+	public func executeOnQueue(queue:dispatch_queue_t, timeout:dispatch_time_t = DISPATCH_TIME_FOREVER, body:(WaitResult) -> Void) {
+		
+		dispatch_async(queue) {
+			
+			switch self.waitWithTimeout(timeout) {
+				
+			case .Success:
+				
+				defer {
+					
+					self.signal()
+				}
+				
+				body(.Success)
+				
+				
+			case .Timeout:
+			
+				body(.Timeout)
+			}
+		}
+	}
+}
+
+extension Semaphore.Interval : CustomStringConvertible {
+
+	public var description: String {
+		
+		return "\(self.second)"
+	}
+}
+
+public protocol UnsignedIntegerConvertible {
+
+	func toUInt() -> UInt
+}
+
+extension UIntMax {
+	
+	public init<T:UIntMaxConvertible>(_ value:T) {
+		
+		self = value.toUIntMax()
+	}
+}
+
+extension Semaphore.Interval : UIntMaxConvertible {
+	
+	public init(_ value:UIntMax) {
+	
+		self.init(rawValue: value.toIntMax())
+	}
+	
+	public func toUIntMax() -> UIntMax {
+		
+		return self.rawValue.toUIntMax()
+	}
+}
+
+public final class Dispatch {
+		
+	public static func makeTimer(interval: UInt64, queue: dispatch_queue_t, start:Bool, eventHandler:dispatch_block_t) -> dispatch_source_t {
+		
+		return self.makeTimer(interval, queue: queue, start: start, eventHandler: eventHandler, cancelHandler: nil)
+	}
+	
+	public static func makeTimer(interval: UInt64, queue: dispatch_queue_t, start:Bool, eventHandler:dispatch_block_t, cancelHandler: dispatch_block_t?) -> dispatch_source_t {
+		
+		let source = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+		
+		source.setEventHandler(eventHandler)
+		
+		if let cancelHandler = cancelHandler {
+			
+			source.setCancelHandler(cancelHandler)
+		}
+		
+		source.setTimer(interval)
+		
+		if start {
+			
+			source.resume()
+		}
+		
+		return source
+	}
+}
+
+extension dispatch_source_t {
+	
+	public func resume() {
+		
+		return dispatch_resume(self)
+	}
+	
+	public func suspend() {
+		
+		return dispatch_suspend(self)
+	}
+	
+	public func sourceCancel() {
+		
+		return dispatch_source_cancel(self)
+	}
+	
+	public func setEventHandler(handler:dispatch_block_t) {
+		
+		return dispatch_source_set_event_handler(self, handler)
+	}
+	
+	public func setCancelHandler(handler:dispatch_block_t) {
+		
+		return dispatch_source_set_cancel_handler(self, handler)
+	}
+	
+	public func setTimer(interval: UInt64, start: dispatch_time_t = DISPATCH_TIME_NOW, leeway: UInt64 = 0) {
+		
+		return dispatch_source_set_timer(self, start, interval, leeway)
+	}
+}
+
+internal enum MessageQueueHandler<Message : MessageType> {
+
+	typealias Queue = MessageQueue<Message>
+	typealias MessageHandler = Queue.MessageHandler
+	typealias MessageErrorHandler = Queue.MessageErrorHandler?
+	
+	case Closure(messageHandler: MessageHandler, errorHandler: MessageErrorHandler)
+	case Delegate(handler: _MessageQueueHandlerProtocol)
+	
+	func handlingMessage(message: Message, byQueue queue:Queue) throws {
+		
+		switch self {
+			
+		case let .Closure(messageHandler: handler, errorHandler: _):
+			try handler(message)
+			
+		case let .Delegate(handler):
+			try handler._messageQueue(queue, handlingMessage: message)
+		}
+	}
+	
+	func handlingError(error: ErrorType, byQueue queue:Queue) throws {
+		
+		switch self {
+
+		case let .Closure(messageHandler: _, errorHandler: handler):
+			try handler?(error)
+			
+		case let .Delegate(handler):
+			try handler._messageQueue(queue, handlingError: error)
+		}
+	}
+}
+
+public protocol MessageQueueType : AnyObject {
+	
+	typealias Message : MessageType
+}
+
+public protocol MessageType {
+	
+	/// Call when the message send completely.
+	func messageQueued()
+	
+	/// Call when the message blocked.
+	func messageBlocked()
+}
+
+extension MessageType {
+	
+	/// Call when the message send completely.
+	public func messageQueued() {
+		
+	}
+	
+	/// Call when the message blocked.
+	public func messageBlocked() {
+		
+	}
+}
+
+public protocol PreActionMessageType : MessageType {
+	
+	func messagePreAction(queue:Queue<Self>) -> ContinuousState
+}
+
+public protocol MessageTypeIgnoreInQuickSuccession : PreActionMessageType {
+	
+	/// Returns true if the message may block in quick succession.
+	var mayBlockInQuickSuccession:Bool { get }
+	
+	func blockInQuickSuccession(lastMessage:Self) -> Bool
+}
+
+extension MessageTypeIgnoreInQuickSuccession {
+	
+	public var mayBlockInQuickSuccession:Bool {
+		
+		return true
+	}
+	
+	public func messagePreAction(queue:Queue<Self>) -> ContinuousState {
+		
+		guard self.mayBlockInQuickSuccession else {
+		
+			return .Continue
+		}
+		
+		if let lastMessage = queue.back where self.blockInQuickSuccession(lastMessage) {
+			
+			return .Abort
+		}
+		else {
+			
+			return .Continue
+		}
+	}
+}
+
+extension MessageTypeIgnoreInQuickSuccession where Self : Equatable {
+	
+	public func blockInQuickSuccession(lastMessage:Self) -> Bool {
+		
+		return self == lastMessage
+	}
+}
+
+private let MessageQueueDefaultProcessingInterval:Double = 0.03
+
+public class MessageQueue<M:MessageType> : MessageQueueType {
+	
+	public typealias Message = M
+	public typealias MessageErrorHandler = (ErrorType) throws -> Void
+	public typealias MessageHandler = (Message) throws -> Void
+	public typealias MessageHandlerNoThrows = (Message) -> Void
+	
+	private(set) var identifier:String
+	
+	private var handler:MessageQueueHandler<Message>
+	private var messageQueue:Queue<Message>
+	
+	private var messageProcessingQueue:dispatch_queue_t
+	private var messageHandlerExecutionQueue:dispatch_queue_t
+	private var messageLoopSource:dispatch_source_t!
+	
+	public private(set) var isRunning:Bool
+
+	internal init(identifier:String, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, handler:MessageQueueHandler<Message>) {
+		
+		self.identifier = identifier
+		self.handler = handler
+		
+		let queue = dispatch_queue_create("\(identifier)", nil)
+		
+		self.messageProcessingQueue = queue
+		self.messageHandlerExecutionQueue = executionQueue ?? queue
+		
+		self.messageQueue = []
+		self.isRunning = false
+
+		self.messageLoopSource = self.makeTimer(Semaphore.Interval(second: processingInterval), start: true, timerAction: _messageLoopBody)
+	}
+
+	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, messageHandler:MessageHandler, errorHandler:MessageErrorHandler?) {
+
+		let handler = MessageQueueHandler.Closure(messageHandler: messageHandler, errorHandler: errorHandler)
+		
+		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
+	}
+
+	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, messageHandler:MessageHandlerNoThrows) {
+		
+		let handler = MessageQueueHandler.Closure(messageHandler: messageHandler, errorHandler: nil)
+		
+		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
+	}
+	
+	public convenience init<T:_MessageQueueHandlerProtocol>(identifier:String, handler:T, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval) {
+		
+		let handler = MessageQueueHandler<Message>.Delegate(handler: handler)
+		
+		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
+	}
+	
+	deinit {
+		
+		self._stopMessageLoop()
+		self.messageLoopSource.sourceCancel()
+	}
+
+	public func makeTimer(interval: Semaphore.Interval, start: Bool, timerAction: () -> Void) -> dispatch_source_t {
+
+		return Dispatch.makeTimer(interval.toUIntMax(), queue: self.messageProcessingQueue, start: start, eventHandler: timerAction)
+	}
+
+	public func makeTimer(interval: Semaphore.Interval, start: Bool, timerAction: () -> Void, cancelAction: () -> Void) -> dispatch_source_t {
+	
+		return Dispatch.makeTimer(interval.toUIntMax(), queue: self.messageProcessingQueue, start: start, eventHandler: timerAction, cancelHandler: cancelAction)
+	}
+	
+	public func start() {
+	
+		self.send(.Start)
+	}
+	
+	public func stop() {
+		
+		self.send(.Stop)
+	}
+	
+	public func send(message: MessageQueueControl) {
+		
+		self.executeOnProcessingQueue {
+
+			switch message {
+				
+			case .Start:
+				self._startMessageLoop()
+				
+			case .Stop:
+				self._stopMessageLoop()
+			}
+		}
+	}
+	
+	public func send(message: Message, preAction:(Queue<Message>, Message) -> ContinuousState) {
+		
+		self.executeOnProcessingQueue {
+
+			guard preAction(self.messageQueue, message) else {
+		
+				message.messageBlocked()
+				return
+			}
+			
+			self.messageQueue.enqueue(message)
+			message.messageQueued()
+		}
+	}
+}
+
+extension MessageQueue where M : MessageType {
+	
+	public func send(message: Message) {
+		
+		self.send(message) { (queue, message) -> ContinuousState in .Continue }
+	}
+	
+	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> dispatch_source_t {
+		
+		return self.makeTimer(interval, start: true) { [weak self] () -> Void in
+			
+			self?.send(message)
+		}
+	}
+}
+
+extension MessageQueue where M : PreActionMessageType {
+	
+	public func send(message: Message) {
+		
+		self.send(message) { (queue, message) -> ContinuousState in
+			
+			return message.messagePreAction(queue)
+		}
+	}
+	
+	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> dispatch_source_t {
+		
+		return self.makeTimer(interval, start: true) { [weak self] () -> Void in
+			
+			self?.send(message)
+		}
+	}
+}
+
+/// If you want to manage queue handlers using Cocoa style,
+/// let conforms to the protocol, then the instance pass to MessageQueue's initializer.
+public protocol _MessageQueueHandlerProtocol {
+	
+	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingMessage:Queue.Message) throws
+	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError:ErrorType) throws
+}
+
+public protocol MessageQueueHandlerProtocol : _MessageQueueHandlerProtocol {
+	
+	typealias Message : MessageType
+
+	func messageQueue(queue:MessageQueue<Message>, handlingMessage:Message) throws
+	func messageQueue(queue:MessageQueue<Message>, handlingError:ErrorType) throws
+}
+
+extension MessageQueueHandlerProtocol {
+	
+	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingMessage message:Queue.Message) throws {
+
+		let queue = queue as! MessageQueue<Message>
+		let message = message as! Message
+		
+		try self.messageQueue(queue, handlingMessage: message)
+	}
+	
+	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError error:ErrorType) throws {
+		
+		let queue = queue as! MessageQueue<Message>
+		
+		try self.messageQueue(queue, handlingError: error)
+	}
+}
+
+public enum MessageQueueControl {
+	
+	case Start
+	case Stop
+}
+
+extension MessageQueue {
+
+	public func executeSyncOnProcessingQueue<R>(execute:()->R) -> R {
+
+		var result:R?
+		
+		dispatch_sync(self.messageProcessingQueue) {
+		
+			result = execute()
+		}
+		
+		return result!
+	}
+
+	public func executeOnProcessingQueue(execute:dispatch_block_t) {
+		
+		dispatch_async(self.messageProcessingQueue) {
+			
+			execute()
+		}
+	}
+	
+	public func executeSyncOnHandlerExecutionQueue<R>(execute:()->R) -> R {
+		
+		var result:R?
+		
+		dispatch_sync(self.messageHandlerExecutionQueue) {
+			
+			result = execute()
+		}
+		
+		return result!
+	}
+	
+	public func executeOnHandlerExecutionQueue(execute:dispatch_block_t) {
+		
+		dispatch_async(self.messageHandlerExecutionQueue) {
+			
+			execute()
+		}
+	}
+	
+	func _startMessageLoop() {
+
+		self.isRunning = true
+	}
+	
+	func _stopMessageLoop() {
+
+		self.isRunning = false
+	}
+
+	func _messageLoopBody() {
+	
+		guard self.isRunning else {
+			
+			return
+		}
+		
+		guard let message = self.messageQueue.dequeue() else {
+			
+			return
+		}
+		
+		let handler = self.handler
+		
+		self.executeOnHandlerExecutionQueue {
+
+			func executeErrorHandlerIfNeeds(error:ErrorType) {
+				
+				do {
+					
+					try handler.handlingError(error, byQueue: self)
+				}
+				catch {
+					
+					fatalError("An error occurred during executing message handler. \(error)")
+				}
+			}
+			
+			do {
+				
+				try handler.handlingMessage(message, byQueue: self)
+			}
+			catch {
+
+				executeErrorHandlerIfNeeds(error)
+			}
+		}
+	}
+}
+
+public struct Repeater<Element> : SequenceType {
+
+	private var generator:RepeaterGenerator<Element>
+	
+	public init(_ value:Element) {
+		
+		self.init { value }
+	}
+	
+	public init (_ generate:()->Element) {
+		
+		self.generator = RepeaterGenerator(generate)
+	}
+	
+	public func generate() -> RepeaterGenerator<Element> {
+		
+		return self.generator
+	}
+	
+	public func zipLeftOf<S:SequenceType>(s:S) -> Zip2Sequence<Repeater,S> {
+		
+		return zip(self, s)
+	}
+	
+	public func zipRightOf<S:SequenceType>(s:S) -> Zip2Sequence<S,Repeater> {
+		
+		return zip(s, self)
+	}
+}
+
+public struct RepeaterGenerator<Element> : GeneratorType {
+	
+	private var _generate:()->Element
+	
+	init(_ value:Element) {
+		
+		self.init { value }
+	}
+	
+	init (_ generate:()->Element) {
+		
+		self._generate = generate
+	}
+	
+	public func next() -> Element? {
+		
+		return self._generate()
+	}
+}
+
+
+public protocol Selectable : AnyObject {
+	
+	var selected:Bool { get set }
+}
+
+extension Selectable {
+	
+	public static func selected(instance:Self) -> () -> Bool {
+		
+		return { instance.selected }
+	}
+	
+	public static func setSelected(instance:Self) -> (Bool) -> Void {
+		
+		return { instance.selected = $0 }
+	}
+}
+
+extension SequenceType where Generator.Element : Selectable {
+
+	public mutating func selectAll() {
+		
+		self.forEach { $0.selected = true }
+	}
+	
+	public mutating func deselectAll() {
+		
+		self.forEach { $0.selected = false }
+	}
+}
+
+extension SequenceType where Generator.Element : AnyObject {
+	
+	public var selectableElementsOnly:[Selectable] {
+		
+		return self.map { $0 as? Selectable }.flatMap { $0 }
+	}
+}
+
+
+extension Optional {
+
+	public func ifHasValue(@noescape predicate:(Wrapped) throws -> Void) rethrows {
+		
+		if case let value? = self {
+			
+			try predicate(value)
+		}
+	}
+}
+
+extension BooleanType {
+
+	public func ifTrue(@noescape predicate:() throws -> Void) rethrows {
+		
+		if self {
+			
+			try predicate()
+		}
+	}
+	
+	public func ifFalse(@noescape predicate:() throws -> Void) rethrows {
+		
+		if !self {
+			
+			try predicate()
+		}
+	}
+}
 
 public class StandardOutputStream : OutputStreamType {
 	
@@ -51,6 +979,11 @@ extension Optional {
 			try expression(value)
 		}
 	}
+}
+
+public func whether(@autoclosure condition:() throws -> Bool) rethrows -> YesNoState {
+	
+	return try condition() ? .Yes : .No
 }
 
 /// Execute `exression`. If an error occurred, write the error to standard output stream.
@@ -149,7 +1082,17 @@ public func handleError<R,E:ErrorType>(@autoclosure expression:() throws -> R, b
 
 extension NSObject {
 
+	public func withChangeValue(keys:String...) {
+		
+		self.withChangeValue(keys, body: {})
+	}
+
 	public func withChangeValue(keys:String..., @noescape body:()->Void) {
+
+		self.withChangeValue(keys, body: body)
+	}
+
+	public func withChangeValue<S:SequenceType where S.Generator.Element == String>(keys:S, @noescape body:()->Void) {
 		
 		keys.forEach(self.willChangeValueForKey)
 		
@@ -624,6 +1567,21 @@ extension APIError : CustomDebugStringConvertible {
 			
 		case NotHTTPURLResponse(let response):
 			return "Not HTTP URL Response (\(response))"
+		}
+	}
+}
+
+extension DecodeError : CustomStringConvertible {
+	
+	public var description:String {
+		
+		switch self {
+			
+		case let .MissingKeyPath(keyPath):
+			return "Missing KeyPath (\(keyPath))"
+			
+		case let .TypeMismatch(expected: expected, actual: actual, keyPath: keyPath):
+			return "Type Mismatch (expected: \(expected), actual: \(actual), keyPath: \(keyPath))"
 		}
 	}
 }

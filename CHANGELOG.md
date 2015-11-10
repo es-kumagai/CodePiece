@@ -2,6 +2,29 @@
 
 Change Logs.
 
+## ****
+
+### Enhancements
+
+* Add 'Browser' menu includes menu items for open page with default browser.
+* Add a feature which open twitter search page with current hashtag.
+* Add a feature which open twitter home page.
+* Add a feature which open GitHub home page.
+* CodePiece can now display tweets with current hashtag.
+
+## 1.3
+
+### Enhancements
+
+* Release by Mac App Store.
+* Support window minimize.
+* Add `Editor` menu includes menu items for clear contents in main window.
+
+### Bug Fixes
+
+* Remove Invalid menus.
+* Fix a bug that twitter account is not switched when select your twitter accounts on preferences.
+
 ## 1.2 (beta)
 
 ### Enhancements

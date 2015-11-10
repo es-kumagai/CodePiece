@@ -8,6 +8,7 @@
 
 import Cocoa
 import ESGists
+import ESTwitter
 import Result
 
 final class GistsController : PostController, AlertDisplayable {
@@ -18,12 +19,12 @@ final class GistsController : PostController, AlertDisplayable {
 	
 	var canPost:Bool {
 	
-		return settings.account.authorizationState.isValid
+		return NSApp.settings.account.authorizationState.isValid
 	}
 	
-	func post(content:String, language:ESGists.Language, description:String, hashtag:Twitter.Hashtag, completed:(PostResult)->Void) throws {
+	func post(content:String, language:ESGists.Language, description:String, hashtag:ESTwitter.Hashtag, completed:(PostResult)->Void) throws {
 
-		guard let authorization = settings.account.authorization else {
+		guard let authorization = NSApp.settings.account.authorization else {
 			
 			throw SNSControllerError.NotAuthorized
 		}

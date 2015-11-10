@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XuT-ox-kbw">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XuT-ox-kbw">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8164.2"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -9,7 +10,7 @@
         <scene sceneID="tc6-ta-1fx">
             <objects>
                 <windowController id="XuT-ox-kbw" customClass="WelcomeBoardWindowController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="cLH-eA-cBA">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="cLH-eA-cBA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="-1626" y="242" width="480" height="270"/>
@@ -40,10 +41,12 @@
                                     <constraint firstAttribute="height" constant="128" id="FA4-Yl-m3z"/>
                                     <constraint firstAttribute="width" constant="128" id="WyP-sj-mZV"/>
                                 </constraints>
+                                <animations/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="qMC-WI-b10"/>
                             </imageView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="69n-bF-oNQ">
-                                <rect key="frame" x="343" y="13" width="151" height="32"/>
+                                <rect key="frame" x="345" y="13" width="149" height="32"/>
+                                <animations/>
                                 <buttonCell key="cell" type="push" title="Open Preferences" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YIn-yW-PyH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -55,18 +58,9 @@ DQ
                                     <action selector="pushStartConfigurationButton:" target="JKI-2u-nmq" id="tlH-av-lgZ"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCQ-LX-iCT">
-                                <rect key="frame" x="248" y="13" width="95" height="32"/>
-                                <buttonCell key="cell" type="push" title="Quit App" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tUH-SZ-eb7">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="pushQuitAppButton:" target="JKI-2u-nmq" id="ciY-i0-ATe"/>
-                                </connections>
-                            </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MGG-vi-gmF">
-                                <rect key="frame" x="166" y="129" width="324" height="36"/>
+                                <rect key="frame" x="166" y="127" width="324" height="38"/>
+                                <animations/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece is an app that post an source code to Gists and tweet this link by Twitter." id="JlN-2t-oqz">
                                     <font key="font" metaFont="system" size="15"/>
                                     <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,7 +68,8 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yhz-aT-cXW">
-                                <rect key="frame" x="166" y="77" width="324" height="36"/>
+                                <rect key="frame" x="166" y="73" width="324" height="38"/>
+                                <animations/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="First, please set your Twitter account and GitHub account to the app in Preferences." id="DNb-d8-MrU">
                                     <font key="font" metaFont="system" size="15"/>
                                     <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -86,6 +81,7 @@ DQ
                                 <subviews>
                                     <textField horizontalHuggingPriority="252" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="LOY-Vk-sjS">
                                         <rect key="frame" x="-2" y="8" width="164" height="24"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Welcome to" id="xCd-XQ-gau">
                                             <font key="font" metaFont="system" size="20"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -94,6 +90,7 @@ DQ
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="hAd-Ad-86L">
                                         <rect key="frame" x="162" y="8" width="160" height="24"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="CodePiece" id="gDx-OO-9oc">
                                             <font key="font" metaFont="system" size="20"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -110,15 +107,28 @@ DQ
                                     <constraint firstItem="LOY-Vk-sjS" firstAttribute="leading" secondItem="TIK-eH-OSL" secondAttribute="leading" id="gHo-xY-ZST"/>
                                     <constraint firstItem="hAd-Ad-86L" firstAttribute="leading" secondItem="LOY-Vk-sjS" secondAttribute="trailing" constant="4" id="jSk-6D-VuH"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qDB-Pp-lcT">
                                 <rect key="frame" x="166" y="191" width="324" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version" id="klZ-ya-fo1">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCQ-LX-iCT">
+                                <rect key="frame" x="251" y="13" width="94" height="32"/>
+                                <animations/>
+                                <buttonCell key="cell" type="push" title="Quit App" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tUH-SZ-eb7">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="pushQuitAppButton:" target="JKI-2u-nmq" id="ciY-i0-ATe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Yhz-aT-cXW" firstAttribute="top" secondItem="MGG-vi-gmF" secondAttribute="bottom" constant="16" id="2Lg-Rc-5AD"/>
@@ -140,6 +150,7 @@ DQ
                             <constraint firstAttribute="trailing" secondItem="Yhz-aT-cXW" secondAttribute="trailing" constant="20" id="z9k-gY-pIn"/>
                             <constraint firstAttribute="trailing" secondItem="MGG-vi-gmF" secondAttribute="trailing" constant="20" id="zgD-OB-6wX"/>
                         </constraints>
+                        <animations/>
                     </view>
                     <connections>
                         <outlet property="appNameLabel" destination="hAd-Ad-86L" id="z7o-ky-v52"/>

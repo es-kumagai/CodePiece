@@ -7,6 +7,7 @@
 //
 
 import ESGists
+import ESTwitter
 import Result
 
 protocol PostController {
@@ -82,7 +83,7 @@ final class SNSController : PostController {
 		return gists.canPost && twitter.canPost
 	}
 	
-	func post(content: String, language: ESGists.Language, description: String, hashtag: Twitter.Hashtag, completed: (PostResult) -> Void) throws {
+	func post(content: String, language: ESGists.Language, description: String, hashtag: ESTwitter.Hashtag, completed: (PostResult) -> Void) throws {
 	
 		DebugTime.print("📮 Try posting to SNS ... #2")
 		
@@ -138,8 +139,8 @@ final class SNSController : PostController {
 
 //					let size = NSMakeSize(736.0, 414.0)
 					let size = NSMakeSize(560.0, 560.0)
-					
-					captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, userAgent: userAgent) { image in
+
+					NSApp.captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, userAgent: userAgent) { image in
 						
 						DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
 						
