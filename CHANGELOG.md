@@ -2,15 +2,15 @@
 
 Change Logs.
 
-## ****
+## 1.4
 
 ### Enhancements
 
+* CodePiece can now display tweets with current hashtag.
 * Add 'Browser' menu includes menu items for open page with default browser.
 * Add a feature which open twitter search page with current hashtag.
 * Add a feature which open twitter home page.
 * Add a feature which open GitHub home page.
-* CodePiece can now display tweets with current hashtag.
 
 ## 1.3
 
