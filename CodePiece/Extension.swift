@@ -20,6 +20,26 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+extension NSTableView {
+
+	func topObjectsInRegisteredNibByIdentifier(identifier: String) -> [AnyObject]? {
+		
+		guard let nib = self.registeredNibsByIdentifier![identifier] else {
+			
+			return nil
+		}
+		
+		var topObjects = NSArray?()
+		
+		guard nib.instantiateWithOwner(nil, topLevelObjects: &topObjects) else {
+			
+			fatalError("Failed to load nib '\(nib)'.")
+		}
+		
+		return (topObjects as! [AnyObject])
+	}
+}
+
 extension NSDate {
 
 	var displayString: String {

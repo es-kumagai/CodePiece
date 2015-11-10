@@ -46,7 +46,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 			if self.selected != oldValue {
 
 				self.textLabel.selectable = self.selected
-				self.setNeedsDisplayInRect(self.bounds)
+				self.needsDisplay = true
 			}
 		}
 	}
@@ -58,7 +58,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 	@IBOutlet var retweetMark: NSView!
 
 	override func drawRect(dirtyRect: NSRect) {
-		
+
 		if self.selected {
 
 			self.style.selectionBackgroundColor.set()
@@ -161,18 +161,20 @@ extension TimelineTableCellView : TimelineTableCellType {
 	}
 	
 	static func estimateCellHeightForItem(item:TimelineTableItem, tableView:NSTableView) -> CGFloat {
-	
+
 		let item = item as! TimelineTweetItem
 
 		let baseHeight: CGFloat = 61
-		let textLabelWidthAdjuster: CGFloat = 50.0
-		
-		let view = self.getCellForEstimateHeightForTableView(tableView)
-		let font = view.textLabel.font
-		let labelSize = item.status.text.sizeWithFont(font, lineBreakMode: .ByWordWrapping, maxWidth: view.textLabel.bounds.width + textLabelWidthAdjuster)
+		let textLabelWidthAdjuster: CGFloat = 10.0
 
-		let textLabelHeight = view.textLabel.bounds.height
+		let cell = self.getCellForEstimateHeightForTableView(tableView)
 		
+		cell.frame = tableView.rectOfColumn(0)
+
+		let font = cell.textLabel.font
+		let labelSize = item.status.text.sizeWithFont(font, lineBreakMode: .ByWordWrapping, maxWidth: cell.textLabel.bounds.width + textLabelWidthAdjuster)
+
+		let textLabelHeight = cell.textLabel.bounds.height
 		let estimateHeight = baseHeight + labelSize.height - textLabelHeight
 
 		return estimateHeight
@@ -180,14 +182,15 @@ extension TimelineTableCellView : TimelineTableCellType {
 	
 	private static func getCellForEstimateHeightForTableView(tableView: NSTableView) -> TimelineTableCellView {
 		
-		
 		if self.cellForEstimateHeight == nil {
 			
-			let cell = self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView
+//			let cell = self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView
+			guard let topObjects = tableView.topObjectsInRegisteredNibByIdentifier(self.prototypeCellIdentifier) else {
 			
-			cell.frame = tableView.rectOfColumn(0)
+				fatalError()
+			}
 			
-			self.cellForEstimateHeight = cell
+			self.cellForEstimateHeight = topObjects.flatMap { $0 as? TimelineTableCellView } .first!
 		}
 		
 		return self.cellForEstimateHeight

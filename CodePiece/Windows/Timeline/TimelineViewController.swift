@@ -17,6 +17,7 @@ private let TableViewInsertAnimationOptions: NSTableViewAnimationOptions = [.Sli
 
 class TimelineViewController: NSViewController {
 
+	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
 	
 	struct TimelineInformation {
 	
@@ -467,6 +468,8 @@ extension TimelineViewController {
 
 			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: TableViewInsertAnimationOptions)
 			self.timelineTableView.selectRowIndexes(NSIndexSet(index: nextSelection), byExtendingSelection: false)
+			
+			self.timelineTableView.reloadData()
 		}
 		
 		let gotTimelineSuccessfully = { () -> Void in
