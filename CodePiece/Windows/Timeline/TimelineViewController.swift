@@ -20,7 +20,7 @@ class TimelineViewController: NSViewController {
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
 	
 	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
-	private(set) var currentTimelineSelectedRowIndexes = NSIndexSet() {
+	var currentTimelineSelectedRowIndexes = NSIndexSet() {
 		
 		didSet {
 			
@@ -440,16 +440,20 @@ extension TimelineViewController {
 		
 		self.message.send(.Stop)
 	}
+
+	func reloadTimeline() {
+		
+		self.message.send(.UpdateStatuses)
+	}
 }
 
 // MARK: - Tweets control
 
-extension TimelineViewController {
+extension TimelineViewController : TimelineTableControllerType {
 	
-	func reloadTimeline() {
-	
-		self.message.send(.UpdateStatuses)
-	}
+}
+
+extension TimelineViewController : TimelineGetStatusesController {
 	
 	private func updateStatuses() {
 		
@@ -463,31 +467,20 @@ extension TimelineViewController {
 		let query = hashtag.description
 		
 		let updateTable = { (tweets:[Status]) in
-
-			let tableView = self.timelineTableView
-			let getNextSelection:() -> NSIndexSet = {
-				
-				let maxRows = self.timelineDataSource.maxTweets
-				let nextIndexes = self.currentTimelineSelectedRowIndexes.map(tweets.count.advancedBy).filter { $0 < maxRows }
-
-				return nextIndexes.reduce(NSMutableIndexSet()) { $0.addIndex($1); return $0 } .copy() as! NSIndexSet
-			}
-
-			let nextSelections = getNextSelection()
-			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count))
-
-			DebugTime.print("Insert: \(tweets.count), Max: \(self.timelineDataSource.maxTweets), Range:\(updateRange)")
-			DebugTime.print("Previous: \(tableView.selectedRowIndexes)")
-			DebugTime.print("Next: \(nextSelections)")
-
-			self.timelineDataSource.appendTweets(tweets, hashtag: hashtag)
-			self.currentTimelineSelectedRowIndexes = nextSelections
-
-			tableView.insertRowsAtIndexes(updateRange, withAnimation: TableViewInsertAnimationOptions)
 			
-//			tableView.selectRowIndexes(nextSelections, byExtendingSelection: false)
+			DebugTime.print("Current Selection:\n\tCurrentTimelineSelectedRows: \(self.currentTimelineSelectedRowIndexes)\n\tNative: \(self.timelineTableView.selectedRowIndexes)")
 			
-			DebugTime.print("New Selection: \(tableView.selectedRowIndexes)")
+			let result = self.appendTweets(tweets, hashtag: hashtag)
+			let nextSelectedIndexes = self.getNextTimelineSelection(result.insertedIndexes)
+
+			NSLog("Tweet: \(tweets.count)")
+			NSLog("Inserted: \(result.insertedIndexes)")
+			NSLog("Ignored: \(result.ignoredIndexes)")
+			NSLog("Removed: \(result.removedIndexes)")
+			
+			self.currentTimelineSelectedRowIndexes = nextSelectedIndexes
+
+			DebugTime.print("Next Selection:\n\tCurrentTimelineSelectedRows: \(self.currentTimelineSelectedRowIndexes)\n\tNative: \(self.timelineTableView.selectedRowIndexes)")
 		}
 		
 		let gotTimelineSuccessfully = { () -> Void in
@@ -502,81 +495,8 @@ extension TimelineViewController {
 				
 				self.message.send(.AddAutoUpdateIntervalDelay(7.0))
 			}
-			
-			let needAlert = { () -> Bool in
-			
-				switch error.type {
-					
-				case .DecodeResultError:
-					return true
-					
-				case .UnexpectedError:
-					return true
-					
-				case .CouldNotAuthenticate:
-					return true
-					
-				case .PageDoesNotExist:
-					return true
-					
-				case .AccountSuspended:
-					return true
-					
-				case .APIv1Inactive:
-					return true
-					
-				case .RateLimitExceeded:
-					return false
-				
-				case .InvalidOrExpiredToken:
-					return true
-					
-				case .SSLRequired:
-					return true
-					
-				case .OverCapacity:
-					return false
-					
-				case .InternalError:
-					return true
-					
-				case .CouldNotAuthenticateYou:
-					return false
-					
-				case .UnableToFollow:
-					return true
-					
-				case .NotAuthorizedToSeeStatus:
-					return true
-					
-				case .DailyStatuUpdateLimitExceeded:
-					return true
-					
-				case .DuplicatedStatus:
-					return true
-					
-				case .BadAuthenticationData:
-					return true
-					
-				case .UserMustVerifyLogin:
-					return true
-					
-				case .RetiredEndpoint:
-					return true
-					
-				case .ApplicationCannotWrite:
-					return true
-				}
-			}
-			
-			if needAlert() {
-
-				self.showErrorAlert("Failed to get Timelines", message: error.description)
-			}
-			else {
-				
-				self.timelineStatusView.errorMessage = error.description
-			}
+		
+			self.reportTimelineGetStatusError(error)
 		}
 		
 		let getTimelineSpecifiedQuery = {
@@ -628,9 +548,9 @@ extension TimelineViewController : NSTableViewDelegate {
 		
 		let item = items[row]
 		let cell = item.timelineCellType.makeCellWithItem(item, tableView: tableView, owner: self) as! TimelineTableCellType
-		
+
+//		cell.selected = tableView.isRowSelected(row)
 		cell.selected = self.currentTimelineSelectedRowIndexes.containsIndex(row)
-		NSLog("Refresh : \(row), selected = \(cell.selected)")
 
 		return cell.toTimelineView()
 	}
@@ -650,14 +570,11 @@ extension TimelineViewController : NSTableViewDelegate {
 	
 	func tableViewSelectionDidChange(notification: NSNotification) {
 		
-		DebugTime.print("Selection Did Change.\n")
-		
 		guard let tableView = notification.object as? TimelineTableView where tableView === self.timelineTableView else {
 			
 			return
 		}
 		
 		currentTimelineSelectedRowIndexes = tableView.selectedRowIndexes
-		DebugTime.print("\tNotified: \(tableView.selectedRowIndexes)\n\tSelf: \(self.timelineTableView.selectedRowIndexes)")
 	}
 }

@@ -20,6 +20,16 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+extension NSIndexSet {
+
+	public convenience init<S:SequenceType where S.Generator.Element == Int>(sequence s:S) {
+		
+		let indexes = s.reduce(NSMutableIndexSet()) { $0.addIndex($1); return $0 }
+		
+		self.init(indexSet: indexes.copy() as! NSIndexSet)
+	}
+}
+
 extension NSTableView {
 
 	func topObjectsInRegisteredNibByIdentifier(identifier: String) -> [AnyObject]? {

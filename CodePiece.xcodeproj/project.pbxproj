@@ -109,6 +109,8 @@
 		B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE61BDC60770013AFF6 /* Environments.swift */; };
 		B1630AE91BDC97580013AFF6 /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE81BDC97580013AFF6 /* ClientInfo.swift */; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
+		B177FA6D1BF1FC7F000CE394 /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */; };
+		B177FA6F1BF21EEB000CE394 /* TimelineGetStatusesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */; };
 		B17C88C11B66BF0B00CBF20F /* README.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BD1B66BE6800CBF20F /* README.md */; };
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
 		B17C88C61B66FE7F00CBF20F /* ss in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BE1B66BE6800CBF20F /* ss */; };
@@ -345,6 +347,8 @@
 		B1630AE61BDC60770013AFF6 /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		B1630AE81BDC97580013AFF6 /* ClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
+		B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableController.swift; sourceTree = "<group>"; };
+		B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineGetStatusesController.swift; sourceTree = "<group>"; };
 		B17C88BD1B66BE6800CBF20F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B17C88BE1B66BE6800CBF20F /* ss */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ss; sourceTree = "<group>"; };
 		B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -484,6 +488,8 @@
 			isa = PBXGroup;
 			children = (
 				B15E71B81BF06CDF009CCB0E /* TimelineViewController.swift */,
+				B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */,
+				B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */,
 				B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */,
 				B15E71C41BF0BC70009CCB0E /* TimelineViewController+Action.swift */,
 				B10182CA1BEF8F6B0077873B /* TimelineStatusView.swift */,
@@ -1272,6 +1278,7 @@
 				B1D2D6841B5D5ED400794EFD /* PreferencesWindowController.swift in Sources */,
 				B12460E91B5FA0090036A690 /* TwitterPreferenceViewController.swift in Sources */,
 				B15E71BD1BF06D26009CCB0E /* TimelineTableCellView.swift in Sources */,
+				B177FA6D1BF1FC7F000CE394 /* TimelineTableController.swift in Sources */,
 				B15E71BE1BF06D26009CCB0E /* TimelineTableDataSource.swift in Sources */,
 				B128CB5F1B67942D00859D81 /* Application.swift in Sources */,
 				B125A3F31B808D5900AFAB89 /* StatusImageView.swift in Sources */,
@@ -1284,6 +1291,7 @@
 				B1BB59F51B5E715B00DE3942 /* TwitterController.swift in Sources */,
 				B12B247B1B6B597400B284D7 /* AboutWindowController.swift in Sources */,
 				B12C99BF1B850B27003E651F /* Language.swift in Sources */,
+				B177FA6F1BF21EEB000CE394 /* TimelineGetStatusesController.swift in Sources */,
 				B19005251BD1DC2D00A05957 /* AppControllers.swift in Sources */,
 				B12B24891B6B80C200B284D7 /* AcknowledgementsViewController.swift in Sources */,
 				B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */,
