@@ -102,7 +102,6 @@ class TimelineViewController: NSViewController {
 			
 			if self.timeline.hashtag != oldValue.hashtag {
 				
-//				self.timelineDataSource.items = []
 				self.message.send(.ChangeHashtag(self.timeline.hashtag))
 			}
 		}
@@ -582,25 +581,14 @@ extension TimelineViewController {
 			}
 		}
 		
-		let clearTimeline = {
-			
-			self.clearStatuses()
-		}
-		
 		switch whether(!query.isEmpty) {
 			
 		case .Yes:
 			getTimelineSpecifiedQuery()
 			
 		case .No:
-			clearTimeline()
+			break
 		}
-	}
-	
-	private func clearStatuses() {
-		
-		self.timelineDataSource.items = []
-		self.timelineTableView.reloadData()
 	}
 }
 
