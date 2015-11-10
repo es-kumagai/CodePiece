@@ -90,7 +90,14 @@ class TimelineViewController: NSViewController {
 		}
 	}
 	
-	@IBOutlet var timelineUpdateIndicator: NSProgressIndicator?
+	@IBOutlet var timelineUpdateIndicator: NSProgressIndicator? {
+	
+		didSet {
+			
+			self.timelineUpdateIndicator?.usesThreadedAnimation = true
+		}
+	}
+	
 	@IBOutlet var timelineRefreshButton: NSButton?
 	
 	let statusesAutoUpdateInterval:Double = 20
