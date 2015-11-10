@@ -639,7 +639,7 @@ extension TimelineViewController : NSTableViewDelegate {
 		for row in 0 ..< tableView.numberOfRows {
 		
 			if let cell = tableView.viewAtColumn(0, row: row, makeIfNecessary: false) as? TimelineTableCellView {
-				
+
 				cell.selected = selectedIndexes.containsIndex(row)
 			}
 		}

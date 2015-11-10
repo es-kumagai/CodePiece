@@ -43,8 +43,11 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 		
 		didSet {
 			
-			self.textLabel.selectable = self.selected
-			self.setNeedsDisplayInRect(self.frame)
+			if self.selected != oldValue {
+
+				self.textLabel.selectable = self.selected
+				self.setNeedsDisplayInRect(self.bounds)
+			}
 		}
 	}
 	
