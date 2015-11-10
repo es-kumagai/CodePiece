@@ -48,6 +48,8 @@ extension TimelineHashtagTableCellItem : TimelineTableItem  {
 		}
 	}
 	
+	var selected: Bool = false
+	
 	@IBOutlet var previousHashtagLabel: NSTextField!
 	@IBOutlet var currentHashtagLabel: NSTextField!
 	@IBOutlet var previousHashtagView: NSView!

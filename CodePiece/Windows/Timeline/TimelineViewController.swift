@@ -19,6 +19,24 @@ class TimelineViewController: NSViewController {
 
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
 	
+	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
+	private(set) var currentTimelineSelectedRowIndexes = NSIndexSet() {
+		
+		didSet {
+			
+			let tableView = self.timelineTableView
+			let selectedIndexes = self.currentTimelineSelectedRowIndexes
+			
+			for row in 0 ..< tableView.numberOfRows {
+				
+				if let cell = tableView.viewAtColumn(0, row: row, makeIfNecessary: false) as? TimelineTableCellView {
+					
+					cell.selected = selectedIndexes.containsIndex(row)
+				}
+			}
+		}
+	}
+	
 	struct TimelineInformation {
 	
 		var hashtag:ESTwitter.Hashtag
@@ -446,30 +464,30 @@ extension TimelineViewController {
 		
 		let updateTable = { (tweets:[Status]) in
 
-			let getNextSelection:()->Int = {
+			let tableView = self.timelineTableView
+			let getNextSelection:() -> NSIndexSet = {
 				
-				let next = self.timelineTableView.selectedRow + tweets.count
 				let maxRows = self.timelineDataSource.maxTweets
-				
-				if next < maxRows {
-					
-					return next
-				}
-				else {
-					
-					return -1
-				}
+				let nextIndexes = self.currentTimelineSelectedRowIndexes.map(tweets.count.advancedBy).filter { $0 < maxRows }
+
+				return nextIndexes.reduce(NSMutableIndexSet()) { $0.addIndex($1); return $0 } .copy() as! NSIndexSet
 			}
-			
-			let nextSelection = getNextSelection()
-			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count.predecessor()))
+
+			let nextSelections = getNextSelection()
+			let updateRange = NSIndexSet(indexesInRange: NSMakeRange(0, tweets.count))
+
+			DebugTime.print("Insert: \(tweets.count), Max: \(self.timelineDataSource.maxTweets), Range:\(updateRange)")
+			DebugTime.print("Previous: \(tableView.selectedRowIndexes)")
+			DebugTime.print("Next: \(nextSelections)")
 
 			self.timelineDataSource.appendTweets(tweets, hashtag: hashtag)
+			self.currentTimelineSelectedRowIndexes = nextSelections
 
-			self.timelineTableView.insertRowsAtIndexes(updateRange, withAnimation: TableViewInsertAnimationOptions)
-			self.timelineTableView.selectRowIndexes(NSIndexSet(index: nextSelection), byExtendingSelection: false)
+			tableView.insertRowsAtIndexes(updateRange, withAnimation: TableViewInsertAnimationOptions)
 			
-			self.timelineTableView.reloadData()
+//			tableView.selectRowIndexes(nextSelections, byExtendingSelection: false)
+			
+			DebugTime.print("New Selection: \(tableView.selectedRowIndexes)")
 		}
 		
 		let gotTimelineSuccessfully = { () -> Void in
@@ -609,30 +627,37 @@ extension TimelineViewController : NSTableViewDelegate {
 		}
 		
 		let item = items[row]
+		let cell = item.timelineCellType.makeCellWithItem(item, tableView: tableView, owner: self) as! TimelineTableCellType
 		
-		return item.timelineCellType.makeCellWithItem(item, tableView: tableView, owner: self)
+		cell.selected = self.currentTimelineSelectedRowIndexes.containsIndex(row)
+		NSLog("Refresh : \(row), selected = \(cell.selected)")
+
+		return cell.toTimelineView()
 	}
 	
 	func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		
 		return self.timelineDataSource.estimateCellHeightOfRow(row, tableView: tableView)
 	}
+
+	func tableViewSelectionIsChanging(notification: NSNotification) {
+		
+		guard let tableView = notification.object as? TimelineTableView where tableView === self.timelineTableView else {
+			
+			return
+		}
+	}
 	
 	func tableViewSelectionDidChange(notification: NSNotification) {
+		
+		DebugTime.print("Selection Did Change.\n")
 		
 		guard let tableView = notification.object as? TimelineTableView where tableView === self.timelineTableView else {
 			
 			return
 		}
 		
-		let selectedIndexes = tableView.selectedRowIndexes
-		
-		for row in 0 ..< tableView.numberOfRows {
-		
-			if let cell = tableView.viewAtColumn(0, row: row, makeIfNecessary: false) as? TimelineTableCellView {
-
-				cell.selected = selectedIndexes.containsIndex(row)
-			}
-		}
+		currentTimelineSelectedRowIndexes = tableView.selectedRowIndexes
+		DebugTime.print("\tNotified: \(tableView.selectedRowIndexes)\n\tSelf: \(self.timelineTableView.selectedRowIndexes)")
 	}
 }

@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import Swim
 import ESTwitter
 
@@ -17,16 +17,22 @@ protocol TimelineTableItem {
 	var timelineCellType: TimelineTableCellType.Type { get }
 }
 
-protocol TimelineTableCellType {
+protocol TimelineTableCellType : AnyObject, Selectable {
 	
 	static var prototypeCellIdentifier: String { get }
-	
 	static func estimateCellHeightForItem(item:TimelineTableItem, tableView:NSTableView) -> CGFloat
 
+	func toTimelineView() -> NSView
+	
 	static func makeCellWithItem(item:TimelineTableItem, tableView: NSTableView, owner: AnyObject?) -> NSTableCellView
 }
 
 extension TimelineTableCellType {
+
+	func toTimelineView() -> NSView {
+	
+		return self as! NSView
+	}
 	
 	static func makeCellForTableView(tableView: NSTableView, owner: AnyObject?) -> TimelineTableCellType {
 
