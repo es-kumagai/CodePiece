@@ -4,7 +4,7 @@
 <a href="https://itunes.apple.com/jp/app/codepiece/id1021284423?mt=12"><img src="ss/Download_on_the_App_Store_Badge.135x40.png" width="135px"/></a>
 </div>
 
-<header style="padding-left: 160px; padding-top: 0pt;">
+<div style="padding-left: 160px; padding-top: 0pt;">
 <h1>CodePiece</h1>
 
 <p>
@@ -13,7 +13,7 @@
 
 > GitHub で公開しているものは beta 版です。正式リリースは Mac App Store で行っています。
 
-</header>
+</div>
 
 <br clear="all"/>
 
