@@ -11,7 +11,9 @@
 入力したコードとコメントを Gists へ投稿してリンクをツイートするアプリです。プログラミングの勉強会でコードを添えて呟くのに重宝するかもしれません。
 </p>
 
-> GitHub で公開しているものは beta 版です。正式リリースは Mac App Store で行っています。
+<blockquote>
+<p>GitHub で公開しているものは beta 版です。正式リリースは Mac App Store で行っています。</p>
+</blockquote>
 
 </div>
 
