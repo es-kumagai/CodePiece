@@ -109,6 +109,7 @@
 		B15E71C71BF0CD84009CCB0E /* TimelineViewController+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */; };
 		B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE61BDC60770013AFF6 /* Environments.swift */; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
+		B1745BD41BF8CDF000E19F32 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1745BD31BF8CDF000E19F32 /* Media.swift */; };
 		B177FA6D1BF1FC7F000CE394 /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */; };
 		B177FA6F1BF21EEB000CE394 /* TimelineGetStatusesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */; };
 		B177FA701BF22D50000CE394 /* CodePieceClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12210511BCBB955004DBB9A /* CodePieceClientInfo.swift */; };
@@ -348,6 +349,7 @@
 		B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Display.swift"; sourceTree = "<group>"; };
 		B1630AE61BDC60770013AFF6 /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
+		B1745BD31BF8CDF000E19F32 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableController.swift; sourceTree = "<group>"; };
 		B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineGetStatusesController.swift; sourceTree = "<group>"; };
 		B17C88BD1B66BE6800CBF20F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 				B126750E1BC12AF300F38464 /* Place.swift */,
 				B12675121BC12CCD00F38464 /* PlaceBoundingBox.swift */,
 				B12675101BC12B6000F38464 /* Coordinate.swift */,
+				B1745BD31BF8CDF000E19F32 /* Media.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1261,6 +1264,7 @@
 				B126750A1BC0F2E300F38464 /* StatusEntities.swift in Sources */,
 				B12674F61BC0EE5B00F38464 /* UserProfile.swift in Sources */,
 				B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */,
+				B1745BD41BF8CDF000E19F32 /* Media.swift in Sources */,
 				B13371EB1BC5009600D1C793 /* StatusCoordinates.swift in Sources */,
 				B12675061BC0F06000F38464 /* Hashtag.swift in Sources */,
 				B12674F81BC0EE8B00F38464 /* URLInfo.swift in Sources */,

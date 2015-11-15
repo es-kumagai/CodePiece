@@ -50,7 +50,7 @@ DEPENDENCIES:
   - Ocean (from `https://github.com/EZ-NET/ESOcean.git`, branch `master`)
   - p2.OAuth2
   - ReachabilitySwift (~> 2.0)
-  - STTwitter (from `https://github.com/EZ-NET/STTwitter.git`, branch `develop`)
+  - STTwitter (from `https://github.com/EZ-NET/STTwitter.git`, branch `FixPostMediaUploadData`)
   - Swim (from `https://github.com/EZ-NET/ESSwim`, branch `master`)
 
 EXTERNAL SOURCES:
@@ -68,7 +68,7 @@ EXTERNAL SOURCES:
     :branch: master
     :git: https://github.com/EZ-NET/ESOcean.git
   STTwitter:
-    :branch: develop
+    :branch: FixPostMediaUploadData
     :git: https://github.com/EZ-NET/STTwitter.git
   Swim:
     :branch: master
@@ -91,7 +91,7 @@ CHECKOUT OPTIONS:
     :commit: 1234aac116cd1903ac386a760d23f456fc3fdbaf
     :git: https://github.com/EZ-NET/ESOcean.git
   STTwitter:
-    :commit: 1cda311046b5f5e40e7b40ed6bca8fe8bccd315a
+    :commit: fced72f91243bcc9856b7d5d5542b60f964ea5c9
     :git: https://github.com/EZ-NET/STTwitter.git
   Swim:
     :commit: 843cc1aa5d019da000c0f0e9091b654e11e08fe0
