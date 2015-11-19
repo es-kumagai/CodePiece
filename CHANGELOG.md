@@ -2,11 +2,13 @@
 
 Change Logs.
 
-## ****
+## 1.4.1
 
 ### Enhancements
 
 * Add `Clear Code And Description` menu item in `Editor` menu.
+* Timeline Controller always report using Timeline status field when errors are occurred.
+* When twitter credentials verifying, other verification process will not run.
 
 ### Bug Fixes
 
