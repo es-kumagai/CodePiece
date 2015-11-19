@@ -1,6 +1,25 @@
-# CodePiece
+<div style="float: left; text-align: center;">
+<a href="https://itunes.apple.com/jp/app/codepiece/id1021284423?mt=12"><img src="ss/CodePiece.128x128.png" width="100px"></a>
+<br/>
+<a href="https://itunes.apple.com/jp/app/codepiece/id1021284423?mt=12"><img src="ss/Download_on_the_App_Store_Badge.135x40.png" width="135px"/></a>
+</div>
 
+<div style="padding-left: 160px; padding-top: 0pt;">
+<h1>CodePiece</h1>
+
+<p>
 入力したコードとコメントを Gists へ投稿してリンクをツイートするアプリです。プログラミングの勉強会でコードを添えて呟くのに重宝するかもしれません。
+</p>
+
+<blockquote>
+<p>GitHub で公開しているものは beta 版です。正式リリースは Mac App Store で行っています。</p>
+</blockquote>
+
+</div>
+
+<br clear="all"/>
+
+---
 
 <img src="ss/main.png" style="width: 100%; max-width: 800px">
 
@@ -78,7 +97,3 @@ CodePiece アプリを起動したら、システムメニューの ```CodePiece
 > * Mac に Twitter アカウントがひとつだけしか登録されていない場合は、それが CodePiece でも使用されます。
 > * Mac で CodePiece から Twitter アカウントを利用する許可が与えられている必要があります。許可の設定は Mac のシステム環境設定にある ```セキュリティとプライバシー``` で行えます。
 
-# 既知の不具合
-
-* ツイート時に Gists のキャプチャを取得できずにアプリが強制終了する場合があります。
-* その他、おそらくマルチスレッド処理まわりで強制終了する可能性がある様子です。

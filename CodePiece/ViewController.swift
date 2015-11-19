@@ -211,17 +211,26 @@ class ViewController: NSViewController {
 	
 	func clearCodeText() {
 		
-		self.codeTextView.string = ""
+		self.withChangeValue("canPost") {
+			
+			self.codeTextView.string = ""
+		}
 	}
 	
 	func clearDescriptionText() {
 		
-		self.descriptionTextField.stringValue = ""
+		self.withChangeValue("canPost") {
+
+			self.descriptionTextField.stringValue = ""
+		}
 	}
 	
 	func clearHashtag() {
 		
-		self.hashTagTextField.hashtag = ""
+		self.withChangeValue("canPost") {
+			
+			self.hashTagTextField.hashtag = ""
+		}
 	}
 	
 	func restoreContents() {

@@ -2,6 +2,16 @@
 
 Change Logs.
 
+## ****
+
+### Enhancements
+
+* Add `Clear Code And Description` menu item in `Editor` menu.
+
+### Bug Fixes
+
+* Cells which posted 24 hours ago is filled by gray background color.
+
 ## 1.4
 
 ### Enhancements

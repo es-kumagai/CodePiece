@@ -181,6 +181,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 	}
 	
+	private var autoVerifyingNow: Bool = false
 	private var autoVerifyingQueue:MessageQueue<AutoVerifyingQueueMessage>!
 	
 	var account:TwitterAccount? {
@@ -209,7 +210,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			return nil
 		}
 		
-		return tweak (STTwitterAPI.twitterAPIOSWithAccount(account.ACAccount, withDelegate:self)) {
+		return tweak (STTwitterAPI.twitterAPIOSWithAccount(account.ACAccount, delegate:self)) {
 			
 			$0.setTimeoutInSeconds(TwitterController.timeout)
 		}
@@ -261,13 +262,25 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	private func autoVerifyingAction() {
 		
+		guard !self.autoVerifyingNow else {
+			
+			return
+		}
+		
 		guard self.credentialsVerified else {
 			
 			NSLog("This change is no effect on the current account because the account's credentials is not verifyed yet.")
 			return
 		}
 		
+		self.autoVerifyingNow = true
+		
 		api.verifyCredentials { result in
+		
+			defer {
+			
+				self.autoVerifyingNow = false
+			}
 			
 			switch result {
 				
@@ -540,14 +553,12 @@ extension TwitterController {
 	}
 }
 
-extension TwitterController : STTwitterAPIDelegate {
+extension TwitterController : STTwitterAPIOSProtocol {
 	
-	func twitterAPI(api: STTwitterAPI!, shouldDisableCurrentOAuth oauth: STTwitterOS!, accountStore: ACAccountStore!) -> Bool {
+	func twitterAPI(twitterAPI: STTwitterAPI!, accountWasInvalidated invalidatedAccount: ACAccount!) {
 		
 		NSLog("Detected OS Account Store change.")
 		self.autoVerifyingQueue.send(.RequestVerification)
-		
-		return false
 	}
 }
 
@@ -576,21 +587,33 @@ extension STTwitterAPI {
 
 			DebugTime.print("📮 Try posting with image ... #3.3.3.1")
 			
-			let tweetProgress = { (bytes:Int, processedBytes:Int, totalBytes:Int) -> Void in
+			let tweetProgress = { (bytes:Int64, processedBytes:Int64, totalBytes:Int64) -> Void in
 
-				NSLog("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
+//				NSLog("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
 			}
 			
 			let data = image.TIFFRepresentation!
 			let bitmap = NSBitmapImageRep(data: data)!
 			let mediaData = bitmap.representationUsingType(NSBitmapImageFileType.NSPNGFileType, properties: [NSImageInterlaced : NSNumber(bool: true)])!
 
-			let mediaDatas:[NSData] = [mediaData]
-			let possiblySensitive:NSNumber = false
-
 			DebugTime.print("📮 Try posting by API ... #3.3.3.2")
 			
-			self.postStatusUpdate(status, mediaDataArray: mediaDatas, possiblySensitive: possiblySensitive, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, uploadProgressBlock: tweetProgress, successBlock: tweetSucceeded, errorBlock: tweetFailed)
+			let mediaUploadSucceeded = { (imageDictionary:[NSObject : AnyObject]!, mediaID:String!, size:NSNumber!) -> Void in
+
+				DebugTime.print("📮 A thumbnail media posted ... #3.3.3.2.1")
+				
+				let mediaIDs = [mediaID]
+				
+				self.postStatusUpdate(status, inReplyToStatusID: existingStatusID, mediaIDs: mediaIDs, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
+			}
+			
+			let mediaUpdateFailed = { (error: NSError!) -> Void in
+				
+				DebugTime.print("📮 Failed to updload a thumbnail media ... #3.3.3.2.2")
+				tweetFailed(error)
+			}
+			
+			self.postMediaUploadData(mediaData, fileName: "thumbnail.png", uploadProgressBlock: tweetProgress, successBlock: mediaUploadSucceeded, errorBlock: mediaUpdateFailed)
 		}
 		else {
 

@@ -93,6 +93,12 @@ final class MenuController : NSObject {
 		self.mainViewController?.clearDescriptionText()
 	}
 	
+	@IBAction func clearCodeAndDescription(sender: NSMenuItem?) {
+	
+		self.mainViewController?.clearCodeText()
+		self.mainViewController?.clearDescriptionText()
+	}
+	
 	@IBAction func clearHashtag(sender:NSMenuItem?) {
 		
 		self.mainViewController?.clearHashtag()
