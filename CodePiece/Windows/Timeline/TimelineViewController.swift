@@ -399,36 +399,36 @@ extension TimelineViewController {
 
 		super.viewDidAppear()
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
 			
 			self.message.send(.UpdateStatuses)
 		}
 		
-		HashtagDidChangeNotification.observeBy(self) { owner, notification in
+		HashtagDidChangeNotification.observeBy(self) { [unowned self] notification in
 			
 			let hashtag = notification.hashtag
 			
 			NSLog("Hashtag did change (\(hashtag))")
 			
-			owner.timeline = owner.timeline.replaceHashtag(hashtag)
+			self.timeline = self.timeline.replaceHashtag(hashtag)
 		}
 		
-		NamedNotification.observe(NSWorkspaceWillSleepNotification, by: self) { owner, notification in
+		NamedNotification.observe(NSWorkspaceWillSleepNotification, by: self) { [unowned self] notification in
 			
 			self.message.send(.AutoUpdate(enable: false))
 		}
 		
-		NamedNotification.observe(NSWorkspaceDidWakeNotification, by: self) { owner, notification in
+		NamedNotification.observe(NSWorkspaceDidWakeNotification, by: self) { [unowned self] notification in
 			
 			self.message.send(.AutoUpdate(enable: true))
 		}
 		
-		ReachabilityController.ReachabilityChangedNotification.observeBy(self) { observer, notification in
+		ReachabilityController.ReachabilityChangedNotification.observeBy(self) { [unowned self] notification in
 			
 			self.message.send(.SetReachability(notification.state))
 		}
 
-		ViewController.PostCompletelyNotification.observeBy(self) { owner, notification in
+		ViewController.PostCompletelyNotification.observeBy(self) { [unowned self] notification in
 		
 			invokeAsyncOnMainQueue(after: 3.0) {
 				

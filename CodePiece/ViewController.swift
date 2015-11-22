@@ -269,13 +269,13 @@ class ViewController: NSViewController {
 
 		self.clearContents()
 		
-		PostCompletelyNotification.observeBy(self) { owner, notification in
+		PostCompletelyNotification.observeBy(self) { [unowned self] notification in
 			
 			self.clearContents()
 			NSLog("Posted completely \(notification.info)")
 		}
 		
-		PostFailedNotification.observeBy(self) { owner, notification in
+		PostFailedNotification.observeBy(self) { [unowned self] notification in
 		
 			self.showErrorAlert("Cannot post", message: notification.info.error.localizedDescription)
 		}

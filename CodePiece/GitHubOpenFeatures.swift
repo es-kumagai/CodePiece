@@ -12,7 +12,7 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable {
 
 	override func awakeFromNib() {
 		
-		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
 			
 			self.withChangeValue("canOpenGitHubHome")
 		}

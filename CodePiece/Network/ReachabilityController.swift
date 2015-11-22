@@ -87,7 +87,7 @@ final class ReachabilityController {
 		return State(self.reachability.currentReachabilityStatus)
 	}
 	
-	func reachabilityDidChange(observer: ReachabilityController, notification:NamedNotification) {
+	func reachabilityDidChange(notification:NamedNotification) {
 		
 		guard notification.object === self.reachability else {
 			
