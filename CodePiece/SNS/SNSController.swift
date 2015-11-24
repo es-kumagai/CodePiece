@@ -83,7 +83,7 @@ final class SNSController : PostController {
 		return gists.canPost && twitter.canPost
 	}
 	
-	func post(content: String, language: ESGists.Language, description: String, hashtag: ESTwitter.Hashtag, completed: (PostResult) -> Void) throws {
+	func post(content: String, language: ESGists.Language, description: String, hashtags: ESTwitter.HashtagSet, completed: (PostResult) -> Void) throws {
 	
 		DebugTime.print("📮 Try posting to SNS ... #2")
 		
@@ -105,7 +105,7 @@ final class SNSController : PostController {
 		
 			DebugTime.print("📮 Try posting by Twitter ... #2.1")
 			
-			try self.twitter.post(gist, language: language, description: description, hashtag: hashtag, image: image) { result in
+			try self.twitter.post(gist, language: language, description: description, hashtags: hashtags, image: image) { result in
 
 				DebugTime.print("📮 Posted by Twitter (\(result)) ... #2.1.1")
 				
@@ -127,7 +127,7 @@ final class SNSController : PostController {
 
 			DebugTime.print("📮 Try posting by Gists ... #2.2")
 			
-			try self.gists.post(content, language: language, description: description, hashtag: hashtag) { result in
+			try self.gists.post(content, language: language, description: description, hashtags: hashtags) { result in
 
 				DebugTime.print("📮 Posted by Gists ... #2.2.1")
 				

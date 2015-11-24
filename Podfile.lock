@@ -94,7 +94,7 @@ CHECKOUT OPTIONS:
     :commit: fced72f91243bcc9856b7d5d5542b60f964ea5c9
     :git: https://github.com/EZ-NET/STTwitter.git
   Swim:
-    :commit: 8bf3a799c036bb80dbf547ca6f07a3080276135e
+    :commit: 18b6bb9c18e9989b9081ff47c5f944997f55cf1c
     :git: https://github.com/EZ-NET/ESSwim
 
 SPEC CHECKSUMS:

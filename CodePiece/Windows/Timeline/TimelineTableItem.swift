@@ -12,7 +12,7 @@ import ESTwitter
 
 protocol TimelineTableItem {
 
-	var currentHashtag: ESTwitter.Hashtag { get }
+	var currentHashtags: ESTwitter.HashtagSet { get }
 	var timelineItemTweetId: String? { get }
 	var timelineCellType: TimelineTableCellType.Type { get }
 }
@@ -43,16 +43,16 @@ extension TimelineTableCellType {
 struct TimelineTweetItem : TimelineTableItem {
 	
 	var status: ESTwitter.Status
-	var hashtag: ESTwitter.Hashtag
+	var hashtags: ESTwitter.HashtagSet
 	
 	var timelineItemTweetId: String? {
 		
 		return self.status.idStr
 	}
 
-	var currentHashtag: ESTwitter.Hashtag {
+	var currentHashtags: ESTwitter.HashtagSet {
 		
-		return self.hashtag
+		return self.hashtags
 	}
 	
 	var timelineCellType: TimelineTableCellType.Type {
@@ -63,9 +63,9 @@ struct TimelineTweetItem : TimelineTableItem {
 
 extension SequenceType where Generator.Element == ESTwitter.Status {
 	
-	func toTimelineTweetItems(hashtag: ESTwitter.Hashtag) -> [TimelineTweetItem] {
+	func toTimelineTweetItems(hashtags: ESTwitter.HashtagSet) -> [TimelineTweetItem] {
 		
-		return self.map { TimelineTweetItem(status: $0, hashtag: hashtag) }
+		return self.map { TimelineTweetItem(status: $0, hashtags: hashtags) }
 	}
 }
 

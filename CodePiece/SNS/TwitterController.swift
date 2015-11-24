@@ -392,7 +392,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 	}
 
-	private func makeStatusFrom(gist:ESGists.Gist?, description:String, hashtag:ESTwitter.Hashtag, var maxLength: Int? = nil) -> String? {
+	private func makeStatusFrom(gist:ESGists.Gist?, description:String, hashtags:ESTwitter.HashtagSet, var maxLength: Int? = nil) -> String? {
 		
 		if gist != nil {
 
@@ -406,21 +406,21 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		let appendAppTag = false
 		let language:Language? = gist?.files.first?.1.language
 		
-		return DescriptionGenerator(description, language: language, hashtag: hashtag, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
+		return DescriptionGenerator(description, language: language, hashtags: hashtags, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
 	}
 	
-	func post(gist:ESGists.Gist, language:ESGists.Language, description:String, hashtag:ESTwitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(gist:ESGists.Gist, language:ESGists.Language, description:String, hashtags:ESTwitter.HashtagSet, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 
-		let status = self.makeStatusFrom(gist, description: description, hashtag: hashtag)!
+		let status = self.makeStatusFrom(gist, description: description, hashtags: hashtags)!
 		
 		try self.post(status, image: image, callback: callback)
 	}
 
-	func post(description:String, hashtag:ESTwitter.Hashtag, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(description:String, hashtags:ESTwitter.HashtagSet, image:NSImage? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
 		DebugTime.print("📮 Try to post by Twitter ... #3")
 		
-		let status = self.makeStatusFrom(nil, description: description, hashtag: hashtag)!
+		let status = self.makeStatusFrom(nil, description: description, hashtags: hashtags)!
 		
 		try self.post(status, image: image, callback: callback)
 	}

@@ -11,21 +11,21 @@ import ESTwitter
 
 final class HashtagTextField : NSTextField {
 	
-	private var hashtagBeforeEditing = ESTwitter.Hashtag()
+	private var hashtagsBeforeEditing:ESTwitter.HashtagSet = []
 	
-	var hashtag:ESTwitter.Hashtag {
+	var hashtags:ESTwitter.HashtagSet {
 
 		get {
 
-			return ESTwitter.Hashtag(super.stringValue)
+			return ESTwitter.HashtagSet(hashtagsDisplayText: super.stringValue)
 		}
 		
 		set {
 			
-			self.stringValue = newValue.value
-			self.hashtagBeforeEditing = newValue
+			self.stringValue = newValue.toTwitterDisplayText()
+			self.hashtagsBeforeEditing = newValue
 
-			HashtagDidChangeNotification(hashtag: newValue).post()
+			HashtagsDidChangeNotification(hashtags: newValue).post()
 		}
 	}
 	
@@ -38,23 +38,23 @@ final class HashtagTextField : NSTextField {
 		
 		get {
 		
-			return self.hashtag.value
+			return self.hashtags.toTwitterDisplayText()
 		}
 	}
 	
 	override func textDidEndEditing(notification: NSNotification) {
 		
 		// 表示のために代入し直して正規化します。
-		self.stringValue = self.hashtag.value
+		self.stringValue = self.hashtags.toTwitterDisplayText()
 		
 		super.textDidEndEditing(notification)
 
 		// 変更があった場合に限り通知します。
-		if self.hashtag != self.hashtagBeforeEditing {
+		if self.hashtags != self.hashtagsBeforeEditing {
 
-			self.hashtagBeforeEditing = self.hashtag
+			self.hashtagsBeforeEditing = self.hashtags
 			
-			HashtagDidChangeNotification(hashtag: self.hashtag).post()
+			HashtagsDidChangeNotification(hashtags: self.hashtags).post()
 		}
 	}
 }

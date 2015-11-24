@@ -76,12 +76,12 @@ extension TwitterAccountSelectorController {
 	}
 }
 
-final class HashtagDidChangeNotification : Notification {
+final class HashtagsDidChangeNotification : Notification {
 	
-	private(set) var hashtag:ESTwitter.Hashtag
+	private(set) var hashtags:ESTwitter.HashtagSet
 	
-	init(hashtag:ESTwitter.Hashtag) {
+	init(hashtags:ESTwitter.HashtagSet) {
 		
-		self.hashtag = hashtag
+		self.hashtags = hashtags
 	}
 }

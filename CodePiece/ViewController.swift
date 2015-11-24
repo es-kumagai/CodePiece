@@ -161,13 +161,13 @@ class ViewController: NSViewController, NotificationObservable {
 		let code = self.codeTextView.string!
 		let language = self.selectedLanguage
 		let description = self.descriptionTextField.stringValue
-		let hashtag = self.hashTagTextField.hashtag
+		let hashtags = self.hashTagTextField.hashtags
 
 		if self.hasCode {
 			
 			DebugTime.print("📮 Try posting with a Code ... #1.1")
 
-			try NSApp.snsController.post(code, language: language, description: description, hashtag: hashtag) { result in
+			try NSApp.snsController.post(code, language: language, description: description, hashtags: hashtags) { result in
 				
 				DebugTime.print("📮 Posted \(result) ... #1.1.1")
 				
@@ -185,7 +185,7 @@ class ViewController: NSViewController, NotificationObservable {
 			
 			DebugTime.print("📮 Try posting without Codes ... #1.2")
 			
-			try NSApp.twitterController.post(description, hashtag: hashtag) { result in
+			try NSApp.twitterController.post(description, hashtags: hashtags) { result in
 				
 				DebugTime.print("📮 Posted \(result) ... #1.2.1")
 				
@@ -225,11 +225,11 @@ class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	func clearHashtag() {
+	func clearHashtags() {
 		
 		self.withChangeValue("canPost") {
 			
-			self.hashTagTextField.hashtag = ""
+			self.hashTagTextField.hashtags = []
 		}
 	}
 	
@@ -238,7 +238,7 @@ class ViewController: NSViewController, NotificationObservable {
 		DebugTime.print("Restoring contents in main window.")
 		
 		NSApp.settings.appState.selectedLanguage.invokeIfExists(self.languagePopUpDataSource.selectLanguage)
-		NSApp.settings.appState.hashtag.invokeIfExists { self.hashTagTextField.hashtag = $0 }
+		NSApp.settings.appState.hashtags.invokeIfExists { self.hashTagTextField.hashtags = $0 }
 	}
 	
 	func saveContents() {
@@ -246,7 +246,7 @@ class ViewController: NSViewController, NotificationObservable {
 		DebugTime.print("Saving contents in main window.")
 		
 		NSApp.settings.appState.selectedLanguage = self.selectedLanguage
-		NSApp.settings.appState.hashtag = self.hashTagTextField.hashtag
+		NSApp.settings.appState.hashtags = self.hashTagTextField.hashtags
 
 		NSApp.settings.saveAppState()
 	}
@@ -369,7 +369,7 @@ class ViewController: NSViewController, NotificationObservable {
 	
 	var canOpenBrowserWithSearchHashtagPage:Bool {
 	
-		return !self.hashTagTextField.hashtag.isEmpty
+		return !self.hashTagTextField.hashtags.isEmpty
 	}
 	
 	func openBrowserWithSearchHashtagPage() {
@@ -381,7 +381,7 @@ class ViewController: NSViewController, NotificationObservable {
 		
 		do {
 
-			try ESTwitter.Browser.openWithQuery(self.hashTagTextField.hashtag.value)
+			try ESTwitter.Browser.openWithQuery(self.hashTagTextField.hashtags.toTwitterDisplayText())
 		}
 		catch let ESTwitter.Browser.Error.OperationFailure(reason: reason) {
 			
@@ -407,7 +407,7 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 		let countsForInputText:[Int] = [
 
 			self.descriptionTextField.stringValue.utf16.count,
-			self.hashTagTextField.hashtag.length.nonZeroMap { $0 + 1 }
+			self.hashTagTextField.hashtags.twitterDisplayTextLength.nonZeroMap { $0 + 1 }
 		]
 		
 		let countsForReserve:[Int] = [

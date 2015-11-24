@@ -22,7 +22,7 @@ final class GistsController : PostController, AlertDisplayable {
 		return NSApp.settings.account.authorizationState.isValid
 	}
 	
-	func post(content:String, language:ESGists.Language, description:String, hashtag:ESTwitter.Hashtag, completed:(PostResult)->Void) throws {
+	func post(content:String, language:ESGists.Language, description:String, hashtags:ESTwitter.HashtagSet, completed:(PostResult)->Void) throws {
 
 		guard let authorization = NSApp.settings.account.authorization else {
 			
@@ -30,7 +30,7 @@ final class GistsController : PostController, AlertDisplayable {
 		}
 
 		let filename = self.filename.appendStringIfNotEmpty(language.extname, separator: ".")
-		let description = DescriptionGenerator(description, language: nil, hashtag: hashtag, appendAppTag: true)
+		let description = DescriptionGenerator(description, language: nil, hashtags: hashtags, appendAppTag: true)
 
 		#if DEBUG
 			let publicGist = false

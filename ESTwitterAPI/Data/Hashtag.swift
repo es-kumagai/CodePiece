@@ -9,7 +9,17 @@
 import Himotoki
 import Swim
 
-public struct Hashtag {
+public protocol HashtagType {
+
+	var value:String { get }
+	
+	var length:Int { get }
+	var isEmpty:Bool { get }
+
+	init(hashtagValue:String)
+}
+
+public struct Hashtag : HashtagType {
 	
 	private var _value:String!
 	
@@ -18,6 +28,11 @@ public struct Hashtag {
 		self._value = ""
 	}
 	
+	public init(hashtagValue: String) {
+		
+		self.init(hashtagValue)
+	}
+
 	public init(_ value:String) {
 		
 		self.value = value

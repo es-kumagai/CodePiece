@@ -9,18 +9,16 @@
 import ESGists
 import ESTwitter
 
-func DescriptionGenerator(var description:String, language:ESGists.Language?, hashtag:ESTwitter.Hashtag, appendAppTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {
+func DescriptionGenerator(var description:String, language:ESGists.Language?, hashtags:ESTwitter.HashtagSet, appendAppTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {
 	
 	let apptag = appendAppTag ? CodePieceApp.hashtag : ESTwitter.Hashtag()
 	let langtag = language?.hashtag ?? ESTwitter.Hashtag()
 
+	let hashtags = ESTwitter.HashtagSet(hashtags + [ apptag, langtag ])
+	
 	if let maxLength = maxLength {
 		
-		let apptagLength = apptag.length
-		let hashtagLength = hashtag.length
-		let langtagLength = langtag.length
-		
-		let descriptionLength = maxLength - apptagLength - hashtagLength - langtagLength
+		let descriptionLength = maxLength - hashtags.twitterDisplayTextLength
 		
 		if description.characters.count > descriptionLength {
 			
@@ -29,13 +27,11 @@ func DescriptionGenerator(var description:String, language:ESGists.Language?, ha
 			let start = sourceDescription.startIndex
 			let end = start.advancedBy(descriptionLength - 2)
 			
-			description = String(sourceDescription[start ..< end]) + " …"
+			description = String(sourceDescription.prefixThrough(end)) + " …"
 		}
 	}
 	
 	return description
 		.appendStringIfNotEmpty(appendString, separator: " ")
-		.appendStringIfNotEmpty(langtag.value, separator: " ")
-		.appendStringIfNotEmpty(hashtag.value, separator: " ")
-		.appendStringIfNotEmpty(apptag.value, separator: " ")
+		.appendStringIfNotEmpty(hashtags.toTwitterDisplayText(), separator: " ")
 }

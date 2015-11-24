@@ -30,7 +30,7 @@ extension TimelineTableControllerType {
 		return self.timelineDataSource.maxTweets
 	}
 	
-	func appendTweets(tweets: [Status], hashtag: Hashtag) -> (insertedIndexes: NSIndexSet, ignoredIndexes: NSIndexSet, removedIndexes: NSIndexSet) {
+	func appendTweets(tweets: [Status], hashtags: HashtagSet) -> (insertedIndexes: NSIndexSet, ignoredIndexes: NSIndexSet, removedIndexes: NSIndexSet) {
 
 		let tweetCount = tweets.count
 
@@ -54,7 +54,7 @@ extension TimelineTableControllerType {
 		let ignoreIndexes = ignoreRows > 0 ? NSIndexSet(indexesInRange: getIgnoreRange()) : NSIndexSet()
 		let removeIndexes = overflowRows > 0 ? NSIndexSet(indexesInRange: getRemoveRange()) : NSIndexSet()
 
-		self.timelineDataSource.appendTweets(tweets, hashtag: hashtag)
+		self.timelineDataSource.appendTweets(tweets, hashtags: hashtags)
 		
 		tweak (self.timelineTableView) {
 			
