@@ -2,6 +2,17 @@
 
 Change Logs.
 
+## *.*.*
+
+### Enhancements
+
+* CodePiece now support multiple hashtags.
+
+### Fixes
+
+* Tweet & Description count is displayed more accurately.
+* CodePiece update Text & Description count when Language popup menu is changed.
+
 ## 1.4.1
 
 ### Enhancements
