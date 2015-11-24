@@ -9,6 +9,14 @@
 import ESGists
 import ESTwitter
 
+extension PostData {
+	
+	var appendLangTagToTwitter: Bool {
+		
+		return true
+	}
+}
+
 extension PostDataContainer {
 	
 	func descriptionForTwitter(var maxLength: Int? = nil) -> String {
@@ -21,10 +29,20 @@ extension PostDataContainer {
 			
 			maxLength = twitterTotalCount - reserveUrlCount - reserveGistCount
 		}
+
+		let hashtags = self.effectiveHashtagsForTwitter
+		let appendAppTag = self.data.appendAppTagToTwitter
+		let appendLangTag = self.data.appendLangTagToTwitter
+		let appendString = gist?.urls.htmlUrl.description
 		
-		let appendAppTag = false
-		let language:Language? = gist?.files.first?.1.language
+		return self.makeDescriptionWithEffectiveHashtags(hashtags, withAppTag: appendAppTag, withLangTag: appendLangTag, maxLength: maxLength, appendString: appendString)
+	}
+	
+	var effectiveHashtagsForTwitter: ESTwitter.HashtagSet {
 		
-		return DescriptionGenerator(self.data.description, language: language, hashtags: self.data.hashtags, appendAppTag: appendAppTag, maxLength: maxLength, appendString: gist?.urls.htmlUrl.description)
+		let appendAppTag = self.data.appendAppTagToTwitter
+		let appendLangTag = self.data.appendLangTagToTwitter
+		
+		return self.effectiveHashtags(withAppTag: appendAppTag, withLangTag: appendLangTag)
 	}
 }

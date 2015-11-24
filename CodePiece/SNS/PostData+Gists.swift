@@ -9,6 +9,19 @@
 import ESGists
 import ESTwitter
 
+extension PostData {
+	
+	var appendAppTagToGists: Bool {
+		
+		return true
+	}
+	
+	var appendLangTagToGists: Bool {
+		
+		return false
+	}
+}
+
 extension PostDataContainer {
 	
 	private var basenameForGists: String { return "CodePiece" }
@@ -25,6 +38,16 @@ extension PostDataContainer {
 	
 	func descriptionForGists() -> String {
 	
-		return DescriptionGenerator(data.description, language: nil, hashtags: data.hashtags, appendAppTag: true)
+		let hashtags = self.effectiveHashtagsForGists
+		let appendAppTag = self.data.appendAppTagToGists
+		let appendLangTag = self.data.appendLangTagToGists
+		let appendString = String?()
+		
+		return self.makeDescriptionWithEffectiveHashtags(hashtags, withAppTag: appendAppTag, withLangTag: appendLangTag, appendString: appendString)
+	}
+
+	var effectiveHashtagsForGists: ESTwitter.HashtagSet {
+		
+		return self.effectiveHashtags(withAppTag: true, withLangTag: false)
 	}
 }
