@@ -374,7 +374,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 
 // MARK: - View Control
 
-extension TimelineViewController {
+extension TimelineViewController : NotificationObservable {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -399,12 +399,12 @@ extension TimelineViewController {
 
 		super.viewDidAppear()
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.message.send(.UpdateStatuses)
 		}
 		
-		HashtagDidChangeNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(HashtagDidChangeNotification.self) { [unowned self] notification in
 			
 			let hashtag = notification.hashtag
 			
@@ -413,22 +413,22 @@ extension TimelineViewController {
 			self.timeline = self.timeline.replaceHashtag(hashtag)
 		}
 		
-		NamedNotification.observe(NSWorkspaceWillSleepNotification, by: self) { [unowned self] notification in
+		self.observeNotificationNamed(NSWorkspaceWillSleepNotification) { [unowned self] notification in
 			
 			self.message.send(.AutoUpdate(enable: false))
 		}
 		
-		NamedNotification.observe(NSWorkspaceDidWakeNotification, by: self) { [unowned self] notification in
+		self.observeNotificationNamed(NSWorkspaceDidWakeNotification) { [unowned self] notification in
 			
 			self.message.send(.AutoUpdate(enable: true))
 		}
 		
-		ReachabilityController.ReachabilityChangedNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
 			self.message.send(.SetReachability(notification.state))
 		}
 
-		ViewController.PostCompletelyNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(ViewController.PostCompletelyNotification.self) { [unowned self] notification in
 		
 			invokeAsyncOnMainQueue(after: 3.0) {
 				
@@ -443,7 +443,7 @@ extension TimelineViewController {
 		
 		super.viewWillDisappear()
 		
-		NotificationManager.release(owner: self)
+		self.releaseObservingNotifications()
 		
 		self.message.send(.Stop)
 	}

@@ -16,7 +16,7 @@ import ESProgressHUD
 import ESTwitter
 import ESNotification
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NotificationObservable {
 
 	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
 	
@@ -269,13 +269,13 @@ class ViewController: NSViewController {
 
 		self.clearContents()
 		
-		PostCompletelyNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(PostCompletelyNotification.self) { [unowned self] notification in
 			
 			self.clearContents()
 			NSLog("Posted completely \(notification.info)")
 		}
 		
-		PostFailedNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(PostFailedNotification.self) { [unowned self] notification in
 		
 			self.showErrorAlert("Cannot post", message: notification.info.error.localizedDescription)
 		}
@@ -298,8 +298,7 @@ class ViewController: NSViewController {
 		DebugTime.print("Main window will hide.")
 		
 		self.saveContents()
-		
-		NotificationManager.release(owner: self)
+		self.releaseObservingNotifications()
 		
 		super.viewWillDisappear()
 	}
