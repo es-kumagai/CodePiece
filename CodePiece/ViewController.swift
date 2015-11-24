@@ -279,6 +279,11 @@ class ViewController: NSViewController, NotificationObservable {
 		
 			self.showErrorAlert("Cannot post", message: notification.info.error.localizedDescription)
 		}
+		
+		self.observeNotification(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
+			
+			self.updateTweetTextCount()
+		}
 	}
 	
 	override func viewDidAppear() {
