@@ -36,6 +36,11 @@ extension PostDataContainer {
 		return self.basenameForGists.appendStringIfNotEmpty(self.data.language.extname, separator: ".")
 	}
 	
+	var descriptionLengthForGists: Int {
+		
+		return self.descriptionForGists().utf16.count
+	}
+	
 	func descriptionForGists() -> String {
 	
 		let hashtags = self.effectiveHashtagsForGists

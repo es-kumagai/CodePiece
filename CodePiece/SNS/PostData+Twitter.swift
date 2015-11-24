@@ -19,6 +19,13 @@ extension PostData {
 
 extension PostDataContainer {
 	
+	func descriptionLengthForTwitter(includesGistsLink includesGistsLink:Bool) -> Int {
+
+		let countsForGistsLink = includesGistsLink ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0
+
+		return self.descriptionForTwitter().utf16.count + countsForGistsLink
+	}
+	
 	func descriptionForTwitter(var maxLength: Int? = nil) -> String {
 		
 		if gist != nil {

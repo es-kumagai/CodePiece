@@ -421,21 +421,8 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func updateTweetTextCount() {
 
-		let countsForInputText:[Int] = [
-
-			self.descriptionTextField.stringValue.utf16.count,
-			self.hashTagTextField.hashtags.twitterDisplayTextLength.nonZeroMap { $0 + 1 }
-		]
-		
-		let countsForReserve:[Int] = [
-
-			self.hasCode ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0,
-			self.hasCode ? self.selectedLanguage.hashtag.length.nonZeroMap { $0 + 1 } : 0
-//			self.hasCode ? CodePieceApp.hashtag.length.nonZeroMap { $0 + 1 } : 0
-		]
-
-		let counts = countsForInputText + countsForReserve
-		let totalCount = counts.reduce(0, combine: +)
+		let includesGistsLink = self.hasCode
+		let totalCount = self.makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
 		
 		self.descriptionCountLabel.stringValue = String(totalCount)
 		self.descriptionCountLabel.textColor = SystemColor.NeutralColor.color
