@@ -154,20 +154,32 @@ class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
+	func makePostData() -> PostData {
+	
+		let code = self.codeTextView.string!
+		let description = self.descriptionTextField.stringValue
+		let language = self.selectedLanguage
+		let hashtags = self.hashTagTextField.hashtags
+		
+		return PostData(code: code, description: description, language: language, hashtags: hashtags)
+	}
+	
+	func makePostDataContainer() -> PostDataContainer {
+		
+		return PostDataContainer(self.makePostData())
+	}
+	
 	func post(callback:(PostResult)->Void) throws {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		
-		let code = self.codeTextView.string!
-		let language = self.selectedLanguage
-		let description = self.descriptionTextField.stringValue
-		let hashtags = self.hashTagTextField.hashtags
-
+		let postDataContainer = self.makePostDataContainer()
+		
 		if self.hasCode {
 			
 			DebugTime.print("📮 Try posting with a Code ... #1.1")
 
-			try NSApp.snsController.post(code, language: language, description: description, hashtags: hashtags) { result in
+			try NSApp.snsController.post(postDataContainer) { result in
 				
 				DebugTime.print("📮 Posted \(result) ... #1.1.1")
 				
@@ -185,7 +197,7 @@ class ViewController: NSViewController, NotificationObservable {
 			
 			DebugTime.print("📮 Try posting without Codes ... #1.2")
 			
-			try NSApp.twitterController.post(description, hashtags: hashtags) { result in
+			try NSApp.twitterController.post(postDataContainer) { result in
 				
 				DebugTime.print("📮 Posted \(result) ... #1.2.1")
 				

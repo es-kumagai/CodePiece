@@ -83,7 +83,7 @@ final class SNSController : PostController {
 		return gists.canPost && twitter.canPost
 	}
 	
-	func post(content: String, language: ESGists.Language, description: String, hashtags: ESTwitter.HashtagSet, completed: (PostResult) -> Void) throws {
+	func post(container:PostDataContainer, completed: (PostResult) -> Void) throws {
 	
 		DebugTime.print("📮 Try posting to SNS ... #2")
 		
@@ -101,11 +101,11 @@ final class SNSController : PostController {
 			completed(PostResult(error: PostErrorInfo(error, resultInfo)))
 		}
 		
-		let postByTwitter = { (description:String, gist:ESGists.Gist, image:NSImage?) throws -> Void in
+		let postByTwitter = { (container:PostDataContainer, image:NSImage?) throws -> Void in
 		
 			DebugTime.print("📮 Try posting by Twitter ... #2.1")
 			
-			try self.twitter.post(gist, language: language, description: description, hashtags: hashtags, image: image) { result in
+			try self.twitter.post(container, image: image) { result in
 
 				DebugTime.print("📮 Posted by Twitter (\(result)) ... #2.1.1")
 				
@@ -123,11 +123,11 @@ final class SNSController : PostController {
 			}
 		}
 		
-		let postByGists = { (description:String) throws -> Void in
+		let postByGists = { (container:PostDataContainer) throws -> Void in
 
 			DebugTime.print("📮 Try posting by Gists ... #2.2")
 			
-			try self.gists.post(content, language: language, description: description, hashtags: hashtags) { result in
+			try self.gists.post(container) { result in
 
 				DebugTime.print("📮 Posted by Gists ... #2.2.1")
 				
@@ -149,7 +149,7 @@ final class SNSController : PostController {
 							DebugTime.print("📮 Try posting the capture by twitter ... #2.2.1.1.2")
 							
 							resultInfo.gist = gist
-							try postByTwitter(description, gist, image)
+							try postByTwitter(container, image)
 							
 							DebugTime.print("📮 The capture posted ... #2.2.1.1.3")
 						}
@@ -174,9 +174,9 @@ final class SNSController : PostController {
 				
 				switch result {
 					
-				case .Success(let gist):
+				case .Success(let container):
 					
-					capture(gist)
+					capture(container.gist!)
 					
 				case .Failure(let error):
 					
@@ -185,6 +185,6 @@ final class SNSController : PostController {
 			}
 		}
 		
-		try postByGists(description)
+		try postByGists(container)
 	}
 }
