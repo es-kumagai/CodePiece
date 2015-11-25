@@ -35,7 +35,7 @@ final class PostDataContainer {
 
 struct PostData {
 	
-	var code: String
+	var code: String?
 	var description: String
 	var language: ESGists.Language
 	var hashtags: ESTwitter.HashtagSet
@@ -54,6 +54,11 @@ extension PostDataContainer {
 	func postedToGist(gist: ESGists.Gist) {
 		
 		self.gistsState.gist = gist
+	}
+	
+	var hasCode: Bool {
+		
+		return self.data.code.isExists
 	}
 	
 	func setTwitterMediaIDs(mediaIDs: [String]) {

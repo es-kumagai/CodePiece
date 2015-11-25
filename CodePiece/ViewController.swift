@@ -88,7 +88,21 @@ class ViewController: NSViewController, NotificationObservable {
 	
 	var hasCode:Bool {
 	
-		return !self.codeTextView.string!.trimmed().isEmpty
+		return self.trimmedCode != nil
+	}
+	
+	var trimmedCode: String? {
+		
+		let code = self.codeTextView.string!.trimmed()
+		
+		if code.isEmpty {
+			
+			return nil
+		}
+		else {
+			
+			return code
+		}
 	}
 	
 	var selectedLanguage:Language {
@@ -156,7 +170,7 @@ class ViewController: NSViewController, NotificationObservable {
 	
 	func makePostData() -> PostData {
 	
-		let code = self.codeTextView.string!
+		let code = self.trimmedCode
 		let description = self.descriptionTextField.stringValue
 		let language = self.selectedLanguage
 		let hashtags = self.hashTagTextField.hashtags
