@@ -19,6 +19,11 @@ extension PostData {
 
 extension PostDataContainer {
 	
+	var isPostedToTwitter: Bool {
+		
+		return self.twitterState.isPosted
+	}
+	
 	func descriptionLengthForTwitter(includesGistsLink includesGistsLink:Bool) -> Int {
 
 		let countsForGistsLink = includesGistsLink ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0
@@ -28,11 +33,11 @@ extension PostDataContainer {
 	
 	func descriptionForTwitter(var maxLength: Int? = nil) -> String {
 		
-		if gist != nil {
+		if self.hasGist {
 			
 			let twitterTotalCount = maxLength ?? 140
 			let reserveUrlCount = 23
-			let reserveGistCount = gist.map { _ in Twitter.SpecialCounting.Media.length } ?? 0
+			let reserveGistCount = self.hasGist ? Twitter.SpecialCounting.Media.length : 0
 			
 			maxLength = twitterTotalCount - reserveUrlCount - reserveGistCount
 		}
@@ -40,7 +45,7 @@ extension PostDataContainer {
 		let hashtags = self.effectiveHashtagsForTwitter
 		let appendAppTag = self.data.appendAppTagToTwitter
 		let appendLangTag = self.data.appendLangTagToTwitter
-		let appendString = gist?.urls.htmlUrl.description
+		let appendString = self.gistPageUrl
 		
 		return self.makeDescriptionWithEffectiveHashtags(hashtags, withAppTag: appendAppTag, withLangTag: appendLangTag, maxLength: maxLength, appendString: appendString)
 	}

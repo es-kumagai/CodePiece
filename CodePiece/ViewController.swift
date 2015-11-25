@@ -161,7 +161,15 @@ class ViewController: NSViewController, NotificationObservable {
 		let language = self.selectedLanguage
 		let hashtags = self.hashTagTextField.hashtags
 		
-		return PostData(code: code, description: description, language: language, hashtags: hashtags, appendAppTagToTwitter: false)
+		#if DEBUG
+			let usePublicGists = false
+		#else
+			let usePublicGists = true
+		#endif
+		
+		let appendAppTagToTwitter = false
+
+		return PostData(code: code, description: description, language: language, hashtags: hashtags, usePublicGists: usePublicGists, appendAppTagToTwitter: appendAppTagToTwitter)
 	}
 	
 	func makePostDataContainer() -> PostDataContainer {

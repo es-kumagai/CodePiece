@@ -176,7 +176,7 @@ final class SNSController : PostController {
 					
 				case .Success(let container):
 					
-					capture(container.gist!)
+					capture(container.gistsState.gist!)
 					
 				case .Failure(let error):
 					

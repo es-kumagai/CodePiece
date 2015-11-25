@@ -22,13 +22,31 @@ extension PostData {
 	}
 }
 
+extension PostDataContainer.GistsState {
+	
+	var isPosted: Bool {
+		
+		return self.gist.isExists
+	}	
+}
+
 extension PostDataContainer {
 	
 	private var basenameForGists: String { return "CodePiece" }
 	
-	var postedToGists: Bool {
+	var isPostedToGists: Bool {
 		
-		return self.gist.isExists
+		return self.gistsState.isPosted
+	}
+	
+	var hasGist: Bool {
+		
+		return self.gistsState.gist.isExists
+	}
+	
+	var gistPageUrl: String? {
+		
+		return gistsState.gist?.urls.htmlUrl.description
 	}
 	
 	var filenameForGists: String {

@@ -31,13 +31,8 @@ final class GistsController : PostController, AlertDisplayable {
 
 		let filename = container.filenameForGists
 		let description = container.descriptionForGists()
+		let publicGist = container.data.usePublicGists
 
-		#if DEBUG
-			let publicGist = false
-		#else
-			let publicGist = true
-		#endif
-		
 		let file = GistFile(name: filename, content: container.data.code)
 
 		let request = GitHubAPI.Gists.CreateGist(authorization: authorization, files: [file], description: description, publicGist: publicGist)

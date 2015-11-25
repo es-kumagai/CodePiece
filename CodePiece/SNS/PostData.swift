@@ -13,8 +13,19 @@ final class PostDataContainer {
 
 	var data: PostData
 	
-	private(set) var gist: ESGists.Gist? = nil
-	private(set) var isPostedToTwitter: Bool = false
+	private(set) var gistsState = GistsState()
+	private(set) var twitterState = TwitterState()
+	
+	struct TwitterState {
+		
+		var isPosted: Bool = false
+		var mediaIDs: [String] = []
+	}
+	
+	struct GistsState {
+	
+		var gist: ESGists.Gist? = nil
+	}
 	
 	init(_ data: PostData) {
 		
@@ -28,6 +39,7 @@ struct PostData {
 	var description: String
 	var language: ESGists.Language
 	var hashtags: ESTwitter.HashtagSet
+	var usePublicGists: Bool
 	
 	var appendAppTagToTwitter:Bool = false
 }
@@ -36,12 +48,22 @@ extension PostDataContainer {
 	
 	func postedToTwitter() {
 		
-		self.isPostedToTwitter = true
+		self.twitterState.isPosted = true
 	}
 	
 	func postedToGist(gist: ESGists.Gist) {
 		
-		self.gist = gist
+		self.gistsState.gist = gist
+	}
+	
+	func setTwitterMediaIDs(mediaIDs: [String]) {
+		
+		self.twitterState.mediaIDs = mediaIDs
+	}
+	
+	func setTwitterMediaIDs(mediaIDs: String...) {
+	
+		self.setTwitterMediaIDs(mediaIDs)
 	}
 	
 	func effectiveHashtags(withAppTag withAppTag:Bool, withLangTag:Bool) -> ESTwitter.HashtagSet {

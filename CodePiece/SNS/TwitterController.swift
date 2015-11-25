@@ -558,7 +558,7 @@ extension STTwitterAPI {
 			
 			let tweetProgress = { (bytes:Int64, processedBytes:Int64, totalBytes:Int64) -> Void in
 
-//				NSLog("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
+				DebugTime.print("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
 			}
 			
 			let data = image.TIFFRepresentation!
@@ -570,10 +570,9 @@ extension STTwitterAPI {
 			let mediaUploadSucceeded = { (imageDictionary:[NSObject : AnyObject]!, mediaID:String!, size:NSNumber!) -> Void in
 
 				DebugTime.print("📮 A thumbnail media posted ... #3.3.3.2.1")
+				container.setTwitterMediaIDs(mediaID)
 				
-				let mediaIDs = [mediaID]
-				
-				self.postStatusUpdate(container.descriptionForTwitter(), inReplyToStatusID: existingStatusID, mediaIDs: mediaIDs, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
+				self.postStatusUpdate(container.descriptionForTwitter(), inReplyToStatusID: existingStatusID, mediaIDs: container.twitterState.mediaIDs, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
 			}
 			
 			let mediaUpdateFailed = { (error: NSError!) -> Void in
