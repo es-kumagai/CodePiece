@@ -17,11 +17,24 @@ extension PostData {
 	}
 }
 
+extension PostDataContainer.TwitterState {
+	
+	var isPosted: Bool {
+		
+		return self.postedObjects.isExists
+	}
+}
+
 extension PostDataContainer {
 	
 	var isPostedToTwitter: Bool {
 		
 		return self.twitterState.isPosted
+	}
+	
+	var postedTwitterText: String? {
+		
+		return self.twitterState.postedObjects?["text"] as? String
 	}
 	
 	func descriptionLengthForTwitter(includesGistsLink includesGistsLink:Bool) -> Int {

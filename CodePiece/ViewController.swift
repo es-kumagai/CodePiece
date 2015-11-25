@@ -20,8 +20,6 @@ class ViewController: NSViewController, NotificationObservable {
 
 	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
 	
-	typealias PostResult = SNSController.PostResult
-	
 	@IBOutlet var postButton:NSButton!
 	@IBOutlet var hashTagTextField:HashtagTextField!
 	
@@ -131,40 +129,22 @@ class ViewController: NSViewController, NotificationObservable {
 		self.posting = true
 		self.postingHUD.show()
 		
-		do {
-
-			try self.post { result in
+		self.post { result in
+			
+			defer {
 				
-				defer {
-					
-					self.posting = false
-					self.postingHUD.hide()
-				}
-				
-				switch result {
-					
-				case .Success(let info):
-					PostCompletelyNotification(info: info).post()
-					
-				case .Failure(let info):
-					PostFailedNotification(info: info).post()
-				}
+				self.posting = false
+				self.postingHUD.hide()
 			}
-		}
-		catch SNSControllerError.NotAuthorized {
 			
-			// from Gists
-			self.posting = false
-			self.postingHUD.hide()
-			
-			self.showErrorAlert("Cannot post", message: "The authentication token is not correct. Please re-authentication.")
-		}
-		catch {
-			
-			self.posting = false
-			self.postingHUD.hide()
-			
-			self.showErrorAlert("Cannot post", message: String(error))
+			switch result {
+				
+			case .Success(let container):
+				PostCompletelyNotification(container: container).post()
+				
+			case .Failure(let container):
+				PostFailedNotification(container: container).post()
+			}
 		}
 	}
 	
@@ -191,46 +171,23 @@ class ViewController: NSViewController, NotificationObservable {
 		return PostDataContainer(self.makePostData())
 	}
 	
-	func post(callback:(PostResult)->Void) throws {
+	func post(callback:(PostResult)->Void) {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		
 		let postDataContainer = self.makePostDataContainer()
 		
-		if self.hasCode {
+		NSApp.snsController.post(postDataContainer) { container in
 			
-			DebugTime.print("📮 Try posting with a Code ... #1.1")
-
-			try NSApp.snsController.post(postDataContainer) { result in
+			DebugTime.print("📮 Posted \(container.twitterState.postedObjects) ... #1.1.1")
+			
+			if container.posted {
 				
-				DebugTime.print("📮 Posted \(result) ... #1.1.1")
-				
-				switch result {
-					
-				case .Success:
-					callback(PostResult(value: SNSController.PostResultInfo()))
-					
-				case .Failure(let errorInfo):
-					callback(PostResult(error: errorInfo))
-				}
+				callback(PostResult.Success(container))
 			}
-		}
-		else {
-			
-			DebugTime.print("📮 Try posting without Codes ... #1.2")
-			
-			try NSApp.twitterController.post(postDataContainer) { result in
+			else {
 				
-				DebugTime.print("📮 Posted \(result) ... #1.2.1")
-				
-				switch result {
-					
-				case .Success:
-					callback(PostResult(value: SNSController.PostResultInfo()))
-					
-				case .Failure(let error):
-					callback(PostResult(error: SNSController.PostErrorInfo(error, SNSController.PostResultInfo())))
-				}
+				callback(PostResult.Failure(container))
 			}
 		}
 	}
@@ -306,12 +263,12 @@ class ViewController: NSViewController, NotificationObservable {
 		self.observeNotification(PostCompletelyNotification.self) { [unowned self] notification in
 			
 			self.clearContents()
-			NSLog("Posted completely \(notification.info)")
+			NSLog("Posted completely \(notification.container.twitterState.postedObjects)")
 		}
 		
 		self.observeNotification(PostFailedNotification.self) { [unowned self] notification in
 		
-			self.showErrorAlert("Cannot post", message: notification.info.error.localizedDescription)
+			self.showErrorAlert("Cannot post", message: "\(notification.container.error!)")
 		}
 		
 		self.observeNotification(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in

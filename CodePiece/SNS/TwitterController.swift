@@ -392,7 +392,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 	}
 
-	func post(container:PostDataContainer, image:NSImage? = nil, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(container:PostDataContainer, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
 		DebugTime.print("📮 Verifying credentials of Twitter ... #3.1")
 		
@@ -410,7 +410,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 
 		DebugTime.print("📮 Try posting by Twitter ... #3.2")
 		
-		api.postStatusUpdate(container, image: image, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
+		api.postStatusUpdate(container, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
 			
 			DebugTime.print("📮 Posted by Twitter ... #3.2.1")
 			
@@ -421,6 +421,43 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 				
 			case .Failure(let error):
 				callback(PostStatusUpdateResult(error: error))
+			}
+		}
+	}
+	
+	func postMedia(container:PostDataContainer, image:NSImage, callback:(PostResult)->Void) throws {
+		
+		DebugTime.print("📮 Verifying credentials of Twitter ... #3.1")
+		
+		guard let api = self.api else {
+			
+			DebugTime.print("📮 Twitter API for Verification is not ready ... #3.1.0")
+			throw TwitterController.APINotReadyError
+		}
+		
+		guard self.credentialsVerified else {
+			
+			DebugTime.print("📮 Verification failure ... #3.1.1")
+			throw SNSControllerError.CredentialsNotVerified
+		}
+		
+		DebugTime.print("📮 Try posting by Twitter ... #3.2")
+		
+		api.postMediaUpload(container, image: image) { result in
+			
+			DebugTime.print("📮 Posted by Twitter ... #3.2.1")
+			
+			switch result {
+				
+			case .Success(let mediaIDs):
+
+				container.setTwitterMediaIDs(mediaIDs)
+				callback(PostResult.Success(container))
+				
+			case .Failure(let error):
+				
+				container.setError(PostError(error: error))
+				callback(PostResult.Failure(container))
 			}
 		}
 	}
@@ -531,16 +568,49 @@ extension TwitterController : STTwitterAPIOSProtocol {
 
 extension STTwitterAPI {
 	
+	typealias MediaID = String
 	typealias VerifyCredentialsResult = Result<(username:String,userId:String),NSError>
 	typealias PostStatusUpdateResult = Result<[NSObject:AnyObject],NSError>
+	typealias PostMediaUploadResult = Result<[MediaID],NSError>
+
+	func postMediaUpload(container:PostDataContainer, image:NSImage, callback:(PostMediaUploadResult)->Void) {
 	
-	func postStatusUpdate(container:PostDataContainer, image:NSImage? = nil, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) {
+		DebugTime.print("📮 Try uploading image for using twitter ... #3.3.3.1")
+		
+		let data = image.TIFFRepresentation!
+		let bitmap = NSBitmapImageRep(data: data)!
+		let mediaData = bitmap.representationUsingType(NSBitmapImageFileType.NSPNGFileType, properties: [NSImageInterlaced : NSNumber(bool: true)])!
+		
+		let tweetProgress = { (bytes:Int64, processedBytes:Int64, totalBytes:Int64) -> Void in
+			
+			DebugTime.print("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
+		}
+		
+		let mediaUploadSucceeded = { (imageDictionary:[NSObject : AnyObject]!, mediaID:String!, size:NSNumber!) -> Void in
+			
+			DebugTime.print("📮 A thumbnail media posted ... #3.3.3.2.1")
+			container.setTwitterMediaIDs(mediaID)
+			
+			callback(PostMediaUploadResult(value: [mediaID]))
+		}
+		
+		let mediaUpdateFailed = { (error: NSError!) -> Void in
+			
+			DebugTime.print("📮 Failed to updload a thumbnail media ... #3.3.3.2.2")
+			callback(PostMediaUploadResult(error: error))
+		}
+		
+		DebugTime.print("📮 Try posting by API ... #3.3.3.2")
+		self.postMediaUploadData(mediaData, fileName: "thumbnail.png", uploadProgressBlock: tweetProgress, successBlock: mediaUploadSucceeded, errorBlock: mediaUpdateFailed)
+	}
+	
+	func postStatusUpdate(container:PostDataContainer, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) {
 		
 		DebugTime.print("📮 Try to post a status by Twitter ... #3.3")
 		
 		let tweetSucceeded = { (objects:[NSObject:AnyObject]!) -> Void in
 			
-			container.postedToTwitter()
+			container.postedToTwitter(objects)
 			
 			DebugTime.print("📮 A status posted successfully (\(objects))... #3.3.1")
 			callback(PostStatusUpdateResult(value: objects))
@@ -552,41 +622,14 @@ extension STTwitterAPI {
 			callback(PostStatusUpdateResult(error: error))
 		}
 		
-		if let image = image {
+		if container.hasMediaIDs {
 
 			DebugTime.print("📮 Try posting with image ... #3.3.3.1")
-			
-			let tweetProgress = { (bytes:Int64, processedBytes:Int64, totalBytes:Int64) -> Void in
-
-				DebugTime.print("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
-			}
-			
-			let data = image.TIFFRepresentation!
-			let bitmap = NSBitmapImageRep(data: data)!
-			let mediaData = bitmap.representationUsingType(NSBitmapImageFileType.NSPNGFileType, properties: [NSImageInterlaced : NSNumber(bool: true)])!
-
-			DebugTime.print("📮 Try posting by API ... #3.3.3.2")
-			
-			let mediaUploadSucceeded = { (imageDictionary:[NSObject : AnyObject]!, mediaID:String!, size:NSNumber!) -> Void in
-
-				DebugTime.print("📮 A thumbnail media posted ... #3.3.3.2.1")
-				container.setTwitterMediaIDs(mediaID)
-				
-				self.postStatusUpdate(container.descriptionForTwitter(), inReplyToStatusID: existingStatusID, mediaIDs: container.twitterState.mediaIDs, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
-			}
-			
-			let mediaUpdateFailed = { (error: NSError!) -> Void in
-				
-				DebugTime.print("📮 Failed to updload a thumbnail media ... #3.3.3.2.2")
-				tweetFailed(error)
-			}
-			
-			self.postMediaUploadData(mediaData, fileName: "thumbnail.png", uploadProgressBlock: tweetProgress, successBlock: mediaUploadSucceeded, errorBlock: mediaUpdateFailed)
+			self.postStatusUpdate(container.descriptionForTwitter(), inReplyToStatusID: existingStatusID, mediaIDs: container.twitterState.mediaIDs, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
 		}
 		else {
 
 			DebugTime.print("📮 Try posting with no image by API ... #3.3.3.3")
-			
 			self.postStatusUpdate(container.descriptionForTwitter(), inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
 		}
 

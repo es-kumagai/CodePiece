@@ -9,28 +9,10 @@
 import ESGists
 import ESTwitter
 
-final class PostDataContainer {
-
-	var data: PostData
+enum PostResult {
 	
-	private(set) var gistsState = GistsState()
-	private(set) var twitterState = TwitterState()
-	
-	struct TwitterState {
-		
-		var isPosted: Bool = false
-		var mediaIDs: [String] = []
-	}
-	
-	struct GistsState {
-	
-		var gist: ESGists.Gist? = nil
-	}
-	
-	init(_ data: PostData) {
-		
-		self.data = data
-	}
+	case Success(PostDataContainer)
+	case Failure(PostDataContainer)
 }
 
 struct PostData {
@@ -44,11 +26,63 @@ struct PostData {
 	var appendAppTagToTwitter:Bool = false
 }
 
+final class PostDataContainer {
+
+	var data: PostData
+	
+	private(set) var stage = PostStage.Initialized
+	private(set) var gistsState = GistsState()
+	private(set) var twitterState = TwitterState()
+	private(set) var error: PostError? = nil
+	
+	init(_ data: PostData) {
+		
+		self.data = data
+	}
+
+	struct TwitterState {
+		
+		var postedObjects: [NSObject:AnyObject]? = nil
+		var mediaIDs: [String] = []
+	}
+	
+	struct GistsState {
+	
+		var gist: ESGists.Gist? = nil
+	}
+
+	enum PostStage {
+		
+		case Initialized
+		case PostToGists
+		case CaptureGists
+		case PostToTwitter
+		case PostToTwitterMedia
+		case PostToTwitterStatus
+		case Posted
+	}
+}
+
+struct PostError : ErrorType {
+	
+	var reason: String
+	
+	init(reason: String) {
+		
+		self.reason = reason
+	}
+	
+	init<T:ErrorType>(error: T) {
+		
+		self.reason = "\(error)"
+	}
+}
+
 extension PostDataContainer {
 	
-	func postedToTwitter() {
+	func postedToTwitter(postedObjects: [NSObject:AnyObject]) {
 		
-		self.twitterState.isPosted = true
+		self.twitterState.postedObjects = postedObjects
 	}
 	
 	func postedToGist(gist: ESGists.Gist) {
@@ -56,9 +90,68 @@ extension PostDataContainer {
 		self.gistsState.gist = gist
 	}
 	
+	func proceedToNextStage() {
+		
+		switch self.stage {
+			
+		case .Initialized:
+			self.stage = (self.hasCode ? .PostToGists : .PostToTwitter)
+			
+		case .PostToGists:
+			self.stage = .CaptureGists
+			
+		case .CaptureGists:
+			self.stage = .PostToTwitter
+			
+		case .PostToTwitter:
+			self.stage = (self.hasGist ? .PostToTwitterMedia : .PostToTwitterStatus)
+			
+		case .PostToTwitterMedia:
+			self.stage = .PostToTwitterStatus
+			
+		case .PostToTwitterStatus:
+			self.stage = .Posted
+			
+		case .Posted:
+			break
+		}
+	}
+	
+	var posted: Bool {
+	
+		if case .Posted = self.stage {
+			
+			return true
+		}
+		else {
+			
+			return false
+		}
+	}
+	
+	var hasError: Bool {
+	
+		return self.error.isExists
+	}
+	
 	var hasCode: Bool {
 		
 		return self.data.code.isExists
+	}
+	
+	var hasMediaIDs: Bool {
+		
+		return !self.twitterState.mediaIDs.isEmpty
+	}
+	
+	func setError(error: PostError) {
+	
+		self.error = error
+	}
+	
+	func resetError() {
+		
+		self.error = nil
 	}
 	
 	func setTwitterMediaIDs(mediaIDs: [String]) {
