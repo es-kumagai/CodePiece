@@ -10,11 +10,6 @@ import ESGists
 import ESTwitter
 
 extension PostData {
-	
-	var appendLangTagToTwitter: Bool {
-		
-		return true
-	}
 }
 
 extension PostDataContainer.TwitterState {
@@ -32,6 +27,23 @@ extension PostDataContainer {
 		return self.twitterState.isPosted
 	}
 	
+	var appendAppTagToTwitter: Bool {
+		
+		return self.data.appendAppTagToTwitter
+	}
+	
+	var appendLangTagToTwitter: Bool {
+		
+		if self.hasGist {
+			
+			return true
+		}
+		else {
+			
+			return false
+		}
+	}
+
 	var postedTwitterText: String? {
 		
 		return self.twitterState.postedObjects?["text"] as? String
@@ -56,8 +68,8 @@ extension PostDataContainer {
 		}
 
 		let hashtags = self.effectiveHashtagsForTwitter
-		let appendAppTag = self.data.appendAppTagToTwitter
-		let appendLangTag = self.data.appendLangTagToTwitter
+		let appendAppTag = self.appendAppTagToTwitter
+		let appendLangTag = self.appendLangTagToTwitter
 		let appendString = self.gistPageUrl
 		
 		return self.makeDescriptionWithEffectiveHashtags(hashtags, withAppTag: appendAppTag, withLangTag: appendLangTag, maxLength: maxLength, appendString: appendString)
@@ -65,8 +77,8 @@ extension PostDataContainer {
 	
 	var effectiveHashtagsForTwitter: ESTwitter.HashtagSet {
 		
-		let appendAppTag = self.data.appendAppTagToTwitter
-		let appendLangTag = self.data.appendLangTagToTwitter
+		let appendAppTag = self.appendAppTagToTwitter
+		let appendLangTag = self.appendLangTagToTwitter
 		
 		return self.effectiveHashtags(withAppTag: appendAppTag, withLangTag: appendLangTag)
 	}

@@ -10,16 +10,7 @@ import ESGists
 import ESTwitter
 
 extension PostData {
-	
-	var appendAppTagToGists: Bool {
-		
-		return true
-	}
-	
-	var appendLangTagToGists: Bool {
-		
-		return false
-	}
+
 }
 
 extension PostDataContainer.GistsState {
@@ -44,6 +35,16 @@ extension PostDataContainer {
 		return self.gistsState.gist.isExists
 	}
 	
+	var appendAppTagToGists: Bool {
+		
+		return true
+	}
+	
+	var appendLangTagToGists: Bool {
+		
+		return false
+	}
+
 	var gistPageUrl: String? {
 		
 		return gistsState.gist?.urls.htmlUrl.description
@@ -62,8 +63,8 @@ extension PostDataContainer {
 	func descriptionForGists() -> String {
 	
 		let hashtags = self.effectiveHashtagsForGists
-		let appendAppTag = self.data.appendAppTagToGists
-		let appendLangTag = self.data.appendLangTagToGists
+		let appendAppTag = self.appendAppTagToGists
+		let appendLangTag = self.appendLangTagToGists
 		let appendString = String?()
 		
 		return self.makeDescriptionWithEffectiveHashtags(hashtags, withAppTag: appendAppTag, withLangTag: appendLangTag, appendString: appendString)
