@@ -31,9 +31,9 @@ The contents of the `CodePieceClientInfo.plist` file are as follows.
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>id</key>
+	<key>GitHubID</key>
 	<string></string>
-	<key>secret</key>
+	<key>GitHubSecret</key>
 	<string></string>
 </dict>
 </plist>

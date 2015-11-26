@@ -24,8 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
 		NotificationManager.dammingNotifications = true
 
-		// FIXME: GitHubClientInfo を NSApp.settings 内に入れたい
-		GitHubClientInfo = CodePieceClientInfo()
+		// FIXME: ClientInfo を NSApp.settings 内に入れたい
+		ClientInfo = CodePieceClientInfo()
 		
 		NSApplication.readyForUse()
 	}
