@@ -38,16 +38,16 @@ extension DataStore {
 			}
 		}
 		
-		var hashtag:ESTwitter.Hashtag? {
+		var hashtags:ESTwitter.HashtagSet? {
 			
 			get {
 				
-				return self.userDefaults.stringForKey(AppState.HashtagKey).map { ESTwitter.Hashtag($0) }
+				return self.userDefaults.stringForKey(AppState.HashtagKey).map { ESTwitter.HashtagSet(hashtagsDisplayText: $0) }
 			}
 			
 			set {
 				
-				self.userDefaults.setObject(newValue?.value, forKey: AppState.HashtagKey)
+				self.userDefaults.setObject(newValue?.toTwitterDisplayText(), forKey: AppState.HashtagKey)
 			}
 		}
 		

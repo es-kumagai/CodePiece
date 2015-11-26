@@ -12,13 +12,13 @@ import ESTwitter
 
 struct TimelineHashtagTableCellItem{
 
-	var previousHashtag: Hashtag?
-	var currentHashtag: Hashtag
+	var previousHashtags: HashtagSet?
+	var currentHashtags: HashtagSet
 	
-	init(previousHashtag: Hashtag?, currentHashtag: Hashtag) {
+	init(previousHashtags: HashtagSet?, currentHashtags: HashtagSet) {
 		
-		self.previousHashtag = previousHashtag
-		self.currentHashtag = currentHashtag
+		self.previousHashtags = previousHashtags
+		self.currentHashtags = currentHashtags
 	}
 }
 
@@ -37,14 +37,14 @@ extension TimelineHashtagTableCellItem : TimelineTableItem  {
 	
 @IBDesignable final class TimelineHashtagTableCellView: NSTableCellView {
 
-	var item = TimelineHashtagTableCellItem(previousHashtag: nil, currentHashtag: Hashtag()) {
+	var item = TimelineHashtagTableCellItem(previousHashtags: nil, currentHashtags: []) {
 	
 		didSet {
 
-			self.previousHashtagLabel.stringValue = self.item.previousHashtag?.description ?? ""
-			self.currentHashtagLabel.stringValue = self.item.currentHashtag.description
+			self.previousHashtagLabel.stringValue = self.item.previousHashtags?.toTwitterDisplayText() ?? ""
+			self.currentHashtagLabel.stringValue = self.item.currentHashtags.toTwitterDisplayText()
 			
-			self.previousHashtagView.hidden = (self.item.previousHashtag == nil)
+			self.previousHashtagView.hidden = (self.item.previousHashtags == nil)
 		}
 	}
 	

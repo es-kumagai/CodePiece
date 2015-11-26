@@ -13,7 +13,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable {
 	
 	override func awakeFromNib() {
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
 
 			self.withChangeValue("canOpenTwitterHome")
 		}		

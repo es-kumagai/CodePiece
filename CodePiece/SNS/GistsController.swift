@@ -15,30 +15,25 @@ final class GistsController : PostController, AlertDisplayable {
 
 	let filename = "CodePiece"
 
-	typealias PostResult = Result<ESGists.Gist,NSError>
+	typealias PostResult = Result<PostDataContainer,NSError>
 	
 	var canPost:Bool {
 	
 		return NSApp.settings.account.authorizationState.isValid
 	}
 	
-	func post(content:String, language:ESGists.Language, description:String, hashtag:ESTwitter.Hashtag, completed:(PostResult)->Void) throws {
+	func post(container:PostDataContainer, completed:(PostResult)->Void) throws {
 
 		guard let authorization = NSApp.settings.account.authorization else {
 			
 			throw SNSControllerError.NotAuthorized
 		}
 
-		let filename = self.filename.appendStringIfNotEmpty(language.extname, separator: ".")
-		let description = DescriptionGenerator(description, language: nil, hashtag: hashtag, appendAppTag: true)
+		let filename = container.filenameForGists
+		let description = container.descriptionForGists()
+		let publicGist = container.data.usePublicGists
 
-		#if DEBUG
-			let publicGist = false
-		#else
-			let publicGist = true
-		#endif
-		
-		let file = GistFile(name: filename, content: content)
+		let file = GistFile(name: filename, content: container.data.code!)
 
 		let request = GitHubAPI.Gists.CreateGist(authorization: authorization, files: [file], description: description, publicGist: publicGist)
 		
@@ -53,8 +48,10 @@ final class GistsController : PostController, AlertDisplayable {
 				
 				let gist = created.gist
 				
+				container.postedToGist(gist)
+				
 				NSLog("A Gist posted successfully. \(gist)")
-				completed(PostResult(value: gist))
+				completed(PostResult(value: container))
 				
 			case .Failure(let error):
 				

@@ -44,21 +44,21 @@ extension ViewController {
 
 	final class PostCompletelyNotification : Notification {
 		
-		var info: SNSController.PostResultInfo
+		var container: PostDataContainer
 		
-		init(info: SNSController.PostResultInfo) {
+		init(container: PostDataContainer) {
 			
-			self.info = info
+			self.container = container
 		}
 	}
 	
 	final class PostFailedNotification : Notification {
 		
-		var info: SNSController.PostErrorInfo
+		var container: PostDataContainer
 		
-		init(info: SNSController.PostErrorInfo) {
+		init(container: PostDataContainer) {
 			
-			self.info = info
+			self.container = container
 		}
 	}
 }
@@ -76,12 +76,12 @@ extension TwitterAccountSelectorController {
 	}
 }
 
-final class HashtagDidChangeNotification : Notification {
+final class HashtagsDidChangeNotification : Notification {
 	
-	private(set) var hashtag:ESTwitter.Hashtag
+	private(set) var hashtags:ESTwitter.HashtagSet
 	
-	init(hashtag:ESTwitter.Hashtag) {
+	init(hashtags:ESTwitter.HashtagSet) {
 		
-		self.hashtag = hashtag
+		self.hashtags = hashtags
 	}
 }

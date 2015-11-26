@@ -48,143 +48,116 @@ final class SNSController : PostController {
 		self.twitter = TwitterController()
 	}
 	
-	struct PostResultInfo {
-	
-		var gist:Gist?
-		var status:String?
-	}
-	
-	enum PostErrorInfo : ErrorType {
-		
-		case Info(NSError,PostResultInfo)
-		
-		init(_ error:NSError, _ info:PostResultInfo) {
-			
-			self = .Info(error, info)
-		}
-		
-		var error:NSError {
-			
-			switch self {
-				
-			case let .Info(error, _):
-				return error
-//				
-//			default:
-//				fatalError()
-			}
-		}
-	}
-	
-	typealias PostResult = Result<PostResultInfo,PostErrorInfo>
-	
 	var canPost:Bool {
 	
 		return gists.canPost && twitter.canPost
 	}
 	
-	func post(content: String, language: ESGists.Language, description: String, hashtag: ESTwitter.Hashtag, completed: (PostResult) -> Void) throws {
+	func post(container:PostDataContainer, completed: (PostDataContainer) -> Void) {
+
+		self._post(container, capturedGistImage: nil, completed: completed)
+	}
 	
-		DebugTime.print("📮 Try posting to SNS ... #2")
+	func _post(container:PostDataContainer, capturedGistImage: NSImage?, completed: (PostDataContainer) -> Void) {
 		
-		var resultInfo = PostResultInfo()
-		
-		let posted = { () -> Void in
-
-			DebugTime.print("📮 Posted successfully (info:\(resultInfo)) ... #2.0.1")
-			completed(PostResult(value: resultInfo))
-		}
-		
-		let failedToPost = { (error:NSError) -> Void in
-		
-			DebugTime.print("📮 Posted with failure (info:\(resultInfo), error:\(error)) ... #2.0.2")
-			completed(PostResult(error: PostErrorInfo(error, resultInfo)))
-		}
-		
-		let postByTwitter = { (description:String, gist:ESGists.Gist, image:NSImage?) throws -> Void in
-		
-			DebugTime.print("📮 Try posting by Twitter ... #2.1")
+		let callNextStageRecursively = { [unowned self] (capturedGistImage image: NSImage?) in
 			
-			try self.twitter.post(gist, language: language, description: description, hashtag: hashtag, image: image) { result in
-
-				DebugTime.print("📮 Posted by Twitter (\(result)) ... #2.1.1")
-				
-				switch result {
-					
-				case .Success(let status):
-					
-					resultInfo.status = status
-					posted()
-					
-				case .Failure(let error):
-					
-					failedToPost(error)
-				}
-			}
+			container.proceedToNextStage()
+			self._post(container, capturedGistImage: image, completed: completed)
 		}
 		
-		let postByGists = { (description:String) throws -> Void in
-
-			DebugTime.print("📮 Try posting by Gists ... #2.2")
+		let exitWithFailure = { (reason: String) in
 			
-			try self.gists.post(content, language: language, description: description, hashtag: hashtag) { result in
-
-				DebugTime.print("📮 Posted by Gists ... #2.2.1")
+			DebugTime.print("📮 Posted with failure (stage:\(container.stage), error:\(reason)) ... #2.0.2")
+			container.setError(PostError(reason: reason))
+			completed(container)
+		}
+		
+		do {
+			
+			switch container.stage {
 				
-				let capture = { (gist:Gist) -> Void in
+			case .Initialized:
+				
+				callNextStageRecursively(capturedGistImage: capturedGistImage)
+				
+			case .PostToGists:
+				
+				DebugTime.print("📮 Try posting by Gists ... #2.2")
+				
+				try self.gists.post(container) { result in
 					
-					DebugTime.print("📮 Capturing a gist (\(gist)) ... #2.2.1.1")
-					
-					let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4"
-
-//					let size = NSMakeSize(736.0, 414.0)
-					let size = NSMakeSize(560.0, 560.0)
-
-					NSApp.captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, userAgent: userAgent) { image in
+					switch result {
 						
-						DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
+					case .Success:
+						callNextStageRecursively(capturedGistImage: capturedGistImage)
 						
-						do {
-							
-							DebugTime.print("📮 Try posting the capture by twitter ... #2.2.1.1.2")
-							
-							resultInfo.gist = gist
-							try postByTwitter(description, gist, image)
-							
-							DebugTime.print("📮 The capture posted ... #2.2.1.1.3")
-						}
-						catch SNSControllerError.NotAuthorized {
-							
-							failedToPost(NSError(domain: SNSControllerError.NotAuthorized.description, code: -1, userInfo: nil))
-						}
-						catch SNSControllerError.CredentialsNotVerified {
-							
-							failedToPost(NSError(domain: SNSControllerError.CredentialsNotVerified.description, code: -1, userInfo: nil))
-						}
-						catch let error as NSError {
-							
-							failedToPost(error)
-						}
-						catch {
-							
-							failedToPost(NSError(domain: String(error), code: -1, userInfo: nil))
-						}
+					case .Failure(let error):
+						exitWithFailure("\(error)")
 					}
 				}
 				
-				switch result {
+			case .CaptureGists:
+				
+				let gist = container.gistsState.gist!
+				DebugTime.print("📮 Capturing a gist (\(gist)) ... #2.2.1.1")
+				
+				let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4"
+				
+				let size = NSMakeSize(560.0, 560.0)
+				
+				NSApp.captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, userAgent: userAgent) { image in
 					
-				case .Success(let gist):
-					
-					capture(gist)
-					
-				case .Failure(let error):
-					
-					failedToPost(error)
+					DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
+					callNextStageRecursively(capturedGistImage: image)
 				}
+				
+			case .PostToTwitter:
+				
+				callNextStageRecursively(capturedGistImage: capturedGistImage)
+				
+			case .PostToTwitterMedia:
+
+				try self.twitter.postMedia(container, image: capturedGistImage!) { result in
+					
+					switch result {
+						
+					case .Success:
+						callNextStageRecursively(capturedGistImage: capturedGistImage)
+						
+					case .Failure:
+						exitWithFailure("\(container.error!.reason)")
+					}
+				}
+				
+			case .PostToTwitterStatus:
+				
+				DebugTime.print("📮 Try posting by Twitter ... #2.1")
+				
+				try self.twitter.post(container) { result in
+					
+					DebugTime.print("📮 Posted by Twitter (\(result)) ... #2.1.1")
+					
+					switch result {
+						
+					case .Success:
+						
+						DebugTime.print("📮 Posted successfully (stage:\(container.stage)) ... #2.0.1")
+						callNextStageRecursively(capturedGistImage: capturedGistImage)
+						
+					case .Failure(let error):
+
+						exitWithFailure("\(error)")
+					}
+				}
+				
+			case .Posted:
+				completed(container)
 			}
 		}
-		
-		try postByGists(description)
+		catch {
+			
+			exitWithFailure("\(error)")
+		}
 	}
 }

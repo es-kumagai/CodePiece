@@ -180,7 +180,7 @@ class TwitterPreferenceViewController: NSViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.observeBy(self) { owner, notification in
+		TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.observeBy(self) { [unowned self] notification in
 			
 			self.withChangeValue("hasAccount") {
 				
@@ -190,14 +190,14 @@ class TwitterPreferenceViewController: NSViewController {
 			self.verifyCredentials()
 		}
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
 			
 			self.withChangeValue("credentialsVerified", "credentialsNotVerified")
 			self.applyAuthorizedStatus()
 		}
 		
 		// In order to just to avoid update account list when user selecting, monitoring notification NSWindowDidBecomeKeyNotification rather than ACAccountStoreDidChangeNotification.
-		NamedNotification.observe(NSWindowDidBecomeKeyNotification, by: self) { owner, notification in
+		NamedNotification.observe(NSWindowDidBecomeKeyNotification, by: self) { [unowned self] notification in
 			
 			if notification.object === self.view.window {
 			

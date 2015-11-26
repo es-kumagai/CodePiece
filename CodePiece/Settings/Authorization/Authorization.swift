@@ -14,23 +14,14 @@ import Result
 import ESThread
 import p2_OAuth2
 
-// このプロトコルに準拠したクライアント情報をプロジェクトに実装し、
-// AppDelegate 等から GitHubClientInfo 変数にそのインスタンスを設定してください。
-//
-// e.g.
-//
-//	struct CodePieceClientInfo : GitHubClientInfoType {
-//
-//		let id = "xxxxxxxx"
-//		let secret = "xxxxxxxx"
-//	}
+// TODO: To build the project, you must create `CodePieceClientInfo` type. See also `HowToBuild.md`.
 
-var GitHubClientInfo:GitHubClientInfoType!
+var ClientInfo:CodePieceClientInfo!
 
 protocol GitHubClientInfoType {
 	
-	var id:String { get }
-	var secret:String { get }
+	var GitHubID:String { get }
+	var GitHubSecret:String { get }
 }
 
 enum AuthorizationState {
@@ -61,8 +52,8 @@ final class Authorization : AlertDisplayable {
 			
 			let settings:OAuth2JSON = [
 				
-				"client_id" : GitHubClientInfo.id,
-				"client_secret" : GitHubClientInfo.secret,
+				"client_id" : ClientInfo.GitHubID,
+				"client_secret" : ClientInfo.GitHubSecret,
 				"authorize_uri" : "https://github.com/login/oauth/authorize",
 				"token_uri" : "https://github.com/login/oauth/access_token",
 				"scope" : "gist",

@@ -39,21 +39,21 @@ class TimelineViewController: NSViewController {
 	
 	struct TimelineInformation {
 	
-		var hashtag:ESTwitter.Hashtag
+		var hashtags: ESTwitter.HashtagSet
 		
 		init() {
 		
-			self.init(hashtag: "")
+			self.init(hashtags: [""])
 		}
 		
-		init(hashtag: ESTwitter.Hashtag) {
+		init(hashtags: ESTwitter.HashtagSet) {
 			
-			self.hashtag = hashtag
+			self.hashtags = hashtags
 		}
 		
-		func replaceHashtag(hashtag: ESTwitter.Hashtag) -> TimelineInformation {
+		func replaceHashtags(hashtags: ESTwitter.HashtagSet) -> TimelineInformation {
 			
-			return TimelineInformation(hashtag: hashtag)
+			return TimelineInformation(hashtags: hashtags)
 		}
 	}
 	
@@ -65,7 +65,7 @@ class TimelineViewController: NSViewController {
 		case SetReachability(ReachabilityController.State)
 		case AutoUpdate(enable: Bool)
 		case UpdateStatuses
-		case ChangeHashtag(ESTwitter.Hashtag)
+		case ChangeHashtags(Set<ESTwitter.Hashtag>)
 		
 		func blockInQuickSuccession(lastMessage: Message) -> Bool {
 			
@@ -126,9 +126,9 @@ class TimelineViewController: NSViewController {
 		
 		didSet {
 			
-			if self.timeline.hashtag != oldValue.hashtag {
+			if self.timeline.hashtags != oldValue.hashtags {
 				
-				self.message.send(.ChangeHashtag(self.timeline.hashtag))
+				self.message.send(.ChangeHashtags(self.timeline.hashtags))
 			}
 		}
 	}
@@ -293,8 +293,8 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		case .SetReachability(let state):
 			self._changeReachability(state)
 			
-		case .ChangeHashtag(let hashtag):
-			self._changeHashtag(hashtag)
+		case .ChangeHashtags(let hashtags):
+			self._changeHashtags(hashtags)
 		}
 	}
 	
@@ -310,9 +310,9 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		invokeAsyncOnMainQueue(self.updateStatuses)
 	}
 	
-	private func _changeHashtag(hashtag: ESTwitter.Hashtag) {
+	private func _changeHashtags(hashtags: Set<ESTwitter.Hashtag>) {
 		
-		if self.timelineDataSource.appendHashtag(hashtag) {
+		if self.timelineDataSource.appendHashtags(hashtags) {
 		
 			invokeOnMainQueue {
 
@@ -374,7 +374,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 
 // MARK: - View Control
 
-extension TimelineViewController {
+extension TimelineViewController : NotificationObservable {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -399,36 +399,36 @@ extension TimelineViewController {
 
 		super.viewDidAppear()
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		self.observeNotification(Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.message.send(.UpdateStatuses)
 		}
 		
-		HashtagDidChangeNotification.observeBy(self) { owner, notification in
+		self.observeNotification(HashtagsDidChangeNotification.self) { [unowned self] notification in
 			
-			let hashtag = notification.hashtag
+			let hashtags = notification.hashtags
 			
-			NSLog("Hashtag did change (\(hashtag))")
+			NSLog("Hashtag did change (\(hashtags))")
 			
-			owner.timeline = owner.timeline.replaceHashtag(hashtag)
+			self.timeline = self.timeline.replaceHashtags(hashtags)
 		}
 		
-		NamedNotification.observe(NSWorkspaceWillSleepNotification, by: self) { owner, notification in
+		self.observeNotificationNamed(NSWorkspaceWillSleepNotification) { [unowned self] notification in
 			
 			self.message.send(.AutoUpdate(enable: false))
 		}
 		
-		NamedNotification.observe(NSWorkspaceDidWakeNotification, by: self) { owner, notification in
+		self.observeNotificationNamed(NSWorkspaceDidWakeNotification) { [unowned self] notification in
 			
 			self.message.send(.AutoUpdate(enable: true))
 		}
 		
-		ReachabilityController.ReachabilityChangedNotification.observeBy(self) { observer, notification in
+		self.observeNotification(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
 			self.message.send(.SetReachability(notification.state))
 		}
 
-		ViewController.PostCompletelyNotification.observeBy(self) { owner, notification in
+		self.observeNotification(ViewController.PostCompletelyNotification.self) { [unowned self] notification in
 		
 			invokeAsyncOnMainQueue(after: 3.0) {
 				
@@ -443,7 +443,7 @@ extension TimelineViewController {
 		
 		super.viewWillDisappear()
 		
-		NotificationManager.release(owner: self)
+		self.releaseObservingNotifications()
 		
 		self.message.send(.Stop)
 	}
@@ -470,14 +470,14 @@ extension TimelineViewController : TimelineGetStatusesController {
 			return
 		}
 		
-		let hashtag = self.timeline.hashtag
-		let query = hashtag.description
+		let hashtags = self.timeline.hashtags
+		let query = hashtags.toTwitterQueryText()
 		
 		let updateTable = { (tweets:[Status]) in
 			
 			DebugTime.print("Current Selection:\n\tCurrentTimelineSelectedRows: \(self.currentTimelineSelectedRowIndexes)\n\tNative: \(self.timelineTableView.selectedRowIndexes)")
 			
-			let result = self.appendTweets(tweets, hashtag: hashtag)
+			let result = self.appendTweets(tweets, hashtags: hashtags)
 			let nextSelectedIndexes = self.getNextTimelineSelection(result.insertedIndexes)
 
 			NSLog("Tweet: \(tweets.count)")
@@ -510,7 +510,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 			
 			self.displayControlState = .Updating
 			
-			NSApp.twitterController.getStatusesWithQuery(query, since: self.timelineDataSource.latestTweetIdForHashtag(hashtag)) { result in
+			NSApp.twitterController.getStatusesWithQuery(query, since: self.timelineDataSource.latestTweetIdForHashtags(hashtags)) { result in
 				
 				self.displayControlState = .Updated
 

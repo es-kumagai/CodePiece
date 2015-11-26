@@ -16,11 +16,9 @@ import ESProgressHUD
 import ESTwitter
 import ESNotification
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NotificationObservable {
 
 	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
-	
-	typealias PostResult = SNSController.PostResult
 	
 	@IBOutlet var postButton:NSButton!
 	@IBOutlet var hashTagTextField:HashtagTextField!
@@ -88,7 +86,21 @@ class ViewController: NSViewController {
 	
 	var hasCode:Bool {
 	
-		return !self.codeTextView.string!.trimmed().isEmpty
+		return self.trimmedCode != nil
+	}
+	
+	var trimmedCode: String? {
+		
+		let code = self.codeTextView.string!.trimmed()
+		
+		if code.isEmpty {
+			
+			return nil
+		}
+		else {
+			
+			return code
+		}
 	}
 	
 	var selectedLanguage:Language {
@@ -117,86 +129,65 @@ class ViewController: NSViewController {
 		self.posting = true
 		self.postingHUD.show()
 		
-		do {
-
-			try self.post { result in
+		self.post { result in
+			
+			defer {
 				
-				defer {
-					
-					self.posting = false
-					self.postingHUD.hide()
-				}
-				
-				switch result {
-					
-				case .Success(let info):
-					PostCompletelyNotification(info: info).post()
-					
-				case .Failure(let info):
-					PostFailedNotification(info: info).post()
-				}
+				self.posting = false
+				self.postingHUD.hide()
 			}
-		}
-		catch SNSControllerError.NotAuthorized {
 			
-			// from Gists
-			self.posting = false
-			self.postingHUD.hide()
-			
-			self.showErrorAlert("Cannot post", message: "The authentication token is not correct. Please re-authentication.")
-		}
-		catch {
-			
-			self.posting = false
-			self.postingHUD.hide()
-			
-			self.showErrorAlert("Cannot post", message: String(error))
+			switch result {
+				
+			case .Success(let container):
+				PostCompletelyNotification(container: container).post()
+				
+			case .Failure(let container):
+				PostFailedNotification(container: container).post()
+			}
 		}
 	}
 	
-	func post(callback:(PostResult)->Void) throws {
+	func makePostData() -> PostData {
+	
+		let code = self.trimmedCode
+		let description = self.descriptionTextField.stringValue
+		let language = self.selectedLanguage
+		let hashtags = self.hashTagTextField.hashtags
+		
+		#if DEBUG
+			let usePublicGists = false
+		#else
+			let usePublicGists = true
+		#endif
+		
+		let appendAppTagToTwitter = false
+
+		return PostData(code: code, description: description, language: language, hashtags: hashtags, usePublicGists: usePublicGists, appendAppTagToTwitter: appendAppTagToTwitter)
+	}
+	
+	func makePostDataContainer() -> PostDataContainer {
+		
+		return PostDataContainer(self.makePostData())
+	}
+	
+	func post(callback:(PostResult)->Void) {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		
-		let code = self.codeTextView.string!
-		let language = self.selectedLanguage
-		let description = self.descriptionTextField.stringValue
-		let hashtag = self.hashTagTextField.hashtag
-
-		if self.hasCode {
+		let postDataContainer = self.makePostDataContainer()
+		
+		NSApp.snsController.post(postDataContainer) { container in
 			
-			DebugTime.print("📮 Try posting with a Code ... #1.1")
-
-			try NSApp.snsController.post(code, language: language, description: description, hashtag: hashtag) { result in
+			DebugTime.print("📮 Posted \(container.twitterState.postedObjects) ... #1.1.1")
+			
+			if container.posted {
 				
-				DebugTime.print("📮 Posted \(result) ... #1.1.1")
-				
-				switch result {
-					
-				case .Success:
-					callback(PostResult(value: SNSController.PostResultInfo()))
-					
-				case .Failure(let errorInfo):
-					callback(PostResult(error: errorInfo))
-				}
+				callback(PostResult.Success(container))
 			}
-		}
-		else {
-			
-			DebugTime.print("📮 Try posting without Codes ... #1.2")
-			
-			try NSApp.twitterController.post(description, hashtag: hashtag) { result in
+			else {
 				
-				DebugTime.print("📮 Posted \(result) ... #1.2.1")
-				
-				switch result {
-					
-				case .Success:
-					callback(PostResult(value: SNSController.PostResultInfo()))
-					
-				case .Failure(let error):
-					callback(PostResult(error: SNSController.PostErrorInfo(error, SNSController.PostResultInfo())))
-				}
+				callback(PostResult.Failure(container))
 			}
 		}
 	}
@@ -225,11 +216,11 @@ class ViewController: NSViewController {
 		}
 	}
 	
-	func clearHashtag() {
+	func clearHashtags() {
 		
 		self.withChangeValue("canPost") {
 			
-			self.hashTagTextField.hashtag = ""
+			self.hashTagTextField.hashtags = []
 		}
 	}
 	
@@ -238,7 +229,7 @@ class ViewController: NSViewController {
 		DebugTime.print("Restoring contents in main window.")
 		
 		NSApp.settings.appState.selectedLanguage.invokeIfExists(self.languagePopUpDataSource.selectLanguage)
-		NSApp.settings.appState.hashtag.invokeIfExists { self.hashTagTextField.hashtag = $0 }
+		NSApp.settings.appState.hashtags.invokeIfExists { self.hashTagTextField.hashtags = $0 }
 	}
 	
 	func saveContents() {
@@ -246,7 +237,7 @@ class ViewController: NSViewController {
 		DebugTime.print("Saving contents in main window.")
 		
 		NSApp.settings.appState.selectedLanguage = self.selectedLanguage
-		NSApp.settings.appState.hashtag = self.hashTagTextField.hashtag
+		NSApp.settings.appState.hashtags = self.hashTagTextField.hashtags
 
 		NSApp.settings.saveAppState()
 	}
@@ -269,15 +260,20 @@ class ViewController: NSViewController {
 
 		self.clearContents()
 		
-		PostCompletelyNotification.observeBy(self) { owner, notification in
+		self.observeNotification(PostCompletelyNotification.self) { [unowned self] notification in
 			
 			self.clearContents()
-			NSLog("Posted completely \(notification.info)")
+			NSLog("Posted completely \(notification.container.twitterState.postedObjects)")
 		}
 		
-		PostFailedNotification.observeBy(self) { owner, notification in
+		self.observeNotification(PostFailedNotification.self) { [unowned self] notification in
 		
-			self.showErrorAlert("Cannot post", message: notification.info.error.localizedDescription)
+			self.showErrorAlert("Cannot post", message: "\(notification.container.error!)")
+		}
+		
+		self.observeNotification(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
+			
+			self.updateTweetTextCount()
 		}
 	}
 	
@@ -298,8 +294,7 @@ class ViewController: NSViewController {
 		DebugTime.print("Main window will hide.")
 		
 		self.saveContents()
-		
-		NotificationManager.release(owner: self)
+		self.releaseObservingNotifications()
 		
 		super.viewWillDisappear()
 	}
@@ -370,7 +365,7 @@ class ViewController: NSViewController {
 	
 	var canOpenBrowserWithSearchHashtagPage:Bool {
 	
-		return !self.hashTagTextField.hashtag.isEmpty
+		return !self.hashTagTextField.hashtags.isEmpty
 	}
 	
 	func openBrowserWithSearchHashtagPage() {
@@ -382,7 +377,7 @@ class ViewController: NSViewController {
 		
 		do {
 
-			try ESTwitter.Browser.openWithQuery(self.hashTagTextField.hashtag.value)
+			try ESTwitter.Browser.openWithQuery(self.hashTagTextField.hashtags.toTwitterDisplayText())
 		}
 		catch let ESTwitter.Browser.Error.OperationFailure(reason: reason) {
 			
@@ -405,21 +400,8 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func updateTweetTextCount() {
 
-		let countsForInputText:[Int] = [
-
-			self.descriptionTextField.stringValue.utf16.count,
-			self.hashTagTextField.hashtag.length.nonZeroMap { $0 + 1 }
-		]
-		
-		let countsForReserve:[Int] = [
-
-			self.hasCode ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0,
-			self.hasCode ? self.selectedLanguage.hashtag.length.nonZeroMap { $0 + 1 } : 0
-//			self.hasCode ? CodePieceApp.hashtag.length.nonZeroMap { $0 + 1 } : 0
-		]
-
-		let counts = countsForInputText + countsForReserve
-		let totalCount = counts.reduce(0, combine: +)
+		let includesGistsLink = self.hasCode
+		let totalCount = self.makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
 		
 		self.descriptionCountLabel.stringValue = String(totalCount)
 		self.descriptionCountLabel.textColor = SystemColor.NeutralColor.color

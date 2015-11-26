@@ -32,22 +32,22 @@ final class MainStatusViewController: NSViewController {
 		self.githubAccountNameTextField.stringValue = none
 		self.twitterAccountNameTextField.stringValue = none
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
 			
 			self.twitterAccountNameTextField.stringValue = notification.username ?? none
 			self.twitterAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
 		}
 		
-		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { owner, notification in
+		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
 			
 			self.githubAccountNameTextField.stringValue = notification.username ?? none
 			self.githubAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
 		}
 		
 		
-		ReachabilityController.ReachabilityChangedNotification.observeBy(self) { observer, notification in
+		ReachabilityController.ReachabilityChangedNotification.observeBy(self) { [unowned self] notification in
 			
-			observer.updateReachability()
+			self.updateReachability()
 		}
 	}
 	
