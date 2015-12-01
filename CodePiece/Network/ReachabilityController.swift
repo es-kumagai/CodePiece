@@ -29,6 +29,8 @@ extension StatusImageView.Status {
 
 final class ReachabilityController {
 
+	private var notificationHandler: HandlerID!
+	
 	private let reachability:Reachability!
 	
 	enum State {
@@ -76,10 +78,14 @@ final class ReachabilityController {
 			throw error
 		}
 		
-		
-		NamedNotification.observe(ReachabilitySwift.ReachabilityChangedNotification, by: self, handler: reachabilityDidChange)
+		self.notificationHandler = NamedNotification.observe(ReachabilitySwift.ReachabilityChangedNotification, handler: reachabilityDidChange)
 		
 		try self.reachability.startNotifier()
+	}
+	
+	deinit {
+		
+		self.notificationHandler.release()
 	}
 	
 	var state:State {

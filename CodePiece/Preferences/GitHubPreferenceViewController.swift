@@ -12,9 +12,12 @@ import ESProgressHUD
 import ESNotification
 import p2_OAuth2
 import ESGists
+import ESNotification
 
-class GitHubPreferenceViewController: NSViewController {
+class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 
+	var notificationHandlers = NotificationHandlers()
+	
 	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
 	private var removeAuthenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
 
@@ -111,7 +114,7 @@ class GitHubPreferenceViewController: NSViewController {
 	
 		super.viewWillAppear()
 		
-		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			NSLog("Detect GitHub authorization state changed.")
 			
 			self.applyAuthorizedStatus()

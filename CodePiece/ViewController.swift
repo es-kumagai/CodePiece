@@ -18,6 +18,8 @@ import ESNotification
 
 class ViewController: NSViewController, NotificationObservable {
 
+	var notificationHandlers = NotificationHandlers()
+	
 	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
 	
 	@IBOutlet var postButton:NSButton!
@@ -294,7 +296,7 @@ class ViewController: NSViewController, NotificationObservable {
 		DebugTime.print("Main window will hide.")
 		
 		self.saveContents()
-		self.releaseObservingNotifications()
+		self.releaseAllObservingNotifications()
 		
 		super.viewWillDisappear()
 	}

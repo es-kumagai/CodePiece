@@ -7,6 +7,7 @@ def pods
 
 	pod 'Swim', :git => 'https://github.com/EZ-NET/ESSwim', :branch => 'master'
 	pod 'Ocean', :git => 'https://github.com/EZ-NET/ESOcean.git', :branch => 'master'
+	pod 'ESThread', :git => 'https://github.com/EZ-NET/ESThread.git', :branch => 'master'
 	pod 'ESNotification', :git => 'https://github.com/EZ-NET/ESNotification.git', :branch => 'master'
 	pod 'APIKit'
 	pod 'Himotoki', :git => 'https://github.com/ikesyo/Himotoki'

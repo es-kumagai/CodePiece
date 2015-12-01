@@ -13,8 +13,10 @@ import Swim
 import Accounts
 import ESNotification
 
-class TwitterPreferenceViewController: NSViewController {
+class TwitterPreferenceViewController: NSViewController, NotificationObservable {
 
+	var notificationHandlers = NotificationHandlers()
+	
 	private var verifyingHUD:ProgressHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
 	private var waitingHUD:ProgressHUD = ProgressHUD(message: "Please wait...", useActivityIndicator: true)
 
@@ -180,7 +182,7 @@ class TwitterPreferenceViewController: NSViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.self) { [unowned self] notification in
 			
 			self.withChangeValue("hasAccount") {
 				
@@ -190,14 +192,14 @@ class TwitterPreferenceViewController: NSViewController {
 			self.verifyCredentials()
 		}
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.withChangeValue("credentialsVerified", "credentialsNotVerified")
 			self.applyAuthorizedStatus()
 		}
 		
 		// In order to just to avoid update account list when user selecting, monitoring notification NSWindowDidBecomeKeyNotification rather than ACAccountStoreDidChangeNotification.
-		NamedNotification.observe(NSWindowDidBecomeKeyNotification, by: self) { [unowned self] notification in
+		self.observeNotificationNamed(NSWindowDidBecomeKeyNotification) { [unowned self] notification in
 			
 			if notification.object === self.view.window {
 			
