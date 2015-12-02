@@ -10,7 +10,7 @@ def pods
 	pod 'ESThread', :git => 'https://github.com/EZ-NET/ESThread.git', :branch => 'master'
 	pod 'ESNotification', :git => 'https://github.com/EZ-NET/ESNotification.git', :branch => 'master'
 	pod 'APIKit'
-	pod 'Himotoki', :git => 'https://github.com/ikesyo/Himotoki'
+	pod 'Himotoki'
 	pod 'ESGists', :git => 'https://github.com/EZ-NET/ESGists.git'
 	pod 'p2.OAuth2'
 	pod 'ReachabilitySwift', '~> 2.0'
@@ -33,6 +33,6 @@ target :ESTwitter do
 	platform :osx, '10.10'
 	use_frameworks!
 	
-	pod 'Himotoki', :git => 'https://github.com/ikesyo/Himotoki'
+	pod 'Himotoki'
 
 end
