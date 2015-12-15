@@ -2,7 +2,7 @@
 
 Change Logs.
 
-## 1.4.4 (*)
+## 1.4.4
 
 ### Enhancements
 
