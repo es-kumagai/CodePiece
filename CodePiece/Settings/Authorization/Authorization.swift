@@ -178,7 +178,7 @@ extension Authorization {
 		
 		oauth2.onFailure = { error in
 			
-			print("Authorization went wrong: \(error?.localizedDescription)")
+			print("Authorization went wrong" + (error.map { ": \($0)." } ?? "."))
 		}
 		
 		NSLog("Trying authorization with GitHub OAuth.")

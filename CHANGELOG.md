@@ -7,6 +7,7 @@ Change Logs.
 ### Fixes
 
 * Fixed a problem that failed to get twitter status when 'profile_image_url' or 'profile_image_url_https' is set to null.
+* Fixed a problem that failed to receive response when returns unknown language from Gists API.
 
 ## 1.4.2
 
