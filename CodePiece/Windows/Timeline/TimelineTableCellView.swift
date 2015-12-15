@@ -116,19 +116,38 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 	}
 	
 	private func updateIconImage(status:ESTwitter.Status) {
-		
-		// FIXME: 🐬 ここで読み込み済みの画像を使いまわしたり、同じ URL で読み込み中のものがあればそれを待つ処理を実装しないといけない。
-		let url = status.user.profile.imageUrlHttps.url!
-		
-		invokeAsyncInBackground {
 
-			if let image = NSImage(contentsOfURL: url) {
+		let setImage = { (url: NSURL) in
+			
+			invokeAsyncInBackground {
 				
-				invokeAsyncOnMainQueue {
-
-					self.iconButton.image = image
+				if let image = NSImage(contentsOfURL: url) {
+					
+					invokeAsyncOnMainQueue { self.iconButton.image = image }
+				}
+				else {
+					
+					invokeAsyncOnMainQueue { self.iconButton.image = nil }
 				}
 			}
+		}
+		
+		let resetImage = {
+			
+			invokeAsyncOnMainQueue {
+				
+				self.iconButton.image = nil
+			}
+		}
+		
+		// FIXME: 🐬 ここで読み込み済みの画像を使いまわしたり、同じ URL で読み込み中のものがあればそれを待つ処理を実装しないといけない。
+		if let url = status.user.profile.imageUrlHttps.url {
+
+			setImage(url)
+		}
+		else {
+
+			resetImage()
 		}
 	}
 }
