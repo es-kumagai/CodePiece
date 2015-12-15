@@ -7,12 +7,15 @@
 //
 
 import AppKit
+import ESNotification
 
-final class GitHubOpenFeatures : NSObject, AlertDisplayable {
+final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObservable {
 
+	var notificationHandlers = NotificationHandlers()
+	
 	override func awakeFromNib() {
 		
-		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.withChangeValue("canOpenGitHubHome")
 		}

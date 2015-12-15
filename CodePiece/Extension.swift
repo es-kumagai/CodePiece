@@ -738,42 +738,22 @@ extension MessageQueue {
 
 	public func executeSyncOnProcessingQueue<R>(execute:()->R) -> R {
 
-		var result:R?
-		
-		dispatch_sync(self.messageProcessingQueue) {
-		
-			result = execute()
-		}
-		
-		return result!
+		return invoke(self.messageProcessingQueue, predicate: execute)
 	}
 
 	public func executeOnProcessingQueue(execute:dispatch_block_t) {
 		
-		dispatch_async(self.messageProcessingQueue) {
-			
-			execute()
-		}
+		invokeAsync(self.messageProcessingQueue, predicate: execute)
 	}
 	
 	public func executeSyncOnHandlerExecutionQueue<R>(execute:()->R) -> R {
 		
-		var result:R?
-		
-		dispatch_sync(self.messageHandlerExecutionQueue) {
-			
-			result = execute()
-		}
-		
-		return result!
+		return invoke(self.messageHandlerExecutionQueue, predicate: execute)
 	}
 	
 	public func executeOnHandlerExecutionQueue(execute:dispatch_block_t) {
 		
-		dispatch_async(self.messageHandlerExecutionQueue) {
-			
-			execute()
-		}
+		invokeAsync(self.messageHandlerExecutionQueue, predicate: execute)
 	}
 	
 	func _startMessageLoop() {

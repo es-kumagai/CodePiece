@@ -8,12 +8,15 @@
 
 import AppKit
 import ESTwitter
+import ESNotification
 
-final class TwitterOpenFeatures : NSObject, AlertDisplayable {
+final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObservable {
+	
+	var notificationHandlers = NotificationHandlers()
 	
 	override func awakeFromNib() {
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 
 			self.withChangeValue("canOpenTwitterHome")
 		}		

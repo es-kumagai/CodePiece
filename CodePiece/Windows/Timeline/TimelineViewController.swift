@@ -17,6 +17,8 @@ private let TableViewInsertAnimationOptions: NSTableViewAnimationOptions = [.Sli
 
 class TimelineViewController: NSViewController {
 
+	var notificationHandlers = NotificationHandlers()
+	
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
 	
 	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
@@ -443,7 +445,7 @@ extension TimelineViewController : NotificationObservable {
 		
 		super.viewWillDisappear()
 		
-		self.releaseObservingNotifications()
+		self.releaseAllObservingNotifications()
 		
 		self.message.send(.Stop)
 	}

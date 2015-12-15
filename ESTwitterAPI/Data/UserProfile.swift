@@ -20,9 +20,9 @@ extension User {
 		public var imageUrlHttps: URL
 		public var useBackgroundImage: Bool
 		public var textColor: Color
-		public var backgroundImageUrlHttps: URL
+		public var backgroundImageUrlHttps: URL?
 		public var backgroundColor: Color
-		public var backgroundImageUrl: URL
+		public var backgroundImageUrl: URL?
 	}
 }
 
@@ -40,9 +40,9 @@ extension User.Profile : Decodable {
 			e <| "profile_image_url_https",
 			e <| "profile_use_background_image",
 			e <| "profile_text_color",
-			e <| "profile_background_image_url_https",
+			e <|? "profile_background_image_url_https",
 			e <| "profile_background_color",
-			e <| "profile_background_image_url"
+			e <|? "profile_background_image_url"
 		)
 	}
 }

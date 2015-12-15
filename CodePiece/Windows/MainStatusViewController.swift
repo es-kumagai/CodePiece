@@ -7,11 +7,14 @@
 //
 
 import Cocoa
+import ESNotification
 
 private let none = "----"
 
-final class MainStatusViewController: NSViewController {
+final class MainStatusViewController: NSViewController, NotificationObservable {
 
+	var notificationHandlers = NotificationHandlers()
+	
 	@IBOutlet var githubAccountNameTextField:NSTextField!
 	@IBOutlet var twitterAccountNameTextField:NSTextField!
 	@IBOutlet var reachabilityTextField:NSTextField!
@@ -32,20 +35,19 @@ final class MainStatusViewController: NSViewController {
 		self.githubAccountNameTextField.stringValue = none
 		self.twitterAccountNameTextField.stringValue = none
 		
-		Authorization.TwitterAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.twitterAccountNameTextField.stringValue = notification.username ?? none
 			self.twitterAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
 		}
 		
-		Authorization.GitHubAuthorizationStateDidChangeNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.githubAccountNameTextField.stringValue = notification.username ?? none
 			self.githubAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
 		}
 		
-		
-		ReachabilityController.ReachabilityChangedNotification.observeBy(self) { [unowned self] notification in
+		self.observeNotification(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
 			self.updateReachability()
 		}
