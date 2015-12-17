@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
@@ -364,7 +364,6 @@ DQ
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Lsx-aj-D77">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </splitView>
                     <connections>
                         <segue destination="7P7-LL-t1l" kind="relationship" relationship="splitItems" id="E01-du-tlP"/>
@@ -405,12 +404,10 @@ DQ
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="CkS-dS-5h1" secondAttribute="height" multiplier="1:1" id="5jd-S9-DFq"/>
                                                 </constraints>
-                                                <animations/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusNone" id="Y8I-xC-619"/>
                                             </imageView>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uhw-fC-q9G" userLabel="Reachability">
                                                 <rect key="frame" x="18" y="1" width="53" height="14"/>
-                                                <animations/>
                                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Unknown" id="BKD-Nd-Aq6">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -418,7 +415,6 @@ DQ
                                                 </textFieldCell>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
@@ -430,7 +426,6 @@ DQ
                                     </stackView>
                                     <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="gdy-95-470">
                                         <rect key="frame" x="77" y="0.0" width="5" height="20"/>
-                                        <animations/>
                                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <font key="titleFont" metaFont="system"/>
@@ -446,12 +441,10 @@ DQ
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="LNv-QM-GkH" secondAttribute="height" multiplier="1:1" id="WsE-Uf-nbL"/>
                                                         </constraints>
-                                                        <animations/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusNone" id="D7C-kG-lzl"/>
                                                     </imageView>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5EX-04-KS4">
                                                         <rect key="frame" x="18" y="1" width="41" height="14"/>
-                                                        <animations/>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub" id="I6a-bR-RH5">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -460,7 +453,6 @@ DQ
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fGm-pJ-R0L">
                                                         <rect key="frame" x="59" y="1" width="8" height="14"/>
-                                                        <animations/>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=":" id="x6g-ca-H4g">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -469,7 +461,6 @@ DQ
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Gv-Zp-fEt">
                                                         <rect key="frame" x="67" y="1" width="48" height="14"/>
-                                                        <animations/>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="M87-jV-SmF">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -482,7 +473,6 @@ DQ
                                                             <constraint firstAttribute="width" secondItem="oG1-SF-roX" secondAttribute="height" multiplier="1:1" id="4MU-pk-Rmz"/>
                                                             <constraint firstAttribute="height" constant="11" id="QdD-1M-X4q"/>
                                                         </constraints>
-                                                        <animations/>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="uFd-Tf-gT0">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -493,7 +483,6 @@ DQ
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <animations/>
                                                 <visibilityPriorities>
                                                     <integer value="1000"/>
                                                     <integer value="1000"/>
@@ -517,12 +506,10 @@ DQ
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="g7U-rz-yR1" secondAttribute="height" multiplier="1:1" id="5rH-e7-kCw"/>
                                                         </constraints>
-                                                        <animations/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusNone" id="cyD-6W-vT4"/>
                                                     </imageView>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="igA-CW-TUG">
                                                         <rect key="frame" x="18" y="1" width="41" height="14"/>
-                                                        <animations/>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Twitter" id="ndG-9I-iJA">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -531,7 +518,6 @@ DQ
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g70-8D-Ykm">
                                                         <rect key="frame" x="59" y="1" width="8" height="14"/>
-                                                        <animations/>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=":" id="0ub-S3-kxQ">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -540,7 +526,6 @@ DQ
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="24G-Tk-oI5">
                                                         <rect key="frame" x="67" y="1" width="48" height="14"/>
-                                                        <animations/>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="NyD-Ff-o7r">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -553,7 +538,6 @@ DQ
                                                             <constraint firstAttribute="height" constant="11" id="To3-LX-WaQ"/>
                                                             <constraint firstAttribute="width" secondItem="CG8-KC-fXs" secondAttribute="height" multiplier="1:1" id="Zly-1k-VHd"/>
                                                         </constraints>
-                                                        <animations/>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="kOj-rf-DiQ">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -564,7 +548,6 @@ DQ
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstItem="CG8-KC-fXs" firstAttribute="width" secondItem="CG8-KC-fXs" secondAttribute="height" multiplier="1:1" id="ntm-tY-iXx"/>
                                                 </constraints>
@@ -584,7 +567,6 @@ DQ
                                                 </customSpacing>
                                             </stackView>
                                         </subviews>
-                                        <animations/>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
@@ -595,7 +577,6 @@ DQ
                                         </customSpacing>
                                     </stackView>
                                 </subviews>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="X7T-ED-qIp"/>
                                 </constraints>
@@ -616,7 +597,6 @@ DQ
                             <constraint firstAttribute="bottom" secondItem="SBQ-P8-KgN" secondAttribute="bottom" id="hZH-ww-mRG"/>
                             <constraint firstItem="SBQ-P8-KgN" firstAttribute="top" secondItem="JXV-aB-ney" secondAttribute="top" id="pP1-FK-Wa4"/>
                         </constraints>
-                        <animations/>
                     </view>
                     <connections>
                         <outlet property="githubAccountNameTextField" destination="9Gv-Zp-fEt" id="phK-0m-du3"/>
