@@ -167,7 +167,7 @@
                                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="11" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mf3-YQ-e92">
                                                                                     <rect key="frame" x="32" y="4" width="247" height="45"/>
                                                                                     <subviews>
-                                                                                        <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kj2-kT-BoQ">
+                                                                                        <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kj2-kT-BoQ">
                                                                                             <rect key="frame" x="-2" y="28" width="251" height="17"/>
                                                                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="efq-iz-mnd">
                                                                                                 <font key="font" metaFont="system"/>
