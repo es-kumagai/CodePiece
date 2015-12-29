@@ -586,7 +586,7 @@ extension STTwitterAPI {
 			DebugTime.print("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
 		}
 		
-		let mediaUploadSucceeded = { (imageDictionary:[NSObject : AnyObject]!, mediaID:String!, size:NSNumber!) -> Void in
+		let mediaUploadSucceeded = { (imageDictionary:[NSObject : AnyObject]!, mediaID:String!, size:Int) -> Void in
 			
 			DebugTime.print("📮 A thumbnail media posted ... #3.3.3.2.1")
 			container.setTwitterMediaIDs(mediaID)
