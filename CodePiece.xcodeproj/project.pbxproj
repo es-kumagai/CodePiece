@@ -1575,7 +1575,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.beta";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CodePiece/CodePiece-Bridging-Header.h";
@@ -1597,7 +1597,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.beta";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "05f26c05-28a7-4965-9ecb-8225993cb44e";
 				SWIFT_OBJC_BRIDGING_HEADER = "CodePiece/CodePiece-Bridging-Header.h";
