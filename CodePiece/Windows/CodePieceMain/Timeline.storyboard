@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gED-XW-6vA">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gED-XW-6vA">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
@@ -32,7 +32,6 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="14" id="DaJ-WU-KEF"/>
                                                                 </constraints>
-                                                                <animations/>
                                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="obn-11-IGu">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -44,7 +43,6 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="2Wo-Jk-7by" secondAttribute="height" multiplier="1:1" id="BfS-hN-Vfo"/>
                                                                 </constraints>
-                                                                <animations/>
                                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="YSE-Js-fA4">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
@@ -55,10 +53,8 @@
                                                             </button>
                                                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="6wO-Lf-gc9">
                                                                 <rect key="frame" x="268" y="0.0" width="16" height="14"/>
-                                                                <animations/>
                                                             </progressIndicator>
                                                         </subviews>
-                                                        <animations/>
                                                         <edgeInsets key="edgeInsets" left="0.0" right="0.0" top="4" bottom="4"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="14" id="wt5-vO-hoF"/>
@@ -81,13 +77,11 @@
                                                     <constraint firstAttribute="trailing" secondItem="izy-dV-Ecq" secondAttribute="trailing" constant="8" id="maq-Bb-fv4"/>
                                                     <constraint firstItem="izy-dV-Ecq" firstAttribute="leading" secondItem="Rvt-xa-mmo" secondAttribute="leading" constant="8" id="vuS-pI-qjh"/>
                                                 </constraints>
-                                                <animations/>
                                                 <connections>
                                                     <outlet property="statusLabel" destination="bcL-Kq-TYx" id="YqM-d4-Wwf"/>
                                                 </connections>
                                             </customView>
                                         </subviews>
-                                        <animations/>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                         </visibilityPriorities>
@@ -104,7 +98,6 @@
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="65" rowSizeStyle="automatic" viewBased="YES" id="TsF-qR-Gkc" customClass="TimelineTableView" customModule="CodePiece" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="298" height="296"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <animations/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -128,7 +121,6 @@
                                                                     <subviews>
                                                                         <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="eYG-fk-Loy">
                                                                             <rect key="frame" x="4" y="-2" width="287" height="5"/>
-                                                                            <animations/>
                                                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                             <font key="titleFont" metaFont="system"/>
@@ -145,7 +137,6 @@
                                                                                                 <constraint firstAttribute="height" constant="24" id="AUE-1q-7PS"/>
                                                                                                 <constraint firstAttribute="width" constant="24" id="XzU-Lb-T5G"/>
                                                                                             </constraints>
-                                                                                            <animations/>
                                                                                             <buttonCell key="cell" type="bevel" bezelStyle="circular" image="NSUserGuest" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="D67-Tb-u39">
                                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                                 <font key="font" metaFont="system"/>
@@ -153,7 +144,6 @@
                                                                                         </button>
                                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pa2-I5-Nhb">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="24" height="14"/>
-                                                                                            <animations/>
                                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="RT" drawsBackground="YES" id="YEP-1i-Vjm">
                                                                                                 <font key="font" metaFont="systemSemibold" size="11"/>
                                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -161,7 +151,6 @@
                                                                                             </textFieldCell>
                                                                                         </textField>
                                                                                     </subviews>
-                                                                                    <animations/>
                                                                                     <constraints>
                                                                                         <constraint firstItem="Pa2-I5-Nhb" firstAttribute="leading" secondItem="lUx-qE-WgV" secondAttribute="leading" id="X3T-v6-KlH"/>
                                                                                         <constraint firstAttribute="trailing" secondItem="Pa2-I5-Nhb" secondAttribute="trailing" id="hjT-Jc-Rph"/>
@@ -178,9 +167,8 @@
                                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="11" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mf3-YQ-e92">
                                                                                     <rect key="frame" x="32" y="4" width="247" height="45"/>
                                                                                     <subviews>
-                                                                                        <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kj2-kT-BoQ">
+                                                                                        <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kj2-kT-BoQ">
                                                                                             <rect key="frame" x="-2" y="28" width="251" height="17"/>
-                                                                                            <animations/>
                                                                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="efq-iz-mnd">
                                                                                                 <font key="font" metaFont="system"/>
                                                                                                 <color key="textColor" red="0.208450675" green="0.33309835199999999" blue="0.41607216000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -192,7 +180,6 @@
                                                                                             <subviews>
                                                                                                 <textField horizontalHuggingPriority="100" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LZz-oQ-fjr">
                                                                                                     <rect key="frame" x="-2" y="0.0" width="219" height="17"/>
-                                                                                                    <animations/>
                                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Username" id="nym-UL-Y5F">
                                                                                                         <font key="font" metaFont="systemBold"/>
                                                                                                         <color key="textColor" red="0.26881562069999998" green="0.4509419985" blue="0.86120975379999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -201,7 +188,6 @@
                                                                                                 </textField>
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="pgZ-aP-321">
                                                                                                     <rect key="frame" x="221" y="0.0" width="28" height="14"/>
-                                                                                                    <animations/>
                                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="date" id="i03-Vk-1xE">
                                                                                                         <font key="font" metaFont="smallSystem"/>
                                                                                                         <color key="textColor" red="0.4756349325" green="0.47564667459999999" blue="0.47564035650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -209,7 +195,6 @@
                                                                                                     </textFieldCell>
                                                                                                 </textField>
                                                                                             </subviews>
-                                                                                            <animations/>
                                                                                             <visibilityPriorities>
                                                                                                 <integer value="1000"/>
                                                                                                 <integer value="1000"/>
@@ -220,7 +205,6 @@
                                                                                             </customSpacing>
                                                                                         </stackView>
                                                                                     </subviews>
-                                                                                    <animations/>
                                                                                     <visibilityPriorities>
                                                                                         <integer value="1000"/>
                                                                                         <integer value="1000"/>
@@ -231,7 +215,6 @@
                                                                                     </customSpacing>
                                                                                 </stackView>
                                                                             </subviews>
-                                                                            <animations/>
                                                                             <visibilityPriorities>
                                                                                 <integer value="1000"/>
                                                                                 <integer value="1000"/>
@@ -251,7 +234,6 @@
                                                                         <constraint firstAttribute="trailing" secondItem="eYG-fk-Loy" secondAttribute="trailing" constant="4" id="kT5-2K-zT1"/>
                                                                         <constraint firstItem="eYG-fk-Loy" firstAttribute="leading" secondItem="PIX-TI-qfa" secondAttribute="leading" constant="4" id="xwB-ld-XXi"/>
                                                                     </constraints>
-                                                                    <animations/>
                                                                     <connections>
                                                                         <outlet property="dateLabel" destination="pgZ-aP-321" id="FYL-Kt-b5f"/>
                                                                         <outlet property="iconButton" destination="eaT-Yb-KdN" id="dPh-MT-IRp"/>
@@ -272,7 +254,6 @@
                                                                                     <subviews>
                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="gu3-Kb-1uH">
                                                                                             <rect key="frame" x="6" y="3" width="12" height="14"/>
-                                                                                            <animations/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↑" id="cDS-Qe-HoX">
                                                                                                 <font key="font" metaFont="smallSystemBold"/>
                                                                                                 <color key="textColor" red="1" green="0.94568324079999999" blue="0.55230108789999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -281,7 +262,6 @@
                                                                                         </textField>
                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="0SF-DB-qdw">
                                                                                             <rect key="frame" x="22" y="3" width="84" height="14"/>
-                                                                                            <animations/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="xAo-9Z-cs6">
                                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                                 <color key="textColor" red="1" green="0.94568324083166289" blue="0.55230108788395904" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -289,7 +269,6 @@
                                                                                             </textFieldCell>
                                                                                         </textField>
                                                                                     </subviews>
-                                                                                    <animations/>
                                                                                     <edgeInsets key="edgeInsets" left="8" right="0.0" top="2" bottom="0.0"/>
                                                                                     <visibilityPriorities>
                                                                                         <integer value="1000"/>
@@ -305,7 +284,6 @@
                                                                                     <subviews>
                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="Ro0-SP-0ba">
                                                                                             <rect key="frame" x="-2" y="3" width="84" height="14"/>
-                                                                                            <animations/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="PA1-DH-PRB">
                                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                                 <color key="textColor" red="0.85522877559726962" green="0.63923549234460642" blue="0.50031248231132941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -314,7 +292,6 @@
                                                                                         </textField>
                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GU9-2u-J5K">
                                                                                             <rect key="frame" x="86" y="3" width="12" height="14"/>
-                                                                                            <animations/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↓" id="3a6-mp-bbg">
                                                                                                 <font key="font" metaFont="smallSystemBold"/>
                                                                                                 <color key="textColor" red="0.85522877559999999" green="0.63923549229999999" blue="0.50031248230000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -322,7 +299,6 @@
                                                                                             </textFieldCell>
                                                                                         </textField>
                                                                                     </subviews>
-                                                                                    <animations/>
                                                                                     <edgeInsets key="edgeInsets" left="0.0" right="8" top="0.0" bottom="-2"/>
                                                                                     <visibilityPriorities>
                                                                                         <integer value="1000"/>
@@ -334,7 +310,6 @@
                                                                                     </customSpacing>
                                                                                 </stackView>
                                                                             </subviews>
-                                                                            <animations/>
                                                                             <constraints>
                                                                                 <constraint firstItem="nVR-K7-OgL" firstAttribute="top" secondItem="glD-pD-d9O" secondAttribute="top" id="PgS-EM-L67"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="bS7-fV-5fL" secondAttribute="bottom" id="Qwz-Me-daH"/>
@@ -359,7 +334,6 @@
                                                                         <constraint firstItem="glD-pD-d9O" firstAttribute="leading" secondItem="i0d-rn-ugi" secondAttribute="leading" id="eLM-43-xze"/>
                                                                         <constraint firstAttribute="bottom" secondItem="glD-pD-d9O" secondAttribute="bottom" id="q1v-hY-b8e"/>
                                                                     </constraints>
-                                                                    <animations/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
                                                                             <color key="value" red="0.4384974539" green="0.26094529030000002" blue="0.2657999694" alpha="1" colorSpace="calibratedRGB"/>
@@ -381,23 +355,18 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
-                                            <animations/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
-                                        <animations/>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.99999999227045355" horizontal="YES" id="JwN-2C-eKa">
                                             <rect key="frame" x="-100" y="-100" width="283" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <animations/>
                                         </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="QaD-GY-diU">
                                             <rect key="frame" x="283" y="1" width="16" height="296"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <animations/>
                                         </scroller>
                                     </scrollView>
                                 </subviews>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="2kd-Py-3pO"/>
                                 </constraints>
@@ -417,7 +386,6 @@
                             <constraint firstAttribute="trailing" secondItem="Ovw-EQ-6td" secondAttribute="trailing" id="dLN-tb-DdT"/>
                             <constraint firstItem="Ovw-EQ-6td" firstAttribute="leading" secondItem="CWQ-kz-Sxg" secondAttribute="leading" id="lCq-8m-cqW"/>
                         </constraints>
-                        <animations/>
                     </view>
                     <connections>
                         <outlet property="timelineDataSource" destination="zPm-Mr-oy7" id="nS5-eP-bqO"/>
