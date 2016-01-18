@@ -2,7 +2,17 @@
 
 Change Logs.
 
-## 1.4.3 (*)
+## 1.4.4 (*)
+
+### Fixes
+
+* Fix layout for showing an error message in Twitter Preferences window.
+
+### Beta Only
+
+* Change Product Bundle Identifier for Beta app.
+
+## 1.4.3
 
 ### Fixes
 
