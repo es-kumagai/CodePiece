@@ -232,6 +232,11 @@ class ViewController: NSViewController, NotificationObservable {
 			
 			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
 		}
+		
+		observeNotification(TimelineViewController.TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
+			
+			self.setReplyTo(notification)
+		}
 	}
 	
 	override func viewDidAppear() {

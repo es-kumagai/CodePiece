@@ -21,4 +21,8 @@ extension TimelineViewController {
 			self.selectedCells = selectedCells
 		}
 	}
+	
+	final class TimelineReplyToSelectionRequestNotification : Notification {
+		
+	}
 }

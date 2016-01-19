@@ -125,6 +125,7 @@
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
 		B17C88C61B66FE7F00CBF20F /* ss in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BE1B66BE6800CBF20F /* ss */; };
 		B17DAF5E1B6529A0004CE4D2 /* WebCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DAF5D1B6529A0004CE4D2 /* WebCaptureController.swift */; };
+		B188E2471C4E7EC700137182 /* TimelineViewController+MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B188E2461C4E7EC700137182 /* TimelineViewController+MainWindow.swift */; };
 		B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA9611BC60D9B00056E86 /* Extension.swift */; };
 		B18AA96C1BC6903A00056E86 /* MainWindowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */; };
 		B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */; };
@@ -376,6 +377,7 @@
 		B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		B17C88C51B66E68D00CBF20F /* ArchiveZip.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ArchiveZip.sh; sourceTree = "<group>"; };
 		B17DAF5D1B6529A0004CE4D2 /* WebCaptureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebCaptureController.swift; sourceTree = "<group>"; };
+		B188E2461C4E7EC700137182 /* TimelineViewController+MainWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+MainWindow.swift"; sourceTree = "<group>"; };
 		B18AA9611BC60D9B00056E86 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B18AA9691BC6903A00056E86 /* MainWindowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MainWindowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowUITests.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 			children = (
 				B15E71B81BF06CDF009CCB0E /* TimelineViewController.swift */,
 				B169B8381C4D967900CBF6C9 /* TimelineViewController+Notifications.swift */,
+				B188E2461C4E7EC700137182 /* TimelineViewController+MainWindow.swift */,
 				B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */,
 				B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */,
 				B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */,
@@ -1355,6 +1358,7 @@
 				B12B24891B6B80C200B284D7 /* AcknowledgementsViewController.swift in Sources */,
 				B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */,
 				B1E89A7C1B7472770062E12E /* DataStore_AuthInfo.swift in Sources */,
+				B188E2471C4E7EC700137182 /* TimelineViewController+MainWindow.swift in Sources */,
 				B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */,
 				B12210541BCBC476004DBB9A /* ClientInfo.swift in Sources */,
 				B169B84D1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift in Sources */,

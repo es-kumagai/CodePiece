@@ -24,8 +24,18 @@ class TimelineViewController: NSViewController {
 	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
 	var currentTimelineSelectedRowIndexes = NSIndexSet() {
 		
+		willSet {
+		
+			willChangeValueForKey("canReplyRequest")
+		}
+		
 		didSet {
 
+			defer {
+			
+				didChangeValueForKey("canReplyRequest")
+			}
+			
 			let tableView = self.timelineTableView
 
 			tableView.makedCells.forEach { cell in
