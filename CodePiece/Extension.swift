@@ -1089,7 +1089,14 @@ public func handleError<R,E:ErrorType>(@autoclosure expression:() throws -> R, b
 	}
 }
 
-extension NSObject {
+public protocol KeyValueChangeable {
+
+	func withChangeValue(keys:String...)
+	func withChangeValue(keys:String..., @noescape body:()->Void)
+	func withChangeValue<S:SequenceType where S.Generator.Element == String>(keys:S, @noescape body:()->Void)
+}
+
+extension NSObject : KeyValueChangeable {
 
 	public func withChangeValue(keys:String...) {
 		

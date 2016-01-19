@@ -147,30 +147,6 @@ class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	func makePostData() -> PostData {
-	
-		let code = codeTextView.codeText
-		let description = descriptionTextField.twitterText
-		let language = self.selectedLanguage
-		let hashtags = self.hashTagTextField.hashtags
-		let replyTo = self.statusForReplyTo
-		
-		#if DEBUG
-			let usePublicGists = false
-		#else
-			let usePublicGists = true
-		#endif
-		
-		let appendAppTagToTwitter = false
-
-		return PostData(code: code, description: description, language: language, hashtags: hashtags, usePublicGists: usePublicGists, replyTo: replyTo, appendAppTagToTwitter: appendAppTagToTwitter)
-	}
-	
-	func makePostDataContainer() -> PostDataContainer {
-		
-		return PostDataContainer(self.makePostData())
-	}
-	
 	func post(callback:(PostResult)->Void) {
 		
 		DebugTime.print("📮 Try to post ... #1")
@@ -189,44 +165,6 @@ class ViewController: NSViewController, NotificationObservable {
 				
 				callback(PostResult.Failure(container))
 			}
-		}
-	}
-	
-	func clearContents() {
-		
-		self.clearCodeText()
-		self.clearDescriptionText()
-		self.clearReplyTo()
-
-		self.updateControlsDisplayText()
-	}
-	
-	func clearReplyTo() {
-	
-		resetReplyTo()
-	}
-	
-	func clearCodeText() {
-		
-		self.withChangeValue("canPost") {
-			
-			codeTextView.clearCodeText()
-		}
-	}
-	
-	func clearDescriptionText() {
-		
-		self.withChangeValue("canPost") {
-
-			descriptionTextField.clearTwitterText()
-		}
-	}
-	
-	func clearHashtags() {
-		
-		self.withChangeValue("canPost") {
-			
-			self.hashTagTextField.hashtags = []
 		}
 	}
 	
@@ -331,31 +269,6 @@ class ViewController: NSViewController, NotificationObservable {
 		NSLog("🌴 restoreStateWithCoder Passed.")
 	}
 
-	func focusToDefaultControl() {
-
-		self.focusToCodeArea()
-	}
-	
-	func focusToCodeArea() {
-		
-		self.codeScrollView.becomeFirstResponder()
-	}
-	
-	func focusToDescription() {
-		
-		self.descriptionTextField.becomeFirstResponder()
-	}
-	
-	func focusToHashtag() {
-		
-		self.hashTagTextField.becomeFirstResponder()
-	}
-	
-	func focusToLanguage() {
-		
-		// MARK: 😒 I don't know how to show NSPopUpButton's submenu manually. The corresponding menu item is disabled too.
-	}
-	
 	func verifyCredentials() {
 
 		guard NSApp.isReadyForUse else {
@@ -410,26 +323,6 @@ class ViewController: NSViewController, NotificationObservable {
 }
 
 extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
-
-	func updateControlsDisplayText() {
-		
-		self.updateTweetTextCount()
-		self.updatePostButtonTitle()
-	}
-	
-	func updateTweetTextCount() {
-
-		let includesGistsLink = codeTextView.hasCode
-		let totalCount = self.makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
-		
-		self.descriptionCountLabel.stringValue = String(totalCount)
-		self.descriptionCountLabel.textColor = SystemColor.NeutralColor.color
-	}
-	
-	func updatePostButtonTitle() {
-		
-		self.postButton.title = (codeTextView.hasCode ? "Post Gist" : "Tweet")
-	}
 	
 	func textDidChange(notification: NSNotification) {
 		

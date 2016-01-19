@@ -115,6 +115,7 @@
 		B169B8471C4E3AC000CBF6C9 /* ViewController+Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8461C4E3AC000CBF6C9 /* ViewController+Fields.swift */; };
 		B169B8491C4E3EE100CBF6C9 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8481C4E3EE100CBF6C9 /* CodeTextView.swift */; };
 		B169B84B1C4E3F0500CBF6C9 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B84A1C4E3F0500CBF6C9 /* CodeText.swift */; };
+		B169B84D1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B84C1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift */; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
 		B1745BD41BF8CDF000E19F32 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1745BD31BF8CDF000E19F32 /* Media.swift */; };
 		B177FA6D1BF1FC7F000CE394 /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */; };
@@ -365,6 +366,7 @@
 		B169B8461C4E3AC000CBF6C9 /* ViewController+Fields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+Fields.swift"; sourceTree = "<group>"; };
 		B169B8481C4E3EE100CBF6C9 /* CodeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 		B169B84A1C4E3F0500CBF6C9 /* CodeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeText.swift; sourceTree = "<group>"; };
+		B169B84C1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+PostDataManage.swift"; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
 		B1745BD31BF8CDF000E19F32 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableController.swift; sourceTree = "<group>"; };
@@ -809,6 +811,7 @@
 				B19B36AB1BD9EA69000D10F9 /* Timeline.storyboard */,
 				B169B83C1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift */,
 				B169B8461C4E3AC000CBF6C9 /* ViewController+Fields.swift */,
+				B169B84C1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift */,
 			);
 			path = CodePieceMain;
 			sourceTree = "<group>";
@@ -1354,6 +1357,7 @@
 				B1E89A7C1B7472770062E12E /* DataStore_AuthInfo.swift in Sources */,
 				B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */,
 				B12210541BCBC476004DBB9A /* ClientInfo.swift in Sources */,
+				B169B84D1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift in Sources */,
 				B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */,
 				B169B84B1C4E3F0500CBF6C9 /* CodeText.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
