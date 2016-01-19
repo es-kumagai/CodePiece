@@ -21,7 +21,7 @@ protocol ViewControllerRepliable : class {
 
 protocol ViewControllerSelectionAndRepliable : ViewControllerSelectable, ViewControllerRepliable {
 	
-	func resetReplyTo()
+	func clearReplyTo()
 	func setReplyToBySelectedStatuses()
 }
 
@@ -51,7 +51,7 @@ extension ViewController {
 		
 		guard selectedStatuses.isExists else {
 			
-			resetReplyTo()
+			clearReplyTo()
 			return
 		}
 
@@ -63,5 +63,19 @@ extension ViewController {
 		}
 
 		focusToDescription()
+	}
+}
+
+
+extension MenuController {
+	
+	var canReplyTo: Bool {
+		
+		return mainViewController?.canReplyToSelectedStatuses ?? false
+	}
+	
+	@IBAction func replyTo(sender:NSMenuItem) {
+		
+		mainViewController?.setReplyTo(sender)
 	}
 }

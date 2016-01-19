@@ -24,6 +24,9 @@ protocol FieldsController {
 	func updateControlsDisplayText()
 	func updateTweetTextCount()
 	func updatePostButtonTitle()
+	
+	func getPostButtonTitle() -> String
+	
 	func clearReplyTo()
 	func clearCodeText()
 	func clearDescriptionText()
@@ -83,15 +86,23 @@ extension FieldsController where Self : PostDataManageable {
 	}	
 }
 
-extension FieldsController where Self : ViewControllerSelectionAndRepliable, Self : KeyValueChangeable {
+extension FieldsController where Self : ViewControllerSelectionAndRepliable {
 	
-	func clearReplyTo() {
+	func getPostButtonTitle() -> String {
 		
-		withChangeValue("canPost") {
+		if hasStatusForReplyTo {
 			
-			resetReplyTo()
+			return "Reply"
+		}
+		else {
+			
+			return codeTextView.hasCode ? "Post Gist" : "Tweet"
 		}
 	}
+}
+
+extension FieldsController where Self : ViewControllerSelectionAndRepliable, Self : KeyValueChangeable {
+	
 }
 
 extension FieldsController where Self : KeyValueChangeable {
@@ -104,7 +115,7 @@ extension FieldsController where Self : KeyValueChangeable {
 	
 	func updatePostButtonTitle() {
 		
-		self.postButton.title = (codeTextView.hasCode ? "Post Gist" : "Tweet")
+		self.postButton.title = getPostButtonTitle()
 	}
 	
 	func clearCodeText() {

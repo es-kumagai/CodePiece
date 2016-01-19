@@ -237,13 +237,6 @@
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="mIg-Dg-glM"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Clear Replying-To Status ID" keyEquivalent="R" id="mfk-kV-ltG">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="clearReplyingToStatusID:" target="p69-Rc-ib8" id="mJ3-aT-8Ir"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="hasReplyingToStatusID" id="wds-xU-e63"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hWk-5O-fe1"/>
                                         <menuItem title="Reload Timeline" keyEquivalent="r" id="SaP-vc-ZWX">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
@@ -268,10 +261,18 @@ DQ
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canPostToSNS" id="1Ru-mv-L7m"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="CYJ-mj-Wam"/>
                                         <menuItem title="Reply To Selection" keyEquivalent="r" id="yiL-UH-fkg">
                                             <connections>
                                                 <action selector="replyTo:" target="p69-Rc-ib8" id="nbW-X6-90O"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="canReplyTo" id="Vne-po-qbr"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Cancel Replying Mode" keyEquivalent="R" id="nRV-hm-BNs">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="clearReplyingToStatusID:" target="p69-Rc-ib8" id="F8S-WX-GsU"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="hasReplyingToStatusID" id="Ot2-JR-ML1"/>
                                             </connections>
                                         </menuItem>
                                     </items>

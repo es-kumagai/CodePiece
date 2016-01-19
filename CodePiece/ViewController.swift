@@ -355,9 +355,12 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 
 extension ViewController : ViewControllerSelectionAndRepliable {
 
-	func resetReplyTo() {
+	func clearReplyTo() {
 	
-		self.statusForReplyTo = nil
+		withChangeValue("canPost") {
+			
+			self.statusForReplyTo = nil
+		}
 	}
 	
 	func setReplyToBySelectedStatuses() {
@@ -367,19 +370,9 @@ extension ViewController : ViewControllerSelectionAndRepliable {
 			return
 		}
 		
-		self.statusForReplyTo = selectedStatuses.first!
-	}
-}
-
-extension MenuController {
-	
-	var canReplyTo: Bool {
-		
-		return mainViewController?.canReplyToSelectedStatuses ?? false
-	}
-	
-	@IBAction func replyTo(sender:NSMenuItem) {
-		
-		mainViewController?.setReplyTo(sender)
+		withChangeValue("canPost") {
+			
+			self.statusForReplyTo = selectedStatuses.first!
+		}
 	}
 }
