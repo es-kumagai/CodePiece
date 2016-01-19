@@ -68,7 +68,7 @@ class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	@IBOutlet var descriptionTextField:NSTextField!
+	@IBOutlet var descriptionTextField:DescriptionTextField!
 	@IBOutlet var descriptionCountLabel:NSTextField!
 	
 	@IBOutlet var codeScrollView:NSScrollView!
@@ -504,8 +504,8 @@ extension MenuController {
 		return mainViewController?.canReplyToSelectedStatuses ?? false
 	}
 	
-	@IBAction func replyTo(sender:NSMenuItem?) {
+	@IBAction func replyTo(sender:NSMenuItem) {
 		
-		mainViewController?.setReplyToBySelectedStatuses()
+		mainViewController?.setReplyTo(sender)
 	}
 }

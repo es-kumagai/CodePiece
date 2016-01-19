@@ -6,7 +6,7 @@
 //  Copyright © 2016 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import ESTwitter
 
 protocol ViewControllerSelectable : class {
@@ -49,13 +49,19 @@ extension ViewController {
 
 	@IBAction func setReplyTo(sender: AnyObject) {
 		
-		if selectedStatuses.isExists {
-
-			setReplyToBySelectedStatuses()
-		}
-		else {
+		guard selectedStatuses.isExists else {
 			
 			resetReplyTo()
+			return
 		}
+
+		setReplyToBySelectedStatuses()
+
+		if let status = self.statusForReplyTo where !NSApp.twitterController.isMyTweet(status) {
+
+			descriptionTextField.readyForReplyTo(status.user.screenName)
+		}
+
+		focusToDescription()
 	}
 }

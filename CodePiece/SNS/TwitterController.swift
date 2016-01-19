@@ -200,6 +200,16 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		
 		return self.account != nil
 	}
+	
+	func isMyTweet(status: ESTwitter.Status) -> Bool {
+		
+		guard let account = self.account else {
+			
+			return false
+		}
+		
+		return account.username == status.user.screenName
+	}
 
 	private lazy var api:STTwitterAPI! = self._getAPI()
 	

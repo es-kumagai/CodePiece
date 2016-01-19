@@ -6,7 +6,7 @@ Change Logs.
 
 ### Enhancements
 
-* CodePiece can now reply to myself by twitter.
+* CodePiece can now replying to other tweets.
 * Change shortcut key for `Reload Timeline` to `option+command+R`.
 * Assign shortcut key for `Reply To Selection` to `command+R`.
 

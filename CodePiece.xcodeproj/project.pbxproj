@@ -110,6 +110,8 @@
 		B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE61BDC60770013AFF6 /* Environments.swift */; };
 		B169B8391C4D967900CBF6C9 /* TimelineViewController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8381C4D967900CBF6C9 /* TimelineViewController+Notifications.swift */; };
 		B169B83D1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B83C1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift */; };
+		B169B8431C4E1C3D00CBF6C9 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8421C4E1C3D00CBF6C9 /* DescriptionTextField.swift */; };
+		B169B8451C4E1DA300CBF6C9 /* TwitterText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8441C4E1DA300CBF6C9 /* TwitterText.swift */; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
 		B1745BD41BF8CDF000E19F32 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1745BD31BF8CDF000E19F32 /* Media.swift */; };
 		B177FA6D1BF1FC7F000CE394 /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */; };
@@ -355,6 +357,8 @@
 		B1630AE61BDC60770013AFF6 /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		B169B8381C4D967900CBF6C9 /* TimelineViewController+Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Notifications.swift"; sourceTree = "<group>"; };
 		B169B83C1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+SelectionAndRepliable.swift"; sourceTree = "<group>"; };
+		B169B8421C4E1C3D00CBF6C9 /* DescriptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTextField.swift; sourceTree = "<group>"; };
+		B169B8441C4E1DA300CBF6C9 /* TwitterText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterText.swift; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
 		B1745BD31BF8CDF000E19F32 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableController.swift; sourceTree = "<group>"; };
@@ -567,6 +571,7 @@
 				B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */,
 				B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */,
 				B125A3F21B808D5900AFAB89 /* StatusImageView.swift */,
+				B169B8421C4E1C3D00CBF6C9 /* DescriptionTextField.swift */,
 			);
 			name = Controls;
 			path = ../Controls;
@@ -672,6 +677,7 @@
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
 				B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */,
 				B12E04401B8864DD0032DC6F /* BaseViewController.swift */,
+				B169B8441C4E1DA300CBF6C9 /* TwitterText.swift */,
 				B1492FBB1B5BCED80043ED8D /* Main.storyboard */,
 				B128CB601B679F8700859D81 /* Support Files */,
 			);
@@ -1303,6 +1309,7 @@
 				B19DA9601C04A276000881AE /* PostData+Twitter.swift in Sources */,
 				B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */,
 				B15E71C51BF0BC70009CCB0E /* TimelineViewController+Action.swift in Sources */,
+				B169B8431C4E1C3D00CBF6C9 /* DescriptionTextField.swift in Sources */,
 				B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */,
 				B13C98F71B70E3C800A5A2B3 /* LanguagePopupDataSource.swift in Sources */,
 				B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */,
@@ -1340,6 +1347,7 @@
 				B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
 				B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */,
+				B169B8451C4E1DA300CBF6C9 /* TwitterText.swift in Sources */,
 				B177FA701BF22D50000CE394 /* CodePieceClientInfo.swift in Sources */,
 				B10182CB1BEF8F6B0077873B /* TimelineStatusView.swift in Sources */,
 				B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */,
