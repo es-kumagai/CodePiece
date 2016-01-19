@@ -4,6 +4,12 @@ Change Logs.
 
 ## 1.4.4 (*)
 
+### Enhancements
+
+* CodePiece can now reply to myself by twitter.
+* Change shortcut key for `Reload Timeline` to `option+command+R`.
+* Assign shortcut key for `Reply To Selection` to `command+R`.
+
 ### Fixes
 
 * Fix layout for showing an error message in Twitter Preferences window.
