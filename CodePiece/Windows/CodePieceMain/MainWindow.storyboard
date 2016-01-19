@@ -24,7 +24,7 @@
                                     <rect key="frame" x="1" y="1" width="702" height="278"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView identifier="CodeTextIdentifier" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="8OA-rk-WhX">
+                                        <textView identifier="CodeTextIdentifier" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="8OA-rk-WhX" customClass="CodeTextView" customModule="CodePiece" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="702" height="278"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

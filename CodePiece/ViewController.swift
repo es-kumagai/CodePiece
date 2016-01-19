@@ -45,7 +45,7 @@ class ViewController: NSViewController, NotificationObservable {
 
 	@IBOutlet var languagePopUpDataSource:LanguagePopupDataSource!
 	
-	@IBOutlet var codeTextView:NSTextView! {
+	@IBOutlet var codeTextView:CodeTextView! {
 	
 		didSet {
 			
@@ -102,25 +102,6 @@ class ViewController: NSViewController, NotificationObservable {
 		return meetsAllOf(conditions, true)
 	}
 	
-	var hasCode:Bool {
-	
-		return self.trimmedCode != nil
-	}
-	
-	var trimmedCode: String? {
-		
-		let code = self.codeTextView.string!.trimmed()
-		
-		if code.isEmpty {
-			
-			return nil
-		}
-		else {
-			
-			return code
-		}
-	}
-	
 	var selectedLanguage:Language {
 		
 		return self.languagePopUpButton.selectedItem.flatMap { Language(displayText: $0.title) }!
@@ -168,8 +149,8 @@ class ViewController: NSViewController, NotificationObservable {
 	
 	func makePostData() -> PostData {
 	
-		let code = self.trimmedCode
-		let description = self.descriptionTextField.stringValue
+		let code = codeTextView.codeText
+		let description = descriptionTextField.twitterText
 		let language = self.selectedLanguage
 		let hashtags = self.hashTagTextField.hashtags
 		let replyTo = self.statusForReplyTo
@@ -229,7 +210,7 @@ class ViewController: NSViewController, NotificationObservable {
 		
 		self.withChangeValue("canPost") {
 			
-			self.codeTextView.string = ""
+			codeTextView.clearCodeText()
 		}
 	}
 	
@@ -237,7 +218,7 @@ class ViewController: NSViewController, NotificationObservable {
 		
 		self.withChangeValue("canPost") {
 
-			self.descriptionTextField.stringValue = ""
+			descriptionTextField.clearTwitterText()
 		}
 	}
 	
@@ -438,7 +419,7 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func updateTweetTextCount() {
 
-		let includesGistsLink = self.hasCode
+		let includesGistsLink = codeTextView.hasCode
 		let totalCount = self.makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
 		
 		self.descriptionCountLabel.stringValue = String(totalCount)
@@ -447,7 +428,7 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func updatePostButtonTitle() {
 		
-		self.postButton.title = (self.hasCode ? "Post Gist" : "Tweet")
+		self.postButton.title = (codeTextView.hasCode ? "Post Gist" : "Tweet")
 	}
 	
 	func textDidChange(notification: NSNotification) {

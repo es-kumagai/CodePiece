@@ -25,6 +25,14 @@ protocol ExistanceCheckable {
 	var isExists: Bool { get }
 }
 
+extension String : ExistanceCheckable {
+	
+	public var isExists: Bool {
+		
+		return !isEmpty
+	}
+}
+
 extension Array : ExistanceCheckable {
 
 	public var isExists: Bool {

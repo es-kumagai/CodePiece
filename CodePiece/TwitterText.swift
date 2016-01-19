@@ -11,6 +11,8 @@ import Foundation
 protocol TwitterTextType {
 	
 	var twitterText: String { get }
+	
+	mutating func clearTwitterText()
 }
 
 struct TwitterTextPart {

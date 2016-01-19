@@ -17,6 +17,11 @@ final class DescriptionTextField: NSTextField {
 			self.stringValue = "@\(screenName) "
 		}
 	}
+	
+	func clearTwitterText() {
+		
+		self.stringValue = ""
+	}
 }
 
 extension DescriptionTextField : TwitterTextType {

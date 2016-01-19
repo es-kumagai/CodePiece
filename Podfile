@@ -34,5 +34,6 @@ target :ESTwitter do
 	use_frameworks!
 	
 	pod 'Himotoki'
+	pod 'Swim', :git => 'https://github.com/EZ-NET/ESSwim', :branch => 'master'
 
 end
