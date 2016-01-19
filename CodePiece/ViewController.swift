@@ -332,6 +332,7 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func textDidChange(notification: NSNotification) {
 		
+		self.withChangeValue("canPost")
 		self.updateControlsDisplayText()
 	}
 	
