@@ -360,6 +360,7 @@ extension ViewController : ViewControllerSelectionAndRepliable {
 		withChangeValue("canPost") {
 			
 			self.statusForReplyTo = nil
+			updateControlsDisplayText()
 		}
 	}
 	
@@ -373,6 +374,7 @@ extension ViewController : ViewControllerSelectionAndRepliable {
 		withChangeValue("canPost") {
 			
 			self.statusForReplyTo = selectedStatuses.first!
+			updateControlsDisplayText()
 		}
 	}
 }
