@@ -8,6 +8,13 @@
 
 import Cocoa
 
+enum ReplyStyle {
+
+	case NormalPost
+	case ReplyPost
+	case ChainPost
+}
+
 protocol FieldsController {
 
 	var codeScrollView:NSScrollView! { get }
@@ -90,13 +97,48 @@ extension FieldsController where Self : ViewControllerSelectionAndRepliable {
 	
 	func getPostButtonTitle() -> String {
 		
-		if hasStatusForReplyTo {
+		switch replyStyle {
 			
+		case .NormalPost:
+			return codeTextView.hasCode ? "Post Gist" : "Tweet"
+
+		case .ReplyPost:
 			return "Reply"
+
+		case .ChainPost:
+			return "Chain Post"
+		}
+	}
+	
+	var replyStyle: ReplyStyle {
+		
+		guard let status = self.statusForReplyTo else {
+			
+			return .NormalPost
+		}
+		
+		if NSApp.twitterController.isMyTweet(status) {
+			
+			return .ChainPost
 		}
 		else {
 			
-			return codeTextView.hasCode ? "Post Gist" : "Tweet"
+			return descriptionTextField.containsScreenName(status.user.screenName) ? .ReplyPost : .NormalPost
+		}
+	}
+	
+	var isReplying: Bool {
+		
+		switch replyStyle {
+			
+		case .NormalPost:
+			return false
+			
+		case .ReplyPost:
+			return true
+			
+		case .ChainPost:
+			return true
 		}
 	}
 }
