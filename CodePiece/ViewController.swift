@@ -21,6 +21,22 @@ class ViewController: NSViewController, NotificationObservable {
 	var notificationHandlers = NotificationHandlers()
 	
 	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
+
+	private(set) var selectedStatuses = Array<ESTwitter.Status>()
+	private(set) var statusForReplyTo: ESTwitter.Status? {
+		
+		didSet {
+			
+			if let status = self.statusForReplyTo {
+				
+				print("Set 'Reply-To:' \(status.user)")
+			}
+			else {
+				
+				print("Reset 'Reply-To:")
+			}
+		}
+	}
 	
 	@IBOutlet var postButton:NSButton!
 	@IBOutlet var hashTagTextField:HashtagTextField!
@@ -156,6 +172,7 @@ class ViewController: NSViewController, NotificationObservable {
 		let description = self.descriptionTextField.stringValue
 		let language = self.selectedLanguage
 		let hashtags = self.hashTagTextField.hashtags
+		let replyTo = self.statusForReplyTo
 		
 		#if DEBUG
 			let usePublicGists = false
@@ -165,7 +182,7 @@ class ViewController: NSViewController, NotificationObservable {
 		
 		let appendAppTagToTwitter = false
 
-		return PostData(code: code, description: description, language: language, hashtags: hashtags, usePublicGists: usePublicGists, appendAppTagToTwitter: appendAppTagToTwitter)
+		return PostData(code: code, description: description, language: language, hashtags: hashtags, usePublicGists: usePublicGists, replyTo: replyTo, appendAppTagToTwitter: appendAppTagToTwitter)
 	}
 	
 	func makePostDataContainer() -> PostDataContainer {
@@ -198,8 +215,14 @@ class ViewController: NSViewController, NotificationObservable {
 		
 		self.clearCodeText()
 		self.clearDescriptionText()
+		self.clearReplyTo()
 
 		self.updateControlsDisplayText()
+	}
+	
+	func clearReplyTo() {
+	
+		resetReplyTo()
 	}
 	
 	func clearCodeText() {
@@ -276,6 +299,19 @@ class ViewController: NSViewController, NotificationObservable {
 		self.observeNotification(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
 			
 			self.updateTweetTextCount()
+		}
+		
+		observeNotification(TimelineViewController.TimelineSelectionChangedNotification.self) { [unowned self] notification in
+			
+			guard notification.selectedCells.count == 1 else {
+
+				self.selectedStatuses = []
+				return
+			}
+
+			self.selectedStatuses = notification.selectedCells.flatMap { $0.cell?.item?.status }
+			
+			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
 		}
 	}
 	
@@ -443,3 +479,33 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	}
 }
 
+extension ViewController : ViewControllerSelectionAndRepliable {
+
+	func resetReplyTo() {
+	
+		self.statusForReplyTo = nil
+	}
+	
+	func setReplyToBySelectedStatuses() {
+		
+		guard canReplyToSelectedStatuses else {
+			
+			return
+		}
+		
+		self.statusForReplyTo = selectedStatuses.first!
+	}
+}
+
+extension MenuController {
+	
+	var canReplyTo: Bool {
+		
+		return mainViewController?.canReplyToSelectedStatuses ?? false
+	}
+	
+	@IBAction func replyTo(sender:NSMenuItem?) {
+		
+		mainViewController?.setReplyToBySelectedStatuses()
+	}
+}

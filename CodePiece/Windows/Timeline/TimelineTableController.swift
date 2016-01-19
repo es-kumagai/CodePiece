@@ -12,7 +12,7 @@ import Swim
 
 protocol TimelineTableControllerType {
 	
-	var timelineTableView: NSTableView! { get }
+	var timelineTableView: TimelineTableView! { get }
 	var timelineDataSource: TimelineTableDataSource! { get }
 	
 	var currentTimelineSelectedRowIndexes: NSIndexSet { get set }

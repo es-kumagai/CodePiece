@@ -392,7 +392,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 	}
 
-	func post(container:PostDataContainer, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(container:PostDataContainer, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
 		DebugTime.print("📮 Verifying credentials of Twitter ... #3.1")
 		
@@ -410,7 +410,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 
 		DebugTime.print("📮 Try posting by Twitter ... #3.2")
 		
-		api.postStatusUpdate(container, inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
+		api.postStatusUpdate(container, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
 			
 			DebugTime.print("📮 Posted by Twitter ... #3.2.1")
 			
@@ -604,7 +604,7 @@ extension STTwitterAPI {
 		self.postMediaUploadData(mediaData, fileName: "thumbnail.png", uploadProgressBlock: tweetProgress, successBlock: mediaUploadSucceeded, errorBlock: mediaUpdateFailed)
 	}
 	
-	func postStatusUpdate(container:PostDataContainer, inReplyToStatusID existingStatusID: String? = nil, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) {
+	func postStatusUpdate(container:PostDataContainer, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) {
 		
 		DebugTime.print("📮 Try to post a status by Twitter ... #3.3")
 		
@@ -625,12 +625,12 @@ extension STTwitterAPI {
 		if container.hasMediaIDs {
 
 			DebugTime.print("📮 Try posting with image ... #3.3.3.1")
-			self.postStatusUpdate(container.descriptionForTwitter(), inReplyToStatusID: existingStatusID, mediaIDs: container.twitterState.mediaIDs, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
+			self.postStatusUpdate(container.descriptionForTwitter(), inReplyToStatusID: container.twitterReplyToStatusID, mediaIDs: container.twitterState.mediaIDs, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
 		}
 		else {
 
 			DebugTime.print("📮 Try posting with no image by API ... #3.3.3.3")
-			self.postStatusUpdate(container.descriptionForTwitter(), inReplyToStatusID: existingStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
+			self.postStatusUpdate(container.descriptionForTwitter(), inReplyToStatusID: container.twitterReplyToStatusID, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, successBlock: tweetSucceeded, errorBlock: tweetFailed)
 		}
 
 		DebugTime.print("📮 Post requested by API ... #3.3.4")

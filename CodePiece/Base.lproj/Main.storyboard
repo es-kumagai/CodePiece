@@ -202,16 +202,6 @@
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="y5N-re-000"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VzD-db-5QY"/>
-                                        <menuItem title="Post Code and Description To SNS" id="4pa-G3-8fj">
-                                            <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                                            <connections>
-                                                <action selector="postToSNS:" target="p69-Rc-ib8" id="P9z-pe-Js3"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canPostToSNS" id="kqv-xq-W5M"/>
-                                            </connections>
-                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -247,11 +237,41 @@ DQ
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="mIg-Dg-glM"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Clear Replying-To Status ID" keyEquivalent="R" id="mfk-kV-ltG">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="clearReplyingToStatusID:" target="p69-Rc-ib8" id="mJ3-aT-8Ir"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="hasReplyingToStatusID" id="wds-xU-e63"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hWk-5O-fe1"/>
                                         <menuItem title="Reload Timeline" keyEquivalent="r" id="SaP-vc-ZWX">
                                             <connections>
                                                 <action selector="reloadTimeline:" target="p69-Rc-ib8" id="xgV-eS-cgL"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isTimelineActive" id="t8s-4R-xaw"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Action" id="SQA-tG-xwj">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Action" id="emn-ui-tRh">
+                                    <items>
+                                        <menuItem title="Post Code and Description To SNS" id="Rc4-4N-6ac">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                            <connections>
+                                                <action selector="postToSNS:" target="p69-Rc-ib8" id="imo-zs-jEi"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canPostToSNS" id="1Ru-mv-L7m"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Reply To Selection" id="yiL-UH-fkg">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="replyTo:" target="p69-Rc-ib8" id="nbW-X6-90O"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canReplyTo" id="Vne-po-qbr"/>
                                             </connections>
                                         </menuItem>
                                     </items>

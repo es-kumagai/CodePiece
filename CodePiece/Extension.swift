@@ -20,6 +20,19 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+protocol ExistanceCheckable {
+
+	var isExists: Bool { get }
+}
+
+extension Array : ExistanceCheckable {
+
+	public var isExists: Bool {
+		
+		return !isEmpty
+	}
+}
+
 extension NSIndexSet {
 
 	public convenience init<S:SequenceType where S.Generator.Element == Int>(sequence s:S) {
@@ -27,6 +40,14 @@ extension NSIndexSet {
 		let indexes = s.reduce(NSMutableIndexSet()) { $0.addIndex($1); return $0 }
 		
 		self.init(indexSet: indexes.copy() as! NSIndexSet)
+	}
+}
+
+extension NSIndexSet : ExistanceCheckable {
+	
+	public var isExists: Bool {
+		
+		return count > 0
 	}
 }
 
