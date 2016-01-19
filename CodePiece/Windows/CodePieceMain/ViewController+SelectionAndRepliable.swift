@@ -41,6 +41,10 @@ extension ViewControllerRepliable {
 	}
 }
 
+extension ViewControllerRepliable where Self : FieldsController {
+
+}
+
 extension ViewControllerSelectionAndRepliable {
 	
 }

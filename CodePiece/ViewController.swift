@@ -96,7 +96,8 @@ class ViewController: NSViewController, NotificationObservable {
 		let conditions = [
 			
 			!self.posting,
-			!self.descriptionTextField.stringValue.isEmpty
+			!self.descriptionTextField.twitterText.isEmpty,
+			self.codeTextView.hasCode || !self.descriptionTextField.isReplyAddressOnly
 		]
 		
 		return meetsAllOf(conditions, true)

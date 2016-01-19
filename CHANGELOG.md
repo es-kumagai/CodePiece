@@ -9,6 +9,7 @@ Change Logs.
 * CodePiece can now replying to other tweets.
 * Change shortcut key for `Reload Timeline` to `option+command+R`.
 * Assign shortcut key for `Reply To Selection` to `command+R`.
+* Prohibit post which only twitter account ntext without a code.
 
 ### Fixes
 

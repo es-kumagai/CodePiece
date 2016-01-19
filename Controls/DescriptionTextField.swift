@@ -28,6 +28,6 @@ extension DescriptionTextField : TwitterTextType {
 	
 	var twitterText: String {
 		
-		return stringValue
+		return stringValue.trimmed()
 	}
 }

@@ -54,4 +54,15 @@ extension TwitterTextType {
 		
 		return includedScreenNames.contains { $0.text == screenName }
 	}
+	
+	var isReplyAddressOnly: Bool {
+		
+		let expression = try! NSRegularExpression(pattern: "^@\\w+$", options: NSRegularExpressionOptions(rawValue: 0))
+		
+		let text = self.twitterText
+		let options = NSMatchingOptions(rawValue: 0)
+		let range = NSMakeRange(0, text.utf16.count)
+		
+		return expression.firstMatchInString(text, options: options, range: range).isExists
+	}
 }
