@@ -63,6 +63,7 @@ extension ViewController {
 		}
 
 		focusToDescription()
+		updateControlsDisplayText()
 	}
 }
 
