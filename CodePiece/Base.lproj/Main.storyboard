@@ -246,6 +246,7 @@
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hWk-5O-fe1"/>
                                         <menuItem title="Reload Timeline" keyEquivalent="r" id="SaP-vc-ZWX">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="reloadTimeline:" target="p69-Rc-ib8" id="xgV-eS-cgL"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isTimelineActive" id="t8s-4R-xaw"/>
@@ -267,8 +268,7 @@ DQ
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canPostToSNS" id="1Ru-mv-L7m"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Reply To Selection" id="yiL-UH-fkg">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Reply To Selection" keyEquivalent="r" id="yiL-UH-fkg">
                                             <connections>
                                                 <action selector="replyTo:" target="p69-Rc-ib8" id="nbW-X6-90O"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="canReplyTo" id="Vne-po-qbr"/>
