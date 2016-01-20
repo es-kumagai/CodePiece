@@ -22,6 +22,7 @@ struct PostData {
 	var language: ESGists.Language
 	var hashtags: ESTwitter.HashtagSet
 	var usePublicGists: Bool
+	var replyTo: ESTwitter.Status?
 	
 	var appendAppTagToTwitter:Bool = false
 }
@@ -152,6 +153,11 @@ extension PostDataContainer {
 	func resetError() {
 		
 		self.error = nil
+	}
+	
+	var twitterReplyToStatusID: String? {
+	
+		return self.data.replyTo?.idStr
 	}
 	
 	func setTwitterMediaIDs(mediaIDs: [String]) {

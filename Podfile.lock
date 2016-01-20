@@ -33,8 +33,8 @@ PODS:
     - ESNotification (~> 0.2.0)
     - ESProgressHUD (~> 0.1.2)
     - ESThread (~> 0.1.1)
-    - Swim (~> 1.4.0)
-  - p2.OAuth2 (2.1.2):
+    - Swim
+  - p2.OAuth2 (2.1.3):
     - SwiftKeychain (~> 0.1.5)
   - ReachabilitySwift (2.3.3)
   - Result (1.0.1)
@@ -91,13 +91,13 @@ CHECKOUT OPTIONS:
     :commit: 30744e7929a1f10709997d3c75ee82d855cdb8e6
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
   Ocean:
-    :commit: d00c8b40316ec071de07f5e706ba6aeccf56cc32
+    :commit: ecdd85a3b558ce8c8cf5e89f8483a4222cd65b86
     :git: https://github.com/EZ-NET/ESOcean.git
   STTwitter:
     :commit: 39add4f6c1924170130e6151f17b3d0a57fe2e66
     :git: https://github.com/EZ-NET/STTwitter.git
   Swim:
-    :commit: 667624773392fed31f324944e079e9b762f95feb
+    :commit: 959e7ac951bef02858db17fc82a62f7f1616402e
     :git: https://github.com/EZ-NET/ESSwim
 
 SPEC CHECKSUMS:
@@ -111,8 +111,8 @@ SPEC CHECKSUMS:
   ESThread: 7fb6c2f9d3a263cf5c719d1f8f555093eebbcc6c
   Himotoki: e803d71cdf0cf6a1c4f5004d949b659231abcc5b
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
-  Ocean: a8325e6066d8dc253938427f11e5fbd0ea6855e5
-  p2.OAuth2: 8f76c8c7679efa38beeb20c5813d4c6095e29ef3
+  Ocean: 53918cd843bc44547cf92356f9ac2bcd90484fb5
+  p2.OAuth2: ce5d6fe61f564354a8267ec3482f0316ae24cfa3
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   Result: caef80340451e1f07492fa1e89117f83613bce24
   STTwitter: eb85d8770ddb0f8989f341cf41ea875e90ac6e7f
