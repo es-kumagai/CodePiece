@@ -108,6 +108,14 @@
 		B15E71C51BF0BC70009CCB0E /* TimelineViewController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C41BF0BC70009CCB0E /* TimelineViewController+Action.swift */; };
 		B15E71C71BF0CD84009CCB0E /* TimelineViewController+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */; };
 		B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE61BDC60770013AFF6 /* Environments.swift */; };
+		B169B8391C4D967900CBF6C9 /* TimelineViewController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8381C4D967900CBF6C9 /* TimelineViewController+Notifications.swift */; };
+		B169B83D1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B83C1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift */; };
+		B169B8431C4E1C3D00CBF6C9 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8421C4E1C3D00CBF6C9 /* DescriptionTextField.swift */; };
+		B169B8451C4E1DA300CBF6C9 /* TwitterText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8441C4E1DA300CBF6C9 /* TwitterText.swift */; };
+		B169B8471C4E3AC000CBF6C9 /* ViewController+Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8461C4E3AC000CBF6C9 /* ViewController+Fields.swift */; };
+		B169B8491C4E3EE100CBF6C9 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8481C4E3EE100CBF6C9 /* CodeTextView.swift */; };
+		B169B84B1C4E3F0500CBF6C9 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B84A1C4E3F0500CBF6C9 /* CodeText.swift */; };
+		B169B84D1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B84C1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift */; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
 		B1745BD41BF8CDF000E19F32 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1745BD31BF8CDF000E19F32 /* Media.swift */; };
 		B177FA6D1BF1FC7F000CE394 /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */; };
@@ -117,6 +125,7 @@
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
 		B17C88C61B66FE7F00CBF20F /* ss in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BE1B66BE6800CBF20F /* ss */; };
 		B17DAF5E1B6529A0004CE4D2 /* WebCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DAF5D1B6529A0004CE4D2 /* WebCaptureController.swift */; };
+		B188E2471C4E7EC700137182 /* TimelineViewController+MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B188E2461C4E7EC700137182 /* TimelineViewController+MainWindow.swift */; };
 		B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA9611BC60D9B00056E86 /* Extension.swift */; };
 		B18AA96C1BC6903A00056E86 /* MainWindowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */; };
 		B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */; };
@@ -351,6 +360,14 @@
 		B15E71C41BF0BC70009CCB0E /* TimelineViewController+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Action.swift"; sourceTree = "<group>"; };
 		B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Display.swift"; sourceTree = "<group>"; };
 		B1630AE61BDC60770013AFF6 /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
+		B169B8381C4D967900CBF6C9 /* TimelineViewController+Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Notifications.swift"; sourceTree = "<group>"; };
+		B169B83C1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+SelectionAndRepliable.swift"; sourceTree = "<group>"; };
+		B169B8421C4E1C3D00CBF6C9 /* DescriptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTextField.swift; sourceTree = "<group>"; };
+		B169B8441C4E1DA300CBF6C9 /* TwitterText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterText.swift; sourceTree = "<group>"; };
+		B169B8461C4E3AC000CBF6C9 /* ViewController+Fields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+Fields.swift"; sourceTree = "<group>"; };
+		B169B8481C4E3EE100CBF6C9 /* CodeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
+		B169B84A1C4E3F0500CBF6C9 /* CodeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeText.swift; sourceTree = "<group>"; };
+		B169B84C1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+PostDataManage.swift"; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
 		B1745BD31BF8CDF000E19F32 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableController.swift; sourceTree = "<group>"; };
@@ -360,6 +377,7 @@
 		B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		B17C88C51B66E68D00CBF20F /* ArchiveZip.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ArchiveZip.sh; sourceTree = "<group>"; };
 		B17DAF5D1B6529A0004CE4D2 /* WebCaptureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebCaptureController.swift; sourceTree = "<group>"; };
+		B188E2461C4E7EC700137182 /* TimelineViewController+MainWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+MainWindow.swift"; sourceTree = "<group>"; };
 		B18AA9611BC60D9B00056E86 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B18AA9691BC6903A00056E86 /* MainWindowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MainWindowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowUITests.swift; sourceTree = "<group>"; };
@@ -497,6 +515,8 @@
 			isa = PBXGroup;
 			children = (
 				B15E71B81BF06CDF009CCB0E /* TimelineViewController.swift */,
+				B169B8381C4D967900CBF6C9 /* TimelineViewController+Notifications.swift */,
+				B188E2461C4E7EC700137182 /* TimelineViewController+MainWindow.swift */,
 				B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */,
 				B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */,
 				B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */,
@@ -563,6 +583,8 @@
 				B128CB5A1B6777DD00859D81 /* HashtagTextField.swift */,
 				B1269A5F1B7D9282009305C6 /* TwitterAccountMenuItem.swift */,
 				B125A3F21B808D5900AFAB89 /* StatusImageView.swift */,
+				B169B8421C4E1C3D00CBF6C9 /* DescriptionTextField.swift */,
+				B169B8481C4E3EE100CBF6C9 /* CodeTextView.swift */,
 			);
 			name = Controls;
 			path = ../Controls;
@@ -669,6 +691,8 @@
 				B1492FB71B5BCED80043ED8D /* ViewController.swift */,
 				B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */,
 				B12E04401B8864DD0032DC6F /* BaseViewController.swift */,
+				B169B8441C4E1DA300CBF6C9 /* TwitterText.swift */,
+				B169B84A1C4E3F0500CBF6C9 /* CodeText.swift */,
 				B1492FBB1B5BCED80043ED8D /* Main.storyboard */,
 				B128CB601B679F8700859D81 /* Support Files */,
 			);
@@ -790,6 +814,9 @@
 			children = (
 				B19B36851BD9C01D000D10F9 /* MainWindow.storyboard */,
 				B19B36AB1BD9EA69000D10F9 /* Timeline.storyboard */,
+				B169B83C1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift */,
+				B169B8461C4E3AC000CBF6C9 /* ViewController+Fields.swift */,
+				B169B84C1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift */,
 			);
 			path = CodePieceMain;
 			sourceTree = "<group>";
@@ -1299,11 +1326,13 @@
 				B19DA9601C04A276000881AE /* PostData+Twitter.swift in Sources */,
 				B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */,
 				B15E71C51BF0BC70009CCB0E /* TimelineViewController+Action.swift in Sources */,
+				B169B8431C4E1C3D00CBF6C9 /* DescriptionTextField.swift in Sources */,
 				B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */,
 				B13C98F71B70E3C800A5A2B3 /* LanguagePopupDataSource.swift in Sources */,
 				B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */,
 				B128CB5D1B67853C00859D81 /* Twitter.swift in Sources */,
 				B128CB5B1B6777DD00859D81 /* HashtagTextField.swift in Sources */,
+				B169B83D1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift in Sources */,
 				B1BD64F21B7B964D002DFDD0 /* URLScheme.swift in Sources */,
 				B15E71C11BF06E41009CCB0E /* TimelineHashtagTableCellView.swift in Sources */,
 				B15E71BF1BF06D26009CCB0E /* TimelineTableView.swift in Sources */,
@@ -1325,15 +1354,21 @@
 				B12B247B1B6B597400B284D7 /* AboutWindowController.swift in Sources */,
 				B12C99BF1B850B27003E651F /* Language.swift in Sources */,
 				B177FA6F1BF21EEB000CE394 /* TimelineGetStatusesController.swift in Sources */,
+				B169B8391C4D967900CBF6C9 /* TimelineViewController+Notifications.swift in Sources */,
 				B19005251BD1DC2D00A05957 /* AppControllers.swift in Sources */,
+				B169B8491C4E3EE100CBF6C9 /* CodeTextView.swift in Sources */,
 				B12B24891B6B80C200B284D7 /* AcknowledgementsViewController.swift in Sources */,
 				B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */,
 				B1E89A7C1B7472770062E12E /* DataStore_AuthInfo.swift in Sources */,
+				B188E2471C4E7EC700137182 /* TimelineViewController+MainWindow.swift in Sources */,
 				B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */,
 				B12210541BCBC476004DBB9A /* ClientInfo.swift in Sources */,
+				B169B84D1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift in Sources */,
 				B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */,
+				B169B84B1C4E3F0500CBF6C9 /* CodeText.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
 				B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */,
+				B169B8451C4E1DA300CBF6C9 /* TwitterText.swift in Sources */,
 				B177FA701BF22D50000CE394 /* CodePieceClientInfo.swift in Sources */,
 				B10182CB1BEF8F6B0077873B /* TimelineStatusView.swift in Sources */,
 				B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */,
@@ -1348,6 +1383,7 @@
 				B1D2D6A61B5E2B2800794EFD /* Notifications.swift in Sources */,
 				B1BB59F71B5E718900DE3942 /* SNSController.swift in Sources */,
 				B1D2D6721B5D490800794EFD /* Settings.swift in Sources */,
+				B169B8471C4E3AC000CBF6C9 /* ViewController+Fields.swift in Sources */,
 				B1118DA51B6BECAD00BFC5FA /* WelcomeBoardViewController.swift in Sources */,
 				B15E71C71BF0CD84009CCB0E /* TimelineViewController+Display.swift in Sources */,
 				B1D2D67F1B5D566000794EFD /* Storyboard.swift in Sources */,

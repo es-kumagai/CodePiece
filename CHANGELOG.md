@@ -4,6 +4,13 @@ Change Logs.
 
 ## 1.4.4 (*)
 
+### Enhancements
+
+* CodePiece can now replying to other tweets.
+* Change shortcut key for `Reload Timeline` to `option+command+R`.
+* Assign shortcut key for `Reply To Selection` to `command+R`.
+* Prohibit post which only twitter account ntext without a code.
+
 ### Fixes
 
 * Fix layout for showing an error message in Twitter Preferences window.

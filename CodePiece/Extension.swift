@@ -20,6 +20,27 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+protocol ExistanceCheckable {
+
+	var isExists: Bool { get }
+}
+
+extension String : ExistanceCheckable {
+	
+	public var isExists: Bool {
+		
+		return !isEmpty
+	}
+}
+
+extension Array : ExistanceCheckable {
+
+	public var isExists: Bool {
+		
+		return !isEmpty
+	}
+}
+
 extension NSIndexSet {
 
 	public convenience init<S:SequenceType where S.Generator.Element == Int>(sequence s:S) {
@@ -27,6 +48,14 @@ extension NSIndexSet {
 		let indexes = s.reduce(NSMutableIndexSet()) { $0.addIndex($1); return $0 }
 		
 		self.init(indexSet: indexes.copy() as! NSIndexSet)
+	}
+}
+
+extension NSIndexSet : ExistanceCheckable {
+	
+	public var isExists: Bool {
+		
+		return count > 0
 	}
 }
 
@@ -1060,7 +1089,14 @@ public func handleError<R,E:ErrorType>(@autoclosure expression:() throws -> R, b
 	}
 }
 
-extension NSObject {
+public protocol KeyValueChangeable {
+
+	func withChangeValue(keys:String...)
+	func withChangeValue(keys:String..., @noescape body:()->Void)
+	func withChangeValue<S:SequenceType where S.Generator.Element == String>(keys:S, @noescape body:()->Void)
+}
+
+extension NSObject : KeyValueChangeable {
 
 	public func withChangeValue(keys:String...) {
 		

@@ -21,6 +21,22 @@ class ViewController: NSViewController, NotificationObservable {
 	var notificationHandlers = NotificationHandlers()
 	
 	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
+
+	private(set) var selectedStatuses = Array<ESTwitter.Status>()
+	private(set) var statusForReplyTo: ESTwitter.Status? {
+		
+		didSet {
+			
+			if let status = self.statusForReplyTo {
+				
+				print("Set 'Reply-To:' \(status.user)")
+			}
+			else {
+				
+				print("Reset 'Reply-To:")
+			}
+		}
+	}
 	
 	@IBOutlet var postButton:NSButton!
 	@IBOutlet var hashTagTextField:HashtagTextField!
@@ -29,7 +45,7 @@ class ViewController: NSViewController, NotificationObservable {
 
 	@IBOutlet var languagePopUpDataSource:LanguagePopupDataSource!
 	
-	@IBOutlet var codeTextView:NSTextView! {
+	@IBOutlet var codeTextView:CodeTextView! {
 	
 		didSet {
 			
@@ -52,7 +68,7 @@ class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	@IBOutlet var descriptionTextField:NSTextField!
+	@IBOutlet var descriptionTextField:DescriptionTextField!
 	@IBOutlet var descriptionCountLabel:NSTextField!
 	
 	@IBOutlet var codeScrollView:NSScrollView!
@@ -80,29 +96,11 @@ class ViewController: NSViewController, NotificationObservable {
 		let conditions = [
 			
 			!self.posting,
-			!self.descriptionTextField.stringValue.isEmpty
+			!self.descriptionTextField.twitterText.isEmpty,
+			self.codeTextView.hasCode || !self.descriptionTextField.isReplyAddressOnly
 		]
 		
 		return meetsAllOf(conditions, true)
-	}
-	
-	var hasCode:Bool {
-	
-		return self.trimmedCode != nil
-	}
-	
-	var trimmedCode: String? {
-		
-		let code = self.codeTextView.string!.trimmed()
-		
-		if code.isEmpty {
-			
-			return nil
-		}
-		else {
-			
-			return code
-		}
 	}
 	
 	var selectedLanguage:Language {
@@ -150,29 +148,6 @@ class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	func makePostData() -> PostData {
-	
-		let code = self.trimmedCode
-		let description = self.descriptionTextField.stringValue
-		let language = self.selectedLanguage
-		let hashtags = self.hashTagTextField.hashtags
-		
-		#if DEBUG
-			let usePublicGists = false
-		#else
-			let usePublicGists = true
-		#endif
-		
-		let appendAppTagToTwitter = false
-
-		return PostData(code: code, description: description, language: language, hashtags: hashtags, usePublicGists: usePublicGists, appendAppTagToTwitter: appendAppTagToTwitter)
-	}
-	
-	func makePostDataContainer() -> PostDataContainer {
-		
-		return PostDataContainer(self.makePostData())
-	}
-	
 	func post(callback:(PostResult)->Void) {
 		
 		DebugTime.print("📮 Try to post ... #1")
@@ -191,38 +166,6 @@ class ViewController: NSViewController, NotificationObservable {
 				
 				callback(PostResult.Failure(container))
 			}
-		}
-	}
-	
-	func clearContents() {
-		
-		self.clearCodeText()
-		self.clearDescriptionText()
-
-		self.updateControlsDisplayText()
-	}
-	
-	func clearCodeText() {
-		
-		self.withChangeValue("canPost") {
-			
-			self.codeTextView.string = ""
-		}
-	}
-	
-	func clearDescriptionText() {
-		
-		self.withChangeValue("canPost") {
-
-			self.descriptionTextField.stringValue = ""
-		}
-	}
-	
-	func clearHashtags() {
-		
-		self.withChangeValue("canPost") {
-			
-			self.hashTagTextField.hashtags = []
 		}
 	}
 	
@@ -277,6 +220,24 @@ class ViewController: NSViewController, NotificationObservable {
 			
 			self.updateTweetTextCount()
 		}
+		
+		observeNotification(TimelineViewController.TimelineSelectionChangedNotification.self) { [unowned self] notification in
+			
+			guard notification.selectedCells.count == 1 else {
+
+				self.selectedStatuses = []
+				return
+			}
+
+			self.selectedStatuses = notification.selectedCells.flatMap { $0.cell?.item?.status }
+			
+			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
+		}
+		
+		observeNotification(TimelineViewController.TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
+			
+			self.setReplyTo(notification)
+		}
 	}
 	
 	override func viewDidAppear() {
@@ -314,31 +275,6 @@ class ViewController: NSViewController, NotificationObservable {
 		NSLog("🌴 restoreStateWithCoder Passed.")
 	}
 
-	func focusToDefaultControl() {
-
-		self.focusToCodeArea()
-	}
-	
-	func focusToCodeArea() {
-		
-		self.codeScrollView.becomeFirstResponder()
-	}
-	
-	func focusToDescription() {
-		
-		self.descriptionTextField.becomeFirstResponder()
-	}
-	
-	func focusToHashtag() {
-		
-		self.hashTagTextField.becomeFirstResponder()
-	}
-	
-	func focusToLanguage() {
-		
-		// MARK: 😒 I don't know how to show NSPopUpButton's submenu manually. The corresponding menu item is disabled too.
-	}
-	
 	func verifyCredentials() {
 
 		guard NSApp.isReadyForUse else {
@@ -393,29 +329,10 @@ class ViewController: NSViewController, NotificationObservable {
 }
 
 extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
-
-	func updateControlsDisplayText() {
-		
-		self.updateTweetTextCount()
-		self.updatePostButtonTitle()
-	}
-	
-	func updateTweetTextCount() {
-
-		let includesGistsLink = self.hasCode
-		let totalCount = self.makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
-		
-		self.descriptionCountLabel.stringValue = String(totalCount)
-		self.descriptionCountLabel.textColor = SystemColor.NeutralColor.color
-	}
-	
-	func updatePostButtonTitle() {
-		
-		self.postButton.title = (self.hasCode ? "Post Gist" : "Tweet")
-	}
 	
 	func textDidChange(notification: NSNotification) {
 		
+		self.withChangeValue("canPost")
 		self.updateControlsDisplayText()
 	}
 	
@@ -443,3 +360,28 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	}
 }
 
+extension ViewController : ViewControllerSelectionAndRepliable {
+
+	func clearReplyTo() {
+	
+		withChangeValue("canPost") {
+			
+			self.statusForReplyTo = nil
+			updateControlsDisplayText()
+		}
+	}
+	
+	func setReplyToBySelectedStatuses() {
+		
+		guard canReplyToSelectedStatuses else {
+			
+			return
+		}
+		
+		withChangeValue("canPost") {
+			
+			self.statusForReplyTo = selectedStatuses.first!
+			updateControlsDisplayText()
+		}
+	}
+}
