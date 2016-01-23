@@ -52,23 +52,63 @@ struct DataStore {
 extension DataStore {
 
 	struct TwitterStore {
+
+		enum Kind : String {
+			
+			case Unknown = ""
+			case OSAccount = "account"
+			case OAuthToken = "token"
+		}
 		
+		static let AccountKindKey = "twitter:kind"
 		static let AccountIdentifierKey = "twitter:identifier"
+		static let AccountTokenKey = "twitter:token"
+		static let AccountTokenSecretKey = "twitter:token-secret"
+		static let AccountTokenScreenNameKey = "twitter:token-screenname"
 		
-		var identifier:String?
+		var kind: Kind
+		var identifier: String
+		var token: String
+		var tokenSecret: String
+		var tokenScreenName: String
 		
 		init() {
 			
 			let userDefaults = NSUserDefaults.standardUserDefaults()
 			
-			self.identifier = userDefaults.stringForKey(TwitterStore.AccountIdentifierKey)
+			self.identifier = userDefaults.stringForKey(TwitterStore.AccountIdentifierKey) ?? ""
+			self.token = userDefaults.stringForKey(TwitterStore.AccountTokenKey) ?? ""
+			self.tokenSecret = userDefaults.stringForKey(TwitterStore.AccountTokenSecretKey) ?? ""
+			self.tokenScreenName = userDefaults.stringForKey(TwitterStore.AccountTokenScreenNameKey) ?? ""
+			
+			if let kindValue = userDefaults.stringForKey(TwitterStore.AccountKindKey) {
+			
+				self.kind = Kind(rawValue: kindValue) ?? .Unknown
+			}
+			else {
+			
+				// If `identifier` is not empty when `kind` is not stored, set `kind` to `OSAccount`.
+				// This process is for compatibility when authentication method was the only using OS Account.
+				if self.identifier.isExists {
+
+					self.kind = .OSAccount
+				}
+				else {
+					
+					self.kind = .Unknown
+				}
+			}
 		}
 		
 		func save() {
 			
 			let userDefaults = NSUserDefaults.standardUserDefaults()
 			
+			userDefaults.setObject(self.kind.rawValue, forKey: TwitterStore.AccountKindKey)
 			userDefaults.setObject(self.identifier, forKey: TwitterStore.AccountIdentifierKey)
+			userDefaults.setObject(self.token, forKey: TwitterStore.AccountTokenKey)
+			userDefaults.setObject(self.tokenSecret, forKey: TwitterStore.AccountTokenSecretKey)
+			userDefaults.setObject(self.tokenScreenName, forKey: TwitterStore.AccountTokenScreenNameKey)
 		}
 	}
 }

@@ -17,13 +17,55 @@ import ESThread
 import Swim
 import Himotoki
 
-struct TwitterAccount {
+enum TwitterAccount {
 	
-	var ACAccount:Accounts.ACAccount
+	case Account(Accounts.ACAccount)
+	case Token(token: String, tokenSecret: String, screenName: String)
+	
+	var storeKind: DataStore.TwitterStore.Kind {
+		
+		switch self {
+			
+		case .Account:
+			return .OSAccount
+			
+		case .Token:
+			return .OAuthToken
+		}
+	}
+	
+	var ACAccount: Accounts.ACAccount? {
+		
+		if case let .Account(account) = self {
+			
+			return account
+		}
+		else {
+			
+			return nil
+		}
+	}
+	
+	var token: (token: String, tokenSecret: String)? {
+		
+		if case let .Token(token, tokenSecret, _) = self {
+			
+			return (token: token, tokenSecret: tokenSecret)
+		}
+		else {
+			
+			return nil
+		}
+	}
 	
 	init(account:Accounts.ACAccount) {
 	
-		self.ACAccount = account
+		self = .Account(account)
+	}
+	
+	init(token: String, tokenSecret: String, screenName: String) {
+		
+		self = .Token(token: token, tokenSecret: tokenSecret, screenName: screenName)
 	}
 	
 	init?(identifier:String) {
@@ -33,17 +75,24 @@ struct TwitterAccount {
 			return nil
 		}
 		
-		self.ACAccount = account
+		self = .Account(account)
 	}
 	
 	var username:String {
 		
-		return self.ACAccount.username
+		switch self {
+			
+		case let .Account(account):
+			return account.username
+			
+		case let .Token(_, _, screenName):
+			return screenName
+		}
 	}
 	
-	var identifier:String {
+	var identifier:String? {
 		
-		return self.ACAccount.identifier!
+		return self.ACAccount?.identifier
 	}
 }
 
@@ -220,9 +269,19 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			return nil
 		}
 		
-		return tweak (STTwitterAPI.twitterAPIOSWithAccount(account.ACAccount, delegate:self)) {
+		switch account {
 			
-			$0.setTimeoutInSeconds(TwitterController.timeout)
+		case let .Account(account):
+
+			return tweak (STTwitterAPI.twitterAPIOSWithAccount(account, delegate:self)) {
+				$0.setTimeoutInSeconds(TwitterController.timeout)
+			}
+			
+		case let .Token(token, tokenSecret, _):
+			
+			return tweak (STTwitterAPI(OAuthConsumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret, oauthToken: token, oauthTokenSecret: tokenSecret)) {
+				$0.setTimeoutInSeconds(TwitterController.timeout)
+			}
 		}
 	}
 	

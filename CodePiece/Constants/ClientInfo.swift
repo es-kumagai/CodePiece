@@ -6,6 +6,6 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-extension CodePieceClientInfo : GitHubClientInfoType {
+extension CodePieceClientInfo : GitHubClientInfoType, TwitterConsumerInfoType {
 
 }

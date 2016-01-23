@@ -15,6 +15,26 @@ enum PreferencesWindowModalResult : Int {
 
 class PreferencesWindowController: NSWindowController {
 
+	enum TwitterPreferenceType {
+	
+		case OAuth
+		case OSAccount
+		
+		var storyboardID: String {
+			
+			switch self {
+				
+			case .OAuth:
+				return "TwitterByOAuth"
+			
+			case .OSAccount:
+				return "TwitterByOS"
+			}
+		}
+	}
+	
+	private var twitterPreferenceType: TwitterPreferenceType = .OAuth
+	
 	@IBOutlet var toolbar:NSToolbar!
 	
 	@IBAction func showGitHubPreference(sender:NSToolbarItem?) {
@@ -24,7 +44,7 @@ class PreferencesWindowController: NSWindowController {
 	
 	@IBAction func showTwitterPreference(sender:NSToolbarItem?) {
 		
-		self.contentViewController = try! Storyboard.TwitterPreferenceView.getInitialController()
+		self.contentViewController = try! Storyboard.TwitterPreferenceView.getControllerByIdentifier(twitterPreferenceType.storyboardID)
 	}
 	
     override func windowDidLoad() {
@@ -33,6 +53,18 @@ class PreferencesWindowController: NSWindowController {
 
 		self.contentViewController = try! Storyboard.GitHubPreferenceView.getInitialController()
     }
+	
+	override func flagsChanged(theEvent: NSEvent) {
+		
+		if theEvent.modifierFlags.contains(.AlternateKeyMask) {
+			
+			self.twitterPreferenceType = .OSAccount
+		}
+		else {
+			
+			self.twitterPreferenceType = .OAuth
+		}
+	}
 }
 
 extension PreferencesWindowController : NSWindowDelegate {

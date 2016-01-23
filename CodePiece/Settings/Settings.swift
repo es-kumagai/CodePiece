@@ -67,34 +67,96 @@ final class Settings {
 	
 	func loadTwitterAccount() {
 		
-		if let identifier = self._store.twitter.identifier {
+		switch self._store.twitter.kind {
 			
-			if let account = TwitterAccount(identifier: identifier) {
+		case .OSAccount:
+			loadTwitterAccountAsAccount()
+			
+		case .OAuthToken:
+			loadTwitterAccountAsToken()
+			
+		case .Unknown:
+			loadTwitterAccountDefault()
+		}
+	}
+	
+	private func loadTwitterAccountAsAccount() {
+		
+		let identifier = self._store.twitter.identifier
+		
+		if let account = TwitterAccount(identifier: identifier) {
+			
+			NSLog("Twitter account which authenticated by OS restored from data store. (\(account.username))")
+			self.account.twitterAccount = account
+		}
+		else {
+			
+			NSLog("Twitter account which authenticated by OS restored from data store but the account is not exists. (\(identifier))")
+		}
+	}
+	
+	private func loadTwitterAccountAsToken() {
+		
+		let token = self._store.twitter.token
+		let tokenSecret = self._store.twitter.tokenSecret
+		let tokenScreenName = self._store.twitter.tokenScreenName
+		
+		let account = TwitterAccount(token: token, tokenSecret: tokenSecret, screenName: tokenScreenName)
+		
+		NSLog("Twitter account which authenticated by OAuth restored from data store. (\(account.username))")
+		self.account.twitterAccount = account
+	}
+	
+	private func loadTwitterAccountDefault() {
+		
+		// If no twitter account specified by settings, adopt registered account in OSX only if single account is registered.
+		if let account = TwitterController.getSingleAccount().map(TwitterAccount.init) {
+			
+			NSLog("No Twitter account specified. Using account '\(account.username)' which registered in OS.")
+			self.account.twitterAccount = account
+		}
+		else {
+			
+			NSLog("No Twitter account specified.")
+			self.account.twitterAccount = nil
+		}
+		
+		self.saveTwitterAccount()
+	}
 
-				NSLog("Twitter account restored from data store. (\(account.username))")
-				self.account.twitterAccount = account
-			}
-			else {
+	func saveTwitterAccount() {
+		
+		NSLog("Writing Twitter account to data store. (\(self.account.twitterAccount?.username))")
+		
+		if let account = self.account.twitterAccount {
+
+			self._store.twitter.kind = account.storeKind
+			
+			switch account {
 				
-				NSLog("Twitter account restored from data store but the account is not exists. (\(identifier))")
+			case let .Account(osAccount):
+				self._store.twitter.identifier = osAccount.identifier ?? ""
+				self._store.twitter.token = ""
+				self._store.twitter.tokenSecret = ""
+				self._store.twitter.tokenScreenName = ""
+				
+			case let .Token(token, tokenSecret, screenName):
+				self._store.twitter.identifier = ""
+				self._store.twitter.token = token
+				self._store.twitter.tokenSecret = tokenSecret
+				self._store.twitter.tokenScreenName = screenName
 			}
 		}
 		else {
-
-			// If no twitter account specified by settings, adopt registered account in OSX only if single account is registered.
-			if let account = TwitterController.getSingleAccount().map(TwitterAccount.init) {
-				
-				NSLog("No Twitter account specified. Using account '\(account.username)' which registered in OS.")
-				self.account.twitterAccount = account
-			}
-			else {
-				
-				NSLog("No Twitter account specified.")
-				self.account.twitterAccount = nil
-			}
 			
-			self.saveTwitterAccount()
+			self._store.twitter.kind = .Unknown
+			self._store.twitter.identifier = ""
+			self._store.twitter.token = ""
+			self._store.twitter.tokenSecret = ""
+			self._store.twitter.tokenScreenName = ""
 		}
+		
+		self._store.twitter.save()
 	}
 	
 	func loadGitHubAccount() {
@@ -106,15 +168,6 @@ final class Settings {
 		NSLog("GitHub account information restored from data store. (\(self.account.username))")
 		
 		Authorization.GitHubAuthorizationStateDidChangeNotification(isValid: self.account.authorizationState == .Authorized, username: self.account.username).post()
-	}
-
-	func saveTwitterAccount() {
-		
-		NSLog("Writing Twitter account to data store. (\(self.account.twitterAccount?.username))")
-		
-		self._store.twitter.identifier = self.account.twitterAccount?.identifier
-		
-		self._store.twitter.save()
 	}
 
 	func saveGitHubAccount() {
