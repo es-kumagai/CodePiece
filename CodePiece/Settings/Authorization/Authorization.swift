@@ -20,8 +20,14 @@ var ClientInfo:CodePieceClientInfo!
 
 protocol GitHubClientInfoType {
 	
-	var GitHubID:String { get }
-	var GitHubSecret:String { get }
+	var GitHubClientID:String { get }
+	var GitHubClientSecret:String { get }
+}
+
+protocol TwitterConsumerInfoType {
+	
+	var TwitterConsumerKey:String { get }
+	var TwitterConsumerSecret:String { get }
 }
 
 enum AuthorizationState {
@@ -52,8 +58,8 @@ final class Authorization : AlertDisplayable {
 			
 			let settings:OAuth2JSON = [
 				
-				"client_id" : ClientInfo.GitHubID,
-				"client_secret" : ClientInfo.GitHubSecret,
+				"client_id" : ClientInfo.GitHubClientID,
+				"client_secret" : ClientInfo.GitHubClientSecret,
 				"authorize_uri" : "https://github.com/login/oauth/authorize",
 				"token_uri" : "https://github.com/login/oauth/access_token",
 				"scope" : "gist",

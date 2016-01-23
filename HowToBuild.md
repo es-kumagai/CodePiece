@@ -31,15 +31,21 @@ The contents of the `CodePieceClientInfo.plist` file are as follows.
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>GitHubID</key>
+	<key>GitHubClientID</key>
 	<string></string>
-	<key>GitHubSecret</key>
+	<key>GitHubClientSecret</key>
+	<string></string>
+	<key>TwitterConsumerKey</key>
+	<string></string>
+	<key>TwitterConsumerSecret</key>
 	<string></string>
 </dict>
 </plist>
 ```
 
-Value for `id` key is a *Client ID* of **GitHub** Application and value for `secret` key is a *Client Secret* of the *Client ID*.
+Value for `GitHubClientID ` key is a *Client ID* of **GitHub** Application and value for `GitHubClientSecret ` key is a *Client Secret* of the *Client ID*.
+
+Value for `TwitterConsumerKey ` key is a *Consumer Key* of **Twitter** Application and value for `TwitterConsumerSecret ` key is a *Consumer Secret* of the *Client ID*.
 
 
 ## Install pods
