@@ -283,7 +283,7 @@
 		B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TwitterPreferenceView.storyboard; sourceTree = "<group>"; };
 		B125A3F01B808CC500AFAB89 /* Mark */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mark; sourceTree = "<group>"; };
 		B125A3F21B808D5900AFAB89 /* StatusImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusImageView.swift; sourceTree = "<group>"; };
-		B125A3F61B80DABC00AFAB89 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		B125A3F61B80DABC00AFAB89 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		B125A3F71B80DE3E00AFAB89 /* HowToBuild.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = HowToBuild.md; sourceTree = "<group>"; };
 		B12674E31BC0ECCA00F38464 /* ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12674E51BC0ECCA00F38464 /* ESTwitterAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESTwitterAPI.h; sourceTree = "<group>"; };
@@ -633,7 +633,7 @@
 				B1492FE01B5BCF1E0043ED8D /* Podfile */,
 				B17C88BD1B66BE6800CBF20F /* README.md */,
 				B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */,
-				B125A3F61B80DABC00AFAB89 /* LICENSE.md */,
+				B125A3F61B80DABC00AFAB89 /* LICENSE.txt */,
 				B125A3F71B80DE3E00AFAB89 /* HowToBuild.md */,
 				B17C88BE1B66BE6800CBF20F /* ss */,
 				B1D2D6B11B5E619E00794EFD /* Resources */,
