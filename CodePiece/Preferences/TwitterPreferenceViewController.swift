@@ -13,10 +13,37 @@ import Swim
 import Accounts
 import ESNotification
 
-class TwitterPreferenceViewController: NSViewController, NotificationObservable {
+protocol TwitterPreferenceAuthenticationByOAuth : AnyObject {
+	
+	var viewForStartAuthentication: NSView! { get }
+	var viewForEnterPin: NSView! { get }
+	
+	var pinTextField: NSTextField! { get }
+	var canPinEnterButtonPush: Bool { get }
+	
+	func doAuthentication(sender:NSButton)
+	func doEnterPin(sender:NSButton)
+	
+	func enteringPinInputMode()
+	func exitPinInputMode()
+}
+
+protocol TwitterPreferenceAuthenticationByOS : AnyObject {
+
+	var accountSelectorController:TwitterAccountSelectorController? { get }
+	
+	func pushVerifyCredentialsButton(sender:NSButton)
+
+	func openAccountsPreferences(sender:NSButton)
+	func openSecurityPreferences(sender:NSButton)
+}
+
+final class TwitterPreferenceViewController: NSViewController, NotificationObservable {
 
 	var notificationHandlers = NotificationHandlers()
 	
+	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
+	private var authenticatingPinHUD:ProgressHUD = ProgressHUD(message: "Please authentication with PIN code.\n", useActivityIndicator: true)
 	private var verifyingHUD:ProgressHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
 	private var waitingHUD:ProgressHUD = ProgressHUD(message: "Please wait...", useActivityIndicator: true)
 
@@ -33,7 +60,12 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		}
 	}
 	
-	@IBOutlet var accountSelectorController:TwitterAccountSelectorController!
+	@IBOutlet var accountSelectorController:TwitterAccountSelectorController?
+	
+	@IBOutlet private(set) var viewForStartAuthentication: NSView!
+	@IBOutlet private(set) var viewForEnterPin: NSView!
+	
+	@IBOutlet private(set) var pinTextField: NSTextField!
 	
 	var canVerify:Bool {
 	
@@ -79,25 +111,9 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		return NSApp.twitterController.credentialsVerified
 	}
 	
-	@IBAction func pushVerifyCredentialsButton(sender:NSButton) {
-		
-		self.verifyCredentials()
-	}
-	
 	@IBAction func pushResetAuthorizationButton(sender:NSButton) {
 	
 		self.resetAuthorization()
-	}
-	
-	@IBAction func openAccountsPreferences(sender:NSButton) {
-		
-		self.openSystemPreferences("InternetAccounts")
-	}
-
-	@IBAction func openSecurityPreferences(sender:NSButton) {
-
-		// TODO: I want to open Security preferences directly.
-		self.openSystemPreferences("Security")
 	}
 	
 	func resetAuthorization() {
@@ -208,21 +224,12 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		}
     }
 	
-	func updateAccountSelector() {
-		
-		self.accountSelectorController.updateAccountSelector()
-		
-		if !self.accountSelectorController.hasAccount {
-			
-			self.reportError("No Twitter account found. Please register a twitter account using Account settings.")
-		}
-	}
-	
 	override func viewWillAppear() {
 		
 		super.viewWillAppear()
 		
 		self.updateAccountSelector()
+		self.exitPinInputMode()
 		self.applyAuthorizedStatus()
 	}
 	
@@ -244,5 +251,116 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		}
 		
 		self.errorReportTextField?.stringValue = message
+	}
+}
+
+extension TwitterPreferenceViewController : TwitterPreferenceAuthenticationByOAuth, NSTextFieldDelegate {
+	
+	@IBAction func doAuthentication(sender:NSButton) {
+		
+		self.authenticatingHUD.show()
+		
+		Authorization.authorizationWithTwitter { result in
+			
+			self.authenticatingHUD.hide()
+			
+			switch result {
+				
+			case .Created:
+				self.showErrorAlert("Failed to authentication", message: "Unexpected Process (PIN is not entered)")
+				
+			case .Failed(let message):
+				self.showErrorAlert("Failed to authentication", message: message)
+				
+			case .PinRequired:
+				self.enteringPinInputMode()
+			}
+		}
+	}
+	
+	@IBAction func doEnterPin(sender: NSButton) {
+		
+		authenticatingPinHUD.show()
+		
+		Authorization.authorizationWithTwitter(pin: pinTextField.stringValue) { result in
+			
+			self.authenticatingPinHUD.hide()
+			
+			switch result {
+				
+			case .Created:
+				self.exitPinInputMode()
+				self.dismissController(self)
+				
+			case .Failed(let message):
+				self.showErrorAlert("Failed to authentication", message: message)
+				
+			case .PinRequired:
+				self.showErrorAlert("Failed to authentication", message: "Unexpected Process (PIN Required)")
+			}
+		}
+	}
+	
+	var canPinEnterButtonPush: Bool {
+	
+		return self.pinTextField.stringValue.isExists
+	}
+	
+	func enteringPinInputMode() {
+
+		self.viewForStartAuthentication.hidden = true
+		self.viewForEnterPin.hidden = false
+	}
+	
+	func exitPinInputMode() {
+		
+		self.viewForStartAuthentication.hidden = false
+		self.viewForEnterPin.hidden = true
+		
+		self.pinTextField.stringValue = ""
+	}
+	
+	override func controlTextDidChange(obj: NSNotification) {
+		
+		guard obj.object === self.pinTextField else {
+			
+			return
+		}
+		
+		withChangeValue("canPinEnterButtonPush")
+	}
+}
+
+extension TwitterPreferenceViewController : TwitterPreferenceAuthenticationByOS {
+	
+	@IBAction func openAccountsPreferences(sender:NSButton) {
+		
+		self.openSystemPreferences("InternetAccounts")
+	}
+	
+	@IBAction func openSecurityPreferences(sender:NSButton) {
+		
+		// TODO: I want to open Security preferences directly.
+		self.openSystemPreferences("Security")
+	}
+	
+	func updateAccountSelector() {
+		
+		guard let accountSelectorController = self.accountSelectorController else {
+			
+			return
+		}
+		
+		accountSelectorController.updateAccountSelector()
+		
+		if !accountSelectorController.hasAccount {
+			
+			self.reportError("No Twitter account found. Please register a twitter account using Account settings.")
+		}
+	}
+	
+	@IBAction func pushVerifyCredentialsButton(sender:NSButton) {
+		
+		self.verifyCredentials()
 	}
 }

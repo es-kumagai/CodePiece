@@ -73,13 +73,25 @@ final class Authorization : AlertDisplayable {
 			self.oauth2 = OAuth2CodeGrant(settings: settings)
 		}
 	}
-	
+
+	final class Twitter {
+		
+		var oauth: STTwitterOAuth
+		
+		init() {
+
+			self.oauth = STTwitterOAuth(consumerName: nil, consumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret)
+		}
+	}
+
 	static var github = GitHub()
+	static var twitter = Twitter()
 	
-	enum GitHubAuthorizationResult {
+	enum AuthorizationResult {
 
 		case Created
 		case Failed(String)
+		case PinRequired
 	}
 }
 
@@ -130,7 +142,17 @@ extension Authorization {
 		}
 	}
 	
-	private static func _authorizationCreateSuccessfully(user user:GistUser, authorization:GitHubAuthorization, completion:(GitHubAuthorizationResult)->Void) {
+	private static func _twitterAuthorizationCreateSuccessfully(completion:(AuthorizationResult)->Void) {
+		
+		completion(.Created)
+	}
+	
+	private static func _twitterAuthorizationFailed(error:String, completion:(AuthorizationResult)->Void) {
+		
+		completion(.Failed(error))
+	}
+	
+	private static func _githubAuthorizationCreateSuccessfully(user user:GistUser, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
 		
 		let username = user.login
 		let id = user.id
@@ -145,13 +167,63 @@ extension Authorization {
 		completion(.Created)
 	}
 	
-	private static func _authorizationFailed(error:String, completion:(GitHubAuthorizationResult)->Void) {
+	private static func _githubAuthorizationFailed(error:String, completion:(AuthorizationResult)->Void) {
 		
 		NSApp.settings.resetGitHubAccount(saveFinally: true)
 		completion(.Failed(error))
 	}
+
+	static func authorizationWithTwitter(pin pin: String, completion:(AuthorizationResult)->Void) {
+		
+		let oauth = self.twitter.oauth
+		
+		let successHandler = { (token: String!, tokenSecret: String!, userId: String!, screenName: String!) in
+			
+			NSLog("Twitter OAuth authentication did end successfully.")
+			DebugTime.print(" with: \(token), \(tokenSecret), \(userId), \(screenName)")
+			
+			let account = TwitterAccount(token: token, tokenSecret: tokenSecret, screenName: screenName)
+			
+			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
+			
+			_twitterAuthorizationCreateSuccessfully(completion)
+		}
+		
+		let errorHandler = { (error: NSError!) in
+			
+			print("Twitter authorization went wrong: \(error).")
+			
+			_twitterAuthorizationFailed("Check entered PIN code and try again.", completion: completion)
+		}
+		
+		oauth.postAccessTokenRequestWithPIN(pin, successBlock: successHandler, errorBlock: errorHandler)
+	}
 	
-	static func authorizationWithGitHub(completion:(GitHubAuthorizationResult)->Void) {
+	static func authorizationWithTwitter(completion:(AuthorizationResult)->Void) {
+
+		let oauth = self.twitter.oauth
+		let callback = ""
+		
+		let successHandler = { (oauthUrl: NSURL!, oauthToken: String!) in
+
+			NSLog("Twitter OAuth require PIN code.")
+			DebugTime.print(" with url: \(oauthUrl), string: \(oauthToken)")
+			
+			NSWorkspace.sharedWorkspace().openURL(oauthUrl)
+			
+			completion(.PinRequired)
+		}
+		
+		let errorHandler = { (error: NSError!) in
+
+			print("Twitter authorization went wrong: \(error).")
+			_twitterAuthorizationFailed("\(error)", completion: completion)
+		}
+		
+		oauth.postTokenRequest(successHandler, oauthCallback: callback, errorBlock: errorHandler)		
+	}
+	
+	static func authorizationWithGitHub(completion:(AuthorizationResult)->Void) {
 		
 		let oauth2 = self.github.oauth2
 		
@@ -159,11 +231,11 @@ extension Authorization {
 			
 			guard case let (scope?, token?) = (parameters["scope"] as? String, parameters["access_token"] as? String) else {
 
-				_authorizationFailed("Failed to get access token.", completion: completion)
+				_githubAuthorizationFailed("Failed to get access token by GitHub.", completion: completion)
 				return
 			}
 			
-			NSLog("OAuth authentication did end successfully with scope=\(scope).")
+			NSLog("GitHub OAuth authentication did end successfully with scope=\(scope).")
 			DebugTime.print(" with parameters: \(parameters)")
 			
 			let authorization = GitHubAuthorization.Token(token)
@@ -174,17 +246,17 @@ extension Authorization {
 				switch response {
 					
 				case .Success(let user):
-					_authorizationCreateSuccessfully(user: user, authorization: authorization, completion: completion)
+					_githubAuthorizationCreateSuccessfully(user: user, authorization: authorization, completion: completion)
 					
 				case .Failure(let error):
-					_authorizationFailed(String(error), completion: completion)
+					_githubAuthorizationFailed(String(error), completion: completion)
 				}
 			}
 		}
 		
 		oauth2.onFailure = { error in
 			
-			print("Authorization went wrong" + (error.map { ": \($0)." } ?? "."))
+			print("GitHub authorization went wrong" + (error.map { ": \($0)." } ?? "."))
 		}
 		
 		NSLog("Trying authorization with GitHub OAuth.")
