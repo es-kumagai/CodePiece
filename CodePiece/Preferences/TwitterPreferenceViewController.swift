@@ -303,21 +303,26 @@ extension TwitterPreferenceViewController : TwitterPreferenceAuthenticationByOAu
 	
 	var canPinEnterButtonPush: Bool {
 	
-		return self.pinTextField.stringValue.isExists
+		guard let pinTextField = self.pinTextField else {
+			
+			return false
+		}
+		
+		return pinTextField.stringValue.isExists
 	}
 	
 	func enteringPinInputMode() {
 
-		self.viewForStartAuthentication.hidden = true
-		self.viewForEnterPin.hidden = false
+		self.viewForStartAuthentication?.hidden = true
+		self.viewForEnterPin?.hidden = false
 	}
 	
 	func exitPinInputMode() {
 		
-		self.viewForStartAuthentication.hidden = false
-		self.viewForEnterPin.hidden = true
+		self.viewForStartAuthentication?.hidden = false
+		self.viewForEnterPin?.hidden = true
 		
-		self.pinTextField.stringValue = ""
+		self.pinTextField?.stringValue = ""
 	}
 	
 	override func controlTextDidChange(obj: NSNotification) {

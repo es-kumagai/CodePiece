@@ -150,6 +150,10 @@ final class Settings {
 		else {
 			
 			self._store.twitter.kind = .Unknown
+			self._store.twitter.identifier = ""
+			self._store.twitter.token = ""
+			self._store.twitter.tokenSecret = ""
+			self._store.twitter.tokenScreenName = ""
 		}
 		
 		self._store.twitter.save()

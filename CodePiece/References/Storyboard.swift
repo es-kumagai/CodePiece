@@ -8,13 +8,13 @@
 
 import AppKit
 
-struct StoryboardItem<InitialController> {
+struct StoryboardItem<Controller> {
 
 	var name:String
-	var initialControllerType:InitialController.Type
+	var initialControllerType:Controller.Type
 	var bundle:NSBundle?
 	
-	init(name:String, controllerType type: InitialController.Type, bundle:NSBundle? = nil) {
+	init(name:String, controllerType type: Controller.Type, bundle:NSBundle? = nil) {
 		
 		self.name = name
 		self.initialControllerType = type
@@ -26,14 +26,26 @@ struct StoryboardItem<InitialController> {
 		return NSStoryboard(name: self.name, bundle: self.bundle)
 	}
 	
-	func getInitialController() throws -> InitialController {
+	func getInitialController() throws -> Controller {
 		
 		guard let instance = self.storyboard.instantiateInitialController() else {
 			
 			throw StoryboardError.FailedToGetController
 		}
 		
-		guard let controller = instance as? InitialController else {
+		guard let controller = instance as? Controller else {
+			
+			throw StoryboardError.UnexpectedControllerType
+		}
+		
+		return controller
+	}
+	
+	func getControllerByIdentifier(identifier: String) throws -> Controller {
+
+		let instance = self.storyboard.instantiateControllerWithIdentifier(identifier)
+		
+		guard let controller = instance as? Controller else {
 			
 			throw StoryboardError.UnexpectedControllerType
 		}

@@ -122,9 +122,6 @@
                                                 <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CcN-ZS-3ll">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
-                                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
                                                 </buttonCell>
                                                 <connections>
                                                     <action selector="pushResetAuthorizationButton:" target="ps4-Eu-nrG" id="KaA-pS-Khx"/>
@@ -307,9 +304,6 @@ DQ
                                 <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="odh-Yr-gqF">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="pushResetAuthorizationButton:" target="LAB-Zh-ZVS" id="PKP-dy-C36"/>
@@ -328,10 +322,10 @@ DQ
                                         </textFieldCell>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgT-R6-FF5">
-                                        <rect key="frame" x="0.0" y="50" width="383" height="22"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="22"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fF9-A5-6At">
-                                                <rect key="frame" x="2" y="-6" width="128" height="32"/>
+                                                <rect key="frame" x="-6" y="-6" width="128" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1ht-15-Ptm">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -345,7 +339,7 @@ DQ
                                                 </connections>
                                             </button>
                                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hp1-hK-Y8X" userLabel="PIN Stack View">
-                                                <rect key="frame" x="132" y="0.0" width="251" height="22"/>
+                                                <rect key="frame" x="124" y="0.0" width="251" height="22"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6L9-jf-ljZ">
                                                         <rect key="frame" x="-2" y="2" width="79" height="19"/>
@@ -396,7 +390,6 @@ DQ
                                                 </customSpacing>
                                             </stackView>
                                         </subviews>
-                                        <edgeInsets key="edgeInsets" left="8" right="0.0" top="0.0" bottom="0.0"/>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
