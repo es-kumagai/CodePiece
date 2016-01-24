@@ -64,6 +64,8 @@ class PreferencesWindowController: NSWindowController {
 			
 			self.twitterPreferenceType = .OAuth
 		}
+		
+		super.flagsChanged(theEvent)
 	}
 }
 
