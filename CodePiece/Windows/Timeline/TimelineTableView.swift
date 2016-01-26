@@ -23,6 +23,11 @@ class TimelineTableView: NSTableView {
 		return selectedRowIndexes.isExists
 	}
 	
+	var selectedSingleRow: Bool {
+		
+		return selectedRowIndexes.count == 1
+	}
+	
 	var cells: [CellInfo] {
 	
 		let rows = 0 ..< numberOfRows

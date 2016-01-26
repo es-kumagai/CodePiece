@@ -38,6 +38,18 @@ public final class Browser {
 		}
 	}
 	
+	public static func openWithStatus(status:ESTwitter.Status) throws {
+		
+		let string = "\(self.baseUrl)/\(status.user.screenName)/status/\(status.idStr)"
+		
+		guard let url = NSURL(string: string) else {
+			
+			throw Error.OperationFailure(reason: "Failed to make URL for open twitter tweet '\(string)'.")
+		}
+		
+		try open(url)
+	}
+	
 	public static func openWithUsername(username:String) throws {
 		
 		let string = "\(self.baseUrl)/\(username)"

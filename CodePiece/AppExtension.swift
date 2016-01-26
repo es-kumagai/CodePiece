@@ -19,6 +19,11 @@ extension NSApplication : AlertDisplayable {
 
 extension NSApplication {
 	
+	var baseViewController:BaseViewController? {
+	
+		return self.keyWindow?.contentViewController as? BaseViewController
+	}
+	
 	static func readyForUse() {
 		
 		guard !CodePiece.isReadyForUse else {

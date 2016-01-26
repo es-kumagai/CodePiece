@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 1.4.5
+
+### Enhancements
+
+* Can now open selecting tweet using browser.
+
 ## 1.4.4
 
 ### Enhancements

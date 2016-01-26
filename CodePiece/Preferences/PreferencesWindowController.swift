@@ -56,6 +56,8 @@ class PreferencesWindowController: NSWindowController {
 	
 	override func flagsChanged(theEvent: NSEvent) {
 		
+        DebugTime.print("Modifier flags changed. (\(theEvent.modifierFlags.rawValue))")
+        
 		if theEvent.modifierFlags.contains(.AlternateKeyMask) {
 			
 			self.twitterPreferenceType = .OSAccount
@@ -64,6 +66,8 @@ class PreferencesWindowController: NSWindowController {
 			
 			self.twitterPreferenceType = .OAuth
 		}
+		
+		super.flagsChanged(theEvent)
 	}
 }
 
