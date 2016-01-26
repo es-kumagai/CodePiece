@@ -20,4 +20,14 @@ extension TimelineViewController {
 		
 		TimelineReplyToSelectionRequestNotification().post()
 	}
+	
+	var canOpenBrowserWithCurrentTwitterStatus: Bool {
+		
+		return timelineTableView.selectedSingleRow
+	}
+	
+	@IBAction func openBrowserWithCurrentTwitterStatus(sender: AnyObject) {
+		
+		self.menuController.openBrowserWithCurrentTwitterStatus(sender)
+	}
 }

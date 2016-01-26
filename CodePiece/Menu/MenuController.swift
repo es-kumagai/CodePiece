@@ -11,26 +11,19 @@ import Ocean
 
 final class MenuController : NSObject {
 
-	@IBOutlet var application:NSApplication!
-
-	var keyWindow:NSWindow? {
+	var application:NSApplication {
 		
-		return self.application.keyWindow
-	}
-	
-	var baseViewController:BaseViewController? {
-		
-		return self.keyWindow?.contentViewController as? BaseViewController
+		return NSApp
 	}
 	
 	var mainViewController:ViewController? {
 		
-		return self.baseViewController?.mainViewController
+		return application.baseViewController?.mainViewController
 	}
 	
 	var timelineViewController:TimelineViewController? {
 		
-		return self.baseViewController?.timelineViewController
+		return application.baseViewController?.timelineViewController
 	}
 	
 	override init() {
@@ -137,5 +130,15 @@ final class MenuController : NSObject {
 	@IBAction func reloadTimeline(sender: NSMenuItem?) {
 		
 		self.timelineViewController?.reloadTimeline()
+	}
+	
+	var canOpenBrowserWithCurrentTwitterStatus:Bool {
+		
+		return self.mainViewController?.canOpenBrowserWithCurrentTwitterStatus ?? false
+	}
+	
+	@IBAction func openBrowserWithCurrentTwitterStatus(sender:AnyObject) {
+		
+		self.mainViewController?.openBrowserWithCurrentTwitterStatus()
 	}
 }

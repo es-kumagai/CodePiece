@@ -326,6 +326,34 @@ class ViewController: NSViewController, NotificationObservable {
 			self.showErrorAlert("Failed to open browser", message: "Unknown error : \(error)")
 		}
 	}
+
+	var canOpenBrowserWithCurrentTwitterStatus:Bool {
+		
+		return self.selectedStatuses.count == 1
+	}
+	
+	func openBrowserWithCurrentTwitterStatus() {
+		
+		guard self.canOpenBrowserWithCurrentTwitterStatus else {
+			
+			fatalError("Cannot open browser.")
+		}
+		
+		let status = self.selectedStatuses.first!
+		
+		do {
+			
+			try ESTwitter.Browser.openWithStatus(status)
+		}
+		catch let ESTwitter.Browser.Error.OperationFailure(reason: reason) {
+			
+			self.showErrorAlert("Failed to open browser", message: reason)
+		}
+		catch {
+			
+			self.showErrorAlert("Failed to open browser", message: "Unknown error : \(error)")
+		}
+	}
 }
 
 extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {

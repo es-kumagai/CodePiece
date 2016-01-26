@@ -17,6 +17,8 @@ private let TableViewInsertAnimationOptions: NSTableViewAnimationOptions = [.Sli
 
 class TimelineViewController: NSViewController {
 
+	@IBOutlet var menuController: MenuController!
+	
 	var notificationHandlers = NotificationHandlers()
 	
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
@@ -27,6 +29,7 @@ class TimelineViewController: NSViewController {
 		willSet {
 		
 			willChangeValueForKey("canReplyRequest")
+			willChangeValueForKey("canOpenBrowserWithCurrentTwitterStatus")
 		}
 		
 		didSet {
@@ -34,6 +37,7 @@ class TimelineViewController: NSViewController {
 			defer {
 			
 				didChangeValueForKey("canReplyRequest")
+				didChangeValueForKey("canOpenBrowserWithCurrentTwitterStatus")
 			}
 			
 			let tableView = self.timelineTableView
