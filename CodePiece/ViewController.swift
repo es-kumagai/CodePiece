@@ -156,7 +156,7 @@ class ViewController: NSViewController, NotificationObservable {
 		
 		NSApp.snsController.post(postDataContainer) { container in
 			
-			DebugTime.print("📮 Posted \(container.twitterState.postedObjects) ... #1.1.1")
+			DebugTime.print("📮 Posted \(container.twitterState.postedStatus) ... #1.1.1")
 			
 			if container.posted {
 				
@@ -208,7 +208,12 @@ class ViewController: NSViewController, NotificationObservable {
 		self.observeNotification(PostCompletelyNotification.self) { [unowned self] notification in
 			
 			self.clearContents()
-			NSLog("Posted completely \(notification.container.twitterState.postedObjects)")
+			
+			// Set posted status to for next reply to.
+			// FIXME: ⚡️ この実装だと、自分の投稿が必ずチェインになってしまうため、statusForReplyTo にセットするタイミングを見定めないといけない。command+R のときに latestTweet があるか判断する形になりそう。
+//			self.statusForReplyTo = notification.container.twitterState.postedStatus
+			
+			NSLog("Posted completely \(notification.container.twitterState.postedStatus)")
 		}
 		
 		self.observeNotification(PostFailedNotification.self) { [unowned self] notification in

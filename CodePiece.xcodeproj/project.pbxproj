@@ -128,6 +128,7 @@
 		B188E2471C4E7EC700137182 /* TimelineViewController+MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B188E2461C4E7EC700137182 /* TimelineViewController+MainWindow.swift */; };
 		B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA9611BC60D9B00056E86 /* Extension.swift */; };
 		B18AA96C1BC6903A00056E86 /* MainWindowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */; };
+		B18E6F511C59F8730049A906 /* LatestTweetManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18E6F501C59F8730049A906 /* LatestTweetManageable.swift */; };
 		B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */; };
 		B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */; };
 		B19005231BD1CCCC00A05957 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19005221BD1CCCC00A05957 /* ReachabilityController.swift */; };
@@ -382,6 +383,7 @@
 		B18AA9691BC6903A00056E86 /* MainWindowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MainWindowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowUITests.swift; sourceTree = "<group>"; };
 		B18AA96D1BC6903A00056E86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B18E6F501C59F8730049A906 /* LatestTweetManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestTweetManageable.swift; sourceTree = "<group>"; };
 		B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterOpenFeatures.swift; sourceTree = "<group>"; };
 		B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOpenFeatures.swift; sourceTree = "<group>"; };
 		B19005221BD1CCCC00A05957 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
@@ -815,6 +817,7 @@
 				B169B83C1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift */,
 				B169B8461C4E3AC000CBF6C9 /* ViewController+Fields.swift */,
 				B169B84C1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift */,
+				B18E6F501C59F8730049A906 /* LatestTweetManageable.swift */,
 			);
 			path = CodePieceMain;
 			sourceTree = "<group>";
@@ -1354,6 +1357,7 @@
 				B177FA6F1BF21EEB000CE394 /* TimelineGetStatusesController.swift in Sources */,
 				B169B8391C4D967900CBF6C9 /* TimelineViewController+Notifications.swift in Sources */,
 				B19005251BD1DC2D00A05957 /* AppControllers.swift in Sources */,
+				B18E6F511C59F8730049A906 /* LatestTweetManageable.swift in Sources */,
 				B169B8491C4E3EE100CBF6C9 /* CodeTextView.swift in Sources */,
 				B12B24891B6B80C200B284D7 /* AcknowledgementsViewController.swift in Sources */,
 				B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */,

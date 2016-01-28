@@ -43,7 +43,7 @@ final class PostDataContainer {
 
 	struct TwitterState {
 		
-		var postedObjects: [NSObject:AnyObject]? = nil
+		var postedStatus: ESTwitter.Status? = nil
 		var mediaIDs: [String] = []
 	}
 	
@@ -81,9 +81,9 @@ struct PostError : ErrorType {
 
 extension PostDataContainer {
 	
-	func postedToTwitter(postedObjects: [NSObject:AnyObject]) {
+	func postedToTwitter(postedStatus: ESTwitter.Status) throws {
 		
-		self.twitterState.postedObjects = postedObjects
+		self.twitterState.postedStatus = postedStatus
 	}
 	
 	func postedToGist(gist: ESGists.Gist) {
