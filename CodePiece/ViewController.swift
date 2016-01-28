@@ -20,8 +20,13 @@ class ViewController: NSViewController, NotificationObservable {
 
 	var notificationHandlers = NotificationHandlers()
 	
+	var twitterController: TwitterController {
+		
+		return NSApp.snsController.twitter
+	}
+	
 	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
-
+	
 	private(set) var selectedStatuses = Array<ESTwitter.Status>()
 	private(set) var statusForReplyTo: ESTwitter.Status? {
 		
@@ -198,7 +203,7 @@ class ViewController: NSViewController, NotificationObservable {
 		DebugTime.print("Main window will show.")
 
 		super.viewWillAppear()
-		
+
 		self.restoreContents()
 		self.focusToDefaultControl()
 		self.updateControlsDisplayText()
@@ -412,9 +417,13 @@ extension ViewController : ViewControllerSelectionAndRepliable {
 		}
 		
 		withChangeValue("canPost") {
-			
+		
 			self.statusForReplyTo = selectedStatuses.first!
 			updateControlsDisplayText()
 		}
 	}
+}
+
+extension ViewController : LatestTweetReplyable {
+	
 }

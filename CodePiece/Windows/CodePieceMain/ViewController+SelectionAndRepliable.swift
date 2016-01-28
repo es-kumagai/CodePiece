@@ -25,6 +25,20 @@ protocol ViewControllerSelectionAndRepliable : ViewControllerSelectable, ViewCon
 	func setReplyToBySelectedStatuses()
 }
 
+protocol LatestTweetReplyable : LatestTweetManageable {
+	
+	var replyToType: ReplyToType { get }
+
+	func clearLatestTweet()
+	func setReplyToByLatestTweet()
+}
+
+enum ReplyToType {
+	
+	case LatestTweet
+	case SelectedStatus
+}
+
 extension ViewControllerSelectable {
 	
 	var canReplyToSelectedStatuses: Bool {
@@ -41,6 +55,14 @@ extension ViewControllerRepliable {
 	}
 }
 
+extension LatestTweetReplyable {
+	
+	var canReplyToLatestTweet: Bool {
+		
+		return hasLatestTweet
+	}
+}
+
 extension ViewControllerRepliable where Self : FieldsController {
 
 }
@@ -53,7 +75,7 @@ extension ViewController {
 
 	@IBAction func setReplyTo(sender: AnyObject) {
 		
-		guard selectedStatuses.isExists else {
+		guard canReplyToSelectedStatuses else {
 			
 			clearReplyTo()
 			return
@@ -61,7 +83,7 @@ extension ViewController {
 
 		setReplyToBySelectedStatuses()
 
-		if let status = self.statusForReplyTo where !NSApp.twitterController.isMyTweet(status) {
+		if let status = self.statusForReplyTo where !twitterController.isMyTweet(status) {
 
 			descriptionTextField.readyForReplyTo(status.user.screenName)
 		}
