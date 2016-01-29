@@ -2,7 +2,13 @@
 
 Change Logs.
 
-## 1.4.5 (*)
+## 1.4.6 (*)
+
+### Enhancements
+
+* Can chain tweet (reply to myself without @screenname) easily.
+
+## 1.4.5
 
 ### Enhancements
 

@@ -207,6 +207,8 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	typealias PostStatusUpdateResult = Result<String,NSError>
 	typealias GetStatusesResult = Result<[ESTwitter.Status], GetStatusesError>
 	
+	var latestTweet: ESTwitter.Status?
+
 	private static let timeout:NSTimeInterval = 15.0
 	private static let accountStore:ACAccountStore = ACAccountStore()
 	private static let accountType:ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
@@ -485,8 +487,9 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			
 			switch result {
 				
-			case .Success(let objects):
-				callback(PostStatusUpdateResult(value: objects["text"] as! String))
+			case .Success(let status):
+				self.latestTweet = status
+				callback(PostStatusUpdateResult(value: status.text))
 				
 			case .Failure(let error):
 				callback(PostStatusUpdateResult(error: error))
@@ -626,6 +629,14 @@ extension TwitterController {
 	}
 }
 
+extension TwitterController : LatestTweetManageable {
+	
+	func resetLatestTweet() {
+		
+		self.latestTweet = nil
+	}
+}
+
 extension TwitterController : STTwitterAPIOSProtocol {
 	
 	func twitterAPI(twitterAPI: STTwitterAPI!, accountWasInvalidated invalidatedAccount: ACAccount!) {
@@ -639,7 +650,7 @@ extension STTwitterAPI {
 	
 	typealias MediaID = String
 	typealias VerifyCredentialsResult = Result<(username:String,userId:String),NSError>
-	typealias PostStatusUpdateResult = Result<[NSObject:AnyObject],NSError>
+	typealias PostStatusUpdateResult = Result<ESTwitter.Status,NSError>
 	typealias PostMediaUploadResult = Result<[MediaID],NSError>
 
 	func postMediaUpload(container:PostDataContainer, image:NSImage, callback:(PostMediaUploadResult)->Void) {
@@ -679,10 +690,20 @@ extension STTwitterAPI {
 		
 		let tweetSucceeded = { (objects:[NSObject:AnyObject]!) -> Void in
 			
-			container.postedToTwitter(objects)
-			
-			DebugTime.print("📮 A status posted successfully (\(objects))... #3.3.1")
-			callback(PostStatusUpdateResult(value: objects))
+			do {
+				
+				let postedStatus = try decode(objects) as ESTwitter.Status
+				
+				try container.postedToTwitter(postedStatus)
+
+				DebugTime.print("📮 A status posted successfully (\(postedStatus))... #3.3.1")
+				callback(PostStatusUpdateResult(value: postedStatus))
+			}
+			catch {
+				
+				DebugTime.print("📮 A status posted successfully but failed to parse the tweet. (\(objects))... #3.3.1.2")
+				callback(PostStatusUpdateResult(error: NSError(domain: "FailedToPost", code: 1, userInfo: [ NSLocalizedDescriptionKey : "A tweet posted successfully but failed to parse the tweet."])))
+			}
 		}
 		
 		let tweetFailed = { (error:NSError!) -> Void in
