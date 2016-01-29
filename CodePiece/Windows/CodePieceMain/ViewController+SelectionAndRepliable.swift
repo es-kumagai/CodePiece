@@ -17,26 +17,18 @@ protocol ViewControllerSelectable : class {
 protocol ViewControllerRepliable : class {
 	
 	var statusForReplyTo: ESTwitter.Status? { get }
+	
+	var canReplyTo: Bool { get }
 }
 
 protocol ViewControllerSelectionAndRepliable : ViewControllerSelectable, ViewControllerRepliable {
 	
-	func clearReplyTo()
 	func setReplyToBySelectedStatuses()
 }
 
 protocol LatestTweetReplyable : LatestTweetManageable {
 	
-	var replyToType: ReplyToType { get }
-
-	func clearLatestTweet()
 	func setReplyToByLatestTweet()
-}
-
-enum ReplyToType {
-	
-	case LatestTweet
-	case SelectedStatus
 }
 
 extension ViewControllerSelectable {
@@ -67,21 +59,32 @@ extension ViewControllerRepliable where Self : FieldsController {
 
 }
 
-extension ViewControllerSelectionAndRepliable {
-	
-}
-
 extension ViewController {
 
+	var canReplyTo: Bool {
+	
+		return canReplyToLatestTweet || canReplyToSelectedStatuses
+	}
+	
 	@IBAction func setReplyTo(sender: AnyObject) {
 		
-		guard canReplyToSelectedStatuses else {
+		guard canReplyTo else {
 			
 			clearReplyTo()
 			return
 		}
 
-		setReplyToBySelectedStatuses()
+		switch nextReplyToType {
+			
+		case .LatestTweet:
+			setReplyToByLatestTweet()
+			
+		case .SelectedStatus:
+			setReplyToBySelectedStatuses()
+			
+		case .None:
+			fatalError()
+		}
 
 		if let status = self.statusForReplyTo where !twitterController.isMyTweet(status) {
 
@@ -98,7 +101,7 @@ extension MenuController {
 	
 	var canReplyTo: Bool {
 		
-		return mainViewController?.canReplyToSelectedStatuses ?? false
+		return mainViewController?.canReplyTo ?? false
 	}
 	
 	@IBAction func replyTo(sender:NSMenuItem) {

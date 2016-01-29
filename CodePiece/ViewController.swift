@@ -16,8 +16,27 @@ import ESProgressHUD
 import ESTwitter
 import ESNotification
 
-class ViewController: NSViewController, NotificationObservable {
+final class ViewController: NSViewController, NotificationObservable {
 
+	enum ReplyToType {
+		
+		case None
+		case LatestTweet
+		case SelectedStatus
+	}
+	
+	var nextReplyToType = ReplyToType.None {
+		
+		willSet {
+			
+			willChangeValueForKey("canReplyTo")
+		}
+		
+		didSet {
+			
+			didChangeValueForKey("canReplyTo")
+		}
+	}
 	var notificationHandlers = NotificationHandlers()
 	
 	var twitterController: TwitterController {
@@ -27,6 +46,7 @@ class ViewController: NSViewController, NotificationObservable {
 	
 	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
 	
+	private(set) var latestTweet: ESTwitter.Status?
 	private(set) var selectedStatuses = Array<ESTwitter.Status>()
 	private(set) var statusForReplyTo: ESTwitter.Status? {
 		
@@ -213,10 +233,8 @@ class ViewController: NSViewController, NotificationObservable {
 		self.observeNotification(PostCompletelyNotification.self) { [unowned self] notification in
 			
 			self.clearContents()
-			
-			// Set posted status to for next reply to.
-			// FIXME: ⚡️ この実装だと、自分の投稿が必ずチェインになってしまうため、statusForReplyTo にセットするタイミングを見定めないといけない。command+R のときに latestTweet があるか判断する形になりそう。
-//			self.statusForReplyTo = notification.container.twitterState.postedStatus
+			self.latestTweet = notification.container.twitterState.postedStatus
+			self.nextReplyToType = .LatestTweet
 			
 			NSLog("Posted completely \(notification.container.twitterState.postedStatus)")
 		}
@@ -240,6 +258,7 @@ class ViewController: NSViewController, NotificationObservable {
 			}
 
 			self.selectedStatuses = notification.selectedCells.flatMap { $0.cell?.item?.status }
+			self.nextReplyToType = .SelectedStatus
 			
 			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
 		}
@@ -292,7 +311,7 @@ class ViewController: NSViewController, NotificationObservable {
 			return
 		}
 		
-		NSApp.twitterController.verifyCredentialsIfNeed { result in
+		twitterController.verifyCredentialsIfNeed { result in
 			
 			switch result {
 
@@ -313,12 +332,12 @@ class ViewController: NSViewController, NotificationObservable {
 	
 	var canOpenBrowserWithSearchHashtagPage:Bool {
 	
-		return !self.hashTagTextField.hashtags.isEmpty
+		return !hashTagTextField.hashtags.isEmpty
 	}
 	
 	func openBrowserWithSearchHashtagPage() {
 		
-		guard self.canOpenBrowserWithSearchHashtagPage else {
+		guard canOpenBrowserWithSearchHashtagPage else {
 			
 			fatalError("Cannot open browser.")
 		}
@@ -426,4 +445,18 @@ extension ViewController : ViewControllerSelectionAndRepliable {
 
 extension ViewController : LatestTweetReplyable {
 	
+	func resetLatestTweet() {
+		
+		self.latestTweet = nil
+	}
+	
+	func setReplyToByLatestTweet() {
+		
+		withChangeValue("canPost") {
+			
+			self.statusForReplyTo = latestTweet
+			
+			updateControlsDisplayText()
+		}
+	}
 }

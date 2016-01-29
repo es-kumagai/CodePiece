@@ -10,7 +10,9 @@ import ESTwitter
 
 protocol LatestTweetManageable : class {
 	
-	var latestTweet: ESTwitter.Status? { get set }
+	var latestTweet: ESTwitter.Status? { get }
+	
+	func resetLatestTweet()
 }
 
 extension LatestTweetManageable {
@@ -19,13 +21,4 @@ extension LatestTweetManageable {
 		
 		return latestTweet != nil
 	}
-	
-	func resetLatestTweet() {
-		
-		self.latestTweet = nil
-	}
-}
-
-extension TwitterController : LatestTweetManageable {
-	
 }

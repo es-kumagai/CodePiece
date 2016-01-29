@@ -629,6 +629,14 @@ extension TwitterController {
 	}
 }
 
+extension TwitterController : LatestTweetManageable {
+	
+	func resetLatestTweet() {
+		
+		self.latestTweet = nil
+	}
+}
+
 extension TwitterController : STTwitterAPIOSProtocol {
 	
 	func twitterAPI(twitterAPI: STTwitterAPI!, accountWasInvalidated invalidatedAccount: ACAccount!) {
