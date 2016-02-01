@@ -162,6 +162,7 @@
 		B1D2D6A61B5E2B2800794EFD /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6A51B5E2B2800794EFD /* Notifications.swift */; };
 		B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */; };
 		B1E89A7C1B7472770062E12E /* DataStore_AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E89A7B1B7472770062E12E /* DataStore_AuthInfo.swift */; };
+		B1F6CF211C5F49E800E5D3B8 /* URLEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6CF1F1C5F492300E5D3B8 /* URLEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -417,6 +418,7 @@
 		B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Regular.otf"; sourceTree = "<group>"; };
 		B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWindowController.swift; sourceTree = "<group>"; };
 		B1E89A7B1B7472770062E12E /* DataStore_AuthInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore_AuthInfo.swift; sourceTree = "<group>"; };
+		B1F6CF1F1C5F492300E5D3B8 /* URLEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLEntity.swift; sourceTree = "<group>"; };
 		B42A5EAE8BAE526CDC6F06BC /* Pods_ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B87E766C0C83F14D1570A71D /* Pods-ESTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-ESTwitter/Pods-ESTwitter.release.xcconfig"; sourceTree = "<group>"; };
 		D6B457359224F9E2FA023078 /* Pods-CodePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodePiece.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece.debug.xcconfig"; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				B12675051BC0F06000F38464 /* Hashtag.swift */,
 				B19DA95A1C04720A000881AE /* Hashtags.swift */,
 				B126750B1BC0F44E00F38464 /* HashtagEntity.swift */,
+				B1F6CF1F1C5F492300E5D3B8 /* URLEntity.swift */,
 				B126750E1BC12AF300F38464 /* Place.swift */,
 				B12675121BC12CCD00F38464 /* PlaceBoundingBox.swift */,
 				B12675101BC12B6000F38464 /* Coordinate.swift */,
@@ -1293,6 +1296,7 @@
 				B12674F41BC0EE2400F38464 /* User.swift in Sources */,
 				B12674FC1BC0EFC300F38464 /* Indicis.swift in Sources */,
 				B14AF3731BC22EA10005F4CF /* Browse.swift in Sources */,
+				B1F6CF211C5F49E800E5D3B8 /* URLEntity.swift in Sources */,
 				B19DA95C1C047212000881AE /* Hashtags.swift in Sources */,
 				B12675021BC0F00C00F38464 /* Date.swift in Sources */,
 				B126750D1BC0FBC700F38464 /* Color.swift in Sources */,

@@ -692,17 +692,26 @@ extension STTwitterAPI {
 			
 			do {
 				
-				let postedStatus = try decode(objects) as ESTwitter.Status
-				
-				try container.postedToTwitter(postedStatus)
+				try container.postedToTwitter(objects)
 
+				let postedStatus = container.twitterState.postedStatus!
+				
 				DebugTime.print("📮 A status posted successfully (\(postedStatus))... #3.3.1")
 				callback(PostStatusUpdateResult(value: postedStatus))
 			}
+			catch let PostDataError.TwitterRawObjectsParseError(rawObjects) {
+				
+				DebugTime.print("📮 A status posted successfully but failed to parse the tweet. (\(rawObjects))... #3.3.1.2")
+				callback(PostStatusUpdateResult(error: NSError(domain: "FailedToPost", code: 1, userInfo: [ NSLocalizedDescriptionKey : "A tweet posted successfully but failed to parse the tweet."])))
+				
+				#if DEBUG
+					// Re-parse for step debug.
+					let _ = try? decode(rawObjects) as ESTwitter.Status
+				#endif
+			}
 			catch {
 				
-				DebugTime.print("📮 A status posted successfully but failed to parse the tweet. (\(objects))... #3.3.1.2")
-				callback(PostStatusUpdateResult(error: NSError(domain: "FailedToPost", code: 1, userInfo: [ NSLocalizedDescriptionKey : "A tweet posted successfully but failed to parse the tweet."])))
+				fatalError("Unexpected Error (\(error.dynamicType)) : \(error)")
 			}
 		}
 		

@@ -23,6 +23,27 @@ public struct Media {
 	}
 }
 
+public struct MediaEntity {
+	
+	public struct Size {
+		
+		public var width: Int
+		public var height: Int
+		public var resize: String
+	}
+	
+	public var idStr: String
+	public var mediaUrlHttps: URL
+	public var expandedUrl: URL
+	public var id: UInt64
+	public var sizes: [String : Size]
+	public var displayUrl: String
+	public var type: String
+	public var indices: Indices
+	public var mediaUrl: URL
+	public var url: URL
+}
+
 extension Media : Decodable {
 	
 	public static func decode(e: Extractor) throws -> Media {
@@ -46,6 +67,39 @@ extension Media.Image : Decodable {
 			e <| "w",
 			e <| "h",
 			e <| "image_type"
+		)
+	}
+}
+
+extension MediaEntity : Decodable {
+
+	public static func decode(e: Extractor) throws -> MediaEntity {
+		
+		return try build(MediaEntity.init)(
+		
+			e <| "id_str",
+			e <| "media_url_https",
+			e <| "expanded_url",
+			e <| "id",
+			e <|-| "sizes",
+			e <| "displayUrl",
+			e <| "type",
+			e <| "indices",
+			e <| "media_url",
+			e <| "url"
+		)
+	}
+}
+
+extension MediaEntity.Size : Decodable {
+	
+	public static func decode(e: Extractor) throws -> MediaEntity.Size {
+		
+		return try build(MediaEntity.Size.init)(
+			
+			e <| "w",
+			e <| "h",
+			e <| "resize"
 		)
 	}
 }
