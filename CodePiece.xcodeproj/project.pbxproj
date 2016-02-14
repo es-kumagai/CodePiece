@@ -128,6 +128,7 @@
 		B188E2471C4E7EC700137182 /* TimelineViewController+MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B188E2461C4E7EC700137182 /* TimelineViewController+MainWindow.swift */; };
 		B18AA9621BC60D9B00056E86 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA9611BC60D9B00056E86 /* Extension.swift */; };
 		B18AA96C1BC6903A00056E86 /* MainWindowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */; };
+		B18BBEE31C6F0702006317E0 /* DebugSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18BBEE21C6F0702006317E0 /* DebugSupport.swift */; };
 		B18E6F511C59F8730049A906 /* LatestTweetManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18E6F501C59F8730049A906 /* LatestTweetManageable.swift */; };
 		B18FAC661BCA31D20041874A /* TwitterOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */; };
 		B18FAC681BCA33850041874A /* GitHubOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */; };
@@ -384,6 +385,7 @@
 		B18AA9691BC6903A00056E86 /* MainWindowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MainWindowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18AA96B1BC6903A00056E86 /* MainWindowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowUITests.swift; sourceTree = "<group>"; };
 		B18AA96D1BC6903A00056E86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B18BBEE21C6F0702006317E0 /* DebugSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugSupport.swift; sourceTree = "<group>"; };
 		B18E6F501C59F8730049A906 /* LatestTweetManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestTweetManageable.swift; sourceTree = "<group>"; };
 		B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterOpenFeatures.swift; sourceTree = "<group>"; };
 		B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOpenFeatures.swift; sourceTree = "<group>"; };
@@ -800,6 +802,7 @@
 			children = (
 				B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */,
 				B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */,
+				B18BBEE21C6F0702006317E0 /* DebugSupport.swift */,
 			);
 			name = GlobalFeatures;
 			sourceTree = "<group>";
@@ -1322,6 +1325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */,
+				B18BBEE31C6F0702006317E0 /* DebugSupport.swift in Sources */,
 				B1D2D6A21B5E19D100794EFD /* Alert.swift in Sources */,
 				B1BD64DE1B7B6CB0002DFDD0 /* OAuthScheme.swift in Sources */,
 				B12E04411B8864DD0032DC6F /* BaseViewController.swift in Sources */,
