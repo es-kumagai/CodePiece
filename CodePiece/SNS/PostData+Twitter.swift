@@ -16,7 +16,7 @@ extension PostDataContainer.TwitterState {
 	
 	var isPosted: Bool {
 		
-		return self.postedObjects.isExists
+		return self.postedStatus.isExists
 	}
 }
 
@@ -46,7 +46,7 @@ extension PostDataContainer {
 
 	var postedTwitterText: String? {
 		
-		return self.twitterState.postedObjects?["text"] as? String
+		return self.twitterState.postedStatus?.text
 	}
 	
 	func descriptionLengthForTwitter(includesGistsLink includesGistsLink:Bool) -> Int {

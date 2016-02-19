@@ -260,6 +260,6 @@ extension Authorization {
 		}
 		
 		NSLog("Trying authorization with GitHub OAuth.")
-		oauth2.openAuthorizeURLInBrowser()
+		try! oauth2.openAuthorizeURLInBrowser()
 	}
 }

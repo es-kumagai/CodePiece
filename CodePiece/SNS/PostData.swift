@@ -8,6 +8,7 @@
 
 import ESGists
 import ESTwitter
+import Himotoki
 
 enum PostResult {
 	
@@ -27,6 +28,11 @@ struct PostData {
 	var appendAppTagToTwitter:Bool = false
 }
 
+enum PostDataError : ErrorType {
+	
+	case TwitterRawObjectsParseError(rawObjects: [NSObject:AnyObject])
+}
+
 final class PostDataContainer {
 
 	var data: PostData
@@ -43,7 +49,7 @@ final class PostDataContainer {
 
 	struct TwitterState {
 		
-		var postedObjects: [NSObject:AnyObject]? = nil
+		var postedStatus: ESTwitter.Status? = nil
 		var mediaIDs: [String] = []
 	}
 	
@@ -81,9 +87,16 @@ struct PostError : ErrorType {
 
 extension PostDataContainer {
 	
-	func postedToTwitter(postedObjects: [NSObject:AnyObject]) {
+	func postedToTwitter(postedRawStatus: [NSObject:AnyObject]) throws {
 		
-		self.twitterState.postedObjects = postedObjects
+		do {
+			
+			self.twitterState.postedStatus = try decode(postedRawStatus) as ESTwitter.Status
+		}
+		catch {
+			
+			throw PostDataError.TwitterRawObjectsParseError(rawObjects: postedRawStatus)
+		}
 	}
 	
 	func postedToGist(gist: ESGists.Gist) {

@@ -9,7 +9,10 @@
 import XCTest
 @testable import CodePiece
 
-class CodePieceTests: XCTestCase {
+import Himotoki
+import ESTwitter
+
+class TwitterDecodeTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -20,17 +23,31 @@ class CodePieceTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+	
+	private func readJSON(name: String) -> AnyObject {
+		
+		let bundle = NSBundle(forClass: TwitterDecodeTests.self)
+		let file = bundle.pathForResource(name, ofType: "json")!
+		let string = try! String(contentsOfFile: file, encoding: NSUTF8StringEncoding)
+
+		return toJSONObjects(string)!
+	}
+	
+	private func toJSONObjects(string: String) -> AnyObject? {
+		
+		guard let data = string.dataUsingEncoding(NSUTF8StringEncoding) else {
+			
+			return nil
+		}
+		
+		return try? NSJSONSerialization.JSONObjectWithData(data, options: [])
+	}
+	
+    func testCase1() {
+		
+		let objects = readJSON("1")
+		let status = try! decode(objects) as ESTwitter.Status
+		
+		XCTAssertEqual(status.entities?.userMenthions?.first?.idStr, "2546782123")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
