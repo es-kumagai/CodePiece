@@ -163,6 +163,8 @@
 		B1D2D6A61B5E2B2800794EFD /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6A51B5E2B2800794EFD /* Notifications.swift */; };
 		B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */; };
 		B1E89A7C1B7472770062E12E /* DataStore_AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E89A7B1B7472770062E12E /* DataStore_AuthInfo.swift */; };
+		B1F16A661C77286B000CBB5F /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = B1F16A651C77286B000CBB5F /* 1.json */; };
+		B1F16A6A1C772AFB000CBB5F /* UserMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F16A671C772AF2000CBB5F /* UserMention.swift */; };
 		B1F6CF211C5F49E800E5D3B8 /* URLEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6CF1F1C5F492300E5D3B8 /* URLEntity.swift */; };
 /* End PBXBuildFile section */
 
@@ -420,6 +422,8 @@
 		B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Regular.otf"; sourceTree = "<group>"; };
 		B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWindowController.swift; sourceTree = "<group>"; };
 		B1E89A7B1B7472770062E12E /* DataStore_AuthInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore_AuthInfo.swift; sourceTree = "<group>"; };
+		B1F16A651C77286B000CBB5F /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1.json; sourceTree = "<group>"; };
+		B1F16A671C772AF2000CBB5F /* UserMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMention.swift; sourceTree = "<group>"; };
 		B1F6CF1F1C5F492300E5D3B8 /* URLEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLEntity.swift; sourceTree = "<group>"; };
 		B42A5EAE8BAE526CDC6F06BC /* Pods_ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B87E766C0C83F14D1570A71D /* Pods-ESTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-ESTwitter/Pods-ESTwitter.release.xcconfig"; sourceTree = "<group>"; };
@@ -565,6 +569,7 @@
 				B12674F31BC0EE2400F38464 /* User.swift */,
 				B12674F51BC0EE5B00F38464 /* UserProfile.swift */,
 				B12675031BC0F02400F38464 /* UserEntities.swift */,
+				B1F16A671C772AF2000CBB5F /* UserMention.swift */,
 				B12674F71BC0EE8B00F38464 /* URLInfo.swift */,
 				B12674F91BC0EF9900F38464 /* Color.swift */,
 				B12674FB1BC0EFC300F38464 /* Indicis.swift */,
@@ -707,6 +712,7 @@
 		B1492FC61B5BCED80043ED8D /* CodePieceTests */ = {
 			isa = PBXGroup;
 			children = (
+				B1F16A641C77284A000CBB5F /* JSON */,
 				B1492FC71B5BCED80043ED8D /* CodePieceTests.swift */,
 				B13746931B6512360068414B /* FontTests.swift */,
 				B1492FC91B5BCED80043ED8D /* Info.plist */,
@@ -919,6 +925,14 @@
 				B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		B1F16A641C77284A000CBB5F /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				B1F16A651C77286B000CBB5F /* 1.json */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 		D44070DA70174B40A6FB9883 /* Pods */ = {
@@ -1171,6 +1185,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1F16A661C77286B000CBB5F /* 1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1302,6 +1317,7 @@
 				B1F6CF211C5F49E800E5D3B8 /* URLEntity.swift in Sources */,
 				B19DA95C1C047212000881AE /* Hashtags.swift in Sources */,
 				B12675021BC0F00C00F38464 /* Date.swift in Sources */,
+				B1F16A6A1C772AFB000CBB5F /* UserMention.swift in Sources */,
 				B126750D1BC0FBC700F38464 /* Color.swift in Sources */,
 				B12675131BC12CCD00F38464 /* PlaceBoundingBox.swift in Sources */,
 				B126750F1BC12AF300F38464 /* Place.swift in Sources */,

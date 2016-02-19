@@ -7,7 +7,6 @@
 //
 
 import Himotoki
-import ESTwitter
 
 public struct URLEntity {
 	

@@ -707,7 +707,7 @@ extension STTwitterAPI {
 				#if DEBUG
 					// Re-parse for step debug.
 					let jsonString = debugStringFromJSON(rawObjects)
-					print(jsonString)
+					print("DEBUG JSON String\n\(jsonString)")
 					let _ = try? decode(rawObjects) as ESTwitter.Status
 				#endif
 			}

@@ -14,7 +14,7 @@ extension Status {
 				
 		public var urls:[URLEntity]?
 		public var hashtags:[HashtagEntity]?
-		public var userMenthions:[String]?
+		public var userMenthions:[UserMention]?
 		public var media:[MediaEntity]?
 	}
 }
@@ -24,7 +24,7 @@ extension Status.Entities : Decodable {
 	public static func decode(e: Extractor) throws -> Status.Entities {
 		
 		return try build(Status.Entities.init)(
-			
+		
 			e <||? "urls",
 			e <||? "hashtags",
 			e <||? "user_mentions",

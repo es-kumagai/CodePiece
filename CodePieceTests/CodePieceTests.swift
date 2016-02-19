@@ -24,6 +24,15 @@ class TwitterDecodeTests: XCTestCase {
         super.tearDown()
     }
 	
+	private func readJSON(name: String) -> AnyObject {
+		
+		let bundle = NSBundle(forClass: TwitterDecodeTests.self)
+		let file = bundle.pathForResource(name, ofType: "json")!
+		let string = try! String(contentsOfFile: file, encoding: NSUTF8StringEncoding)
+
+		return toJSONObjects(string)!
+	}
+	
 	private func toJSONObjects(string: String) -> AnyObject? {
 		
 		guard let data = string.dataUsingEncoding(NSUTF8StringEncoding) else {
@@ -36,9 +45,9 @@ class TwitterDecodeTests: XCTestCase {
 	
     func testCase1() {
 		
-		let jsonString = "10"
-		let objects = toJSONObjects(jsonString)!
-
-		try! decode(objects) as ESTwitter.Status
+		let objects = readJSON("1")
+		let status = try! decode(objects) as ESTwitter.Status
+		
+		XCTAssertEqual(status.entities?.userMenthions?.first?.idStr, "2546782123")
     }
 }

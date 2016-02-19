@@ -82,7 +82,7 @@ extension MediaEntity : Decodable {
 			e <| "expanded_url",
 			e <| "id",
 			e <|-| "sizes",
-			e <| "displayUrl",
+			e <| "display_url",
 			e <| "type",
 			e <| "indices",
 			e <| "media_url",
