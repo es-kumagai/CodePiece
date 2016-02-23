@@ -21,13 +21,13 @@ extension InReplyTo : Decodable {
 	
 	public static func decode(e: Extractor) throws -> InReplyTo {
 		
-		return try build(InReplyTo.init)(
+		return try InReplyTo(
 			
-			e <| "in_reply_to_user_id_str",
-			e <| "in_reply_to_status_id_str",
-			e <| "in_reply_to_user_id",
-			e <| "in_reply_to_screen_name",
-			e <| "in_reply_to_status_id"
+			userIdStr: e.value("in_reply_to_user_id_str"),
+			statusIdStr: e.value("in_reply_to_status_id_str"),
+			userId: e.value("in_reply_to_user_id"),
+			screenName: e.value("in_reply_to_screen_name"),
+			statusId: e.value("in_reply_to_status_id")
 		)
 	}
 	

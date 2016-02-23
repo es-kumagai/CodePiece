@@ -23,12 +23,12 @@ extension Status.Entities : Decodable {
 	
 	public static func decode(e: Extractor) throws -> Status.Entities {
 		
-		return try build(Status.Entities.init)(
+		return try Status.Entities(
 		
-			e <||? "urls",
-			e <||? "hashtags",
-			e <||? "user_mentions",
-			e <||? "media"
+			urls: e.arrayOptional("urls"),
+			hashtags: e.arrayOptional("hashtags"),
+			userMenthions: e.arrayOptional("user_mentions"),
+			media: e.arrayOptional("media")
 		)
 	}
 }

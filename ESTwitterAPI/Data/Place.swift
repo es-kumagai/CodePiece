@@ -26,18 +26,18 @@ extension Place : Decodable {
 	
 	public static func decode(e: Extractor) throws -> Place {
 		
-		return try build(Place.init)(
+		return try Place(
 		
-			e <|-| "attributes",
-			e <| "bounding_box",
-			e <|| "contained_within",
-			e <| "country",
-			e <| "country_code",
-			e <| "full_name",
-			e <| "id",
-			e <| "name",
-			e <| "place_type",
-			e <| "url"
+			attributes: e.dictionary("attributes"),
+			boundingBox: e.value("bounding_box"),
+			containedWithin: e.array("contained_within"),
+			country: e.value("country"),
+			countryCode: e.value("country_code"),
+			fullName: e.value("full_name"),
+			id: e.value("id"),
+			name: e.value("name"),
+			placeType: e.value("place_type"),
+			url: e.value("url")
 		)
 	}
 }

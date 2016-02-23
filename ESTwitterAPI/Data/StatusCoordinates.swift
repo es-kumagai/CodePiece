@@ -21,10 +21,10 @@ extension Status.CoordinatesBox : Decodable {
 	
 	public static func decode(e: Extractor) throws -> Status.CoordinatesBox {
 		
-		return try build(Status.CoordinatesBox.init)(
+		return try Status.CoordinatesBox(
 			
-			e <| "coordinates",
-			e <| "type"
+			coordinates: e.value("coordinates"),
+			type: e.value("type")
 		)
 	}
 }

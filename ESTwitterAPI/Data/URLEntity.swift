@@ -20,12 +20,12 @@ extension URLEntity : Decodable {
 	
 	public static func decode(e: Extractor) throws -> URLEntity {
 		
-		return try build(URLEntity.init)(
+		return try URLEntity(
 			
-			e <| "url",
-			e <| "indices",
-			e <| "display_url",
-			e <| "expanded_url"
+			url: e.value("url"),
+			indices: e.value("indices"),
+			displayUrl: e.value("display_url"),
+			expandedUrl: e.value("expanded_url")
 		)
 	}
 }

@@ -28,10 +28,10 @@ extension UserEntities : Decodable {
 
 	public static func decode(e: Extractor) throws -> UserEntities {
 		
-		return try build(UserEntities.init)(
+		return try UserEntities(
 		
-			e <|? "url",
-			e <| "description"
+			urls: e.valueOptional("url"),
+			description: e.value("description")
 		)
 	}
 }
@@ -40,9 +40,9 @@ extension UserEntities.URLEntity : Decodable {
 	
 	public static func decode(e: Extractor) throws -> UserEntities.URLEntity {
 		
-		return try build(UserEntities.URLEntity.init)(
+		return try UserEntities.URLEntity(
 		
-			e <|| "urls"
+			urls: e.array("urls")
 		)
 	}
 }
@@ -51,9 +51,9 @@ extension UserEntities.DescriptionEntity : Decodable {
 	
 	public static func decode(e: Extractor) throws -> UserEntities.DescriptionEntity {
 		
-		return try build(UserEntities.DescriptionEntity.init)(
+		return try UserEntities.DescriptionEntity(
 			
-			e <|| "urls"
+			urls: e.array("urls")
 		)
 	}
 }
