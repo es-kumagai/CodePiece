@@ -21,13 +21,13 @@ extension UserMention : Decodable {
 	
 	public static func decode(e: Extractor) throws -> UserMention {
 		
-		return try build(UserMention.init)(
+		return try UserMention(
 			
-			e <| "id",
-			e <| "id_str",
-			e <| "name",
-			e <| "screen_name",
-			e <| "indices"
+			id: e.value("id"),
+			idStr: e.value("id_str"),
+			name: e.value("name"),
+			screenName: e.value("screen_name"),
+			indices: e.value("indices")
 		)
 	}
 }

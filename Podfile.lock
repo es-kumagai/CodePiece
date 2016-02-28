@@ -1,19 +1,19 @@
 PODS:
-  - APIKit (1.0.0):
-    - Result (~> 1.0.0)
+  - APIKit (1.1.2):
+    - Result (~> 1.0.1)
   - ESActiveCounter (0.1.4):
     - ESNotification (~> 0.2.0)
   - ESAppKitExtension (0.1.1)
   - ESCoreGraphicsExtension (0.1.3):
     - Swim (~> 1.4.0)
-  - ESGists (0.1.4-beta.3):
-    - APIKit (~> 1.0.0-beta4)
+  - ESGists (0.1.4-beta.4):
+    - APIKit (>= 1.1.2)
     - ESActiveCounter (~> 0.1.4)
     - ESAppKitExtension (~> 0.1.1)
     - ESCoreGraphicsExtension (~> 0.1.3)
     - ESNotification (~> 0.2.4)
     - ESThread (~> 0.1.0)
-    - Himotoki (~> 1.1)
+    - Himotoki (>= 1.5.0)
     - Ocean (~> 1.4.0)
     - Swim (~> 1.4.0)
   - ESNotification (0.2.9):
@@ -24,7 +24,7 @@ PODS:
     - ESAppKitExtension (~> 0.1.1)
     - ESCoreGraphicsExtension (~> 0.1.2)
   - ESThread (0.1.1)
-  - Himotoki (1.4.0)
+  - Himotoki (1.5.0)
   - KeychainAccess (2.3.3)
   - Ocean (1.4.0):
     - ESActiveCounter (~> 0.1.4)
@@ -42,11 +42,11 @@ PODS:
   - Swim (1.4.1-beta2)
 
 DEPENDENCIES:
-  - APIKit
+  - APIKit (>= 1.1.2)
   - ESGists (from `https://github.com/EZ-NET/ESGists.git`)
   - ESNotification (from `https://github.com/EZ-NET/ESNotification.git`, branch `master`)
   - ESThread (from `https://github.com/EZ-NET/ESThread.git`, branch `master`)
-  - Himotoki
+  - Himotoki (>= 1.5.0)
   - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`,
     branch `master`)
   - Ocean (from `https://github.com/EZ-NET/ESOcean.git`, branch `master`)
@@ -79,7 +79,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ESGists:
-    :commit: c02655d0cc3727577ba02460064dc8c555f22c32
+    :commit: 390fc80ea6c2052806a71994565c28830ab5d028
     :git: https://github.com/EZ-NET/ESGists.git
   ESNotification:
     :commit: 1c552fbb5040f570c7e5aaf2e7030850d800b319
@@ -101,15 +101,15 @@ CHECKOUT OPTIONS:
     :git: https://github.com/EZ-NET/ESSwim
 
 SPEC CHECKSUMS:
-  APIKit: 89b0eb7d6ee645a1f518877e63b7208665f46a4d
+  APIKit: d6e313f1ca3b0cae30a7059f872f7780d8a147ec
   ESActiveCounter: 222f94afbe6cd9276eaadf142c88c4ea1a8750b8
   ESAppKitExtension: 3bc92382a286d8ed531c0f2e9e1a0356cae9457c
   ESCoreGraphicsExtension: 187eae3d0bec6a1f6328956305cd9a61fdd6b183
-  ESGists: ddcaba55205f4e07079bd9526fd218e1cd706932
+  ESGists: 1311ac20e32202c5b155573bcf4bbd6680793a47
   ESNotification: e8042be30243c61465dd090e0c3a451f2643156f
   ESProgressHUD: 1ce6537e3813cd96d8fb81ae34d859cd5bd2fad2
   ESThread: 7fb6c2f9d3a263cf5c719d1f8f555093eebbcc6c
-  Himotoki: e342361bf39e8db8fc1d80cba5644d40ff01324e
+  Himotoki: 7506d0a42c59ca4f7e348f22aee89e22c76c5711
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
   Ocean: 53918cd843bc44547cf92356f9ac2bcd90484fb5
   p2.OAuth2: 7f5c44259ef83ea5b9ef8f9049310611788f86cb

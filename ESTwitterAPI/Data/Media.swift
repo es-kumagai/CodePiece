@@ -48,12 +48,12 @@ extension Media : Decodable {
 	
 	public static func decode(e: Extractor) throws -> Media {
 		
-		return try build(Media.init)(
+		return try Media(
 		
-			e <| "media_id",
-			e <| "media_id_string",
-			e <| "size",
-			e <| "image"
+			id: e.value("media_id"),
+			idString: e.value("media_id_string"),
+			size: e.value("size"),
+			image: e.value("image")
 		)
 	}
 }
@@ -62,11 +62,11 @@ extension Media.Image : Decodable {
 	
 	public static func decode(e: Extractor) throws -> Media.Image {
 		
-		return try build(Media.Image.init)(
+		return try Media.Image(
 		
-			e <| "w",
-			e <| "h",
-			e <| "image_type"
+			width: e.value("w"),
+			height: e.value("h"),
+			type: e.value("image_type")
 		)
 	}
 }
@@ -75,18 +75,18 @@ extension MediaEntity : Decodable {
 
 	public static func decode(e: Extractor) throws -> MediaEntity {
 		
-		return try build(MediaEntity.init)(
+		return try MediaEntity(
 		
-			e <| "id_str",
-			e <| "media_url_https",
-			e <| "expanded_url",
-			e <| "id",
-			e <|-| "sizes",
-			e <| "display_url",
-			e <| "type",
-			e <| "indices",
-			e <| "media_url",
-			e <| "url"
+			idStr: e.value("id_str"),
+			mediaUrlHttps: e.value("media_url_https"),
+			expandedUrl: e.value("expanded_url"),
+			id: e.value("id"),
+			sizes: e.dictionary("sizes"),
+			displayUrl: e.value("display_url"),
+			type: e.value("type"),
+			indices: e.value("indices"),
+			mediaUrl: e.value("media_url"),
+			url: e.value("url")
 		)
 	}
 }
@@ -95,11 +95,11 @@ extension MediaEntity.Size : Decodable {
 	
 	public static func decode(e: Extractor) throws -> MediaEntity.Size {
 		
-		return try build(MediaEntity.Size.init)(
+		return try MediaEntity.Size(
 			
-			e <| "w",
-			e <| "h",
-			e <| "resize"
+			width: e.value("w"),
+			height: e.value("h"),
+			resize: e.value("resize")
 		)
 	}
 }

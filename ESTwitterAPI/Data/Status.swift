@@ -92,27 +92,27 @@ extension Status : Decodable {
 	
 	public static func decode(e: Extractor) throws -> Status {
 		
-		return try build(Status.init)(
+		return try Status(
 			
-			e <|? "coordinates",
-			e <| "favorited",
-			e <| "created_at",
-			e <| "truncated",
-			e <| "id_str",
-			e <|? "entities",
-			InReplyTo.decodeOptional(e),
-			e <| "text",
-			e <|? "contributors",
-			e <| "retweet_count",
-			e <| "id",
-			e <|? "geo",
-			e <| "retweeted",
-			e <|? "retweeted_status",
-			e <|? "place",
-			e <|? "possibly_sensitive",
-			e <| "user",
-			e <|? "lang",
-			e <| "source"
+			coordinates: e.valueOptional("coordinates"),
+			favorited: e.value("favorited"),
+			createdAt: e.value("created_at"),
+			truncated: e.value("truncated"),
+			idStr: e.value("id_str"),
+			entities: e.valueOptional("entities"),
+			inReplyTo: InReplyTo.decodeOptional(e),
+			text: e.value("text"),
+			contributors: e.valueOptional("contributors"),
+			retweetCount: e.value("retweet_count"),
+			id: e.value("id"),
+			geo: e.valueOptional("geo"),
+			retweeted: e.value("retweeted"),
+			retweetedStatus: e.valueOptional("retweeted_status"),
+			place: e.valueOptional("place"),
+			possiblySensitive: e.valueOptional("possibly_sensitive"),
+			user: e.value("user"),
+			lang: e.valueOptional("lang"),
+			source: e.value("source")
 		)
 	}
 }

@@ -102,11 +102,10 @@ final class SNSController : PostController {
 				let gist = container.gistsState.gist!
 				DebugTime.print("📮 Capturing a gist (\(gist)) ... #2.2.1.1")
 				
-				let userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4"
-				
+				let captureInfo = LinedCaptureInfo()
 				let size = NSMakeSize(560.0, 560.0)
 				
-				NSApp.captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, userAgent: userAgent) { image in
+				NSApp.captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, captureInfo: captureInfo) { image in
 					
 					DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
 					callNextStageRecursively(capturedGistImage: image)

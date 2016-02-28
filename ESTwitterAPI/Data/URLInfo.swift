@@ -36,12 +36,12 @@ extension URLInfo : Decodable {
 	
 	public static func decode(e: Extractor) throws -> URLInfo {
 		
-		return try build(URLInfo.init)(
+		return try URLInfo(
 		
-			e <|? "display_url",
-			e <|? "expanded_url",
-			e <| "url",
-			e <| "indices"
+			displayUrl: e.valueOptional("display_url"),
+			expandedUrl: e.valueOptional("expanded_url"),
+			url: e.value("url"),
+			indices: e.value("indices")
 		)
 	}
 }

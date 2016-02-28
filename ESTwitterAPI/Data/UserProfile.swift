@@ -30,19 +30,19 @@ extension User.Profile : Decodable {
 	
 	public static func decode(e: Extractor) throws -> User.Profile {
 		
-		return try build(User.Profile.init)(
+		return try User.Profile(
 			
-			e <| "profile_sidebar_border_color",
-			e <| "profile_sidebar_fill_color",
-			e <| "profile_background_tile",
-			e <| "profile_image_url",
-			e <| "profile_link_color",
-			e <| "profile_image_url_https",
-			e <| "profile_use_background_image",
-			e <| "profile_text_color",
-			e <|? "profile_background_image_url_https",
-			e <| "profile_background_color",
-			e <|? "profile_background_image_url"
+			sidebarBorderColor: e.value("profile_sidebar_border_color"),
+			sidebarFillColor: e.value("profile_sidebar_fill_color"),
+			backgroundTile: e.value("profile_background_tile"),
+			imageUrl: e.value("profile_image_url"),
+			linkColor: e.value("profile_link_color"),
+			imageUrlHttps: e.value("profile_image_url_https"),
+			useBackgroundImage: e.value("profile_use_background_image"),
+			textColor: e.value("profile_text_color"),
+			backgroundImageUrlHttps: e.valueOptional("profile_background_image_url_https"),
+			backgroundColor: e.value("profile_background_color"),
+			backgroundImageUrl: e.valueOptional("profile_background_image_url")
 		)
 	}
 }

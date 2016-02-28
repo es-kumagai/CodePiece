@@ -18,10 +18,10 @@ extension HashtagEntity : Decodable {
 	
 	public static func decode(e: Extractor) throws -> HashtagEntity {
 		
-		return try build(HashtagEntity.init)(
+		return try HashtagEntity(
 			
-			e <| "text",
-			e <| "indices"
+			value: e.value("text"),
+			indices: e.value("indices")
 		)
 	}
 }

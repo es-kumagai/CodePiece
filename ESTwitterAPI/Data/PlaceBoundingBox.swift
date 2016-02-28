@@ -21,10 +21,10 @@ extension Place.BoundingBox : Decodable {
 	
 	public static func decode(e: Extractor) throws -> Place.BoundingBox {
 		
-		return try build(Place.BoundingBox.init)(
+		return try Place.BoundingBox(
 			
-			e <|| "coordinates",
-			e <| "type"
+			coordinates: e.array("coordinates"),
+			type: e.value("type")
 		)
 	}
 }
