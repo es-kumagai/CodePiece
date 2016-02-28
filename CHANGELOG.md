@@ -2,7 +2,11 @@
 
 Change Logs.
 
-## 1.4.6 (*)
+## 1.4.7 (*)
+
+* Capture codes with Line number.
+
+## 1.4.6
 
 ### Enhancements
 

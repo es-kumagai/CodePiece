@@ -25,9 +25,9 @@ final class WebCaptureController {
 		self.requests = [Request]()
 	}
 	
-	func capture(url:String, clientSize size:CGSize? = nil, userAgent: String? = nil, completion:CaptureCompletionHandler) {
+	func capture<CaptureInfo:CaptureInfoType>(url:String, clientSize size:CGSize? = nil, captureInfo: CaptureInfo, completion:CaptureCompletionHandler) {
 	
-		post(Request(url: url, owner: self, clientSize: size, userAgent: userAgent, handler: completion))
+		post(Request(url: url, owner: self, clientSize: size, captureInfo: captureInfo, handler: completion))
 	}
 	
 	private func post(request:Request) {
@@ -46,14 +46,17 @@ extension WebCaptureController {
 		
 		weak var owner:WebCaptureController!
 
+		var captureInfo: CaptureInfoType
 		var url:String
 		var completionHandler:WebCaptureController.CaptureCompletionHandler
 		
 		var view:WebView
 		
-		init(url:String, owner: WebCaptureController, clientSize size: CGSize? = nil, userAgent: String? = nil, handler:WebCaptureController.CaptureCompletionHandler) {
+		init<CaptureInfo:CaptureInfoType>(url:String, owner: WebCaptureController, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, handler:WebCaptureController.CaptureCompletionHandler) {
 			
 			self.owner = owner
+			
+			self.captureInfo = captureInfo
 			self.url = url
 			self.completionHandler = handler
 			
@@ -74,7 +77,7 @@ extension WebCaptureController {
 			super.init()
 			
 			self.view.frameLoadDelegate = self
-			self.view.customUserAgent = userAgent
+			self.view.customUserAgent = captureInfo.userAgent
 		}
 		
 		func post() {
@@ -108,12 +111,11 @@ extension WebCaptureController.Request : WebFrameLoadDelegate {
 		// 応急対応として待ち時間を挿入します。適切な方法に変える必要があります。
 		sleepForSecond(0.5)
 		
-		invokeAsyncOnMainQueue {
+		invokeAsyncOnMainQueue { [unowned self] in
 
 			// TODO: 汎用性を確保するためには DOM を渡して切り取る範囲を返す機能を切り出す必要があります。
 			let dom = frame.DOMDocument
-			let blobs = dom.getElementsByClassName("blob-file-content")
-			let content = blobs.item(0)
+			let content = self.captureInfo.targetNode(sender, dom)
 			
 			// TODO: content が取得できず nil になる場合もあるので対応が必要
 			let contentBound = content.boundingBox()
