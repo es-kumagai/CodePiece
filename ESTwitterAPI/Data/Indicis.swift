@@ -64,3 +64,11 @@ extension Indices : Decodable {
 		}
 	}
 }
+
+extension NSRange {
+	
+	public init(_ indices: Indices) {
+		
+		self.init(indices.startIndex ..< indices.endIndex)
+	}
+}

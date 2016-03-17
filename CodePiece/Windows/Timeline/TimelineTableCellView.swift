@@ -77,8 +77,12 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 	private func applyItem(item:TimelineTweetItem?) {
 
 		if let status = item?.status {
-			
-			self.textLabel.stringValue = status.text
+
+			// NOTE: 🐬 CodePiece の Data を扱うときに HTMLText を介すると attributedText の実装が逆に複雑化する可能性があるため、一旦保留にします。
+//			let html = HTMLText(rawValue: status.text)
+//			self.textLabel.attributedStringValue = html.attributedText
+
+			self.textLabel.attributedStringValue = status.attributedText
 			
 			let dateToString:(Date) -> String = {
 				

@@ -20,6 +20,63 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+// NOTE: 🐬 CodePiece の Data を扱うときに HTMLText を介すると attributedText の実装が逆に複雑化する可能性があるため、一旦保留にします。
+//public struct HTMLText {
+//
+//	public var source: String
+//	public var encoding: NSStringEncoding
+//	
+//	public init(source: String, encoding: NSStringEncoding = NSUTF8StringEncoding) {
+//		
+//		self.source = source
+//		self.encoding = encoding
+//	}
+//
+//	public var html: NSData {
+//		
+//		return source.dataUsingEncoding(NSUTF16StringEncoding, allowLossyConversion: true)!
+//	}
+//	
+//	public var attributedText: NSAttributedString {
+//		
+////		let options: [String:AnyObject] = [NSFontAttributeName:NSFont(name: "SourceHanCodeJP-Regular", size: 13.0)!]
+//		
+////		return NSAttributedString(string: source)
+//		return NSAttributedString(HTML: html, options: [:], documentAttributes: nil)!
+//	}
+//}
+//
+//extension HTMLText : StringLiteralConvertible {
+//
+//	public init(stringLiteral value: String) {
+//
+//		self.init(source: value)
+//	}
+//
+//	public init(extendedGraphemeClusterLiteral value: String) {
+//		
+//		self.init(source: value)
+//	}
+//	
+//	public init(unicodeScalarLiteral value: String) {
+//
+//		self.init(source: value)
+//	}
+//}
+//
+//extension HTMLText : RawRepresentable {
+//	
+//	public init(rawValue: String) {
+//		
+//		self.init(source: rawValue, encoding: NSUTF8StringEncoding)
+//	}
+//	
+//	public var rawValue: String {
+//		
+//		return source
+//	}
+//}
+
 protocol ExistanceCheckable {
 
 	var isExists: Bool { get }

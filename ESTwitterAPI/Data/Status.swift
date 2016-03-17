@@ -55,6 +55,19 @@ extension Status {
 		
 		return self.retweetedStatus.isExists
 	}
+	
+	public var attributedText: NSAttributedString {
+		
+		let text = NSMutableAttributedString(string: self.text)
+
+		// FIXME: ツイート内にリンクが記載されていても、それが entities に記録されるわけではない様子…
+//		entities?.urls?.forEach {
+//			
+//			text.addAttribute(NSLinkAttributeName, value: $0.expandedUrl.url!, range: NSRange($0.indices))
+//		}
+		
+		return text.copy() as! NSAttributedString
+	}
 }
 
 extension RetweetedStatus : Decodable {
