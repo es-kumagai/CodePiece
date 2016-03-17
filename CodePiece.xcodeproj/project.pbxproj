@@ -53,7 +53,6 @@
 		B12E04411B8864DD0032DC6F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12E04401B8864DD0032DC6F /* BaseViewController.swift */; };
 		B13371EB1BC5009600D1C793 /* StatusCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13371E91BC5009200D1C793 /* StatusCoordinates.swift */; };
 		B137468D1B6506000068414B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137468C1B6506000068414B /* Fonts.swift */; };
-		B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */; };
 		B13746941B6512360068414B /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13746931B6512360068414B /* FontTests.swift */; };
 		B13C98F71B70E3C800A5A2B3 /* LanguagePopupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13C98F61B70E3C800A5A2B3 /* LanguagePopupDataSource.swift */; };
 		B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13C98FE1B71138500A5A2B3 /* DataStoreForApp.swift */; };
@@ -122,6 +121,7 @@
 		B177FA6D1BF1FC7F000CE394 /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */; };
 		B177FA6F1BF21EEB000CE394 /* TimelineGetStatusesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */; };
 		B177FA701BF22D50000CE394 /* CodePieceClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12210511BCBB955004DBB9A /* CodePieceClientInfo.swift */; };
+		B178775D1C9A63300084878F /* SourceHanCodeJP-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B178775C1C9A63280084878F /* SourceHanCodeJP-Regular.otf */; };
 		B17C88C11B66BF0B00CBF20F /* README.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BD1B66BE6800CBF20F /* README.md */; };
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
 		B17C88C61B66FE7F00CBF20F /* ss in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BE1B66BE6800CBF20F /* ss */; };
@@ -214,7 +214,6 @@
 			dstPath = Fonts;
 			dstSubfolderSpec = 7;
 			files = (
-				B13746921B6511E80068414B /* SourceCodePro-Regular.otf in Copy Font Resources */,
 			);
 			name = "Copy Font Resources";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +378,7 @@
 		B1745BD31BF8CDF000E19F32 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Media.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableController.swift; sourceTree = "<group>"; };
 		B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineGetStatusesController.swift; sourceTree = "<group>"; };
+		B178775C1C9A63280084878F /* SourceHanCodeJP-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanCodeJP-Regular.otf"; sourceTree = "<group>"; };
 		B17C88BD1B66BE6800CBF20F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B17C88BE1B66BE6800CBF20F /* ss */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ss; sourceTree = "<group>"; };
 		B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -421,7 +421,6 @@
 		B1D2D6A11B5E19D100794EFD /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		B1D2D6A31B5E1D5400794EFD /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B1D2D6A51B5E2B2800794EFD /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
-		B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Regular.otf"; sourceTree = "<group>"; };
 		B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWindowController.swift; sourceTree = "<group>"; };
 		B1E89A7B1B7472770062E12E /* DataStore_AuthInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore_AuthInfo.swift; sourceTree = "<group>"; };
 		B1F16A651C77286B000CBB5F /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1.json; sourceTree = "<group>"; };
@@ -925,7 +924,7 @@
 		B1D2D6B21B5E61B400794EFD /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				B1D2D6B31B5E620300794EFD /* SourceCodePro-Regular.otf */,
+				B178775C1C9A63280084878F /* SourceHanCodeJP-Regular.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1180,6 +1179,7 @@
 				B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */,
 				B1D2D6831B5D5ED400794EFD /* PreferencesWindow.storyboard in Resources */,
 				B1492FBD1B5BCED80043ED8D /* Main.storyboard in Resources */,
+				B178775D1C9A63300084878F /* SourceHanCodeJP-Regular.otf in Resources */,
 				B19B36AC1BD9EA69000D10F9 /* Timeline.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,7 @@ enum SystemFont {
 		switch self {
 			
 		case .FontForCode:
-			return NSFont(name: "SourceCodePro-Regular", size: size)
+			return NSFont(name: "SourceHanCodeJP-Regular", size: size)
 		}
 	}
 }
