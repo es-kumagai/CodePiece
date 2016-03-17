@@ -34,7 +34,7 @@ extension PostDataContainer {
 	
 	var appendLangTagToTwitter: Bool {
 		
-		return hasGist
+		return hasCode
 	}
 
 	var postedTwitterText: String? {

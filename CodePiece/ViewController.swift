@@ -177,9 +177,7 @@ final class ViewController: NSViewController, NotificationObservable {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		
-		let postDataContainer = self.makePostDataContainer()
-		
-		NSApp.snsController.post(postDataContainer) { container in
+		NSApp.snsController.post(makePostDataContainer()) { container in
 			
 			DebugTime.print("📮 Posted \(container.twitterState.postedStatus) ... #1.1.1")
 			
