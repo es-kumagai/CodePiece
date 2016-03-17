@@ -17,7 +17,7 @@ extension Set where Element : HashtagType {
 	
 	public init(hashtagsDisplayText: String) {
 		
-		let hashtags = hashtagsDisplayText.split(" ").map { Element(hashtagValue:$0) }
+		let hashtags = hashtagsDisplayText.split(" ").flatMap(Element.init)
 		
 		self.init(hashtags)
 	}

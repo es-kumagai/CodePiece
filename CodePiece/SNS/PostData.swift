@@ -185,10 +185,20 @@ extension PostDataContainer {
 	
 	func effectiveHashtags(withAppTag withAppTag:Bool, withLangTag:Bool) -> ESTwitter.HashtagSet {
 		
-		let apptag = withAppTag ? CodePieceApp.hashtag : ESTwitter.Hashtag()
-		let langtag = withLangTag ? self.data.language.hashtag : ESTwitter.Hashtag()
+		let apptag: ESTwitter.Hashtag? = withAppTag ? CodePieceApp.hashtag : nil
+		let langtag: ESTwitter.Hashtag? = withLangTag ? self.data.language.hashtag : nil
 		
-		return ESTwitter.HashtagSet(self.data.hashtags + [ apptag, langtag ])
+		return [ apptag, langtag ].reduce(data.hashtags) { tags, tag in
+			
+			if let tag = tag {
+				
+				return ESTwitter.HashtagSet(tags + [ tag ])
+			}
+			else {
+				
+				return tags
+			}
+		}
 	}
 	
 	func makeDescriptionWithEffectiveHashtags(hashtags:ESTwitter.HashtagSet, withAppTag:Bool, withLangTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {

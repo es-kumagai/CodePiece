@@ -16,7 +16,7 @@ public protocol HashtagType {
 	var length:Int { get }
 	var isEmpty:Bool { get }
 
-	init(hashtagValue:String)
+	init?(hashtagValue:String)
 }
 
 public struct Hashtag : HashtagType {
@@ -28,7 +28,12 @@ public struct Hashtag : HashtagType {
 		self._value = ""
 	}
 	
-	public init(hashtagValue: String) {
+	public init?(hashtagValue: String) {
+		
+		guard !hashtagValue.isEmpty else {
+		
+			return nil
+		}
 		
 		self.init(hashtagValue)
 	}
