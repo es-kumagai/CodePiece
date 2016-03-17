@@ -10,11 +10,6 @@ public typealias HashtagSet = Set<Hashtag>
 
 extension Set where Element : HashtagType {
 	
-	private var validElements: [Element] {
-	
-		return self.filter { !$0.isEmpty }
-	}
-	
 	public init(hashtagsDisplayText: String) {
 		
 		let hashtags = hashtagsDisplayText.split(" ").flatMap(Element.init)
@@ -29,24 +24,26 @@ extension Set where Element : HashtagType {
 	
 	public func toTwitterDisplayText() -> String {
 		
-		return self.validElements.map { $0.value } .joinWithSeparator(" ")
+		return map { $0.value } .joinWithSeparator(" ")
 	}
 	
 	public var twitterDisplayTextLength: Int {
 		
-		let elements = self.validElements
-		let numberOfSpaces = { elements.count.predecessor() }
+		func numberOfSpaces() -> Int {
+			
+			return count.predecessor()
+		}
 		
-		switch elements.count {
+		switch count {
 			
 		case 0:
 			return 0
 			
 		case 1:
-			return elements.first!.length
+			return first!.length
 			
 		default:
-			return elements.reduce(numberOfSpaces()) { $0 + $1.length }
+			return reduce(numberOfSpaces()) { $0 + $1.length }
 		}
 	}
 }
