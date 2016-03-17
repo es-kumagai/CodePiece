@@ -201,7 +201,7 @@ extension PostDataContainer {
 		}
 	}
 	
-	func makeDescriptionWithEffectiveHashtags(hashtags:ESTwitter.HashtagSet, withAppTag:Bool, withLangTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {
+	func makeDescriptionWithEffectiveHashtags(hashtags:ESTwitter.HashtagSet, maxLength:Int? = nil, appendString:String? = nil) -> String {
 		
 		let getTruncatedDescription = { (description: String, maxLength: Int) -> String in
 			
