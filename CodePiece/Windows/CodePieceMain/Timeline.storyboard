@@ -369,12 +369,12 @@
                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dKB-KM-4qO">
                                                         <rect key="frame" x="8" y="4" width="284" height="14"/>
                                                         <subviews>
-                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bhq-Ez-ipa">
+                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bhq-Ez-ipa">
                                                                 <rect key="frame" x="-2" y="0.0" width="242" height="14"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="14" id="mHM-Gd-XBt"/>
                                                                 </constraints>
-                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="mB6-Ez-ITY">
+                                                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Label" id="mB6-Ez-ITY">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
