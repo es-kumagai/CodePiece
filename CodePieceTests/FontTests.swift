@@ -24,8 +24,10 @@ class FontTests: XCTestCase {
 	
 	func testFontLoad() {
 		
-		let codeFont = SystemFont.FontForCode.fontWithSize(10.0)
+		let textFont = systemPalette.textFont
+		let codeFont = systemPalette.codeFont
 		
+		XCTAssertNotNil(textFont)
 		XCTAssertNotNil(codeFont)
 	}
 }

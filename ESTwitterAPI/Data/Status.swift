@@ -55,16 +55,60 @@ extension Status {
 		
 		return self.retweetedStatus.isExists
 	}
+
+	private func applyAttribute(text: NSMutableAttributedString, urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) {
+		
+		if let entities = entities {
+
+			func setLinkAttributeWithURL(url: NSURL, color: NSColor, range: NSRange) {
+			
+				text.addAttribute(NSLinkAttributeName, value: url, range: range)
+				text.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+				text.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleNone.rawValue, range: range)
+				text.addAttribute(NSUnderlineColorAttributeName, value: NSColor.clearColor(), range: range)
+			}
+			
+			entities.urls?.forEach {
+
+				setLinkAttributeWithURL($0.expandedUrl.url!, color: urlColor, range: NSRange($0.indices))
+			}
+			
+			entities.hashtags?.forEach {
+				
+				setLinkAttributeWithURL($0.value.url, color: hashtagColor, range: NSRange($0.indices))
+			}
+			
+			entities.media?.forEach {
+				
+				setLinkAttributeWithURL($0.url.url!, color: urlColor, range: NSRange($0.indices))
+			}
+			
+			entities.userMenthions?.forEach {
+				
+				setLinkAttributeWithURL($0.url, color: mentionColor, range: NSRange($0.indices))
+			}
+		}
+		
+	}
+
+	public func attributedText(urlColor urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) -> NSAttributedString {
 	
-	public var attributedText: NSAttributedString {
+		let text = NSMutableAttributedString(string: self.text)
+		
+		applyAttribute(text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
+		
+		return text.copy() as! NSAttributedString
+	}
+	
+	public func attributedText(urlColor urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor, @noescape tweak: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
 		
 		let text = NSMutableAttributedString(string: self.text)
-
-		// FIXME: ツイート内にリンクが記載されていても、それが entities に記録されるわけではない様子…
-//		entities?.urls?.forEach {
-//			
-//			text.addAttribute(NSLinkAttributeName, value: $0.expandedUrl.url!, range: NSRange($0.indices))
-//		}
+		
+		// first, apply attributes to entire text.
+		try tweak(text)
+		
+		// then, apply attributes to parts of text.
+		applyAttribute(text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
 		
 		return text.copy() as! NSAttributedString
 	}

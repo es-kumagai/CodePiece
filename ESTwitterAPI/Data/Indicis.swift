@@ -71,4 +71,9 @@ extension NSRange {
 		
 		self.init(indices.startIndex ..< indices.endIndex)
 	}
+	
+	public init(_ indices: Indices, offset: Int) {
+		
+		self.init(indices.startIndex.advancedBy(offset) ..< indices.endIndex.advancedBy(offset))
+	}
 }

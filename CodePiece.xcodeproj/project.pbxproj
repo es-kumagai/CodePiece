@@ -52,7 +52,6 @@
 		B12C99BF1B850B27003E651F /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12C99BE1B850B27003E651F /* Language.swift */; };
 		B12E04411B8864DD0032DC6F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12E04401B8864DD0032DC6F /* BaseViewController.swift */; };
 		B13371EB1BC5009600D1C793 /* StatusCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13371E91BC5009200D1C793 /* StatusCoordinates.swift */; };
-		B137468D1B6506000068414B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137468C1B6506000068414B /* Fonts.swift */; };
 		B13746941B6512360068414B /* FontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13746931B6512360068414B /* FontTests.swift */; };
 		B13C98F71B70E3C800A5A2B3 /* LanguagePopupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13C98F61B70E3C800A5A2B3 /* LanguagePopupDataSource.swift */; };
 		B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13C98FE1B71138500A5A2B3 /* DataStoreForApp.swift */; };
@@ -108,6 +107,7 @@
 		B15E71C51BF0BC70009CCB0E /* TimelineViewController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C41BF0BC70009CCB0E /* TimelineViewController+Action.swift */; };
 		B15E71C71BF0CD84009CCB0E /* TimelineViewController+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */; };
 		B1630AE71BDC60770013AFF6 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1630AE61BDC60770013AFF6 /* Environments.swift */; };
+		B168F1AC1C9BC04100BD7DF0 /* SystemPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B168F1AB1C9BC04100BD7DF0 /* SystemPalette.swift */; };
 		B169B8391C4D967900CBF6C9 /* TimelineViewController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8381C4D967900CBF6C9 /* TimelineViewController+Notifications.swift */; };
 		B169B83D1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B83C1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift */; };
 		B169B8431C4E1C3D00CBF6C9 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B8421C4E1C3D00CBF6C9 /* DescriptionTextField.swift */; };
@@ -141,6 +141,7 @@
 		B19DA95E1C049A65000881AE /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19DA95D1C049A65000881AE /* PostData.swift */; };
 		B19DA9601C04A276000881AE /* PostData+Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19DA95F1C04A276000881AE /* PostData+Twitter.swift */; };
 		B19DA9621C04A280000881AE /* PostData+Gists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19DA9611C04A27F000881AE /* PostData+Gists.swift */; };
+		B1B8D9B01C9BC8C6004725E7 /* TwitterStatusAttributed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B8D9AF1C9BC8C6004725E7 /* TwitterStatusAttributed.swift */; };
 		B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F11B5E714800DE3942 /* GistsController.swift */; };
 		B1BB59F51B5E715B00DE3942 /* TwitterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F41B5E715B00DE3942 /* TwitterController.swift */; };
 		B1BB59F71B5E718900DE3942 /* SNSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F61B5E718900DE3942 /* SNSController.swift */; };
@@ -323,7 +324,6 @@
 		B12C99BE1B850B27003E651F /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		B12E04401B8864DD0032DC6F /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B13371E91BC5009200D1C793 /* StatusCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCoordinates.swift; sourceTree = "<group>"; };
-		B137468C1B6506000068414B /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B13746931B6512360068414B /* FontTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontTests.swift; sourceTree = "<group>"; };
 		B13C98F61B70E3C800A5A2B3 /* LanguagePopupDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagePopupDataSource.swift; sourceTree = "<group>"; };
 		B13C98FC1B710B2400A5A2B3 /* CodePiece-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CodePiece-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -366,6 +366,7 @@
 		B15E71C41BF0BC70009CCB0E /* TimelineViewController+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Action.swift"; sourceTree = "<group>"; };
 		B15E71C61BF0CD84009CCB0E /* TimelineViewController+Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Display.swift"; sourceTree = "<group>"; };
 		B1630AE61BDC60770013AFF6 /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
+		B168F1AB1C9BC04100BD7DF0 /* SystemPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPalette.swift; sourceTree = "<group>"; };
 		B169B8381C4D967900CBF6C9 /* TimelineViewController+Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Notifications.swift"; sourceTree = "<group>"; };
 		B169B83C1C4DBE6700CBF6C9 /* ViewController+SelectionAndRepliable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+SelectionAndRepliable.swift"; sourceTree = "<group>"; };
 		B169B8421C4E1C3D00CBF6C9 /* DescriptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTextField.swift; sourceTree = "<group>"; };
@@ -401,6 +402,7 @@
 		B19DA95D1C049A65000881AE /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		B19DA95F1C04A276000881AE /* PostData+Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PostData+Twitter.swift"; sourceTree = "<group>"; };
 		B19DA9611C04A27F000881AE /* PostData+Gists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PostData+Gists.swift"; sourceTree = "<group>"; };
+		B1B8D9AF1C9BC8C6004725E7 /* TwitterStatusAttributed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterStatusAttributed.swift; sourceTree = "<group>"; };
 		B1BB59F11B5E714800DE3942 /* GistsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistsController.swift; sourceTree = "<group>"; };
 		B1BB59F41B5E715B00DE3942 /* TwitterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TwitterController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B1BB59F61B5E718900DE3942 /* SNSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SNSController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -811,6 +813,7 @@
 				B18FAC651BCA31D20041874A /* TwitterOpenFeatures.swift */,
 				B18FAC671BCA33850041874A /* GitHubOpenFeatures.swift */,
 				B18BBEE21C6F0702006317E0 /* DebugSupport.swift */,
+				B168F1AB1C9BC04100BD7DF0 /* SystemPalette.swift */,
 			);
 			name = GlobalFeatures;
 			sourceTree = "<group>";
@@ -847,6 +850,7 @@
 				B1BB59F41B5E715B00DE3942 /* TwitterController.swift */,
 				B128CB5C1B67853C00859D81 /* Twitter.swift */,
 				B12C99BE1B850B27003E651F /* Language.swift */,
+				B1B8D9AF1C9BC8C6004725E7 /* TwitterStatusAttributed.swift */,
 			);
 			path = SNS;
 			sourceTree = "<group>";
@@ -895,7 +899,6 @@
 			children = (
 				B128CB5E1B67942D00859D81 /* Application.swift */,
 				B1D2D69B1B5DFF7400794EFD /* Colors.swift */,
-				B137468C1B6506000068414B /* Fonts.swift */,
 				B1D2D6A51B5E2B2800794EFD /* Notifications.swift */,
 				B12210531BCBC476004DBB9A /* ClientInfo.swift */,
 			);
@@ -1384,6 +1387,7 @@
 				B177FA6F1BF21EEB000CE394 /* TimelineGetStatusesController.swift in Sources */,
 				B169B8391C4D967900CBF6C9 /* TimelineViewController+Notifications.swift in Sources */,
 				B19005251BD1DC2D00A05957 /* AppControllers.swift in Sources */,
+				B1B8D9B01C9BC8C6004725E7 /* TwitterStatusAttributed.swift in Sources */,
 				B18E6F511C59F8730049A906 /* LatestTweetManageable.swift in Sources */,
 				B169B8491C4E3EE100CBF6C9 /* CodeTextView.swift in Sources */,
 				B12B24891B6B80C200B284D7 /* AcknowledgementsViewController.swift in Sources */,
@@ -1406,9 +1410,9 @@
 				B1587C4B1BE84CDE001E0E1D /* AboutWindow.swift in Sources */,
 				B13C99011B711BD200A5A2B3 /* AppState.swift in Sources */,
 				B1D2D69C1B5DFF7400794EFD /* Colors.swift in Sources */,
-				B137468D1B6506000068414B /* Fonts.swift in Sources */,
 				B1492FB61B5BCED80043ED8D /* AppDelegate.swift in Sources */,
 				B1118DA81B6BEF4D00BFC5FA /* AppExtension.swift in Sources */,
+				B168F1AC1C9BC04100BD7DF0 /* SystemPalette.swift in Sources */,
 				B1D2D6A61B5E2B2800794EFD /* Notifications.swift in Sources */,
 				B1BB59F71B5E718900DE3942 /* SNSController.swift in Sources */,
 				B1D2D6721B5D490800794EFD /* Settings.swift in Sources */,

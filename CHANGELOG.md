@@ -5,6 +5,7 @@ Change Logs.
 ## 1.4.8 beta
 
 * Count the number of tweet text count more accurately.
+* Can open link directly from timeline view.
 
 ## 1.4.7
 

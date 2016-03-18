@@ -59,6 +59,18 @@ public struct Hashtag : HashtagType {
 
 extension Hashtag {
 	
+	public var valueWithoutPrefix: String {
+		
+		if value.hasPrefix("#") {
+			
+			return value.substringFromIndex(value.startIndex.successor())
+		}
+		else {
+			
+			return value
+		}
+	}
+	
 	public static func normalize(value:String) -> String {
 		
 		let value = value.trimmed()
@@ -84,6 +96,11 @@ extension Hashtag {
 	public var isEmpty:Bool {
 		
 		return self.value.isEmpty
+	}
+	
+	public var url: NSURL {
+		
+		return NSURL(scheme: "https", host: "twitter.com", path: "/hashtag/\(valueWithoutPrefix)?f=tweets")!
 	}
 }
 

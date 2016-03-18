@@ -17,6 +17,14 @@ public struct UserMention {
 	public var indices: Indices
 }
 
+extension UserMention {
+	
+	var url: NSURL {
+		
+		return NSURL(scheme: "https", host: "twitter.com", path: "/\(screenName)")!
+	}
+}
+
 extension UserMention : Decodable {
 	
 	public static func decode(e: Extractor) throws -> UserMention {

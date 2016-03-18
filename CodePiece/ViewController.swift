@@ -74,7 +74,7 @@ final class ViewController: NSViewController, NotificationObservable {
 	
 		didSet {
 			
-			guard let font = SystemFont.FontForCode.fontWithSize(14.0) else {
+			guard let font = systemPalette.codeFont else {
 				
 				NSLog("Failed to get a font for the CodeTextView.")
 				return
