@@ -58,37 +58,106 @@ extension Status {
 
 	private func applyAttribute(text: NSMutableAttributedString, urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) {
 		
-		if let entities = entities {
-
-			func setLinkAttributeWithURL(url: NSURL, color: NSColor, range: NSRange) {
+		text.beginEditing()
+		
+		defer {
 			
-				text.addAttribute(NSLinkAttributeName, value: url, range: range)
-				text.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
-				text.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleNone.rawValue, range: range)
-				text.addAttribute(NSUnderlineColorAttributeName, value: NSColor.clearColor(), range: range)
-			}
-			
-			entities.urls?.forEach {
-
-				setLinkAttributeWithURL($0.expandedUrl.url!, color: urlColor, range: NSRange($0.indices))
-			}
-			
-			entities.hashtags?.forEach {
-				
-				setLinkAttributeWithURL($0.value.url, color: hashtagColor, range: NSRange($0.indices))
-			}
-			
-			entities.media?.forEach {
-				
-				setLinkAttributeWithURL($0.url.url!, color: urlColor, range: NSRange($0.indices))
-			}
-			
-			entities.userMenthions?.forEach {
-				
-				setLinkAttributeWithURL($0.url, color: mentionColor, range: NSRange($0.indices))
-			}
+			text.endEditing()
 		}
 		
+		if let entities = entities {
+
+			let baseAttributes = { () -> [String : AnyObject] in
+				
+				var results = [String : AnyObject]()
+				
+				text.enumerateAttributesInRange(NSMakeRange(0, text.length), options: []) { (attributes: [String : AnyObject], range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
+					
+					for (name, value) in attributes {
+						
+						results[name] = value
+					}
+				}
+				
+				return results
+			}()
+			
+			struct LinkItem : HasIndices {
+			
+				var indices: Indices
+				var color: NSColor
+				var displayText: String
+				var link: NSURL
+				
+				init(_ entity: URLEntity, color: NSColor) {
+					
+					self.indices = entity.indices
+					self.color = color
+					self.displayText = entity.displayUrl
+					self.link = entity.expandedUrl.url!
+				}
+				
+				init(_ entity: HashtagEntity, color: NSColor) {
+					
+					self.indices = entity.indices
+					self.color = color
+					self.displayText = entity.value.description
+					self.link = entity.value.url
+				}
+				
+				init(_ entity: MediaEntity, color: NSColor) {
+					
+					self.indices = entity.indices
+					self.color = color
+					self.displayText = entity.displayUrl
+					self.link = entity.expandedUrl.url!
+				}
+				
+				init(_ entity: UserMention, color: NSColor) {
+					
+					self.indices = entity.indices
+					self.color = color
+					self.displayText = entity.description
+					self.link = entity.url
+				}
+				
+				func attributedTextWithBaseAttributes(baseAttributes: [String : AnyObject]) -> NSAttributedString {
+				
+					return NSAttributedString(string: displayText, attributes: attributesWithBaseAttributes(baseAttributes))
+				}
+				
+				var range: NSRange {
+					
+					return NSRange(indices)
+				}
+				
+				func attributesWithBaseAttributes(baseAttributes: [String : AnyObject]) -> [String : AnyObject] {
+					
+					var results = baseAttributes
+					
+					results[NSLinkAttributeName] = link
+					results[NSForegroundColorAttributeName] = color
+					results[NSUnderlineStyleAttributeName] = NSUnderlineStyle.StyleNone.rawValue
+					results[NSUnderlineColorAttributeName] = NSColor.clearColor()
+					
+					return results
+				}
+			}
+
+			let linkItems = FlattenCollection([
+				
+				entities.urls?.map { LinkItem.init($0, color: urlColor) },
+				entities.hashtags?.map { LinkItem.init($0, color: hashtagColor) },
+				entities.media?.map { LinkItem.init($0, color: urlColor) },
+				entities.userMenthions?.map { LinkItem.init($0, color: mentionColor) }
+				]
+				.flatMap { $0 })
+			
+			for item in linkItems.sortedByIndicesDescend {
+				
+				text.replaceCharactersInRange(item.range, withAttributedString: item.attributedTextWithBaseAttributes(baseAttributes))
+			}
+		}
 	}
 
 	public func attributedText(urlColor urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) -> NSAttributedString {
