@@ -121,7 +121,6 @@
 		B177FA6D1BF1FC7F000CE394 /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */; };
 		B177FA6F1BF21EEB000CE394 /* TimelineGetStatusesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */; };
 		B177FA701BF22D50000CE394 /* CodePieceClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12210511BCBB955004DBB9A /* CodePieceClientInfo.swift */; };
-		B178775D1C9A63300084878F /* SourceHanCodeJP-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B178775C1C9A63280084878F /* SourceHanCodeJP-Regular.otf */; };
 		B17C88C11B66BF0B00CBF20F /* README.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BD1B66BE6800CBF20F /* README.md */; };
 		B17C88C21B66BF0B00CBF20F /* CHANGELOG.md in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BF1B66BEDB00CBF20F /* CHANGELOG.md */; };
 		B17C88C61B66FE7F00CBF20F /* ss in Copy Documents */ = {isa = PBXBuildFile; fileRef = B17C88BE1B66BE6800CBF20F /* ss */; };
@@ -142,6 +141,7 @@
 		B19DA9601C04A276000881AE /* PostData+Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19DA95F1C04A276000881AE /* PostData+Twitter.swift */; };
 		B19DA9621C04A280000881AE /* PostData+Gists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19DA9611C04A27F000881AE /* PostData+Gists.swift */; };
 		B1B8D9B01C9BC8C6004725E7 /* TwitterStatusAttributed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B8D9AF1C9BC8C6004725E7 /* TwitterStatusAttributed.swift */; };
+		B1B8D9B11C9BD442004725E7 /* SourceHanCodeJP-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B178775C1C9A63280084878F /* SourceHanCodeJP-Regular.otf */; };
 		B1BB59F31B5E714800DE3942 /* GistsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F11B5E714800DE3942 /* GistsController.swift */; };
 		B1BB59F51B5E715B00DE3942 /* TwitterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F41B5E715B00DE3942 /* TwitterController.swift */; };
 		B1BB59F71B5E718900DE3942 /* SNSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB59F61B5E718900DE3942 /* SNSController.swift */; };
@@ -215,6 +215,7 @@
 			dstPath = Fonts;
 			dstSubfolderSpec = 7;
 			files = (
+				B1B8D9B11C9BD442004725E7 /* SourceHanCodeJP-Regular.otf in Copy Font Resources */,
 			);
 			name = "Copy Font Resources";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1182,7 +1183,6 @@
 				B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */,
 				B1D2D6831B5D5ED400794EFD /* PreferencesWindow.storyboard in Resources */,
 				B1492FBD1B5BCED80043ED8D /* Main.storyboard in Resources */,
-				B178775D1C9A63300084878F /* SourceHanCodeJP-Regular.otf in Resources */,
 				B19B36AC1BD9EA69000D10F9 /* Timeline.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
