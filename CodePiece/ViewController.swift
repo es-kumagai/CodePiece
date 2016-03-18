@@ -74,7 +74,7 @@ final class ViewController: NSViewController, NotificationObservable {
 	
 		didSet {
 			
-			guard let font = SystemFont.FontForCode.fontWithSize(15.0) else {
+			guard let font = systemPalette.codeFont else {
 				
 				NSLog("Failed to get a font for the CodeTextView.")
 				return
@@ -177,9 +177,7 @@ final class ViewController: NSViewController, NotificationObservable {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		
-		let postDataContainer = self.makePostDataContainer()
-		
-		NSApp.snsController.post(postDataContainer) { container in
+		NSApp.snsController.post(makePostDataContainer()) { container in
 			
 			DebugTime.print("📮 Posted \(container.twitterState.postedStatus) ... #1.1.1")
 			

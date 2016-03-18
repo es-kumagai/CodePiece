@@ -39,6 +39,6 @@ extension PostDataManageable {
 	
 	func makePostDataContainer() -> PostDataContainer {
 		
-		return PostDataContainer(self.makePostData())
+		return PostDataContainer(makePostData())
 	}
 }

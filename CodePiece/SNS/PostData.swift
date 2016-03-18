@@ -185,15 +185,25 @@ extension PostDataContainer {
 	
 	func effectiveHashtags(withAppTag withAppTag:Bool, withLangTag:Bool) -> ESTwitter.HashtagSet {
 		
-		let apptag = withAppTag ? CodePieceApp.hashtag : ESTwitter.Hashtag()
-		let langtag = withLangTag ? self.data.language.hashtag : ESTwitter.Hashtag()
+		let apptag: ESTwitter.Hashtag? = withAppTag ? CodePieceApp.hashtag : nil
+		let langtag: ESTwitter.Hashtag? = withLangTag ? self.data.language.hashtag : nil
 		
-		return ESTwitter.HashtagSet(self.data.hashtags + [ apptag, langtag ])
+		return [ apptag, langtag ].reduce(data.hashtags) { tags, tag in
+			
+			if let tag = tag {
+				
+				return ESTwitter.HashtagSet(tags + [ tag ])
+			}
+			else {
+				
+				return tags
+			}
+		}
 	}
 	
-	func makeDescriptionWithEffectiveHashtags(hashtags:ESTwitter.HashtagSet, withAppTag:Bool, withLangTag:Bool, maxLength:Int? = nil, appendString:String? = nil) -> String {
+	func makeDescriptionWithEffectiveHashtags(hashtags:ESTwitter.HashtagSet, maxLength:Int? = nil, appendString:String? = nil) -> String {
 		
-		let getTruncatedDescription = { (description: String, maxLength: Int) -> String in
+		func getTruncatedDescription(description: String, maxLength: Int) -> String {
 			
 			let descriptionLength = maxLength - hashtags.twitterDisplayTextLength
 			
@@ -210,17 +220,15 @@ extension PostDataContainer {
 			return String(sourceDescription.prefixThrough(end)) + " …"
 		}
 		
-		let getDescription = { () -> String in
+		func getDescription() -> String {
 
-			let description = self.data.description
-			
 			if let maxLength = maxLength {
 				
-				return getTruncatedDescription(description, maxLength)
+				return getTruncatedDescription(data.description, maxLength: maxLength)
 			}
 			else {
 				
-				return description
+				return data.description
 			}
 		}
 		

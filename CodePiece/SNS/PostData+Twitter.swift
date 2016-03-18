@@ -16,7 +16,7 @@ extension PostDataContainer.TwitterState {
 	
 	var isPosted: Bool {
 		
-		return self.postedStatus.isExists
+		return postedStatus.isExists
 	}
 }
 
@@ -24,62 +24,47 @@ extension PostDataContainer {
 	
 	var isPostedToTwitter: Bool {
 		
-		return self.twitterState.isPosted
+		return twitterState.isPosted
 	}
 	
 	var appendAppTagToTwitter: Bool {
 		
-		return self.data.appendAppTagToTwitter
+		return data.appendAppTagToTwitter
 	}
 	
 	var appendLangTagToTwitter: Bool {
 		
-		if self.hasGist {
-			
-			return true
-		}
-		else {
-			
-			return false
-		}
+		return hasCode
 	}
 
 	var postedTwitterText: String? {
 		
-		return self.twitterState.postedStatus?.text
+		return twitterState.postedStatus?.text
 	}
 	
 	func descriptionLengthForTwitter(includesGistsLink includesGistsLink:Bool) -> Int {
 
 		let countsForGistsLink = includesGistsLink ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0
 
-		return self.descriptionForTwitter().utf16.count + countsForGistsLink
+		return descriptionForTwitter().utf16.count + countsForGistsLink
 	}
 	
 	func descriptionForTwitter(var maxLength: Int? = nil) -> String {
 		
-		if self.hasGist {
+		if hasGist {
 			
 			let twitterTotalCount = maxLength ?? 140
 			let reserveUrlCount = 23
-			let reserveGistCount = self.hasGist ? Twitter.SpecialCounting.Media.length : 0
+			let reserveGistCount = Twitter.SpecialCounting.Media.length
 			
 			maxLength = twitterTotalCount - reserveUrlCount - reserveGistCount
 		}
 
-		let hashtags = self.effectiveHashtagsForTwitter
-		let appendAppTag = self.appendAppTagToTwitter
-		let appendLangTag = self.appendLangTagToTwitter
-		let appendString = self.gistPageUrl
-		
-		return self.makeDescriptionWithEffectiveHashtags(hashtags, withAppTag: appendAppTag, withLangTag: appendLangTag, maxLength: maxLength, appendString: appendString)
+		return makeDescriptionWithEffectiveHashtags(effectiveHashtagsForTwitter, maxLength: maxLength, appendString: gistPageUrl)
 	}
 	
 	var effectiveHashtagsForTwitter: ESTwitter.HashtagSet {
 		
-		let appendAppTag = self.appendAppTagToTwitter
-		let appendLangTag = self.appendLangTagToTwitter
-		
-		return self.effectiveHashtags(withAppTag: appendAppTag, withLangTag: appendLangTag)
+		return self.effectiveHashtags(withAppTag: appendAppTagToTwitter, withLangTag: appendLangTagToTwitter)
 	}
 }

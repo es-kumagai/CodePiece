@@ -17,7 +17,7 @@ extension PostDataContainer.GistsState {
 	
 	var isPosted: Bool {
 		
-		return self.gist.isExists
+		return gist.isExists
 	}	
 }
 
@@ -27,12 +27,12 @@ extension PostDataContainer {
 	
 	var isPostedToGists: Bool {
 		
-		return self.gistsState.isPosted
+		return gistsState.isPosted
 	}
 	
 	var hasGist: Bool {
 		
-		return self.gistsState.gist.isExists
+		return gistsState.gist.isExists
 	}
 	
 	var appendAppTagToGists: Bool {
@@ -52,26 +52,24 @@ extension PostDataContainer {
 	
 	var filenameForGists: String {
 		
-		return self.basenameForGists.appendStringIfNotEmpty(self.data.language.extname, separator: ".")
+		return basenameForGists.appendStringIfNotEmpty(data.language.extname, separator: ".")
 	}
 	
 	var descriptionLengthForGists: Int {
 		
-		return self.descriptionForGists().utf16.count
+		return descriptionForGists().utf16.count
 	}
 	
 	func descriptionForGists() -> String {
 	
-		let hashtags = self.effectiveHashtagsForGists
-		let appendAppTag = self.appendAppTagToGists
-		let appendLangTag = self.appendLangTagToGists
+		let hashtags = effectiveHashtagsForGists
 		let appendString = String?()
 		
-		return self.makeDescriptionWithEffectiveHashtags(hashtags, withAppTag: appendAppTag, withLangTag: appendLangTag, appendString: appendString)
+		return makeDescriptionWithEffectiveHashtags(hashtags, appendString: appendString)
 	}
 
 	var effectiveHashtagsForGists: ESTwitter.HashtagSet {
 		
-		return self.effectiveHashtags(withAppTag: true, withLangTag: false)
+		return effectiveHashtags(withAppTag: true, withLangTag: false)
 	}
 }

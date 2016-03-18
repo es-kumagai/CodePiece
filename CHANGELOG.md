@@ -2,6 +2,11 @@
 
 Change Logs.
 
+## 1.4.8
+
+* Count the number of tweet text count more accurately.
+* Can open link directly from timeline view.
+
 ## 1.4.7
 
 * Capture codes with Line number.

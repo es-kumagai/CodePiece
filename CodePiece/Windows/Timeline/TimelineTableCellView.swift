@@ -77,8 +77,18 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 	private func applyItem(item:TimelineTweetItem?) {
 
 		if let status = item?.status {
-			
-			self.textLabel.stringValue = status.text
+
+			// NOTE: 🐬 CodePiece の Data を扱うときに HTMLText を介すると attributedText の実装が逆に複雑化する可能性があるため、一旦保留にします。
+//			let html = HTMLText(rawValue: status.text)
+//			self.textLabel.attributedStringValue = html.attributedText
+
+			self.textLabel.attributedStringValue = status.attributedText { text in
+				
+				let textRange = NSMakeRange(0, text.length)
+				
+				text.addAttribute(NSFontAttributeName, value: systemPalette.textFont, range: textRange)
+				text.addAttribute(NSForegroundColorAttributeName, value: systemPalette.textColor, range: textRange)
+			}
 			
 			let dateToString:(Date) -> String = {
 				
@@ -103,8 +113,8 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 		}
 		else {
 
+			self.textLabel.attributedStringValue = NSAttributedString(string: "")
 			self.usernameLabel.stringValue = ""
-			self.textLabel.stringValue = ""
 			self.dateLabel.stringValue = ""
 			self.iconButton.image = nil
 			self.retweetMark.hidden = true
@@ -164,6 +174,8 @@ extension TimelineTableCellView : TimelineTableCellType {
 		let view = tweak(self.makeCellForTableView(tableView, owner: owner) as! TimelineTableCellView) {
 			
 			$0.textLabel.selectable = false
+			$0.textLabel.allowsEditingTextAttributes = true
+			
 			$0.item = (item as! TimelineTweetItem)
 		}
 		

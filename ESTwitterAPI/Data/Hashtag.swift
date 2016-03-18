@@ -16,7 +16,7 @@ public protocol HashtagType {
 	var length:Int { get }
 	var isEmpty:Bool { get }
 
-	init(hashtagValue:String)
+	init?(hashtagValue:String)
 }
 
 public struct Hashtag : HashtagType {
@@ -28,7 +28,12 @@ public struct Hashtag : HashtagType {
 		self._value = ""
 	}
 	
-	public init(hashtagValue: String) {
+	public init?(hashtagValue: String) {
+		
+		guard !hashtagValue.isEmpty else {
+		
+			return nil
+		}
 		
 		self.init(hashtagValue)
 	}
@@ -53,6 +58,18 @@ public struct Hashtag : HashtagType {
 }
 
 extension Hashtag {
+	
+	public var valueWithoutPrefix: String {
+		
+		if value.hasPrefix("#") {
+			
+			return value.substringFromIndex(value.startIndex.successor())
+		}
+		else {
+			
+			return value
+		}
+	}
 	
 	public static func normalize(value:String) -> String {
 		
@@ -79,6 +96,11 @@ extension Hashtag {
 	public var isEmpty:Bool {
 		
 		return self.value.isEmpty
+	}
+	
+	public var url: NSURL {
+		
+		return NSURL(scheme: "https", host: "twitter.com", path: "/hashtag/\(valueWithoutPrefix)?f=tweets")!
 	}
 }
 
