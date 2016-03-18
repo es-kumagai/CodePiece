@@ -2,6 +2,10 @@
 
 Change Logs.
 
+## **
+
+* Can see selected language easily by watermark.
+
 ## 1.4.8 beta
 
 * Count the number of tweet text count more accurately.

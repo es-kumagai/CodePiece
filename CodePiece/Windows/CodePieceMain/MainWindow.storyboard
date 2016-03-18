@@ -262,15 +262,28 @@
                                     <menu key="menu" id="QCr-cN-4U9"/>
                                 </popUpButtonCell>
                             </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAe-oN-MPK" customClass="WatermarkLabel" customModule="CodePiece" customModuleProvider="target">
+                                <rect key="frame" x="541" y="129" width="161" height="79"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Label" id="yPe-Wr-XPi">
+                                    <font key="font" metaFont="system" size="66"/>
+                                    <color key="textColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <outlet property="transparentResponder" destination="8OA-rk-WhX" id="9HY-RI-cFR"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="dTm-OD-heR" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="5Ap-QM-XEv"/>
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="top" secondItem="f8Q-oO-N5A" secondAttribute="bottom" constant="8" id="72d-ZC-NhY"/>
+                            <constraint firstItem="3hT-FM-HsJ" firstAttribute="top" secondItem="cAe-oN-MPK" secondAttribute="bottom" constant="16" id="BUo-2v-i2o"/>
                             <constraint firstItem="dTm-OD-heR" firstAttribute="top" secondItem="3hT-FM-HsJ" secondAttribute="bottom" constant="2" id="Bs8-rF-8ib"/>
                             <constraint firstAttribute="trailing" secondItem="Ny3-jn-TOD" secondAttribute="trailing" constant="20" id="Gah-4W-Hdo"/>
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="KZA-YY-iff"/>
                             <constraint firstItem="f8Q-oO-N5A" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="RbA-ac-h6D"/>
                             <constraint firstItem="GDd-Xx-hX6" firstAttribute="baseline" secondItem="f8Q-oO-N5A" secondAttribute="baseline" id="SD8-1u-wto"/>
+                            <constraint firstAttribute="trailing" secondItem="cAe-oN-MPK" secondAttribute="trailing" constant="44" id="Uw8-6H-EHo"/>
                             <constraint firstAttribute="bottom" secondItem="dTm-OD-heR" secondAttribute="bottom" constant="2" id="Xa6-Us-QMA"/>
                             <constraint firstItem="3hT-FM-HsJ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="aO7-TC-Yo9"/>
                             <constraint firstAttribute="trailing" secondItem="3hT-FM-HsJ" secondAttribute="trailing" constant="20" id="d69-dm-NnX"/>
@@ -290,6 +303,7 @@
                         <outlet property="hashTagTextField" destination="8VY-21-QQc" id="poH-qc-18R"/>
                         <outlet property="languagePopUpButton" destination="GDd-Xx-hX6" id="IXf-6q-WDk"/>
                         <outlet property="languagePopUpDataSource" destination="Csn-jJ-GoY" id="WJk-Ng-BNC"/>
+                        <outlet property="languageWatermark" destination="cAe-oN-MPK" id="vwI-dL-iCc"/>
                         <outlet property="postButton" destination="tsY-MH-1c4" id="2x0-uY-e0J"/>
                     </connections>
                 </viewController>

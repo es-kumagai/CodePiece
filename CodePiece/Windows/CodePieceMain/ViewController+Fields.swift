@@ -23,6 +23,7 @@ protocol FieldsController {
 	var descriptionTextField:DescriptionTextField! { get }
 	var hashTagTextField:HashtagTextField! { get }
 	var languagePopUpButton:NSPopUpButton! { get }
+	var languageWatermark: WatermarkLabel! { get }
 	var postButton:NSButton! { get }
 	
 	var descriptionCountLabel:NSTextField! { get }
@@ -31,6 +32,7 @@ protocol FieldsController {
 	func updateControlsDisplayText()
 	func updateTweetTextCount()
 	func updatePostButtonTitle()
+	func updateWatermark()
 	
 	func getPostButtonTitle() -> String
 	
@@ -42,6 +44,10 @@ protocol FieldsController {
 
 extension ViewController : FieldsController {
 	
+	func updateWatermark() {
+		
+		languageWatermark.stringValue = selectedLanguage.description
+	}
 }
 
 extension FieldsController {
@@ -153,6 +159,7 @@ extension FieldsController where Self : KeyValueChangeable {
 		
 		updateTweetTextCount()
 		updatePostButtonTitle()
+		updateWatermark()
 	}
 	
 	func updatePostButtonTitle() {
