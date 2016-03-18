@@ -12,8 +12,8 @@ let systemPalette = SystemPalette()
 
 struct SystemPalette {
 	
-	let textFont: NSFont! = SystemFont.FontForText.fontWithSize(13.0)!
-	let codeFont: NSFont! = SystemFont.FontForCode.fontWithSize(14.0)!
+	let textFont: NSFont! = SystemFont.FontForText.fontWithSize(13.0)
+	let codeFont: NSFont! = SystemFont.FontForCode.fontWithSize(14.0)
 	
 	let textColor = [#Color(colorLiteralRed: 0.208, green: 0.333, blue: 0.416, alpha: 1.000)#]
 	let urlColor = [#Color(colorLiteralRed: 0.26, green: 0.47, blue: 0.96, alpha: 1.0)#]
