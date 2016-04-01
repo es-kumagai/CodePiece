@@ -60,7 +60,7 @@ final class SNSController : PostController {
 	
 	func _post(container:PostDataContainer, capturedGistImage: NSImage?, completed: (PostDataContainer) -> Void) {
 		
-		let callNextStageRecursively = { [unowned self] (capturedGistImage image: NSImage?) in
+		let callNextStageRecursively = { [unowned self] (image: NSImage?) in
 			
 			container.proceedToNextStage()
 			self._post(container, capturedGistImage: image, completed: completed)
@@ -79,7 +79,7 @@ final class SNSController : PostController {
 				
 			case .Initialized:
 				
-				callNextStageRecursively(capturedGistImage: capturedGistImage)
+				callNextStageRecursively(capturedGistImage)
 				
 			case .PostToGists:
 				
@@ -90,7 +90,7 @@ final class SNSController : PostController {
 					switch result {
 						
 					case .Success:
-						callNextStageRecursively(capturedGistImage: capturedGistImage)
+						callNextStageRecursively(capturedGistImage)
 						
 					case .Failure(let error):
 						exitWithFailure("\(error)")
@@ -108,12 +108,12 @@ final class SNSController : PostController {
 				NSApp.captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, captureInfo: captureInfo) { image in
 					
 					DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
-					callNextStageRecursively(capturedGistImage: image)
+					callNextStageRecursively(image)
 				}
 				
 			case .PostToTwitter:
 				
-				callNextStageRecursively(capturedGistImage: capturedGistImage)
+				callNextStageRecursively(capturedGistImage)
 				
 			case .PostToTwitterMedia:
 
@@ -122,7 +122,7 @@ final class SNSController : PostController {
 					switch result {
 						
 					case .Success:
-						callNextStageRecursively(capturedGistImage: capturedGistImage)
+						callNextStageRecursively(capturedGistImage)
 						
 					case .Failure:
 						exitWithFailure("\(container.error!.reason)")
@@ -142,7 +142,7 @@ final class SNSController : PostController {
 					case .Success:
 						
 						DebugTime.print("📮 Posted successfully (stage:\(container.stage)) ... #2.0.1")
-						callNextStageRecursively(capturedGistImage: capturedGistImage)
+						callNextStageRecursively(capturedGistImage)
 						
 					case .Failure(let error):
 
