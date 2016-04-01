@@ -106,6 +106,14 @@ final class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
+	@IBOutlet var hashtagWatermark: WatermarkLabel! {
+		
+		didSet {
+			
+			hashtagWatermark.stringValue = ""
+		}
+	}
+	
 	var baseViewController:BaseViewController {
 		
 		return self.parentViewController as! BaseViewController

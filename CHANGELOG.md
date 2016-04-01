@@ -4,7 +4,7 @@ Change Logs.
 
 ## **
 
-* Can see selected language easily by watermark.
+* Can see selected language and hashtags easily in watermark text field.
 
 ## 1.4.8 beta
 
