@@ -24,7 +24,7 @@ target :CodePiece do
 
 	pods
 	pod 'KeychainAccess', :git => 'https://github.com/kishikawakatsumi/KeychainAccess.git', :branch => 'master'
-	pod 'STTwitter', :git => 'https://github.com/EZ-NET/STTwitter.git', :branch => 'FixPostMediaUploadData'
+	pod 'STTwitter'
 
 end
 

@@ -33,7 +33,7 @@ PODS:
     - SwiftKeychain (~> 1.0)
   - ReachabilitySwift (2.3.3)
   - Result (2.0.0)
-  - STTwitter (0.2.2)
+  - STTwitter (0.2.3)
   - SwiftKeychain (1.0.0)
   - Swim (1.4.1)
 
@@ -48,24 +48,18 @@ DEPENDENCIES:
   - Ocean
   - p2.OAuth2
   - ReachabilitySwift (>= 2.0)
-  - STTwitter (from `https://github.com/EZ-NET/STTwitter.git`, branch `FixPostMediaUploadData`)
+  - STTwitter
   - Swim
 
 EXTERNAL SOURCES:
   KeychainAccess:
     :branch: master
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
-  STTwitter:
-    :branch: FixPostMediaUploadData
-    :git: https://github.com/EZ-NET/STTwitter.git
 
 CHECKOUT OPTIONS:
   KeychainAccess:
     :commit: 523d6cb588604c20c49445185fb06f715fe14152
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
-  STTwitter:
-    :commit: 39add4f6c1924170130e6151f17b3d0a57fe2e66
-    :git: https://github.com/EZ-NET/STTwitter.git
 
 SPEC CHECKSUMS:
   APIKit: 14c0233ad090ae2dcfc9f642bc8158ff7ad50a4b
@@ -82,7 +76,7 @@ SPEC CHECKSUMS:
   p2.OAuth2: 99c2683594a86770f31240d57a162569f1ef0743
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
-  STTwitter: eb85d8770ddb0f8989f341cf41ea875e90ac6e7f
+  STTwitter: 77386cb6f1807fbfc0e321b9233bdecc9786195d
   SwiftKeychain: fd9ad69f7b3ff7a0c7ba579da508bbaa89a395b2
   Swim: dacd6fb92f7d42094b97973cdaa69b46891b6d25
 
