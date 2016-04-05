@@ -49,7 +49,9 @@ extension PostDataContainer {
 		return descriptionForTwitter().utf16.count + countsForGistsLink
 	}
 	
-	func descriptionForTwitter(var maxLength: Int? = nil) -> String {
+	func descriptionForTwitter(maxLength: Int? = nil) -> String {
+		
+		var maxLength = maxLength
 		
 		if hasGist {
 			

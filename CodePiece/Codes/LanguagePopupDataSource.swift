@@ -23,7 +23,7 @@ final class LanguagePopupDataSource : NSObject {
 			
 			for language in self.languages {
 
-				let menu = tweak (NSMenuItem(title: language.description, action: "popupSelected:", keyEquivalent: "")) {
+				let menu = tweak (NSMenuItem(title: language.description, action: #selector(LanguagePopupDataSource.popupSelected(_:)), keyEquivalent: "")) {
 					
 					$0.target = self
 				}

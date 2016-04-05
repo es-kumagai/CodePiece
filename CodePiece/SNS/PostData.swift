@@ -91,7 +91,7 @@ extension PostDataContainer {
 		
 		do {
 			
-			self.twitterState.postedStatus = try decode(postedRawStatus) as ESTwitter.Status
+			self.twitterState.postedStatus = try decodeValue(postedRawStatus) as ESTwitter.Status
 		}
 		catch {
 			

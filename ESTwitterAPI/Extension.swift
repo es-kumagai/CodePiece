@@ -61,7 +61,7 @@ extension ReferenceDateConvertible {
 
 public protocol DateCalculatable {
 	
-	typealias DateType = Self
+	associatedtype DateType = Self
 	
 	var midnight:DateType { get }
 	var yesterday:DateType { get }

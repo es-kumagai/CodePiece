@@ -49,7 +49,7 @@ extension User : Decodable {
 		return try User(
 			
 			name: e.value("name"),
-			profile: Himotoki.decode(e.rawValue),
+			profile: decodeValue(e.rawValue),
 			createdAt: e.value("created_at"),
 			location: e.value("location"),
 			isTranslationEnabled: e.value("is_translation_enabled"),

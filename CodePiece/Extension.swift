@@ -151,9 +151,9 @@ extension NSDate {
 	}
 }
 
-public func bundle<First,Second>(first:First)(second:Second) -> (First, Second) {
+public func bundle<First,Second>(first:First) -> (second:Second) -> (First, Second) {
 
-	return (first, second)
+	return { second in (first, second) }
 }
 
 public func bundle<First,Second>(first:First, second:Second) -> (First, Second) {
@@ -560,7 +560,7 @@ internal enum MessageQueueHandler<Message : MessageType> {
 
 public protocol MessageQueueType : AnyObject {
 	
-	typealias Message : MessageType
+	associatedtype Message : MessageType
 }
 
 public protocol MessageType {
@@ -790,7 +790,7 @@ public protocol _MessageQueueHandlerProtocol {
 
 public protocol MessageQueueHandlerProtocol : _MessageQueueHandlerProtocol {
 	
-	typealias Message : MessageType
+	associatedtype Message : MessageType
 
 	func messageQueue(queue:MessageQueue<Message>, handlingMessage:Message) throws
 	func messageQueue(queue:MessageQueue<Message>, handlingError:ErrorType) throws
@@ -1425,7 +1425,7 @@ public struct Thread {
 
 protocol Captureable {
 	
-	typealias CaptureTarget
+	associatedtype CaptureTarget
 	
 	var captureTarget:CaptureTarget { get }
 	
