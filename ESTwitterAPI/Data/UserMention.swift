@@ -8,7 +8,7 @@
 
 import Himotoki
 
-public struct UserMention {
+public struct UserMention : HasIndices {
 	
 	public var id: UInt64
 	public var idStr: String
@@ -22,6 +22,14 @@ extension UserMention {
 	var url: NSURL {
 		
 		return NSURL(scheme: "https", host: "twitter.com", path: "/\(screenName)")!
+	}
+}
+
+extension UserMention : CustomStringConvertible {
+
+	public var description: String {
+		
+		return "@\(screenName)"
 	}
 }
 

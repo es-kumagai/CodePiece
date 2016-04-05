@@ -23,7 +23,7 @@ public struct Media {
 	}
 }
 
-public struct MediaEntity {
+public struct MediaEntity : HasIndices {
 	
 	public struct Size {
 		

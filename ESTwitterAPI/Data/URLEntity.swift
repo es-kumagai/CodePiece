@@ -8,7 +8,7 @@
 
 import Himotoki
 
-public struct URLEntity {
+public struct URLEntity : HasIndices {
 	
 	public var url: URL
 	public var indices: Indices

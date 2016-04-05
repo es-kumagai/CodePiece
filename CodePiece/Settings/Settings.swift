@@ -10,64 +10,58 @@ import ESGists
 
 final class Settings {
 	
-	private var _store:DataStore
+	private var _store = DataStore()
 	
-	var appState:AppState
-	var account:AccountSetting
-	var project:ProjectSetting
+	var appState = AppState()
+	var account = AccountSetting()
+	var project = ProjectSetting()
 
 	init() {
 	
-		self._store = DataStore()
-
-		self.appState = AppState()
-		self.account = AccountSetting()
-		self.project = ProjectSetting()
-		
-		self.loadSettings()
+		loadSettings()
 	}
 	
 	// 設定がされていることを確認します。有効性は判定しません。
 	var isReady:Bool {
 	
-		return self.account.isReady && self.project.isReady
+		return account.isReady && project.isReady
 	}
 	
 	func loadSettings() {
 
-		self.loadAppState()
-		self.loadAccount()
+		loadAppState()
+		loadAccount()
 	}
 	
 	func loadAppState() {
 	
-		self.appState.selectedLanguage = self._store.appState.selectedLanguage
-		self.appState.hashtags = self._store.appState.hashtags
+		appState.hashtags = _store.appState.hashtags
+		appState.selectedLanguage = _store.appState.selectedLanguage		
 	}
 	
 	func saveAppState() {
 	
-		self._store.appState.selectedLanguage = self.appState.selectedLanguage
-		self._store.appState.hashtags = self.appState.hashtags
+		_store.appState.selectedLanguage = appState.selectedLanguage
+		_store.appState.hashtags = appState.hashtags
 		
-		self._store.appState.save()
+		_store.appState.save()
 	}
 	
 	func loadAccount() {
 		
-		self.loadTwitterAccount()
-		self.loadGitHubAccount()
+		loadTwitterAccount()
+		loadGitHubAccount()
 	}
 	
 	func saveAccount() {
 		
-		self.saveTwitterAccount()
-		self.saveGitHubAccount()
+		saveTwitterAccount()
+		saveGitHubAccount()
 	}
 	
 	func loadTwitterAccount() {
 		
-		switch self._store.twitter.kind {
+		switch _store.twitter.kind {
 			
 		case .OSAccount:
 			loadTwitterAccountAsAccount()
@@ -82,7 +76,7 @@ final class Settings {
 	
 	private func loadTwitterAccountAsAccount() {
 		
-		let identifier = self._store.twitter.identifier
+		let identifier = _store.twitter.identifier
 		
 		if let account = TwitterAccount(identifier: identifier) {
 			
@@ -97,9 +91,9 @@ final class Settings {
 	
 	private func loadTwitterAccountAsToken() {
 		
-		let token = self._store.twitter.token
-		let tokenSecret = self._store.twitter.tokenSecret
-		let tokenScreenName = self._store.twitter.tokenScreenName
+		let token = _store.twitter.token
+		let tokenSecret = _store.twitter.tokenSecret
+		let tokenScreenName = _store.twitter.tokenScreenName
 		
 		let account = TwitterAccount(token: token, tokenSecret: tokenSecret, screenName: tokenScreenName)
 		
@@ -130,78 +124,78 @@ final class Settings {
 		
 		if let account = self.account.twitterAccount {
 
-			self._store.twitter.kind = account.storeKind
+			_store.twitter.kind = account.storeKind
 			
 			switch account {
 				
 			case let .Account(osAccount):
-				self._store.twitter.identifier = osAccount.identifier ?? ""
-				self._store.twitter.token = ""
-				self._store.twitter.tokenSecret = ""
-				self._store.twitter.tokenScreenName = ""
+				_store.twitter.identifier = osAccount.identifier ?? ""
+				_store.twitter.token = ""
+				_store.twitter.tokenSecret = ""
+				_store.twitter.tokenScreenName = ""
 				
 			case let .Token(token, tokenSecret, screenName):
-				self._store.twitter.identifier = ""
-				self._store.twitter.token = token
-				self._store.twitter.tokenSecret = tokenSecret
-				self._store.twitter.tokenScreenName = screenName
+				_store.twitter.identifier = ""
+				_store.twitter.token = token
+				_store.twitter.tokenSecret = tokenSecret
+				_store.twitter.tokenScreenName = screenName
 			}
 		}
 		else {
 			
-			self._store.twitter.kind = .Unknown
-			self._store.twitter.identifier = ""
-			self._store.twitter.token = ""
-			self._store.twitter.tokenSecret = ""
-			self._store.twitter.tokenScreenName = ""
+			_store.twitter.kind = .Unknown
+			_store.twitter.identifier = ""
+			_store.twitter.token = ""
+			_store.twitter.tokenSecret = ""
+			_store.twitter.tokenScreenName = ""
 		}
 		
-		self._store.twitter.save()
+		_store.twitter.save()
 	}
 	
 	func loadGitHubAccount() {
 		
-		self.account.id = self._store.github.authInfo.id
-		self.account.username = self._store.github.authInfo.username
-		self.account.authorization = self._store.github.authInfo.token.map(GitHubAuthorization.init)
+		account.id = _store.github.authInfo.id
+		account.username = _store.github.authInfo.username
+		account.authorization = _store.github.authInfo.token.map(GitHubAuthorization.init)
 
-		NSLog("GitHub account information restored from data store. (\(self.account.username))")
+		NSLog("GitHub account information restored from data store. (\(account.username))")
 		
-		Authorization.GitHubAuthorizationStateDidChangeNotification(isValid: self.account.authorizationState == .Authorized, username: self.account.username).post()
+		Authorization.GitHubAuthorizationStateDidChangeNotification(isValid: account.authorizationState == .Authorized, username: self.account.username).post()
 	}
 
 	func saveGitHubAccount() {
 		
 		NSLog("Writing GitHub account to data store. (\(self.account.username))")
 		
-		self._store.github.authInfo.id = self.account.id
-		self._store.github.authInfo.username = self.account.username
-		self._store.github.authInfo.token = self.account.authorization?.token!
+		_store.github.authInfo.id = account.id
+		_store.github.authInfo.username = account.username
+		_store.github.authInfo.token = account.authorization?.token!
 		
-		handleError(try self._store.github.save())
+		handleError(try _store.github.save())
 	}
 	
 	func replaceGitHubAccount(username:String, id:ID, authorization:GitHubAuthorization, saveFinally save:Bool) {
 	
-		self.account.id = id
-		self.account.username = username
-		self.account.authorization = authorization
+		account.id = id
+		account.username = username
+		account.authorization = authorization
 
 		if save {
 			
-			self.saveGitHubAccount()
+			saveGitHubAccount()
 		}
 	}
 	
 	func resetGitHubAccount(saveFinally save:Bool) {
 		
-		self.account.id = nil
-		self.account.username = nil
-		self.account.authorization = nil
+		account.id = nil
+		account.username = nil
+		account.authorization = nil
 		
 		if save {
 			
-			self.saveGitHubAccount()
+			saveGitHubAccount()
 		}
 	}
 }

@@ -2,6 +2,10 @@
 
 Change Logs.
 
+## 1.4.9
+
+* Can see selected language and hashtags easily in watermark text field.
+
 ## 1.4.8
 
 * Count the number of tweet text count more accurately.

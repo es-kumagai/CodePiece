@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XfG-lQ-9wD">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XfG-lQ-9wD">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -262,11 +262,47 @@
                                     <menu key="menu" id="QCr-cN-4U9"/>
                                 </popUpButtonCell>
                             </popUpButton>
+                            <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fV7-JG-IRI" userLabel="Watermark State View">
+                                <rect key="frame" x="413" y="135" width="287" height="113"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAe-oN-MPK" customClass="WatermarkLabel" customModule="CodePiece" customModuleProvider="target">
+                                        <rect key="frame" x="-2" y="34" width="291" height="79"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Language" id="yPe-Wr-XPi">
+                                            <font key="font" metaFont="system" size="66"/>
+                                            <color key="textColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <outlet property="transparentResponder" destination="8OA-rk-WhX" id="9HY-RI-cFR"/>
+                                        </connections>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z7v-7K-Ol4" userLabel="Hashtag Watermark" customClass="WatermarkLabel" customModule="CodePiece" customModuleProvider="target">
+                                        <rect key="frame" x="180" y="0.0" width="109" height="34"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Hashtag" id="tMj-DA-3LT">
+                                            <font key="font" metaFont="system" size="28"/>
+                                            <color key="textColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <outlet property="transparentResponder" destination="8OA-rk-WhX" id="FAw-xs-CZX"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="dTm-OD-heR" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="5Ap-QM-XEv"/>
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="top" secondItem="f8Q-oO-N5A" secondAttribute="bottom" constant="8" id="72d-ZC-NhY"/>
                             <constraint firstItem="dTm-OD-heR" firstAttribute="top" secondItem="3hT-FM-HsJ" secondAttribute="bottom" constant="2" id="Bs8-rF-8ib"/>
+                            <constraint firstItem="3hT-FM-HsJ" firstAttribute="top" secondItem="fV7-JG-IRI" secondAttribute="bottom" constant="22" id="FHY-D2-oNB"/>
                             <constraint firstAttribute="trailing" secondItem="Ny3-jn-TOD" secondAttribute="trailing" constant="20" id="Gah-4W-Hdo"/>
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="KZA-YY-iff"/>
                             <constraint firstItem="f8Q-oO-N5A" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="RbA-ac-h6D"/>
@@ -279,6 +315,7 @@
                             <constraint firstItem="3hT-FM-HsJ" firstAttribute="top" secondItem="Ny3-jn-TOD" secondAttribute="bottom" id="ghw-iE-9Ep"/>
                             <constraint firstItem="GDd-Xx-hX6" firstAttribute="trailing" secondItem="Ny3-jn-TOD" secondAttribute="trailing" id="q9b-2y-3iT"/>
                             <constraint firstItem="f8Q-oO-N5A" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="t54-Qc-PJx"/>
+                            <constraint firstAttribute="trailing" secondItem="fV7-JG-IRI" secondAttribute="trailing" constant="44" id="t7L-nA-DUL"/>
                             <constraint firstItem="Hab-QF-1JP" firstAttribute="baseline" secondItem="f8Q-oO-N5A" secondAttribute="baseline" id="zB9-it-zWk"/>
                         </constraints>
                     </view>
@@ -288,8 +325,10 @@
                         <outlet property="descriptionCountLabel" destination="dRA-lG-ufz" id="KDq-Jw-KjP"/>
                         <outlet property="descriptionTextField" destination="KZX-ml-gl0" id="J8Q-xu-srr"/>
                         <outlet property="hashTagTextField" destination="8VY-21-QQc" id="poH-qc-18R"/>
+                        <outlet property="hashtagWatermark" destination="z7v-7K-Ol4" id="B7Z-NH-a6W"/>
                         <outlet property="languagePopUpButton" destination="GDd-Xx-hX6" id="IXf-6q-WDk"/>
                         <outlet property="languagePopUpDataSource" destination="Csn-jJ-GoY" id="WJk-Ng-BNC"/>
+                        <outlet property="languageWatermark" destination="cAe-oN-MPK" id="vwI-dL-iCc"/>
                         <outlet property="postButton" destination="tsY-MH-1c4" id="2x0-uY-e0J"/>
                     </connections>
                 </viewController>

@@ -98,6 +98,22 @@ final class ViewController: NSViewController, NotificationObservable {
 	
 	@IBOutlet var codeScrollView:NSScrollView!
 	
+	@IBOutlet var languageWatermark: WatermarkLabel! {
+		
+		didSet {
+			
+			languageWatermark.stringValue = ""
+		}
+	}
+	
+	@IBOutlet var hashtagWatermark: WatermarkLabel! {
+		
+		didSet {
+			
+			hashtagWatermark.stringValue = ""
+		}
+	}
+	
 	var baseViewController:BaseViewController {
 		
 		return self.parentViewController as! BaseViewController
@@ -237,13 +253,14 @@ final class ViewController: NSViewController, NotificationObservable {
 			NSLog("Posted completely \(notification.container.twitterState.postedStatus)")
 		}
 		
-		self.observeNotification(PostFailedNotification.self) { [unowned self] notification in
+		observeNotification(PostFailedNotification.self) { [unowned self] notification in
 		
 			self.showErrorAlert("Cannot post", message: "\(notification.container.error!)")
 		}
 		
-		self.observeNotification(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
+		observeNotification(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
 			
+			self.updateWatermark()
 			self.updateTweetTextCount()
 		}
 		

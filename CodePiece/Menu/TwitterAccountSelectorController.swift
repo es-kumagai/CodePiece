@@ -38,7 +38,7 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 		
 			self.accounts = nil
 			
-			let createMenuItem = TwitterAccountMenuItem.menuItemCreator(action: "accountSelectorDidChange:", target: self)
+			let createMenuItem = TwitterAccountMenuItem.menuItemCreator(action: #selector(TwitterAccountSelectorController.accountSelectorDidChange(_:)), target: self)
 			
 			tweak (self.accountSelector) {
 				

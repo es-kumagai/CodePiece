@@ -18,7 +18,7 @@ final class URLSchemeManager {
 	
 	init() {
 		
-		self.eventManager.setEventHandler(self, andSelector: "handleURLEvent:withReply:", forEventClass: self.eventClass, andEventID: self.eventID)
+		self.eventManager.setEventHandler(self, andSelector: #selector(URLSchemeManager.handleURLEvent(_:withReply:)), forEventClass: self.eventClass, andEventID: self.eventID)
 	}
 	
 	deinit {

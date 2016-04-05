@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ESTwitter
 
 enum ReplyStyle {
 
@@ -23,6 +24,8 @@ protocol FieldsController {
 	var descriptionTextField:DescriptionTextField! { get }
 	var hashTagTextField:HashtagTextField! { get }
 	var languagePopUpButton:NSPopUpButton! { get }
+	var languageWatermark: WatermarkLabel! { get }
+	var hashtagWatermark: WatermarkLabel! { get }
 	var postButton:NSButton! { get }
 	
 	var descriptionCountLabel:NSTextField! { get }
@@ -31,6 +34,9 @@ protocol FieldsController {
 	func updateControlsDisplayText()
 	func updateTweetTextCount()
 	func updatePostButtonTitle()
+
+	func updateLanguageWatermark()
+	func updateHashtagWatermark()
 	
 	func getPostButtonTitle() -> String
 	
@@ -40,8 +46,29 @@ protocol FieldsController {
 	func clearHashtags()
 }
 
+extension FieldsController {
+	
+	func updateWatermark() {
+		
+		updateLanguageWatermark()
+		updateHashtagWatermark()
+	}
+}
+
 extension ViewController : FieldsController {
 	
+	func updateLanguageWatermark() {
+		
+		languageWatermark.stringValue = selectedLanguage.description
+		updateHashtagWatermark()
+	}
+	
+	func updateHashtagWatermark() {
+		
+		let hashtags = HashtagSet(hashTagTextField.hashtags + [selectedLanguage.hashtag])
+		
+		hashtagWatermark.stringValue = hashtags.toTwitterDisplayText()
+	}
 }
 
 extension FieldsController {
@@ -153,6 +180,7 @@ extension FieldsController where Self : KeyValueChangeable {
 		
 		updateTweetTextCount()
 		updatePostButtonTitle()
+		updateWatermark()
 	}
 	
 	func updatePostButtonTitle() {
@@ -181,6 +209,7 @@ extension FieldsController where Self : KeyValueChangeable {
 		withChangeValue("canPost") {
 			
 			self.hashTagTextField.hashtags = []
+			updateHashtagWatermark()
 		}
 	}
 }

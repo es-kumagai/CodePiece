@@ -8,6 +8,48 @@
 
 import Himotoki
 
+public protocol HasIndices {
+
+	var indices: Indices { get }
+}
+
+extension CollectionType where Generator.Element : HasIndices {
+	
+	public var sortedByIndicesAscend: Array<Generator.Element> {
+	
+		return sort {
+			
+			let (lhs, rhs) = ($0.indices, $1.indices)
+			
+			if lhs.startIndex == rhs.startIndex {
+				
+				return lhs.endIndex < rhs.endIndex
+			}
+			else {
+				
+				return lhs.startIndex < rhs.startIndex
+			}
+		}
+	}
+	
+	public var sortedByIndicesDescend: Array<Generator.Element> {
+		
+		return sort {
+			
+			let (lhs, rhs) = ($0.indices, $1.indices)
+			
+			if lhs.endIndex == rhs.endIndex {
+				
+				return lhs.startIndex > rhs.startIndex
+			}
+			else {
+				
+				return lhs.endIndex > rhs.endIndex
+			}
+		}
+	}
+}
+
 public struct Indices {
 	
 	public var startIndex:Int
