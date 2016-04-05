@@ -1643,18 +1643,3 @@ extension APIError : CustomDebugStringConvertible {
 		}
 	}
 }
-
-extension DecodeError : CustomStringConvertible {
-	
-	public var description:String {
-		
-		switch self {
-			
-		case let .MissingKeyPath(keyPath):
-			return "Missing KeyPath (\(keyPath))"
-			
-		case let .TypeMismatch(expected: expected, actual: actual, keyPath: keyPath):
-			return "Type Mismatch (expected: \(expected), actual: \(actual), keyPath: \(keyPath))"
-		}
-	}
-}
