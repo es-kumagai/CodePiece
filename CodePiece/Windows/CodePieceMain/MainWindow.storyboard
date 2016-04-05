@@ -263,7 +263,7 @@
                                 </popUpButtonCell>
                             </popUpButton>
                             <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fV7-JG-IRI" userLabel="Watermark State View">
-                                <rect key="frame" x="413" y="129" width="287" height="113"/>
+                                <rect key="frame" x="413" y="135" width="287" height="113"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAe-oN-MPK" customClass="WatermarkLabel" customModule="CodePiece" customModuleProvider="target">
                                         <rect key="frame" x="-2" y="34" width="291" height="79"/>
@@ -302,7 +302,7 @@
                             <constraint firstItem="dTm-OD-heR" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="5Ap-QM-XEv"/>
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="top" secondItem="f8Q-oO-N5A" secondAttribute="bottom" constant="8" id="72d-ZC-NhY"/>
                             <constraint firstItem="dTm-OD-heR" firstAttribute="top" secondItem="3hT-FM-HsJ" secondAttribute="bottom" constant="2" id="Bs8-rF-8ib"/>
-                            <constraint firstItem="3hT-FM-HsJ" firstAttribute="top" secondItem="fV7-JG-IRI" secondAttribute="bottom" constant="16" id="FHY-D2-oNB"/>
+                            <constraint firstItem="3hT-FM-HsJ" firstAttribute="top" secondItem="fV7-JG-IRI" secondAttribute="bottom" constant="22" id="FHY-D2-oNB"/>
                             <constraint firstAttribute="trailing" secondItem="Ny3-jn-TOD" secondAttribute="trailing" constant="20" id="Gah-4W-Hdo"/>
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="KZA-YY-iff"/>
                             <constraint firstItem="f8Q-oO-N5A" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="RbA-ac-h6D"/>
