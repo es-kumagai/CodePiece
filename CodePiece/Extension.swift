@@ -77,27 +77,6 @@ public var NullStream = NullOutputStream()
 //	}
 //}
 
-protocol ExistanceCheckable {
-
-	var isExists: Bool { get }
-}
-
-extension String : ExistanceCheckable {
-	
-	public var isExists: Bool {
-		
-		return !isEmpty
-	}
-}
-
-extension Array : ExistanceCheckable {
-
-	public var isExists: Bool {
-		
-		return !isEmpty
-	}
-}
-
 extension NSIndexSet {
 
 	public convenience init<S:SequenceType where S.Generator.Element == Int>(sequence s:S) {
@@ -108,11 +87,11 @@ extension NSIndexSet {
 	}
 }
 
-extension NSIndexSet : ExistanceCheckable {
+extension NSIndexSet : ExistenceDeterminationable {
 	
-	public var isExists: Bool {
+	public var isEmpty: Bool {
 		
-		return count > 0
+		return count.isZero
 	}
 }
 
