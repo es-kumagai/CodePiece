@@ -66,10 +66,21 @@ final class SNSController : PostController {
 			self._post(container, capturedGistImage: image, completed: completed)
 		}
 		
-		let exitWithFailure = { (reason: String) in
+		let exitWithFailure = { (reason: String, code: Int?) in
 			
 			DebugTime.print("📮 Posted with failure (stage:\(container.stage), error:\(reason)) ... #2.0.2")
-			container.setError(PostError(reason: reason))
+			
+			let error: PostError
+			
+			if let code = code {
+				error = PostError(reason: reason, code: code)
+			}else{
+				error = PostError(reason: reason)
+			}
+			
+			container.setError(error)
+			
+			
 			completed(container)
 		}
 		
@@ -93,7 +104,7 @@ final class SNSController : PostController {
 						callNextStageRecursively(capturedGistImage)
 						
 					case .Failure(let error):
-						exitWithFailure("\(error)")
+						exitWithFailure("\(error)", nil)
 					}
 				}
 				
@@ -125,7 +136,7 @@ final class SNSController : PostController {
 						callNextStageRecursively(capturedGistImage)
 						
 					case .Failure:
-						exitWithFailure("\(container.error!.reason)")
+						exitWithFailure("\(container.error!.reason)", nil)
 					}
 				}
 				
@@ -146,7 +157,7 @@ final class SNSController : PostController {
 						
 					case .Failure(let error):
 
-						exitWithFailure("\(error)")
+						exitWithFailure("\(error)", error.code)
 					}
 				}
 				
@@ -156,7 +167,7 @@ final class SNSController : PostController {
 		}
 		catch {
 			
-			exitWithFailure("\(error)")
+			exitWithFailure("\(error)", nil)
 		}
 	}
 }
