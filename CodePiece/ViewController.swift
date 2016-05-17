@@ -255,17 +255,7 @@ final class ViewController: NSViewController, NotificationObservable {
 		
 		observeNotification(PostFailedNotification.self) { [unowned self] notification in
 			
-			let errorOver140 = 186
-			
-			let message: String
-			switch notification.container.error?.code {
-			case .Some(errorOver140):
-				message = "Tweet is over 140 characters."
-			default:
-				message = "\(notification.container.error!)"
-			}
-		
-			self.showErrorAlert("Cannot post", message: message)
+			self.showErrorAlert("Cannot post", message: notification.container.error!.description)
 		}
 		
 		observeNotification(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
