@@ -1132,6 +1132,10 @@ public protocol KeyValueChangeable {
 	func withChangeValue<S:SequenceType where S.Generator.Element == String>(keys:S, @noescape body:()->Void)
 }
 
+// FIXME: Xcode 7.3.1 からか、なぜか NSObject だけでなく NSViewController にも　KeyValueChangeable を適用しないと、その先で準拠性を約束できませんでした。
+extension NSViewController : KeyValueChangeable {
+}
+
 extension NSObject : KeyValueChangeable {
 
 	public func withChangeValue(keys:String...) {
