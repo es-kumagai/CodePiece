@@ -2,16 +2,28 @@
 
 Change Logs.
 
-## 1.4.9 beta
+## 1.4.10 beta
+
+### Fixes
+
+* Refine error message more readable.
+
+## 1.4.9
+
+### Enhancements
 
 * Can see selected language and hashtags easily in watermark text field.
 
 ## 1.4.8
 
+### Enhancements
+
 * Count the number of tweet text count more accurately.
 * Can open link directly from timeline view.
 
 ## 1.4.7
+
+### Enhancements
 
 * Capture codes with Line number.
 
