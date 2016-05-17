@@ -73,10 +73,17 @@ final class PostDataContainer {
 struct PostError : ErrorType {
 	
 	var reason: String
+	var code: Int?
 	
 	init(reason: String) {
 		
 		self.reason = reason
+	}
+	
+	init(reason: String, code: Int?) {
+		
+		self.reason = reason
+		self.code   = code
 	}
 	
 	init<T:ErrorType>(error: T) {
