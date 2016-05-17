@@ -1,28 +1,20 @@
 # How to build CodePiece
 
-To build **CodePiece** ...
-
-## Install a Support Tool
-
-You need to install `XcodeGenerateConstants` tool in the next steps.
-
-```bash
-cd /tmp
-git clone https://github.com/EZ-NET/XcodeGenerateConstants.git
-
-cd XcodeGenerateConstants
-sudo make install
-```
-
-By doing this, the `XcodeGenerateConstants` tool is installed to `/usr/local/bin` directory.
-
-> This tool is used for generate Swift Files defined a struct type from Property List Files in `~/Library/XcodeGenerateConstants` directory.
+To build **CodePiece** project ...
 
 ## Define keys and secrets
 
-### for GitHub Application
+To build the CodePiece project, you need to create `CodePieceClientInfo.plist` file to `~/Library/XcodeGenerateConstants` directory.
 
-You need to create a file named `CodePieceClientInfo.plist` in `~/Library/XcodeGenerateConstants` directory.
+### How to make CodePieceClientInfo.plist
+
+If you have not created it, you can do it easily to using `SetupCodePieceClientInfo.sh` script.
+
+```sh
+sh Tools/SetupCodePieceClientInfo.sh
+```
+
+When you execute the script, the script will install [EZ-NET/XcodeGenerateConstants](https://github.com/EZ-NET/XcodeGenerateConstants.git) tool to `/usr/local/bin` directory, and generate `CodePieceClientInfo.plist` in `~/Library/XcodeGenerateConstants` directory.
 
 The contents of the `CodePieceClientInfo.plist` file are as follows.
 
