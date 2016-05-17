@@ -39,7 +39,7 @@ The contents of the `CodePieceClientInfo.plist` file are as follows.
 
 Create your Client ID and Client Secret for Github.
 
-[https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+[https://github.com/settings/applications/new](https://github.com/settings/applications/new)
 
 Value for `GitHubClientID ` key is a *Client ID* of **GitHub** Application and value for `GitHubClientSecret ` key is a *Client Secret* of the *Client ID*.
 
