@@ -40,7 +40,7 @@ final class PostDataContainer {
 	private(set) var stage = PostStage.Initialized
 	private(set) var gistsState = GistsState()
 	private(set) var twitterState = TwitterState()
-	private(set) var error: PostError? = nil
+	private(set) var error: SNSController.PostError? = nil
 	
 	init(_ data: PostData) {
 		
@@ -67,21 +67,6 @@ final class PostDataContainer {
 		case PostToTwitterMedia
 		case PostToTwitterStatus
 		case Posted
-	}
-}
-
-struct PostError : ErrorType {
-	
-	var reason: String
-	
-	init(reason: String) {
-		
-		self.reason = reason
-	}
-	
-	init<T:ErrorType>(error: T) {
-		
-		self.reason = "\(error)"
 	}
 }
 
@@ -158,7 +143,7 @@ extension PostDataContainer {
 		return !self.twitterState.mediaIDs.isEmpty
 	}
 	
-	func setError(error: PostError) {
+	func setError(error: SNSController.PostError) {
 	
 		self.error = error
 	}

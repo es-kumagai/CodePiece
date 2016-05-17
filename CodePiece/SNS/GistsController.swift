@@ -15,7 +15,7 @@ final class GistsController : PostController, AlertDisplayable {
 
 	let filename = "CodePiece"
 
-	typealias PostResult = Result<PostDataContainer,NSError>
+	typealias PostResult = Result<PostDataContainer, SNSController.PostError>
 	
 	var canPost:Bool {
 	
@@ -26,7 +26,7 @@ final class GistsController : PostController, AlertDisplayable {
 
 		guard let authorization = NSApp.settings.account.authorization else {
 			
-			throw SNSControllerError.NotAuthorized
+			throw SNSController.AuthenticationError.NotAuthorized(service: .GitHub)
 		}
 
 		let filename = container.filenameForGists
@@ -54,8 +54,8 @@ final class GistsController : PostController, AlertDisplayable {
 				completed(PostResult(value: container))
 				
 			case .Failure(let error):
-				
-				completed(PostResult(error: NSError(domain: "Failed to post a gist. \(error)", code: -1, userInfo: nil)))
+
+				completed(PostResult(error: .Description("Failed to post a gist. \(error)")))
 			}
 		}
 	}
