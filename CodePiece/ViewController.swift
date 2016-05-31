@@ -254,8 +254,8 @@ final class ViewController: NSViewController, NotificationObservable {
 		}
 		
 		observeNotification(PostFailedNotification.self) { [unowned self] notification in
-		
-			self.showErrorAlert("Cannot post", message: "\(notification.container.error!)")
+			
+			self.showErrorAlert("Cannot post", message: notification.container.error!.description)
 		}
 		
 		observeNotification(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in

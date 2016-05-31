@@ -15,30 +15,34 @@ protocol PostController {
 	var canPost:Bool { get }
 }
 
-enum SNSControllerError : ErrorType, CustomStringConvertible {
-
-	case CredentialsNotVerified
-	case NotAuthorized
-	case NotReady(String)
-	
-	var description:String {
-		
-		switch self {
-			
-		case .CredentialsNotVerified:
-			return "Credentials not verified."
-			
-		case .NotAuthorized:
-			return "Not authorized."
-			
-		case .NotReady(let message):
-			return message
-		}
-	}
-}
-
 final class SNSController : PostController {
 
+	enum Service {
+	
+		case Twitter
+		case GitHub
+	}
+	
+	enum AuthenticationError : ErrorType {
+		
+		case CredentialsNotVerified
+		case NotAuthorized(service: Service)
+		case NotReady(service: Service, description: String)
+		case InvalidAccount(service: Service, reason: String)
+	}
+	
+	/// This means a error which may occur when post.
+	enum PostError : ErrorType {
+		
+		case Unexpected(NSError)
+		case SystemError(String)
+		case Description(String)
+		case Authentication(AuthenticationError)
+		case PostTextTooLong(limit: Int)
+		case FailedToUploadGistCapture(NSImage, description: String)
+		case FailedToPostTweet(String)
+	}
+	
 	var gists:GistsController
 	var twitter:TwitterController
 	
@@ -66,10 +70,10 @@ final class SNSController : PostController {
 			self._post(container, capturedGistImage: image, completed: completed)
 		}
 		
-		let exitWithFailure = { (reason: String) in
+		let exitWithFailure = { (error: SNSController.PostError) in
 			
-			DebugTime.print("📮 Posted with failure (stage:\(container.stage), error:\(reason)) ... #2.0.2")
-			container.setError(PostError(reason: reason))
+			DebugTime.print("📮 Posted with failure (stage:\(container.stage), error:\(error)) ... #2.0.2")
+			container.setError(error)
 			completed(container)
 		}
 		
@@ -93,7 +97,7 @@ final class SNSController : PostController {
 						callNextStageRecursively(capturedGistImage)
 						
 					case .Failure(let error):
-						exitWithFailure("\(error)")
+						exitWithFailure(error)
 					}
 				}
 				
@@ -125,7 +129,7 @@ final class SNSController : PostController {
 						callNextStageRecursively(capturedGistImage)
 						
 					case .Failure:
-						exitWithFailure("\(container.error!.reason)")
+						exitWithFailure(container.error!)
 					}
 				}
 				
@@ -146,7 +150,7 @@ final class SNSController : PostController {
 						
 					case .Failure(let error):
 
-						exitWithFailure("\(error)")
+						exitWithFailure(error)
 					}
 				}
 				
@@ -154,9 +158,79 @@ final class SNSController : PostController {
 				completed(container)
 			}
 		}
-		catch {
+		catch let error as AuthenticationError {
 			
-			exitWithFailure("\(error)")
+			exitWithFailure(.Authentication(error))
+		}
+		catch let error as NSError {
+			
+			exitWithFailure(.Unexpected(error))
+		}
+	}
+}
+
+extension SNSController.AuthenticationError : CustomStringConvertible {
+	
+	var description: String {
+		
+		switch self {
+			
+		case .CredentialsNotVerified:
+			return "Credentials not verified."
+			
+		case .NotAuthorized(let service):
+			return "\(service) is not authorized."
+			
+		case .NotReady(let service, let message):
+			return "\(service) is not ready. \(message)"
+			
+		case .InvalidAccount(let service, let reason):
+			return "Invalid \(service) Account. \(reason)"
+		}
+	}
+}
+
+extension SNSController.PostError : CustomStringConvertible {
+	
+	var description: String {
+		
+		switch self {
+			
+		case let .Unexpected(error):
+			return "Unexpected error. \(error.localizedDescription)"
+			
+		case let .SystemError(message):
+			return "System Error. \(message)"
+			
+		case let .Description(message):
+			return "\(message)"
+
+		case let .Authentication(error):
+			return error.description
+			
+		case let .PostTextTooLong(limit):
+			return "Post text over \(limit) characters."
+			
+		case let .FailedToUploadGistCapture(_, message):
+			return "Failed to upload gist capture image. \(message)"
+			
+		case let .FailedToPostTweet(message):
+			return "Failed to post tweet. \(message)"
+		}
+	}
+}
+
+extension SNSController.Service : CustomStringConvertible {
+	
+	var description: String {
+		
+		switch self {
+			
+		case .Twitter:
+			return "Twitter"
+			
+		case .GitHub:
+			return "GitHub"
 		}
 	}
 }

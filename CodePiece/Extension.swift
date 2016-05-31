@@ -77,27 +77,6 @@ public var NullStream = NullOutputStream()
 //	}
 //}
 
-protocol ExistanceCheckable {
-
-	var isExists: Bool { get }
-}
-
-extension String : ExistanceCheckable {
-	
-	public var isExists: Bool {
-		
-		return !isEmpty
-	}
-}
-
-extension Array : ExistanceCheckable {
-
-	public var isExists: Bool {
-		
-		return !isEmpty
-	}
-}
-
 extension NSIndexSet {
 
 	public convenience init<S:SequenceType where S.Generator.Element == Int>(sequence s:S) {
@@ -108,11 +87,11 @@ extension NSIndexSet {
 	}
 }
 
-extension NSIndexSet : ExistanceCheckable {
+extension NSIndexSet : ExistenceDeterminationable {
 	
-	public var isExists: Bool {
+	public var isEmpty: Bool {
 		
-		return count > 0
+		return count.isZero
 	}
 }
 
@@ -1151,6 +1130,10 @@ public protocol KeyValueChangeable {
 	func withChangeValue(keys:String...)
 	func withChangeValue(keys:String..., @noescape body:()->Void)
 	func withChangeValue<S:SequenceType where S.Generator.Element == String>(keys:S, @noescape body:()->Void)
+}
+
+// FIXME: Xcode 7.3.1 からか、なぜか NSObject だけでなく NSViewController にも　KeyValueChangeable を適用しないと、その先で準拠性を約束できませんでした。
+extension NSViewController : KeyValueChangeable {
 }
 
 extension NSObject : KeyValueChangeable {

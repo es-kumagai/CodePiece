@@ -204,7 +204,7 @@ struct GetStatusesError : ErrorType, CustomStringConvertible {
 final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	typealias VerifyResult = Result<Void,NSError>
-	typealias PostStatusUpdateResult = Result<String,NSError>
+	typealias PostStatusUpdateResult = Result<String, SNSController.PostError>
 	typealias GetStatusesResult = Result<[ESTwitter.Status], GetStatusesError>
 	
 	var latestTweet: ESTwitter.Status?
@@ -214,7 +214,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	private static let accountType:ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 	private static let accountOptions:[NSObject:AnyObject]? = nil
 	
-	private static let APINotReadyError = SNSControllerError.NotReady("Twitter API is not ready.")
+	private static let APINotReadyError = SNSController.AuthenticationError.NotReady(service: .Twitter, description: "Twitter API is not ready.")
 	private static let APINotReadyNSError = NSError(domain: String(APINotReadyError), code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.description])
 
 	private enum AutoVerifyingQueueMessage : MessageTypeIgnoreInQuickSuccession {
@@ -476,7 +476,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		guard self.credentialsVerified else {
 			
 			DebugTime.print("📮 Verification failure ... #3.1.1")
-			throw SNSControllerError.CredentialsNotVerified
+			throw SNSController.AuthenticationError.CredentialsNotVerified
 		}
 
 		DebugTime.print("📮 Try posting by Twitter ... #3.2")
@@ -510,7 +510,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		guard self.credentialsVerified else {
 			
 			DebugTime.print("📮 Verification failure ... #3.1.1")
-			throw SNSControllerError.CredentialsNotVerified
+			throw SNSController.AuthenticationError.CredentialsNotVerified
 		}
 		
 		DebugTime.print("📮 Try posting by Twitter ... #3.2")
@@ -528,7 +528,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 				
 			case .Failure(let error):
 				
-				container.setError(PostError(error: error))
+				container.setError(.FailedToUploadGistCapture(image, description: error.localizedDescription))
 				callback(PostResult.Failure(container))
 			}
 		}
@@ -650,7 +650,7 @@ extension STTwitterAPI {
 	
 	typealias MediaID = String
 	typealias VerifyCredentialsResult = Result<(username:String,userId:String),NSError>
-	typealias PostStatusUpdateResult = Result<ESTwitter.Status,NSError>
+	typealias PostStatusUpdateResult = Result<ESTwitter.Status, SNSController.PostError>
 	typealias PostMediaUploadResult = Result<[MediaID],NSError>
 
 	func postMediaUpload(container:PostDataContainer, image:NSImage, callback:(PostMediaUploadResult)->Void) {
@@ -702,7 +702,7 @@ extension STTwitterAPI {
 			catch let PostDataError.TwitterRawObjectsParseError(rawObjects) {
 				
 				DebugTime.print("📮 A status posted successfully but failed to parse the tweet. (\(rawObjects))... #3.3.1.2")
-				callback(PostStatusUpdateResult(error: NSError(domain: "FailedToPost", code: 1, userInfo: [ NSLocalizedDescriptionKey : "A tweet posted successfully but failed to parse the tweet."])))
+				callback(PostStatusUpdateResult(error: .SystemError("A tweet posted successfully but failed to parse the tweet.")))
 				
 				#if DEBUG
 					// Re-parse for step debug.
@@ -717,10 +717,16 @@ extension STTwitterAPI {
 			}
 		}
 		
-		let tweetFailed = { (error:NSError!) -> Void in
+		let tweetFailed = { (error: NSError!) -> Void in
 			
 			DebugTime.print("📮 Failed to post a status with failure (\(error)) ... #3.3.2")
-			callback(PostStatusUpdateResult(error: error))
+			
+			var postError: SNSController.PostError {
+
+				return SNSController.PostError(twitterError: error)
+			}
+			
+			callback(PostStatusUpdateResult(error: postError))
 		}
 		
 		if container.hasMediaIDs {
@@ -758,6 +764,31 @@ extension STTwitterAPI {
 			DebugTime.print("📮 Start verifying ... #3.4.1")
 			
 			self.verifyCredentialsWithUserSuccessBlock(verifySucceeded, errorBlock: verifyFailed)
+		}
+	}
+}
+
+extension SNSController.PostError {
+	
+	init(twitterError error: NSError) {
+		
+		var errorCode: Int {
+			
+			return error.code
+		}
+		
+		var errorMessage: String {
+			
+			return error.localizedDescription
+		}
+		
+		switch errorCode {
+			
+		case 186:
+			self = .FailedToPostTweet(errorMessage)
+
+		default:
+			self = .FailedToPostTweet("\(errorMessage) (\(errorCode))")
 		}
 	}
 }
