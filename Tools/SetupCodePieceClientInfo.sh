@@ -11,7 +11,8 @@ XCODEGENERATECONSTRAINTS_WORKINGCOPIES="${WORKDIR}/CodePiece.${XCODEGENERATECONS
 XCODEGENERATECONSTRAINTS_BIN="${XCODEGENERATECONSTRAINTS}"
 
 CLIENTINFO_FILE="CodePieceClientInfo.plist"
-CLIENTINFO_PATH="${HOME}/Library/XcodeGenerateConstants/${CLIENTINFO_FILE}"
+CLIENTINFO_DIR="${HOME}/Library/XcodeGenerateConstants"
+CLIENTINFO_PATH="${CLIENTINFO_DIR}/${CLIENTINFO_FILE}"
 
 
 function SetupXcodeGenerateConstants() {
@@ -39,6 +40,8 @@ function SetupXcodeGenerateConstants() {
 
 function MakeCodePieceClientInfo() {
 
+	mkdir -p "${CLIENTINFO_DIR}"
+	
 	echo
 	echo "Checking '${CLIENTINFO_PATH}' ..."
 
