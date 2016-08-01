@@ -2,7 +2,13 @@
 
 Change Logs.
 
-## 1.4.10 beta
+## 1.4.11
+
+### Fixes
+
+* Display code text with simple text format. So you can see the code if you paste some codes with white text color.
+
+## 1.4.10
 
 ### Fixes
 
