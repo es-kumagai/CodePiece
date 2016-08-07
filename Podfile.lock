@@ -6,7 +6,7 @@ PODS:
   - ESAppKitExtension (0.1.2)
   - ESCoreGraphicsExtension (0.1.3):
     - Swim (~> 1.4.0)
-  - ESGists (0.2.0):
+  - ESGists (0.2.1):
     - APIKit (~> 1.3.0)
     - ESAppKitExtension (~> 0.1.2)
     - Himotoki (~> 1.7.0)
@@ -66,7 +66,7 @@ SPEC CHECKSUMS:
   ESActiveCounter: 21fdeaa07eb7c748430d39906f54e6b5819f4968
   ESAppKitExtension: 990ea5e3bcd8c951cd5789ce016f4aef18a6c54e
   ESCoreGraphicsExtension: 187eae3d0bec6a1f6328956305cd9a61fdd6b183
-  ESGists: 082eabffc774cd5fdfb9bf0367ce518bfb9e21c7
+  ESGists: 6351137a4aa63a980ef847a6d5ccbde9691a846d
   ESNotification: 91828c8a6862e6ccdacda2d87bd24a9597f0f925
   ESProgressHUD: 6af7b70629ba4f4f0effb2d0ade4b77abca8f55c
   ESThread: 2b98a63113f595bd25eda46928a0ea795ed357a3

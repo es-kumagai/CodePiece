@@ -118,6 +118,7 @@
 		B169B84D1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B84C1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift */; };
 		B16DA7211BC92C5C00ED1599 /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */; };
 		B1745BD41BF8CDF000E19F32 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1745BD31BF8CDF000E19F32 /* Media.swift */; };
+		B17515201D56DE6700648E17 /* UserDefaultsAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B175151F1D56DE6700648E17 /* UserDefaultsAccessible.swift */; };
 		B177FA6D1BF1FC7F000CE394 /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */; };
 		B177FA6F1BF21EEB000CE394 /* TimelineGetStatusesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */; };
 		B177FA701BF22D50000CE394 /* CodePieceClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12210511BCBB955004DBB9A /* CodePieceClientInfo.swift */; };
@@ -381,6 +382,7 @@
 		B169B84C1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+PostDataManage.swift"; sourceTree = "<group>"; };
 		B16DA7201BC92C5C00ED1599 /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
 		B1745BD31BF8CDF000E19F32 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Media.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		B175151F1D56DE6700648E17 /* UserDefaultsAccessible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsAccessible.swift; sourceTree = "<group>"; };
 		B177FA6C1BF1FC7F000CE394 /* TimelineTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableController.swift; sourceTree = "<group>"; };
 		B177FA6E1BF21EEB000CE394 /* TimelineGetStatusesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineGetStatusesController.swift; sourceTree = "<group>"; };
 		B178775C1C9A63280084878F /* SourceHanCodeJP-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanCodeJP-Regular.otf"; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 		B1492FE21B5BD2510043ED8D /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				B175151F1D56DE6700648E17 /* UserDefaultsAccessible.swift */,
 				B1D2D6981B5DEA2600794EFD /* DataStore.swift */,
 				B13C98FE1B71138500A5A2B3 /* DataStoreForApp.swift */,
 				B1E89A7B1B7472770062E12E /* DataStore_AuthInfo.swift */,
@@ -1417,6 +1420,7 @@
 				B169B84B1C4E3F0500CBF6C9 /* CodeText.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
 				B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */,
+				B17515201D56DE6700648E17 /* UserDefaultsAccessible.swift in Sources */,
 				B169B8451C4E1DA300CBF6C9 /* TwitterText.swift in Sources */,
 				B177FA701BF22D50000CE394 /* CodePieceClientInfo.swift in Sources */,
 				B10182CB1BEF8F6B0077873B /* TimelineStatusView.swift in Sources */,
