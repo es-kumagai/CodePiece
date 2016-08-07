@@ -11,19 +11,8 @@ import ESGists
 import Ocean
 import Swim
 
-enum DataStoreError : ErrorType, CustomStringConvertible {
-	
-	case FailedToSave(String)
-	
-	var description:String {
-		
-		switch self {
-			
-		case .FailedToSave(let reason):
-			return "Failed to save to data store. \(reason)"
-		}
-	}
-}
+@available(*, unavailable, renamed="DataStore.Error")
+typealias DataStoreError = DataStore.Error
 
 struct DataStore {
 	
@@ -50,8 +39,138 @@ struct DataStore {
 }
 
 extension DataStore {
+	
+	enum Error : ErrorType {
+		
+		case FailedToSave(String)
+	}
+}
 
-	struct TwitterStore {
+extension DataStore.Error : CustomStringConvertible {
+	
+	var description:String {
+		
+		switch self {
+			
+		case .FailedToSave(let reason):
+			return "Failed to save to data store. \(reason)"
+		}
+	}
+}
+
+private extension NSUserDefaults {
+	
+	typealias TwitterStoreKind = DataStore.TwitterStore.Kind
+	
+	static let twitterStoreAccountKindKey = "twitter:kind"
+	static let twitterStoreAccountIdentifierKey = "twitter:identifier"
+	static let twitterStoreAccountTokenKey = "twitter:token"
+	static let twitterStoreAccountTokenSecretKey = "twitter:token-secret"
+	static let twitterStoreAccountTokenScreenNameKey = "twitter:token-screenname"
+
+	var twitterStore: DataStore.TwitterStore {
+	
+		let identifier = twitterStoreAccountIdentifier ?? ""
+		let token = twitterStoreAccountToken ?? ""
+		let tokenSecret = twitterStoreAccountTokenSecret ?? ""
+		let tokenScreenName = twitterStoreAccountTokenScreenName ?? ""
+		let kind = twitterStoreAccountKind
+		
+		return DataStore.TwitterStore(kind: kind, identifier: identifier, token: token, tokenSecret: tokenSecret, tokenScreenName: tokenScreenName)
+	}
+
+	func set(twitterStore store: DataStore.TwitterStore) {
+		
+		twitterStoreAccountIdentifier = store.identifier
+		twitterStoreAccountToken = store.token
+		twitterStoreAccountTokenSecret = store.tokenSecret
+		twitterStoreAccountTokenScreenName = store.tokenScreenName
+		twitterStoreAccountKind = store.kind
+	}
+	
+	var twitterStoreAccountIdentifier: String? {
+		
+		get {
+			
+			return stringForKey(NSUserDefaults.twitterStoreAccountIdentifierKey)
+		}
+		
+		set (identifier) {
+			
+			setObject(identifier, forKey: NSUserDefaults.twitterStoreAccountIdentifierKey)
+		}
+	}
+	
+	var twitterStoreAccountToken: String? {
+		
+		get {
+			
+			return stringForKey(NSUserDefaults.twitterStoreAccountTokenKey)
+		}
+		
+		set (token) {
+			
+			setObject(token, forKey: NSUserDefaults.twitterStoreAccountTokenKey)
+		}
+	}
+	
+	var twitterStoreAccountTokenSecret: String? {
+		
+		get {
+			
+			return stringForKey(NSUserDefaults.twitterStoreAccountTokenSecretKey)
+		}
+		
+		set (secret) {
+			
+			setObject(secret, forKey: NSUserDefaults.twitterStoreAccountTokenSecretKey)
+		}
+	}
+	
+	var twitterStoreAccountTokenScreenName: String? {
+		
+		get {
+			
+			return stringForKey(NSUserDefaults.twitterStoreAccountTokenScreenNameKey)
+		}
+		
+		set (screenName) {
+			
+			setObject(screenName, forKey: NSUserDefaults.twitterStoreAccountTokenScreenNameKey)
+		}
+	}
+	
+	var twitterStoreAccountKind: TwitterStoreKind {
+		
+		get {
+			
+			if let kindValue = stringForKey(NSUserDefaults.twitterStoreAccountKindKey) {
+				
+				return TwitterStoreKind(rawValue: kindValue) ?? .Unknown
+			}
+			else {
+				
+				// If `identifier` is not empty when `kind` is not stored, set `kind` to `OSAccount`.
+				// This process is for compatibility when authentication method was the only using OS Account.
+				guard let identifier = twitterStoreAccountIdentifier where identifier.isExists else {
+					
+					return .Unknown
+				}
+				
+				return .OSAccount
+			}
+		}
+		
+		set (kind) {
+			
+			setObject(kind.rawValue, forKey: NSUserDefaults.twitterStoreAccountKindKey)
+		}
+	}
+}
+
+extension DataStore {
+
+	struct TwitterStore : UserDefaultAccessible {
 
 		enum Kind : String {
 			
@@ -60,56 +179,24 @@ extension DataStore {
 			case OAuthToken = "token"
 		}
 		
-		static let AccountKindKey = "twitter:kind"
-		static let AccountIdentifierKey = "twitter:identifier"
-		static let AccountTokenKey = "twitter:token"
-		static let AccountTokenSecretKey = "twitter:token-secret"
-		static let AccountTokenScreenNameKey = "twitter:token-screenname"
-		
 		var kind: Kind
 		var identifier: String
 		var token: String
 		var tokenSecret: String
 		var tokenScreenName: String
-		
-		init() {
-			
-			let userDefaults = NSUserDefaults.standardUserDefaults()
-			
-			self.identifier = userDefaults.stringForKey(TwitterStore.AccountIdentifierKey) ?? ""
-			self.token = userDefaults.stringForKey(TwitterStore.AccountTokenKey) ?? ""
-			self.tokenSecret = userDefaults.stringForKey(TwitterStore.AccountTokenSecretKey) ?? ""
-			self.tokenScreenName = userDefaults.stringForKey(TwitterStore.AccountTokenScreenNameKey) ?? ""
-			
-			if let kindValue = userDefaults.stringForKey(TwitterStore.AccountKindKey) {
-			
-				self.kind = Kind(rawValue: kindValue) ?? .Unknown
-			}
-			else {
-			
-				// If `identifier` is not empty when `kind` is not stored, set `kind` to `OSAccount`.
-				// This process is for compatibility when authentication method was the only using OS Account.
-				if self.identifier.isExists {
+	}
+}
 
-					self.kind = .OSAccount
-				}
-				else {
-					
-					self.kind = .Unknown
-				}
-			}
-		}
+extension DataStore.TwitterStore {
+	
+	init() {
 		
-		func save() {
-			
-			let userDefaults = NSUserDefaults.standardUserDefaults()
-			
-			userDefaults.setObject(self.kind.rawValue, forKey: TwitterStore.AccountKindKey)
-			userDefaults.setObject(self.identifier, forKey: TwitterStore.AccountIdentifierKey)
-			userDefaults.setObject(self.token, forKey: TwitterStore.AccountTokenKey)
-			userDefaults.setObject(self.tokenSecret, forKey: TwitterStore.AccountTokenSecretKey)
-			userDefaults.setObject(self.tokenScreenName, forKey: TwitterStore.AccountTokenScreenNameKey)
-		}
+		self = DataStore.TwitterStore.userDefaults.twitterStore
+	}
+	
+	func save() {
+		
+		userDefaults.set(twitterStore: self)
 	}
 }
 
@@ -194,7 +281,7 @@ extension DataStore {
 			}
 			catch let error as NSError {
 				
-				throw DataStoreError.FailedToSave(error.localizedDescription)
+				throw Error.FailedToSave(error.localizedDescription)
 			}
 		}
 		
