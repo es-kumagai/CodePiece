@@ -75,7 +75,7 @@ extension AlertDisplayable {
 		
 		alert.messageText = title
 		alert.informativeText = message
-		alert.addButtonWithTitle("I see")
+		alert.addButtonWithTitle("OK")
 		alert.alertStyle = .CriticalAlertStyle
 
 		self.showAlert(alert)

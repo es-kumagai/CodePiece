@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 1.4.12
+
+### Enhancements
+
+* Supports code types Simple text and Kotlin.
+
 ## 1.4.11
 
 ### Fixes
