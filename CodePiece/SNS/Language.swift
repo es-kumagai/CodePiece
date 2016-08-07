@@ -313,7 +313,9 @@ extension Language {
 //		case JSONLD
 //		case Julia
 //		case Kit
-//		case Kotlin
+		case Kotlin:
+			return "kotlin"
+			
 //		case KRL
 //		case LabVIEW
 //		case Lasso

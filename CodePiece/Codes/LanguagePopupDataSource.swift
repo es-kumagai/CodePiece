@@ -21,7 +21,7 @@ final class LanguagePopupDataSource : NSObject {
 
 			self.popupButton.addItemWithTitle(self.defaultLanguage.description)
 			
-			for language in self.languages {
+			for language in languages.sort() {
 
 				let menu = tweak (NSMenuItem(title: language.description, action: #selector(LanguagePopupDataSource.popupSelected(_:)), keyEquivalent: "")) {
 					
@@ -33,7 +33,13 @@ final class LanguagePopupDataSource : NSObject {
 		}
 	}
 	
-	let languages = PopularLanguage.all.languages.sort()
+	let languages: Set<Language> = { () -> Set<Language> in
+		
+		let populars = Set(PopularLanguage.all.map(Language.init))
+		let others = [ Language.Text, Language.Kotlin ] as Set
+		
+		return populars.union(others)
+	}()
 	
 	override func awakeFromNib() {
 	
