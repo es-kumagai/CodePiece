@@ -70,10 +70,10 @@ private extension NSUserDefaults {
 
 	var twitterStore: DataStore.TwitterStore {
 	
-		let identifier = twitterStoreAccountIdentifier ?? ""
-		let token = twitterStoreAccountToken ?? ""
-		let tokenSecret = twitterStoreAccountTokenSecret ?? ""
-		let tokenScreenName = twitterStoreAccountTokenScreenName ?? ""
+		let identifier = twitterStoreAccountIdentifier
+		let token = twitterStoreAccountToken
+		let tokenSecret = twitterStoreAccountTokenSecret
+		let tokenScreenName = twitterStoreAccountTokenScreenName
 		let kind = twitterStoreAccountKind
 		
 		return DataStore.TwitterStore(kind: kind, identifier: identifier, token: token, tokenSecret: tokenSecret, tokenScreenName: tokenScreenName)
@@ -88,11 +88,11 @@ private extension NSUserDefaults {
 		twitterStoreAccountKind = store.kind
 	}
 	
-	var twitterStoreAccountIdentifier: String? {
+	var twitterStoreAccountIdentifier: String {
 		
 		get {
 			
-			return stringForKey(NSUserDefaults.twitterStoreAccountIdentifierKey)
+			return stringForKey(NSUserDefaults.twitterStoreAccountIdentifierKey) ?? ""
 		}
 		
 		set (identifier) {
@@ -101,11 +101,11 @@ private extension NSUserDefaults {
 		}
 	}
 	
-	var twitterStoreAccountToken: String? {
+	var twitterStoreAccountToken: String {
 		
 		get {
 			
-			return stringForKey(NSUserDefaults.twitterStoreAccountTokenKey)
+			return stringForKey(NSUserDefaults.twitterStoreAccountTokenKey) ?? ""
 		}
 		
 		set (token) {
@@ -114,11 +114,11 @@ private extension NSUserDefaults {
 		}
 	}
 	
-	var twitterStoreAccountTokenSecret: String? {
+	var twitterStoreAccountTokenSecret: String {
 		
 		get {
 			
-			return stringForKey(NSUserDefaults.twitterStoreAccountTokenSecretKey)
+			return stringForKey(NSUserDefaults.twitterStoreAccountTokenSecretKey) ?? ""
 		}
 		
 		set (secret) {
@@ -127,11 +127,11 @@ private extension NSUserDefaults {
 		}
 	}
 	
-	var twitterStoreAccountTokenScreenName: String? {
+	var twitterStoreAccountTokenScreenName: String {
 		
 		get {
 			
-			return stringForKey(NSUserDefaults.twitterStoreAccountTokenScreenNameKey)
+			return stringForKey(NSUserDefaults.twitterStoreAccountTokenScreenNameKey) ?? ""
 		}
 		
 		set (screenName) {
@@ -152,7 +152,7 @@ private extension NSUserDefaults {
 				
 				// If `identifier` is not empty when `kind` is not stored, set `kind` to `OSAccount`.
 				// This process is for compatibility when authentication method was the only using OS Account.
-				guard let identifier = twitterStoreAccountIdentifier where identifier.isExists else {
+				guard twitterStoreAccountIdentifier.isExists else {
 					
 					return .Unknown
 				}
