@@ -19,8 +19,6 @@
 		B12460EB1B5FA0210036A690 /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */; };
 		B125A3F31B808D5900AFAB89 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B125A3F21B808D5900AFAB89 /* StatusImageView.swift */; };
 		B12674E61BC0ECCA00F38464 /* ESTwitterAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = B12674E51BC0ECCA00F38464 /* ESTwitterAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B12674EA1BC0ECCB00F38464 /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12674E31BC0ECCA00F38464 /* ESTwitter.framework */; };
-		B12674EB1BC0ECCB00F38464 /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12674E31BC0ECCA00F38464 /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B12674F21BC0ED9E00F38464 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F11BC0ED9E00F38464 /* Status.swift */; };
 		B12674F41BC0EE2400F38464 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F31BC0EE2400F38464 /* User.swift */; };
 		B12674F61BC0EE5B00F38464 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12674F51BC0EE5B00F38464 /* UserProfile.swift */; };
@@ -64,35 +62,8 @@
 		B1492FE41B5BD26B0043ED8D /* ProjectSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */; };
 		B1492FE61B5BD2A10043ED8D /* AccountSeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */; };
 		B14AF3731BC22EA10005F4CF /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3721BC22EA10005F4CF /* Browse.swift */; };
-		B152E2A01B6EE06A008B485A /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; };
-		B152E2A11B6EE06A008B485A /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460CF1B5F865F0036A690 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2A31B6EE06A008B485A /* ESActiveCounter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2A21B6EE06A008B485A /* ESActiveCounter.framework */; };
-		B152E2A41B6EE06A008B485A /* ESActiveCounter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2A21B6EE06A008B485A /* ESActiveCounter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2A61B6EE06A008B485A /* ESAppKitExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2A51B6EE06A008B485A /* ESAppKitExtension.framework */; };
-		B152E2A71B6EE06A008B485A /* ESAppKitExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2A51B6EE06A008B485A /* ESAppKitExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2A91B6EE06A008B485A /* ESCoreGraphicsExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2A81B6EE06A008B485A /* ESCoreGraphicsExtension.framework */; };
-		B152E2AA1B6EE06A008B485A /* ESCoreGraphicsExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2A81B6EE06A008B485A /* ESCoreGraphicsExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2AC1B6EE06A008B485A /* ESGists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2AB1B6EE06A008B485A /* ESGists.framework */; };
-		B152E2AD1B6EE06A008B485A /* ESGists.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2AB1B6EE06A008B485A /* ESGists.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2AF1B6EE06A008B485A /* ESNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2AE1B6EE06A008B485A /* ESNotification.framework */; };
-		B152E2B01B6EE06A008B485A /* ESNotification.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2AE1B6EE06A008B485A /* ESNotification.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2B21B6EE06A008B485A /* ESProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2B11B6EE06A008B485A /* ESProgressHUD.framework */; };
-		B152E2B31B6EE06A008B485A /* ESProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2B11B6EE06A008B485A /* ESProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2B51B6EE06A008B485A /* ESThread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2B41B6EE06A008B485A /* ESThread.framework */; };
-		B152E2B61B6EE06A008B485A /* ESThread.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B152E2B41B6EE06A008B485A /* ESThread.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2B71B6EE06A008B485A /* Himotoki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D21B5F865F0036A690 /* Himotoki.framework */; };
-		B152E2B81B6EE06A008B485A /* Himotoki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D21B5F865F0036A690 /* Himotoki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2B91B6EE06A008B485A /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D51B5F865F0036A690 /* KeychainAccess.framework */; };
-		B152E2BA1B6EE06A008B485A /* KeychainAccess.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D51B5F865F0036A690 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2BB1B6EE06A008B485A /* Ocean.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D81B5F865F0036A690 /* Ocean.framework */; };
-		B152E2BC1B6EE06A008B485A /* Ocean.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460D81B5F865F0036A690 /* Ocean.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B152B06F1D6DAF900022C898 /* TwitterAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B152B06E1D6DAF900022C898 /* TwitterAccount.swift */; };
 		B152E2BE1B6EE06A008B485A /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2BF1B6EE06A008B485A /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460DF1B5F865F0036A690 /* Result.framework */; };
-		B152E2C01B6EE06A008B485A /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460DF1B5F865F0036A690 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2C11B6EE06B008B485A /* STTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E21B5F865F0036A690 /* STTwitter.framework */; };
-		B152E2C21B6EE06B008B485A /* STTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E21B5F865F0036A690 /* STTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B152E2C31B6EE06B008B485A /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; };
-		B152E2C41B6EE06B008B485A /* Swim.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12460E51B5F865F0036A690 /* Swim.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */; };
 		B1587C431BE843D0001E0E1D /* AboutWindowUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1587C421BE843D0001E0E1D /* AboutWindowUITests.m */; };
 		B1587C4B1BE84CDE001E0E1D /* AboutWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1587C4A1BE84CDE001E0E1D /* AboutWindow.swift */; };
@@ -148,8 +119,6 @@
 		B1BD64DC1B7B44AB002DFDD0 /* URLSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD64DB1B7B44AB002DFDD0 /* URLSchemeManager.swift */; };
 		B1BD64DE1B7B6CB0002DFDD0 /* OAuthScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD64DD1B7B6CB0002DFDD0 /* OAuthScheme.swift */; };
 		B1BD64F21B7B964D002DFDD0 /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD64F11B7B964D002DFDD0 /* URLScheme.swift */; };
-		B1BD64F41B7B96F2002DFDD0 /* p2_OAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BD64F31B7B96F2002DFDD0 /* p2_OAuth2.framework */; };
-		B1BD64F51B7B96F2002DFDD0 /* p2_OAuth2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1BD64F31B7B96F2002DFDD0 /* p2_OAuth2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1D2D66B1B5D44A800794EFD /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D66A1B5D44A800794EFD /* Authorization.swift */; };
 		B1D2D6721B5D490800794EFD /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6711B5D490800794EFD /* Settings.swift */; };
 		B1D2D6761B5D525C00794EFD /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6751B5D525C00794EFD /* MenuController.swift */; };
@@ -164,21 +133,15 @@
 		B1D2D6A41B5E1D5400794EFD /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6A31B5E1D5400794EFD /* Extension.swift */; };
 		B1D2D6A61B5E2B2800794EFD /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D2D6A51B5E2B2800794EFD /* Notifications.swift */; };
 		B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D3C10D1B620D1700CD8CD8 /* BaseWindowController.swift */; };
+		B1D92FAD1D6DEC45000D403A /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12674E31BC0ECCA00F38464 /* ESTwitter.framework */; };
+		B1D92FAE1D6DEC45000D403A /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B12674E31BC0ECCA00F38464 /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1E89A7C1B7472770062E12E /* DataStore_AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E89A7B1B7472770062E12E /* DataStore_AuthInfo.swift */; };
 		B1F16A661C77286B000CBB5F /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = B1F16A651C77286B000CBB5F /* 1.json */; };
 		B1F16A6A1C772AFB000CBB5F /* UserMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F16A671C772AF2000CBB5F /* UserMention.swift */; };
 		B1F6CF211C5F49E800E5D3B8 /* URLEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6CF1F1C5F492300E5D3B8 /* URLEntity.swift */; };
-		EA2226EAEF8ABAB8CAE75381 /* Pods_ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2D8FD9D2687D6A212B287 /* Pods_ESTwitter.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B12674E81BC0ECCB00F38464 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B1492FAA1B5BCED80043ED8D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B12674E21BC0ECCA00F38464;
-			remoteInfo = ESTwitterAPI;
-		};
 		B1492FC41B5BCED80043ED8D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B1492FAA1B5BCED80043ED8D /* Project object */;
@@ -207,6 +170,13 @@
 			remoteGlobalIDString = B1492FB11B5BCED80043ED8D;
 			remoteInfo = CodePiece;
 		};
+		B1D92FAF1D6DEC45000D403A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1492FAA1B5BCED80043ED8D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B12674E21BC0ECCA00F38464;
+			remoteInfo = ESTwitter;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -227,24 +197,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B152E2AA1B6EE06A008B485A /* ESCoreGraphicsExtension.framework in Embed Frameworks */,
-				B12674EB1BC0ECCB00F38464 /* ESTwitter.framework in Embed Frameworks */,
-				B152E2C01B6EE06A008B485A /* Result.framework in Embed Frameworks */,
-				B152E2B31B6EE06A008B485A /* ESProgressHUD.framework in Embed Frameworks */,
-				B1BD64F51B7B96F2002DFDD0 /* p2_OAuth2.framework in Embed Frameworks */,
-				B152E2B81B6EE06A008B485A /* Himotoki.framework in Embed Frameworks */,
 				B152E2BE1B6EE06A008B485A /* (null) in Embed Frameworks */,
-				B152E2BA1B6EE06A008B485A /* KeychainAccess.framework in Embed Frameworks */,
-				B152E2AD1B6EE06A008B485A /* ESGists.framework in Embed Frameworks */,
-				B152E2B61B6EE06A008B485A /* ESThread.framework in Embed Frameworks */,
-				B152E2A11B6EE06A008B485A /* APIKit.framework in Embed Frameworks */,
-				B152E2B01B6EE06A008B485A /* ESNotification.framework in Embed Frameworks */,
-				B152E2C41B6EE06B008B485A /* Swim.framework in Embed Frameworks */,
-				B152E2C21B6EE06B008B485A /* STTwitter.framework in Embed Frameworks */,
 				B10CB6941BCCBBBC001C9E02 /* (null) in Embed Frameworks */,
-				B152E2A71B6EE06A008B485A /* ESAppKitExtension.framework in Embed Frameworks */,
-				B152E2BC1B6EE06A008B485A /* Ocean.framework in Embed Frameworks */,
-				B152E2A41B6EE06A008B485A /* ESActiveCounter.framework in Embed Frameworks */,
+				B1D92FAE1D6DEC45000D403A /* ESTwitter.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,7 +221,6 @@
 
 /* Begin PBXFileReference section */
 		07980E07CAF5F499F3CEEF07 /* Pods-CodePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodePiece.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece.debug.xcconfig"; sourceTree = "<group>"; };
-		26F2D8FD9D2687D6A212B287 /* Pods_ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40415ECECCBD7373B5A59A0D /* Pods-CodePiece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodePiece.release.xcconfig"; path = "Pods/Target Support Files/Pods-CodePiece/Pods-CodePiece.release.xcconfig"; sourceTree = "<group>"; };
 		65F2A01077BD5AC5E845965E /* Pods-ESTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-ESTwitter/Pods-ESTwitter.release.xcconfig"; sourceTree = "<group>"; };
 		B10182CA1BEF8F6B0077873B /* TimelineStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineStatusView.swift; sourceTree = "<group>"; };
@@ -277,13 +231,6 @@
 		B1118DA91B6BF01200BFC5FA /* WelcomeBoardWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBoardWindowController.swift; sourceTree = "<group>"; };
 		B12210511BCBB955004DBB9A /* CodePieceClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodePieceClientInfo.swift; path = /Data/Development/Projects/CodePiece/Resources/../../../../../private/tmp/CodePieceClientInfo.swift; sourceTree = "<absolute>"; };
 		B12210531BCBC476004DBB9A /* ClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
-		B12460CF1B5F865F0036A690 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B12460D21B5F865F0036A690 /* Himotoki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Himotoki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B12460D51B5F865F0036A690 /* KeychainAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B12460D81B5F865F0036A690 /* Ocean.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ocean.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B12460DF1B5F865F0036A690 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B12460E21B5F865F0036A690 /* STTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = STTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B12460E51B5F865F0036A690 /* Swim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12460E81B5FA0090036A690 /* TwitterPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterPreferenceViewController.swift; sourceTree = "<group>"; };
 		B12460EA1B5FA0210036A690 /* TwitterPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TwitterPreferenceView.storyboard; sourceTree = "<group>"; };
 		B125A3F01B808CC500AFAB89 /* Mark */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mark; sourceTree = "<group>"; };
@@ -346,13 +293,7 @@
 		B1492FE31B5BD26B0043ED8D /* ProjectSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSetting.swift; sourceTree = "<group>"; };
 		B1492FE51B5BD2A10043ED8D /* AccountSeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSeting.swift; sourceTree = "<group>"; };
 		B14AF3721BC22EA10005F4CF /* Browse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
-		B152E2A21B6EE06A008B485A /* ESActiveCounter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESActiveCounter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B152E2A51B6EE06A008B485A /* ESAppKitExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESAppKitExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B152E2A81B6EE06A008B485A /* ESCoreGraphicsExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESCoreGraphicsExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B152E2AB1B6EE06A008B485A /* ESGists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESGists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B152E2AE1B6EE06A008B485A /* ESNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B152E2B11B6EE06A008B485A /* ESProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B152E2B41B6EE06A008B485A /* ESThread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ESThread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B152B06E1D6DAF900022C898 /* TwitterAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccount.swift; sourceTree = "<group>"; };
 		B152E2C51B6F6C08008B485A /* MainStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStatusViewController.swift; sourceTree = "<group>"; };
 		B1587C401BE843D0001E0E1D /* AboutWindowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AboutWindowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1587C421BE843D0001E0E1D /* AboutWindowUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutWindowUITests.m; sourceTree = "<group>"; };
@@ -412,7 +353,6 @@
 		B1BD64DB1B7B44AB002DFDD0 /* URLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSchemeManager.swift; sourceTree = "<group>"; };
 		B1BD64DD1B7B6CB0002DFDD0 /* OAuthScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthScheme.swift; sourceTree = "<group>"; };
 		B1BD64F11B7B964D002DFDD0 /* URLScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
-		B1BD64F31B7B96F2002DFDD0 /* p2_OAuth2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = p2_OAuth2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D2D66A1B5D44A800794EFD /* Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		B1D2D6711B5D490800794EFD /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B1D2D6751B5D525C00794EFD /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -440,7 +380,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA2226EAEF8ABAB8CAE75381 /* Pods_ESTwitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,22 +387,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B152E2A91B6EE06A008B485A /* ESCoreGraphicsExtension.framework in Frameworks */,
-				B12674EA1BC0ECCB00F38464 /* ESTwitter.framework in Frameworks */,
-				B152E2BF1B6EE06A008B485A /* Result.framework in Frameworks */,
-				B152E2B21B6EE06A008B485A /* ESProgressHUD.framework in Frameworks */,
-				B1BD64F41B7B96F2002DFDD0 /* p2_OAuth2.framework in Frameworks */,
-				B152E2B71B6EE06A008B485A /* Himotoki.framework in Frameworks */,
-				B152E2B91B6EE06A008B485A /* KeychainAccess.framework in Frameworks */,
-				B152E2AC1B6EE06A008B485A /* ESGists.framework in Frameworks */,
-				B152E2B51B6EE06A008B485A /* ESThread.framework in Frameworks */,
-				B152E2A01B6EE06A008B485A /* APIKit.framework in Frameworks */,
-				B152E2AF1B6EE06A008B485A /* ESNotification.framework in Frameworks */,
-				B152E2C31B6EE06B008B485A /* Swim.framework in Frameworks */,
-				B152E2C11B6EE06B008B485A /* STTwitter.framework in Frameworks */,
-				B152E2A61B6EE06A008B485A /* ESAppKitExtension.framework in Frameworks */,
-				B152E2BB1B6EE06A008B485A /* Ocean.framework in Frameworks */,
-				B152E2A31B6EE06A008B485A /* ESActiveCounter.framework in Frameworks */,
+				B1D92FAD1D6DEC45000D403A /* ESTwitter.framework in Frameworks */,
 				1AE41D3CF7B27A697EA52CC7 /* Pods_CodePiece.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,23 +437,7 @@
 		84FCAD57E3AF93B4392E1F74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B1BD64F31B7B96F2002DFDD0 /* p2_OAuth2.framework */,
-				B152E2B41B6EE06A008B485A /* ESThread.framework */,
-				B152E2B11B6EE06A008B485A /* ESProgressHUD.framework */,
-				B152E2AE1B6EE06A008B485A /* ESNotification.framework */,
-				B152E2AB1B6EE06A008B485A /* ESGists.framework */,
-				B152E2A81B6EE06A008B485A /* ESCoreGraphicsExtension.framework */,
-				B152E2A51B6EE06A008B485A /* ESAppKitExtension.framework */,
-				B152E2A21B6EE06A008B485A /* ESActiveCounter.framework */,
-				B12460E51B5F865F0036A690 /* Swim.framework */,
-				B12460E21B5F865F0036A690 /* STTwitter.framework */,
-				B12460DF1B5F865F0036A690 /* Result.framework */,
-				B12460D81B5F865F0036A690 /* Ocean.framework */,
-				B12460D51B5F865F0036A690 /* KeychainAccess.framework */,
-				B12460D21B5F865F0036A690 /* Himotoki.framework */,
-				B12460CF1B5F865F0036A690 /* APIKit.framework */,
 				CCF13FDFE9B06E1A399BC4CB /* Pods_CodePiece.framework */,
-				26F2D8FD9D2687D6A212B287 /* Pods_ESTwitter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -865,14 +773,15 @@
 		B1BB59EF1B5E714800DE3942 /* SNS */ = {
 			isa = PBXGroup;
 			children = (
-				B19DA95D1C049A65000881AE /* PostData.swift */,
-				B19DA95F1C04A276000881AE /* PostData+Twitter.swift */,
-				B19DA9611C04A27F000881AE /* PostData+Gists.swift */,
-				B1BB59F61B5E718900DE3942 /* SNSController.swift */,
 				B1BB59F11B5E714800DE3942 /* GistsController.swift */,
-				B1BB59F41B5E715B00DE3942 /* TwitterController.swift */,
-				B128CB5C1B67853C00859D81 /* Twitter.swift */,
 				B12C99BE1B850B27003E651F /* Language.swift */,
+				B19DA95D1C049A65000881AE /* PostData.swift */,
+				B19DA9611C04A27F000881AE /* PostData+Gists.swift */,
+				B19DA95F1C04A276000881AE /* PostData+Twitter.swift */,
+				B1BB59F61B5E718900DE3942 /* SNSController.swift */,
+				B128CB5C1B67853C00859D81 /* Twitter.swift */,
+				B152B06E1D6DAF900022C898 /* TwitterAccount.swift */,
+				B1BB59F41B5E715B00DE3942 /* TwitterController.swift */,
 				B1B8D9AF1C9BC8C6004725E7 /* TwitterStatusAttributed.swift */,
 			);
 			path = SNS;
@@ -1015,7 +924,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				B12674E91BC0ECCB00F38464 /* PBXTargetDependency */,
+				B1D92FB01D6DEC45000D403A /* PBXTargetDependency */,
 			);
 			name = CodePiece;
 			productName = CodePiece;
@@ -1404,6 +1313,7 @@
 				B1D3C10E1B620D1700CD8CD8 /* BaseWindowController.swift in Sources */,
 				B12210541BCBC476004DBB9A /* ClientInfo.swift in Sources */,
 				B169B84D1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift in Sources */,
+				B152B06F1D6DAF900022C898 /* TwitterAccount.swift in Sources */,
 				B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */,
 				B169B84B1C4E3F0500CBF6C9 /* CodeText.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
@@ -1472,11 +1382,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B12674E91BC0ECCB00F38464 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B12674E21BC0ECCA00F38464 /* ESTwitter */;
-			targetProxy = B12674E81BC0ECCB00F38464 /* PBXContainerItemProxy */;
-		};
 		B1492FC51B5BCED80043ED8D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B1492FB11B5BCED80043ED8D /* CodePiece */;
@@ -1496,6 +1401,11 @@
 			isa = PBXTargetDependency;
 			target = B1492FB11B5BCED80043ED8D /* CodePiece */;
 			targetProxy = B18AA96E1BC6903A00056E86 /* PBXContainerItemProxy */;
+		};
+		B1D92FB01D6DEC45000D403A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B12674E21BC0ECCA00F38464 /* ESTwitter */;
+			targetProxy = B1D92FAF1D6DEC45000D403A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1646,6 +1556,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
@@ -1665,6 +1576,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
