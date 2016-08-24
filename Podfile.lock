@@ -33,7 +33,7 @@ PODS:
     - SwiftKeychain (~> 1.0)
   - ReachabilitySwift (2.3.3)
   - Result (2.0.0)
-  - STTwitter (0.2.3)
+  - STTwitter (0.2.5)
   - SwiftKeychain (1.0.0)
   - Swim (1.4.2)
 
@@ -43,8 +43,7 @@ DEPENDENCIES:
   - ESNotification
   - ESThread
   - Himotoki (>= 1.5.0)
-  - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`,
-    branch `master`)
+  - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`, branch `master`)
   - Ocean
   - p2.OAuth2
   - ReachabilitySwift (>= 2.0)
@@ -76,8 +75,10 @@ SPEC CHECKSUMS:
   p2.OAuth2: 99c2683594a86770f31240d57a162569f1ef0743
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
-  STTwitter: 77386cb6f1807fbfc0e321b9233bdecc9786195d
+  STTwitter: 5c157e8dcb4f0e4cf5b4374393021b7d7b7fd497
   SwiftKeychain: fd9ad69f7b3ff7a0c7ba579da508bbaa89a395b2
   Swim: 8775e09a0bdcfe992c6a649c547a1aed2d5394d1
 
-COCOAPODS: 0.39.0.beta.5
+PODFILE CHECKSUM: d6239205db9c98f12c9230531ed7de24fea32b31
+
+COCOAPODS: 1.0.1
