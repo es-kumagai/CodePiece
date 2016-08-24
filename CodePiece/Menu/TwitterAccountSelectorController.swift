@@ -42,7 +42,7 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 			
 			tweak (self.accountSelector) {
 				
-				let currentAccount = NSApp.settings.account.twitterAccount?.ACAccount
+				let currentAccount = NSApp.settings.account.twitterAccount?.acAccount
 				
 				$0.removeAllItems()
 				$0.menu!.addItem(createMenuItem(account: currentAccount, keyEquivalent: ""))

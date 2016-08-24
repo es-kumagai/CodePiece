@@ -6,18 +6,18 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Cocoa
+import AppKit
 import Accounts
 
 final class TwitterAccountMenuItem: NSMenuItem {
 
 	private static let IdentifierCoderKey = "TwitterAccountMenuItemIdentifierKey"
 	
-	var account:TwitterAccount? {
+	var account: TwitterController.Account? {
 		
 		didSet {
 			
-			self.title = TwitterAccountMenuItem.titleOfAccount(self.account)
+			title = TwitterAccountMenuItem.titleOfAccount(account)
 		}
 	}
 	
@@ -33,7 +33,7 @@ final class TwitterAccountMenuItem: NSMenuItem {
 		
 		super.init(title: TwitterAccountMenuItem.titleOfAccount(account), action: action, keyEquivalent: keyEquivalent)
 
-		self.account = account.map(TwitterAccount.init)
+		self.account = account.map(TwitterController.Account.init)
 		self.target = target
 	}
 
@@ -41,17 +41,17 @@ final class TwitterAccountMenuItem: NSMenuItem {
 
 		if let accountIdentifier = aDecoder.decodeObjectForKey(TwitterAccountMenuItem.IdentifierCoderKey) as? String {
 			
-			self.account = TwitterAccount(identifier: accountIdentifier)
+			account = TwitterController.Account(identifier: accountIdentifier)
 		}
 		else {
 			
-			self.account = nil
+			account = nil
 		}
 		
 		super.init(coder: aDecoder)
 	}
 	
-	func differentAccount(account:TwitterAccount) -> Bool {
+	func differentAccount(account: TwitterController.Account) -> Bool {
 	
 		guard let myAccount = self.account else {
 			
@@ -61,12 +61,12 @@ final class TwitterAccountMenuItem: NSMenuItem {
 		return myAccount.identifier != account.identifier
 	}
 	
-	private static func titleOfAccount(account:TwitterAccount?) -> String {
+	private static func titleOfAccount(account: TwitterController.Account?) -> String {
 		
-		return self.titleOfAccount(account?.ACAccount)
+		return titleOfAccount(account?.acAccount)
 	}
 	
-	private static func titleOfAccount(account:ACAccount?) -> String {
+	private static func titleOfAccount(account: ACAccount?) -> String {
 		
 		return account?.username ?? "----"
 	}
@@ -75,6 +75,6 @@ final class TwitterAccountMenuItem: NSMenuItem {
 		
 		super.encodeWithCoder(aCoder)
 		
-		aCoder.encodeObject(self.account?.identifier, forKey: TwitterAccountMenuItem.IdentifierCoderKey)
+		aCoder.encodeObject(account?.identifier, forKey: TwitterAccountMenuItem.IdentifierCoderKey)
 	}
 }

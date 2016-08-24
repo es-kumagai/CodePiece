@@ -78,7 +78,7 @@ final class Settings {
 		
 		let identifier = _store.twitter.identifier
 		
-		if let account = TwitterAccount(identifier: identifier) {
+		if let account = TwitterController.Account(identifier: identifier) {
 			
 			NSLog("Twitter account which authenticated by OS restored from data store. (\(account.username))")
 			self.account.twitterAccount = account
@@ -95,7 +95,7 @@ final class Settings {
 		let tokenSecret = _store.twitter.tokenSecret
 		let tokenScreenName = _store.twitter.tokenScreenName
 		
-		let account = TwitterAccount(token: token, tokenSecret: tokenSecret, screenName: tokenScreenName)
+		let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: tokenScreenName)
 		
 		NSLog("Twitter account which authenticated by OAuth restored from data store. (\(account.username))")
 		self.account.twitterAccount = account
@@ -104,7 +104,7 @@ final class Settings {
 	private func loadTwitterAccountDefault() {
 		
 		// If no twitter account specified by settings, adopt registered account in OSX only if single account is registered.
-		if let account = TwitterController.getSingleAccount().map(TwitterAccount.init) {
+		if let account = TwitterController.getSingleAccount().map(TwitterController.Account.init) {
 			
 			NSLog("No Twitter account specified. Using account '\(account.username)' which registered in OS.")
 			self.account.twitterAccount = account
@@ -128,13 +128,13 @@ final class Settings {
 			
 			switch account {
 				
-			case let .Account(osAccount):
+			case let .account(osAccount):
 				_store.twitter.identifier = osAccount.identifier ?? ""
 				_store.twitter.token = ""
 				_store.twitter.tokenSecret = ""
 				_store.twitter.tokenScreenName = ""
 				
-			case let .Token(token, tokenSecret, screenName):
+			case let .token(token, tokenSecret, screenName):
 				_store.twitter.identifier = ""
 				_store.twitter.token = token
 				_store.twitter.tokenSecret = tokenSecret

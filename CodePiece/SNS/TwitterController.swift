@@ -17,85 +17,6 @@ import ESThread
 import Swim
 import Himotoki
 
-enum TwitterAccount {
-	
-	case Account(Accounts.ACAccount)
-	case Token(token: String, tokenSecret: String, screenName: String)
-	
-	var storeKind: DataStore.TwitterStore.Kind {
-		
-		switch self {
-			
-		case .Account:
-			return .OSAccount
-			
-		case .Token:
-			return .OAuthToken
-		}
-	}
-	
-	var ACAccount: Accounts.ACAccount? {
-		
-		if case let .Account(account) = self {
-			
-			return account
-		}
-		else {
-			
-			return nil
-		}
-	}
-	
-	var token: (token: String, tokenSecret: String)? {
-		
-		if case let .Token(token, tokenSecret, _) = self {
-			
-			return (token: token, tokenSecret: tokenSecret)
-		}
-		else {
-			
-			return nil
-		}
-	}
-	
-	init(account:Accounts.ACAccount) {
-	
-		self = .Account(account)
-	}
-	
-	init(token: String, tokenSecret: String, screenName: String) {
-		
-		self = .Token(token: token, tokenSecret: tokenSecret, screenName: screenName)
-	}
-	
-	init?(identifier:String) {
-	
-		guard let account = TwitterController.getAccount(identifier) else {
-			
-			return nil
-		}
-		
-		self = .Account(account)
-	}
-	
-	var username:String {
-		
-		switch self {
-			
-		case let .Account(account):
-			return account.username
-			
-		case let .Token(_, _, screenName):
-			return screenName
-		}
-	}
-	
-	var identifier:String? {
-		
-		return self.ACAccount?.identifier
-	}
-}
-
 struct GetStatusesError : ErrorType, CustomStringConvertible {
 
 	enum Type {
@@ -235,7 +156,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	private var autoVerifyingNow: Bool = false
 	private var autoVerifyingQueue:MessageQueue<AutoVerifyingQueueMessage>!
 	
-	var account:TwitterAccount? {
+	var account: Account? {
 		
 		didSet {
 			
@@ -273,13 +194,13 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		
 		switch account {
 			
-		case let .Account(account):
+		case let .account(account):
 
 			return tweak (STTwitterAPI.twitterAPIOSWithAccount(account, delegate:self)) {
 				$0.setTimeoutInSeconds(TwitterController.timeout)
 			}
 			
-		case let .Token(token, tokenSecret, _):
+		case let .token(token, tokenSecret, _):
 			
 			return tweak (STTwitterAPI(OAuthConsumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret, oauthToken: token, oauthTokenSecret: tokenSecret)) {
 				$0.setTimeoutInSeconds(TwitterController.timeout)
@@ -307,7 +228,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 	}
  
-	private init(account:TwitterAccount?) {
+	private init(account: Account?) {
 		
 		self.account = account
 		self.effectiveUserInfo = nil
