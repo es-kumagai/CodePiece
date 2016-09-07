@@ -67,9 +67,9 @@ extension TwitterAccountSelectorController {
 	
 	final class TwitterAccountSelectorDidChangeNotification : Notification {
 		
-		private(set) var account:TwitterAccount
+		private(set) var account: TwitterController.Account
 		
-		init(account:TwitterAccount) {
+		init(account: TwitterController.Account) {
 			
 			self.account = account
 		}

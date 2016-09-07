@@ -182,7 +182,7 @@ extension Authorization {
 			NSLog("Twitter OAuth authentication did end successfully.")
 			DebugTime.print(" with: \(token), \(tokenSecret), \(userId), \(screenName)")
 			
-			let account = TwitterAccount(token: token, tokenSecret: tokenSecret, screenName: screenName)
+			let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: screenName)
 			
 			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
 			

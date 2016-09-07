@@ -11,7 +11,7 @@ import WebKit
 protocol CaptureInfoType {
 	
 	var userAgent: String? { get }
-	var targetNode: (WebView, DOMDocument) -> DOMNode { get }
+	var targetNode: (WebView, DOMDocument) -> DOMNode? { get }
 	var clientSize: NSSize { get }
 }
 
@@ -20,7 +20,7 @@ struct SimpleCaptureInfo : CaptureInfoType {
 	let userAgent: String? = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4"
 	let clientSize: NSSize = NSMakeSize(560.0, 560.0)
 
-	var targetNode: (WebView, DOMDocument) -> DOMNode {
+	var targetNode: (WebView, DOMDocument) -> DOMNode? {
 		
 		return { webview, dom in
 			
@@ -31,15 +31,15 @@ struct SimpleCaptureInfo : CaptureInfoType {
 
 struct LinedCaptureInfo : CaptureInfoType {
 	
-	let userAgent: String? = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8) AppleWebKit/536.25 (KHTML, like Gecko) Version/6.0 Safari/536.25"
+	let userAgent: String? = nil
 	let clientSize: NSSize = NSMakeSize(480.0, 480.0)
 	
-	var targetNode: (WebView, DOMDocument) -> DOMNode {
+	var targetNode: (WebView, DOMDocument) -> DOMNode? {
 		
 		return { webview, dom in
 		
-			let nodes = dom.getElementsByClassName("data")
-			let	node = nodes.item(0)
+			let nodes = dom.getElementsByClassName("data")!
+			let	node = nodes.item(0) as Optional
 		
 			let applyingStyleScript = [
 				

@@ -118,10 +118,16 @@ extension WebCaptureController.Request : WebFrameLoadDelegate {
 			let content = self.captureInfo.targetNode(sender, dom)
 			
 			// TODO: content が取得できず nil になる場合もあるので対応が必要
-			let contentBound = content.boundingBox()
-			let image = frame.frameView.documentView.capture(contentBound)
-			
-			self.fulfillRequest(image)
+			if let contentBound = content?.boundingBox() {
+				
+				let image = frame.frameView.documentView.capture(contentBound)
+				
+				self.fulfillRequest(image)
+			}
+			else {
+				
+				self.fulfillRequest(nil)
+			}
 		}
 	}
 	
