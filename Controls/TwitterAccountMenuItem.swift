@@ -41,6 +41,7 @@ final class TwitterAccountMenuItem: NSMenuItem {
 
 		if let accountIdentifier = aDecoder.decodeObjectForKey(TwitterAccountMenuItem.IdentifierCoderKey) as? String {
 			
+			NSLog("🐋 Creates Twitter Account Menu Item with identifier.")
 			account = TwitterController.Account(identifier: accountIdentifier)
 		}
 		else {

@@ -196,12 +196,14 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			
 		case let .account(account):
 
+			NSLog("🐋 Instantiate Twitter API using OS Account.")
 			return tweak (STTwitterAPI.twitterAPIOSWithAccount(account, delegate:self)) {
 				$0.setTimeoutInSeconds(TwitterController.timeout)
 			}
 			
 		case let .token(token, tokenSecret, _):
 			
+			NSLog("🐋 Instantiate Twitter API using Token.")
 			return tweak (STTwitterAPI(OAuthConsumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret, oauthToken: token, oauthTokenSecret: tokenSecret)) {
 				$0.setTimeoutInSeconds(TwitterController.timeout)
 			}

@@ -76,6 +76,8 @@ final class Settings {
 	
 	private func loadTwitterAccountAsAccount() {
 		
+		NSLog("🐋 Loading Twitter Account as OS Account.")
+
 		let identifier = _store.twitter.identifier
 		
 		if let account = TwitterController.Account(identifier: identifier) {

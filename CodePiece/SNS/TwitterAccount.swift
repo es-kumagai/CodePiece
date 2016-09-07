@@ -24,6 +24,7 @@ extension TwitterController.Account {
 	
 	init(account: Accounts.ACAccount) {
 
+		NSLog("🐋 Creates Twitter Account with OS Account.")
 		self = .account(account)
 	}
 	
@@ -39,6 +40,7 @@ extension TwitterController.Account {
 			return nil
 		}
 		
+		NSLog("🐋 Creates Twitter Account with Identifier.")
 		self = .account(account)
 	}
 }
@@ -59,12 +61,12 @@ extension TwitterController.Account {
 	
 	var acAccount: Accounts.ACAccount? {
 	
-		if case let .account(account) = self {
+		switch self {
 			
+		case .account(let account):
 			return account
-		}
-		else {
 			
+		case .token:
 			return nil
 		}
 	}
