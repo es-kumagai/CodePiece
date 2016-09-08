@@ -23,14 +23,14 @@ extension AlertDisplayable {
 		self.dynamicType.showInformationAlert(title, message: message)
 	}
 	
-	func showWarningAlert(title:String, message:String) {
+	func showWarningAlert(title:String, message:String, debugDescription: String? = nil) {
 		
-		self.dynamicType.showWarningAlert(title, message: message)
+		self.dynamicType.showWarningAlert(title, message: message, debugDescription: debugDescription)
 	}
 	
-	func showErrorAlert(title:String, message:String) {
+	func showErrorAlert(title:String, message:String, debugDescription: String? = nil) {
 		
-		self.dynamicType.showErrorAlert(title, message: message)
+		self.dynamicType.showErrorAlert(title, message: message, debugDescription: debugDescription)
 	}
 	
 	private static func showAlert(alert:NSAlert) {
@@ -53,9 +53,9 @@ extension AlertDisplayable {
 		self.showAlert(alert)
 	}
 	
-	static func showWarningAlert(title:String, message:String) {
+	static func showWarningAlert(title:String, message:String, debugDescription: String? = nil) {
 		
-		NSLog("Warning: \(title) : \(message)")
+		NSLog("Warning: \(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
 		
 		let alert = NSAlert()
 		
@@ -67,9 +67,9 @@ extension AlertDisplayable {
 		self.showAlert(alert)
 	}
 	
-	static func showErrorAlert(title:String, message:String) {
+	static func showErrorAlert(title:String, message:String, debugDescription: String? = nil) {
 
-		NSLog("Error: \(title) : \(message)")
+		NSLog("Error: \(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
 		
 		let alert = NSAlert()
 		

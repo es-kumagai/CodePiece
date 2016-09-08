@@ -269,8 +269,8 @@ extension TwitterPreferenceViewController : TwitterPreferenceAuthenticationByOAu
 			case .Created:
 				self.showErrorAlert("Failed to authentication", message: "Unexpected Process (PIN is not entered)")
 				
-			case .Failed(let message):
-				self.showErrorAlert("Failed to authentication", message: message)
+			case .Failed(let error):
+				self.showErrorAlert("Failed to authentication", message: error.description)
 				
 			case .PinRequired:
 				self.enteringPinInputMode()
@@ -293,7 +293,7 @@ extension TwitterPreferenceViewController : TwitterPreferenceAuthenticationByOAu
 				self.dismissController(self)
 				
 			case .Failed(let message):
-				self.showErrorAlert("Failed to authentication", message: message)
+				self.showErrorAlert("Failed to authentication", message: message.description)
 				
 			case .PinRequired:
 				self.showErrorAlert("Failed to authentication", message: "Unexpected Process (PIN Required)")

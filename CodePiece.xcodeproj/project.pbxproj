@@ -110,6 +110,7 @@
 		B19DA95E1C049A65000881AE /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19DA95D1C049A65000881AE /* PostData.swift */; };
 		B19DA9601C04A276000881AE /* PostData+Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19DA95F1C04A276000881AE /* PostData+Twitter.swift */; };
 		B19DA9621C04A280000881AE /* PostData+Gists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19DA9611C04A27F000881AE /* PostData+Gists.swift */; };
+		B1B1D0B71D82235800A336BA /* TwitterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B1D0B61D82235800A336BA /* TwitterError.swift */; };
 		B1B8D9B01C9BC8C6004725E7 /* TwitterStatusAttributed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B8D9AF1C9BC8C6004725E7 /* TwitterStatusAttributed.swift */; };
 		B1B8D9B11C9BD442004725E7 /* SourceHanCodeJP-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B178775C1C9A63280084878F /* SourceHanCodeJP-Regular.otf */; };
 		B1B8D9B31C9C07A6004725E7 /* WatermarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B8D9B21C9C07A6004725E7 /* WatermarkLabel.swift */; };
@@ -345,6 +346,7 @@
 		B19DA95D1C049A65000881AE /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		B19DA95F1C04A276000881AE /* PostData+Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PostData+Twitter.swift"; sourceTree = "<group>"; };
 		B19DA9611C04A27F000881AE /* PostData+Gists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PostData+Gists.swift"; sourceTree = "<group>"; };
+		B1B1D0B61D82235800A336BA /* TwitterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterError.swift; sourceTree = "<group>"; };
 		B1B8D9AF1C9BC8C6004725E7 /* TwitterStatusAttributed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterStatusAttributed.swift; sourceTree = "<group>"; };
 		B1B8D9B21C9C07A6004725E7 /* WatermarkLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkLabel.swift; sourceTree = "<group>"; };
 		B1BB59F11B5E714800DE3942 /* GistsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistsController.swift; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 				B19DA95F1C04A276000881AE /* PostData+Twitter.swift */,
 				B1BB59F61B5E718900DE3942 /* SNSController.swift */,
 				B128CB5C1B67853C00859D81 /* Twitter.swift */,
+				B1B1D0B61D82235800A336BA /* TwitterError.swift */,
 				B152B06E1D6DAF900022C898 /* TwitterAccount.swift */,
 				B1BB59F41B5E715B00DE3942 /* TwitterController.swift */,
 				B1B8D9AF1C9BC8C6004725E7 /* TwitterStatusAttributed.swift */,
@@ -1315,6 +1318,7 @@
 				B169B84D1C4E4A5A00CBF6C9 /* ViewController+PostDataManage.swift in Sources */,
 				B152B06F1D6DAF900022C898 /* TwitterAccount.swift in Sources */,
 				B13C98FF1B71138500A5A2B3 /* DataStoreForApp.swift in Sources */,
+				B1B1D0B71D82235800A336BA /* TwitterError.swift in Sources */,
 				B169B84B1C4E3F0500CBF6C9 /* CodeText.swift in Sources */,
 				B1D2D68B1B5D5FCD00794EFD /* GitHubPreferenceViewController.swift in Sources */,
 				B152E2C71B6F6C08008B485A /* MainStatusViewController.swift in Sources */,
