@@ -215,11 +215,11 @@ final class TwitterPreferenceViewController: NSViewController, NotificationObser
 		}
 		
 		// In order to just to avoid update account list when user selecting, monitoring notification NSWindowDidBecomeKeyNotification rather than ACAccountStoreDidChangeNotification.
-		self.observeNotificationNamed(NSWindowDidBecomeKeyNotification) { [unowned self] notification in
+		self.observeNotificationNamed(NSWindowDidBecomeKeyNotification) { [weak self] notification in
 			
-			if notification.object === self.view.window {
+			if notification.object === self?.view.window {
 			
-				self.checkCanAccessToAccountsAndUpdateAccountSelector()
+				self!.checkCanAccessToAccountsAndUpdateAccountSelector()
 			}
 		}
     }
