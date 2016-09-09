@@ -77,10 +77,12 @@ final class Authorization : AlertDisplayable {
 	final class Twitter {
 		
 		var oauth: STTwitterOAuth
-		
+		private(set) var pinRequesting: Bool
+
 		init() {
 
-			self.oauth = STTwitterOAuth(consumerName: nil, consumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret)
+			oauth = STTwitterOAuth(consumerName: nil, consumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret)
+			pinRequesting = false
 		}
 	}
 
@@ -96,6 +98,14 @@ final class Authorization : AlertDisplayable {
 }
 
 // MARK: Twitter
+
+extension Authorization {
+
+	static var isTwitterPinRequesting: Bool {
+		
+		return twitter.pinRequesting
+	}
+}
 
 extension Authorization.AuthorizationResult {
 
@@ -220,7 +230,8 @@ extension Authorization {
 			let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: screenName)
 			
 			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
-			
+
+			twitter.pinRequesting = false
 			_twitterAuthorizationCreateSuccessfully(completion)
 		}
 		
@@ -251,11 +262,14 @@ extension Authorization {
 		
 		let errorHandler = { (error: NSError!) in
 
+			twitter.pinRequesting = false
+
 			print("Twitter authorization went wrong: \(error).")
 			_twitterAuthorizationFailed(AuthorizationResult.Error(error), completion: completion)
 		}
 		
-		oauth.postTokenRequest(successHandler, oauthCallback: callback, errorBlock: errorHandler)		
+		twitter.pinRequesting = true
+		oauth.postTokenRequest(successHandler, oauthCallback: callback, errorBlock: errorHandler)
 	}
 	
 	static func authorizationWithGitHub(completion:(AuthorizationResult)->Void) {

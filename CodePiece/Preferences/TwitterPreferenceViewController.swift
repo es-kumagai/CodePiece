@@ -228,9 +228,9 @@ final class TwitterPreferenceViewController: NSViewController, NotificationObser
 		
 		super.viewWillAppear()
 		
-		self.updateAccountSelector()
-		self.exitPinInputMode()
-		self.applyAuthorizedStatus()
+		updateAccountSelector()
+		updatePinInputMode()
+		applyAuthorizedStatus()
 	}
 	
 	override func viewDidAppear() {
@@ -309,6 +309,18 @@ extension TwitterPreferenceViewController : TwitterPreferenceAuthenticationByOAu
 		}
 		
 		return pinTextField.stringValue.isExists
+	}
+	
+	func updatePinInputMode() {
+	
+		switch Authorization.isTwitterPinRequesting {
+			
+		case true:
+			enteringPinInputMode()
+			
+		case false:
+			exitPinInputMode()
+		}		
 	}
 	
 	func enteringPinInputMode() {
