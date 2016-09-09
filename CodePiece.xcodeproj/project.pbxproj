@@ -143,7 +143,6 @@
 		B1F16A661C77286B000CBB5F /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = B1F16A651C77286B000CBB5F /* 1.json */; };
 		B1F16A6A1C772AFB000CBB5F /* UserMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F16A671C772AF2000CBB5F /* UserMention.swift */; };
 		B1F6CF211C5F49E800E5D3B8 /* URLEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6CF1F1C5F492300E5D3B8 /* URLEntity.swift */; };
-		BF1B1F61039BE4DDFF4828AC /* Pods_ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01A144EF6B58ED9D477773A /* Pods_ESTwitter.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -383,7 +382,6 @@
 		B1F6CF1F1C5F492300E5D3B8 /* URLEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLEntity.swift; sourceTree = "<group>"; };
 		CCF13FDFE9B06E1A399BC4CB /* Pods_CodePiece.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CodePiece.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6FEB80EB37058E9C54DE649 /* Pods-ESTwitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESTwitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ESTwitter/Pods-ESTwitter.debug.xcconfig"; sourceTree = "<group>"; };
-		F01A144EF6B58ED9D477773A /* Pods_ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1597,15 +1595,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CodePiece/CodePiece.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: EasyStyle G.K. (89282N6UM7)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "3rd Party Mac Developer Application: EasyStyle G.K. (89282N6UM7)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "20009761-9a8a-4b66-82aa-445046d5aa83";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CodePiece/CodePiece-Bridging-Header.h";
 			};
 			name = Release;
