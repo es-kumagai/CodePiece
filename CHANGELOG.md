@@ -10,6 +10,7 @@ Change Logs.
 
 ### Fixes
 
+* Fix a problem might failed to get gist capture.
 * Fix a problem that might not be able to authenticate when move other preference window during entering a Twitter PIN code.
 
 ## 1.4.11
