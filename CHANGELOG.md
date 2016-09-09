@@ -8,6 +8,10 @@ Change Logs.
 
 * Supports code types Simple text and Kotlin.
 
+### Fixes
+
+* Fix a problem that might not be able to authenticate when move other preference window during entering a Twitter PIN code.
+
 ## 1.4.11
 
 ### Fixes

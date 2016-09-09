@@ -511,8 +511,8 @@ extension TimelineViewController : TimelineGetStatusesController {
 		}
 		
 		let failedToGetTimeline = { (error: GetStatusesError) -> Void in
-						
-			if case .RateLimitExceeded = error.type {
+			
+			if error.isRateLimitExceeded {
 				
 				self.message.send(.AddAutoUpdateIntervalDelay(7.0))
 			}

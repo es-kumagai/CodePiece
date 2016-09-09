@@ -77,10 +77,12 @@ final class Authorization : AlertDisplayable {
 	final class Twitter {
 		
 		var oauth: STTwitterOAuth
-		
+		private(set) var pinRequesting: Bool
+
 		init() {
 
-			self.oauth = STTwitterOAuth(consumerName: nil, consumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret)
+			oauth = STTwitterOAuth(consumerName: nil, consumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret)
+			pinRequesting = false
 		}
 	}
 
@@ -90,7 +92,7 @@ final class Authorization : AlertDisplayable {
 	enum AuthorizationResult {
 
 		case Created
-		case Failed(String)
+		case Failed(Error)
 		case PinRequired
 	}
 }
@@ -99,6 +101,49 @@ final class Authorization : AlertDisplayable {
 
 extension Authorization {
 
+	static var isTwitterPinRequesting: Bool {
+		
+		return twitter.pinRequesting
+	}
+}
+
+extension Authorization.AuthorizationResult {
+
+	enum Error {
+		
+		case twitterError(STTwitterTwitterErrorCode)
+		case message(String)
+	}
+}
+
+extension Authorization.AuthorizationResult.Error {
+	
+	init(_ error: NSError) {
+		
+		switch error.domain {
+			
+		case kSTTwitterTwitterErrorDomain:
+			self = .twitterError(STTwitterTwitterErrorCode(rawValue: error.code)!)
+			
+		default:
+			self = .message(error.localizedDescription)
+		}
+	}
+}
+
+extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
+
+	var description: String {
+		
+		switch self {
+
+		case .twitterError(let code):
+			return code.description
+			
+		case .message(let message):
+			return message			
+		}
+	}
 }
 
 // MARK: GitHub
@@ -147,7 +192,7 @@ extension Authorization {
 		completion(.Created)
 	}
 	
-	private static func _twitterAuthorizationFailed(error:String, completion:(AuthorizationResult)->Void) {
+	private static func _twitterAuthorizationFailed(error: AuthorizationResult.Error, completion:(AuthorizationResult)->Void) {
 		
 		completion(.Failed(error))
 	}
@@ -167,7 +212,7 @@ extension Authorization {
 		completion(.Created)
 	}
 	
-	private static func _githubAuthorizationFailed(error:String, completion:(AuthorizationResult)->Void) {
+	private static func _githubAuthorizationFailed(error: AuthorizationResult.Error, completion:(AuthorizationResult)->Void) {
 		
 		NSApp.settings.resetGitHubAccount(saveFinally: true)
 		completion(.Failed(error))
@@ -185,7 +230,8 @@ extension Authorization {
 			let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: screenName)
 			
 			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
-			
+
+			twitter.pinRequesting = false
 			_twitterAuthorizationCreateSuccessfully(completion)
 		}
 		
@@ -193,7 +239,7 @@ extension Authorization {
 			
 			print("Twitter authorization went wrong: \(error).")
 			
-			_twitterAuthorizationFailed("Check entered PIN code and try again.", completion: completion)
+			_twitterAuthorizationFailed(.message("Check entered PIN code and try again."), completion: completion)
 		}
 		
 		oauth.postAccessTokenRequestWithPIN(pin, successBlock: successHandler, errorBlock: errorHandler)
@@ -216,11 +262,14 @@ extension Authorization {
 		
 		let errorHandler = { (error: NSError!) in
 
+			twitter.pinRequesting = false
+
 			print("Twitter authorization went wrong: \(error).")
-			_twitterAuthorizationFailed("\(error)", completion: completion)
+			_twitterAuthorizationFailed(AuthorizationResult.Error(error), completion: completion)
 		}
 		
-		oauth.postTokenRequest(successHandler, oauthCallback: callback, errorBlock: errorHandler)		
+		twitter.pinRequesting = true
+		oauth.postTokenRequest(successHandler, oauthCallback: callback, errorBlock: errorHandler)
 	}
 	
 	static func authorizationWithGitHub(completion:(AuthorizationResult)->Void) {
@@ -231,7 +280,7 @@ extension Authorization {
 			
 			guard case let (scope?, token?) = (parameters["scope"] as? String, parameters["access_token"] as? String) else {
 
-				_githubAuthorizationFailed("Failed to get access token by GitHub.", completion: completion)
+				_githubAuthorizationFailed(AuthorizationResult.Error.message("Failed to get access token by GitHub."), completion: completion)
 				return
 			}
 			
@@ -249,7 +298,7 @@ extension Authorization {
 					_githubAuthorizationCreateSuccessfully(user: user, authorization: authorization, completion: completion)
 					
 				case .Failure(let error):
-					_githubAuthorizationFailed(String(error), completion: completion)
+					_githubAuthorizationFailed(AuthorizationResult.Error.message("\(error)"), completion: completion)
 				}
 			}
 		}

@@ -25,24 +25,7 @@ struct GetStatusesError : ErrorType, CustomStringConvertible {
 		case UnexpectedError
 		
 		// STTwitter
-		case CouldNotAuthenticate
-		case PageDoesNotExist
-		case AccountSuspended
-		case APIv1Inactive
-		case RateLimitExceeded
-		case InvalidOrExpiredToken
-		case SSLRequired
-		case OverCapacity
-		case InternalError
-		case CouldNotAuthenticateYou
-		case UnableToFollow
-		case NotAuthorizedToSeeStatus
-		case DailyStatuUpdateLimitExceeded
-		case DuplicatedStatus
-		case BadAuthenticationData
-		case UserMustVerifyLogin
-		case RetiredEndpoint
-		case ApplicationCannotWrite
+		case TwitterError(STTwitterTwitterErrorCode)
 	}
 	
 	var type: Type
@@ -62,62 +45,21 @@ struct GetStatusesError : ErrorType, CustomStringConvertible {
 	init(code: STTwitterTwitterErrorCode, reason: String) {
 		
 		self.reason = reason
+		self.type = .TwitterError(code)
+	}
+}
+
+extension GetStatusesError {
+	
+	var isRateLimitExceeded: Bool {
 		
-		switch code {
+		switch type {
 			
-		case .CouldNotAuthenticate:
-			self.type = .CouldNotAuthenticate
+		case .TwitterError(.RateLimitExceeded):
+			return true
 			
-		case .PageDoesNotExist:
-			self.type = .PageDoesNotExist
-			
-		case .AccountSuspended:
-			self.type = .AccountSuspended
-			
-		case .APIv1Inactive:
-			self.type = .APIv1Inactive
-			
-		case .RateLimitExceeded:
-			self.type = .RateLimitExceeded
-			
-		case .InvalidOrExpiredToken:
-			self.type = .InvalidOrExpiredToken
-			
-		case .SSLRequired:
-			self.type = .SSLRequired
-			
-		case .OverCapacity:
-			self.type = .OverCapacity
-			
-		case .InternalError:
-			self.type = .InternalError
-			
-		case .CouldNotAuthenticateYou:
-			self.type = .CouldNotAuthenticateYou
-			
-		case .UnableToFollow:
-			self.type = .UnableToFollow
-			
-		case .NotAuthorizedToSeeStatus:
-			self.type = .NotAuthorizedToSeeStatus
-			
-		case .DailyStatuUpdateLimitExceeded:
-			self.type = .DailyStatuUpdateLimitExceeded
-			
-		case .DuplicatedStatus:
-			self.type = .DuplicatedStatus
-			
-		case .BadAuthenticationData:
-			self.type = .BadAuthenticationData
-			
-		case .UserMustVerifyLogin:
-			self.type = .UserMustVerifyLogin
-			
-		case .RetiredEndpoint:
-			self.type = .RetiredEndpoint
-			
-		case .ApplicationCannotWrite:
-			self.type = .ApplicationCannotWrite
+		default:
+			return false
 		}
 	}
 }
