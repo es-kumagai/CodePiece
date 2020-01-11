@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B1A105FD23CA1A4A00F9C4FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */; };
+		B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1060223CA217F00F9C4FD /* APIKeys.swift */; };
+		B1A1060523CA25B100F9C4FD /* APIKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1060423CA25B100F9C4FD /* APIKeysTests.swift */; };
+		B1C6737723CA2A7000A07F9E /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1A1060023CA1FE800F9C4FD /* APIKeys.plist */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7623CA14DB0016902A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7523CA14DB0016902A /* ViewController.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
@@ -26,6 +29,10 @@
 
 /* Begin PBXFileReference section */
 		B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B1A105FF23CA1F1900F9C4FD /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
+		B1A1060023CA1FE800F9C4FD /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
+		B1A1060223CA217F00F9C4FD /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		B1A1060423CA25B100F9C4FD /* APIKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeysTests.swift; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1D13C7523CA14DB0016902A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,9 +62,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B1A105FE23CA1EF700F9C4FD /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				B1A105FF23CA1F1900F9C4FD /* TODO.md */,
+				B1A1060023CA1FE800F9C4FD /* APIKeys.plist */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		B1D13C6723CA14DB0016902A = {
 			isa = PBXGroup;
 			children = (
+				B1A105FE23CA1EF700F9C4FD /* Private */,
 				B1D13C7223CA14DB0016902A /* CodePiece */,
 				B1D13C8523CA14DD0016902A /* CodePieceTests */,
 				B1D13C7123CA14DB0016902A /* Products */,
@@ -82,6 +99,7 @@
 				B1D13C7C23CA14DD0016902A /* Info.plist */,
 				B1D13C7D23CA14DD0016902A /* CodePiece.entitlements */,
 				B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */,
+				B1A1060223CA217F00F9C4FD /* APIKeys.swift */,
 			);
 			path = CodePiece;
 			sourceTree = "<group>";
@@ -91,6 +109,7 @@
 			children = (
 				B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */,
 				B1D13C8823CA14DD0016902A /* Info.plist */,
+				B1A1060423CA25B100F9C4FD /* APIKeysTests.swift */,
 			);
 			path = CodePieceTests;
 			sourceTree = "<group>";
@@ -176,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C6737723CA2A7000A07F9E /* APIKeys.plist in Resources */,
 				B1A105FD23CA1A4A00F9C4FD /* Assets.xcassets in Resources */,
 				B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */,
 			);
@@ -195,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */,
 				B1D13C7623CA14DB0016902A /* ViewController.swift in Sources */,
 				B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */,
 			);
@@ -204,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1A1060523CA25B100F9C4FD /* APIKeysTests.swift in Sources */,
 				B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,7 +381,7 @@
 				);
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece-Beta";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CodePiece;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -378,7 +400,7 @@
 				);
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CodePiece;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -397,7 +419,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceTests-Rev2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece.app/Contents/MacOS/CodePiece";
@@ -418,7 +440,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceTests-Rev2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece.app/Contents/MacOS/CodePiece";

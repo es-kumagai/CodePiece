@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import CodePiece_Rev2
+@testable import CodePiece
 
 class CodePiece_Rev2Tests: XCTestCase {
 
