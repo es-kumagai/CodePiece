@@ -12,7 +12,7 @@ final class DescriptionTextField: NSTextField {
 
 	func readyForReplyTo(screenName: String) {
 		
-		if !containsScreenName(screenName) {
+		if !containsScreenName(screenName: screenName) {
 			
 			self.stringValue = "@\(screenName) "
 		}
@@ -28,6 +28,6 @@ extension DescriptionTextField : TwitterTextType {
 	
 	var twitterText: String {
 		
-		return stringValue.trimmed()
+		return stringValue.trimmingCharacters(in: .whitespaces)
 	}
 }

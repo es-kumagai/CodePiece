@@ -129,12 +129,12 @@ extension PostDataContainer {
 	
 	var hasError: Bool {
 	
-		return self.error.isExists
+		return self.error != nil
 	}
 	
 	var hasCode: Bool {
 		
-		return self.data.code.isExists
+		return self.data.code != nil
 	}
 	
 	var hasMediaIDs: Bool {
@@ -164,7 +164,7 @@ extension PostDataContainer {
 	
 	func setTwitterMediaIDs(_ mediaIDs: String...) {
 	
-		self.setTwitterMediaIDs(mediaIDs)
+		self.setTwitterMediaIDs(mediaIDs: mediaIDs)
 	}
 	
 	func effectiveHashtags(withAppTag withAppTag:Bool, withLangTag:Bool) -> ESTwitter.HashtagSet {
@@ -191,15 +191,15 @@ extension PostDataContainer {
 			
 			let descriptionLength = maxLength - hashtags.twitterDisplayTextLength
 			
-			guard description.characters.count > descriptionLength else {
+			guard description.count > descriptionLength else {
 				
 				return description
 			}
 			
-			let sourceDescription = description.characters
+			let sourceDescription = description
 			
 			let start = sourceDescription.startIndex
-			let end = start.advancedBy(descriptionLength - 2)
+			let end = sourceDescription.index(start, offsetBy: descriptionLength - 2)
 			
 			return String(sourceDescription.prefixThrough(end)) + " …"
 		}
@@ -217,7 +217,7 @@ extension PostDataContainer {
 		}
 		
 		return getDescription()
-			.appendStringIfNotEmpty(appendString, separator: " ")
-			.appendStringIfNotEmpty(hashtags.toTwitterDisplayText(), separator: " ")
+			.appendStringIfNotEmpty(string: appendString, separator: " ")
+			.appendStringIfNotEmpty(string: hashtags.toTwitterDisplayText(), separator: " ")
 	}
 }

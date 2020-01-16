@@ -7,13 +7,12 @@
 //
 
 import Cocoa
-import ESThread
 
 final class WatermarkLabel: NSTextField {
 
 	@IBOutlet var transparentResponder: NSView?
 	
-	override func mouseDown(theEvent: NSEvent) {
+	override func mouseDown(with theEvent: NSEvent) {
 		
 		transparentResponder?.window?.makeFirstResponder(transparentResponder!)
 	}

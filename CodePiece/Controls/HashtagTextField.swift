@@ -42,7 +42,7 @@ final class HashtagTextField : NSTextField {
 		}
 	}
 	
-	override func textDidEndEditing(notification: NSNotification) {
+	override func textDidEndEditing(_ notification: Notification) {
 		
 		// 表示のために代入し直して正規化します。
 		self.stringValue = self.hashtags.toTwitterDisplayText()

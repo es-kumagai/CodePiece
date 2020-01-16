@@ -78,9 +78,7 @@ extension TimelineTableControllerType {
 			let noEffectIndexes = currentIndexes.filter { $0 < insertIndex }
 			let shiftedIndexes = currentIndexes.filter { $0 >= insertIndex } .map { $0 + 1 }
 			
-			let resultIndexes = IndexSet(sequence: noEffectIndexes + shiftedIndexes)
-			
-			return resultIndexes.copy() as! IndexSet
+			return IndexSet(noEffectIndexes + shiftedIndexes)
 		}
 
 		func shiftIndexes(currentIndexes: IndexSet, insertIndexes: IndexSet) -> IndexSet {
