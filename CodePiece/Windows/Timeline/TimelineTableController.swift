@@ -15,7 +15,7 @@ protocol TimelineTableControllerType {
 	var timelineTableView: TimelineTableView! { get }
 	var timelineDataSource: TimelineTableDataSource! { get }
 	
-	var currentTimelineSelectedRowIndexes: NSIndexSet { get set }
+	var currentTimelineSelectedRowIndexes: IndexSet { get set }
 }
 
 extension TimelineTableControllerType {
@@ -30,13 +30,13 @@ extension TimelineTableControllerType {
 		return self.timelineDataSource.maxTweets
 	}
 	
-	func appendTweets(tweets: [Status], hashtags: HashtagSet) -> (insertedIndexes: NSIndexSet, ignoredIndexes: NSIndexSet, removedIndexes: NSIndexSet) {
+	func appendTweets(tweets: [Status], hashtags: HashtagSet) -> (insertedIndexes: IndexSet, ignoredIndexes: IndexSet, removedIndexes: IndexSet) {
 
 		let tweetCount = tweets.count
 
 		guard tweetCount != 0 else {
 		
-			return (insertedIndexes: NSIndexSet(), ignoredIndexes: NSIndexSet(), removedIndexes: NSIndexSet())
+			return (insertedIndexes: IndexSet(), ignoredIndexes: IndexSet(), removedIndexes: IndexSet())
 		}
 		
 		let currentRows = self.currentTimelineRows
@@ -50,11 +50,11 @@ extension TimelineTableControllerType {
 		let getIgnoreRange = { NSMakeRange(maxRows - ignoreRows, ignoreRows) }
 		let getRemoveRange = { NSMakeRange(currentRows - overflowRows, overflowRows) }
 		
-		let insertIndexes = NSIndexSet(indexesIn: getInsertRange())
-		let ignoreIndexes = ignoreRows > 0 ? NSIndexSet(indexesInRange: getIgnoreRange()) : NSIndexSet()
-		let removeIndexes = overflowRows > 0 ? NSIndexSet(indexesInRange: getRemoveRange()) : NSIndexSet()
+		let insertIndexes = IndexSet(indexesIn: getInsertRange())
+		let ignoreIndexes = ignoreRows > 0 ? IndexSet(indexesInRange: getIgnoreRange()) : IndexSet()
+		let removeIndexes = overflowRows > 0 ? IndexSet(indexesInRange: getRemoveRange()) : IndexSet()
 
-		self.timelineDataSource.appendTweets(tweets, hashtags: hashtags)
+		self.timelineDataSource.appendTweets(tweets: tweets, hashtags: hashtags)
 		
 		applyingExpression(to: self.timelineTableView) {
 			
@@ -69,30 +69,30 @@ extension TimelineTableControllerType {
 		return (insertedIndexes: insertIndexes, ignoredIndexes: ignoreIndexes, removedIndexes: removeIndexes)
 	}
 	
-	func getNextTimelineSelection(insertedIndexes: NSIndexSet) -> NSIndexSet {
+	func getNextTimelineSelection(insertedIndexes: IndexSet) -> IndexSet {
 
-		func shiftIndex(currentIndexes: NSIndexSet, insertIndex: Int) -> NSIndexSet {
+		func shiftIndex(currentIndexes: IndexSet, insertIndex: Int) -> IndexSet {
 			
-			let currentIndexes = currentIndexes.sort(<)
+			let currentIndexes = currentIndexes.sorted(by: <)
 
 			let noEffectIndexes = currentIndexes.filter { $0 < insertIndex }
-			let shiftedIndexes = currentIndexes.filter { $0 >= insertIndex } .map { $0.successor() }
+			let shiftedIndexes = currentIndexes.filter { $0 >= insertIndex } .map { $0 + 1 }
 			
-			let resultIndexes = NSIndexSet(sequence: noEffectIndexes + shiftedIndexes)
+			let resultIndexes = IndexSet(sequence: noEffectIndexes + shiftedIndexes)
 			
-			return resultIndexes.copy() as! NSIndexSet
+			return resultIndexes.copy() as! IndexSet
 		}
 
-		func shiftIndexes(currentIndexes: NSIndexSet, insertIndexes: NSIndexSet) -> NSIndexSet {
+		func shiftIndexes(currentIndexes: IndexSet, insertIndexes: IndexSet) -> IndexSet {
 			
-			var insertIndexesGenerator = insertIndexes.generate()
+			var insertIndexesGenerator = insertIndexes.makeIterator()
 			
 			if let insertIndex = insertIndexesGenerator.next() {
 				
-				let currentIndexes = shiftIndex(currentIndexes, insertIndex: insertIndex)
-				let insertIndexes = NSIndexSet(sequence: insertIndexes.dropFirst())
+				let currentIndexes = shiftIndex(currentIndexes: currentIndexes, insertIndex: insertIndex)
+				let insertIndexes = IndexSet(insertIndexes.dropFirst())
 
-				return shiftIndexes(currentIndexes, insertIndexes: insertIndexes)
+				return shiftIndexes(currentIndexes: currentIndexes, insertIndexes: insertIndexes)
 			}
 			else {
 				

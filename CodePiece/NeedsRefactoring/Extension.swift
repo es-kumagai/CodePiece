@@ -76,23 +76,23 @@ public var NullStream = NullOutputStream()
 //	}
 //}
 
-extension NSIndexSet {
-
-	public convenience init<S: Sequence>(sequence s: S) where S.Element == Int {
-		
-        let indexes = s.reduce(NSMutableIndexSet()) { $0.add($1); return $0 }
-		
-		self.init(indexSet: (indexes.copy() as! NSIndexSet) as IndexSet)
-	}
-}
-
-extension NSIndexSet {
-	
-	public var isEmpty: Bool {
-		
-		return count == 0
-	}
-}
+//extension DateComponents {
+//
+//	public convenience init<S: Sequence>(sequence s: S) where S.Element == Int {
+//		
+//        let indexes = s.reduce(NSMutableIndexSet()) { $0.add($1); return $0 }
+//		
+//		self.init(indexSet: (indexes.copy() as! DateComponents) as IndexSet)
+//	}
+//}
+//
+//extension DateComponents {
+//	
+//	public var isEmpty: Bool {
+//		
+//		return count == 0
+//	}
+//}
 
 extension NSTableView {
 
@@ -103,14 +103,14 @@ extension NSTableView {
 			return nil
 		}
 		
-		var topObjects = NSArray?()
+		var topObjects = NSArray()
 		
 		guard nib.instantiateWithOwner(nil, topLevelObjects: &topObjects) else {
 			
 			fatalError("Failed to load nib '\(nib)'.")
 		}
 		
-		return (topObjects as! [AnyObject])
+		return topObjects as [AnyObject]
 	}
 }
 
@@ -1350,58 +1350,58 @@ private func ~= (pattern:dispatch_queue_attr_t, value:dispatch_queue_attr_t) -> 
 	return pattern.isEqual(value)
 }
 
-public struct Thread {
-	
-	public enum `Type` : RawRepresentable {
-		
-		case Serial
-		case Concurrent
-		
-		public init?(rawValue: dispatch_queue_attr_t!) {
-			
-			switch rawValue {
-				
-			case DISPATCH_QUEUE_CONCURRENT:
-				self = .Concurrent
-				
-			case DISPATCH_QUEUE_SERIAL:
-				self = .Serial
-				
-			default:
-				return nil
-			}
-		}
-		
-		public var rawValue:dispatch_queue_attr_t! {
-			
-			switch self {
-				
-			case .Concurrent:
-				return DISPATCH_QUEUE_CONCURRENT
-				
-			case .Serial:
-				return DISPATCH_QUEUE_SERIAL
-			}
-		}
-	}
-	
-	var queue: DispatchQueue
-	
-	public init(name: String, type: Type = .Serial) {
-
-		queue = DispatchQueue(name, type.rawValue)
-	}
-	
-	public func invokeAsync(predicate: @escaping () -> Void) {
-		
-		queue.async(execute: predicate)
-	}
-	
-	public func invoke<Result>(predicate: () -> Result) -> Result {
-		
-		queue.sync(execute: predicate)
-	}
-}
+//public struct Thread {
+//	
+//	public enum `Type` : RawRepresentable {
+//		
+//		case Serial
+//		case Concurrent
+//		
+//		public init?(rawValue: dispatch_queue_attr_t!) {
+//			
+//			switch rawValue {
+//				
+//			case DISPATCH_QUEUE_CONCURRENT:
+//				self = .Concurrent
+//				
+//			case DISPATCH_QUEUE_SERIAL:
+//				self = .Serial
+//				
+//			default:
+//				return nil
+//			}
+//		}
+//		
+//		public var rawValue:dispatch_queue_attr_t! {
+//			
+//			switch self {
+//				
+//			case .Concurrent:
+//				return DISPATCH_QUEUE_CONCURRENT
+//				
+//			case .Serial:
+//				return DISPATCH_QUEUE_SERIAL
+//			}
+//		}
+//	}
+//	
+//	var queue: DispatchQueue
+//	
+//	public init(name: String, type: Type = .Serial) {
+//
+//		queue = DispatchQueue(name, type.rawValue)
+//	}
+//	
+//	public func invokeAsync(predicate: @escaping () -> Void) {
+//		
+//		queue.async(execute: predicate)
+//	}
+//	
+//	public func invoke<Result>(predicate: () -> Result) -> Result {
+//		
+//		queue.sync(execute: predicate)
+//	}
+//}
 
 // MARK: - Capture
 

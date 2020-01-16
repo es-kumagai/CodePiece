@@ -24,7 +24,7 @@ class TimelineViewController: NSViewController {
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
 	
 	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
-	var currentTimelineSelectedRowIndexes = NSIndexSet() {
+	var currentTimelineSelectedRowIndexes = IndexSet() {
 		
 		willSet {
 		
@@ -118,7 +118,7 @@ class TimelineViewController: NSViewController {
 		
 		didSet {
 			
-			precondition(Thread.isMainThread())
+			precondition(Thread.isMainThread)
 			
 			self.updateDisplayControlsForState()
 		}
@@ -140,7 +140,7 @@ class TimelineViewController: NSViewController {
 			
 			if self.timeline.hashtags != oldValue.hashtags {
 				
-				self.message.send(.ChangeHashtags(self.timeline.hashtags))
+				self.message.send(message: .ChangeHashtags(self.timeline.hashtags))
 			}
 		}
 	}
@@ -230,7 +230,7 @@ extension TimelineViewController {
 
 		mutating func addUpdateIntervalDelay(bySecond second: Double) {
 			
-			self.addUpdateIntervalDelayByInterval(Semaphore.Interval(second: second))
+			self.addUpdateIntervalDelayByInterval(interval: Semaphore.Interval(second: second))
 		}
 
 		mutating func addUpdateIntervalDelayByInterval(interval: Semaphore.Interval) {
@@ -276,7 +276,7 @@ extension TimelineViewController {
 			}
 			
 			self.autoUpdateState.setUpdated()
-			self.message.send(.UpdateStatuses)
+			self.message.send(message: .UpdateStatuses)
 		}
 	}
 }
@@ -306,13 +306,13 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
             self._changeReachability(state: state)
 			
 		case .ChangeHashtags(let hashtags):
-			self._changeHashtags(hashtags)
+			self._changeHashtags(hashtags: hashtags)
 		}
 	}
 	
 	func messageQueue<Queue : MessageQueueType>(queue: Queue, handlingError error: Error) throws {
 		
-		fatalError(String(error))
+		fatalError(error.localizedDescription)
 	}
 	
 	private func _updateStatuses() {
@@ -329,7 +329,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
             DispatchQueue.main.sync {
 
                 self.timelineTableView.insertRows(at: IndexSet(integer: 0), withAnimation: TableViewInsertAnimationOptions)
-				self.message.send(.UpdateStatuses)
+				self.message.send(message: .UpdateStatuses)
 			}
 		}
 	}
@@ -396,9 +396,9 @@ extension TimelineViewController : NotificationObservable {
 		
 		self.updateDisplayControlsForState()
 		
-		self.message.send(.SetAutoUpdateInterval(self.statusesAutoUpdateInterval))
-		self.message.send(.SetReachability(NSApp.reachabilityController.state))
-		self.message.send(.AutoUpdate(enable: true))
+		self.message.send(message: .SetAutoUpdateInterval(self.statusesAutoUpdateInterval))
+		self.message.send(message: .SetReachability(NSApp.reachabilityController.state))
+		self.message.send(message: .AutoUpdate(enable: true))
     }
 	
 	override func viewWillAppear() {
@@ -413,7 +413,7 @@ extension TimelineViewController : NotificationObservable {
 		
 		self.observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			self.message.send(.UpdateStatuses)
+			self.message.send(message: .UpdateStatuses)
 		}
 		
 		self.observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
@@ -422,33 +422,33 @@ extension TimelineViewController : NotificationObservable {
 			
 			NSLog("Hashtag did change (\(hashtags))")
 			
-			self.timeline = self.timeline.replaceHashtags(hashtags)
+			self.timeline = self.timeline.replaceHashtags(hashtags: hashtags)
 		}
 		
-		self.observe(notificationNamed: NSWorkspaceWillSleepNotification) { [unowned self] notification in
+		self.observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
 			
-			self.message.send(.AutoUpdate(enable: false))
+			self.message.send(message: .AutoUpdate(enable: false))
 		}
 		
-		self.observe(notificationNamed: NSWorkspaceDidWakeNotification) { [unowned self] notification in
+		self.observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
 			
-			self.message.send(.AutoUpdate(enable: true))
+			self.message.send(message: .AutoUpdate(enable: true))
 		}
 		
 		self.observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
-			self.message.send(.SetReachability(notification.state))
+			self.message.send(message: .SetReachability(notification.state))
 		}
 
 		self.observe(notification: MainViewController.PostCompletelyNotification.self) { [unowned self] notification in
 		
 			DispatchQueue.main.async(after: 3.0) {
 				
-				self.message.send(.UpdateStatuses)
+				self.message.send(message: .UpdateStatuses)
 			}
 		}
 		
-		self.message.send(.Start)
+		self.message.send(message: .Start)
 	}
 	
 	override func viewWillDisappear() {
@@ -457,19 +457,19 @@ extension TimelineViewController : NotificationObservable {
 		
 		self.releaseAllObservingNotifications()
 		
-		self.message.send(.Stop)
+		self.message.send(message: .Stop)
 	}
 
 	func reloadTimeline() {
 		
-		self.message.send(.UpdateStatuses)
+		self.message.send(message: .UpdateStatuses)
 	}
 }
 
 // MARK: - Tweets control
 
 extension TimelineViewController : TimelineTableControllerType {
-	
+
 }
 
 extension TimelineViewController : TimelineGetStatusesController {
@@ -489,8 +489,8 @@ extension TimelineViewController : TimelineGetStatusesController {
 			
 			DebugTime.print("Current Selection:\n\tCurrentTimelineSelectedRows: \(self.currentTimelineSelectedRowIndexes)\n\tNative: \(self.timelineTableView.selectedRowIndexes)")
 			
-			let result = self.appendTweets(tweets, hashtags: hashtags)
-			let nextSelectedIndexes = self.getNextTimelineSelection(result.insertedIndexes)
+			let result = self.appendTweets(tweets: tweets, hashtags: hashtags)
+			let nextSelectedIndexes = self.getNextTimelineSelection(insertedIndexes: result.insertedIndexes)
 
 			NSLog("Tweet: \(tweets.count)")
 			NSLog("Inserted: \(result.insertedIndexes)")
@@ -504,15 +504,15 @@ extension TimelineViewController : TimelineGetStatusesController {
 		
 		let gotTimelineSuccessfully = { () -> Void in
 			
-			self.message.send(.ResetAutoUpdateIntervalDeray)
-			self.timelineStatusView.OKMessage = "Last Update: \(NSDate().displayString)"
+			self.message.send(message: .ResetAutoUpdateIntervalDeray)
+			self.timelineStatusView.OKMessage = "Last Update: \(Date().displayString)"
 		}
 		
 		let failedToGetTimeline = { (error: GetStatusesError) -> Void in
 			
 			if error.isRateLimitExceeded {
 				
-				self.message.send(.AddAutoUpdateIntervalDelay(7.0))
+				self.message.send(message: .AddAutoUpdateIntervalDelay(7.0))
 			}
 		
             self.reportTimelineGetStatusError(error: error)
@@ -522,20 +522,20 @@ extension TimelineViewController : TimelineGetStatusesController {
 			
 			self.displayControlState = .Updating
 			
-			NSApp.twitterController.getStatusesWithQuery(query, since: self.timelineDataSource.latestTweetIdForHashtags(hashtags)) { result in
+			NSApp.twitterController.getStatusesWithQuery(query: query, since: self.timelineDataSource.latestTweetIdForHashtags(hashtags: hashtags)) { result in
 				
 				self.displayControlState = .Updated
 
 				switch result {
 					
-				case .Success(let tweets) where !tweets.isEmpty:
+				case .success(let tweets) where !tweets.isEmpty:
 					updateTable(tweets)
 					gotTimelineSuccessfully()
 					
-				case .Success:
+				case .success:
 					gotTimelineSuccessfully()
 					
-				case .Failure(let error):
+				case .failure(let error):
 					failedToGetTimeline(error)
 				}
 			}

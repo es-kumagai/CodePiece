@@ -15,14 +15,14 @@ public class AboutWindowController: NSWindowController {
         super.windowDidLoad()
 
 		// FIXME: 😨 リサイズさせたくないのですが IB でリサイズを無効化してもできてしまいます。コードでマスクを操作してみましたが、それでも効果がないようでした。メニューからストーリーボードで直接インスタンス化しているのが問題なのかもしれません。
-		self.window!.styleMask.modifyMask(reset: NSResizableWindowMask)
+		self.window!.styleMask.subtract(.resizable)
     }
 
 	public static func instantiate() -> AboutWindowController {
 		
 		let storyboard = NSStoryboard(name: "AboutWindowController", bundle: nil)
 		
-		return self.instantiate(storyboard)!
+		return self.instantiate(storyboard: storyboard)!
 	}
 	
 	public static func instantiate(storyboard: NSStoryboard, identifier: String? = nil) -> AboutWindowController? {
@@ -77,7 +77,7 @@ public class AboutWindowController: NSWindowController {
 extension AboutWindowController : NSWindowDelegate {
 	
 	// FIXME: 😨 リサイズさせたくないのですが IB でリサイズを無効化してもできてしまいます。NSWindowDelegate での調整を試みましたが、呼ばれず、効果がないようでした。メニューからストーリーボードで直接インスタンス化しているのが問題なのかもしれません。
-	public func windowShouldZoom(window: NSWindow, toFrame newFrame: NSRect) -> Bool {
+	public func windowShouldZoom(_ window: NSWindow, toFrame newFrame: NSRect) -> Bool {
 		
 		return false
 	}

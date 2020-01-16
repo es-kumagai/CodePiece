@@ -74,7 +74,7 @@ struct LinedCaptureInfo : CaptureInfoType {
 				"}"
 			]
 			
-			webview.stringByEvaluatingJavaScriptFromString(applyingStyleScript.joinWithSeparator("\n"))
+			webview.stringByEvaluatingJavaScript(from: applyingStyleScript.joined(separator: "\n"))
 		
 			return node
 		}

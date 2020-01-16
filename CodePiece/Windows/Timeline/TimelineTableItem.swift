@@ -17,9 +17,13 @@ protocol TimelineTableItem {
 	var timelineCellType: TimelineTableCellType.Type { get }
 }
 
+extension NSUserInterfaceItemIdentifier {
+	
+	static var timeLineCell = NSUserInterfaceItemIdentifier("TimelineCell")
+}
+
 protocol TimelineTableCellType : Selectable {
 	
-	static var prototypeCellIdentifier: String { get }
 	static func estimateCellHeightForItem(item:TimelineTableItem, tableView:NSTableView) -> CGFloat
 
 	func toTimelineView() -> NSView
@@ -36,7 +40,7 @@ extension TimelineTableCellType {
 	
 	static func makeCellForTableView(tableView: NSTableView, owner: AnyObject?) -> TimelineTableCellType {
 
-		return tableView.makeViewWithIdentifier(self.prototypeCellIdentifier, owner: owner) as! TimelineTableCellType
+		return tableView.makeView(withIdentifier: .timeLineCell, owner: owner) as! TimelineTableCellType
 	}
 }
 

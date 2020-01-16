@@ -6,9 +6,11 @@
 //  Copyright © 2016 EasyStyle G.K. All rights reserved.
 //
 
+import Ocean
+
 extension TimelineViewController {
 	
-	final class TimelineSelectionChangedNotification : Notification {
+	final class TimelineSelectionChangedNotification : NotificationProtocol {
 		
 		private(set) unowned var timelineViewController: TimelineViewController
 		private(set) var selectedCells: [TimelineTableView.CellInfo]
@@ -20,7 +22,7 @@ extension TimelineViewController {
 		}
 	}
 	
-	final class TimelineReplyToSelectionRequestNotification : Notification {
+	final class TimelineReplyToSelectionRequestNotification : NotificationProtocol {
 		
 	}
 }

@@ -164,11 +164,6 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 
 extension TimelineTableCellView : TimelineTableCellType {
 
-	static var prototypeCellIdentifier: String {
-		
-		return "TimelineCell"
-	}
-
 	static func makeCellWithItem(item: TimelineTableItem, tableView: NSTableView, owner: AnyObject?) -> NSTableCellView {
 		
 		let view = applyingExpression(to: makeCellForTableView(tableView: tableView, owner: owner) as! TimelineTableCellView) {

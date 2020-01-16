@@ -29,7 +29,6 @@
 		B15EE21023CE7612005B268A /* LanguagePopupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE20D23CE7612005B268A /* LanguagePopupDataSource.swift */; };
 		B15EE21123CE7612005B268A /* WebCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE20E23CE7612005B268A /* WebCaptureController.swift */; };
 		B15EE21223CE7612005B268A /* CaptureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE20F23CE7612005B268A /* CaptureInfo.swift */; };
-		B15EE21823CE761C005B268A /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21423CE761C005B268A /* ClientInfo.swift */; };
 		B15EE21923CE761C005B268A /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21523CE761C005B268A /* Notifications.swift */; };
 		B15EE21A23CE761C005B268A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21623CE761C005B268A /* Application.swift */; };
 		B15EE21B23CE761C005B268A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21723CE761C005B268A /* Colors.swift */; };
@@ -137,6 +136,12 @@
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
 		B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */; };
 		B1DDCB3E23D0C98F00418A84 /* Swim in Frameworks */ = {isa = PBXBuildFile; productRef = B1DDCB3D23D0C98F00418A84 /* Swim */; };
+		B1DDCB4623D0D37700418A84 /* TwitterAccountMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4023D0D37700418A84 /* TwitterAccountMenuItem.swift */; };
+		B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */; };
+		B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4223D0D37700418A84 /* StatusImageView.swift */; };
+		B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4323D0D37700418A84 /* CodeTextView.swift */; };
+		B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */; };
+		B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -206,7 +211,6 @@
 		B15EE20D23CE7612005B268A /* LanguagePopupDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagePopupDataSource.swift; sourceTree = "<group>"; };
 		B15EE20E23CE7612005B268A /* WebCaptureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebCaptureController.swift; sourceTree = "<group>"; };
 		B15EE20F23CE7612005B268A /* CaptureInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureInfo.swift; sourceTree = "<group>"; };
-		B15EE21423CE761C005B268A /* ClientInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
 		B15EE21523CE761C005B268A /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B15EE21623CE761C005B268A /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		B15EE21723CE761C005B268A /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -328,6 +332,12 @@
 		B1D13C8223CA14DD0016902A /* CodePieceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodePieceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePiece_Rev2Tests.swift; sourceTree = "<group>"; };
 		B1D13C8823CA14DD0016902A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1DDCB4023D0D37700418A84 /* TwitterAccountMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccountMenuItem.swift; sourceTree = "<group>"; };
+		B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
+		B1DDCB4223D0D37700418A84 /* StatusImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusImageView.swift; sourceTree = "<group>"; };
+		B1DDCB4323D0D37700418A84 /* CodeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
+		B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkLabel.swift; sourceTree = "<group>"; };
+		B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,7 +434,6 @@
 		B15EE21323CE761C005B268A /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				B15EE21423CE761C005B268A /* ClientInfo.swift */,
 				B15EE21523CE761C005B268A /* Notifications.swift */,
 				B15EE21623CE761C005B268A /* Application.swift */,
 				B15EE21723CE761C005B268A /* Colors.swift */,
@@ -743,6 +752,7 @@
 		B1D13C7223CA14DB0016902A /* CodePiece */ = {
 			isa = PBXGroup;
 			children = (
+				B1DDCB3F23D0D37700418A84 /* Controls */,
 				B15EE1F723CE7482005B268A /* NeedsRefactoring */,
 				B15EE1DC23CE706C005B268A /* Alerts */,
 				B15EE20C23CE7612005B268A /* Codes */,
@@ -785,6 +795,19 @@
 				B1A1060423CA25B100F9C4FD /* APIKeysTests.swift */,
 			);
 			path = CodePieceTests;
+			sourceTree = "<group>";
+		};
+		B1DDCB3F23D0D37700418A84 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				B1DDCB4023D0D37700418A84 /* TwitterAccountMenuItem.swift */,
+				B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */,
+				B1DDCB4223D0D37700418A84 /* StatusImageView.swift */,
+				B1DDCB4323D0D37700418A84 /* CodeTextView.swift */,
+				B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */,
+				B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1057,6 +1080,7 @@
 				B15EE29323CE7667005B268A /* ViewController+SelectionAndRepliable.swift in Sources */,
 				B15EE1F623CE747D005B268A /* Extension.swift in Sources */,
 				B15EE2A023CE7667005B268A /* TimelineTableDataSource.swift in Sources */,
+				B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */,
 				B15EE2AA23CE7667005B268A /* WelcomeBoardWindowController.swift in Sources */,
 				B15EE2A523CE7667005B268A /* TimelineViewController+MainWindow.swift in Sources */,
 				B15EE20B23CE7593005B268A /* GitHubOpenFeatures.swift in Sources */,
@@ -1064,16 +1088,20 @@
 				B15EE20723CE7593005B268A /* SystemPalette.swift in Sources */,
 				B15EE22623CE7648005B268A /* ReachabilityController.swift in Sources */,
 				B15EE29E23CE7667005B268A /* TimelineViewController+Notifications.swift in Sources */,
+				B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */,
+				B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */,
 				B15EE25123CE7658005B268A /* DataStore.swift in Sources */,
+				B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */,
 				B15EE26823CE7658005B268A /* PreferencesWindowController.swift in Sources */,
 				B15EE21223CE7612005B268A /* CaptureInfo.swift in Sources */,
 				B15EE2A423CE7667005B268A /* TimelineViewController+Display.swift in Sources */,
-				B15EE21823CE761C005B268A /* ClientInfo.swift in Sources */,
 				B15EE25723CE7658005B268A /* Storyboard.swift in Sources */,
 				B15EE26123CE7658005B268A /* SNSController.swift in Sources */,
 				B15EE20923CE7593005B268A /* Environments.swift in Sources */,
 				B15EE1FB23CE752D005B268A /* AppExtension.swift in Sources */,
 				B15EE20123CE757C005B268A /* DebugSupport.swift in Sources */,
+				B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */,
+				B1DDCB4623D0D37700418A84 /* TwitterAccountMenuItem.swift in Sources */,
 				B15EE25623CE7658005B268A /* AccountSeting.swift in Sources */,
 				B15EE28F23CE7667005B268A /* LatestTweetManageable.swift in Sources */,
 				B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */,

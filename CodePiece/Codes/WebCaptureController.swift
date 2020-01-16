@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import Ocean
 
-private var thread = Thread(name: "jp.ez-style.CodePiece.CodeCaptureController")
+private var thread = DispatchQueue(label: "jp.ez-style.CodePiece.CodeCaptureController")
 
 final class WebCaptureController {
 	
@@ -30,7 +30,7 @@ final class WebCaptureController {
 	
 	private func post(_ request: Request) {
 		
-		thread.invokeAsync {
+		thread.async {
 		
 			self.requests.append(request)
 			request.post()
@@ -94,7 +94,7 @@ extension WebCaptureController.Request : WebFrameLoadDelegate {
 		
 		self.completionHandler(image)
 		
-		thread.invokeAsync {
+		thread.async {
 
 			if let index = self.owner.requests.firstIndex(of: self) {
 			
@@ -107,7 +107,7 @@ extension WebCaptureController.Request : WebFrameLoadDelegate {
 		
 		// frame の bounds が更新される前に呼び出される場合があるようなので、
 		// 応急対応として待ち時間を挿入します。適切な方法に変える必要があります。
-		sleepForSecond(0.5)
+		Thread.sleep(forTimeInterval: 0.5)
 		
 		DispatchQueue.main.async { [unowned self] in
 
@@ -119,7 +119,7 @@ extension WebCaptureController.Request : WebFrameLoadDelegate {
 			if let contentBound = content?.boundingBox() {
 				
 				let image = frame.frameView.documentView!.capture(contentBound)
-				
+
 				self.fulfillRequest(image)
 			}
 			else {

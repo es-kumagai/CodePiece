@@ -6,6 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
+import AppKit
 import ESGists
 import ESTwitter
 
@@ -58,7 +59,7 @@ final class SNSController : PostController {
 	
 	func post(container:PostDataContainer, completed: (PostDataContainer) -> Void) {
 
-		self._post(container, capturedGistImage: nil, completed: completed)
+		self._post(container: container, capturedGistImage: nil, completed: completed)
 	}
 	
 	func _post(container:PostDataContainer, capturedGistImage: NSImage?, completed: (PostDataContainer) -> Void) {
@@ -66,13 +67,13 @@ final class SNSController : PostController {
 		let callNextStageRecursively = { [unowned self] (image: NSImage?) in
 			
 			container.proceedToNextStage()
-			self._post(container, capturedGistImage: image, completed: completed)
+			self._post(container: container, capturedGistImage: image, completed: completed)
 		}
 		
 		let exitWithFailure = { (error: SNSController.PostError) in
 			
 			DebugTime.print("📮 Posted with failure (stage:\(container.stage), error:\(error)) ... #2.0.2")
-			container.setError(error)
+			container.setError(error: error)
 			completed(container)
 		}
 		
@@ -88,7 +89,7 @@ final class SNSController : PostController {
 				
 				DebugTime.print("📮 Try posting by Gists ... #2.2")
 				
-				try self.gists.post(container) { result in
+				try self.gists.post(container: container) { result in
 					
 					switch result {
 						
@@ -108,7 +109,7 @@ final class SNSController : PostController {
 				let captureInfo = LinedCaptureInfo()
 				let size = NSMakeSize(560.0, 560.0)
 				
-				NSApp.captureController.capture(gist.urls.htmlUrl.rawValue, clientSize: size, captureInfo: captureInfo) { image in
+				NSApp.captureController.capture(url: gist.urls.htmlUrl.rawValue, clientSize: size, captureInfo: captureInfo) { image in
 					
 					DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
 					callNextStageRecursively(image)
@@ -120,14 +121,14 @@ final class SNSController : PostController {
 				
 			case .PostToTwitterMedia:
 
-				try self.twitter.postMedia(container, image: capturedGistImage!) { result in
+				try self.twitter.postMedia(container: container, image: capturedGistImage!) { result in
 					
 					switch result {
 						
-					case .success:
+					case .Success:
 						callNextStageRecursively(capturedGistImage)
 						
-					case .failure:
+					case .Failure:
 						exitWithFailure(container.error!)
 					}
 				}
@@ -136,7 +137,7 @@ final class SNSController : PostController {
 				
 				DebugTime.print("📮 Try posting by Twitter ... #2.1")
 				
-				try self.twitter.post(container) { result in
+				try self.twitter.post(container: container) { result in
 					
 					DebugTime.print("📮 Posted by Twitter (\(result)) ... #2.1.1")
 					
