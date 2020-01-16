@@ -16,7 +16,7 @@ final class MenuController : NSObject {
 		return NSApp
 	}
 	
-	var mainViewController:ViewController? {
+	var mainViewController:MainViewController? {
 		
 		return application.baseViewController?.mainViewController
 	}
@@ -137,7 +137,7 @@ final class MenuController : NSObject {
 		return self.mainViewController?.canOpenBrowserWithCurrentTwitterStatus ?? false
 	}
 	
-	@IBAction func openBrowserWithCurrentTwitterStatus(sender:AnyObject) {
+	@IBAction func openBrowserWithCurrentTwitterStatus(sender: AnyObject) {
 		
 		self.mainViewController?.openBrowserWithCurrentTwitterStatus()
 	}

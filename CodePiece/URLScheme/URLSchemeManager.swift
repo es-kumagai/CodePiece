@@ -10,27 +10,26 @@ import Cocoa
 
 final class URLSchemeManager {
 
-	let eventManager = NSAppleEventManager.sharedAppleEventManager()
+	let eventManager = NSAppleEventManager.shared()
 	let eventClass = AEEventClass(kInternetEventClass)
 	let eventID = AEEventID(kAEGetURL)
 	
 	let schemes:[URLScheme] = [ OAuthScheme() ]
 	
 	init() {
-		
-		self.eventManager.setEventHandler(self, andSelector: #selector(URLSchemeManager.handleURLEvent(_:withReply:)), forEventClass: self.eventClass, andEventID: self.eventID)
+		self.eventManager.setEventHandler(self, andSelector: #selector(URLSchemeManager.handleURLEvent(event:withReply:)), forEventClass: self.eventClass, andEventID: eventID)
 	}
 	
 	deinit {
 		
-		self.eventManager.removeEventHandlerForEventClass(self.eventClass, andEventID: self.eventID)
+		eventManager.removeEventHandler(forEventClass: eventClass, andEventID: eventID)
 	}
 	
 	@objc func handleURLEvent(event: NSAppleEventDescriptor, withReply reply: NSAppleEventDescriptor) {
 		
 		if let url = event.url {
 			
-			self.schemes.forEach { $0.action(url) }
+			schemes.forEach { $0.action(url: url) }
 		}
 		else {
 

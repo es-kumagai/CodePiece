@@ -6,6 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
+import Foundation
 import ESGists
 
 final class Settings {
@@ -131,7 +132,7 @@ final class Settings {
 			switch account {
 				
 			case let .account(osAccount):
-				_store.twitter.identifier = osAccount.identifier ?? ""
+				_store.twitter.identifier = (osAccount.identifier ?? "") as String
 				_store.twitter.token = ""
 				_store.twitter.tokenSecret = ""
 				_store.twitter.tokenScreenName = ""
@@ -174,7 +175,7 @@ final class Settings {
 		_store.github.authInfo.username = account.username
 		_store.github.authInfo.token = account.authorization?.token!
 		
-		handleError(try _store.github.save())
+		handleError(expression: try _store.github.save())
 	}
 	
 	func replaceGitHubAccount(username:String, id:ID, authorization:GitHubAuthorization, saveFinally save:Bool) {

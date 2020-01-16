@@ -12,9 +12,9 @@ struct StoryboardItem<Controller> {
 
 	var name:String
 	var initialControllerType:Controller.Type
-	var bundle:NSBundle?
+	var bundle: Bundle?
 	
-	init(name:String, controllerType type: Controller.Type, bundle:NSBundle? = nil) {
+	init(name:String, controllerType type: Controller.Type, bundle: Bundle? = nil) {
 		
 		self.name = name
 		self.initialControllerType = type
@@ -43,7 +43,7 @@ struct StoryboardItem<Controller> {
 	
 	func getControllerByIdentifier(identifier: String) throws -> Controller {
 
-		let instance = self.storyboard.instantiateControllerWithIdentifier(identifier)
+		let instance = self.storyboard.instantiateController(withIdentifier: identifier)
 		
 		guard let controller = instance as? Controller else {
 			
@@ -54,7 +54,7 @@ struct StoryboardItem<Controller> {
 	}
 }
 
-enum StoryboardError : ErrorType {
+enum StoryboardError : Error {
 	
 	case FailedToGetController
 	case UnexpectedControllerType

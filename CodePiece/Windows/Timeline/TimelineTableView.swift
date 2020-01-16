@@ -20,7 +20,7 @@ class TimelineTableView: NSTableView {
 	
 	var selectedAnyRows: Bool {
 		
-		return selectedRowIndexes.isExists
+		return selectedRowIndexes.count > 0
 	}
 	
 	var selectedSingleRow: Bool {
@@ -34,8 +34,8 @@ class TimelineTableView: NSTableView {
 		
 		return rows.reduce([CellInfo]()) { results, row in
 			
-			let cell = viewAtColumn(0, row: row, makeIfNecessary: false) as? TimelineTableCellView
-			let selection = selectedRowIndexes.containsIndex(row)
+			let cell = view(atColumn: 0, row: row, makeIfNecessary: false) as? TimelineTableCellView
+			let selection = selectedRowIndexes.contains(row)
 			
 			return results + [CellInfo(row: row, cell: cell, selection: selection)]
 		}
@@ -58,12 +58,12 @@ class TimelineTableView: NSTableView {
 	
 	func timelineTableDataSource() -> TimelineTableDataSource {
 		
-		return super.dataSource() as! TimelineTableDataSource
+		return super.dataSource as! TimelineTableDataSource
 	}
 	
-	override func resizeWithOldSuperviewSize(oldSize: NSSize) {
+	override func resizeWithOldSuperviewSize(_ oldSize: NSSize) {
 		
-		super.resizeWithOldSuperviewSize(oldSize)
+		super.resize(withOldSuperviewSize: oldSize)
 		
 		self.timelineTableDataSource().setNeedsEstimateHeight()
 		self.reloadData()
@@ -74,7 +74,7 @@ extension TimelineTableView.CellInfo {
 	
 	var isCellExists: Bool {
 		
-		return cell.isExists
+		return cell != nil
 	}
 	
 	func applySelection() {

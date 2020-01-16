@@ -10,29 +10,29 @@ import Foundation
 
 struct Environment {
 	
-	var debugOnXcodeServer:Bool
-    var useKeychain:Bool
-	var showWelcomeBoardOnStartup:Bool
+	var debugOnXcodeServer: Bool
+    var useKeychain: Bool
+	var showWelcomeBoardOnStartup: Bool
 	
     init() {
 		
-		let environments = NSProcessInfo.processInfo().environment
+		let environments = ProcessInfo.processInfo.environment
 		
 		#if DEBUG
-			self.debugOnXcodeServer = environments.keys.contains("XCS")
+			debugOnXcodeServer = environments.keys.contains("XCS")
 		#else
-			self.debugOnXcodeServer = false
+			debugOnXcodeServer = false
 		#endif
 		
-		if self.debugOnXcodeServer {
+		if debugOnXcodeServer {
 
-			self.useKeychain = false
-			self.showWelcomeBoardOnStartup = false
+			useKeychain = false
+			showWelcomeBoardOnStartup = false
 		}
 		else {
 
-			self.useKeychain = true
-			self.showWelcomeBoardOnStartup = true
+			useKeychain = true
+			showWelcomeBoardOnStartup = true
 		}
     }
 }

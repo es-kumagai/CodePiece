@@ -6,13 +6,14 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
+import Cocoa
 import KeychainAccess
 import ESGists
 import Ocean
 import Swim
 
-@available(*, unavailable, renamed="DataStore.Error")
-typealias DataStoreError = DataStore.Error
+@available(*, unavailable, renamed: "DataStore.Error")
+typealias DataStoreError = DataStore.error
 
 struct DataStore {
 	
@@ -40,25 +41,25 @@ struct DataStore {
 
 extension DataStore {
 	
-	enum Error : ErrorType {
+	enum DataStoreError : Error {
 		
-		case FailedToSave(String)
+		case failedToSave(String)
 	}
 }
 
-extension DataStore.Error : CustomStringConvertible {
+extension DataStore.DataStoreError : CustomStringConvertible {
 	
 	var description:String {
 		
 		switch self {
 			
-		case .FailedToSave(let reason):
+		case .failedToSave(let reason):
 			return "Failed to save to data store. \(reason)"
 		}
 	}
 }
 
-private extension NSUserDefaults {
+private extension UserDefaults {
 	
 	typealias TwitterStoreKind = DataStore.TwitterStore.Kind
 	
@@ -92,12 +93,12 @@ private extension NSUserDefaults {
 		
 		get {
 			
-			return stringForKey(NSUserDefaults.twitterStoreAccountIdentifierKey) ?? ""
+			return string(forKey: UserDefaults.twitterStoreAccountIdentifierKey) ?? ""
 		}
 		
 		set (identifier) {
 			
-			setObject(identifier, forKey: NSUserDefaults.twitterStoreAccountIdentifierKey)
+			set(identifier, forKey: UserDefaults.twitterStoreAccountIdentifierKey)
 		}
 	}
 	
@@ -105,12 +106,12 @@ private extension NSUserDefaults {
 		
 		get {
 			
-			return stringForKey(NSUserDefaults.twitterStoreAccountTokenKey) ?? ""
+			return string(forKey: UserDefaults.twitterStoreAccountTokenKey) ?? ""
 		}
 		
 		set (token) {
 			
-			setObject(token, forKey: NSUserDefaults.twitterStoreAccountTokenKey)
+			set(token, forKey: UserDefaults.twitterStoreAccountTokenKey)
 		}
 	}
 	
@@ -118,12 +119,12 @@ private extension NSUserDefaults {
 		
 		get {
 			
-			return stringForKey(NSUserDefaults.twitterStoreAccountTokenSecretKey) ?? ""
+			return string(forKey: UserDefaults.twitterStoreAccountTokenSecretKey) ?? ""
 		}
 		
 		set (secret) {
 			
-			setObject(secret, forKey: NSUserDefaults.twitterStoreAccountTokenSecretKey)
+			set(secret, forKey: UserDefaults.twitterStoreAccountTokenSecretKey)
 		}
 	}
 	
@@ -131,12 +132,12 @@ private extension NSUserDefaults {
 		
 		get {
 			
-			return stringForKey(NSUserDefaults.twitterStoreAccountTokenScreenNameKey) ?? ""
+			return string(forKey: UserDefaults.twitterStoreAccountTokenScreenNameKey) ?? ""
 		}
 		
 		set (screenName) {
 			
-			setObject(screenName, forKey: NSUserDefaults.twitterStoreAccountTokenScreenNameKey)
+			set(screenName, forKey: UserDefaults.twitterStoreAccountTokenScreenNameKey)
 		}
 	}
 	
@@ -144,7 +145,7 @@ private extension NSUserDefaults {
 		
 		get {
 			
-			if let kindValue = stringForKey(NSUserDefaults.twitterStoreAccountKindKey) {
+			if let kindValue = string(forKey: UserDefaults.twitterStoreAccountKindKey) {
 				
 				return TwitterStoreKind(rawValue: kindValue) ?? .Unknown
 			}
@@ -152,7 +153,7 @@ private extension NSUserDefaults {
 				
 				// If `identifier` is not empty when `kind` is not stored, set `kind` to `OSAccount`.
 				// This process is for compatibility when authentication method was the only using OS Account.
-				guard twitterStoreAccountIdentifier.isExists else {
+				guard !twitterStoreAccountIdentifier.isEmpty else {
 					
 					return .Unknown
 				}
@@ -163,7 +164,7 @@ private extension NSUserDefaults {
 		
 		set (kind) {
 			
-			setObject(kind.rawValue, forKey: NSUserDefaults.twitterStoreAccountKindKey)
+			set(kind.rawValue, forKey: UserDefaults.twitterStoreAccountKindKey)
 		}
 	}
 }
@@ -211,8 +212,8 @@ extension DataStore {
 		private static var keychain:Keychain {
 			
 			// synchronizable すると署名なしのアーカイブ時に読み書きできなくなることがあるため、現在は無効化しています。
-			return Keychain(service: DataStore.service, accessGroup:DataStore.group)
-				.accessibility(Accessibility.WhenUnlocked)
+			return Keychain(service: DataStore.service, accessGroup: DataStore.group)
+				.accessibility(Accessibility.whenUnlocked)
 //				.synchronizable(true)
 		}
 		
@@ -238,7 +239,7 @@ extension DataStore {
 		
 			let keychain = GitHubStore.keychain
 
-			guard let data = handleError(try keychain.getData(GitHubStore.AuthorizationKey), to: &OutputStream) where data != nil else {
+			guard let data = handleError(expression: try keychain.getData(GitHubStore.AuthorizationKey), to: &OutputStream), data != nil else {
 		
 				self.authInfo = AuthInfo()
 				return
@@ -246,7 +247,7 @@ extension DataStore {
 			
 			NSLog("Restoring authentication information from Keychain.")
 			
-			guard let authInfo = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? AuthInfo else {
+			guard let authInfo = NSKeyedUnarchiver.unarchiveObject(with: data!) as? AuthInfo else {
 				
 				self.authInfo = AuthInfo()
 				return
@@ -281,18 +282,18 @@ extension DataStore {
 			}
 			catch let error as NSError {
 				
-				throw Error.FailedToSave(error.localizedDescription)
+				throw DataStoreError.failedToSave(error.localizedDescription)
 			}
 		}
 		
-		private func archiveAuthorizationData() -> NSData? {
+		private func archiveAuthorizationData() -> Data? {
 
 			guard !self.authInfo.noData else {
 
 				return nil
 			}
 			
-			return NSKeyedArchiver.archivedDataWithRootObject(self.authInfo)
+			return NSKeyedArchiver.archivedData(withRootObject: self.authInfo)
 		}
 	}
 }

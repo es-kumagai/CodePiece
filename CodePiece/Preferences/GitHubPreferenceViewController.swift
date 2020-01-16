@@ -9,14 +9,12 @@
 import Cocoa
 import Ocean
 import ESProgressHUD
-import ESNotification
-import p2_OAuth2
+import OAuth2
 import ESGists
-import ESNotification
 
 class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 
-	var notificationHandlers = NotificationHandlers()
+	var notificationHandlers = Notification.Handlers()
 	
 	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
 	private var removeAuthenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
@@ -30,22 +28,22 @@ class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 	
 	@IBAction func doAuthentication(sender:NSButton) {
 	
-		self.authenticatingHUD.show()
+		authenticatingHUD.show()
 		
 		Authorization.authorizationWithGitHub { result in
 			
-			self.authenticatingHUD.hide()
+			authenticatingHUD.hide()
 			
 			switch result {
 				
 			case .Created:
-				self.dismissController(self)
+				dismiss(self)
 				
 			case .Failed(let message):
-				self.showErrorAlert("Failed to authentication", message: message.description)
+				showErrorAlert(withTitle: "Failed to authentication", message: message.description)
 				
 			case .PinRequired:
-				self.showErrorAlert("Failed to authentication", message: "Unexpected Process (Pin Required).")
+				showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")
 			}
 		}
 	}
@@ -62,16 +60,16 @@ class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 		
 		Authorization.resetAuthorizationOfGitHub(id) { result in
 			
-			self.removeAuthenticatingHUD.hide()
+			removeAuthenticatingHUD.hide()
 			
 			switch result {
 				
-			case .Success:
+			case .success:
 				NSLog("Reset successfully. Please perform authentication before you post to Gist again.")
 				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
 
-			case .Failure(let error):
-				self.showWarningAlert("Failed to reset authorization", message: "Could't reset the current authentication information. Reset authentication information which saved in this app force. (\(error))")
+			case .failure(let error):
+				showWarningAlert(withTitle: "Failed to reset authorization", message: "Could't reset the current authentication information. Reset authentication information which saved in this app force. (\(error))")
 			}
 		}
 	}
@@ -83,25 +81,25 @@ class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 	
 	func applyAuthorizedStatus() {
 		
-		self.authorizedAccountName.stringValue = NSApp.settings.account.username ?? ""
+		authorizedAccountName.stringValue = NSApp.settings.account.username ?? ""
 		
-		switch self.authorizationState {
+		switch authorizationState {
 			
 		case .Authorized:
 
-			self.authorizedStatusTextField.textColor = SystemColor.TextForAuthenticated.color
-			self.authorizedStatusTextField.stringValue = "Authenticated"
+			authorizedStatusTextField.textColor = SystemColor.TextForAuthenticated.color
+			authorizedStatusTextField.stringValue = "Authenticated"
 			
-			self.authorizationButton.enabled = false
-			self.resetButton.enabled = true
+			authorizationButton.isEnabled = false
+			resetButton.isEnabled = true
 					
 		case .NotAuthorized:
 			
-			self.authorizedStatusTextField.textColor = SystemColor.TextForNotAuthenticated.color
-			self.authorizedStatusTextField.stringValue = "Not authenticated yet"
+			authorizedStatusTextField.textColor = SystemColor.TextForNotAuthenticated.color
+			authorizedStatusTextField.stringValue = "Not authenticated yet"
 			
-			self.authorizationButton.enabled = true
-			self.resetButton.enabled = false
+			authorizationButton.isEnabled = true
+			resetButton.isEnabled = false
 		}
 	}
 	
@@ -117,7 +115,7 @@ class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 	
 		super.viewWillAppear()
 		
-		self.observeNotification(Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			NSLog("Detect GitHub authorization state changed.")
 			
 			self.applyAuthorizedStatus()

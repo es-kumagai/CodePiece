@@ -18,42 +18,42 @@ extension NSViewController : AlertDisplayable {
 
 extension AlertDisplayable {
 
-	func showInformationAlert(title:String, message:String) {
+	func showInformationAlert(withTitle title: String, message: String) {
 		
-		self.dynamicType.showInformationAlert(title, message: message)
+		Self.showInformationAlert(withTitle: title, message: message)
 	}
 	
-	func showWarningAlert(title:String, message:String, debugDescription: String? = nil) {
+	func showWarningAlert(withTitle title: String, message: String, debugDescription: String? = nil) {
 		
-		self.dynamicType.showWarningAlert(title, message: message, debugDescription: debugDescription)
+		Self.showWarningAlert(withTitle: title, message: message, debugDescription: debugDescription)
 	}
 	
-	func showErrorAlert(title:String, message:String, debugDescription: String? = nil) {
+	func showErrorAlert(withTitle title: String, message: String, debugDescription: String? = nil) {
 		
-		self.dynamicType.showErrorAlert(title, message: message, debugDescription: debugDescription)
+		Self.showErrorAlert(withTitle: title, message: message, debugDescription: debugDescription)
 	}
 	
-	private static func showAlert(alert:NSAlert) {
+	private static func showAlert(_ alert: NSAlert) {
 	
-		dispatch_async(dispatch_get_main_queue()) {
+		DispatchQueue.main.async {
 			
 			alert.runModal()
 		}
 	}
 	
-	static func showInformationAlert(title:String, message:String) {
+	static func showInformationAlert(withTitle title: String, message: String) {
 		
 		let alert = NSAlert()
 		
 		alert.messageText = title
 		alert.informativeText = message
-		alert.addButtonWithTitle("OK")
-		alert.alertStyle = .InformationalAlertStyle
+		alert.addButton(withTitle: "OK")
+		alert.alertStyle = .informational
 	
-		self.showAlert(alert)
+		showAlert(alert)
 	}
 	
-	static func showWarningAlert(title:String, message:String, debugDescription: String? = nil) {
+	static func showWarningAlert(withTitle title: String, message: String, debugDescription: String? = nil) {
 		
 		NSLog("Warning: \(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
 		
@@ -61,13 +61,13 @@ extension AlertDisplayable {
 		
 		alert.messageText = title
 		alert.informativeText = message
-		alert.addButtonWithTitle("OK")
-		alert.alertStyle = .WarningAlertStyle
+		alert.addButton(withTitle: "OK")
+		alert.alertStyle = .warning
 		
 		self.showAlert(alert)
 	}
 	
-	static func showErrorAlert(title:String, message:String, debugDescription: String? = nil) {
+	static func showErrorAlert(withTitle title: String, message: String, debugDescription: String? = nil) {
 
 		NSLog("Error: \(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
 		
@@ -75,8 +75,8 @@ extension AlertDisplayable {
 		
 		alert.messageText = title
 		alert.informativeText = message
-		alert.addButtonWithTitle("OK")
-		alert.alertStyle = .CriticalAlertStyle
+		alert.addButton(withTitle: "OK")
+		alert.alertStyle = .critical
 
 		self.showAlert(alert)
 	}

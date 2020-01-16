@@ -86,7 +86,7 @@ public final class AboutViewController: NSViewController {
 	
 	public var acknowledgements:Acknowledgements? {
 		
-		let info = { (name:String) -> (name:String, bundle:NSBundle?) in
+		let info = { (name:String) -> (name:String, bundle:Bundle?) in
 			
 			(name: name, bundle: self.bundle)
 		}
@@ -94,11 +94,11 @@ public final class AboutViewController: NSViewController {
 		return self.acknowledgementsName.map(info).flatMap(Acknowledgements.init)
 	}
 	
-	public var bundle:NSBundle?
+	public var bundle:Bundle?
 	
-	private var targetBundle:NSBundle {
+	private var targetBundle:Bundle {
 		
-		return self.bundle ?? NSBundle.mainBundle()
+		return self.bundle ?? Bundle.main
 	}
 	
     override public func viewDidLoad() {

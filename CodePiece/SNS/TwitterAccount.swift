@@ -8,7 +8,7 @@
 
 import Accounts
 
-@available(*, unavailable, renamed="TwitterController.Account")
+@available(*, unavailable, renamed: "TwitterController.Account")
 typealias TwitterAccount = TwitterController.Account
 
 extension TwitterController {

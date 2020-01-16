@@ -18,42 +18,41 @@ extension DataStore {
 		static let SelectedLanguageKey = "codepiece:selected-language"
 		static let HashtagKey = "codepiece:hashtag"
 		
-		private var userDefaults:NSUserDefaults
+		private var userDefaults = UserDefaults.standard
 		
 		init() {
 			
-			self.userDefaults = NSUserDefaults.standardUserDefaults()
 		}
 
 		var selectedLanguage:Language? {
 			
 			get {
 				
-				return self.userDefaults.stringForKey(AppState.SelectedLanguageKey).flatMap { Language(rawValue: $0) }
+				return userDefaults.string(forKey: AppState.SelectedLanguageKey).flatMap { Language(rawValue: $0) }
 			}
 			
 			set {
 				
-				self.userDefaults.setObject(newValue?.description, forKey: AppState.SelectedLanguageKey)
+				userDefaults.set(newValue?.description, forKey: AppState.SelectedLanguageKey)
 			}
 		}
 		
-		var hashtags:ESTwitter.HashtagSet? {
+		var hashtags: ESTwitter.HashtagSet? {
 			
 			get {
 				
-				return self.userDefaults.stringForKey(AppState.HashtagKey).map { ESTwitter.HashtagSet(hashtagsDisplayText: $0) }
+				return userDefaults.stringForKey(AppState.HashtagKey).map { ESTwitter.HashtagSet(hashtagsDisplayText: $0) }
 			}
 			
 			set {
 				
-				self.userDefaults.setObject(newValue?.toTwitterDisplayText(), forKey: AppState.HashtagKey)
+				userDefaults.setObject(newValue?.toTwitterDisplayText(), forKey: AppState.HashtagKey)
 			}
 		}
 		
 		func save() {
 			
-			self.userDefaults.synchronize()
+			userDefaults.synchronize()
 		}
 	}
 }

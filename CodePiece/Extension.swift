@@ -9,12 +9,11 @@
 // 将来的に別のモジュールへ移動できそうな機能を実装しています。
 
 import APIKit
-import Himotoki
 import AppKit
 import Ocean
 import Swim
-import ESCoreGraphicsExtension
-import ESThread
+import Sky
+import Dispatch
 
 public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
@@ -79,19 +78,19 @@ public var NullStream = NullOutputStream()
 
 extension NSIndexSet {
 
-	public convenience init<S:SequenceType where S.Generator.Element == Int>(sequence s:S) {
+	public convenience init<S: Sequence>(sequence s: S) where S.Element == Int {
 		
-		let indexes = s.reduce(NSMutableIndexSet()) { $0.addIndex($1); return $0 }
+        let indexes = s.reduce(NSMutableIndexSet()) { $0.add($1); return $0 }
 		
-		self.init(indexSet: indexes.copy() as! NSIndexSet)
+		self.init(indexSet: (indexes.copy() as! NSIndexSet) as IndexSet)
 	}
 }
 
-extension NSIndexSet : ExistenceDeterminationable {
+extension NSIndexSet {
 	
 	public var isEmpty: Bool {
 		
-		return count.isZero
+		return count == 0
 	}
 }
 
@@ -115,27 +114,27 @@ extension NSTableView {
 	}
 }
 
-extension NSDate {
+extension Date {
 
 	var displayString: String {
 		
-		let calendar = NSCalendar.currentCalendar()
-		let formatter = NSDateFormatter()
+        let calendar = NSCalendar.current
+        let formatter = DateFormatter()
 		
 		formatter.calendar = calendar
-		formatter.dateStyle = NSDateFormatterStyle.ShortStyle
-		formatter.timeStyle = NSDateFormatterStyle.MediumStyle
+		formatter.dateStyle = .short
+		formatter.timeStyle = .medium
 		
-		return formatter.stringFromDate(self)
+        return formatter.string(from: self)
 	}
 }
 
-public func bundle<First,Second>(first:First) -> (second:Second) -> (First, Second) {
+public func bundle<First,Second>(first: First) -> (Second) -> (First, Second) {
 
 	return { second in (first, second) }
 }
 
-public func bundle<First,Second>(first:First, second:Second) -> (First, Second) {
+public func bundle<First,Second>(first: First, second: Second) -> (First, Second) {
 	
 	return (first, second)
 }
@@ -145,7 +144,7 @@ func mask(mask:Int, reset values:Int...) -> Int {
 	return values.reduce(mask) { $0 & ~$1 }
 }
 
-func mask(inout mask:Int, reset values:Int...) {
+func mask( mask: inout Int, reset values: Int...) {
 	
 	values.forEach { mask = mask & ~$0 }
 }
@@ -225,10 +224,10 @@ public class Semaphore : RawRepresentable {
 	
 	public struct Time : RawRepresentable {
 	
-		public var rawValue:dispatch_time_t
+		public var rawValue: dispatch_time_t
 		
 		public init() {
-			
+            
 			self.rawValue = DISPATCH_TIME_NOW
 		}
 		
@@ -352,12 +351,12 @@ public class Semaphore : RawRepresentable {
 		dispatch_semaphore_signal(self.semaphore)
 	}
 	
-	public func execute(timeout:Time = Time(), @noescape body:() throws -> Void) rethrows -> WaitResult {
+	public func execute(timeout:Time = Time(), body:() throws -> Void) rethrows -> WaitResult {
 		
 		return try self.execute(timeout.rawValue, body: body)
 	}
 
-	public func execute(timeout:dispatch_time_t = DISPATCH_TIME_FOREVER, @noescape body:() throws ->Void) rethrows -> WaitResult {
+	public func execute(timeout:dispatch_time_t = DISPATCH_TIME_FOREVER, body:() throws ->Void) rethrows -> WaitResult {
 
 		switch self.waitWithTimeout(timeout) {
 			
@@ -524,7 +523,7 @@ internal enum MessageQueueHandler<Message : MessageType> {
 		}
 	}
 	
-	func handlingError(error: ErrorType, byQueue queue:Queue) throws {
+	func handlingError(error: Error, byQueue queue:Queue) throws {
 		
 		switch self {
 
@@ -566,7 +565,7 @@ extension MessageType {
 
 public protocol PreActionMessageType : MessageType {
 	
-	func messagePreAction(queue:Queue<Self>) -> ContinuousState
+	func messagePreAction(queue:Queue<Self>) -> Continuous
 }
 
 public protocol MessageTypeIgnoreInQuickSuccession : PreActionMessageType {
@@ -584,20 +583,20 @@ extension MessageTypeIgnoreInQuickSuccession {
 		return true
 	}
 	
-	public func messagePreAction(queue:Queue<Self>) -> ContinuousState {
+	public func messagePreAction(queue:Queue<Self>) -> Continuous {
 		
 		guard self.mayBlockInQuickSuccession else {
 		
-			return .Continue
+			return .continue
 		}
 		
-		if let lastMessage = queue.back where self.blockInQuickSuccession(lastMessage) {
+        if let lastMessage = queue.back, self.blockInQuickSuccession(lastMessage: lastMessage) {
 			
-			return .Abort
+			return .abort
 		}
 		else {
 			
-			return .Continue
+			return .continue
 		}
 	}
 }
@@ -615,7 +614,7 @@ private let MessageQueueDefaultProcessingInterval:Double = 0.03
 public class MessageQueue<M:MessageType> : MessageQueueType {
 	
 	public typealias Message = M
-	public typealias MessageErrorHandler = (ErrorType) throws -> Void
+	public typealias MessageErrorHandler = (Error) throws -> Void
 	public typealias MessageHandler = (Message) throws -> Void
 	public typealias MessageHandlerNoThrows = (Message) -> Void
 	
@@ -624,18 +623,18 @@ public class MessageQueue<M:MessageType> : MessageQueueType {
 	private var handler:MessageQueueHandler<Message>
 	private var messageQueue:Queue<Message>
 	
-	private var messageProcessingQueue:dispatch_queue_t
-	private var messageHandlerExecutionQueue:dispatch_queue_t
+	private var messageProcessingQueue: DispatchQueue
+	private var messageHandlerExecutionQueue: DispatchQueue
 	private var messageLoopSource:dispatch_source_t!
 	
 	public private(set) var isRunning:Bool
 
-	internal init(identifier:String, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, handler:MessageQueueHandler<Message>) {
+	internal init(identifier:String, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, handler:MessageQueueHandler<Message>) {
 		
 		self.identifier = identifier
 		self.handler = handler
 		
-		let queue = dispatch_queue_create("\(identifier)", nil)
+		let queue = DispatchQueue(identifier: "\(identifier)", nil)
 		
 		self.messageProcessingQueue = queue
 		self.messageHandlerExecutionQueue = executionQueue ?? queue
@@ -646,21 +645,21 @@ public class MessageQueue<M:MessageType> : MessageQueueType {
 		self.messageLoopSource = self.makeTimer(Semaphore.Interval(second: processingInterval), start: true, timerAction: _messageLoopBody)
 	}
 
-	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, messageHandler:MessageHandler, errorHandler:MessageErrorHandler?) {
+	public convenience init(identifier:String, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, messageHandler:MessageHandler, errorHandler:MessageErrorHandler?) {
 
 		let handler = MessageQueueHandler.Closure(messageHandler: messageHandler, errorHandler: errorHandler)
 		
 		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
 	}
 
-	public convenience init(identifier:String, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, messageHandler:MessageHandlerNoThrows) {
+	public convenience init(identifier:String, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval, messageHandler:MessageHandlerNoThrows) {
 		
 		let handler = MessageQueueHandler.Closure(messageHandler: messageHandler, errorHandler: nil)
 		
 		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
 	}
 	
-	public convenience init<T:_MessageQueueHandlerProtocol>(identifier:String, handler:T, executionQueue:dispatch_queue_t? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval) {
+	public convenience init<T:_MessageQueueHandlerProtocol>(identifier:String, handler:T, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueueDefaultProcessingInterval) {
 		
 		let handler = MessageQueueHandler<Message>.Delegate(handler: handler)
 		
@@ -708,7 +707,7 @@ public class MessageQueue<M:MessageType> : MessageQueueType {
 		}
 	}
 	
-	public func send(message: Message, preAction:(Queue<Message>, Message) -> ContinuousState) {
+	public func send(message: Message, preAction:(Queue<Message>, Message) -> Continuous) {
 		
 		self.executeOnProcessingQueue {
 
@@ -728,7 +727,7 @@ extension MessageQueue where M : MessageType {
 	
 	public func send(message: Message) {
 		
-		self.send(message) { (queue, message) -> ContinuousState in .Continue }
+		self.send(message) { (queue, message) -> Continuous in .continue }
 	}
 	
 	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> dispatch_source_t {
@@ -744,9 +743,9 @@ extension MessageQueue where M : PreActionMessageType {
 	
 	public func send(message: Message) {
 		
-		self.send(message) { (queue, message) -> ContinuousState in
+        self.send(message: message) { (queue, message) -> Continuous in
 			
-			return message.messagePreAction(queue)
+            return message.messagePreAction(queue: queue)
 		}
 	}
 	
@@ -764,7 +763,7 @@ extension MessageQueue where M : PreActionMessageType {
 public protocol _MessageQueueHandlerProtocol {
 	
 	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingMessage:Queue.Message) throws
-	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError:ErrorType) throws
+	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError:Error) throws
 }
 
 public protocol MessageQueueHandlerProtocol : _MessageQueueHandlerProtocol {
@@ -772,7 +771,7 @@ public protocol MessageQueueHandlerProtocol : _MessageQueueHandlerProtocol {
 	associatedtype Message : MessageType
 
 	func messageQueue(queue:MessageQueue<Message>, handlingMessage:Message) throws
-	func messageQueue(queue:MessageQueue<Message>, handlingError:ErrorType) throws
+	func messageQueue(queue:MessageQueue<Message>, handlingError:Error) throws
 }
 
 extension MessageQueueHandlerProtocol {
@@ -782,14 +781,14 @@ extension MessageQueueHandlerProtocol {
 		let queue = queue as! MessageQueue<Message>
 		let message = message as! Message
 		
-		try self.messageQueue(queue, handlingMessage: message)
+        try self.messageQueue(queue: queue, handlingMessage: message)
 	}
 	
-	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError error:ErrorType) throws {
+	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError error:Error) throws {
 		
 		let queue = queue as! MessageQueue<Message>
 		
-		try self.messageQueue(queue, handlingError: error)
+        try self.messageQueue(queue: queue, handlingError: error)
 	}
 }
 
@@ -847,7 +846,7 @@ extension MessageQueue {
 		
 		self.executeOnHandlerExecutionQueue {
 
-			func executeErrorHandlerIfNeeds(error:ErrorType) {
+			func executeErrorHandlerIfNeeds(error:Error) {
 				
 				do {
 					
@@ -871,7 +870,7 @@ extension MessageQueue {
 	}
 }
 
-public struct Repeater<Element> : SequenceType {
+public struct Repeater<Element> : Sequence {
 
 	private var generator:RepeaterGenerator<Element>
 	
@@ -890,18 +889,18 @@ public struct Repeater<Element> : SequenceType {
 		return self.generator
 	}
 	
-	public func zipLeftOf<S:SequenceType>(s:S) -> Zip2Sequence<Repeater,S> {
+	public func zipLeftOf<S:Sequence>(s:S) -> Zip2Sequence<Repeater,S> {
 		
 		return zip(self, s)
 	}
 	
-	public func zipRightOf<S:SequenceType>(s:S) -> Zip2Sequence<S,Repeater> {
+	public func zipRightOf<S:Sequence>(s:S) -> Zip2Sequence<S,Repeater> {
 		
 		return zip(s, self)
 	}
 }
 
-public struct RepeaterGenerator<Element> : GeneratorType {
+public struct RepeaterGenerator<Element> : IteratorProtocol {
 	
 	private var _generate:()->Element
 	
@@ -910,7 +909,7 @@ public struct RepeaterGenerator<Element> : GeneratorType {
 		self.init { value }
 	}
 	
-	init (_ generate:()->Element) {
+    init (_ generate: @escaping ()->Element) {
 		
 		self._generate = generate
 	}
@@ -940,7 +939,7 @@ extension Selectable {
 	}
 }
 
-extension SequenceType where Generator.Element : Selectable {
+extension Sequence where Element : Selectable {
 
 	public mutating func selectAll() {
 		
@@ -953,7 +952,7 @@ extension SequenceType where Generator.Element : Selectable {
 	}
 }
 
-extension SequenceType where Generator.Element : AnyObject {
+extension Sequence where Element : AnyObject {
 	
 	public var selectableElementsOnly:[Selectable] {
 		
@@ -964,7 +963,7 @@ extension SequenceType where Generator.Element : AnyObject {
 
 extension Optional {
 
-	public func ifHasValue(@noescape predicate:(Wrapped) throws -> Void) rethrows {
+	public func ifHasValue(predicate:(Wrapped) throws -> Void) rethrows {
 		
 		if case let value? = self {
 			
@@ -973,9 +972,9 @@ extension Optional {
 	}
 }
 
-extension BooleanType {
+extension Bool {
 
-	public func ifTrue(@noescape predicate:() throws -> Void) rethrows {
+	public func isTrue(predicate:() throws -> Void) rethrows {
 		
 		if self {
 			
@@ -983,7 +982,7 @@ extension BooleanType {
 		}
 	}
 	
-	public func ifFalse(@noescape predicate:() throws -> Void) rethrows {
+	public func isFalse(predicate:() throws -> Void) rethrows {
 		
 		if !self {
 			
@@ -992,7 +991,7 @@ extension BooleanType {
 	}
 }
 
-public class StandardOutputStream : OutputStreamType {
+public class StandardOutputStream : OutputStream {
 	
 	public func write(string: String) {
 		
@@ -1000,7 +999,7 @@ public class StandardOutputStream : OutputStreamType {
 	}
 }
 
-public class StandardErrorStream : OutputStreamType {
+public class StandardErrorStream : OutputStream {
 	
 	public func write(string: String) {
 		
@@ -1008,7 +1007,7 @@ public class StandardErrorStream : OutputStreamType {
 	}
 }
 
-public class NullOutputStream : OutputStreamType {
+public class NullOutputStream : OutputStream {
 	
 	public func write(string: String) {
 		
@@ -1017,7 +1016,7 @@ public class NullOutputStream : OutputStreamType {
 
 extension Optional {
 	
-	public func invokeIfExists(@noescape expression:(Wrapped) throws -> Void) rethrows -> Void {
+	public func invokeIfExists(expression:(Wrapped) throws -> Void) rethrows -> Void {
 		
 		if let value = self {
 
@@ -1026,43 +1025,43 @@ extension Optional {
 	}
 }
 
-public func whether(@autoclosure condition:() throws -> Bool) rethrows -> YesNoState {
+public func whether(condition: @autoclosure () throws -> Bool) rethrows -> YesNoState {
 	
 	return try condition() ? .Yes : .No
 }
 
 /// Execute `exression`. If an error occurred, write the error to standard output stream.
-public func handleError(@autoclosure expression:() throws -> Void) -> Void {
+public func handleError(expression: @autoclosure () throws -> Void) -> Void {
 	
-	handleError(expression, to: &OutputStream)
+    handleError(expression: expression(), to: &OutputStream)
 }
 
 /// Execute `exression`. If an error occurred, write the error to standard output stream.
-public func handleError<R>(@autoclosure expression:() throws -> R) -> R? {
+public func handleError<R>(expression: @autoclosure () throws -> R) -> R? {
 
-	return handleError(expression, to: &OutputStream)
+    return handleError(expression: expression(), to: &OutputStream)
 }
 
 /// Execute `exression`. If an error occurred, write the error to `stream`.
-public func handleError<STREAM:OutputStreamType>(@autoclosure expression:() throws -> Void, inout to stream:STREAM) -> Void {
+public func handleError<STREAM: OutputStream>(expression: @autoclosure () throws -> Void, to stream: inout STREAM) -> Void {
 	
-	handleError(expression) { (error:ErrorType)->Void in
+	handleError(expression) { (error:Error)->Void in
 		
-		stream.write("Error Handling: \(error)")
+        stream.write("Error Handling: \(error)", maxLength: Int.max)
 	}
 }
 
 /// Execute `exression`. If an error occurred, write the error to `stream`.
-public func handleError<R,STREAM:OutputStreamType>(@autoclosure expression:() throws -> R, inout to stream:STREAM) -> R? {
+public func handleError<R,STREAM: OutputStream>(expression: @autoclosure () throws -> R, to stream: inout STREAM) -> R? {
 	
-	return handleError(expression) { (error:ErrorType)->Void in
+	return handleError(expression) { (error: Error)->Void in
 		
-		stream.write("Error Handling: \(error)")
+		stream.write("Error Handling: \(error)", maxLength: Int.max)
 	}
 }
 
 /// Execute `exression`. If an error occurred, write the error to `stream`.
-public func handleError(@autoclosure expression:() throws -> Void, by handler:(ErrorType)->Void) -> Void {
+public func handleError(expression: @autoclosure () throws -> Void, by handler:(Error)->Void) -> Void {
 	
 	do {
 		
@@ -1075,7 +1074,7 @@ public func handleError(@autoclosure expression:() throws -> Void, by handler:(E
 }
 
 /// Execute `exression`. If an error occurred, write the error to `stream`.
-public func handleError<R>(@autoclosure expression:() throws -> R, by handler:(ErrorType)->Void) -> R? {
+public func handleError<R>(expression: @autoclosure () throws -> R, by handler:(Error)->Void) -> R? {
 	
 	do {
 		
@@ -1090,7 +1089,7 @@ public func handleError<R>(@autoclosure expression:() throws -> R, by handler:(E
 }
 
 /// Execute `exression`. If an error occurred, write the error to `stream`.
-public func handleError<E:ErrorType>(@autoclosure expression:() throws -> Void, by handler:(E)->Void) -> Void {
+public func handleError<E:Error>(expression: @autoclosure () throws -> Void, by handler:(E)->Void) -> Void {
 	
 	do {
 		
@@ -1107,7 +1106,7 @@ public func handleError<E:ErrorType>(@autoclosure expression:() throws -> Void, 
 }
 
 /// Execute `exression`. If an error occurred, write the error to `stream`.
-public func handleError<R,E:ErrorType>(@autoclosure expression:() throws -> R, by handler:(E)->Void) -> R? {
+public func handleError<R,E:Error>(expression: @autoclosure () throws -> R, by handler:(E)->Void) -> R? {
 	
 	do {
 		
@@ -1127,9 +1126,9 @@ public func handleError<R,E:ErrorType>(@autoclosure expression:() throws -> R, b
 
 public protocol KeyValueChangeable {
 
-	func withChangeValue(keys:String...)
-	func withChangeValue(keys:String..., @noescape body:()->Void)
-	func withChangeValue<S:SequenceType where S.Generator.Element == String>(keys:S, @noescape body:()->Void)
+	func withChangeValue(for keys: String...)
+	func withChangeValue(for keys: String..., body: () -> Void)
+	func withChangeValue<S: Sequence>(for keys: S, body: () -> Void)  where S.Element == String
 }
 
 // FIXME: Xcode 7.3.1 からか、なぜか NSObject だけでなく NSViewController にも　KeyValueChangeable を適用しないと、その先で準拠性を約束できませんでした。
@@ -1138,23 +1137,23 @@ extension NSViewController : KeyValueChangeable {
 
 extension NSObject : KeyValueChangeable {
 
-	public func withChangeValue(keys:String...) {
+	public func withChangeValue(for keys: String...) {
 		
-		self.withChangeValue(keys, body: {})
+		withChangeValue(for: keys, body: {})
 	}
 
-	public func withChangeValue(keys:String..., @noescape body:()->Void) {
+	public func withChangeValue(for keys: String..., body: () -> Void) {
 
-		self.withChangeValue(keys, body: body)
+		withChangeValue(for: keys, body: body)
 	}
 
-	public func withChangeValue<S:SequenceType where S.Generator.Element == String>(keys:S, @noescape body:()->Void) {
+	public func withChangeValue<S: Sequence>(for keys: S, body: () -> Void) where S.Element == String {
 		
-		keys.forEach(self.willChangeValueForKey)
+		keys.forEach(willChangeValue)
 		
 		defer {
 			
-			keys.forEach(self.didChangeValueForKey)
+			keys.forEach(didChangeValue)
 		}
 		
 		body()
@@ -1178,15 +1177,15 @@ public class ObjectKeeper<T:AnyObject> {
 
 public extension NSAppleEventDescriptor {
 	
-	public var url:NSURL? {
+	var url: NSURL? {
 		
-		return self.paramDescriptorForKeyword(AEKeyword(keyDirectObject))?.stringValue.flatMap { NSURL(string: $0) }
+		paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue.flatMap { NSURL(string: $0) }
 	}
 }
 
 public final class DebugTime {
 
-	public static func print(message:String) {
+	public static func print(_ message:String) {
 
 		#if DEBUG
 		NSLog("\(message)")
@@ -1197,18 +1196,18 @@ public final class DebugTime {
 public protocol AcknowledgementsIncluded {
 
 	var acknowledgementsName:String! { get }
-	var acknowledgementsBundle:NSBundle? { get }
+	var acknowledgementsBundle:Bundle? { get }
 }
 
 public protocol AcknowledgementsIncludedAndCustomizable : AcknowledgementsIncluded {
 	
 	var acknowledgementsName:String! { get set }
-	var acknowledgementsBundle:NSBundle? { get set }
+	var acknowledgementsBundle:Bundle? { get set }
 }
 
 extension AcknowledgementsIncluded {
 
-	var acknowledgementsBundle:NSBundle? {
+	var acknowledgementsBundle:Bundle? {
 
 		return nil
 	}
@@ -1232,11 +1231,11 @@ public struct Acknowledgements {
 	public var headerText:String
 	public var footerText:String
 	
-	public init?(name:String, bundle:NSBundle?) {
+	public init?(name:String, bundle:Bundle?) {
 	
-		let bundle = bundle ?? NSBundle.mainBundle()
+		let bundle = bundle ?? Bundle.main
 		
-		guard let path = bundle.pathForResource(name, ofType: "plist") else {
+        guard let path = bundle.path(forResource: name, ofType: "plist") else {
 			
 			return nil
 		}
@@ -1291,13 +1290,13 @@ extension Acknowledgements : CustomStringConvertible {
 		results.append("")
 		results.append(self.footerText)
 		
-		return results.joinWithSeparator("\n")
+        return results.joined(separator: "\n")
 	}
 }
 
 // MARK: - Bundle
 
-extension NSBundle {
+extension Bundle {
 	
 	public var appName:String? {
 		
@@ -1338,7 +1337,7 @@ extension NSBundle {
 		let main = version.main ?? ""
 		let build = version.build.map { "build \($0)" } ?? ""
 		
-		let value = main.appendStringIfNotEmpty(build, separator: " ")
+        let value = main.appendStringIfNotEmpty(string: build, separator: " ")
 
 		return value
 	}
@@ -1353,7 +1352,7 @@ private func ~= (pattern:dispatch_queue_attr_t, value:dispatch_queue_attr_t) -> 
 
 public struct Thread {
 	
-	public enum Type : RawRepresentable {
+	public enum `Type` : RawRepresentable {
 		
 		case Serial
 		case Concurrent
@@ -1386,21 +1385,21 @@ public struct Thread {
 		}
 	}
 	
-	var queue:dispatch_queue_t
+	var queue: DispatchQueue
 	
-	public init(name:String, type:Type = .Serial) {
-		
-		self.queue = dispatch_queue_create(name, type.rawValue)
+	public init(name: String, type: Type = .Serial) {
+
+		queue = DispatchQueue(name, type.rawValue)
 	}
 	
-	public func invokeAsync(predicate:()->Void) {
+	public func invokeAsync(predicate: @escaping () -> Void) {
 		
-		ESThread.invokeAsync(self.queue, predicate: predicate)
+		queue.async(execute: predicate)
 	}
 	
-	public func invoke<Result>(predicate:()->Result) -> Result {
+	public func invoke<Result>(predicate: () -> Result) -> Result {
 		
-		return ESThread.invoke(self.queue, predicate: predicate)
+		queue.sync(execute: predicate)
 	}
 }
 
@@ -1419,12 +1418,12 @@ extension Captureable where CaptureTarget == NSView {
 
 	func capture() -> NSImage {
 	
-		return CodePiece.capture(self.captureTarget)
+        return CodePiece.capture(view: self.captureTarget)
 	}
 	
 	func capture(rect:NSRect) -> NSImage {
 		
-		return CodePiece.capture(self.captureTarget, rect: rect)
+        return CodePiece.capture(view: self.captureTarget, rect: rect)
 	}
 }
 
@@ -1432,7 +1431,7 @@ extension Captureable where CaptureTarget == NSWindow {
 	
 	func capture() -> NSImage {
 		
-		return CodePiece.capture(self.captureTarget)
+        return CodePiece.capture(window: self.captureTarget)
 	}
 }
 
@@ -1478,12 +1477,12 @@ extension NSApplication : EnclosingScaleProperty {
 
 func capture(view:NSView) -> NSImage {
 
-	return capture(view, rect: view.bounds)
+    return capture(view: view, rect: view.bounds)
 }
 
 func capture(view:NSView, rect:NSRect) -> NSImage {
 	
-	guard rect != CGRectZero else {
+    guard rect != .zero else {
 
 		fatalError("Bounds is Zero.")
 	}
@@ -1493,24 +1492,24 @@ func capture(view:NSView, rect:NSRect) -> NSImage {
 	// Retina が混在した環境ではどの画面でも、サイズ情報はそのまま、ピクセルが倍解像度で得られるようです。
 	// imageRep や、ここから生成した NSImage に対する操作は scale を加味しない座標系で問題ありませんが、
 	// CGImage に対する処理は、スケールを加味した座標指定が必要になるようです。
-	let imageRep = view.bitmapImageRepForCachingDisplayInRect(viewRect)!
+    let imageRep = view.bitmapImageRepForCachingDisplay(in: viewRect)!
 
-	view.cacheDisplayInRect(viewRect, toBitmapImageRep: imageRep)
+    view.cacheDisplay(in: viewRect, to: imageRep)
 	
-	let cgImage = imageRep.CGImage!
-	let cgImageScale = cgImage.widthScaleOf(viewRect.size)
-	let scaledRect = rect.scaled(cgImageScale).truncate()
+    let cgImage = imageRep.cgImage!
+    let cgImageScale = cgImage.widthScale(of: viewRect.size)
+    let scaledRect = rect.scaled(by: cgImageScale).rounded()
 	
 	let clippedImage = CGImageCreateWithImageInRect(cgImage, scaledRect)!
 
-	let image = NSImage(CGImage: clippedImage, size: scaledRect.size)
+    let image = NSImage(cgImage: clippedImage, size: scaledRect.size)
 
 	// TODO: 画像の見やすさを考えて余白を作れたら良さそう。
 	let horizontal = 0 // Int(max(image.size.height - image.size.width, 0) / 2.0)
 	let vertical = 0 // Int(max(image.size.width - image.size.height, 0) / 2.0)
 	
 	let margin = Margin(vertical: vertical, horizontal: horizontal)
-	let newImage = createImage(image, margin: margin)
+    let newImage = createImage(image: image, margin: margin)
 
 	return newImage
 }
@@ -1537,11 +1536,11 @@ public func createImage(image:NSImage, margin:IntMargin) -> NSImage {
 	let bitsPerComponent = 8
 	let bytesPerRow = 4 * newWidth
 	let colorSpace = CGColorSpaceCreateDeviceRGB()
-	let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue)
+    let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
 	
 	let point = NSPoint(x: CGFloat(margin.left), y: CGFloat(margin.top))
 	
-	guard let bitmapContext = CGBitmapContextCreate(nil, newWidth, newHeight, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo.rawValue) else {
+    guard let bitmapContext = CGContext(data: nil, width: newWidth, height: newHeight, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
 		
 		fatalError("Failed to create a bitmap context.")
 	}
@@ -1550,21 +1549,21 @@ public func createImage(image:NSImage, margin:IntMargin) -> NSImage {
 	let bitmapSize = NSSize(width: CGFloat(newWidth), height: CGFloat(newHeight))
 	let bitmapRect = NSRect(origin: NSZeroPoint, size: NSSize(width: bitmapSize.width, height: bitmapSize.height))
 
-	let graphicsContext = NSGraphicsContext(CGContext: bitmapContext, flipped: false)
+    let graphicsContext = NSGraphicsContext(cgContext: bitmapContext, flipped: false)
 	
 	NSGraphicsContext.saveGraphicsState()
-	NSGraphicsContext.setCurrentContext(graphicsContext)
+    NSGraphicsContext.current = graphicsContext
 	
 	image.drawAtPoint(point, fromRect: bitmapRect, operation: NSCompositingOperation.CompositeCopy, fraction: 1.0)
 
 	NSGraphicsContext.restoreGraphicsState()
 	
-	guard let newImageRef = CGBitmapContextCreateImage(bitmapContext) else {
+    guard let newImageRef = bitmapContext.makeImage() else {
 		
 		fatalError("Failed to create a bitmap with margin.")
 	}
 
-	let newImage = NSImage(CGImage: newImageRef, size: bitmapSize)
+    let newImage = NSImage(cgImage: newImageRef, size: bitmapSize)
 	
 	return newImage
 }
@@ -1573,8 +1572,8 @@ func capture(window:NSWindow) -> NSImage {
 	
 	let windowId = CGWindowID(window.windowNumber)
 
-	let imageRef = CGWindowListCreateImage(CGRectZero, CGWindowListOption.OptionIncludingWindow, windowId, CGWindowImageOption.Default)
-	let imageData = NSImage(CGImage: imageRef!, size: window.contentView!.bounds.size)
+    let imageRef = CGWindowListCreateImage(.zero, .optionIncludingWindow, windowId, [])
+    let imageData = NSImage(cgImage: imageRef!, size: window.contentView!.bounds.size)
 	
 	return imageData
 }
@@ -1585,7 +1584,7 @@ extension String {
 
 	public func appendStringIfNotEmpty(string:String?, separator:String = "") -> String {
 		
-		guard let string = string where !string.isEmpty else {
+		guard let string = string, !string.isEmpty else {
 			
 			return self
 		}

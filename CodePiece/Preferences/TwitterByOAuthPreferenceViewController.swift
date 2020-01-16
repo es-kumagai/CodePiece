@@ -38,7 +38,7 @@ final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewContro
 			return
 		}
 		
-		withChangeValue("canPinEnterButtonPush")
+		withChangeValue(for: "canPinEnterButtonPush")
 	}
 }
 
@@ -57,10 +57,10 @@ extension TwitterByOAuthPreferenceViewController {
 			switch result {
 				
 			case .Created:
-				self.showErrorAlert("Failed to authentication", message: "Unexpected Process (PIN is not entered)")
+				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (PIN is not entered)")
 				
 			case .Failed(let error):
-				self.showErrorAlert("Failed to authentication", message: error.description)
+				self.showErrorAlert(withTitle: "Failed to authentication", message: error.description)
 				
 			case .PinRequired:
 				self.enteringPinInputMode()
@@ -80,13 +80,13 @@ extension TwitterByOAuthPreferenceViewController {
 				
 			case .Created:
 				self.exitPinInputMode()
-				self.dismissController(self)
+				self.dismiss(self)
 				
 			case .Failed(let message):
-				self.showErrorAlert("Failed to authentication", message: message.description)
+				self.showErrorAlert(withTitle: "Failed to authentication", message: message.description)
 				
 			case .PinRequired:
-				self.showErrorAlert("Failed to authentication", message: "Unexpected Process (PIN Required)")
+				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (PIN Required)")
 			}
 		}
 	}
@@ -115,14 +115,14 @@ extension TwitterByOAuthPreferenceViewController {
 	
 	func enteringPinInputMode() {
 		
-		self.viewForStartAuthentication?.hidden = true
-		self.viewForEnterPin?.hidden = false
+		self.viewForStartAuthentication?.isHidden = true
+		self.viewForEnterPin?.isHidden = false
 	}
 	
 	func exitPinInputMode() {
 		
-		self.viewForStartAuthentication?.hidden = false
-		self.viewForEnterPin?.hidden = true
+		self.viewForStartAuthentication?.isHidden = false
+		self.viewForEnterPin?.isHidden = true
 		
 		self.pinTextField?.stringValue = ""
 	}

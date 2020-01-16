@@ -12,32 +12,32 @@ let systemPalette = SystemPalette()
 
 struct SystemPalette {
 	
-	let textFont: NSFont! = SystemFont.FontForText.fontWithSize(13.0)
-	let codeFont: NSFont! = SystemFont.FontForCode.fontWithSize(14.0)
+	let textFont = SystemFont.forText.font(withSize: 13.0)!
+	let codeFont = SystemFont.forCode.font(withSize: 14.0)!
 	
-	let textColor = [#Color(colorLiteralRed: 0.208, green: 0.333, blue: 0.416, alpha: 1.000)#]
-	let urlColor = [#Color(colorLiteralRed: 0.26, green: 0.47, blue: 0.96, alpha: 1.0)#]
-	let hashtagColor = [#Color(colorLiteralRed: 0.6, green: 0.6, blue: 0.733, alpha: 1.0)#]
-	let mentionColor = [#Color(colorLiteralRed: 0.0, green: 0.412, blue: 0.851, alpha: 1.0)#]
+	let textColor = #colorLiteral(red: 0.208, green: 0.333, blue: 0.416, alpha: 1.000)
+	let urlColor = #colorLiteral(red: 0.26, green: 0.47, blue: 0.96, alpha: 1.0)
+	let hashtagColor = #colorLiteral(red: 0.6, green: 0.6, blue: 0.733, alpha: 1.0)
+	let mentionColor = #colorLiteral(red: 0.0, green: 0.412, blue: 0.851, alpha: 1.0)
 	
-	private init() {
+	fileprivate init() {
 		
 	}
 }
 
 private enum SystemFont {
 	
-	case FontForText
-	case FontForCode
+	case forText
+	case forCode
 	
-	func fontWithSize(size:CGFloat) -> NSFont? {
+	func font(withSize size:CGFloat) -> NSFont? {
 		
 		switch self {
 			
-		case .FontForText:
-			return NSFont.systemFontOfSize(size)
+		case .forText:
+			return NSFont.systemFont(ofSize: size)
 			
-		case .FontForCode:
+		case .forCode:
 			return NSFont(name: "SourceHanCodeJP-Regular", size: size)
 		}
 	}

@@ -7,7 +7,6 @@
 //
 
 import Ocean
-import ESNotification
 import Accounts
 import ESTwitter
 
@@ -15,7 +14,7 @@ import ESTwitter
 
 extension Authorization {
 
-	final class GitHubAuthorizationStateDidChangeNotification : Notification {
+	final class GitHubAuthorizationStateDidChangeNotification : NotificationProtocol {
 		
 		private(set) var isValid:Bool
 		private(set) var username:String?
@@ -27,7 +26,7 @@ extension Authorization {
 		}
 	}
 
-	final class TwitterAuthorizationStateDidChangeNotification : Notification {
+	final class TwitterAuthorizationStateDidChangeNotification : NotificationProtocol {
 		
 		private(set) var isValid:Bool
 		private(set) var username:String?
@@ -40,9 +39,9 @@ extension Authorization {
 	}
 }
 
-extension ViewController {
+extension MainViewController {
 
-	final class PostCompletelyNotification : Notification {
+	final class PostCompletelyNotification : NotificationProtocol {
 		
 		var container: PostDataContainer
 		
@@ -52,7 +51,7 @@ extension ViewController {
 		}
 	}
 	
-	final class PostFailedNotification : Notification {
+	final class PostFailedNotification : NotificationProtocol {
 		
 		var container: PostDataContainer
 		
@@ -65,7 +64,7 @@ extension ViewController {
 
 extension TwitterAccountSelectorController {
 	
-	final class TwitterAccountSelectorDidChangeNotification : Notification {
+	final class TwitterAccountSelectorDidChangeNotification : NotificationProtocol {
 		
 		private(set) var account: TwitterController.Account
 		
@@ -76,7 +75,7 @@ extension TwitterAccountSelectorController {
 	}
 }
 
-final class HashtagsDidChangeNotification : Notification {
+final class HashtagsDidChangeNotification : NotificationProtocol {
 	
 	private(set) var hashtags:ESTwitter.HashtagSet
 	

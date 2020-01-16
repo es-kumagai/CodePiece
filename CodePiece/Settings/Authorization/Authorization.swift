@@ -6,29 +6,10 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import ESGists
 import APIKit
-import STTwitter
-import Result
-import ESThread
-import p2_OAuth2
-
-// TODO: To build the project, you must create `CodePieceClientInfo` type. See also `HowToBuild.md`.
-
-var ClientInfo:CodePieceClientInfo!
-
-protocol GitHubClientInfoType {
-	
-	var GitHubClientID:String { get }
-	var GitHubClientSecret:String { get }
-}
-
-protocol TwitterConsumerInfoType {
-	
-	var TwitterConsumerKey:String { get }
-	var TwitterConsumerSecret:String { get }
-}
+import OAuth2
 
 enum AuthorizationState {
 	
@@ -58,8 +39,8 @@ final class Authorization : AlertDisplayable {
 			
 			let settings:OAuth2JSON = [
 				
-				"client_id" : ClientInfo.GitHubClientID,
-				"client_secret" : ClientInfo.GitHubClientSecret,
+				"client_id" : APIKeys.GitHub.clientId,
+				"client_secret" : APIKeys.GitHub.clientSecret,
 				"authorize_uri" : "https://github.com/login/oauth/authorize",
 				"token_uri" : "https://github.com/login/oauth/access_token",
 				"scope" : "gist",
@@ -154,7 +135,7 @@ extension Authorization {
 		
 		guard let authorization = NSApp.settings.account.authorization else {
 
-			self.showWarningAlert("Failed to reset authorization", message: "Could't get the current authentication information. Reset authentication information which saved in this app.")
+			self.showWarningAlert(withTitle: "Failed to reset authorization", message: "Could't get the current authentication information. Reset authentication information which saved in this app.")
 			
 			NSApp.settings.resetGitHubAccount(saveFinally: true)
 			GitHubAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
@@ -164,7 +145,7 @@ extension Authorization {
 		
 		let request = GitHubAPI.OAuthAuthorizations.DeleteAuthorization(authorization: authorization, id:id)
 		
-		GitHubAPI.sendRequest(request) { response in
+		GitHubAPI.send(request) { response in
 			
 			defer {
 				
@@ -173,13 +154,13 @@ extension Authorization {
 
 			switch response {
 				
-			case .Success:
+			case .success:
 				
 				// Token では削除できないようなので、403 で失敗しても認証情報を削除するだけにしています。
 				NSApp.settings.resetGitHubAccount(saveFinally: true)
 				completion(response)
 				
-			case .Failure(_):
+			case .failure(_):
 
 				NSApp.settings.resetGitHubAccount(saveFinally: true)
 				completion(response)
@@ -197,7 +178,7 @@ extension Authorization {
 		completion(.Failed(error))
 	}
 	
-	private static func _githubAuthorizationCreateSuccessfully(user user:GistUser, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
+	private static func _githubAuthorizationCreateSuccessfully(user:GistUser, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
 		
 		let username = user.login
 		let id = user.id
@@ -232,14 +213,14 @@ extension Authorization {
 			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
 
 			twitter.pinRequesting = false
-			_twitterAuthorizationCreateSuccessfully(completion)
+			_twitterAuthorizationCreateSuccessfully(completion: completion)
 		}
 		
 		let errorHandler = { (error: NSError!) in
 			
 			print("Twitter authorization went wrong: \(error).")
 			
-			_twitterAuthorizationFailed(.message("Check entered PIN code and try again."), completion: completion)
+			_twitterAuthorizationFailed(error: .message("Check entered PIN code and try again."), completion: completion)
 		}
 		
 		oauth.postAccessTokenRequestWithPIN(pin, successBlock: successHandler, errorBlock: errorHandler)
@@ -265,7 +246,7 @@ extension Authorization {
 			twitter.pinRequesting = false
 
 			print("Twitter authorization went wrong: \(error).")
-			_twitterAuthorizationFailed(AuthorizationResult.Error(error), completion: completion)
+			_twitterAuthorizationFailed(error: AuthorizationResult.Error(error), completion: completion)
 		}
 		
 		twitter.pinRequesting = true
@@ -294,10 +275,10 @@ extension Authorization {
 				
 				switch response {
 					
-				case .Success(let user):
+				case .success(let user):
 					_githubAuthorizationCreateSuccessfully(user: user, authorization: authorization, completion: completion)
 					
-				case .Failure(let error):
+				case .failure(let error):
 					_githubAuthorizationFailed(AuthorizationResult.Error.message("\(error)"), completion: completion)
 				}
 			}

@@ -56,7 +56,7 @@ extension TimelineTableControllerType {
 
 		self.timelineDataSource.appendTweets(tweets, hashtags: hashtags)
 		
-		tweak (self.timelineTableView) {
+		applyingExpression(to: self.timelineTableView) {
 			
 			$0.beginUpdates()
 			
@@ -100,6 +100,6 @@ extension TimelineTableControllerType {
 			}
 		}
 		
-		return shiftIndexes(self.currentTimelineSelectedRowIndexes, insertIndexes: insertedIndexes)
+        return shiftIndexes(currentIndexes: self.currentTimelineSelectedRowIndexes, insertIndexes: insertedIndexes)
 	}
 }

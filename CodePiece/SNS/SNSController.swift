@@ -8,7 +8,6 @@
 
 import ESGists
 import ESTwitter
-import Result
 
 protocol PostController {
 
@@ -23,7 +22,7 @@ final class SNSController : PostController {
 		case GitHub
 	}
 	
-	enum AuthenticationError : ErrorType {
+	enum AuthenticationError : Error {
 		
 		case CredentialsNotVerified
 		case NotAuthorized(service: Service)
@@ -32,7 +31,7 @@ final class SNSController : PostController {
 	}
 	
 	/// This means a error which may occur when post.
-	enum PostError : ErrorType {
+	enum PostError : Error {
 		
 		case Unexpected(NSError)
 		case SystemError(String)
@@ -93,10 +92,10 @@ final class SNSController : PostController {
 					
 					switch result {
 						
-					case .Success:
+					case .success:
 						callNextStageRecursively(capturedGistImage)
 						
-					case .Failure(let error):
+					case .failure(let error):
 						exitWithFailure(error)
 					}
 				}
@@ -125,10 +124,10 @@ final class SNSController : PostController {
 					
 					switch result {
 						
-					case .Success:
+					case .success:
 						callNextStageRecursively(capturedGistImage)
 						
-					case .Failure:
+					case .failure:
 						exitWithFailure(container.error!)
 					}
 				}
@@ -143,12 +142,12 @@ final class SNSController : PostController {
 					
 					switch result {
 						
-					case .Success:
+					case .success:
 						
 						DebugTime.print("📮 Posted successfully (stage:\(container.stage)) ... #2.0.1")
 						callNextStageRecursively(capturedGistImage)
 						
-					case .Failure(let error):
+					case .failure(let error):
 
 						exitWithFailure(error)
 					}

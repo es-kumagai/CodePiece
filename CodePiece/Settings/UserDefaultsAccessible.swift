@@ -11,7 +11,7 @@ import Foundation
 // I must gethering the features to other module and remove the namespace.
 struct UserDefaultAccessibleNamespace {
 
-	static let userDefaults = NSUserDefaults.standardUserDefaults()
+	static let userDefaults = UserDefaults.standardUserDefaults()
 }
 
 protocol UserDefaultAccessible {
@@ -20,12 +20,12 @@ protocol UserDefaultAccessible {
 
 extension UserDefaultAccessible {
 	
-	var userDefaults: NSUserDefaults {
+	var userDefaults: UserDefaults {
 		
-		return self.dynamicType.userDefaults
+		return Self.userDefaults
 	}
 	
-	static var userDefaults: NSUserDefaults {
+	static var userDefaults: UserDefaults {
 		
 		return UserDefaultAccessibleNamespace.userDefaults
 	}

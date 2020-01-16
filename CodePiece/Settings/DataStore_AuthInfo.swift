@@ -43,23 +43,23 @@ class AuthInfo : NSObject, NSCoding {
 	
 	required convenience init?(coder aDecoder: NSCoder) {
 		
-		let id = (aDecoder.decodeObjectForKey(ArchiveKey.ID) as? NSNumber).map { ID($0.unsignedLongLongValue) }
-		let username = aDecoder.decodeObjectForKey(ArchiveKey.Username) as? String
-		let token = aDecoder.decodeObjectForKey(ArchiveKey.Token) as? String
+		let id = (aDecoder.decodeObject(forKey: ArchiveKey.ID) as? NSNumber).map { ID($0.uint64Value) }
+		let username = aDecoder.decodeObject(forKey: ArchiveKey.Username) as? String
+		let token = aDecoder.decodeObject(forKey: ArchiveKey.Token) as? String
 		
 		self.init(id: id, username: username, token: token)
 	}
 	
-	func encodeWithCoder(aCoder: NSCoder) {
+	func encode(with aCoder: NSCoder) {
 		
-		aCoder.encodeObject((self.id?.value).map({NSNumber(unsignedLongLong: $0)}), forKey: ArchiveKey.ID)
-		aCoder.encodeObject(self.username, forKey: ArchiveKey.Username)
-		aCoder.encodeObject(self.token, forKey: ArchiveKey.Token)
+		aCoder.encode((id?.value).map({NSNumber(value: $0)}), forKey: ArchiveKey.ID)
+		aCoder.encode(username, forKey: ArchiveKey.Username)
+		aCoder.encode(token, forKey: ArchiveKey.Token)
 	}
 	
 	var noData:Bool {
 		
-		if case (.None, .None, .None) = (self.id, self.username, self.token) {
+		if case (.none, .none, .none) = (id, username, token) {
 			
 			return true
 		}

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on H27/07/19.
@@ -8,15 +8,13 @@
 
 import Cocoa
 import ESGists
-import Result
 import Ocean
 import Quartz
 import Swim
 import ESProgressHUD
 import ESTwitter
-import ESNotification
 
-final class ViewController: NSViewController, NotificationObservable {
+final class MainViewController: NSViewController, NotificationObservable {
 
 	enum ReplyToType {
 		
@@ -29,15 +27,15 @@ final class ViewController: NSViewController, NotificationObservable {
 		
 		willSet {
 			
-			willChangeValueForKey("canReplyTo")
+			willChangeValue(forKey: "canReplyTo")
 		}
 		
 		didSet {
 			
-			didChangeValueForKey("canReplyTo")
+			didChangeValue(forKey: "canReplyTo")
 		}
 	}
-	var notificationHandlers = NotificationHandlers()
+	var notificationHandlers = Notification.Handlers()
 	
 	var twitterController: TwitterController {
 		
@@ -63,14 +61,14 @@ final class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	@IBOutlet var postButton:NSButton!
-	@IBOutlet var hashTagTextField:HashtagTextField!
+	@IBOutlet var postButton: NSButton!
+	@IBOutlet var hashTagTextField: HashtagTextField!
 	
-	@IBOutlet var languagePopUpButton:NSPopUpButton!
+	@IBOutlet var languagePopUpButton: NSPopUpButton!
 
-	@IBOutlet var languagePopUpDataSource:LanguagePopupDataSource!
+	@IBOutlet var languagePopUpDataSource: LanguagePopupDataSource!
 	
-	@IBOutlet var codeTextView:CodeTextView! {
+	@IBOutlet var codeTextView: CodeTextView! {
 	
 		didSet {
 			
@@ -93,10 +91,10 @@ final class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	@IBOutlet var descriptionTextField:DescriptionTextField!
-	@IBOutlet var descriptionCountLabel:NSTextField!
+	@IBOutlet var descriptionTextField: DescriptionTextField!
+	@IBOutlet var descriptionCountLabel: NSTextField!
 	
-	@IBOutlet var codeScrollView:NSScrollView!
+	@IBOutlet var codeScrollView: NSScrollView!
 	
 	@IBOutlet var languageWatermark: WatermarkLabel! {
 		
@@ -114,21 +112,21 @@ final class ViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	var baseViewController:BaseViewController {
+	var baseViewController: BaseViewController {
 		
-		return self.parentViewController as! BaseViewController
+		return parent as! BaseViewController
 	}
 	
 	var posting:Bool = false {
 	
 		willSet {
 			
-			self.willChangeValueForKey("canPost")
+			self.willChangeValue(forKey: "canPost")
 		}
 		
 		didSet {
 			
-			self.didChangeValueForKey("canPost")
+			self.didChangeValue(forKey: "canPost")
 		}
 	}
 	
@@ -141,7 +139,7 @@ final class ViewController: NSViewController, NotificationObservable {
 			self.codeTextView.hasCode || !self.descriptionTextField.isReplyAddressOnly
 		]
 		
-		return meetsAllOf(conditions, true)
+		return meetsAll(of: conditions, true)
 	}
 	
 	var selectedLanguage:Language {
@@ -163,14 +161,14 @@ final class ViewController: NSViewController, NotificationObservable {
 
 		guard NSApp.snsController.canPost else {
 		
-			self.showErrorAlert("Not ready", message: "It is not ready to post. Please set SNS accounts by the CodePiece's preferences. (⌘,)")
+			self.showErrorAlert(withTitle: "Not ready", message: "It is not ready to post. Please set SNS accounts by the CodePiece's preferences. (⌘,)")
 			return
 		}
 		
-		self.posting = true
-		self.postingHUD.show()
+		posting = true
+		postingHUD.show()
 		
-		self.post { result in
+		post { result in
 			
 			defer {
 				
@@ -180,16 +178,16 @@ final class ViewController: NSViewController, NotificationObservable {
 			
 			switch result {
 				
-			case .Success(let container):
+			case .success(let container):
 				PostCompletelyNotification(container: container).post()
 				
-			case .Failure(let container):
+			case .failure(let container):
 				PostFailedNotification(container: container).post()
 			}
 		}
 	}
 	
-	func post(callback:(PostResult)->Void) {
+	func post(callback: (PostResult) -> Void) {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		
@@ -199,11 +197,11 @@ final class ViewController: NSViewController, NotificationObservable {
 			
 			if container.posted {
 				
-				callback(PostResult.Success(container))
+				callback(PostResult.success(container))
 			}
 			else {
 				
-				callback(PostResult.Failure(container))
+				callback(PostResult.failure(container))
 			}
 		}
 	}
@@ -244,7 +242,7 @@ final class ViewController: NSViewController, NotificationObservable {
 
 		self.clearContents()
 		
-		self.observeNotification(PostCompletelyNotification.self) { [unowned self] notification in
+		self.observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
 			
 			self.clearContents()
 			self.latestTweet = notification.container.twitterState.postedStatus
@@ -253,18 +251,18 @@ final class ViewController: NSViewController, NotificationObservable {
 			NSLog("Posted completely \(notification.container.twitterState.postedStatus)")
 		}
 		
-		observeNotification(PostFailedNotification.self) { [unowned self] notification in
+		observe(notification: PostFailedNotification.self) { [unowned self] notification in
 			
-			self.showErrorAlert("Cannot post", message: notification.container.error!.description)
+			self.showErrorAlert(withTitle: "Cannot post", message: notification.container.error!.description)
 		}
 		
-		observeNotification(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
+		observe(notification: LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
 			
 			self.updateWatermark()
 			self.updateTweetTextCount()
 		}
 		
-		observeNotification(TimelineViewController.TimelineSelectionChangedNotification.self) { [unowned self] notification in
+		observe(notification: TimelineViewController.TimelineSelectionChangedNotification.self) { [unowned self] notification in
 			
 			guard notification.selectedCells.count == 1 else {
 
@@ -278,7 +276,7 @@ final class ViewController: NSViewController, NotificationObservable {
 			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
 		}
 		
-		observeNotification(TimelineViewController.TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
+		observe(notification: TimelineViewController.TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
 			
 			self.setReplyTo(notification)
 		}
@@ -313,9 +311,9 @@ final class ViewController: NSViewController, NotificationObservable {
 		super.viewDidDisappear()		
 	}
 	
-	override func restoreStateWithCoder(coder: NSCoder) {
+	override func restoreState(with coder: NSCoder) {
 		
-		super.restoreStateWithCoder(coder)
+		super.restoreState(with: coder)
 		NSLog("🌴 restoreStateWithCoder Passed.")
 	}
 
@@ -330,16 +328,16 @@ final class ViewController: NSViewController, NotificationObservable {
 			
 			switch result {
 
-			case .Success:
+			case .success:
 				NSLog("Twitter credentials verified successfully.")
 				
-			case .Failure(let error):
-				self.showErrorAlert("Failed to verify credentials", message: error.localizedDescription)
+			case .failure(let error):
+				self.showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
 			}
 		}
 	}
 
-	override var representedObject: AnyObject? {
+	override var representedObject: Any? {
 		didSet {
 		// Update the view, if already loaded.
 		}
@@ -363,11 +361,11 @@ final class ViewController: NSViewController, NotificationObservable {
 		}
 		catch let ESTwitter.Browser.Error.OperationFailure(reason: reason) {
 			
-			self.showErrorAlert("Failed to open browser", message: reason)
+			self.showErrorAlert(withTitle: "Failed to open browser", message: reason)
 		}
 		catch {
 
-			self.showErrorAlert("Failed to open browser", message: "Unknown error : \(error)")
+			self.showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
 		}
 	}
 
@@ -391,26 +389,26 @@ final class ViewController: NSViewController, NotificationObservable {
 		}
 		catch let ESTwitter.Browser.Error.OperationFailure(reason: reason) {
 			
-			self.showErrorAlert("Failed to open browser", message: reason)
+			self.showErrorAlert(withTitle: "Failed to open browser", message: reason)
 		}
 		catch {
 			
-			self.showErrorAlert("Failed to open browser", message: "Unknown error : \(error)")
+			self.showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
 		}
 	}
 }
 
-extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
+extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func textDidChange(notification: NSNotification) {
 		
-		self.withChangeValue("canPost")
+		self.withChangeValue(for: "canPost")
 		self.updateControlsDisplayText()
 	}
 	
 	override func controlTextDidChange(notification: NSNotification) {
 	
-		self.withChangeValue("canPost")
+		self.withChangeValue(for: "canPost")
 		self.updateControlsDisplayText()
 	}
 	
@@ -432,11 +430,11 @@ extension ViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	}
 }
 
-extension ViewController : ViewControllerSelectionAndRepliable {
+extension MainViewController : ViewControllerSelectionAndRepliable {
 
 	func clearReplyTo() {
 	
-		withChangeValue("canPost") {
+		withChangeValue(for: "canPost") {
 			
 			self.statusForReplyTo = nil
 			updateControlsDisplayText()
@@ -450,7 +448,7 @@ extension ViewController : ViewControllerSelectionAndRepliable {
 			return
 		}
 		
-		withChangeValue("canPost") {
+		withChangeValue(for: "canPost") {
 		
 			self.statusForReplyTo = selectedStatuses.first!
 			updateControlsDisplayText()
@@ -458,7 +456,7 @@ extension ViewController : ViewControllerSelectionAndRepliable {
 	}
 }
 
-extension ViewController : LatestTweetReplyable {
+extension MainViewController : LatestTweetReplyable {
 	
 	func resetLatestTweet() {
 		
@@ -467,7 +465,7 @@ extension ViewController : LatestTweetReplyable {
 	
 	func setReplyToByLatestTweet() {
 		
-		withChangeValue("canPost") {
+		withChangeValue(for: "canPost") {
 			
 			self.statusForReplyTo = latestTweet
 			

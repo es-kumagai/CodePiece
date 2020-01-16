@@ -10,14 +10,14 @@
 
 	import Foundation
 	
-	func debugStringFromJSON(object: AnyObject) -> String {
+	func debugString(fromJSONObject object: AnyObject) -> String {
 		
-		guard let data = try? NSJSONSerialization.dataWithJSONObject(object, options: []) else {
+		guard let data = try? JSONSerialization.data(withJSONObject: object, options: []) else {
 			
 			return "*** FAILED TO DECODE *** \n\(object)"
 		}
 		
-		guard let string = String(data: data, encoding: NSUTF8StringEncoding) else {
+		guard let string = String(data: data, encoding: .utf8) else {
 			
 			return "*** FAILED TO DECODE *** \n\(data)"
 		}

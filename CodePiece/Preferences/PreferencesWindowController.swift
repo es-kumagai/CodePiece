@@ -44,7 +44,7 @@ class PreferencesWindowController: NSWindowController {
 	
 	@IBAction func showTwitterPreference(sender:NSToolbarItem?) {
 		
-		self.contentViewController = try! Storyboard.TwitterPreferenceView.getControllerByIdentifier(twitterPreferenceType.storyboardID)
+		self.contentViewController = try! Storyboard.TwitterPreferenceView.getControllerByIdentifier(identifier: twitterPreferenceType.storyboardID)
 	}
 	
     override func windowDidLoad() {
@@ -54,7 +54,7 @@ class PreferencesWindowController: NSWindowController {
 		self.contentViewController = try! Storyboard.GitHubPreferenceView.getInitialController()
     }
 	
-	override func flagsChanged(theEvent: NSEvent) {
+	override func flagsChanged(with theEvent: NSEvent) {
 		
         DebugTime.print("Modifier flags changed. (\(theEvent.modifierFlags.rawValue))")
         
@@ -67,7 +67,7 @@ class PreferencesWindowController: NSWindowController {
 			self.twitterPreferenceType = .OAuth
 		}
 		
-		super.flagsChanged(theEvent)
+		super.flagsChanged(with: theEvent)
 	}
 }
 

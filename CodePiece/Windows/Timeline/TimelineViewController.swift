@@ -8,18 +8,18 @@
 
 import Cocoa
 import Swim
-import ESThread
+import Ocean
 import ESTwitter
-import ESNotification
 import ESGists
+import Dispatch
 
-private let TableViewInsertAnimationOptions: NSTableViewAnimationOptions = [.SlideDown, .EffectFade]
+private let TableViewInsertAnimationOptions: NSTableView.AnimationOptions = [.slideDown, .effectFade]
 
 class TimelineViewController: NSViewController {
 
 	@IBOutlet var menuController: MenuController!
 	
-	var notificationHandlers = NotificationHandlers()
+    var notificationHandlers = Notification.Handlers()
 	
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
 	
@@ -28,26 +28,24 @@ class TimelineViewController: NSViewController {
 		
 		willSet {
 		
-			willChangeValueForKey("canReplyRequest")
-			willChangeValueForKey("canOpenBrowserWithCurrentTwitterStatus")
+            willChangeValue(forKey: "canReplyRequest")
+            willChangeValue(forKey: "canOpenBrowserWithCurrentTwitterStatus")
 		}
 		
 		didSet {
 
 			defer {
 			
-				didChangeValueForKey("canReplyRequest")
-				didChangeValueForKey("canOpenBrowserWithCurrentTwitterStatus")
+                didChangeValue(forKey: "canReplyRequest")
+                didChangeValue(forKey: "canOpenBrowserWithCurrentTwitterStatus")
 			}
 			
-			let tableView = self.timelineTableView
-
-			tableView.makedCells.forEach { cell in
+			timelineTableView.makedCells.forEach { cell in
 				
 				cell.applySelection()
 			}
 
-			TimelineSelectionChangedNotification(timelineViewController: self, selectedCells: tableView.selectedCells).post()
+			TimelineSelectionChangedNotification(timelineViewController: self, selectedCells: timelineTableView.selectedCells).post()
 		}
 	}
 	
@@ -120,7 +118,7 @@ class TimelineViewController: NSViewController {
 		
 		didSet {
 			
-			precondition(NSThread.isMainThread())
+			precondition(Thread.isMainThread())
 			
 			self.updateDisplayControlsForState()
 		}
@@ -227,27 +225,27 @@ extension TimelineViewController {
 		
 		mutating func resetUpdateIntervalDelay() {
 			
-			self.setUpdateIntervalDelay(0)
+            self.setUpdateIntervalDelay(delay: 0)
 		}
 
-		mutating func addUpdateIntervalDelayBySecond(second: Double) {
+		mutating func addUpdateIntervalDelay(bySecond second: Double) {
 			
 			self.addUpdateIntervalDelayByInterval(Semaphore.Interval(second: second))
 		}
 
 		mutating func addUpdateIntervalDelayByInterval(interval: Semaphore.Interval) {
 			
-			self.addUpdateIntervalDelay(interval.rawValue)
+            self.addUpdateIntervalDelay(delay: interval.rawValue)
 		}
 		
 		mutating func setUpdateIntervalDelayBySecond(second: Double) {
 			
-			self.setUpdateIntervalDelayByInterval(Semaphore.Interval(second: second))
+            self.setUpdateIntervalDelayByInterval(interval: Semaphore.Interval(second: second))
 		}
 		
 		mutating func setUpdateIntervalDelayByInterval(interval: Semaphore.Interval) {
 			
-			self.setUpdateIntervalDelay(interval.rawValue)
+            self.setUpdateIntervalDelay(delay: interval.rawValue)
 		}
 
 		mutating func addUpdateIntervalDelay(delay: Int64) {
@@ -293,26 +291,26 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 			self._updateStatuses()
 			
 		case .AutoUpdate(enable: let enable):
-			self._changeAutoUpdateState(enable)
+            self._changeAutoUpdateState(enable: enable)
 			
 		case .SetAutoUpdateInterval(let interval):
-			self._changeAutoUpdateInterval(interval)
+            self._changeAutoUpdateInterval(interval: interval)
 			
 		case .AddAutoUpdateIntervalDelay(let interval):
-			self._changeAutoUpdateIntervalDelay(interval)
+            self._changeAutoUpdateIntervalDelay(interval: interval)
 			
 		case .ResetAutoUpdateIntervalDeray:
 			self._resetAutoUpdateIntervalDelay()
 			
 		case .SetReachability(let state):
-			self._changeReachability(state)
+            self._changeReachability(state: state)
 			
 		case .ChangeHashtags(let hashtags):
 			self._changeHashtags(hashtags)
 		}
 	}
 	
-	func messageQueue<Queue : MessageQueueType>(queue: Queue, handlingError error: ErrorType) throws {
+	func messageQueue<Queue : MessageQueueType>(queue: Queue, handlingError error: Error) throws {
 		
 		fatalError(String(error))
 	}
@@ -321,16 +319,16 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		
 		self.autoUpdateState.updateNextUpdateTime()
 		
-		invokeAsyncOnMainQueue(self.updateStatuses)
+		DispatchQueue.main.async(execute: updateStatuses)
 	}
 	
 	private func _changeHashtags(hashtags: Set<ESTwitter.Hashtag>) {
 		
 		if self.timelineDataSource.appendHashtags(hashtags) {
 		
-			invokeOnMainQueue {
+            DispatchQueue.main.sync {
 
-				self.timelineTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: TableViewInsertAnimationOptions)
+                self.timelineTableView.insertRows(at: IndexSet(integer: 0), withAnimation: TableViewInsertAnimationOptions)
 				self.message.send(.UpdateStatuses)
 			}
 		}
@@ -343,14 +341,14 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 	
 	private func _changeAutoUpdateIntervalDelay(interval: Double) {
 		
-		self.autoUpdateState.addUpdateIntervalDelayBySecond(interval)
+		self.autoUpdateState.addUpdateIntervalDelay(bySecond: interval)
 		
 		NSLog("Next update of timeline will delay %@ seconds.", Semaphore.Interval(rawValue: self.autoUpdateState.updateIntervalDelay).description)
 	}
 	
 	private func _resetAutoUpdateIntervalDelay() {
 		
-		guard self.autoUpdateState.updateIntervalDelay.isNonZero else {
+		guard autoUpdateState.updateIntervalDelay != 0 else {
 			
 			return
 		}
@@ -374,12 +372,12 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		
 		switch state {
 			
-		case .ViaWiFi, .ViaCellular:
+		case .viaWiFi, .viaCellular:
 			NSLog("CodePiece has get internet connection.")
 			self.autoUpdateState.hasInternetConnection = true
 			self.autoUpdateState.setNeedsUpdate()
 			
-		case .Unreachable:
+		case .unreachable:
 			NSLog("CodePiece has lost internet connection.")
 			self.autoUpdateState.hasInternetConnection = false
 		}
@@ -413,12 +411,12 @@ extension TimelineViewController : NotificationObservable {
 
 		super.viewDidAppear()
 		
-		self.observeNotification(Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.message.send(.UpdateStatuses)
 		}
 		
-		self.observeNotification(HashtagsDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
 			
 			let hashtags = notification.hashtags
 			
@@ -427,24 +425,24 @@ extension TimelineViewController : NotificationObservable {
 			self.timeline = self.timeline.replaceHashtags(hashtags)
 		}
 		
-		self.observeNotificationNamed(NSWorkspaceWillSleepNotification) { [unowned self] notification in
+		self.observe(notificationNamed: NSWorkspaceWillSleepNotification) { [unowned self] notification in
 			
 			self.message.send(.AutoUpdate(enable: false))
 		}
 		
-		self.observeNotificationNamed(NSWorkspaceDidWakeNotification) { [unowned self] notification in
+		self.observe(notificationNamed: NSWorkspaceDidWakeNotification) { [unowned self] notification in
 			
 			self.message.send(.AutoUpdate(enable: true))
 		}
 		
-		self.observeNotification(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
+		self.observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
 			self.message.send(.SetReachability(notification.state))
 		}
 
-		self.observeNotification(ViewController.PostCompletelyNotification.self) { [unowned self] notification in
+		self.observe(notification: MainViewController.PostCompletelyNotification.self) { [unowned self] notification in
 		
-			invokeAsyncOnMainQueue(after: 3.0) {
+			DispatchQueue.main.async(after: 3.0) {
 				
 				self.message.send(.UpdateStatuses)
 			}
@@ -517,7 +515,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 				self.message.send(.AddAutoUpdateIntervalDelay(7.0))
 			}
 		
-			self.reportTimelineGetStatusError(error)
+            self.reportTimelineGetStatusError(error: error)
 		}
 		
 		let getTimelineSpecifiedQuery = {
@@ -558,7 +556,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 
 extension TimelineViewController : NSTableViewDelegate {
 
-	func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		
 		let items = self.timelineDataSource.items
 		
@@ -568,34 +566,34 @@ extension TimelineViewController : NSTableViewDelegate {
 		}
 		
 		let item = items[row]
-		let cell = item.timelineCellType.makeCellWithItem(item, tableView: tableView, owner: self) as! TimelineTableCellType
+        let cell = item.timelineCellType.makeCellWithItem(item: item, tableView: tableView, owner: self) as! TimelineTableCellType
 
 //		cell.selected = tableView.isRowSelected(row)
-		cell.selected = self.currentTimelineSelectedRowIndexes.containsIndex(row)
+        cell.selected = self.currentTimelineSelectedRowIndexes.contains(row)
 
 		return cell.toTimelineView()
 	}
 	
-	func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		
-		return self.timelineDataSource.estimateCellHeightOfRow(row, tableView: tableView)
+        return self.timelineDataSource.estimateCellHeightOfRow(row: row, tableView: tableView)
 	}
 
-	func tableViewSelectionIsChanging(notification: NSNotification) {
+    private func tableViewSelectionIsChanging(notification: NSNotification) {
 		
-		guard let tableView = notification.object as? TimelineTableView where tableView === self.timelineTableView else {
+		guard let tableView = notification.object as? TimelineTableView, tableView === self.timelineTableView else {
 			
 			return
 		}
 	}
 	
-	func tableViewSelectionDidChange(notification: NSNotification) {
+    private func tableViewSelectionDidChange(notification: NSNotification) {
 		
-		guard let tableView = notification.object as? TimelineTableView where tableView === self.timelineTableView else {
+		guard let tableView = notification.object as? TimelineTableView, tableView === self.timelineTableView else {
 			
 			return
 		}
 		
-		currentTimelineSelectedRowIndexes = tableView.selectedRowIndexes
+        currentTimelineSelectedRowIndexes = tableView.selectedRowIndexes
 	}
 }

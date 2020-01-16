@@ -8,17 +8,16 @@
 
 import AppKit
 import ESTwitter
-import ESNotification
 
 final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObservable {
 	
-	var notificationHandlers = NotificationHandlers()
+	var notificationHandlers = Notification.Handlers()
 	
 	override func awakeFromNib() {
 		
-		self.observeNotification(Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 
-			self.withChangeValue("canOpenTwitterHome")
+			self.withChangeValue(for: "canOpenTwitterHome")
 		}		
 	}
 	
@@ -41,7 +40,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		
 		guard let username = NSApp.twitterController.account?.username else {
 			
-			return self.showErrorAlert("Failed to open Twitter", message: "Twitter user is not set.")
+			return self.showErrorAlert(withTitle: "Failed to open Twitter", message: "Twitter user is not set.")
 		}
 		
 		do {
@@ -50,11 +49,11 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		}
 		catch ESTwitter.Browser.Error.OperationFailure(reason: let reason) {
 			
-			self.showErrorAlert("Failed to open Twitter", message: reason)
+			self.showErrorAlert(withTitle: "Failed to open Twitter", message: reason)
 		}
 		catch {
 			
-			self.showErrorAlert("Failed to open Twitter", message: "Unknown Error : \(error)")
+			self.showErrorAlert(withTitle: "Failed to open Twitter", message: "Unknown Error : \(error)")
 		}
 	}
 }

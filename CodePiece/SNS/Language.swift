@@ -23,184 +23,184 @@ extension Language {
 		
 		switch self {
 			
-		case ActionScript:
+		case .actionScript:
 			return "actionscript"
 			
-		case C:
+		case .c:
 			return "C"
 			
-		case CSharp:
+		case .cSharp:
 			return "csharp"
 			
-		case CPlusPlus:
+		case .cPlusPlus:
 			return "cpp"
 			
-		case Clojure:
+		case .clojure:
 			return "clojure"
 			
-		case CoffeeScript:
+		case .coffeeScript:
 			return "coffee"
 			
-		case CSS:
+		case .css:
 			return "css"
 			
-		case Go:
+		case .go:
 			return "go"
 			
-		case Haskell:
+		case .haskell:
 			return "haskell"
 			
-		case HTML:
+		case .html:
 			return "html"
 			
-		case Java:
+		case .java:
 			return "java"
 			
-		case JavaScript:
+		case .javaScript:
 			return "javascript"
 			
-		case Lua:
+		case .lua:
 			return "lua"
 
-		case Matlab:
+		case .matlab:
 			return "matlab"
 			
-		case Objective_C:
+		case .objectiveC:
 			return "objc"
 			
-		case Perl:
+		case .perl:
 			return "perl"
 			
-		case PHP:
+		case .php:
 			return "php"
 			
-		case Python:
+		case .python:
 			return "python"
 			
-		case R:
+		case .r:
 			return "r"
 			
-		case Ruby:
+		case .ruby:
 			return "ruby"
 			
-		case Scala:
+		case .scala:
 			return "scala"
 			
-		case Shell:
+		case .shell:
 			return "sh"
 			
-		case Swift:
+		case .swift:
 			return "swift"
 			
-		case TeX:
+		case .tex:
 			return "tex"
 			
-		case VimL:
+		case .vimL:
 			return "vim"
 			
-		case ABAP:
+		case .abap:
 			return "abap"
 			
-		case Ada:
+		case .ada:
 			return "adb"
 			
-		case Agda:
+		case .agda:
 			return "agda"
 			
-		case AGS_Script:
+		case .agsScript:
 			return "agsscript"
 			
-		case Alloy:
+		case .alloy:
 			return "alloy"
 			
-		case AMPL:
+		case .ampl:
 			return "ampl"
 			
-		case Ant_Build_System:
+		case .antBuildSystem:
 			return "ant"
 			
-		case ANTLR:
+		case .antlr:
 			return "antlr"
 			
-		case ApacheConf:
+		case .apacheConf:
 			return "apacheconf"
 			
-		case Apex:
+		case .apex:
 			return "apex"
 			
-		case APL:
+		case .apl:
 			return "apl"
 			
-		case AppleScript:
+		case .appleScript:
 			return "applescript"
 			
-		case Arc:
+		case .arc:
 			return "arc"
 			
-		case Arduino:
+		case .arduino:
 			return "arduino"
 			
-		case AsciiDoc:
+		case .asciiDoc:
 			return "asciidoc"
 			
-		case ASP:
+		case .asp:
 			return "asp"
 			
-		case AspectJ:
+		case .aspectJ:
 			return "aspectj"
 			
-		case Assembly:
+		case .assembly:
 			return "asm"
 			
-		case ATS:
+		case .ats:
 			return "ats"
 			
-		case Augeas:
+		case .augeas:
 			return "augeas"
 			
-		case AutoHotkey:
+		case .autoHotkey:
 			return "autohotkey"
 			
-		case AutoIt:
+		case .autoIt:
 			return "autoit"
 			
-		case Awk:
+		case .awk:
 			return "awk"
 			
-		case Batchfile:
+		case .batchfile:
 			return "bat"
 			
-		case Befunge:
+		case .befunge:
 			return "befunge"
 			
-		case Bison:
+		case .bison:
 			return "bison"
 			
-		case BitBake:
+		case .bitBake:
 			return "bitbake"
 			
-		case BlitzBasic:
+		case .blitzBasic:
 			return "blitzbasic"
 			
-		case BlitzMax:
+		case .blitzMax:
 			return "blitzmax"
 			
-		case Bluespec:
+		case .bluespec:
 			return "bluespec"
 			
-		case Boo:
+		case .boo:
 			return "boo"
 			
-		case Brainfuck:
+		case .brainfuck:
 			return "brainfuck"
 			
-		case Brightscript:
+		case .brightscript:
 			return "brightscript"
 			
-		case Bro:
+		case .bro:
 			return "bro"
 			
-		case C_ObjDump:
+		case .cObjDump:
 			return "c_objdump"
 			
 //		case C2hs_Haskell = "C2hs Haskell"
@@ -313,7 +313,7 @@ extension Language {
 //		case JSONLD
 //		case Julia
 //		case Kit
-		case Kotlin:
+		case .kotlin:
 			return "kotlin"
 			
 //		case KRL
@@ -458,7 +458,7 @@ extension Language {
 //		case Tcl
 //		case Tcsh
 //		case Tea
-		case Text:
+		case .text:
 			return "text"
 //
 //		case Textile

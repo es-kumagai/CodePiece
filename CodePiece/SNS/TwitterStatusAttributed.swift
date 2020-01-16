@@ -6,7 +6,7 @@
 //  Copyright © 2016 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import ESTwitter
 
 extension Status {
@@ -16,7 +16,7 @@ extension Status {
 		return attributedText(urlColor: systemPalette.urlColor, hashtagColor: systemPalette.hashtagColor, mentionColor: systemPalette.mentionColor)
 	}
 	
-	public func attributedText(@noescape tweak: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
+	public func attributedText(tweak: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
 		
 		return try attributedText(urlColor: systemPalette.urlColor, hashtagColor: systemPalette.hashtagColor, mentionColor: systemPalette.mentionColor, tweak: tweak)
 	}

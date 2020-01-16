@@ -25,11 +25,11 @@ public class AboutWindowController: NSWindowController {
 		return self.instantiate(storyboard)!
 	}
 	
-	public static func instantiate(storyboard:NSStoryboard, identifier:String? = nil) -> AboutWindowController? {
+	public static func instantiate(storyboard: NSStoryboard, identifier: String? = nil) -> AboutWindowController? {
 
 		if let identifier = identifier {
 
-			return storyboard.instantiateControllerWithIdentifier(identifier) as? AboutWindowController
+            return storyboard.instantiateController(withIdentifier: identifier) as? AboutWindowController
 		}
 		else {
 			

@@ -54,10 +54,10 @@ extension TwitterByOSPreferenceViewController {
 			
 			switch result {
 				
-			case .Success:
+			case .success:
 				break
 				
-			case .Failure(let error):
+			case .failure(let error):
 				NSLog("Access to Twitter account is not allowed. \(error)")
 				self.reportError("Access to Twitter account is not allowed. Please give permission to access Twitter account using Privacy settings.")
 			}
@@ -79,17 +79,17 @@ extension TwitterByOSPreferenceViewController {
 
 extension TwitterByOSPreferenceViewController {
 	
-	func openSystemPreferences(panel:String) {
+	func openSystemPreferences(_ panel: String) {
 		
 		// 表示に時間がかかるので、気持ち待ち時間を HUD で紛らわします。
 		waitingHUD.show()
-		
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(6 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
 			
 			self.waitingHUD.hide()
 		}
 		
-		NSWorkspace.sharedWorkspace().openURL(NSURL(fileURLWithPath: "/System/Library/PreferencePanes/\(panel).prefPane"))
+		NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/\(panel).prefPane"))
 	}
 
 	@IBAction func openAccountsPreferences(sender:NSButton) {

@@ -13,7 +13,7 @@ protocol PostDataManageable {
 	func makePostData() -> PostData
 }
 
-extension ViewController : PostDataManageable {
+extension MainViewController : PostDataManageable {
 	
 	func makePostData() -> PostData {
 		

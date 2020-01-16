@@ -17,13 +17,16 @@ protocol TwitterTextType {
 
 struct TwitterTextPart {
 
-	enum Type {
+	@available(*, unavailable, renamed: "Kind")
+	enum `Type` {}
+	
+	enum Kind {
 	
 		case ScreenName
 	}
 	
 	var text: String
-	var type: Type
+	var type: Kind
 	var range: Range<String.Index>
 }
 
@@ -31,13 +34,13 @@ extension TwitterTextType {
 	
 	var includedScreenNames: [TwitterTextPart] {
 		
-		let expression = try! NSRegularExpression(pattern: "(?<!\\w)@\\w+\\b", options: NSRegularExpressionOptions(rawValue: 0))
+		let expression = try! NSRegularExpression(pattern: "(?<!\\w)@\\w+\\b", options: [])
 		
 		let text = self.twitterText
-		let options = NSMatchingOptions(rawValue: 0)
+		let options = NSRegularExpression.MatchingOptions(rawValue: 0)
 		let range = NSMakeRange(0, text.utf16.count)
 		
-		return expression.matchesInString(text, options: options, range: range).reduce([TwitterTextPart]()) { parts, match in
+		return expression.matches(in: text, options: options, range: range).reduce([TwitterTextPart]()) { parts, match in
 
 			let startIndex = text.startIndex.advancedBy(match.range.location + 1)
 			let endIndex = startIndex.advancedBy(match.range.length - 1)
@@ -57,12 +60,12 @@ extension TwitterTextType {
 	
 	var isReplyAddressOnly: Bool {
 		
-		let expression = try! NSRegularExpression(pattern: "^@\\w+$", options: NSRegularExpressionOptions(rawValue: 0))
+		let expression = try! NSRegularExpression(pattern: "^@\\w+$", options: [])
 		
 		let text = self.twitterText
-		let options = NSMatchingOptions(rawValue: 0)
+		let options = NSRegularExpression.MatchingOptions(rawValue: 0)
 		let range = NSMakeRange(0, text.utf16.count)
 		
-		return expression.firstMatchInString(text, options: options, range: range).isExists
+		return expression.firstMatch(in: text, options: options, range: range) != nil
 	}
 }

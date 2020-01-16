@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import ESNotification
+import Ocean
 
 private let none = "----"
 

@@ -6,14 +6,14 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import Swim
 
 final class AboutWindowControllerSegue : NSStoryboardSegue {
 	
 	override func perform() {
 		
-		tweak(self.destinationController as! AboutWindowController) {
+		applyingExpression(to: self.destinationController as! AboutWindowController) {
 			
 			$0.acknowledgementsName = "Pods-CodePiece-acknowledgements"
 		}

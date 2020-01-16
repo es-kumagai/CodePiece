@@ -6,8 +6,6 @@
 //  Copyright © 2016 EasyStyle G.K. All rights reserved.
 //
 
-import ESNotification
-
 extension TimelineViewController {
 	
 	final class TimelineSelectionChangedNotification : Notification {

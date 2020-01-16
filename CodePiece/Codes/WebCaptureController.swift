@@ -9,8 +9,6 @@
 import Cocoa
 import WebKit
 import Ocean
-import Swift
-import ESThread
 
 private var thread = Thread(name: "jp.ez-style.CodePiece.CodeCaptureController")
 
@@ -18,19 +16,19 @@ final class WebCaptureController {
 	
 	typealias CaptureCompletionHandler = (NSImage?) -> Void
 	
-	private var requests:[Request]
+	private var requests: [Request]
 	
 	init() {
 
 		self.requests = [Request]()
 	}
 	
-	func capture<CaptureInfo:CaptureInfoType>(url:String, clientSize size:CGSize? = nil, captureInfo: CaptureInfo, completion:CaptureCompletionHandler) {
+	func capture<CaptureInfo:CaptureInfoType>(url: String, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, completion: @escaping CaptureCompletionHandler) {
 	
 		post(Request(url: url, owner: self, clientSize: size, captureInfo: captureInfo, handler: completion))
 	}
 	
-	private func post(request:Request) {
+	private func post(_ request: Request) {
 		
 		thread.invokeAsync {
 		
@@ -44,15 +42,15 @@ extension WebCaptureController {
 	
 	@objc internal class Request : NSObject {
 		
-		weak var owner:WebCaptureController!
+		weak var owner: WebCaptureController!
 
 		var captureInfo: CaptureInfoType
-		var url:String
-		var completionHandler:WebCaptureController.CaptureCompletionHandler
+		var url: String
+		var completionHandler: WebCaptureController.CaptureCompletionHandler
 		
-		var view:WebView
+		var view: WebView
 		
-		init<CaptureInfo:CaptureInfoType>(url:String, owner: WebCaptureController, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, handler:WebCaptureController.CaptureCompletionHandler) {
+		init<CaptureInfo:CaptureInfoType>(url: String, owner: WebCaptureController, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, handler: @escaping WebCaptureController.CaptureCompletionHandler) {
 			
 			self.owner = owner
 			
@@ -82,7 +80,7 @@ extension WebCaptureController {
 		
 		func post() {
 			
-			invokeAsyncOnMainQueue {
+			DispatchQueue.main.async {
 				
 				self.view.mainFrameURL = self.url
 			}
@@ -92,15 +90,15 @@ extension WebCaptureController {
 
 extension WebCaptureController.Request : WebFrameLoadDelegate {
 	
-	private func fulfillRequest(image:NSImage?) {
+	private func fulfillRequest(for image: NSImage?) {
 		
 		self.completionHandler(image)
 		
 		thread.invokeAsync {
 
-			if let index = self.owner.requests.indexOf(self) {
+			if let index = self.owner.requests.firstIndex(of: self) {
 			
-				self.owner.requests.removeAtIndex(index)
+				self.owner.requests.remove(at: index)
 			}
 		}
 	}
@@ -111,31 +109,31 @@ extension WebCaptureController.Request : WebFrameLoadDelegate {
 		// 応急対応として待ち時間を挿入します。適切な方法に変える必要があります。
 		sleepForSecond(0.5)
 		
-		invokeAsyncOnMainQueue { [unowned self] in
+		DispatchQueue.main.async { [unowned self] in
 
 			// TODO: 汎用性を確保するためには DOM を渡して切り取る範囲を返す機能を切り出す必要があります。
-			let dom = frame.DOMDocument
+			let dom = frame.domDocument!
 			let content = self.captureInfo.targetNode(sender, dom)
 			
 			// TODO: content が取得できず nil になる場合もあるので対応が必要
 			if let contentBound = content?.boundingBox() {
 				
-				let image = frame.frameView.documentView.capture(contentBound)
+				let image = frame.frameView.documentView!.capture(contentBound)
 				
 				self.fulfillRequest(image)
 			}
 			else {
 				
-				self.fulfillRequest(nil)
+				self.fulfillRequest(for: nil)
 			}
 		}
 	}
 	
 	func webView(sender: WebView!, didFailLoadWithError error: NSError!, forFrame frame: WebFrame!) {
 		
-		invokeAsyncOnMainQueue {
+		DispatchQueue.main.async {
 			
-			self.fulfillRequest(nil)
+			self.fulfillRequest(for: nil)
 		}
 	}
 }

@@ -7,17 +7,17 @@
 //
 
 import AppKit
-import ESNotification
+import Ocean
 
 final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObservable {
 
-	var notificationHandlers = NotificationHandlers()
+	var notificationHandlers = Notification.Handlers()
 	
 	override func awakeFromNib() {
 		
-		self.observeNotification(Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notificationNamed: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			self.withChangeValue("canOpenGitHubHome")
+			self.withChangeValue(for: "canOpenGitHubHome")
 		}
 	}
 	
@@ -40,19 +40,19 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObserva
 		
 		guard let username = NSApp.settings.account.username else {
 			
-			return self.showErrorAlert("Failed to open GitHub", message: "GitHub user is not set.")
+			return self.showErrorAlert(withTitle: "Failed to open GitHub", message: "GitHub user is not set.")
 		}
 		
 		let urlString = "https://GitHub.com/\(username)"
 		
-		guard let url = NSURL(string: urlString) else {
+		guard let url = URL(string: urlString) else {
 			
-			return self.showErrorAlert("Failed to open GitHub", message: "Invalid URL '\(urlString)'.")
+			return self.showErrorAlert(withTitle: "Failed to open GitHub", message: "Invalid URL '\(urlString)'.")
 		}
 		
-		NSWorkspace.sharedWorkspace().openURL(url).ifFalse {
+		NSWorkspace.shared.open(url).isFalse {
 			
-			self.showErrorAlert("Failed to open GitHub", message: "URL '\(url)' cannot open.")
+			self.showErrorAlert(withTitle: "Failed to open GitHub", message: "URL '\(url)' cannot open.")
 		}
 	}
 }

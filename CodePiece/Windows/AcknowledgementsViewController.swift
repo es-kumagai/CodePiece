@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import ESAppKitExtension
+import Sky
 
 public final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSource {
 	
@@ -95,7 +95,7 @@ public class ESAcknowledgementsViewController: NSViewController, Acknowledgement
 	@IBInspectable public var licenseColumnIdentifier:String = "license"
 	
 	public var acknowledgementsName:String!
-	public var acknowledgementsBundle:NSBundle?
+	public var acknowledgementsBundle:Bundle?
 	
 	private var acknowledgementsTableViewDataSource:ESAcknowledgementsTableViewDataSource! {
 		
@@ -127,7 +127,7 @@ public class ESAcknowledgementsViewController: NSViewController, Acknowledgement
 	
 		let headerText = acknowledgements.headerText
 		
-		if let title = NSBundle.mainBundle().appName {
+		if let title = Bundle.main.appName {
 			
 			self.title = "\(title) : \(headerText)"
 		}

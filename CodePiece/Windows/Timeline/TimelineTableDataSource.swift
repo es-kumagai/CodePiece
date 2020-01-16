@@ -67,7 +67,7 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		}
 		else {
 
-			return .Aborted
+			return .aborted
 		}
 	}
 	

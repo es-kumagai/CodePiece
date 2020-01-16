@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import ESNotification
+import Ocean
 
 extension TimelineViewController {
 	
@@ -28,6 +28,6 @@ extension TimelineViewController {
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(sender: AnyObject) {
 		
-		self.menuController.openBrowserWithCurrentTwitterStatus(sender)
+		self.menuController.openBrowserWithCurrentTwitterStatus(sender: sender)
 	}
 }

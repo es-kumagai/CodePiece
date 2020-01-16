@@ -9,7 +9,6 @@
 import Cocoa
 import ESGists
 import ESTwitter
-import Result
 
 final class GistsController : PostController, AlertDisplayable {
 
@@ -44,7 +43,7 @@ final class GistsController : PostController, AlertDisplayable {
 			
 			switch response {
 				
-			case .Success(let created):
+			case .success(let created):
 				
 				let gist = created.gist
 				
@@ -53,7 +52,7 @@ final class GistsController : PostController, AlertDisplayable {
 				NSLog("A Gist posted successfully. \(gist)")
 				completed(PostResult(value: container))
 				
-			case .Failure(let error):
+			case .failure(let error):
 
 				completed(PostResult(error: .Description("Failed to post a gist. \(error)")))
 			}

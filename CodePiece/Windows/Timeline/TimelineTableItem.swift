@@ -17,7 +17,7 @@ protocol TimelineTableItem {
 	var timelineCellType: TimelineTableCellType.Type { get }
 }
 
-protocol TimelineTableCellType : AnyObject, Selectable {
+protocol TimelineTableCellType : Selectable {
 	
 	static var prototypeCellIdentifier: String { get }
 	static func estimateCellHeightForItem(item:TimelineTableItem, tableView:NSTableView) -> CGFloat
@@ -61,7 +61,7 @@ struct TimelineTweetItem : TimelineTableItem {
 	}
 }
 
-extension SequenceType where Generator.Element == ESTwitter.Status {
+extension Sequence where Element == ESTwitter.Status {
 	
 	func toTimelineTweetItems(hashtags: ESTwitter.HashtagSet) -> [TimelineTweetItem] {
 		
@@ -69,7 +69,7 @@ extension SequenceType where Generator.Element == ESTwitter.Status {
 	}
 }
 
-extension SequenceType where Generator.Element == TimelineTableItem {
+extension Sequence where Element == TimelineTableItem {
 	
 	var timelineLatestTweetItem: TimelineTweetItem? {
 		
@@ -79,9 +79,9 @@ extension SequenceType where Generator.Element == TimelineTableItem {
 	}
 }
 
-extension SequenceType where Generator.Element : TimelineTableItem {
+extension Sequence where Element : TimelineTableItem {
 	
-	func timelineItemsAppend<S: SequenceType where S.Generator.Element == TimelineTableItem>(items: S) -> [S.Generator.Element] {
+	func timelineItemsAppend<S: Sequence>(items: S) -> [S.Element] where S.Element == TimelineTableItem {
 	
 		return self.map { $0 as TimelineTableItem } + items
 	}

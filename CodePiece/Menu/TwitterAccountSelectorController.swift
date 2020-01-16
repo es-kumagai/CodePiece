@@ -34,13 +34,13 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 	
 	func updateAccountSelector() {
 		
-		self.withChangeValue("hasAccount") {
+		self.withChangeValue(for: "hasAccount") {
 		
 			self.accounts = nil
 			
 			let createMenuItem = TwitterAccountMenuItem.menuItemCreator(action: #selector(TwitterAccountSelectorController.accountSelectorDidChange(_:)), target: self)
 			
-			tweak (self.accountSelector) {
+			applyingExpression(to: accountSelector) {
 				
 				let currentAccount = NSApp.settings.account.twitterAccount?.acAccount
 				
@@ -59,7 +59,7 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 
 		let headerMenuItem = self.headerMenuItem
 		
-		guard let account = sender.account where headerMenuItem.differentAccount(account) else {
+		guard let account = sender.account, headerMenuItem.differentAccount(account) else {
 			
 			return
 		}
@@ -69,24 +69,20 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 		TwitterAccountSelectorDidChangeNotification(account: account).post()
 	}
 	
-	func accountByIdentifier(identifier:String!) -> ACAccount? {
+	func accountByIdentifier(identifier: String!) -> ACAccount? {
 		
-		let found = self.accounts.findElement {
+		return self.accounts.first {
 			
-			$0.identifier == identifier
+			$0.identifier.isEqual(to: identifier)
 		}
-		
-		return found?.element
 	}
 	
 	func accountByName(name:String!) -> ACAccount? {
 		
-		let found = self.accounts.findElement {
+		return self.accounts.first {
 			
 			$0.username == name
 		}
-		
-		return found?.element
 	}
 	
 }

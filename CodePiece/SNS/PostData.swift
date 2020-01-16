@@ -8,7 +8,6 @@
 
 import ESGists
 import ESTwitter
-import Himotoki
 
 enum PostResult {
 	
@@ -28,7 +27,7 @@ struct PostData {
 	var appendAppTagToTwitter:Bool = false
 }
 
-enum PostDataError : ErrorType {
+enum PostDataError : Error {
 	
 	case TwitterRawObjectsParseError(rawObjects: [NSObject:AnyObject])
 }
@@ -163,7 +162,7 @@ extension PostDataContainer {
 		self.twitterState.mediaIDs = mediaIDs
 	}
 	
-	func setTwitterMediaIDs(mediaIDs: String...) {
+	func setTwitterMediaIDs(_ mediaIDs: String...) {
 	
 		self.setTwitterMediaIDs(mediaIDs)
 	}
@@ -188,7 +187,7 @@ extension PostDataContainer {
 	
 	func makeDescriptionWithEffectiveHashtags(hashtags:ESTwitter.HashtagSet, maxLength:Int? = nil, appendString:String? = nil) -> String {
 		
-		func getTruncatedDescription(description: String, maxLength: Int) -> String {
+		func getTruncatedDescription(_ description: String, maxLength: Int) -> String {
 			
 			let descriptionLength = maxLength - hashtags.twitterDisplayTextLength
 			

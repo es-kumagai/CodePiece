@@ -10,11 +10,10 @@ import Cocoa
 import ESProgressHUD
 import Ocean
 import Swim
-import ESNotification
 
 class TwitterPreferenceViewController: NSViewController, NotificationObservable {
 
-	var notificationHandlers = NotificationHandlers()
+	var notificationHandlers = Notification.Handlers()
 	
 	private(set) var waitingHUD:ProgressHUD = ProgressHUD(message: "Please wait...", useActivityIndicator: true)
 	private(set) var verifyingHUD:ProgressHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
@@ -36,7 +35,7 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		
 		willSet {
 			
-			self.willChangeValueForKey("canVerify")
+			willChangeValue(forKey: "canVerify")
 			
 			if newValue {
 				
@@ -46,7 +45,7 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		
 		didSet {
 			
-			self.didChangeValueForKey("canVerify")
+			didChangeValue(forKey: "canVerify")
 			
 			if !verifying {
 				
@@ -78,7 +77,7 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 	
 	func resetAuthorization() {
 
-		self.withChangeValue("hasAccount") {
+		self.withChangeValue(for: "hasAccount") {
 
 			NSApp.twitterController.account = nil
 		}
@@ -103,9 +102,9 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		self.observeNotification(TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.self) { [unowned self] notification in
+		observe(notification: TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.self) { [unowned self] notification in
 			
-			self.withChangeValue("hasAccount") {
+			self.withChangeValue(for: "hasAccount") {
 				
 				NSApp.twitterController.account = notification.account
 			}
@@ -113,9 +112,9 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 			self.verifyCredentials()
 		}
 		
-		self.observeNotification(Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			self.withChangeValue("credentialsVerified", "credentialsNotVerified")
+			self.withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
 			self.applyAuthorizedStatus()
 		}		
     }
@@ -137,7 +136,7 @@ extension TwitterPreferenceViewController {
 		self.reportError("")
 	}
 	
-	func reportError(message:String) {
+	func reportError(_ message:String) {
 		
 		if !message.isEmpty {
 			
@@ -175,11 +174,11 @@ extension TwitterPreferenceViewController {
 			
 			switch result {
 				
-			case .Success:
+			case .success:
 				NSLog("Twitter credentials verified successfully.")
 				
-			case .Failure(let error):
-				self.showErrorAlert("Failed to verify credentials", message: error.localizedDescription)
+			case .failure(let error):
+				showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
 			}
 		}
 	}

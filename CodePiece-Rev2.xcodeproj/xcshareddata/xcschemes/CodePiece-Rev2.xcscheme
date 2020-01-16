@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1120"
+   LastUpgradeVersion = "1130"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -35,6 +35,16 @@
                BlueprintIdentifier = "B1D13C8123CA14DD0016902A"
                BuildableName = "CodePieceTests.xctest"
                BlueprintName = "CodePieceTests"
+               ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B132D51223CD08B800690C5F"
+               BuildableName = "ESTwitterTests.xctest"
+               BlueprintName = "ESTwitterTests"
                ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
             </BuildableReference>
          </TestableReference>

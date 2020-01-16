@@ -6,10 +6,10 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Cocoa
+import AppKit
 import Swim
-import ESThread
 import ESTwitter
+import ESGists
 
 class TimelineTableCellView: NSTableCellView, Selectable {
 
@@ -27,7 +27,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 			
 			if item?.status.id != oldValue?.status.id {
 
-				self.applyItem(self.item)
+				self.applyItem(item: self.item)
 			}
 		}
 	}
@@ -46,7 +46,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 			
 			if self.selected != oldValue {
 
-				self.textLabel.selectable = self.selected
+				self.textLabel.isSelectable = self.selected
 				self.needsDisplay = true
 			}
 		}
@@ -58,7 +58,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 	@IBOutlet var dateLabel:NSTextField!
 	@IBOutlet var retweetMark: NSView!
 
-	override func drawRect(dirtyRect: NSRect) {
+	override func draw(_ dirtyRect: NSRect) {
 
 		if self.selected {
 
@@ -71,7 +71,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 		
 		NSRectFill(dirtyRect)
 		
-		super.drawRect(dirtyRect)
+		super.draw(dirtyRect)
 	}
 	
 	private func applyItem(item:TimelineTweetItem?) {
@@ -90,23 +90,23 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 				text.addAttribute(NSForegroundColorAttributeName, value: systemPalette.textColor, range: textRange)
 			}
 			
-			let dateToString:(Date) -> String = {
+			let dateToString: (ISO8601Date) -> String = {
 				
-				let formatter = tweak(NSDateFormatter()) {
+				let formatter = applyingExpression(to: DateFormatter()) {
 					
-					$0.dateStyle = .ShortStyle
-					$0.timeStyle = .ShortStyle
+					$0.dateStyle = .short
+					$0.timeStyle = .short
 //					$0.dateFormat = "yyyy-MM-dd HH:mm"
 //					$0.locale = NSLocale(localeIdentifier: "en_US_POSIX")
 				}
 				
-				return formatter.stringFromDate($0.rawValue)
+				return formatter.string(from: $0.rawValue)
 			}
 			
 			self.usernameLabel.stringValue = status.user.name
 			self.dateLabel.stringValue = dateToString(status.createdAt)
 			self.iconButton.image = nil
-			self.retweetMark.hidden = !status.isRetweetedTweet
+			self.retweetMark.isHidden = !status.isRetweetedTweet
 			self.style = (status.createdAt > Date().daysAgo(1) ? .Recent : .Past)
 			
 			self.updateIconImage(status)
@@ -117,7 +117,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 			self.usernameLabel.stringValue = ""
 			self.dateLabel.stringValue = ""
 			self.iconButton.image = nil
-			self.retweetMark.hidden = true
+			self.retweetMark.isHidden = true
 			self.style = .Recent
 			self.iconButton.image = nil
 		}
@@ -127,24 +127,24 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 	
 	private func updateIconImage(status:ESTwitter.Status) {
 
-		let setImage = { (url: NSURL) in
+		let setImage = { (url: Foundation.URL) in
 			
-			invokeAsyncInBackground {
+			DispatchQueue.global(qos: .background).async {
 				
-				if let image = NSImage(contentsOfURL: url) {
+				if let image = NSImage(contentsOf: url) {
 					
-					invokeAsyncOnMainQueue { self.iconButton.image = image }
+					DispatchQueue.main.async { self.iconButton.image = image }
 				}
 				else {
 					
-					invokeAsyncOnMainQueue { self.iconButton.image = nil }
+					DispatchQueue.main.async { self.iconButton.image = nil }
 				}
 			}
 		}
 		
 		let resetImage = {
 			
-			invokeAsyncOnMainQueue {
+			DispatchQueue.main.async {
 				
 				self.iconButton.image = nil
 			}
@@ -171,9 +171,9 @@ extension TimelineTableCellView : TimelineTableCellType {
 
 	static func makeCellWithItem(item: TimelineTableItem, tableView: NSTableView, owner: AnyObject?) -> NSTableCellView {
 		
-		let view = tweak(self.makeCellForTableView(tableView, owner: owner) as! TimelineTableCellView) {
+		let view = applyingExpression(to: makeCellForTableView(tableView: tableView, owner: owner) as! TimelineTableCellView) {
 			
-			$0.textLabel.selectable = false
+			$0.textLabel.isSelectable = false
 			$0.textLabel.allowsEditingTextAttributes = true
 			
 			$0.item = (item as! TimelineTweetItem)
@@ -189,9 +189,9 @@ extension TimelineTableCellView : TimelineTableCellType {
 		let baseHeight: CGFloat = 61
 		let textLabelWidthAdjuster: CGFloat = 10.0
 
-		let cell = self.getCellForEstimateHeightForTableView(tableView)
+		let cell = self.getCellForEstimateHeightForTableView(tableView: tableView)
 		
-		cell.frame = tableView.rectOfColumn(0)
+		cell.frame = tableView.rect(ofColumn: 0)
 
 		let font = cell.textLabel.font
 		let labelSize = item.status.text.sizeWithFont(font, lineBreakMode: .ByWordWrapping, maxWidth: cell.textLabel.bounds.width + textLabelWidthAdjuster)
@@ -207,7 +207,7 @@ extension TimelineTableCellView : TimelineTableCellType {
 		if self.cellForEstimateHeight == nil {
 			
 //			let cell = self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView
-			guard let topObjects = tableView.topObjectsInRegisteredNibByIdentifier(self.prototypeCellIdentifier) else {
+			guard let topObjects = tableView.topObjectsInRegisteredNibByIdentifier(identifier: self.prototypeCellIdentifier) else {
 			
 				fatalError()
 			}
@@ -226,7 +226,7 @@ extension TimelineTableCellView.Style {
 		switch self {
 
 		case .Recent:
-			return NSColor.whiteColor()
+			return .white
 			
 		case .Past:
 			return NSColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1.0)

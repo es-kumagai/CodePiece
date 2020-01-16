@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import ESThread
 
 final class BaseWindowController: NSWindowController {
 
@@ -29,7 +28,7 @@ extension BaseWindowController : NSWindowDelegate {
 		
 		DebugTime.print("Closing window ...")
 
-		invokeAsyncOnMainQueue {
+		DispatchQueue.main.async {
 			
 			DebugTime.print("Application will terminate.")
 			NSApp.terminate(self)

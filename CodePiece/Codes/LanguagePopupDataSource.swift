@@ -8,22 +8,22 @@
 
 import Cocoa
 import ESGists
+import Ocean
 import Swim
-import ESNotification
 
 final class LanguagePopupDataSource : NSObject {
 	
-	let defaultLanguage = Language.Swift
+	let defaultLanguage = Language.swift
 	
 	@IBOutlet var popupButton:NSPopUpButton! {
 		
 		didSet {
 
-			self.popupButton.addItemWithTitle(self.defaultLanguage.description)
+			self.popupButton.addItem(withTitle: self.defaultLanguage.description)
 			
 			for language in languages.sort() {
 
-				let menu = tweak (NSMenuItem(title: language.description, action: #selector(LanguagePopupDataSource.popupSelected(_:)), keyEquivalent: "")) {
+				let menu = applyingExpression(to: NSMenuItem(title: language.description, action: #selector(LanguagePopupDataSource.popupSelected(_:)), keyEquivalent: "")) {
 					
 					$0.target = self
 				}
@@ -35,8 +35,8 @@ final class LanguagePopupDataSource : NSObject {
 	
 	let languages: Set<Language> = { () -> Set<Language> in
 		
-		let populars = Set(PopularLanguage.all.map(Language.init))
-		let others = [ Language.Text, Language.Kotlin ] as Set
+		let populars = Set(PopularLanguage.allCases.map(Language.init))
+		let others = [ .text, .kotlin ] as Set<Language>
 		
 		return populars.union(others)
 	}()
@@ -46,13 +46,13 @@ final class LanguagePopupDataSource : NSObject {
 		super.awakeFromNib()
 	}
 	
-	func selectLanguage(language:Language) {
+	func selectLanguage(_ language:Language) {
 	
-		self.popupButton.selectItemWithTitle(language.description)
-		self.popupButton.selectedItem.invokeIfExists(self.popupSelected)
+		self.popupButton.selectItem(withTitle: language.description)
+		self.popupButton.selectedItem.invokeIfExists(expression: self.popupSelected)
 	}
 	
-	func popupSelected(item:NSMenuItem) {
+	@objc func popupSelected(_ item: NSMenuItem) {
 		
 		self.popupButton.title = item.title
 		
@@ -62,7 +62,7 @@ final class LanguagePopupDataSource : NSObject {
 
 extension LanguagePopupDataSource {
 	
-	final class LanguageSelectionChanged : Notification {
+	final class LanguageSelectionChanged : NotificationProtocol {
 		
 		var language:Language
 		

@@ -6,7 +6,8 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Reachability
+import ReachabilitySwift
+import ESNotification
 
 extension StatusImageView.Status {
 
@@ -14,13 +15,13 @@ extension StatusImageView.Status {
 		
 		switch reachabilityState {
 			
-		case .viaWiFi:
+		case .ViaWiFi:
 			self = .Available
 			
-		case .viaCellular:
+		case .ViaCellular:
 			self = .Available
 			
-		case .unreachable:
+		case .Unreachable:
 			self = .Unavailable
 		}
 	}
@@ -34,27 +35,27 @@ final class ReachabilityController {
 	
 	enum State {
 		
-		case viaWiFi
-		case viaCellular
-		case unreachable
+		case ViaWiFi
+		case ViaCellular
+		case Unreachable
 		
-		init(_ rawState: Reachability.Connection) {
+		init(_ rawState:Reachability.NetworkStatus) {
 			
 			switch rawState {
 				
-			case .wifi:
-				self = .viaWiFi
+			case .ReachableViaWiFi:
+				self = ViaWiFi
 				
-			case .cellular:
-				self = .viaCellular
+			case .ReachableViaWWAN:
+				self = ViaCellular
 				
-			case .unavailable, .none:
-				self = .unreachable
+			case .NotReachable:
+				self = Unreachable
 			}
 		}
 	}
 	
-	final class ReachabilityChangedNotification : NotificationProtocol {
+	final class ReachabilityChangedNotification : Notification {
 		
 		private(set) var state:State
 		
@@ -89,7 +90,7 @@ final class ReachabilityController {
 	
 	var state:State {
 		
-		return State(reachability.connection)
+		return State(self.reachability.currentReachabilityStatus)
 	}
 	
 	func reachabilityDidChange(notification:NamedNotification) {
@@ -109,13 +110,13 @@ extension ReachabilityController.State : CustomStringConvertible {
 		
 		switch self {
 			
-		case .viaWiFi:
+		case .ViaWiFi:
 			return "Wi-Fi"
 			
-		case .viaCellular:
+		case .ViaCellular:
 			return "Cellular"
 			
-		case .unreachable:
+		case .Unreachable:
 			return "Unreachable"
 		}
 	}

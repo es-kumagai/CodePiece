@@ -54,17 +54,17 @@ extension NSApplication {
 	
 	var environment:Environment {
 		
-		return self.dynamicType.environment
+		return Self.environment
 	}
 	
 	var settings:Settings {
 	
-		return self.dynamicType.settings
+		return Self.settings
 	}
 	
 	var controllers:AppGlobalControllers {
 
-		return self.dynamicType.controllers
+		return Self.controllers
 	}
 	
 	var snsController:SNSController {
@@ -102,7 +102,7 @@ extension NSApplication {
 	
 	func showWelcomeBoard() {
 
-		NSApp.runModalForWindow(welcomeBoardWindowController.window!)
+		NSApp.runModal(for: welcomeBoardWindowController.window!)
 	}
 	
 	func closeWelcomeBoard() {

@@ -44,7 +44,7 @@ extension TimelineHashtagTableCellItem : TimelineTableItem  {
 			self.previousHashtagLabel.stringValue = self.item.previousHashtags?.toTwitterDisplayText() ?? ""
 			self.currentHashtagLabel.stringValue = self.item.currentHashtags.toTwitterDisplayText()
 			
-			self.previousHashtagView.hidden = (self.item.previousHashtags == nil)
+			self.previousHashtagView.isHidden = (self.item.previousHashtags == nil)
 		}
 	}
 	

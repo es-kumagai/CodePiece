@@ -28,12 +28,12 @@ extension TimelineViewController {
 	
 	func updateDisplayControlsForState() {
 		
-		self.updateDisplayControlsForState(self.displayControlState)
+        self.updateDisplayControlsForState(state: displayControlState)
 	}
 	
 	func updateDisplayControlsForState(state: DisplayControlState) {
-		
-		precondition(NSThread.isMainThread())
+        
+		precondition(Thread.isMainThread())
 		
 		let controlsForShow: [NSView?]
 		let controlsForHide: [NSView?]
@@ -51,7 +51,7 @@ extension TimelineViewController {
 			controlsForHide = self.displayControlsForUpdating
 		}
 
-		controlsForShow.forEach { $0?.hidden = false }
-		controlsForHide.forEach { $0?.hidden = true }
+        controlsForShow.forEach { $0?.isHidden = false }
+		controlsForHide.forEach { $0?.isHidden = true }
 	}
 }

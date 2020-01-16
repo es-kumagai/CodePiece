@@ -14,8 +14,8 @@ class TimelineStatusView: NSView {
 		
 		didSet {
 			
-			self.statusLabel?.stringValue = ""
-			self.applyForegroundColorToStatusLabel()
+			statusLabel?.stringValue = ""
+			applyForegroundColorToStatusLabel()
 		}
 	}
 	
@@ -29,32 +29,32 @@ class TimelineStatusView: NSView {
 		
 		didSet {
 			
-			self.applyForegroundColorToStatusLabel()
-			self.setNeedsDisplayInRect(self.frame)
+			applyForegroundColorToStatusLabel()
+            setNeedsDisplay(frame)
 		}
 	}
 	
 	private func applyForegroundColorToStatusLabel() {
 		
-		self.statusLabel?.textColor = self.foregroundColor
+		statusLabel?.textColor = foregroundColor
 	}
 	
 	var OKMessage: String {
 		
 		get {
 			
-			guard self.state == .OK else {
+			guard state == .OK else {
 				
 				return ""
 			}
 			
-			return self.statusLabel?.stringValue ?? ""
+			return statusLabel?.stringValue ?? ""
 		}
 		
 		set {
 			
-			self.state = .OK
-			self.statusLabel?.stringValue = newValue
+			state = .OK
+			statusLabel?.stringValue = newValue
 		}
 	}
 
@@ -62,12 +62,12 @@ class TimelineStatusView: NSView {
 		
 		get {
 			
-			guard self.state == .Error else {
+			guard state == .Error else {
 
 				return ""
 			}
 
-			return self.statusLabel?.stringValue ?? ""
+			return statusLabel?.stringValue ?? ""
 		}
 		
 		set {
@@ -77,14 +77,14 @@ class TimelineStatusView: NSView {
 				return resetMessage()
 			}
 			
-			self.state = .Error
-			self.statusLabel?.stringValue = newValue
+			state = .Error
+			statusLabel?.stringValue = newValue
 		}
 	}
 	
 	func clearMessage() {
 		
-		self.OKMessage = ""
+		OKMessage = ""
 	}
 	
 	var foregroundColor: NSColor {
@@ -92,7 +92,7 @@ class TimelineStatusView: NSView {
 		switch state {
 			
 		case .OK:
-			return NSColor.windowFrameColor()
+            return NSColor.windowFrameColor
 			
 		case .Error:
 			return NSColor(red: 0.5, green: 0.2, blue: 0.2, alpha: 1.0)
@@ -104,7 +104,7 @@ class TimelineStatusView: NSView {
 		switch state {
 			
 		case .OK:
-			return NSColor.windowBackgroundColor()
+            return NSColor.windowBackgroundColor
 			
 		case .Error:
 			return NSColor(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
@@ -113,14 +113,15 @@ class TimelineStatusView: NSView {
 	
 	func resetMessage() {
 		
-		self.state = .OK
-		self.statusLabel?.stringValue = ""
+		state = .OK
+		statusLabel?.stringValue = ""
 	}
 	
-    override func drawRect(dirtyRect: NSRect) {
-        super.drawRect(dirtyRect)
+    override func drawRect(_ dirtyRect: NSRect) {
+        
+        super.draw(dirtyRect)
 
-		self.backgroundColor.set()
+		backgroundColor.set()
 		
 		NSRectFill(dirtyRect)
     }

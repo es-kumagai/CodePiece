@@ -7,19 +7,15 @@
 //
 
 import Cocoa
-import STTwitter
 import ESTwitter
 import ESGists
 import Accounts
-import Result
 import Ocean
-import ESThread
 import Swim
-import Himotoki
 
-struct GetStatusesError : ErrorType, CustomStringConvertible {
+struct GetStatusesError : Error, CustomStringConvertible {
 
-	enum Type {
+	enum `Type` {
 	
 		case DecodeResultError
 		case UnexpectedError
@@ -72,9 +68,9 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	var latestTweet: ESTwitter.Status?
 
-	private static let timeout:NSTimeInterval = 15.0
-	private static let accountStore:ACAccountStore = ACAccountStore()
-	private static let accountType:ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+	private static let timeout: NSTimeInterval = 15.0
+	private static let accountStore: ACAccountStore = ACAccountStore()
+	private static let accountType: ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 	private static let accountOptions:[NSObject:AnyObject]? = nil
 	
 	private static let APINotReadyError = SNSController.AuthenticationError.NotReady(service: .Twitter, description: "Twitter API is not ready.")
@@ -139,14 +135,14 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		case let .account(account):
 
 			NSLog("🐋 Instantiate Twitter API using OS Account.")
-			return tweak (STTwitterAPI.twitterAPIOSWithAccount(account, delegate:self)) {
+			return applyingExpression(STTwitterAPI.twitterAPIOSWithAccount(account, delegate:self)) {
 				$0.setTimeoutInSeconds(TwitterController.timeout)
 			}
 			
 		case let .token(token, tokenSecret, _):
 			
 			NSLog("🐋 Instantiate Twitter API using Token.")
-			return tweak (STTwitterAPI(OAuthConsumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret, oauthToken: token, oauthTokenSecret: tokenSecret)) {
+			return applyingExpression(STTwitterAPI(OAuthConsumerKey: APIKeys.twitter.consumerKey, consumerSecret: APIKeys.Twitter.consumerSecret, oauthToken: token, oauthTokenSecret: tokenSecret)) {
 				$0.setTimeoutInSeconds(TwitterController.timeout)
 			}
 		}
@@ -154,21 +150,21 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	var credentialsVerified:Bool {
 		
-		return self.effectiveUserInfo != nil
+		return effectiveUserInfo != nil
 	}
 	
 	private(set) var effectiveUserInfo:UserInfo? {
 		
 		willSet {
 			
-			self.willChangeValueForKey("credentialsVerified")
-			self.willChangeValueForKey("canPost")
+			self.willChangeValue(forKey: "credentialsVerified")
+			self.willChangeValue(forKey: "canPost")
 		}
 		
 		didSet {
 			
-			self.didChangeValueForKey("credentialsVerified")
-			self.didChangeValueForKey("canPost")
+			self.didChangeValue(forKey: "credentialsVerified")
+			self.didChangeValue(forKey: "canPost")
 		}
 	}
  
@@ -179,7 +175,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		
 		super.init()
 		
-		self.autoVerifyingQueue = MessageQueue<AutoVerifyingQueueMessage>(identifier: "\(self.dynamicType)", executionQueue: dispatch_get_main_queue(), processingInterval: 5.0) { message in
+		self.autoVerifyingQueue = MessageQueue<AutoVerifyingQueueMessage>(identifier: "\(Self)", executionQueue: dispatch_get_main_queue(), processingInterval: 5.0) { message in
 
 			switch message {
 				
@@ -220,13 +216,13 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			
 			switch result {
 				
-			case .Success:
+			case .success:
 				NSLog("This change is no effect on the current account.")
 				
-			case .Failure:
+			case .failure:
 				
 				self.clearEffectiveUserInfo()
-				self.showWarningAlert("Twitter Account is invalid.", message: "Your twitter account setting may be changed by OS. Please check your settings in Internet Account preferences pane.")
+				self.showWarningAlert(withTitle: "Twitter Account is invalid.", message: "Your twitter account setting may be changed by OS. Please check your settings in Internet Account preferences pane.")
 			}
 		}
 	}
@@ -243,10 +239,11 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
 	}
 
+	@discardableResult
 	func verifyCredentialsIfNeed() -> Bool {
 		
 		DebugTime.print("📮 Passed verify-credentials #1")
-		return self.verifyCredentialsIfNeed(self.verifyCredentialsBasicErrorReportCallback)
+		return self.verifyCredentialsIfNeed(callback: verifyCredentialsBasicErrorReportCallback)
 	}
 	
 	func verifyCredentialsIfNeed(callback:(VerifyResult)->Void) -> Bool {
@@ -266,7 +263,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 		
 		DebugTime.print("📮 Passed verify-credentials #4")
-		self.verifyCredentials(callback)
+		self.verifyCredentials(callback: callback)
 
 		DebugTime.print("📮 Passed verify-credentials #5")
 		return true
@@ -277,19 +274,19 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		DebugTime.print("📮 Passed verify-credentials #11")
 		switch result {
 			
-		case .Success:
+		case .success:
 			DebugTime.print("📮 Passed verify-credentials #12")
 			NSLog("Twitter credentials verified successfully. (\(NSApp.twitterController.effectiveUserInfo?.username))")
 			
-		case .Failure(let error):
+		case .failure(let error):
 			DebugTime.print("📮 Passed verify-credentials #13")
-			self.showErrorAlert("Failed to verify credentials", message: "\(error.localizedDescription) (\(NSApp.twitterController.effectiveUserInfo?.username))")
+			self.showErrorAlert(withTitle: "Failed to verify credentials", message: "\(error.localizedDescription) (\(NSApp.twitterController.effectiveUserInfo?.username))")
 		}
 	}
 	
 	func verifyCredentials() {
 	
-		self.verifyCredentials(self.verifyCredentialsBasicErrorReportCallback)
+		self.verifyCredentials(callback: self.verifyCredentialsBasicErrorReportCallback)
 	}
 	
 	func verifyCredentials(callback:(VerifyResult)->Void) {
@@ -298,7 +295,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 
 		guard let api = self.api else {
 		
-			callback(VerifyResult(error: TwitterController.APINotReadyNSError))
+			callback(VerifyResult.failure(TwitterController.APINotReadyNSError))
 			return
 		}
 		
@@ -313,13 +310,13 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			
 			switch result {
 				
-			case let .Success(username, userId):
+			case let .success(username, userId):
 				
 				DebugTime.print("📮 Passed verify-credentials #9")
 				self.effectiveUserInfo = UserInfo(username: username, id: userId)
 				callback(VerifyResult(value:()))
 				
-			case let .Failure(error):
+			case let .failure(error):
 
 				DebugTime.print("📮 Passed verify-credentials #10")
 				self.effectiveUserInfo = nil
@@ -352,11 +349,11 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			
 			switch result {
 				
-			case .Success(let status):
+			case .success(let status):
 				self.latestTweet = status
 				callback(PostStatusUpdateResult(value: status.text))
 				
-			case .Failure(let error):
+			case .failure(let error):
 				callback(PostStatusUpdateResult(error: error))
 			}
 		}
@@ -386,15 +383,15 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			
 			switch result {
 				
-			case .Success(let mediaIDs):
+			case .success(let mediaIDs):
 
 				container.setTwitterMediaIDs(mediaIDs)
-				callback(PostResult.Success(container))
+				callback(PostResult.success(container))
 				
-			case .Failure(let error):
+			case .failure(let error):
 				
 				container.setError(.FailedToUploadGistCapture(image, description: error.localizedDescription))
-				callback(PostResult.Failure(container))
+				callback(PostResult.failure(container))
 			}
 		}
 	}
@@ -441,7 +438,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 
 extension TwitterController {
 
-	typealias RequestAccessResult = Result<Void,NSError>
+	typealias RequestAccessResult = Result<Void, NSError>
 	
 	struct UserInfo {
 	
@@ -449,24 +446,24 @@ extension TwitterController {
 		var id:String
 	}
 	
-	static func requestAccessToAccounts(completion:(RequestAccessResult) -> Void) {
+	static func requestAccessToAccounts(completion: (RequestAccessResult) -> Void) {
 		
-		TwitterController.accountStore.requestAccessToAccountsWithType(self.accountType, options: self.accountOptions) { granted, error in
+		TwitterController.accountStore.requestAccessToAccounts(with: self.accountType, options: self.accountOptions) { granted, error in
 			
 			if granted {
 				
-				completion(RequestAccessResult(value:()))
+				completion(RequestAccessResult.success(()))
 			}
 			else {
 				
-				completion(RequestAccessResult(error: error ?? NSError(domain: "Not Permitted", code: 0, userInfo: nil)))
+				completion(RequestAccessResult.failure((error as NSError?) ?? NSError(domain: "Not Permitted", code: 0, userInfo: nil)))
 			}
 		}
 	}
 	
 	static func getAccounts() -> [ACAccount] {
 		
-		guard let accounts = self.accountStore.accountsWithAccountType(self.accountType) as? [ACAccount] else {
+		guard let accounts = self.accountStore.accounts(with: self.accountType) as? [ACAccount] else {
 			
 			return []
 		}
@@ -476,7 +473,7 @@ extension TwitterController {
 	
 	static func getAccount(identifier:String) -> ACAccount? {
 		
-		return self.accountStore.accountWithIdentifier(identifier)
+		return self.accountStore.account(withIdentifier: identifier)
 	}
 	
 	static func getSingleAccount() -> ACAccount? {
@@ -522,9 +519,9 @@ extension STTwitterAPI {
 	
 		DebugTime.print("📮 Try uploading image for using twitter ... #3.3.3.1")
 		
-		let data = image.TIFFRepresentation!
+		let data = image.tiffRepresentation!
 		let bitmap = NSBitmapImageRep(data: data)!
-		let mediaData = bitmap.representationUsingType(NSBitmapImageFileType.NSPNGFileType, properties: [NSImageInterlaced : NSNumber(bool: true)])!
+		let mediaData = bitmap.representation(using: .png, properties: [.interlaced : NSNumber(value: true)])!
 		
 		let tweetProgress = { (bytes:Int64, processedBytes:Int64, totalBytes:Int64) -> Void in
 			
@@ -571,14 +568,14 @@ extension STTwitterAPI {
 				
 				#if DEBUG
 					// Re-parse for step debug.
-					let jsonString = debugStringFromJSON(rawObjects)
+				let jsonString = debugString(fromJSONObject: rawObjects)
 					print("DEBUG JSON String\n\(jsonString)")
 					let _ = try? decodeValue(rawObjects) as ESTwitter.Status
 				#endif
 			}
 			catch {
 				
-				fatalError("Unexpected Error (\(error.dynamicType)) : \(error)")
+				fatalError("Unexpected Error (\(type(of: error))) : \(error)")
 			}
 		}
 		
@@ -624,7 +621,7 @@ extension STTwitterAPI {
 		
 		DebugTime.print("📮 Try to verify credentials ... #3.4")
 		
-		invokeAsync(mainQueue) {
+		DispatchQueue.main.async {
 
 			DebugTime.print("📮 Start verifying ... #3.4.1")
 			
