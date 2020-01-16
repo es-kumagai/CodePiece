@@ -51,7 +51,7 @@ extension GetStatusesError {
 		
 		switch type {
 			
-		case .TwitterError(.RateLimitExceeded):
+		case .TwitterError(.rateLimitExceeded):
 			return true
 			
 		default:
