@@ -7,18 +7,40 @@
 //
 
 import Cocoa
+import Ocean
+
+// FIXME: ⭐️ 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整します。
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
+	var urlSchemeManager:URLSchemeManager!
+	
+	override func awakeFromNib() {
+		
+		NSLog("Application awoke.")
+		
+		super.awakeFromNib()
 
+		NotificationManager.dammingNotifications = true
+
+		NSApplication.readyForUse()
+	}
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+
+		NSLog("Application launched.")
+		
+		NotificationManager.dammingNotifications = false
+		
+		self.urlSchemeManager = URLSchemeManager()
+		
+		NSApp.twitterController.verifyCredentialsIfNeed()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+
+		NSLog("Application terminated.")
     }
 
 

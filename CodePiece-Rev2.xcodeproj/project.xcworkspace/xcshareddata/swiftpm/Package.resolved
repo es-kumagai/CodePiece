@@ -1,0 +1,97 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "APIKit",
+        "repositoryURL": "https://github.com/ishkawa/APIKit",
+        "state": {
+          "branch": null,
+          "revision": "f24f05616f8972fec937c2f069491468a8fabf85",
+          "version": "5.1.0"
+        }
+      },
+      {
+        "package": "ESGists",
+        "repositoryURL": "https://github.com/es-kumagai/ESGists.git",
+        "state": {
+          "branch": "master",
+          "revision": "2c53437ec63fb0e83b3cd97a9db6cf30c96c7088",
+          "version": null
+        }
+      },
+      {
+        "package": "ESProgressHUD",
+        "repositoryURL": "https://github.com/es-kumagai/ESProgressHUD.git",
+        "state": {
+          "branch": "master",
+          "revision": "03e95cb365b56d5846f34ec2b6b7c37e057e6068",
+          "version": null
+        }
+      },
+      {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
+        "state": {
+          "branch": null,
+          "revision": "b920ad7df3c73189dcdd4aa05c540849b2010dbf",
+          "version": "4.1.0"
+        }
+      },
+      {
+        "package": "OAuth2",
+        "repositoryURL": "https://github.com/p2/OAuth2",
+        "state": {
+          "branch": null,
+          "revision": "5e2f70d12cdcbf7b10d8a9aab544e6990a490dcf",
+          "version": "5.1.1"
+        }
+      },
+      {
+        "package": "Ocean",
+        "repositoryURL": "https://github.com/es-kumagai/Ocean",
+        "state": {
+          "branch": "master",
+          "revision": "934e0866902f070506e68d6fdd3cf43556fb936c",
+          "version": null
+        }
+      },
+      {
+        "package": "Reachability",
+        "repositoryURL": "https://github.com/ashleymills/Reachability.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "98e968e7b6c1318fb61df23e347bc319761e8acb",
+          "version": "5.0.0"
+        }
+      },
+      {
+        "package": "Sky",
+        "repositoryURL": "https://github.com/es-kumagai/Sky",
+        "state": {
+          "branch": "master",
+          "revision": "5d67d048910045ed5d75463baf6e797122868ce7",
+          "version": null
+        }
+      },
+      {
+        "package": "Swifter",
+        "repositoryURL": "https://github.com/mattdonnelly/Swifter.git",
+        "state": {
+          "branch": null,
+          "revision": "39541c9fb3312771fd851bde2d6a89886fbe3851",
+          "version": "2.3.0"
+        }
+      },
+      {
+        "package": "Swim",
+        "repositoryURL": "https://github.com/es-kumagai/Swim",
+        "state": {
+          "branch": "master",
+          "revision": "183d0cf57d48f37cedb77d017b6fcff7b10c754d",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

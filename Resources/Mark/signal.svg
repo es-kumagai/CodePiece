@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="signal.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="63.26613"
+     inkscape:cy="673.39786"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4142"
+     showgrid="false"
+     showguides="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1031"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g4169"
+       transform="matrix(1,0,0,-1,0,261.86728)">
+      <circle
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#737373;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="circle4140"
+         cx="125.71428"
+         cy="-130.93364"
+         r="100"
+         transform="scale(1,-1)" />
+      <circle
+         transform="scale(1,-1)"
+         r="88.472092"
+         cy="-130.93364"
+         cx="125.71428"
+         id="path4138"
+         style="opacity:1;fill:#00d400;fill-opacity:1;fill-rule:nonzero;stroke:#2c812f;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4173">
+      <circle
+         transform="scale(1,-1)"
+         r="100"
+         cy="-132.36221"
+         cx="371.42856"
+         id="circle4161"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#737373;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <circle
+         style="opacity:1;fill:#fff001;fill-opacity:1;fill-rule:nonzero;stroke:#81732c;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="circle4163"
+         cx="371.42856"
+         cy="-132.36221"
+         r="88.472092"
+         transform="scale(1,-1)" />
+    </g>
+    <g
+       id="g4177">
+      <circle
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#737373;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="circle4165"
+         cx="614.28571"
+         cy="-136.64793"
+         r="100"
+         transform="scale(1,-1)" />
+      <circle
+         transform="scale(1,-1)"
+         r="88.472092"
+         cy="-136.64793"
+         cx="614.28571"
+         id="circle4167"
+         style="opacity:1;fill:#fa6a00;fill-opacity:1;fill-rule:nonzero;stroke:#81482c;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       transform="matrix(1,0,0,-1,4.0406102,490.16176)"
+       id="g4142">
+      <g
+         id="g4148"
+         inkscape:export-filename="signal-neutral.24x24.png"
+         inkscape:export-xdpi="10.485436"
+         inkscape:export-ydpi="10.485436">
+        <circle
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#737373;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="circle4144"
+           cx="125.71428"
+           cy="-130.93364"
+           r="100"
+           transform="scale(1,-1)" />
+        <circle
+           transform="scale(1,-1)"
+           r="88.472092"
+           cy="-130.93364"
+           cx="125.71428"
+           id="circle4146"
+           style="opacity:1;fill:#cadcdc;fill-opacity:1;fill-rule:nonzero;stroke:#abb0b6;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>
