@@ -19,23 +19,21 @@ public struct Coordinate {
 
 extension Coordinate : Decodable {
 
-	public static func decode(e: Extractor) throws -> Coordinate {
-		
-		return try Coordinate(items: decodeArray(e.rawValue))
-	}
 }
 
 extension Coordinate.Item : Decodable {
 
-	public static func decode(e: Extractor) throws -> Coordinate.Item {
+	public init(from decoder: Decoder) throws {
+	
+		let container = try decoder.singleValueContainer()
+		let array = try container.decode([Double].self)
 
-		let array = try decodeArray(e.rawValue) as [Double]
-
-		guard array.count == 2, case let (latitude, longitude) = (array[0], array[1]) else {
+		guard array.count == 2 else {
 			
-			throw DecodeError.TypeMismatch(expected: "\(Coordinate.self)", actual: "\(array)", keyPath: nil)
+			throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot values for latitude and longitude.")
 		}
 		
-		return Coordinate.Item(latitude: latitude, longitude: longitude)
+		latitude = array[0]
+		longitude = array[1]
 	}
 }

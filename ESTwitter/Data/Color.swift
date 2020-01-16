@@ -12,7 +12,7 @@ public struct Color : RawRepresentable {
 	
 	public var rawValue: NSColor
 	
-	public enum InitializeError : ErrorType {
+	public enum InitializeError : Error {
 		
 		case InvalidFormat(String)
 	}
@@ -39,7 +39,7 @@ extension Color {
 	
 	public init(twitterColorString string: String) throws {
 
-		guard string.characters.count == 6 else {
+		guard string.count == 6 else {
 			
 			throw InitializeError.InvalidFormat(string)
 		}
@@ -59,7 +59,7 @@ extension Color {
 		
 		let toColorElement = { (part:String) throws -> CGFloat in
 			
-			guard part.characters.count == 2, let value = Int(part, radix: 16) else {
+			guard part.count == 2, let value = Int(part, radix: 16) else {
 				
 				throw InitializeError.InvalidFormat(string)
 			}
@@ -77,17 +77,17 @@ extension Color {
 
 extension Color : Decodable {
 
-	public static func decode(e: Extractor) throws -> Color {
+	public init(from decoder: Decoder) throws {
 		
-		let string = try String.decode(e)
+		let container = try decoder.singleValueContainer()
+		let string = try container.decode(String.self)
 		
 		do {
-
-			return try Color(twitterColorString: string)
+			self = try Color(twitterColorString: string)
 		}
-		catch is InitializeError {
+		catch {
 			
-			throw DecodeError.TypeMismatch(expected: "\(Color.self)", actual: "\(string)", keyPath: nil)
+			throw DecodingError.dataCorruptedError(in: container, debugDescription: error.localizedDescription)
 		}
 	}
 }

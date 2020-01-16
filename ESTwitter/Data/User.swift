@@ -42,41 +42,38 @@ public struct User {
 
 extension User : Decodable {
 
-	public static func decode(e: Extractor) throws -> User {
+	enum CodingKeys : String, CodingKey {
 		
-		return try User(
-			
-			name: e.value("name"),
-			profile: decodeValue(e.rawValue),
-			createdAt: e.value("created_at"),
-			location: e.value("location"),
-			isTranslationEnabled: e.value("is_translation_enabled"),
-			isTranslator: e.value("is_translator"),
-			followRequestSent: e.value("follow_request_sent"),
-			idStr: e.value("id_str"),
-			entities: e.value("entities"),
-			defaultProfile: e.value("default_profile"),
-			contributorsEnabled: e.value("contributors_enabled"),
-			url: e.valueOptional("url"),
-			favouritesCount: e.value("favourites_count"),
-			utcOffset: e.valueOptional("utc_offset"),
-			id: e.value("id"),
-			listedCount: e.value("listed_count"),
-			protected: e.value("protected"),
-			lang: e.value("lang"),
-			followersCount: e.value("followers_count"),
-			timeZone: e.valueOptional("time_zone"),
-			verified: e.value("verified"),
-			notifications: e.value("notifications"),
-			description: e.value("description"),
-			geoEnabled: e.value("geo_enabled"),
-			statusesCount: e.value("statuses_count"),
-			defaultProfileImage: e.value("default_profile_image"),
-			friendsCount: e.value("friends_count"),
-			showAllInlineMedia: e.valueOptional("show_all_inline_media"),
-			screenName: e.value("screen_name"),
-			following: e.value("following")
-		)
+		case name
+		case profile
+		case createdAt = "created_at"
+		case location
+		case isTranslationEnabled = "is_translation_enabled"
+		case isTranslator = "is_translator"
+		case followRequestSent = "follow_request_sent"
+		case idStr = "id_str"
+		case entities
+		case defaultProfile = "default_profile"
+		case contributorsEnabled = "contributors_enabled"
+		case url
+		case favouritesCount = "favourites_count"
+		case utcOffset = "utc_offset"
+		case id
+		case listedCount = "listed_count"
+		case protected
+		case lang
+		case followersCount = "followers_count"
+		case timeZone = "time_zone"
+		case verified
+		case notifications
+		case description
+		case geoEnabled = "geo_enabled"
+		case statusesCount = "statuses_count"
+		case defaultProfileImage = "default_profile_image"
+		case friendsCount = "friends_count"
+		case showAllInlineMedia = "show_all_inline_media"
+		case screenName = "screen_name"
+		case following
 	}
 }
 

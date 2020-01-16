@@ -11,37 +11,37 @@ public protocol HasIndices {
 	var indices: Indices { get }
 }
 
-extension CollectionType where Generator.Element : HasIndices {
+extension Collection where Element : HasIndices {
 	
-	public var sortedByIndicesAscend: Array<Generator.Element> {
+	public var sortedByIndicesAscend: Array<Element> {
 	
-		return sort {
+		return sorted {
 			
 			let (lhs, rhs) = ($0.indices, $1.indices)
 			
-			if lhs.startIndex == rhs.startIndex {
+			switch lhs.startIndex == rhs.startIndex {
 				
+			case true:
 				return lhs.endIndex < rhs.endIndex
-			}
-			else {
-				
+
+			case false:
 				return lhs.startIndex < rhs.startIndex
 			}
 		}
 	}
 	
-	public var sortedByIndicesDescend: Array<Generator.Element> {
+	public var sortedByIndicesDescend: Array<Element> {
 		
-		return sort {
+		return sorted {
 			
 			let (lhs, rhs) = ($0.indices, $1.indices)
 			
-			if lhs.endIndex == rhs.endIndex {
+			switch lhs.endIndex == rhs.endIndex {
 				
+			case true:
 				return lhs.startIndex > rhs.startIndex
-			}
-			else {
-				
+
+			case false:
 				return lhs.endIndex > rhs.endIndex
 			}
 		}
@@ -53,7 +53,7 @@ public struct Indices {
 	public var startIndex:Int
 	public var endIndex:Int
 	
-	public enum InitializeError : ErrorType {
+	public enum InitializeError : Error {
 		
 		case InvalidArgument(String)
 	}

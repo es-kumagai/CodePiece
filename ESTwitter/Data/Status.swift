@@ -6,34 +6,62 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
+import AppKit
 import Swim
 
-public enum RetweetedStatus {
+public enum RetweetedStatus : Decodable {
 	
 	indirect case Value(Status)
 }
 
-public struct Status {
+public struct Status : Decodable {
 	
-	public var coordinates:CoordinatesBox?
-	public var favorited:Bool
-	public var createdAt:Date
-	public var truncated:Bool
-	public var idStr:String
-	public var entities:Entities?
-	public var inReplyTo:InReplyTo?
-	public var text:String
-	public var contributors:String?
-	public var retweetCount:Int
-	public var id:UInt64
-	public var geo:CoordinatesBox?
-	public var retweeted:Bool
-	public var retweetedStatus:RetweetedStatus?
-	public var place:Place?
+	public var coordinates: CoordinatesBox?
+	public var favorited: Bool
+	public var createdAt: Date
+	public var truncated: Bool
+	public var idStr: String
+	public var entities: Entities?
+	public var inReplyTo: InReplyTo?
+	public var text: String
+	public var contributors: String?
+	public var retweetCount: Int
+	public var id: UInt64
+	public var geo: CoordinatesBox?
+	public var retweeted: Bool
+	public var retweetedStatus: RetweetedStatus?
+	public var place: Place?
 	public var possiblySensitive: Bool?
-	public var user:User
-	public var lang:String?
-	public var source:String
+	public var user: User
+	public var lang: String?
+	public var source: String
+	
+	public enum CodingKeys : String, CodingKey {
+		
+		case coordinates
+		case favorited
+		case createdAt
+		case truncated
+		case idStr = "id_str"
+		case entities
+		case inReplyToUserIdStr = "in_reply_to_user_id_str"
+		case inReplyToStatusIdStr = "in_reply_to_status_id_str"
+		case inReplyToUserId = "in_reply_to_user_id"
+		case inReplyTo_ScreenName = "in_reply_to_screen_name"
+		case inReplyToStatusId = "in_reply_to_status_id"
+		case text
+		case contributors
+		case retweetCount = "retweet_count"
+		case id
+		case geo
+		case retweeted
+		case retweetedStatus = "retweeted_status"
+		case place
+		case possiblySensitive = "possibly_sensitive"
+		case user
+		case lang
+		case source
+	}
 }
 
 extension RetweetedStatus {
@@ -52,7 +80,7 @@ extension Status {
 	
 	public var isRetweetedTweet: Bool {
 		
-		return self.retweetedStatus.isExists
+		return retweetedStatus != nil
 	}
 
 	private func applyAttribute(text: NSMutableAttributedString, urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) {
@@ -122,7 +150,7 @@ extension Status {
 				
 				func attributedTextWithBaseAttributes(baseAttributes: [String : AnyObject]) -> NSAttributedString {
 				
-					return NSAttributedString(string: displayText, attributes: attributesWithBaseAttributes(baseAttributes))
+					return NSAttributedString(string: displayText, attributes: attributesWithBaseAttributes(baseAttributes: baseAttributes))
 				}
 				
 				var range: NSRange {
@@ -148,7 +176,7 @@ extension Status {
 				entities.urls?.map { LinkItem.init($0, color: urlColor) },
 				entities.hashtags?.map { LinkItem.init($0, color: hashtagColor) },
 				entities.media?.map { LinkItem.init($0, color: urlColor) },
-				entities.userMenthions?.map { LinkItem.init($0, color: mentionColor) }
+				entities.userMentions?.map { LinkItem.init($0, color: mentionColor) }
 				]
 				.flatMap { $0 })
 			
@@ -163,7 +191,7 @@ extension Status {
 	
 		let text = NSMutableAttributedString(string: self.text)
 		
-		applyAttribute(text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
+		applyAttribute(text: text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
 		
 		return text.copy() as! NSAttributedString
 	}
@@ -176,68 +204,66 @@ extension Status {
 		try tweak(text)
 		
 		// then, apply attributes to parts of text.
-		applyAttribute(text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
+		applyAttribute(text: text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
 		
 		return text.copy() as! NSAttributedString
 	}
 }
 
-extension RetweetedStatus : Decodable {
+extension Sequence where Element == Status {
+
+	public func orderByNewCreationDate() -> [Element] {
 	
-	public static func decode(e: Extractor) throws -> RetweetedStatus {
+		return sorted { $0.createdAt > $1.createdAt }
+	}
+	
+	public func excludeRetweets() -> [Element] {
 		
-		return try RetweetedStatus.Value(Status.decode(e))
+		return filter { !$0.retweeted }
+	}
+	
+	public func originalTweetAtFirst() -> Element? {
+		
+		return first { $0.retweeted }
 	}
 }
 
-extension SequenceType where Generator.Element == Status {
+// MARK: - Decodable
 
-	public func orderByNewCreationDate() -> [Generator.Element] {
+extension RetweetedStatus {
 	
-		return self.sort { $0.0.createdAt > $0.1.createdAt }
-	}
-	
-	public func excludeRetweets() -> [Generator.Element] {
+	public init(from decoder: Decoder) throws {
 		
-		return self.filter { !$0.retweeted }
-	}
-	
-	public func originalTweetAtFirst() -> Generator.Element? {
-		
-		guard let found = self.findElement({$0.retweeted}) else {
-			
-			return nil
-		}
-		
-		return found.element
+		self = try .Value(Status(from: decoder))
 	}
 }
 
-extension Status : Decodable {
+extension Status {
 	
-	public static func decode(e: Extractor) throws -> Status {
+	public init(from decoder: Decoder) throws {
+	
+		let container = try decoder.container(keyedBy: CodingKeys.self)
 		
-		return try Status(
-			
-			coordinates: e.valueOptional("coordinates"),
-			favorited: e.value("favorited"),
-			createdAt: e.value("created_at"),
-			truncated: e.value("truncated"),
-			idStr: e.value("id_str"),
-			entities: e.valueOptional("entities"),
-			inReplyTo: InReplyTo.decodeOptional(e),
-			text: e.value("text"),
-			contributors: e.valueOptional("contributors"),
-			retweetCount: e.value("retweet_count"),
-			id: e.value("id"),
-			geo: e.valueOptional("geo"),
-			retweeted: e.value("retweeted"),
-			retweetedStatus: e.valueOptional("retweeted_status"),
-			place: e.valueOptional("place"),
-			possiblySensitive: e.valueOptional("possibly_sensitive"),
-			user: e.value("user"),
-			lang: e.valueOptional("lang"),
-			source: e.value("source")
-		)
+		coordinates = try container.decode(CoordinatesBox.self, forKey: .coordinates)
+		favorited = try container.decode(Bool.self, forKey: .favorited)
+		createdAt = try container.decode(Date.self, forKey: .createdAt)
+		truncated = try container.decode(Bool.self, forKey: .truncated)
+		idStr = try container.decode(String.self, forKey: .idStr)
+		entities = try container.decode(Entities.self, forKey: .entities)
+		
+		inReplyTo = try InReplyTo(from: decoder)
+		
+		text = try container.decode(String.self, forKey: .text)
+		contributors = try container.decode(String.self, forKey: .contributors)
+		retweetCount = try container.decode(Int.self, forKey: .retweetCount)
+		id = try container.decode(UInt64.self, forKey: .id)
+		geo = try container.decode(CoordinatesBox.self, forKey: .geo)
+		retweeted = try container.decode(Bool.self, forKey: .retweeted)
+		retweetedStatus = try container.decode(RetweetedStatus.self, forKey: .retweetedStatus)
+		place = try container.decode(Place.self, forKey: .place)
+		possiblySensitive = try container.decode(Bool.self, forKey: .possiblySensitive)
+		user = try container.decode(User.self, forKey: .user)
+		lang = try container.decode(String.self, forKey: .lang)
+		source = try container.decode(String.self, forKey: .source)
 	}
 }

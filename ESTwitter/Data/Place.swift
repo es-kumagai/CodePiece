@@ -22,20 +22,17 @@ public struct Place {
 
 extension Place : Decodable {
 	
-	public static func decode(e: Extractor) throws -> Place {
+	enum CodingKeys : String, CodingKey {
 		
-		return try Place(
-		
-			attributes: e.dictionary("attributes"),
-			boundingBox: e.value("bounding_box"),
-			containedWithin: e.array("contained_within"),
-			country: e.value("country"),
-			countryCode: e.value("country_code"),
-			fullName: e.value("full_name"),
-			id: e.value("id"),
-			name: e.value("name"),
-			placeType: e.value("place_type"),
-			url: e.value("url")
-		)
+		case attributes
+		case boundingBox = "bounding_box"
+		case containedWithin = "contained_within"
+		case country
+		case countryCode = "country_code"
+		case fullName = "full_name"
+		case id
+		case name
+		case placeType = "place_type"
+		case url
 	}
 }

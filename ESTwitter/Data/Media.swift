@@ -44,60 +44,48 @@ public struct MediaEntity : HasIndices {
 
 extension Media : Decodable {
 	
-	public static func decode(e: Extractor) throws -> Media {
+	enum CodingKeys : String, CodingKey {
 		
-		return try Media(
-		
-			id: e.value("media_id"),
-			idString: e.value("media_id_string"),
-			size: e.value("size"),
-			image: e.value("image")
-		)
+		case id = "media_id"
+		case idString = "media_id_string"
+		case size
+		case image
 	}
 }
 
 extension Media.Image : Decodable {
 	
-	public static func decode(e: Extractor) throws -> Media.Image {
+	enum CodingKeys : String, CodingKey {
 		
-		return try Media.Image(
-		
-			width: e.value("w"),
-			height: e.value("h"),
-			type: e.value("image_type")
-		)
+		case width = "w"
+		case height = "h"
+		case type = "image_type"
 	}
 }
 
 extension MediaEntity : Decodable {
 
-	public static func decode(e: Extractor) throws -> MediaEntity {
-		
-		return try MediaEntity(
-		
-			idStr: e.value("id_str"),
-			mediaUrlHttps: e.value("media_url_https"),
-			expandedUrl: e.value("expanded_url"),
-			id: e.value("id"),
-			sizes: e.dictionary("sizes"),
-			displayUrl: e.value("display_url"),
-			type: e.value("type"),
-			indices: e.value("indices"),
-			mediaUrl: e.value("media_url"),
-			url: e.value("url")
-		)
+	enum CodingKeys : String, CodingKey {
+	
+		case idStr = "id_str"
+		case mediaUrlHttps = "media_url_https"
+		case expandedUrl = "expanded_url"
+		case id
+		case sizes
+		case displayUrl = "display_url"
+		case type
+		case indices
+		case mediaUrl = "media_url"
+		case url
 	}
 }
 
 extension MediaEntity.Size : Decodable {
 	
-	public static func decode(e: Extractor) throws -> MediaEntity.Size {
+	enum CodingKeys : String, CodingKey {
 		
-		return try MediaEntity.Size(
-			
-			width: e.value("w"),
-			height: e.value("h"),
-			resize: e.value("resize")
-		)
+		case width = "w"
+		case height = "h"
+		case resize
 	}
 }

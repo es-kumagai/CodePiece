@@ -10,14 +10,14 @@ import Foundation
 
 public struct Date : RawRepresentable {
 	
-	public var rawValue:NSDate
+	public var rawValue: Foundation.Date
 	
 	public init() {
 	
-		self.init(NSDate())
+		self.init(Foundation.Date())
 	}
 	
-	public init(rawValue: NSDate) {
+	public init(rawValue: Foundation.Date) {
 		
 		self.rawValue = rawValue
 	}
@@ -25,27 +25,27 @@ public struct Date : RawRepresentable {
 
 extension NSDate {
 	
-	public static func dateFromTwitterDateString(string: String) -> NSDate? {
+	public static func dateFromTwitterDateString(string: String) -> Foundation.Date? {
 
-		let formatter = NSDateFormatter()
+		let formatter = DateFormatter()
 		
-		formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+		formatter.locale = Locale(identifier: "en_US_POSIX")
 		formatter.dateFormat = "EEE MM dd HH:mm:ss Z yyyy"
 		
-		return formatter.dateFromString(string)
+		return formatter.date(from: string)
 	}
 }
 
 extension Date {
 	
-	public init(_ date:NSDate) {
+	public init(_ date: Foundation.Date) {
 		
 		self.rawValue = date
 	}
 	
-	public init?(_ string:String) {
+	public init?(_ string: String) {
 		
-		guard let date = NSDate.dateFromTwitterDateString(string) else {
+		guard let date = Date.dateFromTwitterDateString(string) else {
 			
 			return nil
 		}
@@ -58,12 +58,12 @@ extension Date : DateCalculatable, ReferenceDateConvertible {
 
 	public typealias DateType = Date
 	
-	public init(timeIntervalSinceReferenceDate: NSTimeInterval) {
+	public init(timeIntervalSinceReferenceDate: TimeInterval) {
 	
-		self.init(NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate))
+		self.init(Foundation.Date(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate))
 	}
 
-	public var timeIntervalSinceReferenceDate: NSTimeInterval {
+	public var timeIntervalSinceReferenceDate: TimeInterval {
 	
 		return self.rawValue.timeIntervalSinceReferenceDate
 	}
@@ -73,28 +73,23 @@ extension Date : Comparable {
 	
 }
 
-public func == (lhs:Date, rhs:Date) -> Bool {
+public func == (lhs: Date, rhs: Date) -> Bool {
 	
-	return lhs.rawValue.isEqualToDate(rhs.rawValue)
+	return lhs.rawValue == rhs.rawValue
 }
 
-public func < (lhs:Date, rhs:Date) -> Bool {
+public func < (lhs: Date, rhs: Date) -> Bool {
 	
-	return lhs.rawValue.compare(rhs.rawValue) == NSComparisonResult.OrderedAscending
+	return lhs.rawValue < rhs.rawValue
 }
 
 extension Date : Decodable {
 	
-	public static func decode(e: Extractor) throws -> Date {
+	public init(from decoder: Decoder) throws {
+	
+		let container = try decoder.singleValueContainer()
 		
-		let string = try String.decode(e)
-		
-		guard let result = Date(string) else {
-			
-			throw DecodeError.TypeMismatch(expected: "\(DecodedType.self)", actual: "\(string)", keyPath: nil)
-		}
-		
-		return result
+		rawValue = try container.decode(Foundation.Date.self)
 	}
 }
 
@@ -102,6 +97,6 @@ extension Date : CustomStringConvertible {
 	
 	public var description:String {
 		
-		return self.rawValue.description
+		return rawValue.description
 	}
 }

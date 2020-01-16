@@ -6,17 +6,25 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct URLInfo {
+public struct URLInfo : Decodable {
 	
-	public var displayUrl:String?
-	public var expandedUrl:URL?
-	public var url:URL
-	public var indices:Indices
+	public var displayUrl: String?
+	public var expandedUrl: URL?
+	public var url: URL
+	public var indices: Indices
+	
+	public enum CodingKeys : String, CodingKey {
+		
+		case displayUrl = "display_url"
+		case expandedUrl = "expanded_url"
+		case url
+		case indices
+	}
 }
 
 extension URLInfo {
 
-	public var effectiveUrl:URL {
+	public var effectiveUrl: URL {
 		
 		return self.expandedUrl ?? self.url
 	}
@@ -24,22 +32,8 @@ extension URLInfo {
 
 extension URLInfo : CustomStringConvertible {
 
-	public var description:String {
+	public var description: String {
 	
 		return self.displayUrl ?? self.effectiveUrl.description
-	}
-}
-
-extension URLInfo : Decodable {
-	
-	public static func decode(e: Extractor) throws -> URLInfo {
-		
-		return try URLInfo(
-		
-			displayUrl: e.valueOptional("display_url"),
-			expandedUrl: e.valueOptional("expanded_url"),
-			url: e.value("url"),
-			indices: e.value("indices")
-		)
 	}
 }

@@ -6,9 +6,11 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
+import Foundation
+
 public struct URL : RawRepresentable {
 	
-	public var rawValue:String
+	public var rawValue: String
 	
 	public init(rawValue: String) {
 		
@@ -18,17 +20,17 @@ public struct URL : RawRepresentable {
 
 extension URL : Decodable {
 	
-	public static func decode(e: Extractor) throws -> URL {
+	public init(from decoder: Decoder) throws {
 		
-		return try URL(rawValue: String.decode(e))
+		rawValue = try decoder.singleValueContainer().decode(String.self)
 	}
 }
 
 extension URL {
 	
-	public var url:NSURL? {
+	public var url: Foundation.URL? {
 		
-		return NSURL(string: self.rawValue)
+		return Foundation.URL(string: self.rawValue)
 	}
 }
 

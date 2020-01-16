@@ -17,12 +17,4 @@ extension Status {
 
 extension Status.CoordinatesBox : Decodable {
 	
-	public static func decode(e: Extractor) throws -> Status.CoordinatesBox {
-		
-		return try Status.CoordinatesBox(
-			
-			coordinates: e.value("coordinates"),
-			type: e.value("type")
-		)
-	}
 }

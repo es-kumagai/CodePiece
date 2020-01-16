@@ -26,21 +26,18 @@ extension User {
 
 extension User.Profile : Decodable {
 	
-	public static func decode(e: Extractor) throws -> User.Profile {
+	enum CodingKeys : String, CodingKey {
 		
-		return try User.Profile(
-			
-			sidebarBorderColor: e.value("profile_sidebar_border_color"),
-			sidebarFillColor: e.value("profile_sidebar_fill_color"),
-			backgroundTile: e.value("profile_background_tile"),
-			imageUrl: e.value("profile_image_url"),
-			linkColor: e.value("profile_link_color"),
-			imageUrlHttps: e.value("profile_image_url_https"),
-			useBackgroundImage: e.value("profile_use_background_image"),
-			textColor: e.value("profile_text_color"),
-			backgroundImageUrlHttps: e.valueOptional("profile_background_image_url_https"),
-			backgroundColor: e.value("profile_background_color"),
-			backgroundImageUrl: e.valueOptional("profile_background_image_url")
-		)
+		case sidebarBorderColor = "profile_sidebar_border_color"
+		case sidebarFillColor = "profile_sidebar_fill_color"
+		case backgroundTile = "profile_background_tile"
+		case imageUrl = "profile_image_url"
+		case linkColor = "profile_link_color"
+		case imageUrlHttps = "profile_image_url_https"
+		case useBackgroundImage = "profile_use_background_image"
+		case textColor = "profile_text_color"
+		case backgroundImageUrlHttps = "profile_background_image_url_https"
+		case backgroundColor = "profile_background_color"
+		case backgroundImageUrl = "profile_background_image_url"
 	}
 }

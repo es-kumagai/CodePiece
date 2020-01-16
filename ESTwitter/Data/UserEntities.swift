@@ -6,52 +6,18 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct UserEntities {
+public struct UserEntities : Decodable {
 	
-	public var urls:URLEntity?
-	public var description:DescriptionEntity
+	public var url: URLEntity?
+	public var description: DescriptionEntity
 	
-	public struct URLEntity {
+	public struct URLEntity : Decodable {
 		
-		public var urls:[URLInfo]
+		public var urls: [URLInfo]
 	}
 	
-	public struct DescriptionEntity {
+	public struct DescriptionEntity : Decodable {
 		
-		public var urls:[URLInfo]
-	}
-}
-
-extension UserEntities : Decodable {
-
-	public static func decode(e: Extractor) throws -> UserEntities {
-		
-		return try UserEntities(
-		
-			urls: e.valueOptional("url"),
-			description: e.value("description")
-		)
-	}
-}
-
-extension UserEntities.URLEntity : Decodable {
-	
-	public static func decode(e: Extractor) throws -> UserEntities.URLEntity {
-		
-		return try UserEntities.URLEntity(
-		
-			urls: e.array("urls")
-		)
-	}
-}
-
-extension UserEntities.DescriptionEntity : Decodable {
-	
-	public static func decode(e: Extractor) throws -> UserEntities.DescriptionEntity {
-		
-		return try UserEntities.DescriptionEntity(
-			
-			urls: e.array("urls")
-		)
+		public var urls: [URLInfo]
 	}
 }

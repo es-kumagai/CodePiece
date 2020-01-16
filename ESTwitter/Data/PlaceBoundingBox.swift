@@ -8,21 +8,9 @@
 
 extension Place {
 
-	public struct BoundingBox {
+	public struct BoundingBox : Decodable {
 	
 		var coordinates: [Coordinate]
 		var type: String
-	}
-}
-
-extension Place.BoundingBox : Decodable {
-	
-	public static func decode(e: Extractor) throws -> Place.BoundingBox {
-		
-		return try Place.BoundingBox(
-			
-			coordinates: e.array("coordinates"),
-			type: e.value("type")
-		)
 	}
 }

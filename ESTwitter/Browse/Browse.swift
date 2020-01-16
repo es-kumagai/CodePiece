@@ -13,28 +13,28 @@ public final class Browser {
 	public static let baseUrl = "https://twitter.com"
 	public static let searchUrl = "https://twitter.com/search"
 	
-	public enum Error : ErrorType {
+	public enum BrowseError : Error {
 		
 		case OperationFailure(reason:String)
 	}
 	
 	private static func escape(string:String) throws -> String {
 		
-		let allowedCharacters = NSCharacterSet.alphanumericCharacterSet()
+		let allowedCharacters = NSCharacterSet.alphanumerics
 		
 		guard let escaped = string.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters) else {
 			
-			throw Error.OperationFailure(reason: "Failed to escape a parameter '\(string)'.")
+			throw BrowseError.OperationFailure(reason: "Failed to escape a parameter '\(string)'.")
 		}
 		
 		return escaped
 	}
 	
-	private static func open(url:NSURL) throws {
+	private static func open(url: Foundation.URL) throws {
 		
-		guard NSWorkspace.sharedWorkspace().openURL(url) else {
+		guard NSWorkspace.shared.open(url) else {
 			
-			throw Error.OperationFailure(reason: "Failed to open URL '\(url)'.")
+			throw BrowseError.OperationFailure(reason: "Failed to open URL '\(url)'.")
 		}
 	}
 	
@@ -42,36 +42,36 @@ public final class Browser {
 		
 		let string = "\(self.baseUrl)/\(status.user.screenName)/status/\(status.idStr)"
 		
-		guard let url = NSURL(string: string) else {
+		guard let url = Foundation.URL(string: string) else {
 			
-			throw Error.OperationFailure(reason: "Failed to make URL for open twitter tweet '\(string)'.")
+			throw BrowseError.OperationFailure(reason: "Failed to make URL for open twitter tweet '\(string)'.")
 		}
 		
-		try open(url)
+		try open(url: url)
 	}
 	
 	public static func openWithUsername(username:String) throws {
 		
 		let string = "\(self.baseUrl)/\(username)"
 		
-		guard let url = NSURL(string: string) else {
+		guard let url = Foundation.URL(string: string) else {
 			
-			throw Error.OperationFailure(reason: "Failed to make URL for open twitter home '\(string)'.")
+			throw BrowseError.OperationFailure(reason: "Failed to make URL for open twitter home '\(string)'.")
 		}
 		
-		try open(url)
+		try open(url: url)
 	}
 	
 	public static func openWithQuery(query:String, language:String? = nil) throws {
 		
 		let language = language ?? ""
-		let string = try "\(self.searchUrl)?f=tweets&vertical=default&q=\(escape(query))&src=typd&lang=\(escape(language))"
+		let string = try "\(self.searchUrl)?f=tweets&vertical=default&q=\(escape(string: query))&src=typd&lang=\(escape(string: language))"
 		
-		guard let url = NSURL(string: string) else {
+		guard let url = Foundation.URL(string: string) else {
 			
-			throw Error.OperationFailure(reason: "Failed to make URL for search '\(string)'.")
+			throw BrowseError.OperationFailure(reason: "Failed to make URL for search '\(string)'.")
 		}
 		
-		try open(url)
+		try open(url: url)
 	}
 }

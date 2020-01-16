@@ -68,7 +68,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	var latestTweet: ESTwitter.Status?
 
-	private static let timeout: NSTimeInterval = 15.0
+	private static let timeout: TimeInterval = 15.0
 	private static let accountStore: ACAccountStore = ACAccountStore()
 	private static let accountType: ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 	private static let accountOptions:[NSObject:AnyObject]? = nil

@@ -14,12 +14,4 @@ public struct HashtagEntity {
 
 extension HashtagEntity : Decodable {
 	
-	public static func decode(e: Extractor) throws -> HashtagEntity {
-		
-		return try HashtagEntity(
-			
-			value: e.value("text"),
-			indices: e.value("indices")
-		)
-	}
 }

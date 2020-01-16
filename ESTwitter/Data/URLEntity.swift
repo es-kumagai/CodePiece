@@ -16,14 +16,11 @@ public struct URLEntity : HasIndices {
 
 extension URLEntity : Decodable {
 	
-	public static func decode(e: Extractor) throws -> URLEntity {
+	enum CodingKeys : String, CodingKey {
 		
-		return try URLEntity(
-			
-			url: e.value("url"),
-			indices: e.value("indices"),
-			displayUrl: e.value("display_url"),
-			expandedUrl: e.value("expanded_url")
-		)
+		case url
+		case indices
+		case displayUrl = "display_url"
+		case expandedUrl = "expanded_url"
 	}
 }

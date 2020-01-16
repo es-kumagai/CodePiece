@@ -10,21 +10,21 @@ import Swim
 
 public protocol HashtagType {
 
-	var value:String { get }
+	var value: String { get }
 	
-	var length:Int { get }
-	var isEmpty:Bool { get }
+	var length: Int { get }
+	var isEmpty: Bool { get }
 
 	init?(hashtagValue:String)
 }
 
 public struct Hashtag : HashtagType {
 	
-	private var _value:String!
+	private var rawValue: String!
 	
 	public init() {
 		
-		self._value = ""
+		self.rawValue = ""
 	}
 	
 	public init?(hashtagValue: String) {
@@ -42,16 +42,16 @@ public struct Hashtag : HashtagType {
 		self.value = value
 	}
 	
-	public var value:String {
+	public var value: String {
 		
 		get {
 			
-			return self._value
+			return self.rawValue
 		}
 		
 		set {
 			
-			self._value = Hashtag.normalize(newValue)
+			self.value = Hashtag.normalize(newValue)
 		}
 	}
 }
@@ -70,7 +70,7 @@ extension Hashtag {
 		}
 	}
 	
-	public static func normalize(value:String) -> String {
+	public static func normalize(_ value: String) -> String {
 		
 		let value = value.trimmed()
 		
@@ -79,7 +79,7 @@ extension Hashtag {
 			return ""
 		}
 		
-		guard !meetsAllOf(value.characters, "#") else {
+		guard !value.characters.meetsAll(of: "#") else {
 			
 			return ""
 		}
@@ -128,19 +128,9 @@ public func == (lhs:Hashtag, rhs:Hashtag) -> Bool{
 	return lhs.value == rhs.value
 }
 
-extension Hashtag : StringLiteralConvertible {
-	
-	public init(extendedGraphemeClusterLiteral value: String) {
-		
-		self.init(value)
-	}
+extension Hashtag : ExpressibleByStringLiteral {
 	
 	public init(stringLiteral value: String) {
-		
-		self.init(value)
-	}
-	
-	public init(unicodeScalarLiteral value: String) {
 		
 		self.init(value)
 	}
@@ -148,8 +138,8 @@ extension Hashtag : StringLiteralConvertible {
 
 extension Hashtag : Decodable {
 	
-	public static func decode(e: Extractor) throws -> Hashtag {
-
-		return try Hashtag(String.decode(e))
+	public init(from decoder: Decoder) throws {
+		
+		rawValue = try decoder.singleValueContainer().decode(String.self)
 	}
 }
