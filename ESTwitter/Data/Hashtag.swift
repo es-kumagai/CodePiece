@@ -62,7 +62,7 @@ extension Hashtag {
 		
 		if value.hasPrefix("#") {
 			
-			return value.substringFromIndex(value.startIndex.successor())
+			return value.substring(from: value.index(after: value.startIndex))
 		}
 		else {
 			
@@ -72,14 +72,14 @@ extension Hashtag {
 	
 	public static func normalize(_ value: String) -> String {
 		
-		let value = value.trimmed()
+		let value = value.trimmingCharacters(in: .whitespaces)
 		
 		guard !value.isEmpty else {
 			
 			return ""
 		}
 		
-		guard !value.characters.meetsAll(of: "#") else {
+		guard !value.meetsAll(of: "#") else {
 			
 			return ""
 		}
@@ -97,9 +97,9 @@ extension Hashtag {
 		return self.value.isEmpty
 	}
 	
-	public var url: NSURL {
+	public var url: Foundation.URL {
 		
-		return NSURL(scheme: "https", host: "twitter.com", path: "/hashtag/\(valueWithoutPrefix)?f=tweets")!
+		return NSURL(scheme: "https", host: "twitter.com", path: "/hashtag/\(valueWithoutPrefix)?f=tweets")! as Foundation.URL
 	}
 }
 

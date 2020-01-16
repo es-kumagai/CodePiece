@@ -18,11 +18,11 @@ public final class Browser {
 		case OperationFailure(reason:String)
 	}
 	
-	private static func escape(string:String) throws -> String {
+	private static func escape(string: String) throws -> String {
 		
 		let allowedCharacters = NSCharacterSet.alphanumerics
 		
-		guard let escaped = string.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters) else {
+		guard let escaped = (string as NSString).addingPercentEncoding(withAllowedCharacters: allowedCharacters) else {
 			
 			throw BrowseError.OperationFailure(reason: "Failed to escape a parameter '\(string)'.")
 		}

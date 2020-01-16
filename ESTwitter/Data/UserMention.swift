@@ -28,9 +28,9 @@ public struct UserMention : Decodable, HasIndices {
 
 extension UserMention {
 	
-	var url: NSURL {
+	var url: Foundation.URL {
 		
-		Foundation.NSURL(scheme: "https", host: "twitter.com", path: "/\(screenName)")!
+		Foundation.NSURL(scheme: "https", host: "twitter.com", path: "/\(screenName)")! as Foundation.URL
 	}
 }
 

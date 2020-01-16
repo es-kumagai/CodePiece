@@ -13,7 +13,7 @@ final class OAuthScheme : URLScheme {
 	let scheme = "jp.ez-style.scheme.codepiece"
 	let host = "oauth"
 	
-	func action(url: NSURL) {
+	func action(url: URL) {
 		
 		Authorization.github.oauth2.handleRedirectURL(url)
 	}

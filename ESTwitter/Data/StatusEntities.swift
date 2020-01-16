@@ -12,7 +12,7 @@ extension Status {
 				
 		public var urls: [URLEntity]?
 		public var hashtags: [HashtagEntity]?
-		public var userMenthions: [UserMention]?
+		public var userMentions: [UserMention]?
 		public var media: [MediaEntity]?
 	}
 }

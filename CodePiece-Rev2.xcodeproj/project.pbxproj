@@ -136,6 +136,7 @@
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
 		B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */; };
+		B1DDCB3E23D0C98F00418A84 /* Swim in Frameworks */ = {isa = PBXBuildFile; productRef = B1DDCB3D23D0C98F00418A84 /* Swim */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -334,6 +335,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1DDCB3E23D0C98F00418A84 /* Swim in Frameworks */,
 				B15EE38723CE9C42005B268A /* Swifter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -815,6 +817,7 @@
 			name = ESTwitter;
 			packageProductDependencies = (
 				B15EE38623CE9C42005B268A /* Swifter */,
+				B1DDCB3D23D0C98F00418A84 /* Swim */,
 			);
 			productName = ESTwitter;
 			productReference = B132D50B23CD08B800690C5F /* ESTwitter.framework */;
@@ -927,6 +930,7 @@
 				B15EE38023CE9B40005B268A /* XCRemoteSwiftPackageReference "Swifter" */,
 				B15EE38823CE9FBB005B268A /* XCRemoteSwiftPackageReference "Reachability.swift" */,
 				B15EE38B23CEA03E005B268A /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				B1DDCB3C23D0C98F00418A84 /* XCRemoteSwiftPackageReference "Swim" */,
 			);
 			productRefGroup = B1D13C7123CA14DB0016902A /* Products */;
 			projectDirPath = "";
@@ -1548,6 +1552,14 @@
 				minimumVersion = 4.1.0;
 			};
 		};
+		B1DDCB3C23D0C98F00418A84 /* XCRemoteSwiftPackageReference "Swim" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/es-kumagai/Swim.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1585,6 +1597,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B15EE38B23CEA03E005B268A /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		B1DDCB3D23D0C98F00418A84 /* Swim */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1DDCB3C23D0C98F00418A84 /* XCRemoteSwiftPackageReference "Swim" */;
+			productName = Swim;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

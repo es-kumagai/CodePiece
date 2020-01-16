@@ -1177,9 +1177,9 @@ public class ObjectKeeper<T:AnyObject> {
 
 public extension NSAppleEventDescriptor {
 	
-	var url: NSURL? {
+	var url: URL? {
 		
-		paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue.flatMap { NSURL(string: $0) }
+		paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue.flatMap { URL(string: $0) }
 	}
 }
 

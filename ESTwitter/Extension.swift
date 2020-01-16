@@ -42,19 +42,17 @@ extension ReferenceDateConvertible {
 	
 	public func toFoundationDate() -> Foundation.Date {
 		
-		let date = Foundation.Date()
-		
 		return Foundation.Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate)
 	}
 	
-	public func toFoundationDateComponentsWithFlag(unitFlags: NSCalendar.Unit) -> DateComponents {
+	public func toFoundationDateComponentsWithFlag(unitFlags: Set<Calendar.Component>) -> DateComponents {
 		
-		return NSCalendar.current.components(unitFlags, from: self.toFoundationDate())
+		return NSCalendar.current.dateComponents(unitFlags, from: toFoundationDate())
 	}
 	
 	public func toFoundationDateComponents() -> DateComponents {
 		
-		return toFoundationDateComponentsWithFlag(unitFlags: NSCalendar.Unit(rawValue: UInt.max))
+		return toFoundationDateComponentsWithFlag(unitFlags: [.era, .year, .month, .day, .hour, .minute, .second, .nanosecond, .timeZone, .yearForWeekOfYear, .weekOfYear, .weekOfMonth, .weekdayOrdinal])
 	}
 }
 

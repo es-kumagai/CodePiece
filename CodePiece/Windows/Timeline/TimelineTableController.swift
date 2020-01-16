@@ -50,7 +50,7 @@ extension TimelineTableControllerType {
 		let getIgnoreRange = { NSMakeRange(maxRows - ignoreRows, ignoreRows) }
 		let getRemoveRange = { NSMakeRange(currentRows - overflowRows, overflowRows) }
 		
-		let insertIndexes = NSIndexSet(indexesInRange: getInsertRange())
+		let insertIndexes = NSIndexSet(indexesIn: getInsertRange())
 		let ignoreIndexes = ignoreRows > 0 ? NSIndexSet(indexesInRange: getIgnoreRange()) : NSIndexSet()
 		let removeIndexes = overflowRows > 0 ? NSIndexSet(indexesInRange: getRemoveRange()) : NSIndexSet()
 

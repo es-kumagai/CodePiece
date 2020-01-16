@@ -50,8 +50,8 @@ extension Collection where Element : HasIndices {
 
 public struct Indices {
 	
-	public var startIndex:Int
-	public var endIndex:Int
+	public var startIndex: Int
+	public var endIndex: Int
 	
 	public enum InitializeError : Error {
 		
@@ -81,7 +81,7 @@ extension Indices {
 			throw InitializeError.InvalidArgument("\(array)")
 		}
 		
-		guard case let (start, end) = (array[0], array[1]) where start <= end else {
+		guard case let (start, end) = (array[0], array[1]), start <= end else {
 			
 			throw InitializeError.InvalidArgument("\(array)")
 		}
@@ -92,15 +92,18 @@ extension Indices {
 
 extension Indices : Decodable {
 
-	public static func decode(e: Extractor) throws -> Indices {
-
+	public init(from decoder: Decoder) throws {
+	
+		let container = try decoder.singleValueContainer()
+		let indicesArray = try container.decode([Int].self)
+		
 		do {
-
-			return try Indices(twitterIndicesArray: decodeArray(e.rawValue))
-		}
-		catch InitializeError.InvalidArgument(let value) {
 			
-			throw DecodeError.TypeMismatch(expected: "\(Indices.self)", actual: "\(value)", keyPath: "indices")
+			try self.init(twitterIndicesArray: indicesArray)
+		}
+		catch {
+			
+			throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid indices format.")
 		}
 	}
 }
@@ -114,6 +117,6 @@ extension NSRange {
 	
 	public init(_ indices: Indices, offset: Int) {
 		
-		self.init(indices.startIndex.advancedBy(offset) ..< indices.endIndex.advancedBy(offset))
+		self.init(indices.startIndex + offset ..< indices.endIndex + offset)
 	}
 }

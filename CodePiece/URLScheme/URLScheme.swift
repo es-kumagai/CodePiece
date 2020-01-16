@@ -13,12 +13,12 @@ protocol URLScheme {
 	var scheme:String { get }
 	var host:String { get }
 	
-	func action(url:NSURL)
+	func action(url: URL)
 }
 
 extension URLScheme {
 	
-	func match(url:NSURL) -> Bool {
+	func match(url: URL) -> Bool {
 		
 		return url.scheme == self.scheme && url.host == self.host
 	}

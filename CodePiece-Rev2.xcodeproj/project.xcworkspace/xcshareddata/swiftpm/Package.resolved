@@ -84,7 +84,7 @@
       },
       {
         "package": "Swim",
-        "repositoryURL": "https://github.com/es-kumagai/Swim",
+        "repositoryURL": "https://github.com/es-kumagai/Swim.git",
         "state": {
           "branch": "master",
           "revision": "183d0cf57d48f37cedb77d017b6fcff7b10c754d",

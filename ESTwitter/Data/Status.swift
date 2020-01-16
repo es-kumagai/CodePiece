@@ -94,11 +94,11 @@ extension Status {
 		
 		if let entities = entities {
 
-			let baseAttributes = { () -> [String : AnyObject] in
+			let baseAttributes = { () -> [NSAttributedString.Key : Any] in
 				
-				var results = [String : AnyObject]()
+				var results = [NSAttributedString.Key : Any]()
 				
-				text.enumerateAttributesInRange(NSMakeRange(0, text.length), options: []) { (attributes: [String : AnyObject], range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
+				text.enumerateAttributes(in: NSMakeRange(0, text.length), options: []) { (attributes: [NSAttributedString.Key : Any], range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
 					
 					for (name, value) in attributes {
 						
@@ -114,7 +114,7 @@ extension Status {
 				var indices: Indices
 				var color: NSColor
 				var displayText: String
-				var link: NSURL
+				var link: Foundation.URL
 				
 				init(_ entity: URLEntity, color: NSColor) {
 					
@@ -148,7 +148,7 @@ extension Status {
 					self.link = entity.url
 				}
 				
-				func attributedTextWithBaseAttributes(baseAttributes: [String : AnyObject]) -> NSAttributedString {
+				func attributedTextWithBaseAttributes(baseAttributes: [NSAttributedString.Key : Any]) -> NSAttributedString {
 				
 					return NSAttributedString(string: displayText, attributes: attributesWithBaseAttributes(baseAttributes: baseAttributes))
 				}
@@ -158,36 +158,37 @@ extension Status {
 					return NSRange(indices)
 				}
 				
-				func attributesWithBaseAttributes(baseAttributes: [String : AnyObject]) -> [String : AnyObject] {
+				func attributesWithBaseAttributes(baseAttributes: [NSAttributedString.Key : Any]) -> [NSAttributedString.Key : Any] {
 					
 					var results = baseAttributes
 					
-					results[NSLinkAttributeName] = link
-					results[NSForegroundColorAttributeName] = color
-					results[NSUnderlineStyleAttributeName] = NSUnderlineStyle.StyleNone.rawValue
-					results[NSUnderlineColorAttributeName] = NSColor.clearColor()
+					results[.link] = link
+					results[.foregroundColor] = color
+					results[.underlineStyle] = [] as NSUnderlineStyle
+					results[.underlineColor] = NSColor.clear
 					
 					return results
 				}
 			}
 
-			let linkItems = FlattenCollection([
+			let linkItems = [
 				
 				entities.urls?.map { LinkItem.init($0, color: urlColor) },
 				entities.hashtags?.map { LinkItem.init($0, color: hashtagColor) },
 				entities.media?.map { LinkItem.init($0, color: urlColor) },
 				entities.userMentions?.map { LinkItem.init($0, color: mentionColor) }
 				]
-				.flatMap { $0 })
+				.compactMap { $0 }
+				.flatMap { $0 }
 			
 			for item in linkItems.sortedByIndicesDescend {
 				
-				text.replaceCharactersInRange(item.range, withAttributedString: item.attributedTextWithBaseAttributes(baseAttributes))
+				text.replaceCharacters(in: item.range, with: item.attributedTextWithBaseAttributes(baseAttributes: baseAttributes))
 			}
 		}
 	}
 
-	public func attributedText(urlColor urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) -> NSAttributedString {
+	public func attributedText(urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) -> NSAttributedString {
 	
 		let text = NSMutableAttributedString(string: self.text)
 		
@@ -196,7 +197,7 @@ extension Status {
 		return text.copy() as! NSAttributedString
 	}
 	
-	public func attributedText(urlColor urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor, @noescape tweak: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
+	public func attributedText(urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor, tweak: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
 		
 		let text = NSMutableAttributedString(string: self.text)
 		

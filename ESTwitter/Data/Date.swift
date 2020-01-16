@@ -23,9 +23,9 @@ public struct Date : RawRepresentable {
 	}
 }
 
-extension NSDate {
+extension Date {
 	
-	public static func dateFromTwitterDateString(string: String) -> Foundation.Date? {
+	public static func date(fromTwitterDateString string: String) -> Foundation.Date? {
 
 		let formatter = DateFormatter()
 		
@@ -45,7 +45,7 @@ extension Date {
 	
 	public init?(_ string: String) {
 		
-		guard let date = Date.dateFromTwitterDateString(string) else {
+		guard let date = Date.date(fromTwitterDateString: string) else {
 			
 			return nil
 		}

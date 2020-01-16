@@ -117,7 +117,7 @@ class TimelineStatusView: NSView {
 		statusLabel?.stringValue = ""
 	}
 	
-    override func drawRect(_ dirtyRect: NSRect) {
+	override func draw(_ dirtyRect: NSRect) {
         
         super.draw(dirtyRect)
 

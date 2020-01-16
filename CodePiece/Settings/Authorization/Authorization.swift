@@ -231,7 +231,7 @@ extension Authorization {
 		let oauth = self.twitter.oauth
 		let callback = ""
 		
-		let successHandler = { (oauthUrl: NSURL!, oauthToken: String!) in
+		let successHandler = { (oauthUrl: Foundation.URL!, oauthToken: String!) in
 
 			NSLog("Twitter OAuth require PIN code.")
 			DebugTime.print(" with url: \(oauthUrl), string: \(oauthToken)")

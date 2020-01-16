@@ -12,7 +12,7 @@ extension Set where Element : HashtagType {
 	
 	public init(hashtagsDisplayText: String) {
 		
-		let hashtags = hashtagsDisplayText.split(" ").flatMap(Element.init)
+		let hashtags = hashtagsDisplayText.split(separator: " ").compactMap(String.init).compactMap(Element.init)
 		
 		self.init(hashtags)
 	}
@@ -24,14 +24,14 @@ extension Set where Element : HashtagType {
 	
 	public func toTwitterDisplayText() -> String {
 		
-		return map { $0.value } .joinWithSeparator(" ")
+		return map { $0.value } .joined(separator: " ")
 	}
 	
 	public var twitterDisplayTextLength: Int {
 		
 		func numberOfSpaces() -> Int {
 			
-			return count.predecessor()
+			return count - 1
 		}
 		
 		switch count {

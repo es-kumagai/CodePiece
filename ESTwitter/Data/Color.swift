@@ -54,7 +54,11 @@ extension Color {
 		let getColorPart = { (part:ColorPartLocation) -> String in
 
 			let location = part.rawValue
-			return string.substringWithRange(string.startIndex.advancedBy(location) ... string.startIndex.advancedBy(location + 1))
+			
+			let start = string.index(string.startIndex, offsetBy: location)
+			let end = string.index(string.startIndex, offsetBy: location + 2)
+			
+			return string.substring(with: start ..< end)
 		}
 		
 		let toColorElement = { (part:String) throws -> CGFloat in
