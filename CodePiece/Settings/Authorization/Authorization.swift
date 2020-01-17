@@ -131,7 +131,7 @@ extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
 
 extension Authorization {
 
-	static func resetAuthorizationOfGitHub(id:ID, completion:(Result<Void, SessionTaskError>)->Void) {
+	static func resetAuthorizationOfGitHub(id:ID, completion: @escaping (Result<Void, SessionTaskError>)->Void) {
 		
 		guard let authorization = NSApp.settings.account.authorization else {
 
@@ -257,39 +257,42 @@ extension Authorization {
 		
 		let oauth2 = self.github.oauth2
 		
-		oauth2.onAuthorize = { parameters in
-			
-			guard case let (scope?, token?) = (parameters["scope"] as? String, parameters["access_token"] as? String) else {
-
-				_githubAuthorizationFailed(AuthorizationResult.Error.message("Failed to get access token by GitHub."), completion: completion)
-				return
-			}
-			
-			NSLog("GitHub OAuth authentication did end successfully with scope=\(scope).")
-			DebugTime.print(" with parameters: \(parameters)")
-			
-			let authorization = GitHubAuthorization.Token(token)
-			let request = GitHubAPI.Users.GetAuthenticatedUser(authorization: authorization)
-			
-			GitHubAPI.sendRequest(request) { response in
-				
-				switch response {
-					
-				case .success(let user):
-					_githubAuthorizationCreateSuccessfully(user: user, authorization: authorization, completion: completion)
-					
-				case .failure(let error):
-					_githubAuthorizationFailed(AuthorizationResult.Error.message("\(error)"), completion: completion)
-				}
-			}
-		}
+		#warning("OAuto2 の API が変わりすぎている様子のため、いったん無効化します。")
+		NSLog("%@", "OAuto2 の API が変わりすぎている様子のため、いったん無効化します。")
 		
-		oauth2.onFailure = { error in
-			
-			print("GitHub authorization went wrong" + (error.map { ": \($0)." } ?? "."))
-		}
-		
-		NSLog("Trying authorization with GitHub OAuth.")
-		try! oauth2.openAuthorizeURLInBrowser()
+//		oauth2.onAuthorize = { parameters in
+//
+//			guard case let (scope?, token?) = (parameters["scope"] as? String, parameters["access_token"] as? String) else {
+//
+//				_githubAuthorizationFailed(AuthorizationResult.Error.message("Failed to get access token by GitHub."), completion: completion)
+//				return
+//			}
+//
+//			NSLog("GitHub OAuth authentication did end successfully with scope=\(scope).")
+//			DebugTime.print(" with parameters: \(parameters)")
+//
+//			let authorization = GitHubAuthorization.Token(token)
+//			let request = GitHubAPI.Users.GetAuthenticatedUser(authorization: authorization)
+//
+//			GitHubAPI.sendRequest(request) { response in
+//
+//				switch response {
+//
+//				case .success(let user):
+//					_githubAuthorizationCreateSuccessfully(user: user, authorization: authorization, completion: completion)
+//
+//				case .failure(let error):
+//					_githubAuthorizationFailed(AuthorizationResult.Error.message("\(error)"), completion: completion)
+//				}
+//			}
+//		}
+//
+//		oauth2.onFailure = { error in
+//
+//			print("GitHub authorization went wrong" + (error.map { ": \($0)." } ?? "."))
+//		}
+//
+//		NSLog("Trying authorization with GitHub OAuth.")
+//		try! oauth2.openAuthorizeURLInBrowser()
 	}
 }

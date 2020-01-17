@@ -60,7 +60,7 @@ class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 		
 		Authorization.resetAuthorizationOfGitHub(id: id) { result in
 			
-			removeAuthenticatingHUD.hide()
+			self.removeAuthenticatingHUD.hide()
 			
 			switch result {
 				
@@ -69,7 +69,7 @@ class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
 
 			case .failure(let error):
-				showWarningAlert(withTitle: "Failed to reset authorization", message: "Could't reset the current authentication information. Reset authentication information which saved in this app force. (\(error))")
+				self.showWarningAlert(withTitle: "Failed to reset authorization", message: "Could't reset the current authentication information. Reset authentication information which saved in this app force. (\(error))")
 			}
 		}
 	}
