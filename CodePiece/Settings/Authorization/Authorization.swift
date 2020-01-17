@@ -55,20 +55,20 @@ final class Authorization : AlertDisplayable {
 		}
 	}
 
-	final class Twitter {
-		
-		var oauth: STTwitterOAuth
-		fileprivate(set) var pinRequesting: Bool
-
-		init() {
-
-			oauth = STTwitterOAuth(consumerName: nil, consumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret)
-			pinRequesting = false
-		}
-	}
+//	final class Twitter {
+//
+//		var oauth: STTwitterOAuth
+//		fileprivate(set) var pinRequesting: Bool
+//
+//		init() {
+//
+//			oauth = STTwitterOAuth(consumerName: nil, consumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret)
+//			pinRequesting = false
+//		}
+//	}
 
 	static var github = GitHub()
-	static var twitter = Twitter()
+//	static var twitter = Twitter()
 	
 	enum AuthorizationResult {
 
@@ -80,52 +80,52 @@ final class Authorization : AlertDisplayable {
 
 // MARK: Twitter
 
-extension Authorization {
-
-	static var isTwitterPinRequesting: Bool {
-		
-		return twitter.pinRequesting
-	}
-}
-
-extension Authorization.AuthorizationResult {
-
-	enum Error {
-		
-		case twitterError(STTwitterTwitterErrorCode)
-		case message(String)
-	}
-}
-
-extension Authorization.AuthorizationResult.Error {
-	
-	init(_ error: NSError) {
-		
-		switch error.domain {
-			
-		case kSTTwitterTwitterErrorDomain:
-			self = .twitterError(STTwitterTwitterErrorCode(rawValue: error.code)!)
-			
-		default:
-			self = .message(error.localizedDescription)
-		}
-	}
-}
-
-extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
-
-	var description: String {
-		
-		switch self {
-
-		case .twitterError(let code):
-			return code.description
-			
-		case .message(let message):
-			return message			
-		}
-	}
-}
+//extension Authorization {
+//
+//	static var isTwitterPinRequesting: Bool {
+//
+//		return twitter.pinRequesting
+//	}
+//}
+//
+//extension Authorization.AuthorizationResult {
+//
+//	enum Error {
+//
+//		case twitterError(STTwitterTwitterErrorCode)
+//		case message(String)
+//	}
+//}
+//
+//extension Authorization.AuthorizationResult.Error {
+//
+//	init(_ error: NSError) {
+//
+//		switch error.domain {
+//
+//		case kSTTwitterTwitterErrorDomain:
+//			self = .twitterError(STTwitterTwitterErrorCode(rawValue: error.code)!)
+//
+//		default:
+//			self = .message(error.localizedDescription)
+//		}
+//	}
+//}
+//
+//extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
+//
+//	var description: String {
+//
+//		switch self {
+//
+//		case .twitterError(let code):
+//			return code.description
+//
+//		case .message(let message):
+//			return message
+//		}
+//	}
+//}
 
 // MARK: GitHub
 
@@ -173,10 +173,10 @@ extension Authorization {
 		completion(.Created)
 	}
 	
-	private static func _twitterAuthorizationFailed(error: AuthorizationResult.Error, completion:(AuthorizationResult)->Void) {
-		
-		completion(.Failed(error))
-	}
+//	private static func _twitterAuthorizationFailed(error: AuthorizationResult.Error, completion:(AuthorizationResult)->Void) {
+//
+//		completion(.Failed(error))
+//	}
 	
 	private static func _githubAuthorizationCreateSuccessfully(user: Gist.User, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
 		
@@ -199,59 +199,59 @@ extension Authorization {
 		completion(.Failed(error))
 	}
 
-	static func authorizationWithTwitter(pin: String, completion:(AuthorizationResult)->Void) {
-		
-		let oauth = self.twitter.oauth
-		
-		let successHandler = { (token: String!, tokenSecret: String!, userId: String!, screenName: String!) in
-			
-			NSLog("Twitter OAuth authentication did end successfully.")
-			DebugTime.print(" with: \(token), \(tokenSecret), \(userId), \(screenName)")
-			
-			let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: screenName)
-			
-			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
-
-			twitter.pinRequesting = false
-			_twitterAuthorizationCreateSuccessfully(completion: completion)
-		}
-		
-		let errorHandler = { (error: NSError!) in
-			
-			print("Twitter authorization went wrong: \(error).")
-			
-			_twitterAuthorizationFailed(error: .message("Check entered PIN code and try again."), completion: completion)
-		}
-		
-		oauth.postAccessTokenRequestWithPIN(pin, successBlock: successHandler, errorBlock: errorHandler)
-	}
+//	static func authorizationWithTwitter(pin: String, completion:(AuthorizationResult)->Void) {
+//
+//		let oauth = self.twitter.oauth
+//
+//		let successHandler = { (token: String!, tokenSecret: String!, userId: String!, screenName: String!) in
+//
+//			NSLog("Twitter OAuth authentication did end successfully.")
+//			DebugTime.print(" with: \(token), \(tokenSecret), \(userId), \(screenName)")
+//
+//			let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: screenName)
+//
+//			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
+//
+//			twitter.pinRequesting = false
+//			_twitterAuthorizationCreateSuccessfully(completion: completion)
+//		}
+//
+//		let errorHandler = { (error: NSError!) in
+//
+//			print("Twitter authorization went wrong: \(error).")
+//
+//			_twitterAuthorizationFailed(error: .message("Check entered PIN code and try again."), completion: completion)
+//		}
+//
+//		oauth.postAccessTokenRequestWithPIN(pin, successBlock: successHandler, errorBlock: errorHandler)
+//	}
 	
-	static func authorizationWithTwitter(completion:(AuthorizationResult)->Void) {
-
-		let oauth = self.twitter.oauth
-		let callback = ""
-		
-		let successHandler = { (oauthUrl: Foundation.URL!, oauthToken: String!) in
-
-			NSLog("Twitter OAuth require PIN code.")
-			DebugTime.print(" with url: \(oauthUrl), string: \(oauthToken)")
-			
-			NSWorkspace.shared.open(oauthUrl)
-			
-			completion(.PinRequired)
-		}
-		
-		let errorHandler = { (error: NSError!) in
-
-			twitter.pinRequesting = false
-
-			print("Twitter authorization went wrong: \(error).")
-			_twitterAuthorizationFailed(error: AuthorizationResult.Error(error), completion: completion)
-		}
-		
-		twitter.pinRequesting = true
-		oauth.postTokenRequest(successHandler, oauthCallback: callback, errorBlock: errorHandler)
-	}
+//	static func authorizationWithTwitter(completion:(AuthorizationResult)->Void) {
+//
+//		let oauth = self.twitter.oauth
+//		let callback = ""
+//		
+//		let successHandler = { (oauthUrl: Foundation.URL!, oauthToken: String!) in
+//
+//			NSLog("Twitter OAuth require PIN code.")
+//			DebugTime.print(" with url: \(oauthUrl), string: \(oauthToken)")
+//			
+//			NSWorkspace.shared.open(oauthUrl)
+//			
+//			completion(.PinRequired)
+//		}
+//		
+//		let errorHandler = { (error: NSError!) in
+//
+//			twitter.pinRequesting = false
+//
+//			print("Twitter authorization went wrong: \(error).")
+//			_twitterAuthorizationFailed(error: AuthorizationResult.Error(error), completion: completion)
+//		}
+//		
+//		twitter.pinRequesting = true
+//		oauth.postTokenRequest(successHandler, oauthCallback: callback, errorBlock: errorHandler)
+//	}
 	
 	static func authorizationWithGitHub(completion:(AuthorizationResult)->Void) {
 		

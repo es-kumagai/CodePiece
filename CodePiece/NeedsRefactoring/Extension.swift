@@ -728,7 +728,7 @@ public class MessageQueue<M:MessageType> : MessageQueueType {
 		}
 	}
 	
-	public func send(message: Message, preAction:(Queue<Message>, Message) -> Continuous) {
+	public func send(message: Message, preAction: @escaping (Queue<Message>, Message) -> Continuous) {
 		
 		self.executeOnProcessingQueue {
 

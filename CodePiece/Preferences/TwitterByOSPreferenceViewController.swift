@@ -10,13 +10,13 @@ import Cocoa
 
 final class TwitterByOSPreferenceViewController: TwitterPreferenceViewController {
 	
-	@IBOutlet var accountSelectorController: TwitterAccountSelectorController!
+//	@IBOutlet var accountSelectorController: TwitterAccountSelectorController!
 	
 	override func resetAuthorization() {
 		
 		super.resetAuthorization()
 		
-		updateAccountSelector()
+//		updateAccountSelector()
 	}
 }
 
@@ -42,37 +42,37 @@ extension TwitterByOSPreferenceViewController {
 		
 		super.viewWillAppear()
 		
-		updateAccountSelector()
+//		updateAccountSelector()
 	}
 	
-	private func checkCanAccessToAccountsAndUpdateAccountSelector() {
-		
-		TwitterController.requestAccessToAccounts { result in
-			
-			self.clearError()
-			self.updateAccountSelector()
-			
-			switch result {
-				
-			case .success:
-				break
-				
-			case .failure(let error):
-				NSLog("Access to Twitter account is not allowed. \(error)")
-				self.reportError("Access to Twitter account is not allowed. Please give permission to access Twitter account using Privacy settings.")
-			}
-		}
-	}
+//	private func checkCanAccessToAccountsAndUpdateAccountSelector() {
+//
+//		TwitterController.requestAccessToAccounts { result in
+//
+//			self.clearError()
+//			self.updateAccountSelector()
+//
+//			switch result {
+//
+//			case .success:
+//				break
+//
+//			case .failure(let error):
+//				NSLog("Access to Twitter account is not allowed. \(error)")
+//				self.reportError("Access to Twitter account is not allowed. Please give permission to access Twitter account using Privacy settings.")
+//			}
+//		}
+//	}
 
-	func updateAccountSelector() {
-		
-		accountSelectorController.updateAccountSelector()
-		
-		if !accountSelectorController.hasAccount {
-			
-			self.reportError("No Twitter account found. Please register a twitter account using Account settings.")
-		}
-	}
+//	func updateAccountSelector() {
+//
+//		accountSelectorController.updateAccountSelector()
+//
+//		if !accountSelectorController.hasAccount {
+//
+//			self.reportError("No Twitter account found. Please register a twitter account using Account settings.")
+//		}
+//	}
 }
 
 // MARK: Preferences

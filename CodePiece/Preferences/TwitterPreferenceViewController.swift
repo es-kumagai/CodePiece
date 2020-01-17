@@ -178,7 +178,7 @@ extension TwitterPreferenceViewController {
 				NSLog("Twitter credentials verified successfully.")
 				
 			case .failure(let error):
-				showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
+				self.showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
 			}
 		}
 	}

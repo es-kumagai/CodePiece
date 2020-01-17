@@ -79,25 +79,27 @@ extension TwitterByOAuthPreferenceViewController {
 	
 	@IBAction func doEnterPin(sender: NSButton) {
 		
-		authenticatingPinHUD.show()
-		
-		Authorization.authorizationWithTwitter(pin: pinTextField.stringValue) { result in
-			
-			self.authenticatingPinHUD.hide()
-			
-			switch result {
-				
-			case .Created:
-				self.exitPinInputMode()
-				self.dismiss(self)
-				
-			case .Failed(let message):
-				self.showErrorAlert(withTitle: "Failed to authentication", message: message.description)
-				
-			case .PinRequired:
-				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (PIN Required)")
-			}
-		}
+		#warning("いったん、処理を無効化してあります。")
+		fatalError("いったん、処理を無効化してあります。")
+//		authenticatingPinHUD.show()
+//
+//		Authorization.authorizationWithTwitter(pin: pinTextField.stringValue) { result in
+//
+//			self.authenticatingPinHUD.hide()
+//
+//			switch result {
+//
+//			case .Created:
+//				self.exitPinInputMode()
+//				self.dismiss(self)
+//
+//			case .Failed(let message):
+//				self.showErrorAlert(withTitle: "Failed to authentication", message: message.description)
+//
+//			case .PinRequired:
+//				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (PIN Required)")
+//			}
+//		}
 	}
 	
 	var canPinEnterButtonPush: Bool {
@@ -110,17 +112,17 @@ extension TwitterByOAuthPreferenceViewController {
 		return !pinTextField.stringValue.isEmpty
 	}
 	
-	func updatePinInputMode() {
-		
-		switch Authorization.isTwitterPinRequesting {
-			
-		case true:
-			enteringPinInputMode()
-			
-		case false:
-			exitPinInputMode()
-		}
-	}
+//	func updatePinInputMode() {
+//
+//		switch Authorization.isTwitterPinRequesting {
+//
+//		case true:
+//			enteringPinInputMode()
+//
+//		case false:
+//			exitPinInputMode()
+//		}
+//	}
 	
 	func enteringPinInputMode() {
 		

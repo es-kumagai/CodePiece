@@ -12,9 +12,6 @@ import ESGists
 import Ocean
 import Swim
 
-@available(*, unavailable, renamed: "DataStore.Error")
-typealias DataStoreError = DataStore.error
-
 struct DataStore {
 	
 	static let service = "CodePiece App"
@@ -151,14 +148,7 @@ private extension UserDefaults {
 			}
 			else {
 				
-				// If `identifier` is not empty when `kind` is not stored, set `kind` to `OSAccount`.
-				// This process is for compatibility when authentication method was the only using OS Account.
-				guard !twitterStoreAccountIdentifier.isEmpty else {
-					
-					return .Unknown
-				}
-				
-				return .OSAccount
+				return .Unknown
 			}
 		}
 		
@@ -176,7 +166,7 @@ extension DataStore {
 		enum Kind : String {
 			
 			case Unknown = ""
-			case OSAccount = "account"
+//			case OSAccount = "account"
 			case OAuthToken = "token"
 		}
 		

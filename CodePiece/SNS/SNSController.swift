@@ -57,12 +57,12 @@ final class SNSController : PostController {
 		return gists.canPost && twitter.canPost
 	}
 	
-	func post(container:PostDataContainer, completed: (PostDataContainer) -> Void) {
+	func post(container:PostDataContainer, completed: @escaping (PostDataContainer) -> Void) {
 
 		self._post(container: container, capturedGistImage: nil, completed: completed)
 	}
 	
-	func _post(container:PostDataContainer, capturedGistImage: NSImage?, completed: (PostDataContainer) -> Void) {
+	func _post(container:PostDataContainer, capturedGistImage: NSImage?, completed: @escaping (PostDataContainer) -> Void) {
 		
 		let callNextStageRecursively = { [unowned self] (image: NSImage?) in
 			

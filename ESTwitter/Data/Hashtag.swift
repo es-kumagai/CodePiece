@@ -46,12 +46,12 @@ public struct Hashtag : HashtagType {
 		
 		get {
 			
-			return self.rawValue
+			return rawValue
 		}
 		
 		set {
 			
-			self.value = Hashtag.normalize(newValue)
+			rawValue = Hashtag.normalize(newValue)
 		}
 	}
 }
@@ -113,9 +113,9 @@ extension Hashtag : CustomStringConvertible {
 
 extension Hashtag : Hashable {
 	
-	public var hashValue: Int {
+	public func hash(into hasher: inout Hasher) {
 		
-		return self.value.hashValue
+		hasher.combine(rawValue)
 	}
 }
 

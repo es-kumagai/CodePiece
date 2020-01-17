@@ -317,7 +317,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 	
 	private func _changeHashtags(hashtags: Set<ESTwitter.Hashtag>) {
 		
-		if self.timelineDataSource.appendHashtags(hashtags: hashtags) {
+		if timelineDataSource.appendHashtags(hashtags: hashtags).passed {
 		
             DispatchQueue.main.sync {
 
