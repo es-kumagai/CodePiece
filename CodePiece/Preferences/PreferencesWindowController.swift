@@ -77,7 +77,7 @@ extension PreferencesWindowController : NSWindowDelegate {
 
 		NSApp.twitterController.verifyCredentialsIfNeed { result in
 			
-			if let error = result.error {
+			if case .failure(let error) = result {
 				
 				NSLog("Failed to verify credentials. \(error)")
 			}

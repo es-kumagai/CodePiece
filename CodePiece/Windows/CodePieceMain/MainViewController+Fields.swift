@@ -1,5 +1,5 @@
 //
-//  ViewController+Fields.swift
+//  MainViewController+Fields.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on 1/19/16.
@@ -55,7 +55,7 @@ extension FieldsController {
 	}
 }
 
-extension ViewController : FieldsController {
+extension MainViewController : FieldsController {
 	
 	func updateLanguageWatermark() {
 		
@@ -144,13 +144,13 @@ extension FieldsController where Self : ViewControllerSelectionAndRepliable {
 			return .NormalPost
 		}
 		
-		if NSApp.twitterController.isMyTweet(status) {
+		if NSApp.twitterController.isMyTweet(status: status) {
 			
 			return .ChainPost
 		}
 		else {
 			
-			return descriptionTextField.containsScreenName(status.user.screenName) ? .ReplyPost : .NormalPost
+			return descriptionTextField.containsScreenName(screenName: status.user.screenName) ? .ReplyPost : .NormalPost
 		}
 	}
 	
@@ -190,7 +190,7 @@ extension FieldsController where Self : KeyValueChangeable {
 	
 	func clearCodeText() {
 		
-		withChangeValue("canPost") {
+		withChangeValue(for: "canPost") {
 			
 			codeTextView.clearCodeText()
 		}
@@ -198,7 +198,7 @@ extension FieldsController where Self : KeyValueChangeable {
 	
 	func clearDescriptionText() {
 		
-		withChangeValue("canPost") {
+		withChangeValue(for: "canPost") {
 			
 			descriptionTextField.clearTwitterText()
 		}
@@ -206,7 +206,7 @@ extension FieldsController where Self : KeyValueChangeable {
 	
 	func clearHashtags() {
 		
-		withChangeValue("canPost") {
+		withChangeValue(for: "canPost") {
 			
 			self.hashTagTextField.hashtags = []
 			updateHashtagWatermark()

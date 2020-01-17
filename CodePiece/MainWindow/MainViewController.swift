@@ -72,22 +72,16 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 		didSet {
 			
-			guard let font = systemPalette.codeFont else {
-				
-				NSLog("Failed to get a font for the CodeTextView.")
-				return
-			}
-			
-			self.codeTextView.font = font
+			self.codeTextView.font = systemPalette.codeFont
 
 			// MARK: IB からだと自動書式調整のプロパティを変えても効かないので、ここで調整しています。
-			self.codeTextView.automaticDashSubstitutionEnabled = false
-			self.codeTextView.automaticDataDetectionEnabled = false
-			self.codeTextView.automaticLinkDetectionEnabled = false
-			self.codeTextView.automaticQuoteSubstitutionEnabled = false
-			self.codeTextView.automaticSpellingCorrectionEnabled = false
-			self.codeTextView.automaticTextReplacementEnabled = false
-			self.codeTextView.continuousSpellCheckingEnabled = false
+			self.codeTextView.isAutomaticDashSubstitutionEnabled = false
+			self.codeTextView.isAutomaticDataDetectionEnabled = false
+			self.codeTextView.isAutomaticLinkDetectionEnabled = false
+			self.codeTextView.isAutomaticQuoteSubstitutionEnabled = false
+			self.codeTextView.isAutomaticSpellingCorrectionEnabled = false
+			self.codeTextView.isAutomaticTextReplacementEnabled = false
+			self.codeTextView.isContinuousSpellCheckingEnabled = false
 		}
 	}
 	
@@ -139,7 +133,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			self.codeTextView.hasCode || !self.descriptionTextField.isReplyAddressOnly
 		]
 		
-		return meetsAll(of: conditions, true)
+		return conditions.meetsAll(of: true)
 	}
 	
 	var selectedLanguage:Language {
@@ -178,10 +172,10 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			switch result {
 				
-			case .success(let container):
+			case .Success(let container):
 				PostCompletelyNotification(container: container).post()
 				
-			case .failure(let container):
+			case .Failure(let container):
 				PostFailedNotification(container: container).post()
 			}
 		}
@@ -191,17 +185,17 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		
-		NSApp.snsController.post(makePostDataContainer()) { container in
+		NSApp.snsController.post(container: makePostDataContainer()) { container in
 			
 			DebugTime.print("📮 Posted \(container.twitterState.postedStatus) ... #1.1.1")
 			
 			if container.posted {
 				
-				callback(PostResult.success(container))
+				callback(PostResult.Success(container))
 			}
 			else {
 				
-				callback(PostResult.failure(container))
+				callback(PostResult.Failure(container))
 			}
 		}
 	}
@@ -210,7 +204,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		DebugTime.print("Restoring contents in main window.")
 		
-		NSApp.settings.appState.selectedLanguage.invokeIfExists(self.languagePopUpDataSource.selectLanguage)
+		NSApp.settings.appState.selectedLanguage.invokeIfExists(expression: self.languagePopUpDataSource.selectLanguage)
 		NSApp.settings.appState.hashtags.invokeIfExists { self.hashTagTextField.hashtags = $0 }
 	}
 	
@@ -270,7 +264,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 				return
 			}
 
-			self.selectedStatuses = notification.selectedCells.flatMap { $0.cell?.item?.status }
+			self.selectedStatuses = notification.selectedCells.compactMap { $0.cell?.item?.status }
 			self.nextReplyToType = .SelectedStatus
 			
 			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
@@ -278,7 +272,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		observe(notification: TimelineViewController.TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
 			
-			self.setReplyTo(notification)
+			self.setReplyTo(sender: notification)
 		}
 	}
 	
@@ -298,8 +292,8 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 		DebugTime.print("Main window will hide.")
 		
-		self.saveContents()
-		self.releaseAllObservingNotifications()
+		saveContents()
+		notificationHandlers.releaseAll()
 		
 		super.viewWillDisappear()
 	}
@@ -357,9 +351,9 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		do {
 
-			try ESTwitter.Browser.openWithQuery(self.hashTagTextField.hashtags.toTwitterDisplayText())
+			try ESTwitter.Browser.openWithQuery(query: self.hashTagTextField.hashtags.toTwitterDisplayText())
 		}
-		catch let ESTwitter.Browser.Error.OperationFailure(reason: reason) {
+		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
 			
 			self.showErrorAlert(withTitle: "Failed to open browser", message: reason)
 		}
@@ -385,9 +379,9 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		do {
 			
-			try ESTwitter.Browser.openWithStatus(status)
+			try ESTwitter.Browser.openWithStatus(status: status)
 		}
-		catch let ESTwitter.Browser.Error.OperationFailure(reason: reason) {
+		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
 			
 			self.showErrorAlert(withTitle: "Failed to open browser", message: reason)
 		}
@@ -400,19 +394,13 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
-	func textDidChange(notification: NSNotification) {
+	func textDidChange(_ notification: Notification) {
 		
 		self.withChangeValue(for: "canPost")
 		self.updateControlsDisplayText()
 	}
 	
-	override func controlTextDidChange(notification: NSNotification) {
-	
-		self.withChangeValue(for: "canPost")
-		self.updateControlsDisplayText()
-	}
-	
-	func control(control: NSControl, textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {
+	func control(_ control: NSControl, textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {
 		
 		switch control {
 			
@@ -424,7 +412,7 @@ extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 		}
 	}
 	
-	func textView(textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {
+	func textView(_ textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>?) -> [String] {
 		
 		return []
 	}

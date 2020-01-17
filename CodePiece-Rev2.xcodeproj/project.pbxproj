@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		B1154B6A23CABCFC003CFFF2 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B1154B6923CABCFC003CFFF2 /* ESGists */; };
+		B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1278B5B23D176C3003F3719 /* CodeText.swift */; };
 		B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B132D50423CD078800690C5F /* ESProgressHUD */; };
 		B132D51423CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
 		B132D51B23CD08B800690C5F /* ESTwitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B132D51A23CD08B800690C5F /* ESTwitterTests.swift */; };
 		B132D51D23CD08B800690C5F /* ESTwitter.h in Headers */ = {isa = PBXBuildFile; fileRef = B132D50D23CD08B800690C5F /* ESTwitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
 		B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B136C9AF23D189C6004AEA27 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B136C9AE23D189C6004AEA27 /* ESGists */; };
 		B15EE1DE23CE706C005B268A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1DD23CE706C005B268A /* Alert.swift */; };
 		B15EE1F623CE747D005B268A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F523CE747D005B268A /* Extension.swift */; };
 		B15EE1F923CE7522005B268A /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F823CE7522005B268A /* AppControllers.swift */; };
@@ -69,9 +71,9 @@
 		B15EE26D23CE7658005B268A /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24D23CE7658005B268A /* TwitterPreferenceViewController.swift */; };
 		B15EE28F23CE7667005B268A /* LatestTweetManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27123CE7667005B268A /* LatestTweetManageable.swift */; };
 		B15EE29023CE7667005B268A /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE27223CE7667005B268A /* Timeline.storyboard */; };
-		B15EE29123CE7667005B268A /* ViewController+PostDataManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27323CE7667005B268A /* ViewController+PostDataManage.swift */; };
-		B15EE29223CE7667005B268A /* ViewController+Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27423CE7667005B268A /* ViewController+Fields.swift */; };
-		B15EE29323CE7667005B268A /* ViewController+SelectionAndRepliable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27523CE7667005B268A /* ViewController+SelectionAndRepliable.swift */; };
+		B15EE29123CE7667005B268A /* MainViewController+PostDataManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27323CE7667005B268A /* MainViewController+PostDataManage.swift */; };
+		B15EE29223CE7667005B268A /* MainViewController+Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27423CE7667005B268A /* MainViewController+Fields.swift */; };
+		B15EE29323CE7667005B268A /* MainViewController+SelectionAndRepliable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27523CE7667005B268A /* MainViewController+SelectionAndRepliable.swift */; };
 		B15EE29423CE7667005B268A /* AboutWindowController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE27623CE7667005B268A /* AboutWindowController.storyboard */; };
 		B15EE29523CE7667005B268A /* AboutWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27723CE7667005B268A /* AboutWindow.swift */; };
 		B15EE29623CE7667005B268A /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27823CE7667005B268A /* AboutWindowController.swift */; };
@@ -190,6 +192,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B1278B5B23D176C3003F3719 /* CodeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeText.swift; sourceTree = "<group>"; };
 		B132D50B23CD08B800690C5F /* ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B132D50D23CD08B800690C5F /* ESTwitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESTwitter.h; sourceTree = "<group>"; };
 		B132D50E23CD08B800690C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -251,9 +254,9 @@
 		B15EE24D23CE7658005B268A /* TwitterPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterPreferenceViewController.swift; sourceTree = "<group>"; };
 		B15EE27123CE7667005B268A /* LatestTweetManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestTweetManageable.swift; sourceTree = "<group>"; };
 		B15EE27223CE7667005B268A /* Timeline.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Timeline.storyboard; sourceTree = "<group>"; };
-		B15EE27323CE7667005B268A /* ViewController+PostDataManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+PostDataManage.swift"; sourceTree = "<group>"; };
-		B15EE27423CE7667005B268A /* ViewController+Fields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+Fields.swift"; sourceTree = "<group>"; };
-		B15EE27523CE7667005B268A /* ViewController+SelectionAndRepliable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+SelectionAndRepliable.swift"; sourceTree = "<group>"; };
+		B15EE27323CE7667005B268A /* MainViewController+PostDataManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainViewController+PostDataManage.swift"; sourceTree = "<group>"; };
+		B15EE27423CE7667005B268A /* MainViewController+Fields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainViewController+Fields.swift"; sourceTree = "<group>"; };
+		B15EE27523CE7667005B268A /* MainViewController+SelectionAndRepliable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainViewController+SelectionAndRepliable.swift"; sourceTree = "<group>"; };
 		B15EE27623CE7667005B268A /* AboutWindowController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AboutWindowController.storyboard; sourceTree = "<group>"; };
 		B15EE27723CE7667005B268A /* AboutWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindow.swift; sourceTree = "<group>"; };
 		B15EE27823CE7667005B268A /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
@@ -345,6 +348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B136C9AF23D189C6004AEA27 /* ESGists in Frameworks */,
 				B1DDCB3E23D0C98F00418A84 /* Swim in Frameworks */,
 				B15EE38723CE9C42005B268A /* Swifter in Frameworks */,
 			);
@@ -573,9 +577,9 @@
 			children = (
 				B15EE27123CE7667005B268A /* LatestTweetManageable.swift */,
 				B15EE27223CE7667005B268A /* Timeline.storyboard */,
-				B15EE27323CE7667005B268A /* ViewController+PostDataManage.swift */,
-				B15EE27423CE7667005B268A /* ViewController+Fields.swift */,
-				B15EE27523CE7667005B268A /* ViewController+SelectionAndRepliable.swift */,
+				B15EE27323CE7667005B268A /* MainViewController+PostDataManage.swift */,
+				B15EE27423CE7667005B268A /* MainViewController+Fields.swift */,
+				B15EE27523CE7667005B268A /* MainViewController+SelectionAndRepliable.swift */,
 			);
 			path = CodePieceMain;
 			sourceTree = "<group>";
@@ -773,6 +777,7 @@
 				B15EE1FC23CE7571005B268A /* BaseViewController.swift */,
 				B15EE1FD23CE7571005B268A /* BaseWindowController.swift */,
 				B15EE20023CE757C005B268A /* DebugSupport.swift */,
+				B1278B5B23D176C3003F3719 /* CodeText.swift */,
 				B15EE20423CE7593005B268A /* Environments.swift */,
 				B15EE20623CE7593005B268A /* GitHubOpenFeatures.swift */,
 				B15EE20223CE7593005B268A /* SystemPalette.swift */,
@@ -841,6 +846,7 @@
 			packageProductDependencies = (
 				B15EE38623CE9C42005B268A /* Swifter */,
 				B1DDCB3D23D0C98F00418A84 /* Swim */,
+				B136C9AE23D189C6004AEA27 /* ESGists */,
 			);
 			productName = ESTwitter;
 			productReference = B132D50B23CD08B800690C5F /* ESTwitter.framework */;
@@ -1071,13 +1077,13 @@
 				B15EE20A23CE7593005B268A /* TwitterText.swift in Sources */,
 				B15EE2A223CE7667005B268A /* TimelineStatusView.swift in Sources */,
 				B15EE20823CE7593005B268A /* TwitterOpenFeatures.swift in Sources */,
-				B15EE29223CE7667005B268A /* ViewController+Fields.swift in Sources */,
+				B15EE29223CE7667005B268A /* MainViewController+Fields.swift in Sources */,
 				B15EE25E23CE7658005B268A /* PostData+Gists.swift in Sources */,
 				B15EE26923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift in Sources */,
 				B15EE25A23CE7658005B268A /* TwitterAccount.swift in Sources */,
 				B15EE22123CE7636005B268A /* AboutWindowControllerSegue.swift in Sources */,
 				B15EE29723CE7667005B268A /* WelcomeBoardViewController.swift in Sources */,
-				B15EE29323CE7667005B268A /* ViewController+SelectionAndRepliable.swift in Sources */,
+				B15EE29323CE7667005B268A /* MainViewController+SelectionAndRepliable.swift in Sources */,
 				B15EE1F623CE747D005B268A /* Extension.swift in Sources */,
 				B15EE2A023CE7667005B268A /* TimelineTableDataSource.swift in Sources */,
 				B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */,
@@ -1116,10 +1122,11 @@
 				B15EE21023CE7612005B268A /* LanguagePopupDataSource.swift in Sources */,
 				B15EE21A23CE761C005B268A /* Application.swift in Sources */,
 				B15EE25F23CE7658005B268A /* Twitter.swift in Sources */,
+				B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */,
 				B15EE25423CE7658005B268A /* DataStore_AuthInfo.swift in Sources */,
 				B15EE1FE23CE7571005B268A /* BaseViewController.swift in Sources */,
 				B15EE25523CE7658005B268A /* Authorization.swift in Sources */,
-				B15EE29123CE7667005B268A /* ViewController+PostDataManage.swift in Sources */,
+				B15EE29123CE7667005B268A /* MainViewController+PostDataManage.swift in Sources */,
 				B15EE21123CE7612005B268A /* WebCaptureController.swift in Sources */,
 				B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */,
 				B15EE25323CE7658005B268A /* Settings.swift in Sources */,
@@ -1600,6 +1607,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B132D50323CD078800690C5F /* XCRemoteSwiftPackageReference "ESProgressHUD" */;
 			productName = ESProgressHUD;
+		};
+		B136C9AE23D189C6004AEA27 /* ESGists */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1154B6823CABCFC003CFFF2 /* XCRemoteSwiftPackageReference "ESGists" */;
+			productName = ESGists;
 		};
 		B15EE33F23CE7959005B268A /* OAuth2 */ = {
 			isa = XCSwiftPackageProductDependency;

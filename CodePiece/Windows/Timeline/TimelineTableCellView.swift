@@ -69,7 +69,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 			self.style.backgroundColor.set()
 		}
 		
-		NSRectFill(dirtyRect)
+		dirtyRect.fill()
 		
 		super.draw(dirtyRect)
 	}
@@ -86,30 +86,17 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 				
 				let textRange = NSMakeRange(0, text.length)
 				
-				text.addAttribute(NSFontAttributeName, value: systemPalette.textFont, range: textRange)
-				text.addAttribute(NSForegroundColorAttributeName, value: systemPalette.textColor, range: textRange)
-			}
-			
-			let dateToString: (ISO8601Date) -> String = {
-				
-				let formatter = applyingExpression(to: DateFormatter()) {
-					
-					$0.dateStyle = .short
-					$0.timeStyle = .short
-//					$0.dateFormat = "yyyy-MM-dd HH:mm"
-//					$0.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-				}
-				
-				return formatter.string(from: $0.rawValue)
+				text.addAttribute(.font, value: systemPalette.textFont, range: textRange)
+				text.addAttribute(.foregroundColor, value: systemPalette.textColor, range: textRange)
 			}
 			
 			self.usernameLabel.stringValue = status.user.name
-			self.dateLabel.stringValue = dateToString(status.createdAt)
+			self.dateLabel.stringValue = status.createdAt.description
 			self.iconButton.image = nil
 			self.retweetMark.isHidden = !status.isRetweetedTweet
 			self.style = (status.createdAt > Date().daysAgo(1) ? .Recent : .Past)
 			
-			self.updateIconImage(status)
+			self.updateIconImage(status: status)
 		}
 		else {
 
@@ -189,7 +176,7 @@ extension TimelineTableCellView : TimelineTableCellType {
 		cell.frame = tableView.rect(ofColumn: 0)
 
 		let font = cell.textLabel.font
-		let labelSize = item.status.text.sizeWithFont(font, lineBreakMode: .ByWordWrapping, maxWidth: cell.textLabel.bounds.width + textLabelWidthAdjuster)
+		let labelSize = item.status.text.size(with: font, lineBreakMode: .byWordWrapping, maxWidth: cell.textLabel.bounds.width + textLabelWidthAdjuster)
 
 		let textLabelHeight = cell.textLabel.bounds.height
 		let estimateHeight = baseHeight + labelSize.height - textLabelHeight
@@ -202,12 +189,12 @@ extension TimelineTableCellView : TimelineTableCellType {
 		if self.cellForEstimateHeight == nil {
 			
 //			let cell = self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView
-			guard let topObjects = tableView.topObjectsInRegisteredNibByIdentifier(identifier: self.prototypeCellIdentifier) else {
+			guard let topObjects = tableView.topObjectsInRegisteredNibByIdentifier(identifier: .timelineHashtagTableCellViewPrototypeCellIdentifier) else {
 			
 				fatalError()
 			}
 			
-			self.cellForEstimateHeight = topObjects.flatMap { $0 as? TimelineTableCellView } .first!
+			self.cellForEstimateHeight = topObjects.compactMap { $0 as? TimelineTableCellView } .first!
 		}
 		
 		return self.cellForEstimateHeight

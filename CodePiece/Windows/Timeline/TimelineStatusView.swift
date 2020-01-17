@@ -123,6 +123,6 @@ class TimelineStatusView: NSView {
 
 		backgroundColor.set()
 		
-		NSRectFill(dirtyRect)
+		dirtyRect.fill()
     }
 }

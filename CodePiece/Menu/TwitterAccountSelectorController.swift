@@ -29,7 +29,7 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 	
 	var headerMenuItem:TwitterAccountMenuItem {
 		
-		return self.accountSelector.menu!.itemAtIndex(0) as! TwitterAccountMenuItem
+		return self.accountSelector.menu!.item(at: 0) as! TwitterAccountMenuItem
 	}
 	
 	func updateAccountSelector() {
@@ -59,7 +59,7 @@ final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 
 		let headerMenuItem = self.headerMenuItem
 		
-		guard let account = sender.account, headerMenuItem.differentAccount(account) else {
+		guard let account = sender.account, headerMenuItem.differentAccount(account: account) else {
 			
 			return
 		}

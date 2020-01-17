@@ -17,7 +17,13 @@ final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewContro
 	@IBOutlet private(set) var viewForStartAuthentication: NSView!
 	@IBOutlet private(set) var viewForEnterPin: NSView!
 	
-	@IBOutlet private(set) var pinTextField: NSTextField!
+	@IBOutlet private(set) var pinTextField: NSTextField! {
+		
+		didSet {
+			
+			pinTextField.delegate = self
+		}
+	}
 		
 	override func viewDidLoad() {
 		
@@ -30,10 +36,13 @@ final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewContro
 		
 		updatePinInputMode()
 	}
+}
+
+extension TwitterByOAuthPreferenceViewController : NSTextFieldDelegate {
 	
-	override func controlTextDidChange(obj: NSNotification) {
-		
-		guard obj.object === self.pinTextField else {
+	func controlTextDidChange(_ obj: Notification) {
+
+		guard let object = obj.object as? NSTextField, object === self.pinTextField else {
 			
 			return
 		}
@@ -98,7 +107,7 @@ extension TwitterByOAuthPreferenceViewController {
 			return false
 		}
 		
-		return pinTextField.stringValue.isExists
+		return !pinTextField.stringValue.isEmpty
 	}
 	
 	func updatePinInputMode() {

@@ -13,6 +13,8 @@ import Accounts
 import Ocean
 import Swim
 
+private let jsonDecoder = JSONDecoder()
+
 struct GetStatusesError : Error, CustomStringConvertible {
 
 	enum `Type` {
@@ -70,22 +72,22 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 
 	private static let timeout: TimeInterval = 15.0
 	private static let accountStore: ACAccountStore = ACAccountStore()
-	private static let accountType: ACAccountType = TwitterController.accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+	private static let accountType: ACAccountType = TwitterController.accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
 	private static let accountOptions:[NSObject:AnyObject]? = nil
 	
 	private static let APINotReadyError = SNSController.AuthenticationError.NotReady(service: .Twitter, description: "Twitter API is not ready.")
-	private static let APINotReadyNSError = NSError(domain: String(APINotReadyError), code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.description])
+	private static let APINotReadyNSError = NSError(domain: APINotReadyError.localizedDescription, code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.localizedDescription])
 
 	private enum AutoVerifyingQueueMessage : MessageTypeIgnoreInQuickSuccession {
 	
 		case RequestVerification;
 		
-		private func messageBlocked() {
+		fileprivate func messageBlocked() {
 
 			NSLog("Ignoring duplicated `Request Verification` message.")
 		}
 		
-		private func messageQueued() {
+		fileprivate func messageQueued() {
 			
 			NSLog("queued")
 		}
@@ -175,7 +177,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		
 		super.init()
 		
-		self.autoVerifyingQueue = MessageQueue<AutoVerifyingQueueMessage>(identifier: "\(Self)", executionQueue: dispatch_get_main_queue(), processingInterval: 5.0) { message in
+		self.autoVerifyingQueue = MessageQueue<AutoVerifyingQueueMessage>(identifier: "\(Self.self)", executionQueue: DispatchQueue.main, processingInterval: 5.0) { message in
 
 			switch message {
 				
@@ -246,6 +248,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		return self.verifyCredentialsIfNeed(callback: verifyCredentialsBasicErrorReportCallback)
 	}
 	
+	@discardableResult
 	func verifyCredentialsIfNeed(callback:(VerifyResult)->Void) -> Bool {
 		
 		DebugTime.print("📮 Passed verify-credentials #2")
@@ -398,27 +401,28 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	func getStatusesWithQuery(query:String, since:String?, callback:(GetStatusesResult)->Void) {
 		
-		let successHandler = { (query:[NSObject : AnyObject]!, resultData:[AnyObject]!) -> Void in
+		let successHandler = { (query:[String : Any]!, resultData:[AnyObject]!) -> Void in
 
 			DebugTime.print("Get Statuses : \(query)\n\(resultData)")
 			
 			do {
 
-				let status = try decodeArray(resultData) as [ESTwitter.Status]
+				let data = resultData as! Data
+				let status = try jsonDecoder.decode([ESTwitter.Status].self, from: data)
 				
-				callback(GetStatusesResult(status))
+				callback(GetStatusesResult.success(status))
 			}
-			catch let error as DecodeError {
+			catch let error as DecodingError {
 				
-				let error = GetStatusesError(type: .DecodeResultError, reason: error.description)
+				let error = GetStatusesError(type: .DecodeResultError, reason: error.localizedDescription)
 
-				callback(GetStatusesResult(error: error))
+				callback(GetStatusesResult.failure(error))
 			}
 			catch let error as NSError {
 				
 				let error = GetStatusesError(type: .UnexpectedError, reason: error.localizedDescription)
 
-				callback(GetStatusesResult(error: error))
+				callback(GetStatusesResult.failure(error))
 			}
 		}
 		
@@ -429,7 +433,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 			
 			let error = GetStatusesError(code: code, reason: reason)
 			
-			callback(GetStatusesResult(error: error))
+			callback(GetStatusesResult.failure(error))
 		}
 		
 		self.api.getSearchTweetsWithQuery(query, geocode: nil, lang: nil, locale: nil, resultType: "mixed", count: "50", until: nil, sinceID: since, maxID: nil, includeEntities: true, callback: nil, successBlock: successHandler, errorBlock: errorHandler)
@@ -504,7 +508,7 @@ extension TwitterController : STTwitterAPIOSProtocol {
 	func twitterAPI(twitterAPI: STTwitterAPI!, accountWasInvalidated invalidatedAccount: ACAccount!) {
 		
 		NSLog("Detected OS Account Store change.")
-		self.autoVerifyingQueue.send(.RequestVerification)
+		self.autoVerifyingQueue.send(message: .RequestVerification)
 	}
 }
 
@@ -513,7 +517,7 @@ extension STTwitterAPI {
 	typealias MediaID = String
 	typealias VerifyCredentialsResult = Result<(username:String,userId:String),NSError>
 	typealias PostStatusUpdateResult = Result<ESTwitter.Status, SNSController.PostError>
-	typealias PostMediaUploadResult = Result<[MediaID],NSError>
+	typealias PostMediaUploadResult = Result<[STTwitterAPI.MediaID],NSError>
 
 	func postMediaUpload(container:PostDataContainer, image:NSImage, callback:(PostMediaUploadResult)->Void) {
 	
@@ -554,7 +558,7 @@ extension STTwitterAPI {
 			
 			do {
 				
-				try container.postedToTwitter(objects)
+				try container.postedToTwitter(postedRawStatus: objects)
 
 				let postedStatus = container.twitterState.postedStatus!
 				

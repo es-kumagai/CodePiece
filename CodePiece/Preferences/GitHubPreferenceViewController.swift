@@ -58,7 +58,7 @@ class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 		
 		self.removeAuthenticatingHUD.show()
 		
-		Authorization.resetAuthorizationOfGitHub(id) { result in
+		Authorization.resetAuthorizationOfGitHub(id: id) { result in
 			
 			removeAuthenticatingHUD.hide()
 			

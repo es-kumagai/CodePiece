@@ -16,7 +16,9 @@ extension CodeTextView : CodeTextType {
 	
 	var codeText: String? {
 		
-		guard let code = self.string?.trimmed() where code.isExists else {
+		let code = self.string.trimmingCharacters(in: .whitespaces)
+		
+		guard !code.isEmpty else {
 			
 			return nil
 		}

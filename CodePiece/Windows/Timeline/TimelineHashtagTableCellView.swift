@@ -57,29 +57,33 @@ extension TimelineHashtagTableCellItem : TimelineTableItem  {
 	
 	@IBInspectable var backgroundColor: NSColor?
 	
-	override func drawRect(dirtyRect: NSRect) {
+	override func draw(_ dirtyRect: NSRect) {
 		
-		tweak(self.backgroundColor ?? NSColor.whiteColor()) {
+		switch backgroundColor {
 			
-			$0.set()
+		case .some(let color):
+			color.set()
+			
+		case .none:
+			NSColor.white.set()
 		}
+	
+		dirtyRect.fill()
 		
-		NSRectFill(dirtyRect)
-		
-		super.drawRect(dirtyRect)
+		super.draw(dirtyRect)
 	}
+}
+
+extension NSUserInterfaceItemIdentifier {
+	
+	static var timelineHashtagTableCellViewPrototypeCellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "TimelineHashtagCell")
 }
 
 extension TimelineHashtagTableCellView : TimelineTableCellType {
 	
-	static var prototypeCellIdentifier: String {
-		
-		return "TimelineHashtagCell"
-	}
-	
 	static func makeCellWithItem(item: TimelineTableItem, tableView: NSTableView, owner: AnyObject?) -> NSTableCellView {
 		
-		let view = tweak(self.makeCellForTableView(tableView, owner: owner) as! TimelineHashtagTableCellView) {
+		let view = instanceApplyingExpression(with: self.makeCellForTableView(tableView: tableView, owner: owner) as! TimelineHashtagTableCellView) {
 			
 			$0.item = (item as! TimelineHashtagTableCellItem)
 		}

@@ -11,7 +11,7 @@ import Foundation
 // I must gethering the features to other module and remove the namespace.
 struct UserDefaultAccessibleNamespace {
 
-	static let userDefaults = UserDefaults.standardUserDefaults()
+	static let userDefaults = UserDefaults.standard
 }
 
 protocol UserDefaultAccessible {

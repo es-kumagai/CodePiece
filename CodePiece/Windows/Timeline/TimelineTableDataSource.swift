@@ -19,7 +19,7 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		
 		didSet {
 	
-			self.items.timelineLatestTweetItem.invokeIfExists(self.setLatestTweet)
+			self.items.timelineLatestTweetItem.invokeIfExists(expression: self.setLatestTweet)
 		}
 	}
 	
@@ -37,22 +37,22 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
 	func appendTweets(tweets: [ESTwitter.Status], hashtags: ESTwitter.HashtagSet) {
 		
-		let newTweets = tweets.orderByNewCreationDate().toTimelineTweetItems(hashtags).timelineItemsAppend(self.items).prefix(self.maxTweets)
+		let newTweets = tweets.orderByNewCreationDate().toTimelineTweetItems(hashtags: hashtags).timelineItemsAppend(items: self.items).prefix(self.maxTweets)
 		
 		self.items = Array(newTweets)
 	}
 	
-	func appendHashtags(hashtags: ESTwitter.HashtagSet) -> ProcessingState {
+	func appendHashtags(hashtags: ESTwitter.HashtagSet) -> ProcessExitStatus {
 		
 		let latestHashtags = self.items.first?.currentHashtags
 		let needAppending = { () -> Bool in
 			
 			switch latestHashtags {
 				
-			case .None:
+			case .none:
 				return true
 				
-			case .Some(let v):
+			case .some(let v):
 				return v != hashtags
 			}
 		}
@@ -61,13 +61,13 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 			
 			let item = TimelineHashtagTableCellItem(previousHashtags: latestHashtags, currentHashtags: hashtags)
 			
-			self.items.insert(item, atIndex: 0)
+			self.items.insert(item, at: 0)
 			
-			return .Passed
+			return .passed
 		}
 		else {
 
-			return .aborted
+			return .aborted(in: -1)
 		}
 	}
 	
@@ -84,6 +84,6 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		
 		let item = self.items[row]
 		
-		return item.timelineCellType.estimateCellHeightForItem(item, tableView: tableView)
+		return item.timelineCellType.estimateCellHeightForItem(item: item, tableView: tableView)
 	}
 }

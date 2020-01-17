@@ -8,6 +8,7 @@
 
 import AppKit
 import ESTwitter
+import Ocean
 
 final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObservable {
 	
@@ -45,9 +46,9 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		
 		do {
 			
-			try ESTwitter.Browser.openWithUsername(username)
+			try ESTwitter.Browser.openWithUsername(username: username)
 		}
-		catch ESTwitter.Browser.Error.OperationFailure(reason: let reason) {
+		catch ESTwitter.Browser.BrowseError.OperationFailure(reason: let reason) {
 			
 			self.showErrorAlert(withTitle: "Failed to open Twitter", message: reason)
 		}

@@ -61,7 +61,7 @@ class TimelineTableView: NSTableView {
 		return super.dataSource as! TimelineTableDataSource
 	}
 	
-	override func resizeWithOldSuperviewSize(_ oldSize: NSSize) {
+	override func resize(withOldSuperviewSize oldSize: NSSize) {
 		
 		super.resize(withOldSuperviewSize: oldSize)
 		

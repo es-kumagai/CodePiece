@@ -24,6 +24,9 @@ extension STTwitterTwitterErrorCode : CustomStringConvertible {
 		case .badAuthenticationData:
 			return "Bad authentication data."
 			
+		case .cannotReplyToDeletedOrInvisibleTweet:
+			return "Cannot reply to deleted or invisible tweet."
+			
 		case .couldNotAuthenticate:
 			return "Could not authenticate."
 			
@@ -38,6 +41,9 @@ extension STTwitterTwitterErrorCode : CustomStringConvertible {
 			
 		case .internalError:
 			return "Internal error."
+			
+		case .invalidAttachmentURL:
+			return "Invalid attachment URL."
 			
 		case .invalidOrExpiredToken:
 			return "Invalid or expired token."
@@ -59,6 +65,9 @@ extension STTwitterTwitterErrorCode : CustomStringConvertible {
 			
 		case .sslRequired:
 			return "SSL required."
+			
+		case .tooManyAttachmentTypes:
+			return "Too many attachment types."
 			
 		case .unableToFollow:
 			return "Unable to follow."

@@ -1,5 +1,5 @@
 //
-//  ViewController+PostDataManage.swift
+//  MainViewController+PostDataManage.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on 1/19/16.

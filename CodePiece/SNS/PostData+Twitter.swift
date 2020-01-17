@@ -16,7 +16,7 @@ extension PostDataContainer.TwitterState {
 	
 	var isPosted: Bool {
 		
-		return postedStatus.isExists
+		return postedStatus != nil
 	}
 }
 
@@ -42,7 +42,7 @@ extension PostDataContainer {
 		return twitterState.postedStatus?.text
 	}
 	
-	func descriptionLengthForTwitter(includesGistsLink includesGistsLink:Bool) -> Int {
+	func descriptionLengthForTwitter(includesGistsLink:Bool) -> Int {
 
 		let countsForGistsLink = includesGistsLink ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0
 
@@ -62,7 +62,7 @@ extension PostDataContainer {
 			maxLength = twitterTotalCount - reserveUrlCount - reserveGistCount
 		}
 
-		return makeDescriptionWithEffectiveHashtags(effectiveHashtagsForTwitter, maxLength: maxLength, appendString: gistPageUrl)
+		return makeDescriptionWithEffectiveHashtags(hashtags: effectiveHashtagsForTwitter, maxLength: maxLength, appendString: gistPageUrl)
 	}
 	
 	var effectiveHashtagsForTwitter: ESTwitter.HashtagSet {

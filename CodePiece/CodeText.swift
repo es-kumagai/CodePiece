@@ -19,6 +19,6 @@ extension CodeTextType {
 	
 	var hasCode: Bool {
 		
-		return codeText.isExists
+		return codeText != nil
 	}
 }

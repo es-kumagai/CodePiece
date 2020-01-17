@@ -42,12 +42,12 @@ extension TwitterTextType {
 		
 		return expression.matches(in: text, options: options, range: range).reduce([TwitterTextPart]()) { parts, match in
 
-			let startIndex = text.startIndex.advancedBy(match.range.location + 1)
-			let endIndex = startIndex.advancedBy(match.range.length - 1)
+			let startIndex = text.index(text.startIndex, offsetBy: match.range.location + 1)
+			let endIndex = text.index(startIndex, offsetBy: match.range.length - 1)
 			let range = startIndex ..< endIndex
 			
 			let screenName = text[startIndex ..< endIndex]
-			let textPart = TwitterTextPart(text: screenName, type: .ScreenName, range: range)
+			let textPart = TwitterTextPart(text: String(screenName), type: .ScreenName, range: range)
 			
 			return parts + [textPart]
 		}

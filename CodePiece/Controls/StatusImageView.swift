@@ -13,7 +13,7 @@ import Cocoa
 	private let StatusCodingKey = "StatusImageViewStatusCoding"
 	private let StatusDefault = Status.None
 	
-	public enum Status : Int {
+	@objc public enum Status : Int {
 
 		case None
 		case Available
@@ -36,7 +36,7 @@ import Cocoa
 	
 	public required init?(coder: NSCoder) {
 
-		if coder.containsValueForKey(self.StatusCodingKey), let status = Status(rawValue: coder.decodeIntegerForKey(self.StatusCodingKey)) {
+		if coder.containsValue(forKey: StatusCodingKey), let status = Status(rawValue: coder.decodeInteger(forKey: StatusCodingKey)) {
 			
 			self.status = status
 		}
@@ -50,14 +50,14 @@ import Cocoa
 		self.updateStatusImage()
 	}
 	
-	public override func encodeWithCoder(aCoder: NSCoder) {
+	public override func encode(with aCoder: NSCoder) {
 		
-		super.encodeWithCoder(aCoder)
+		super.encode(with: aCoder)
 		
-		aCoder.encodeInteger(self.status.rawValue, forKey: self.StatusCodingKey)
+		aCoder.encode(status.rawValue, forKey: StatusCodingKey)
 	}
 	
-	@IBInspectable public var status:Status {
+	@IBInspectable public var status: Status {
 	
 		didSet {
 

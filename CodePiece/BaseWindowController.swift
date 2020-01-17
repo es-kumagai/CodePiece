@@ -24,7 +24,7 @@ extension BaseWindowController : NSWindowDelegate {
 		return true
 	}
 	
-	func windowWillClose(notification: NSNotification) {
+	func windowWillClose(_ notification: Notification) {
 		
 		DebugTime.print("Closing window ...")
 

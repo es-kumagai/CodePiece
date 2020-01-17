@@ -1,5 +1,5 @@
 //
-//  ViewController+Repliable.swift
+//  MainViewController+Repliable.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on 1/19/16.
@@ -43,7 +43,7 @@ extension ViewControllerRepliable {
 	
 	var hasStatusForReplyTo: Bool {
 		
-		return statusForReplyTo.isExists
+		return statusForReplyTo != nil
 	}
 }
 
@@ -59,7 +59,7 @@ extension ViewControllerRepliable where Self : FieldsController {
 
 }
 
-extension ViewController {
+extension MainViewController {
 
 	var canReplyTo: Bool {
 	
@@ -86,9 +86,9 @@ extension ViewController {
 			fatalError()
 		}
 
-		if let status = self.statusForReplyTo where !twitterController.isMyTweet(status) {
+		if let status = self.statusForReplyTo, !twitterController.isMyTweet(status: status) {
 
-			descriptionTextField.readyForReplyTo(status.user.screenName)
+			descriptionTextField.readyForReplyTo(screenName: status.user.screenName)
 		}
 
 		focusToDescription()
@@ -106,6 +106,6 @@ extension MenuController {
 	
 	@IBAction func replyTo(sender:NSMenuItem) {
 		
-		mainViewController?.setReplyTo(sender)
+		mainViewController?.setReplyTo(sender: sender)
 	}
 }

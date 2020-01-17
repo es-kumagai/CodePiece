@@ -61,7 +61,7 @@ extension NSError {
 		}
 		
 		var message: String!
-		var code: Int? = 0
+		var code: Int = 0
 		
 		if let json = json as? NSDictionary {
 			
@@ -74,7 +74,7 @@ extension NSError {
 				if let errorDictionary = errors.lastObject as? NSDictionary {
 					
 					message = errorDictionary["message"] as? String
-					code = (errorDictionary.value(forKey: "code") as? String).flatMap(Int.init)
+					code = Int(errorDictionary.value(forKey: "code") as! String, radix: 10)!
 				}
 			}
 			else if let errors = json.value(forKey: "error") as? String {
@@ -140,7 +140,7 @@ extension NSError {
 			if rateLimitRemaining != nil { md[kSTTwitterRateLimitRemaining] = rateLimitRemaining }
 			if rateLimitResetDate != nil { md[kSTTwitterRateLimitResetDate] = rateLimitResetDate }
 			
-			let userInfo = NSDictionary(dictionary: md)
+			let userInfo = md as! [String : Any]
 			
 			return NSError(domain: kSTTwitterTwitterErrorDomain, code: code, userInfo: userInfo)
 		}

@@ -29,7 +29,7 @@ public final class AboutViewController: NSViewController {
 			viewController.acknowledgementsBundle = self.bundle
 		}
 		
-		self.presentViewControllerAsModalWindow(viewController)
+		self.presentAsModalWindow(viewController)
 	}
 	
 	public override var title:String? {

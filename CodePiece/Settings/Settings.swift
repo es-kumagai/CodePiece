@@ -175,7 +175,7 @@ final class Settings {
 		_store.github.authInfo.username = account.username
 		_store.github.authInfo.token = account.authorization?.token!
 		
-		handleError(expression: try _store.github.save())
+		try! handleError(expression: _store.github.save())
 	}
 	
 	func replaceGitHubAccount(username:String, id:ID, authorization:GitHubAuthorization, saveFinally save:Bool) {

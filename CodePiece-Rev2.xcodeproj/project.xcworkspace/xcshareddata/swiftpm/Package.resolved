@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/es-kumagai/ESGists.git",
         "state": {
           "branch": "master",
-          "revision": "2c53437ec63fb0e83b3cd97a9db6cf30c96c7088",
+          "revision": "70cbe06393e902b7ee85d8c7333fac0cf85dc4c0",
           "version": null
         }
       },
@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/es-kumagai/Ocean",
         "state": {
           "branch": "master",
-          "revision": "934e0866902f070506e68d6fdd3cf43556fb936c",
+          "revision": "5ed003fb6e348a5ea77452b7b6820da43bc93b87",
           "version": null
         }
       },

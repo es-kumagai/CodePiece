@@ -239,7 +239,7 @@ extension DataStore {
 		
 			let keychain = GitHubStore.keychain
 
-			guard let data = handleError(expression: try keychain.getData(GitHubStore.AuthorizationKey), to: &OutputStream), data != nil else {
+			guard let data = handleError(expression: try! keychain.getData(GitHubStore.AuthorizationKey), to: &OutputStream), data != nil else {
 		
 				self.authInfo = AuthInfo()
 				return

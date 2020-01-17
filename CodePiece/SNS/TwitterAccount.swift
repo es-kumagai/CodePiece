@@ -35,7 +35,7 @@ extension TwitterController.Account {
 	
 	init?(identifier:String) {
 		
-		guard let account = TwitterController.getAccount(identifier) else {
+		guard let account = TwitterController.getAccount(identifier: identifier) else {
 			
 			return nil
 		}
@@ -97,6 +97,6 @@ extension TwitterController.Account {
 	
 	var identifier: String? {
 		
-		return acAccount?.identifier
+		return acAccount?.identifier as String?
 	}
 }

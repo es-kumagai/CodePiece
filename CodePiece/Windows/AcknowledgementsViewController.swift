@@ -27,16 +27,21 @@ public final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableView
 		return self.acknowledgements.pods.count
 	}
 	
-	public func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+	public func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
 		
 		guard let owner = self.owner else {
 		
 			return nil
 		}
 		
+		guard let tableColumn = tableColumn else {
+			
+			return nil
+		}
+		
 		let pod = self.acknowledgements.pods[row]
 		
-		switch tableColumn!.identifier {
+		switch tableColumn.identifier.rawValue {
 			
 		case owner.nameColumnIdentifier:
 			return pod.name
@@ -45,7 +50,7 @@ public final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableView
 			return pod.license
 			
 		default:
-			fatalError("Unknown column identifier (\(tableColumn?.identifier))")
+			fatalError("Unknown column identifier (\(tableColumn.identifier))")
 		}
 	}
 }
@@ -63,7 +68,7 @@ public final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDe
 		super.init()
 	}
 	
-	public func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+	public func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		
 		let defaultCellHeight:CGFloat = tableView.rowHeight
 		
@@ -74,13 +79,13 @@ public final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDe
 		
 		let pod = self.acknowledgements.pods[row]
 		
-		let column = tableView.columnWithIdentifier(owner.licenseColumnIdentifier)
-		let columnView = tableView.tableColumnWithIdentifier("license")
-		let columnRect = tableView.rectOfColumn(column)
+		let column = tableView.column(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: owner.licenseColumnIdentifier))
+		let columnView = tableView.tableColumn(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "license"))
+		let columnRect = tableView.rect(ofColumn: column)
 
 		if let cell = columnView!.dataCell as? NSTextFieldCell {
 
-			return pod.license.sizeWithFont(cell.font, lineBreakMode:NSLineBreakMode.ByWordWrapping, maxWidth: columnRect.width).height
+			return pod.license.size(with: cell.font, lineBreakMode: .byWordWrapping, maxWidth: columnRect.width).height
 		}
 		else {
 			
@@ -88,6 +93,13 @@ public final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDe
 		}
 	}
 }
+
+// 以下に書き換えようとしたけれど `@IBInspectable を利用している意図を確かめられなかった保留します。
+//extension NSUserInterfaceItemIdentifier {
+//
+//	static let acknowledgementsViewControllerNameColumn = NSUserInterfaceItemIdentifier(rawValue: "name")
+//	static let acknowledgementsViewControllerLicenseColumn = NSUserInterfaceItemIdentifier(rawValue: "license")
+//}
 
 public class ESAcknowledgementsViewController: NSViewController, AcknowledgementsIncludedAndCustomizable {
 
@@ -101,7 +113,7 @@ public class ESAcknowledgementsViewController: NSViewController, Acknowledgement
 		
 		didSet {
 			
-			self.acknowledgementsTableView.setDataSource(self.acknowledgementsTableViewDataSource)
+			acknowledgementsTableView.dataSource = acknowledgementsTableViewDataSource
 		}
 	}
 	
@@ -109,7 +121,7 @@ public class ESAcknowledgementsViewController: NSViewController, Acknowledgement
 		
 		didSet {
 			
-			self.acknowledgementsTableView.setDelegate(self.acknowledgementsTableViewDelegate)
+			acknowledgementsTableView.delegate = acknowledgementsTableViewDelegate
 		}
 	}
 	
@@ -117,7 +129,7 @@ public class ESAcknowledgementsViewController: NSViewController, Acknowledgement
 		
 		didSet {
 			
-			self.acknowledgementsTableView.focusRingType = .None
+			acknowledgementsTableView.focusRingType = .none
 		}
 	}
 	
@@ -143,14 +155,14 @@ public class ESAcknowledgementsViewController: NSViewController, Acknowledgement
 		
 		let acknowledgements = self.acknowledgements
 		
-		if self.acknowledgementsTableView.dataSource() == nil {
+		if acknowledgementsTableView.dataSource == nil {
 			
-			self.acknowledgementsTableViewDataSource = ESAcknowledgementsTableViewDataSource(owner: self, acknowledgements: acknowledgements)
+			acknowledgementsTableViewDataSource = ESAcknowledgementsTableViewDataSource(owner: self, acknowledgements: acknowledgements)
 		}
 		
-		if self.acknowledgementsTableView.delegate() == nil {
+		if acknowledgementsTableView.delegate == nil {
 			
-			self.acknowledgementsTableViewDelegate = ESAcknowledgementsTableViewDelegate(owner: self, acknowledgements: acknowledgements)
+			acknowledgementsTableViewDelegate = ESAcknowledgementsTableViewDelegate(owner: self, acknowledgements: acknowledgements)
 		}
     }
 	

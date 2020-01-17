@@ -45,14 +45,14 @@ extension TimelineTableControllerType {
 		let overflowRows = max(0, (insertRows + currentRows) - maxRows)
 		
 		let ignoreRows = max(0, tweetCount - maxRows)
+
+		let getInsertRange = { Range(NSMakeRange(0, insertRows))! }
+		let getIgnoreRange = { Range(NSMakeRange(maxRows - ignoreRows, ignoreRows))! }
+		let getRemoveRange = { Range(NSMakeRange(currentRows - overflowRows, overflowRows))! }
 		
-		let getInsertRange = { NSMakeRange(0, insertRows) }
-		let getIgnoreRange = { NSMakeRange(maxRows - ignoreRows, ignoreRows) }
-		let getRemoveRange = { NSMakeRange(currentRows - overflowRows, overflowRows) }
-		
-		let insertIndexes = IndexSet(indexesIn: getInsertRange())
-		let ignoreIndexes = ignoreRows > 0 ? IndexSet(indexesInRange: getIgnoreRange()) : IndexSet()
-		let removeIndexes = overflowRows > 0 ? IndexSet(indexesInRange: getRemoveRange()) : IndexSet()
+		let insertIndexes = IndexSet(integersIn: getInsertRange())
+		let ignoreIndexes = ignoreRows > 0 ? IndexSet(integersIn: getIgnoreRange()) : IndexSet()
+		let removeIndexes = overflowRows > 0 ? IndexSet(integersIn: getRemoveRange()) : IndexSet()
 
 		self.timelineDataSource.appendTweets(tweets: tweets, hashtags: hashtags)
 		
@@ -60,8 +60,8 @@ extension TimelineTableControllerType {
 			
 			$0.beginUpdates()
 			
-			$0.removeRowsAtIndexes(removeIndexes, withAnimation: [.EffectFade, .SlideDown])
-			$0.insertRowsAtIndexes(insertIndexes, withAnimation: [.EffectFade, .SlideDown])
+			$0.removeRows(at: removeIndexes, withAnimation: [.effectFade, .slideDown])
+			$0.insertRows(at: insertIndexes, withAnimation: [.effectFade, .slideDown])
 			
 			$0.endUpdates()
 		}

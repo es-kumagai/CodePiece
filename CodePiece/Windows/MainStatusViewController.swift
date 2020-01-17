@@ -13,7 +13,7 @@ private let none = "----"
 
 final class MainStatusViewController: NSViewController, NotificationObservable {
 
-	var notificationHandlers = NotificationHandlers()
+	var notificationHandlers = Notification.Handlers()
 	
 	@IBOutlet var githubAccountNameTextField:NSTextField!
 	@IBOutlet var twitterAccountNameTextField:NSTextField!
@@ -35,19 +35,19 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 		self.githubAccountNameTextField.stringValue = none
 		self.twitterAccountNameTextField.stringValue = none
 		
-		self.observeNotification(Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.twitterAccountNameTextField.stringValue = notification.username ?? none
 			self.twitterAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
 		}
 		
-		self.observeNotification(Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.githubAccountNameTextField.stringValue = notification.username ?? none
 			self.githubAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
 		}
 		
-		self.observeNotification(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
+		self.observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
 			self.updateReachability()
 		}

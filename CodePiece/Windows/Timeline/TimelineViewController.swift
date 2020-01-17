@@ -127,7 +127,7 @@ class TimelineViewController: NSViewController {
 	private var autoUpdateState = AutoUpdateState()
 	
 	private(set) var message:MessageQueue<Message>!
-	private var updateTimerSource:dispatch_source_t!
+	private var updateTimerSource: DispatchSourceTimer!
 	
 	var isTimelineActive: Bool {
 	
@@ -165,13 +165,18 @@ extension TimelineViewController {
 		
 		var hasInternetConnection:Bool = false
 		
-		private var _updateInterval: DispatchTimeInterval = .nanoseconds(0)
+		private var _updateInterval: Semaphore.Interval? = .init(nanosecond: 0)
 		
-		var updateInterval: DispatchTimeInterval {
+		var updateInterval: Semaphore.Interval? {
 			
 			get {
 
-				return _updateInterval + updateIntervalDelay
+				guard let updateInterval = _updateInterval else {
+					
+					return nil
+				}
+				
+				return updateInterval + updateIntervalDelay
 			}
 			
 			set {
@@ -201,7 +206,7 @@ extension TimelineViewController {
 		
 		mutating func setNeedsUpdate() {
 			
-			guard updateInterval != .never else {
+			guard updateInterval != nil else {
 
 				nextUpdateTime = nil
 				return
@@ -212,7 +217,7 @@ extension TimelineViewController {
 		
 		mutating func updateNextUpdateTime() {
 			
-			guard updateInterval != .never else {
+			guard let updateInterval = updateInterval else {
 				
 				nextUpdateTime = nil
 				return
@@ -312,7 +317,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 	
 	private func _changeHashtags(hashtags: Set<ESTwitter.Hashtag>) {
 		
-		if self.timelineDataSource.appendHashtags(hashtags) {
+		if self.timelineDataSource.appendHashtags(hashtags: hashtags) {
 		
             DispatchQueue.main.sync {
 
@@ -380,7 +385,7 @@ extension TimelineViewController : NotificationObservable {
         super.viewDidLoad()
 		
 		self.message = MessageQueue(identifier: "CodePiece.Timeline", handler: self)
-		self.updateTimerSource = self.message.makeTimer(Semaphore.Interval(second: 0.03), start: true, timerAction: self.autoUpdateAction)
+		self.updateTimerSource = message.makeTimer(interval: Semaphore.Interval(second: 0.03), start: true, timerAction: self.autoUpdateAction)
 		
 		self.updateDisplayControlsForState()
 		
@@ -529,12 +534,12 @@ extension TimelineViewController : TimelineGetStatusesController {
 			}
 		}
 		
-		switch whether(!query.isEmpty) {
+		switch whether(condition: !query.isEmpty) {
 			
-		case .Yes:
+		case true:
 			getTimelineSpecifiedQuery()
 			
-		case .No:
+		case false:
 			break
 		}
 	}

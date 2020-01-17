@@ -9,6 +9,8 @@
 import ESGists
 import ESTwitter
 
+private let jsonDecoder = JSONDecoder()
+
 enum PostResult {
 	
 	case Success(PostDataContainer)
@@ -29,7 +31,7 @@ struct PostData {
 
 enum PostDataError : Error {
 	
-	case TwitterRawObjectsParseError(rawObjects: [NSObject:AnyObject])
+	case TwitterRawObjectsParseError(rawObjects: [String : Any])
 }
 
 final class PostDataContainer {
@@ -71,11 +73,11 @@ final class PostDataContainer {
 
 extension PostDataContainer {
 	
-	func postedToTwitter(postedRawStatus: [NSObject:AnyObject]) throws {
+	func postedToTwitter(postedRawStatus: [String : Any]) throws {
 		
 		do {
 			
-			self.twitterState.postedStatus = try decodeValue(postedRawStatus) as ESTwitter.Status
+			self.twitterState.postedStatus = try jsonDecoder.decode(ESTwitter.Status.self, from: postedRawStatus)
 		}
 		catch {
 			
@@ -201,7 +203,7 @@ extension PostDataContainer {
 			let start = sourceDescription.startIndex
 			let end = sourceDescription.index(start, offsetBy: descriptionLength - 2)
 			
-			return String(sourceDescription.prefixThrough(end)) + " …"
+			return String(sourceDescription.prefix(through: end)) + " …"
 		}
 		
 		func getDescription() -> String {

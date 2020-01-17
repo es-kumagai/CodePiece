@@ -8,6 +8,7 @@
 
 import AppKit
 import Swim
+import ESGists
 
 public enum RetweetedStatus : Decodable {
 	
@@ -18,7 +19,7 @@ public struct Status : Decodable {
 	
 	public var coordinates: CoordinatesBox?
 	public var favorited: Bool
-	public var createdAt: Date
+	public var createdAt: ISO8601Date
 	public var truncated: Bool
 	public var idStr: String
 	public var entities: Entities?
@@ -247,7 +248,7 @@ extension Status {
 		
 		coordinates = try container.decode(CoordinatesBox.self, forKey: .coordinates)
 		favorited = try container.decode(Bool.self, forKey: .favorited)
-		createdAt = try container.decode(Date.self, forKey: .createdAt)
+		createdAt = try container.decode(ISO8601Date.self, forKey: .createdAt)
 		truncated = try container.decode(Bool.self, forKey: .truncated)
 		idStr = try container.decode(String.self, forKey: .idStr)
 		entities = try container.decode(Entities.self, forKey: .entities)

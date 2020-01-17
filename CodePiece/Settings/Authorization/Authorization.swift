@@ -58,7 +58,7 @@ final class Authorization : AlertDisplayable {
 	final class Twitter {
 		
 		var oauth: STTwitterOAuth
-		private(set) var pinRequesting: Bool
+		fileprivate(set) var pinRequesting: Bool
 
 		init() {
 
@@ -131,7 +131,7 @@ extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
 
 extension Authorization {
 
-	static func resetAuthorizationOfGitHub(id:ID, completion:(Result<Void,APIError>)->Void) {
+	static func resetAuthorizationOfGitHub(id:ID, completion:(Result<Void, SessionTaskError>)->Void) {
 		
 		guard let authorization = NSApp.settings.account.authorization else {
 
@@ -178,7 +178,7 @@ extension Authorization {
 		completion(.Failed(error))
 	}
 	
-	private static func _githubAuthorizationCreateSuccessfully(user:GistUser, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
+	private static func _githubAuthorizationCreateSuccessfully(user: Gist.User, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
 		
 		let username = user.login
 		let id = user.id
@@ -188,7 +188,7 @@ extension Authorization {
 			GitHubAuthorizationStateDidChangeNotification(isValid: true, username: username).post()
 		}
 		
-		NSApp.settings.replaceGitHubAccount(username, id: id, authorization: authorization, saveFinally: true)
+		NSApp.settings.replaceGitHubAccount(username: username, id: id, authorization: authorization, saveFinally: true)
 		
 		completion(.Created)
 	}
@@ -199,7 +199,7 @@ extension Authorization {
 		completion(.Failed(error))
 	}
 
-	static func authorizationWithTwitter(pin pin: String, completion:(AuthorizationResult)->Void) {
+	static func authorizationWithTwitter(pin: String, completion:(AuthorizationResult)->Void) {
 		
 		let oauth = self.twitter.oauth
 		
@@ -236,7 +236,7 @@ extension Authorization {
 			NSLog("Twitter OAuth require PIN code.")
 			DebugTime.print(" with url: \(oauthUrl), string: \(oauthToken)")
 			
-			NSWorkspace.sharedWorkspace().openURL(oauthUrl)
+			NSWorkspace.shared.open(oauthUrl)
 			
 			completion(.PinRequired)
 		}
