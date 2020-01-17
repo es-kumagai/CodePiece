@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B1154B6A23CABCFC003CFFF2 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B1154B6923CABCFC003CFFF2 /* ESGists */; };
+		B124E2C823D1F47C0063D98A /* NamedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B124E2C723D1F47C0063D98A /* NamedNotification.swift */; };
 		B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1278B5B23D176C3003F3719 /* CodeText.swift */; };
 		B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B132D50423CD078800690C5F /* ESProgressHUD */; };
 		B132D51423CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
@@ -193,6 +194,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B124E2C723D1F47C0063D98A /* NamedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedNotification.swift; sourceTree = "<group>"; };
 		B1278B5B23D176C3003F3719 /* CodeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeText.swift; sourceTree = "<group>"; };
 		B132D50B23CD08B800690C5F /* ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B132D50D23CD08B800690C5F /* ESTwitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESTwitter.h; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				B15EE38E23CF0360005B268A /* TwitterError.swift */,
 				B15EE39023CF039C005B268A /* NSError+STTwitter.swift */,
 				B15EE1F523CE747D005B268A /* Extension.swift */,
+				B124E2C723D1F47C0063D98A /* NamedNotification.swift */,
 			);
 			path = NeedsRefactoring;
 			sourceTree = "<group>";
@@ -1092,6 +1095,7 @@
 				B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */,
 				B15EE2AA23CE7667005B268A /* WelcomeBoardWindowController.swift in Sources */,
 				B15EE2A523CE7667005B268A /* TimelineViewController+MainWindow.swift in Sources */,
+				B124E2C823D1F47C0063D98A /* NamedNotification.swift in Sources */,
 				B15EE20B23CE7593005B268A /* GitHubOpenFeatures.swift in Sources */,
 				B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */,
 				B15EE20723CE7593005B268A /* SystemPalette.swift in Sources */,
