@@ -66,7 +66,14 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 	@IBOutlet var languagePopUpButton: NSPopUpButton!
 
-	@IBOutlet var languagePopUpDataSource: LanguagePopupDataSource!
+	@IBOutlet var languagePopUpDataSource: LanguagePopupDataSource! {
+		
+		didSet {
+			
+			#warning("実行時に nil になるので動作検証のためのコードです。")
+			NSLog("%@", "実行時に nil になるので動作検証のためのコードです。")
+		}
+	}
 	
 	@IBOutlet var codeTextView: CodeTextView! {
 	
@@ -204,8 +211,8 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		DebugTime.print("Restoring contents in main window.")
 		
-		NSApp.settings.appState.selectedLanguage.invokeIfExists(expression: self.languagePopUpDataSource.selectLanguage)
-		NSApp.settings.appState.hashtags.invokeIfExists { self.hashTagTextField.hashtags = $0 }
+		NSApp.settings.appState.selectedLanguage.executeIfExists(expression: self.languagePopUpDataSource.selectLanguage)
+		NSApp.settings.appState.hashtags.executeIfExists { self.hashTagTextField.hashtags = $0 }
 	}
 	
 	func saveContents() {
