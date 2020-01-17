@@ -181,7 +181,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	func post(callback: (PostResult) -> Void) {
+	func post(callback: @escaping (PostResult) -> Void) {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		

@@ -21,7 +21,7 @@ final class GistsController : PostController, AlertDisplayable {
 		return NSApp.settings.account.authorizationState.isValid
 	}
 	
-	func post(container:PostDataContainer, completed:(PostResult)->Void) throws {
+	func post(container:PostDataContainer, completed: @escaping (PostResult)->Void) throws {
 
 		guard let authorization = NSApp.settings.account.authorization else {
 			

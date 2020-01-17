@@ -87,45 +87,45 @@ final class Authorization : AlertDisplayable {
 //		return twitter.pinRequesting
 //	}
 //}
-//
-//extension Authorization.AuthorizationResult {
-//
-//	enum Error {
-//
-//		case twitterError(STTwitterTwitterErrorCode)
-//		case message(String)
-//	}
-//}
-//
-//extension Authorization.AuthorizationResult.Error {
-//
-//	init(_ error: NSError) {
-//
-//		switch error.domain {
-//
-//		case kSTTwitterTwitterErrorDomain:
-//			self = .twitterError(STTwitterTwitterErrorCode(rawValue: error.code)!)
-//
-//		default:
-//			self = .message(error.localizedDescription)
-//		}
-//	}
-//}
-//
-//extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
-//
-//	var description: String {
-//
-//		switch self {
-//
-//		case .twitterError(let code):
-//			return code.description
-//
-//		case .message(let message):
-//			return message
-//		}
-//	}
-//}
+
+extension Authorization.AuthorizationResult {
+
+	enum Error {
+
+		case twitterError(STTwitterTwitterErrorCode)
+		case message(String)
+	}
+}
+
+extension Authorization.AuthorizationResult.Error {
+
+	init(_ error: NSError) {
+
+		switch error.domain {
+
+		case kSTTwitterTwitterErrorDomain:
+			self = .twitterError(STTwitterTwitterErrorCode(rawValue: error.code)!)
+
+		default:
+			self = .message(error.localizedDescription)
+		}
+	}
+}
+
+extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
+
+	var description: String {
+
+		switch self {
+
+		case .twitterError(let code):
+			return code.description
+
+		case .message(let message):
+			return message
+		}
+	}
+}
 
 // MARK: GitHub
 

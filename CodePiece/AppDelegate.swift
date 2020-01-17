@@ -22,7 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		
 		super.awakeFromNib()
 
-		NotificationManager.dammingNotifications = true
+		#warning("通知を堰き止めるのは乱暴なので、それ以外の方法で適切に制御できるようにします。")
+//		NotificationManager.dammingNotifications = true
 
 		NSApplication.readyForUse()
 	}
@@ -31,7 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
 		NSLog("Application launched.")
 		
-		NotificationManager.dammingNotifications = false
+		#warning("通知を堰き止めるのは乱暴なので、それ以外の方法で適切に制御できるようにします。")
+//		NotificationManager.dammingNotifications = false
 		
 		self.urlSchemeManager = URLSchemeManager()
 		

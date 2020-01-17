@@ -94,7 +94,7 @@ class TimelineTableCellView: NSTableCellView, Selectable {
 			self.dateLabel.stringValue = status.createdAt.description
 			self.iconButton.image = nil
 			self.retweetMark.isHidden = !status.isRetweetedTweet
-			self.style = (status.createdAt > Date().daysAgo(1) ? .Recent : .Past)
+			self.style = (status.createdAt > ISO8601Date(NSDate().daysAgo(1) as Foundation.Date) ? .Recent : .Past)
 			
 			self.updateIconImage(status: status)
 		}

@@ -435,10 +435,12 @@ extension TimelineViewController : NotificationObservable {
 
 		self.observe(notification: MainViewController.PostCompletelyNotification.self) { [unowned self] notification in
 		
-			DispatchQueue.main.async(after: 3.0) {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
 				
-				self.message.send(message: .UpdateStatuses)
+				self.message.send(message: TimelineViewController.Message.UpdateStatuses)
 			}
+			
+			return
 		}
 		
 		self.message.send(message: .Start)

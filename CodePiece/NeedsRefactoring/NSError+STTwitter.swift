@@ -53,10 +53,11 @@ extension NSError {
 		
 		do {
 
-			let json = try JSONSerialization.jsonObject(with: responseData, options: [.mutableLeaves]) as AnyObject
+			json = try JSONSerialization.jsonObject(with: responseData, options: [.mutableLeaves]) as AnyObject
 		}
 		catch {
 		
+			json = nil
 			jsonError = error as NSError
 		}
 		

@@ -56,7 +56,7 @@ extension Date {
 
 extension Date : DateCalculatable, ReferenceDateConvertible {
 
-	public typealias DateType = Date
+	public typealias DateType = Self
 	
 	public init(timeIntervalSinceReferenceDate: TimeInterval) {
 	

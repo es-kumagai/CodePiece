@@ -29,13 +29,13 @@ extension TwitterByOSPreferenceViewController {
 		super.viewDidLoad()
 				
 		// In order to just to avoid update account list when user selecting, monitoring notification NSWindowDidBecomeKeyNotification rather than ACAccountStoreDidChangeNotification.
-		self.observeNotificationNamed(NSWindowDidBecomeKeyNotification) { [weak self] notification in
-			
-			if notification.object === self?.view.window {
-				
-				self!.checkCanAccessToAccountsAndUpdateAccountSelector()
-			}
-		}
+//		self.observe(notificationNamed: NSWindow.didBecomeKeyNotification) { [weak self] notification in
+//			
+//			if let window = notification.object as? NSWindow, window === self?.view.window {
+//				
+//				self!.checkCanAccessToAccountsAndUpdateAccountSelector()
+//			}
+//		}
 	}
 	
 	override func viewWillAppear() {

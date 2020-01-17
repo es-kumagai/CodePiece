@@ -102,15 +102,15 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		observe(notification: TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.self) { [unowned self] notification in
-			
-			self.withChangeValue(for: "hasAccount") {
-				
-				NSApp.twitterController.account = notification.account
-			}
-			
-			self.verifyCredentials()
-		}
+//		observe(notification: TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.self) { [unowned self] notification in
+//			
+//			self.withChangeValue(for: "hasAccount") {
+//				
+//				NSApp.twitterController.account = notification.account
+//			}
+//			
+//			self.verifyCredentials()
+//		}
 		
 		observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
