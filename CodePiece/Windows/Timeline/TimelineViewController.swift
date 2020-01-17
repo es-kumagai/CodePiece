@@ -165,24 +165,24 @@ extension TimelineViewController {
 		
 		var hasInternetConnection:Bool = false
 		
-		private var _updateInterval:Int64 = 0
+		private var _updateInterval: DispatchTimeInterval = .nanoseconds(0)
 		
-		var updateInterval:Int64 {
+		var updateInterval: DispatchTimeInterval {
 			
 			get {
-				
-				return self._updateInterval + self.updateIntervalDelay
+
+				return _updateInterval + updateIntervalDelay
 			}
 			
 			set {
 				
-				self._updateInterval = newValue
+				_updateInterval = newValue
 			}
 		}
 
-		private(set) var updateIntervalDelay:Int64 = 0
-		var updateIntervalDelayMax:Int64 = 60
-		var nextUpdateTime:dispatch_time_t? = nil
+		private(set) var updateIntervalDelay: Semaphore.Interval = .init(nanosecond: 0)
+		var updateIntervalDelayMax: Semaphore.Interval = .init(nanosecond: 60)
+		var nextUpdateTime: DispatchTime? = nil
 		
 		var isUpdateTimeOver:Bool {
 		
@@ -191,41 +191,39 @@ extension TimelineViewController {
 				return false
 			}
 			
-			return nextUpdateTime < dispatch_time(DISPATCH_TIME_NOW, 0)
+			return nextUpdateTime < DispatchTime.now()
 		}
 		
 		mutating func setUpdated() {
 			
-			self.nextUpdateTime = nil
+			nextUpdateTime = nil
 		}
 		
 		mutating func setNeedsUpdate() {
 			
-			if self.updateInterval > 0 {
-				
-				self.nextUpdateTime = dispatch_time(DISPATCH_TIME_NOW, 0)
+			guard updateInterval != .never else {
+
+				nextUpdateTime = nil
+				return
 			}
-			else {
-				
-				self.nextUpdateTime = nil
-			}
+
+			nextUpdateTime = DispatchTime.now()
 		}
 		
 		mutating func updateNextUpdateTime() {
 			
-			if self.updateInterval > 0 {
+			guard updateInterval != .never else {
 				
-				self.nextUpdateTime = dispatch_time(DISPATCH_TIME_NOW, self.updateInterval)
+				nextUpdateTime = nil
+				return
 			}
-			else {
 				
-				self.nextUpdateTime = nil
-			}
+			nextUpdateTime = DispatchTime.now() + updateInterval
 		}
 		
 		mutating func resetUpdateIntervalDelay() {
 			
-            self.setUpdateIntervalDelay(delay: 0)
+			self.setUpdateIntervalDelayByInterval(interval: .zero)
 		}
 
 		mutating func addUpdateIntervalDelay(bySecond second: Double) {
@@ -233,29 +231,19 @@ extension TimelineViewController {
 			self.addUpdateIntervalDelayByInterval(interval: Semaphore.Interval(second: second))
 		}
 
-		mutating func addUpdateIntervalDelayByInterval(interval: Semaphore.Interval) {
-			
-            self.addUpdateIntervalDelay(delay: interval.rawValue)
-		}
-		
 		mutating func setUpdateIntervalDelayBySecond(second: Double) {
 			
             self.setUpdateIntervalDelayByInterval(interval: Semaphore.Interval(second: second))
 		}
 		
-		mutating func setUpdateIntervalDelayByInterval(interval: Semaphore.Interval) {
+		mutating func addUpdateIntervalDelayByInterval(interval: Semaphore.Interval) {
 			
-            self.setUpdateIntervalDelay(delay: interval.rawValue)
-		}
-
-		mutating func addUpdateIntervalDelay(delay: Int64) {
-			
-			self.updateIntervalDelay = min(self.updateIntervalDelay + delay, self.updateIntervalDelayMax)
+			updateIntervalDelay = min(updateIntervalDelay + interval, updateIntervalDelayMax)
 		}
 		
-		mutating func setUpdateIntervalDelay(delay: Int64) {
+		mutating func setUpdateIntervalDelayByInterval(interval: Semaphore.Interval) {
 			
-			self.updateIntervalDelay = delay
+            updateIntervalDelay = interval
 		}
 	}
 	
@@ -336,19 +324,19 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 	
 	private func _changeAutoUpdateInterval(interval: Double) {
 		
-		self.autoUpdateState.updateInterval = Semaphore.Interval(second: interval).rawValue
+		autoUpdateState.updateInterval = Semaphore.Interval(second: interval)
 	}
 	
 	private func _changeAutoUpdateIntervalDelay(interval: Double) {
 		
-		self.autoUpdateState.addUpdateIntervalDelay(bySecond: interval)
+		autoUpdateState.addUpdateIntervalDelay(bySecond: interval)
 		
-		NSLog("Next update of timeline will delay %@ seconds.", Semaphore.Interval(rawValue: self.autoUpdateState.updateIntervalDelay).description)
+		NSLog("Next update of timeline will delay %@ seconds.", autoUpdateState.updateIntervalDelay.description)
 	}
 	
 	private func _resetAutoUpdateIntervalDelay() {
 		
-		guard autoUpdateState.updateIntervalDelay != 0 else {
+		guard autoUpdateState.updateIntervalDelay != .zero else {
 			
 			return
 		}
@@ -455,7 +443,7 @@ extension TimelineViewController : NotificationObservable {
 		
 		super.viewWillDisappear()
 		
-		self.releaseAllObservingNotifications()
+		notificationHandlers.releaseAll()
 		
 		self.message.send(message: .Stop)
 	}
@@ -597,3 +585,4 @@ extension TimelineViewController : NSTableViewDelegate {
         currentTimelineSelectedRowIndexes = tableView.selectedRowIndexes
 	}
 }
+

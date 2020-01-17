@@ -79,17 +79,17 @@ public var NullStream = NullOutputStream()
 //extension DateComponents {
 //
 //	public convenience init<S: Sequence>(sequence s: S) where S.Element == Int {
-//		
+//
 //        let indexes = s.reduce(NSMutableIndexSet()) { $0.add($1); return $0 }
-//		
+//
 //		self.init(indexSet: (indexes.copy() as! DateComponents) as IndexSet)
 //	}
 //}
 //
 //extension DateComponents {
-//	
+//
 //	public var isEmpty: Bool {
-//		
+//
 //		return count == 0
 //	}
 //}
@@ -222,143 +222,127 @@ public class Semaphore : RawRepresentable {
 		case Timeout
 	}
 	
-	public struct Time : RawRepresentable {
+	@available(*, unavailable, message: "Use `DispatchTime` instead.")
+	public struct Time {
 	
-		public var rawValue: dispatch_time_t
-		
-		public init() {
-            
-			self.rawValue = DISPATCH_TIME_NOW
-		}
-		
-		public init(rawValue time:dispatch_time_t) {
-			
-			self.rawValue = time
-		}
-		
-		public func delta(second time:Double) -> Time {
-			
-			return Time(rawValue: dispatch_time(self.rawValue, Interval(second: time).rawValue))
-		}
-		
-		public func delta(millisecond time:Double) -> Time {
-		
-			return Time(rawValue: dispatch_time(self.rawValue, Interval(millisecond: time).rawValue))
-		}
-		
-		public func delta(microsecond time:Double) -> Time {
-			
-			return Time(rawValue: dispatch_time(self.rawValue, Interval(microsecond: time).rawValue))
-		}
-		
-		public func delta(nanosecond time:Int64) -> Time {
-			
-			return Time(rawValue: dispatch_time(self.rawValue, Interval(nanosecond: time).rawValue))
-		}
+//		public var rawValue: dispatch_time_t
+//
+//		public init() {
+//
+//			self.rawValue = DISPATCH_TIME_NOW
+//		}
+//
+//		public init(rawValue time:dispatch_time_t) {
+//
+//			self.rawValue = time
+//		}
+//
+//		public func delta(second time:Double) -> Time {
+//
+//			return Time(rawValue: dispatch_time(self.rawValue, Interval(second: time).rawValue))
+//		}
+//
+//		public func delta(millisecond time:Double) -> Time {
+//
+//			return Time(rawValue: dispatch_time(self.rawValue, Interval(millisecond: time).rawValue))
+//		}
+//
+//		public func delta(microsecond time:Double) -> Time {
+//
+//			return Time(rawValue: dispatch_time(self.rawValue, Interval(microsecond: time).rawValue))
+//		}
+//
+//		public func delta(nanosecond time:Int64) -> Time {
+//
+//			return Time(rawValue: dispatch_time(self.rawValue, Interval(nanosecond: time).rawValue))
+//		}
 	}
 	
-	public struct Interval : RawRepresentable {
+	public struct Interval {
 		
-		public var rawValue:Int64
+		static var zero = Interval(nanosecond: 0)
 		
-		public init(second delta:Double) {
+		public var nanoseconds: Int
+		
+		public init(second value: Double) {
 			
-			self.rawValue = Int64(delta * NSEC_PER_SEC.toDouble())
+			nanoseconds = Int(value * Double(NSEC_PER_SEC))
 		}
 		
-		public init(millisecond delta:Double) {
+		public init(millisecond value: Double) {
 			
-			self.rawValue = Int64(delta * NSEC_PER_MSEC.toDouble())
+			nanoseconds = Int(value * Double(NSEC_PER_MSEC))
 		}
 		
-		public init(microsecond delta:Double) {
+		public init(microsecond value:Double) {
 			
-			self.rawValue = Int64(delta * NSEC_PER_USEC.toDouble())
+			nanoseconds = Int(value * Double(NSEC_PER_USEC))
 		}
 		
-		public init(nanosecond delta:Int64) {
+		public init(nanosecond value: Int) {
 			
-			self.rawValue = delta
-		}
-		
-		public init(rawValue:Int64) {
-			
-			self.rawValue = rawValue
+			nanoseconds = value
 		}
 		
 		public var second: Double {
 			
-			return self.rawValue.toDouble() / NSEC_PER_SEC.toDouble()
+			return Double(nanoseconds) / Double(NSEC_PER_SEC)
 		}
 		
 		public var millisecond: Double {
 			
-			return self.rawValue.toDouble() / NSEC_PER_MSEC.toDouble()
+			return Double(nanoseconds) / Double(NSEC_PER_MSEC)
 		}
 		
 		public var microsecond: Double {
 			
-			return self.rawValue.toDouble() / NSEC_PER_USEC.toDouble()
-		}
-		
-		public var nanosecond: Int64 {
-			
-			return self.rawValue
+			return Double(nanoseconds) / Double(NSEC_PER_USEC)
 		}
 	}
 	
-	private var semaphore:dispatch_semaphore_t
+	private var semaphore: DispatchSemaphore
 	
-	public init(value:Int = 1) {
+	public init(value: Int = 1) {
 		
-		self.semaphore = dispatch_semaphore_create(value)
+		semaphore = DispatchSemaphore(value: value)
 	}
 	
-	public required init(rawValue semaphore: dispatch_semaphore_t) {
+	public required init(rawValue semaphore: DispatchSemaphore) {
 		
 		self.semaphore = semaphore
 	}
 	
-	public var rawValue:dispatch_semaphore_t {
+	public var rawValue: DispatchSemaphore {
 		
-		return self.semaphore
+		return semaphore
 	}
 	
 	public func wait() {
 		
-		self.waitWithTimeout(Time())
+		self.wait(timeout: .distantFuture)
 	}
 	
-	public func waitWithTimeout(timeout:dispatch_time_t) -> WaitResult {
+	@discardableResult
+	public func wait(timeout: DispatchTime) -> WaitResult {
 		
-		switch dispatch_semaphore_wait(self.semaphore, timeout) {
+		switch semaphore.wait(timeout: timeout) {
 			
-		case 0:
+		case .success:
 			return .Success
 			
-		default:
+		case .timedOut
 			return .Timeout
 		}
 	}
 	
-	public func waitWithTimeout(timeout:Time) -> WaitResult {
-
-		return self.waitWithTimeout(timeout.rawValue)
-	}
-	
 	public func signal() {
 		
-		dispatch_semaphore_signal(self.semaphore)
+		semaphore.signal()
 	}
 	
-	public func execute(timeout:Time = Time(), body:() throws -> Void) rethrows -> WaitResult {
-		
-		return try self.execute(timeout.rawValue, body: body)
-	}
+	public func execute(timeout: DispatchTime = .distantFuture, body:() throws ->Void) rethrows -> WaitResult {
 
-	public func execute(timeout:dispatch_time_t = DISPATCH_TIME_FOREVER, body:() throws ->Void) rethrows -> WaitResult {
-
-		switch self.waitWithTimeout(timeout) {
+		switch self.wait(timeout: timeout) {
 			
 		case .Success:
 		
@@ -377,16 +361,11 @@ public class Semaphore : RawRepresentable {
 		}
 	}
 	
-	public func executeOnQueue(queue:dispatch_queue_t, timeout:Time, body:(WaitResult) -> Void) {
+	public func executeOnQueue(queue: DispatchQueue, timeout: DispatchTime = .distantFuture, body: @escaping (WaitResult) -> Void) {
 		
-		self.executeOnQueue(queue, timeout: timeout.rawValue, body: body)
-	}
-	
-	public func executeOnQueue(queue:dispatch_queue_t, timeout:dispatch_time_t = DISPATCH_TIME_FOREVER, body:(WaitResult) -> Void) {
-		
-		dispatch_async(queue) {
+		queue.async {
 			
-			switch self.waitWithTimeout(timeout) {
+			switch self.wait(timeout: timeout) {
 				
 			case .Success:
 				
@@ -406,6 +385,62 @@ public class Semaphore : RawRepresentable {
 	}
 }
 
+extension Semaphore.Interval {
+	
+	static func +(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Semaphore.Interval {
+		
+		return Semaphore.Interval(nanosecond: lhs.nanoseconds + rhs.nanoseconds)
+	}
+	
+	static func -(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Semaphore.Interval {
+		
+		return Semaphore.Interval(nanosecond: lhs.nanoseconds - rhs.nanoseconds)
+	}
+	
+	static func *(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Semaphore.Interval {
+		
+		return Semaphore.Interval(nanosecond: lhs.nanoseconds * rhs.nanoseconds)
+	}
+	
+	static func /(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Semaphore.Interval {
+		
+		return Semaphore.Interval(nanosecond: lhs.nanoseconds / rhs.nanoseconds)
+	}
+}
+
+extension Semaphore.Interval : Comparable {
+
+	public static func ==(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
+		
+		return lhs.nanoseconds == rhs.nanoseconds
+	}
+
+	public static func !=(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
+		
+		return lhs.nanoseconds != rhs.nanoseconds
+	}
+
+	public static func <(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
+		
+		return lhs.nanoseconds < rhs.nanoseconds
+	}
+
+	public static func >(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
+		
+		return lhs.nanoseconds > rhs.nanoseconds
+	}
+
+	public static func <=(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
+		
+		return lhs.nanoseconds <= rhs.nanoseconds
+	}
+
+	public static func >=(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
+		
+		return lhs.nanoseconds >= rhs.nanoseconds
+	}
+}
+
 extension Semaphore.Interval : CustomStringConvertible {
 
 	public var description: String {
@@ -414,31 +449,39 @@ extension Semaphore.Interval : CustomStringConvertible {
 	}
 }
 
+extension DispatchTime {
+	
+	static func +(lhs: DispatchTime, rhs: Semaphore.Interval) -> DispatchTime {
+		
+		return lhs + DispatchTimeInterval.nanoseconds(rhs.nanoseconds)
+	}
+}
+
 public protocol UnsignedIntegerConvertible {
 
 	func toUInt() -> UInt
 }
 
-extension UIntMax {
-	
-	public init<T:UIntMaxConvertible>(_ value:T) {
-		
-		self = value.toUIntMax()
-	}
-}
-
-extension Semaphore.Interval : UIntMaxConvertible {
-	
-	public init(_ value:UIntMax) {
-	
-		self.init(rawValue: value.toIntMax())
-	}
-	
-	public func toUIntMax() -> UIntMax {
-		
-		return self.rawValue.toUIntMax()
-	}
-}
+//extension UIntMax {
+//
+//	public init<T:UIntMaxConvertible>(_ value:T) {
+//
+//		self = value.toUIntMax()
+//	}
+//}
+//
+//extension Semaphore.Interval : UIntMaxConvertible {
+//
+//	public init(_ value:UIntMax) {
+//
+//		self.init(rawValue: value.toIntMax())
+//	}
+//
+//	public func toUIntMax() -> UIntMax {
+//
+//		return self.rawValue.toUIntMax()
+//	}
+//}
 
 public final class Dispatch {
 		
