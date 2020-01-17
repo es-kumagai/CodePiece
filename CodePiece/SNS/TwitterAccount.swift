@@ -15,33 +15,15 @@ extension TwitterController {
 	
 	enum Account {
 		
-		case account(Accounts.ACAccount)
 		case token(token: String, tokenSecret: String, screenName: String)
 	}
 }
 
 extension TwitterController.Account {
 	
-	init(account: Accounts.ACAccount) {
-
-		NSLog("🐋 Creates Twitter Account with OS Account.")
-		self = .account(account)
-	}
-	
 	init(token: String, tokenSecret: String, screenName: String) {
 		
 		self = .token(token: token, tokenSecret: tokenSecret, screenName: screenName)
-	}
-	
-	init?(identifier:String) {
-		
-		guard let account = TwitterController.getAccount(identifier: identifier) else {
-			
-			return nil
-		}
-		
-		NSLog("🐋 Creates Twitter Account with Identifier.")
-		self = .account(account)
 	}
 }
 
@@ -51,23 +33,8 @@ extension TwitterController.Account {
 		
 		switch self {
 			
-		case .account:
-			return .OSAccount
-			
 		case .token:
 			return .OAuthToken
-		}
-	}
-	
-	var acAccount: Accounts.ACAccount? {
-	
-		switch self {
-			
-		case .account(let account):
-			return account
-			
-		case .token:
-			return nil
 		}
 	}
 	
@@ -87,16 +54,8 @@ extension TwitterController.Account {
 		
 		switch self {
 			
-		case let .account(account):
-			return account.username
-			
 		case let .token(_, _, screenName):
 			return screenName
 		}
-	}
-	
-	var identifier: String? {
-		
-		return acAccount?.identifier as String?
 	}
 }

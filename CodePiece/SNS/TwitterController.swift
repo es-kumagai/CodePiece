@@ -12,6 +12,7 @@ import ESGists
 import Accounts
 import Ocean
 import Swim
+import Swifter
 
 private let jsonDecoder = JSONDecoder()
 
@@ -78,6 +79,8 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	private static let APINotReadyError = SNSController.AuthenticationError.NotReady(service: .Twitter, description: "Twitter API is not ready.")
 	private static let APINotReadyNSError = NSError(domain: APINotReadyError.localizedDescription, code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.localizedDescription])
 
+	private static let twitterCallbackUrl = URL(string: "https://ez-net.jp/")!
+	
 	private enum AutoVerifyingQueueMessage : MessageTypeIgnoreInQuickSuccession {
 	
 		case RequestVerification;
@@ -122,11 +125,9 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		
 		return account.username == status.user.screenName
 	}
-
-	private lazy var api:STTwitterAPI! = self._getAPI()
 	
-	private func _getAPI() -> STTwitterAPI? {
-
+	private lazy var api: Swifter! = {
+		
 		guard let account = self.account else {
 			
 			return nil
@@ -134,21 +135,13 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		
 		switch account {
 			
-		case let .account(account):
-
-			NSLog("🐋 Instantiate Twitter API using OS Account.")
-			return applyingExpression(STTwitterAPI.twitterAPIOSWithAccount(account, delegate:self)) {
-				$0.setTimeoutInSeconds(TwitterController.timeout)
-			}
-			
 		case let .token(token, tokenSecret, _):
 			
 			NSLog("🐋 Instantiate Twitter API using Token.")
-			return applyingExpression(STTwitterAPI(OAuthConsumerKey: APIKeys.twitter.consumerKey, consumerSecret: APIKeys.Twitter.consumerSecret, oauthToken: token, oauthTokenSecret: tokenSecret)) {
-				$0.setTimeoutInSeconds(TwitterController.timeout)
-			}
+			
+			return Swifter(consumerKey: APIKeys.Twitter.consumerKey, consumerSecret: APIKeys.Twitter.consumerSecret, oauthToken: token, oauthTokenSecret: tokenSecret)
 		}
-	}
+	}()
 	
 	var credentialsVerified:Bool {
 		
@@ -208,25 +201,20 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 		
 		self.autoVerifyingNow = true
-		
-		api.verifyCredentials { result in
-		
-			defer {
+	
+		let authorizationSucceeded: Swifter.TokenSuccessHandler = { accessToken, response in
 			
-				self.autoVerifyingNow = false
-			}
-			
-			switch result {
-				
-			case .success:
-				NSLog("This change is no effect on the current account.")
-				
-			case .failure:
-				
-				self.clearEffectiveUserInfo()
-				self.showWarningAlert(withTitle: "Twitter Account is invalid.", message: "Your twitter account setting may be changed by OS. Please check your settings in Internet Account preferences pane.")
-			}
+			NSLog("This change is no effect on the current account.")
 		}
+		
+		let authorizationFailed: Swifter.FailureHandler = { error in
+			
+			self.clearEffectiveUserInfo()
+			self.showWarningAlert(withTitle: "Twitter Account is invalid.", message: "Your twitter account setting may be changed by OS. Please check your settings in Internet Account preferences pane.")
+		}
+
+		#warning("ここのコードが意味をなしていないはず。")
+		api.authorize(withCallback: Self.twitterCallbackUrl, success: authorizationSucceeded, failure: authorizationFailed)
 	}
 	
 	var canPost:Bool {
@@ -292,7 +280,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		self.verifyCredentials(callback: self.verifyCredentialsBasicErrorReportCallback)
 	}
 	
-	func verifyCredentials(callback:(VerifyResult)->Void) {
+	func verifyCredentials(callback: (VerifyResult)->Void) {
 		
 		DebugTime.print("📮 Passed verify-credentials #6")
 
@@ -303,32 +291,32 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		}
 		
 		DebugTime.print("📮 Passed verify-credentials #7")
-		api.verifyCredentials { result in
-			
-			DebugTime.print("📮 Passed verify-credentials #8")
-			defer {
-			
-				Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: self.credentialsVerified, username: self.effectiveUserInfo?.username).post()
-			}
+		api.authorize(withCallback: Self.twitterCallbackUrl) { result in
 			
 			switch result {
 				
-			case let .success(username, userId):
-				
-				DebugTime.print("📮 Passed verify-credentials #9")
-				self.effectiveUserInfo = UserInfo(username: username, id: userId)
-				callback(VerifyResult(value:()))
-				
-			case let .failure(error):
+			case .success(let accessToken, let response):
 
+				DebugTime.print("📮 Passed verify-credentials #9")
+				#warning("コンパイルを通すため、ダミーのユーザー名と識別子を入れておきます。")
+				self.effectiveUserInfo = UserInfo(username: "username", id: "userId")
+				callback(VerifyResult.success(()))
+
+				Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: self.credentialsVerified, username: self.effectiveUserInfo?.username).post()
+
+				
+			case .failure(let error):
+				
 				DebugTime.print("📮 Passed verify-credentials #10")
 				self.effectiveUserInfo = nil
-				callback(VerifyResult(error: error))
+				callback(VerifyResult.failure(error as NSError))
+
+				Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: self.credentialsVerified, username: self.effectiveUserInfo?.username).post()
 			}
 		}
 	}
 
-	func post(container:PostDataContainer, latitude: String? = nil, longitude: String? = nil, placeID: String? = nil, displayCoordinates: NSNumber? = nil, trimUser: NSNumber? = nil, callback:(PostStatusUpdateResult)->Void) throws {
+	func post(container:PostDataContainer, latitude: Double? = nil, longitude: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, callback:(PostStatusUpdateResult)->Void) throws {
 		
 		DebugTime.print("📮 Verifying credentials of Twitter ... #3.1")
 		
@@ -346,18 +334,21 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 
 		DebugTime.print("📮 Try posting by Twitter ... #3.2")
 		
-		api.postStatusUpdate(container, latitude: latitude, longitude: longitude, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser) { result in
+		api.postTweet(container: container, inReplyToStatusID: nil, coordinate: (lat: latitude, long: longitude) as? (lat: Double, long: Double), autoPopulateReplyMetadata: nil, excludeReplyUserIds: nil, placeID: placeID, displayCoordinates: displayCoordinates, trimUser: trimUser, mediaIDs: [], attachmentURL: nil, tweetMode: .default) { result in
 			
 			DebugTime.print("📮 Posted by Twitter ... #3.2.1")
-			
+
 			switch result {
 				
-			case .success(let status):
-				self.latestTweet = status
-				callback(PostStatusUpdateResult(value: status.text))
-				
+			case .success(let json):
+				#warning("ここで 'status' を受け取っていた。まずはコンパイルを通すため nil を設定する。")
+				self.latestTweet = nil
+				#warning("ここで 'status.text' を保存していた。")
+				callback(PostStatusUpdateResult.success(json.string!))
+
 			case .failure(let error):
-				callback(PostStatusUpdateResult(error: error))
+				#warning("ひとまず未知のエラーを報告しておきます。")
+				callback(PostStatusUpdateResult.failure(SNSController.PostError.Unexpected(error as NSError)))
 			}
 		}
 	}
@@ -380,63 +371,72 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		
 		DebugTime.print("📮 Try posting by Twitter ... #3.2")
 		
-		api.postMediaUpload(container, image: image) { result in
+		#warning("コンパイルを通すために、まずは `image` ではなく空のデータを渡しておきます。")
+		api.postMedia(container: container, data: Data(), additionalOwners: nil) { result in
 			
 			DebugTime.print("📮 Posted by Twitter ... #3.2.1")
 			
 			switch result {
 				
-			case .success(let mediaIDs):
+			case .success(let json):
 
-				container.setTwitterMediaIDs(mediaIDs)
-				callback(PostResult.success(container))
+				#warning("ここで以前は `mediaIDs` が渡ってきました。")
+				#warning("引数でメディア ID を渡す必要がありますが、いったん保留します。")
+//				container.setTwitterMediaIDs(mediaIDs)
+				callback(PostResult.Success(container))
 				
 			case .failure(let error):
 				
-				container.setError(.FailedToUploadGistCapture(image, description: error.localizedDescription))
-				callback(PostResult.failure(container))
+				container.setError(error: .FailedToUploadGistCapture(image, description: error.localizedDescription))
+				callback(PostResult.Failure(container))
 			}
 		}
 	}
 	
 	func getStatusesWithQuery(query:String, since:String?, callback:(GetStatusesResult)->Void) {
 		
-		let successHandler = { (query:[String : Any]!, resultData:[AnyObject]!) -> Void in
-
-			DebugTime.print("Get Statuses : \(query)\n\(resultData)")
+		api.searchTweet(using: query, geocode: nil, lang: nil, locale: nil, resultType: "mixed", count: 50, until: nil, sinceID: since, maxID: nil, includeEntities: true, callback: nil, tweetMode: .default) { result in
 			
-			do {
-
-				let data = resultData as! Data
-				let status = try jsonDecoder.decode([ESTwitter.Status].self, from: data)
+			switch result {
 				
-				callback(GetStatusesResult.success(status))
-			}
-			catch let error as DecodingError {
-				
-				let error = GetStatusesError(type: .DecodeResultError, reason: error.localizedDescription)
+			case .success(let (json, searchMetaData)):
 
-				callback(GetStatusesResult.failure(error))
-			}
-			catch let error as NSError {
+				#warning("変更前は (`query: [String:Any], resultData: [AnyObject]! が得られていた。")
+				DebugTime.print("Get Statuses : \(query)\n\(json)")
 				
-				let error = GetStatusesError(type: .UnexpectedError, reason: error.localizedDescription)
+				do {
 
+					#warning("コンパイルを通すため、従来の `resultData` を渡さずに、いったん空データを渡している。")
+					let data = Data()
+					let status = try jsonDecoder.decode([ESTwitter.Status].self, from: data)
+					
+					callback(GetStatusesResult.success(status))
+				}
+				catch let error as DecodingError {
+					
+					let error = GetStatusesError(type: .DecodeResultError, reason: error.localizedDescription)
+
+					callback(GetStatusesResult.failure(error))
+				}
+				catch let error as NSError {
+					
+					let error = GetStatusesError(type: .UnexpectedError, reason: error.localizedDescription)
+
+					callback(GetStatusesResult.failure(error))
+				}
+
+			case .failure(let error):
+				
+				#warning("まずは無意味なエラーを設定して、コンパイルを通します。")
+				let code = STTwitterTwitterErrorCode.internalError
+//				let code = STTwitterTwitterErrorCode(rawValue: error.code)!
+				let reason = error.localizedDescription
+				
+				let error = GetStatusesError(code: code, reason: reason)
+				
 				callback(GetStatusesResult.failure(error))
 			}
 		}
-		
-		let errorHandler = { (error: NSError!) -> Void in
-			
-			let code = STTwitterTwitterErrorCode(rawValue: error.code)!
-			let reason = error.localizedDescription
-			
-			let error = GetStatusesError(code: code, reason: reason)
-			
-			callback(GetStatusesResult.failure(error))
-		}
-		
-		self.api.getSearchTweetsWithQuery(query, geocode: nil, lang: nil, locale: nil, resultType: "mixed", count: "50", until: nil, sinceID: since, maxID: nil, includeEntities: true, callback: nil, successBlock: successHandler, errorBlock: errorHandler)
 	}
 }
 

@@ -16,6 +16,7 @@
 		B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
 		B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B136C9AF23D189C6004AEA27 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B136C9AE23D189C6004AEA27 /* ESGists */; };
+		B136C9B123D1BDE1004AEA27 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B136C9B023D1BDE1004AEA27 /* Swifter.swift */; };
 		B15EE1DE23CE706C005B268A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1DD23CE706C005B268A /* Alert.swift */; };
 		B15EE1F623CE747D005B268A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F523CE747D005B268A /* Extension.swift */; };
 		B15EE1F923CE7522005B268A /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F823CE7522005B268A /* AppControllers.swift */; };
@@ -199,6 +200,7 @@
 		B132D51323CD08B800690C5F /* ESTwitterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESTwitterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B132D51A23CD08B800690C5F /* ESTwitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESTwitterTests.swift; sourceTree = "<group>"; };
 		B132D51C23CD08B800690C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B136C9B023D1BDE1004AEA27 /* Swifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
 		B15EE1DD23CE706C005B268A /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		B15EE1F523CE747D005B268A /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B15EE1F823CE7522005B268A /* AppControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppControllers.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 		B15EE23623CE7658005B268A /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				B136C9B023D1BDE1004AEA27 /* Swifter.swift */,
 			);
 			path = Twitter;
 			sourceTree = "<group>";
@@ -1110,6 +1113,7 @@
 				B1DDCB4623D0D37700418A84 /* TwitterAccountMenuItem.swift in Sources */,
 				B15EE25623CE7658005B268A /* AccountSeting.swift in Sources */,
 				B15EE28F23CE7667005B268A /* LatestTweetManageable.swift in Sources */,
+				B136C9B123D1BDE1004AEA27 /* Swifter.swift in Sources */,
 				B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */,
 				B15EE26623CE7658005B268A /* TwitterByOSPreferenceViewController.swift in Sources */,
 				B15EE25C23CE7658005B268A /* GistsController.swift in Sources */,
