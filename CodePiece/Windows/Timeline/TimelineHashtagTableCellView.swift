@@ -35,7 +35,9 @@ extension TimelineHashtagTableCellItem : TimelineTableItem  {
 	}
 }
 	
-@IBDesignable final class TimelineHashtagTableCellView: NSTableCellView {
+@IBDesignable
+@objcMembers
+final class TimelineHashtagTableCellView: NSTableCellView {
 
 	var item = TimelineHashtagTableCellItem(previousHashtags: nil, currentHashtags: []) {
 	

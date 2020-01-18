@@ -8,7 +8,8 @@
 
 import Cocoa
 
-class BaseViewController: NSSplitViewController {
+@objcMembers
+final class BaseViewController: NSSplitViewController {
 
 	private(set) weak var mainSplitViewItem:NSSplitViewItem? {
 		

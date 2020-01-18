@@ -11,7 +11,7 @@ import Ocean
 
 // FIXME: ⭐️ 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整します。
 
-@NSApplicationMain
+@NSApplicationMain @objcMembers
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
 	var urlSchemeManager:URLSchemeManager!

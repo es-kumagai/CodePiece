@@ -9,23 +9,24 @@
 import Cocoa
 import Swim
 
-public class AboutWindowController: NSWindowController {
+@objcMembers
+class AboutWindowController: NSWindowController {
 
-    public override func windowDidLoad() {
+    override func windowDidLoad() {
         super.windowDidLoad()
 
 		// FIXME: 😨 リサイズさせたくないのですが IB でリサイズを無効化してもできてしまいます。コードでマスクを操作してみましたが、それでも効果がないようでした。メニューからストーリーボードで直接インスタンス化しているのが問題なのかもしれません。
 		self.window!.styleMask.subtract(.resizable)
     }
 
-	public static func instantiate() -> AboutWindowController {
+	static func instantiate() -> AboutWindowController {
 		
 		let storyboard = NSStoryboard(name: "AboutWindowController", bundle: nil)
 		
 		return self.instantiate(storyboard: storyboard)!
 	}
 	
-	public static func instantiate(storyboard: NSStoryboard, identifier: String? = nil) -> AboutWindowController? {
+	static func instantiate(storyboard: NSStoryboard, identifier: String? = nil) -> AboutWindowController? {
 
 		if let identifier = identifier {
 
@@ -37,7 +38,7 @@ public class AboutWindowController: NSWindowController {
 		}
 	}
 
-	public override var contentViewController: NSViewController? {
+	override var contentViewController: NSViewController? {
 	
 		get {
 			
@@ -50,12 +51,12 @@ public class AboutWindowController: NSWindowController {
 		}
 	}
 	
-	public var aboutViewController: AboutViewController {
+	var aboutViewController: AboutViewController {
 	
 		return super.contentViewController as! AboutViewController
 	}
 	
-	public var acknowledgementsName:String? {
+	var acknowledgementsName:String? {
 		
 		didSet {
 			
@@ -63,12 +64,12 @@ public class AboutWindowController: NSWindowController {
 		}
 	}
 	
-	public var hasAcnowledgements:Bool {
+	var hasAcnowledgements:Bool {
 		
 		return self.acknowledgementsName != nil
 	}
 	
-	public func showWindow() {
+	func showWindow() {
 		
 		self.showWindow(self)
 	}
@@ -77,7 +78,7 @@ public class AboutWindowController: NSWindowController {
 extension AboutWindowController : NSWindowDelegate {
 	
 	// FIXME: 😨 リサイズさせたくないのですが IB でリサイズを無効化してもできてしまいます。NSWindowDelegate での調整を試みましたが、呼ばれず、効果がないようでした。メニューからストーリーボードで直接インスタンス化しているのが問題なのかもしれません。
-	public func windowShouldZoom(_ window: NSWindow, toFrame newFrame: NSRect) -> Bool {
+	func windowShouldZoom(_ window: NSWindow, toFrame newFrame: NSRect) -> Bool {
 		
 		return false
 	}

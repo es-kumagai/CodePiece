@@ -8,7 +8,8 @@
 
 import Cocoa
 
-class WelcomeBoardWindowController: NSWindowController, NSWindowDelegate {
+@objcMembers
+final class WelcomeBoardWindowController: NSWindowController, NSWindowDelegate {
 
     override func windowDidLoad() {
         super.windowDidLoad()

@@ -9,7 +9,8 @@
 import Cocoa
 import Ocean
 
-class WelcomeBoardViewController: NSViewController {
+@objcMembers
+final class WelcomeBoardViewController: NSViewController {
 
 	@IBOutlet var iconView:NSImageView!
 	@IBOutlet var appNameLabel:NSTextField!

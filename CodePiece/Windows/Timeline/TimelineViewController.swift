@@ -15,7 +15,8 @@ import Dispatch
 
 private let TableViewInsertAnimationOptions: NSTableView.AnimationOptions = [.slideDown, .effectFade]
 
-class TimelineViewController: NSViewController {
+@objcMembers
+final class TimelineViewController: NSViewController {
 
 	@IBOutlet var menuController: MenuController!
 	

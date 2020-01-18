@@ -8,7 +8,8 @@
 
 import Cocoa
 
-class TimelineStatusView: NSView {
+@objcMembers
+final class TimelineStatusView: NSView {
 
 	@IBOutlet var statusLabel: NSTextField? {
 		

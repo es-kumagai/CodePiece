@@ -11,6 +11,7 @@ import ESGists
 import Ocean
 import Swim
 
+@objcMembers
 final class LanguagePopupDataSource : NSObject {
 	
 	let defaultLanguage = Language.swift

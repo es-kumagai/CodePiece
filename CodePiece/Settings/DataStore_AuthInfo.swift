@@ -20,6 +20,7 @@ private struct ArchiveKey {
 // The name specified with @objc must not be change.
 // If this name change, raise EXCEPTION in NSKeyedUnarchiver.unarchiveObjectWithData.
 
+#warning("Objective-C 互換である必要がなさそう。")
 @objc(ESDataStoreAuthInfo)
 class AuthInfo : NSObject, NSCoding {
 	

@@ -11,6 +11,7 @@ import APIKit
 import ESTwitter
 import Swim
 
+@objcMembers
 final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
 	var maxTweets = 200

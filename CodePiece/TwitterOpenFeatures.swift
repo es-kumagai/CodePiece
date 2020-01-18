@@ -10,6 +10,7 @@ import AppKit
 import ESTwitter
 import Ocean
 
+@objcMembers
 final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObservable {
 	
 	var notificationHandlers = Notification.Handlers()

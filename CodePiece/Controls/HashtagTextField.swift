@@ -9,6 +9,7 @@
 import Cocoa
 import ESTwitter
 
+@objcMembers
 final class HashtagTextField : NSTextField {
 	
 	private var hashtagsBeforeEditing:ESTwitter.HashtagSet = []

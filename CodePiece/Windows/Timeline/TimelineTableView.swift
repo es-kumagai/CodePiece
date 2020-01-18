@@ -8,7 +8,8 @@
 
 import Cocoa
 
-class TimelineTableView: NSTableView {
+@objcMembers
+final class TimelineTableView: NSTableView {
 
 	// Infomation which tha table view has. if the cell for row is not maked yet, cell is set to nil.
 	struct CellInfo {

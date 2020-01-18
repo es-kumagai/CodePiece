@@ -9,7 +9,8 @@
 import Cocoa
 import Sky
 
-public final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSource {
+@objcMembers
+final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSource {
 	
 	public private(set) weak var owner:ESAcknowledgementsViewController?
 	public var acknowledgements:Acknowledgements
@@ -55,7 +56,8 @@ public final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableView
 	}
 }
 
-public final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDelegate {
+@objcMembers
+final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDelegate {
 	
 	public private(set) weak var owner:ESAcknowledgementsViewController?
 	public var acknowledgements:Acknowledgements
@@ -101,7 +103,8 @@ public final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDe
 //	static let acknowledgementsViewControllerLicenseColumn = NSUserInterfaceItemIdentifier(rawValue: "license")
 //}
 
-public class ESAcknowledgementsViewController: NSViewController, AcknowledgementsIncludedAndCustomizable {
+@objcMembers
+class ESAcknowledgementsViewController: NSViewController, AcknowledgementsIncludedAndCustomizable {
 
 	@IBInspectable public var nameColumnIdentifier:String = "name"
 	@IBInspectable public var licenseColumnIdentifier:String = "license"

@@ -41,7 +41,8 @@ final class WebCaptureController {
 
 extension WebCaptureController {
 	
-	@objc internal class Request : NSObject {
+	@objcMembers
+	internal class Request : NSObject {
 		
 		weak var owner: WebCaptureController!
 

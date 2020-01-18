@@ -8,7 +8,8 @@
 
 import Cocoa
 
-public final class AboutViewController: NSViewController {
+@objcMembers
+final class AboutViewController: NSViewController {
 
 	public static var acknowledgementsStoryboardName = "AcknowledgementsViewController"
 	

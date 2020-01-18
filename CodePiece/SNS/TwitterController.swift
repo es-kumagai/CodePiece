@@ -63,6 +63,7 @@ extension GetStatusesError {
 	}
 }
 
+@objcMembers
 final class TwitterController : NSObject, PostController, AlertDisplayable {
 	
 	typealias VerifyResult = Result<Void,NSError>

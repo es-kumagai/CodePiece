@@ -12,7 +12,8 @@ import ESProgressHUD
 import OAuth2
 import ESGists
 
-class GitHubPreferenceViewController: NSViewController, NotificationObservable {
+@objcMembers
+final class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 
 	var notificationHandlers = Notification.Handlers()
 	

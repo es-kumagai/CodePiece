@@ -14,6 +14,7 @@ import Swim
 import ESProgressHUD
 import ESTwitter
 
+@objcMembers
 final class MainViewController: NSViewController, NotificationObservable {
 
 	enum ReplyToType {

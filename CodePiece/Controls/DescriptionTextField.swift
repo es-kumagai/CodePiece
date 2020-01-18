@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@objcMembers
 final class DescriptionTextField: NSTextField {
 
 	func readyForReplyTo(screenName: String) {

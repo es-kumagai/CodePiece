@@ -9,6 +9,7 @@
 import AppKit
 import Ocean
 
+@objcMembers
 final class MenuController : NSObject {
 
 	var application:NSApplication {

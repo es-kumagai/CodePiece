@@ -13,7 +13,8 @@ enum PreferencesWindowModalResult : Int {
 	case Close = 0
 }
 
-class PreferencesWindowController: NSWindowController {
+@objcMembers
+final class PreferencesWindowController: NSWindowController {
 
 	enum TwitterPreferenceType {
 	

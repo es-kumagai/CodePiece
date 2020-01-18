@@ -11,7 +11,8 @@ import Swim
 import ESTwitter
 import ESGists
 
-class TimelineTableCellView: NSTableCellView, Selectable {
+@objcMembers
+final class TimelineTableCellView: NSTableCellView, Selectable {
 
 	private static var cellForEstimateHeight: TimelineTableCellView!
 	

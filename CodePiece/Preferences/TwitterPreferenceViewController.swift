@@ -11,6 +11,7 @@ import ESProgressHUD
 import Ocean
 import Swim
 
+@objcMembers
 class TwitterPreferenceViewController: NSViewController, NotificationObservable {
 
 	var notificationHandlers = Notification.Handlers()

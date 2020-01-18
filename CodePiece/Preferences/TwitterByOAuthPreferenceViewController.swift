@@ -9,6 +9,7 @@
 import Cocoa
 import ESProgressHUD
 
+@objcMembers
 final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewController {
 	
 	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)

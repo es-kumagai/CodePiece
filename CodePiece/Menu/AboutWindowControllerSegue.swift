@@ -9,6 +9,7 @@
 import Cocoa
 import Swim
 
+@objcMembers
 final class AboutWindowControllerSegue : NSStoryboardSegue {
 	
 	override func perform() {

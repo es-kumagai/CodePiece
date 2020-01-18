@@ -10,6 +10,7 @@ import Cocoa
 import Accounts
 import Swim
 
+//@objcMembers
 //final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 	
 //	@IBOutlet var accountSelector:NSPopUpButton! {

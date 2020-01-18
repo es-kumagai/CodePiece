@@ -9,6 +9,7 @@
 import AppKit
 import Ocean
 
+@objcMembers
 final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObservable {
 
 	var notificationHandlers = Notification.Handlers()

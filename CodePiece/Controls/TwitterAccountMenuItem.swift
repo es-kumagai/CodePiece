@@ -9,6 +9,7 @@
 //import AppKit
 //import Accounts
 //
+//@objcMembers
 //final class TwitterAccountMenuItem: NSMenuItem {
 //
 //	private static let IdentifierCoderKey = "TwitterAccountMenuItemIdentifierKey"

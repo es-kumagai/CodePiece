@@ -8,7 +8,8 @@
 
 import Cocoa
 
-@IBDesignable public class StatusImageView: NSImageView {
+@objcMembers
+@IBDesignable final class StatusImageView: NSImageView {
 
 	private let StatusCodingKey = "StatusImageViewStatusCoding"
 	private let StatusDefault = Status.None

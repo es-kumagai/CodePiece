@@ -11,6 +11,7 @@ import Ocean
 
 private let none = "----"
 
+@objcMembers
 final class MainStatusViewController: NSViewController, NotificationObservable {
 
 	var notificationHandlers = Notification.Handlers()
