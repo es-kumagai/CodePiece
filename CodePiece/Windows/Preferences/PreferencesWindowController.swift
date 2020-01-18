@@ -74,7 +74,7 @@ final class PreferencesWindowController: NSWindowController {
 
 extension PreferencesWindowController : NSWindowDelegate {
 	
-	func windowWillClose(notification: NSNotification) {
+	func windowWillClose(_ notification: Notification) {
 
 		NSApp.twitterController.verifyCredentialsIfNeed { result in
 			

@@ -575,7 +575,7 @@ extension TimelineViewController : NSTableViewDelegate {
         return self.timelineDataSource.estimateCellHeightOfRow(row: row, tableView: tableView)
 	}
 
-    private func tableViewSelectionIsChanging(notification: NSNotification) {
+    func tableViewSelectionIsChanging(_ notification: Notification) {
 		
 		guard let tableView = notification.object as? TimelineTableView, tableView === self.timelineTableView else {
 			
@@ -583,7 +583,7 @@ extension TimelineViewController : NSTableViewDelegate {
 		}
 	}
 	
-    private func tableViewSelectionDidChange(notification: NSNotification) {
+    func tableViewSelectionDidChange(_ notification: Notification) {
 		
 		guard let tableView = notification.object as? TimelineTableView, tableView === self.timelineTableView else {
 			
