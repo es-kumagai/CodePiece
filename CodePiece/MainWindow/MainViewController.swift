@@ -66,15 +66,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 	@IBOutlet var hashTagTextField: HashtagTextField!
 	
 	@IBOutlet var languagePopUpButton: NSPopUpButton!
-
-	@IBOutlet var languagePopUpDataSource: LanguagePopupDataSource! {
-		
-		didSet {
-			
-			#warning("実行時に nil になるので動作検証のためのコードです。")
-			NSLog("%@", "実行時に nil になるので動作検証のためのコードです。")
-		}
-	}
+	@IBOutlet var languagePopUpDataSource: LanguagePopupDataSource!
 	
 	@IBOutlet var codeTextView: CodeTextView! {
 	

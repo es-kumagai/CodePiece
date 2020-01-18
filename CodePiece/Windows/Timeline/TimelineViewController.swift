@@ -366,12 +366,12 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		
 		switch state {
 			
-		case .ViaWiFi, .ViaCellular:
+		case .viaWiFi, .viaCellular:
 			NSLog("CodePiece has get internet connection.")
 			self.autoUpdateState.hasInternetConnection = true
 			self.autoUpdateState.setNeedsUpdate()
 			
-		case .Unreachable:
+		case .unreachable:
 			NSLog("CodePiece has lost internet connection.")
 			self.autoUpdateState.hasInternetConnection = false
 		}

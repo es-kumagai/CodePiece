@@ -21,9 +21,9 @@ import Cocoa
 		case PartiallyAvailable
 		case Unavailable
 		
-		var image:NSImage {
+		var image: NSImage {
 			
-			return NSImage(named: "NSStatus\(self)")!
+			return NSImage(self)
 		}
 	}
 	
@@ -69,5 +69,26 @@ import Cocoa
 	private func updateStatusImage() {
 		
 		self.image = self.status.image
+	}
+}
+
+extension NSImage {
+	
+	convenience init(_ status: StatusImageView.Status) {
+		
+		switch status {
+			
+		case .None:
+			self.init(named: "NSStatusNone")!
+			
+		case .Available:
+			self.init(named: "NSStatusAvailable")!
+
+		case .PartiallyAvailable:
+			self.init(named: "NSStatusPartiallyAvailable")!
+
+		case .Unavailable:
+			self.init(named: "NSStatusUnavailable")!
+		}
 	}
 }
