@@ -18,7 +18,7 @@ public final class AboutViewController: NSViewController {
 	@IBOutlet public weak var appCopyrightLabel:NSTextField?
 	@IBOutlet public weak var showAcknowledgementsButton:NSButton?
 	
-	@IBAction public func pushShowAcknowledgementsButton(sender:AnyObject?) {
+	@IBAction public func pushShowAcknowledgementsButton(_ sender:AnyObject?) {
 	
 		let storyboard = NSStoryboard(name: AboutViewController.acknowledgementsStoryboardName, bundle: self.bundle)
 		let viewController = storyboard.instantiateInitialController() as! NSViewController

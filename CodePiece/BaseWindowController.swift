@@ -19,7 +19,7 @@ final class BaseWindowController: NSWindowController {
 
 extension BaseWindowController : NSWindowDelegate {
 	
-	func windowShouldClose(sender: AnyObject) -> Bool {
+	func windowShouldClose(_ sender: AnyObject) -> Bool {
 		
 		return true
 	}

@@ -46,58 +46,58 @@ final class MenuController : NSObject {
 		return self.mainViewController?.canPost ?? false
 	}
 	
-	@IBAction func showPreferences(sender:NSMenuItem?) {
+	@IBAction func showPreferences(_ sender:NSMenuItem?) {
 		
 		NSApp.showPreferencesWindow()
 	}
 
-	@IBAction func showWelcomeBoard(sender:NSMenuItem?) {
+	@IBAction func showWelcomeBoard(_ sender:NSMenuItem?) {
 		
 		NSApp.showWelcomeBoard()
 	}
 	
-	@IBAction func moveFocusToCodeArea(sender:NSObject?) {
+	@IBAction func moveFocusToCodeArea(_ sender:NSObject?) {
 		
 		self.mainViewController?.focusToCodeArea()
 	}
 	
-	@IBAction func moveFocusToDescription(sender:NSObject?) {
+	@IBAction func moveFocusToDescription(_ sender:NSObject?) {
 		
 		self.mainViewController?.focusToDescription()
 	}
 	
-	@IBAction func moveFocusToHashtag(sender:NSObject?) {
+	@IBAction func moveFocusToHashtag(_ sender:NSObject?) {
 		
 		self.mainViewController?.focusToHashtag()
 	}
 	
-	@IBAction func moveFocusToLanguage(sender:NSObject?) {
+	@IBAction func moveFocusToLanguage(_ sender:NSObject?) {
 		
 		self.mainViewController?.focusToLanguage()
 	}
 	
-	@IBAction func postToSNS(sender:NSMenuItem?) {
+	@IBAction func postToSNS(_ sender:NSMenuItem?) {
 		
 		self.mainViewController?.postToSNS()
 	}
 	
-	@IBAction func clearTweetAndDescription(sender:NSMenuItem?) {
+	@IBAction func clearTweetAndDescription(_ sender:NSMenuItem?) {
 		
 		self.mainViewController?.clearDescriptionText()
 	}
 	
-	@IBAction func clearCodeAndDescription(sender: NSMenuItem?) {
+	@IBAction func clearCodeAndDescription(_ sender: NSMenuItem?) {
 	
 		self.mainViewController?.clearCodeText()
 		self.mainViewController?.clearDescriptionText()
 	}
 	
-	@IBAction func clearHashtag(sender:NSMenuItem?) {
+	@IBAction func clearHashtag(_ sender:NSMenuItem?) {
 		
 		self.mainViewController?.clearHashtags()
 	}
 	
-	@IBAction func clearCode(sender:NSMenuItem?) {
+	@IBAction func clearCode(_ sender:NSMenuItem?) {
 		
 		self.mainViewController?.clearCodeText()
 	}
@@ -107,7 +107,7 @@ final class MenuController : NSObject {
 		return mainViewController?.hasStatusForReplyTo ?? false
 	}
 	
-	@IBAction func clearReplyingToStatusID(sender: NSMenuItem?) {
+	@IBAction func clearReplyingToStatusID(_ sender: NSMenuItem?) {
 		
 		mainViewController?.clearReplyTo()
 	}
@@ -117,7 +117,7 @@ final class MenuController : NSObject {
 		return self.mainViewController?.canOpenBrowserWithSearchHashtagPage ?? false
 	}
 	
-	@IBAction func openBrowserWithSearchHashtagPage(sender:NSMenuItem?) {
+	@IBAction func openBrowserWithSearchHashtagPage(_ sender:NSMenuItem?) {
 		
 		self.mainViewController?.openBrowserWithSearchHashtagPage()
 	}
@@ -127,7 +127,7 @@ final class MenuController : NSObject {
 		return self.timelineViewController?.isTimelineActive ?? false
 	}
 	
-	@IBAction func reloadTimeline(sender: NSMenuItem?) {
+	@IBAction func reloadTimeline(_ sender: NSMenuItem?) {
 		
 		self.timelineViewController?.reloadTimeline()
 	}
@@ -137,7 +137,7 @@ final class MenuController : NSObject {
 		return self.mainViewController?.canOpenBrowserWithCurrentTwitterStatus ?? false
 	}
 	
-	@IBAction func openBrowserWithCurrentTwitterStatus(sender: AnyObject) {
+	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {
 		
 		self.mainViewController?.openBrowserWithCurrentTwitterStatus()
 	}

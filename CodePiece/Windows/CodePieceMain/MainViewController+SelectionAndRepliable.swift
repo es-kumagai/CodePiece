@@ -66,7 +66,7 @@ extension MainViewController {
 		return canReplyToLatestTweet || canReplyToSelectedStatuses
 	}
 	
-	@IBAction func setReplyTo(sender: AnyObject) {
+	@IBAction func setReplyTo(_ sender: AnyObject) {
 		
 		guard canReplyTo else {
 			
@@ -104,8 +104,8 @@ extension MenuController {
 		return mainViewController?.canReplyTo ?? false
 	}
 	
-	@IBAction func replyTo(sender:NSMenuItem) {
+	@IBAction func replyTo(_ sender:NSMenuItem) {
 		
-		mainViewController?.setReplyTo(sender: sender)
+		mainViewController?.setReplyTo(sender)
 	}
 }

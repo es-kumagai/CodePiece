@@ -92,12 +92,12 @@ extension TwitterByOSPreferenceViewController {
 		NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/\(panel).prefPane"))
 	}
 
-	@IBAction func openAccountsPreferences(sender:NSButton) {
+	@IBAction func openAccountsPreferences(_ sender:NSButton) {
 		
 		self.openSystemPreferences("InternetAccounts")
 	}
 	
-	@IBAction func openSecurityPreferences(sender:NSButton) {
+	@IBAction func openSecurityPreferences(_ sender:NSButton) {
 		
 		// TODO: I want to open Security preferences directly.
 		self.openSystemPreferences("Security")

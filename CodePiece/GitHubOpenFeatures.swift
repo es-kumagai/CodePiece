@@ -31,7 +31,7 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObserva
 		return NSApp.settings.account.authorizationState.isValid
 	}
 	
-	@IBAction func openGitHubHomeAction(sender:AnyObject) {
+	@IBAction func openGitHubHomeAction(_ sender:AnyObject) {
 	
 		self.openGitHubHome()
 	}

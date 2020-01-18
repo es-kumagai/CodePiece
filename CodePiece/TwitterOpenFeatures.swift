@@ -32,7 +32,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		return NSApp.twitterController.credentialsVerified
 	}
 	
-	@IBAction func openTwitterHomeAction(sender:AnyObject) {
+	@IBAction func openTwitterHomeAction(_ sender:AnyObject) {
 		
 		self.openTwitterHome()
 	}

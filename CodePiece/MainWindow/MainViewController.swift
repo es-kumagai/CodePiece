@@ -148,7 +148,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		return self.languagePopUpButton.selectedItem.flatMap { Language(displayText: $0.title) }!
 	}
 	
-	@IBAction func pushPostButton(sender:NSObject?) {
+	@IBAction func pushPostButton(_ sender:NSObject?) {
 	
 		self.postToSNS()
 	}
@@ -279,7 +279,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		observe(notification: TimelineViewController.TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
 			
-			self.setReplyTo(sender: notification)
+			self.setReplyTo(notification)
 		}
 	}
 	

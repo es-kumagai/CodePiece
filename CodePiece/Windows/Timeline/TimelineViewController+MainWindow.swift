@@ -16,7 +16,7 @@ extension TimelineViewController {
 		return timelineTableView.selectedAnyRows
 	}
 	
-	@IBAction func replyRequest(sender: AnyObject) {
+	@IBAction func replyRequest(_ sender: AnyObject) {
 		
 		TimelineReplyToSelectionRequestNotification().post()
 	}
@@ -26,8 +26,8 @@ extension TimelineViewController {
 		return timelineTableView.selectedSingleRow
 	}
 	
-	@IBAction func openBrowserWithCurrentTwitterStatus(sender: AnyObject) {
+	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {
 		
-		self.menuController.openBrowserWithCurrentTwitterStatus(sender: sender)
+		self.menuController.openBrowserWithCurrentTwitterStatus(sender)
 	}
 }

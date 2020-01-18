@@ -55,7 +55,7 @@ import Swim
 //		}
 //	}
 	
-//	func accountSelectorDidChange(sender:TwitterAccountMenuItem!) {
+//	func accountSelectorDidChange(_ sender:TwitterAccountMenuItem!) {
 //
 //		let headerMenuItem = self.headerMenuItem
 //

@@ -10,7 +10,7 @@ import Foundation
 
 extension TimelineViewController {
 	
-	@IBAction func pushTimelineRefreshButton(sender: AnyObject!) {
+	@IBAction func pushTimelineRefreshButton(_ sender: AnyObject!) {
 		
 		self.reloadTimeline()
 	}

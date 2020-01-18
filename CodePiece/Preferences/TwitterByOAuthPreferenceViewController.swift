@@ -55,7 +55,7 @@ extension TwitterByOAuthPreferenceViewController : NSTextFieldDelegate {
 
 extension TwitterByOAuthPreferenceViewController {
 	
-	@IBAction func doAuthentication(sender:NSButton) {
+	@IBAction func doAuthentication(_ sender:NSButton) {
 		
 		self.authenticatingHUD.show()
 		
@@ -79,7 +79,7 @@ extension TwitterByOAuthPreferenceViewController {
 //		}
 	}
 	
-	@IBAction func doEnterPin(sender: NSButton) {
+	@IBAction func doEnterPin(_ sender: NSButton) {
 		
 		#warning("いったん、処理を無効化してあります。")
 		NSLog("%@", "いったん、処理を無効化してあります。")

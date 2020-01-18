@@ -70,7 +70,7 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		return NSApp.twitterController.credentialsVerified
 	}
 	
-	@IBAction func pushResetAuthorizationButton(sender:NSButton) {
+	@IBAction func pushResetAuthorizationButton(_ sender:NSButton) {
 	
 		self.resetAuthorization()
 	}
@@ -151,7 +151,7 @@ extension TwitterPreferenceViewController {
 
 extension TwitterPreferenceViewController {
 	
-	@IBAction func pushVerifyCredentialsButton(sender:NSButton) {
+	@IBAction func pushVerifyCredentialsButton(_ sender:NSButton) {
 		
 		verifyCredentials()
 	}

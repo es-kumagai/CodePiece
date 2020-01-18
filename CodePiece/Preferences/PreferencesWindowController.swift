@@ -37,12 +37,12 @@ class PreferencesWindowController: NSWindowController {
 	
 	@IBOutlet var toolbar:NSToolbar!
 	
-	@IBAction func showGitHubPreference(sender:NSToolbarItem?) {
+	@IBAction func showGitHubPreference(_ sender:NSToolbarItem?) {
 
 		self.contentViewController = try! Storyboard.GitHubPreferenceView.getInitialController()
 	}
 	
-	@IBAction func showTwitterPreference(sender:NSToolbarItem?) {
+	@IBAction func showTwitterPreference(_ sender:NSToolbarItem?) {
 		
 		self.contentViewController = try! Storyboard.TwitterPreferenceView.getControllerByIdentifier(identifier: twitterPreferenceType.storyboardID)
 	}

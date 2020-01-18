@@ -26,7 +26,7 @@ class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 	@IBOutlet var resetButton:NSButton!
 	
 	
-	@IBAction func doAuthentication(sender:NSButton) {
+	@IBAction func doAuthentication(_ sender:NSButton) {
 	
 		authenticatingHUD.show()
 		
@@ -48,7 +48,7 @@ class GitHubPreferenceViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	@IBAction func doReset(sender:NSButton) {
+	@IBAction func doReset(_ sender:NSButton) {
 		
 		guard let id = NSApp.settings.account.id else {
 			
