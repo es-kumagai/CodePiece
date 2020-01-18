@@ -72,7 +72,7 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		}
 	}
 	
-	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+	func numberOfRows(in tableView: NSTableView) -> Int {
 		
 		return self.items.count
 	}

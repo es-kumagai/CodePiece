@@ -108,6 +108,7 @@ extension NSApplication {
 	func closeWelcomeBoard() {
 		
 		welcomeBoardWindowController.close()
+		NSApp.stopModal(withCode: .OK)
 	}
 	
 	func showPreferencesWindow() {

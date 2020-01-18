@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B1154B6A23CABCFC003CFFF2 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B1154B6923CABCFC003CFFF2 /* ESGists */; };
 		B124E2C823D1F47C0063D98A /* NamedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B124E2C723D1F47C0063D98A /* NamedNotification.swift */; };
 		B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1278B5B23D176C3003F3719 /* CodeText.swift */; };
 		B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B132D50423CD078800690C5F /* ESProgressHUD */; };
@@ -100,8 +99,6 @@
 		B15EE2A923CE7667005B268A /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28C23CE7667005B268A /* TimelineTableController.swift */; };
 		B15EE2AA23CE7667005B268A /* WelcomeBoardWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28D23CE7667005B268A /* WelcomeBoardWindowController.swift */; };
 		B15EE33D23CE78A5005B268A /* SourceHanCodeJP-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B15EE30423CE771F005B268A /* SourceHanCodeJP-Regular.otf */; };
-		B15EE34023CE7959005B268A /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE33F23CE7959005B268A /* OAuth2 */; };
-		B15EE38223CE9B40005B268A /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38123CE9B40005B268A /* Swifter */; };
 		B15EE38723CE9C42005B268A /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38623CE9C42005B268A /* Swifter */; };
 		B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38923CE9FBB005B268A /* Reachability */; };
 		B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38C23CEA03E005B268A /* KeychainAccess */; };
@@ -146,6 +143,8 @@
 		B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4323D0D37700418A84 /* CodeTextView.swift */; };
 		B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */; };
 		B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */; };
+		B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161D23D36E6C002D4571 /* OAuth2 */; };
+		B1FB162023D36E6C002D4571 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161F23D36E6C002D4571 /* Swifter */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,13 +369,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1154B6A23CABCFC003CFFF2 /* ESGists in Frameworks */,
+				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
-				B15EE34023CE7959005B268A /* OAuth2 in Frameworks */,
+				B1FB162023D36E6C002D4571 /* Swifter in Frameworks */,
 				B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
-				B15EE38223CE9B40005B268A /* Swifter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,14 +545,9 @@
 		B15EE24523CE7658005B268A /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				B15EE24623CE7658005B268A /* TwitterByOSPreferenceViewController.swift */,
-				B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */,
-				B15EE24823CE7658005B268A /* PreferencesWindowController.swift */,
-				B15EE24923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift */,
+				B1FB161C23D36BC6002D4571 /* PreferenceViews */,
 				B15EE24A23CE7658005B268A /* PreferencesWindow.storyboard */,
-				B15EE24B23CE7658005B268A /* TwitterPreferenceView.storyboard */,
-				B15EE24C23CE7658005B268A /* GitHubPreferenceViewController.swift */,
-				B15EE24D23CE7658005B268A /* TwitterPreferenceViewController.swift */,
+				B15EE24823CE7658005B268A /* PreferencesWindowController.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -562,12 +555,14 @@
 		B15EE26E23CE7667005B268A /* Windows */ = {
 			isa = PBXGroup;
 			children = (
+				B1D13C7923CA14DD0016902A /* Main.storyboard */,
+				B15EE24523CE7658005B268A /* Preferences */,
+				B1FB161B23D36B2C002D4571 /* WelcomeBoard */,
+				B17B937F23CAB1EC00E3B490 /* MainWindow */,
 				B15EE26F23CE7667005B268A /* CodePieceMain */,
 				B15EE27623CE7667005B268A /* AboutWindowController.storyboard */,
 				B15EE27723CE7667005B268A /* AboutWindow.swift */,
 				B15EE27823CE7667005B268A /* AboutWindowController.swift */,
-				B15EE27923CE7667005B268A /* WelcomeBoardViewController.swift */,
-				B15EE27A23CE7667005B268A /* WelcomeBoard.storyboard */,
 				B15EE27B23CE7667005B268A /* AcknowledgementsViewController.storyboard */,
 				B15EE27C23CE7667005B268A /* AcknowledgementsViewController.swift */,
 				B15EE27D23CE7667005B268A /* MainStatusViewController.swift */,
@@ -770,13 +765,11 @@
 				B15EE21C23CE762A005B268A /* Editors */,
 				B15EE22423CE7648005B268A /* Network */,
 				B15EE21D23CE7636005B268A /* Menu */,
-				B15EE24523CE7658005B268A /* Preferences */,
 				B15EE23223CE7658005B268A /* References */,
 				B15EE22723CE7658005B268A /* Settings */,
 				B15EE23423CE7658005B268A /* SNS */,
 				B15EE26E23CE7667005B268A /* Windows */,
 				B15EE24123CE7658005B268A /* URLScheme */,
-				B17B937F23CAB1EC00E3B490 /* MainWindow */,
 				B1D13C7323CA14DB0016902A /* AppDelegate.swift */,
 				B15EE1F823CE7522005B268A /* AppControllers.swift */,
 				B15EE1FA23CE752D005B268A /* AppExtension.swift */,
@@ -789,7 +782,6 @@
 				B15EE20223CE7593005B268A /* SystemPalette.swift */,
 				B15EE20323CE7593005B268A /* TwitterOpenFeatures.swift */,
 				B15EE20523CE7593005B268A /* TwitterText.swift */,
-				B1D13C7923CA14DD0016902A /* Main.storyboard */,
 				B1D13C7C23CA14DD0016902A /* Info.plist */,
 				B1D13C7D23CA14DD0016902A /* CodePiece.entitlements */,
 				B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */,
@@ -819,6 +811,28 @@
 				B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		B1FB161B23D36B2C002D4571 /* WelcomeBoard */ = {
+			isa = PBXGroup;
+			children = (
+				B15EE27923CE7667005B268A /* WelcomeBoardViewController.swift */,
+				B15EE27A23CE7667005B268A /* WelcomeBoard.storyboard */,
+			);
+			path = WelcomeBoard;
+			sourceTree = "<group>";
+		};
+		B1FB161C23D36BC6002D4571 /* PreferenceViews */ = {
+			isa = PBXGroup;
+			children = (
+				B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */,
+				B15EE24C23CE7658005B268A /* GitHubPreferenceViewController.swift */,
+				B15EE24923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift */,
+				B15EE24623CE7658005B268A /* TwitterByOSPreferenceViewController.swift */,
+				B15EE24B23CE7658005B268A /* TwitterPreferenceView.storyboard */,
+				B15EE24D23CE7658005B268A /* TwitterPreferenceViewController.swift */,
+			);
+			path = PreferenceViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -893,12 +907,11 @@
 			);
 			name = CodePiece;
 			packageProductDependencies = (
-				B1154B6923CABCFC003CFFF2 /* ESGists */,
 				B132D50423CD078800690C5F /* ESProgressHUD */,
-				B15EE33F23CE7959005B268A /* OAuth2 */,
-				B15EE38123CE9B40005B268A /* Swifter */,
 				B15EE38923CE9FBB005B268A /* Reachability */,
 				B15EE38C23CEA03E005B268A /* KeychainAccess */,
+				B1FB161D23D36E6C002D4571 /* OAuth2 */,
+				B1FB161F23D36E6C002D4571 /* Swifter */,
 			);
 			productName = "CodePiece-Rev2";
 			productReference = B1D13C7023CA14DB0016902A /* CodePiece.app */;
@@ -1606,11 +1619,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B1154B6923CABCFC003CFFF2 /* ESGists */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B1154B6823CABCFC003CFFF2 /* XCRemoteSwiftPackageReference "ESGists" */;
-			productName = ESGists;
-		};
 		B132D50423CD078800690C5F /* ESProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B132D50323CD078800690C5F /* XCRemoteSwiftPackageReference "ESProgressHUD" */;
@@ -1620,16 +1628,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B1154B6823CABCFC003CFFF2 /* XCRemoteSwiftPackageReference "ESGists" */;
 			productName = ESGists;
-		};
-		B15EE33F23CE7959005B268A /* OAuth2 */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B15EE33E23CE7959005B268A /* XCRemoteSwiftPackageReference "OAuth2" */;
-			productName = OAuth2;
-		};
-		B15EE38123CE9B40005B268A /* Swifter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B15EE38023CE9B40005B268A /* XCRemoteSwiftPackageReference "Swifter" */;
-			productName = Swifter;
 		};
 		B15EE38623CE9C42005B268A /* Swifter */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1650,6 +1648,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B1DDCB3C23D0C98F00418A84 /* XCRemoteSwiftPackageReference "Swim" */;
 			productName = Swim;
+		};
+		B1FB161D23D36E6C002D4571 /* OAuth2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B15EE33E23CE7959005B268A /* XCRemoteSwiftPackageReference "OAuth2" */;
+			productName = OAuth2;
+		};
+		B1FB161F23D36E6C002D4571 /* Swifter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B15EE38023CE9B40005B268A /* XCRemoteSwiftPackageReference "Swifter" */;
+			productName = Swifter;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

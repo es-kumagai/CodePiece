@@ -9,7 +9,7 @@
 import Cocoa
 import Ocean
 import ESProgressHUD
-import OAuth2
+import ESTwitter
 import ESGists
 
 @objcMembers
