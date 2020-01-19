@@ -102,17 +102,21 @@ extension NSApplication {
 	
 	func showWelcomeBoard() {
 
-		NSApp.runModal(for: welcomeBoardWindowController.window!)
+		welcomeBoardWindowController.showWindow(self)
 	}
 	
 	func closeWelcomeBoard() {
 		
 		welcomeBoardWindowController.close()
-		NSApp.stopModal(withCode: .OK)
 	}
 	
 	func showPreferencesWindow() {
-		
+
 		preferencesWindowController.showWindow(self)
-	}	
+	}
+//
+	func closePreferencesWindow() {
+
+		preferencesWindowController.close()
+	}
 }

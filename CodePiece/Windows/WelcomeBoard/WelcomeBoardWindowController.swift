@@ -17,8 +17,13 @@ final class WelcomeBoardWindowController: NSWindowController, NSWindowDelegate {
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
 	
+	override func showWindow(_ sender: Any?) {
+		
+		NSApp.runModal(for: window!)
+	}
+
 	func windowWillClose(_ notification: Notification) {
 	
-		NSApp.stopModal()
+		NSApp.stopModal(withCode: .OK)
 	}
 }

@@ -72,10 +72,19 @@ final class PreferencesWindowController: NSWindowController {
 	}
 }
 
+extension PreferencesWindowController {
+	
+	override func showWindow(_ sender: Any?) {
+		
+		NSApp.runModal(for: window!)
+	}
+}
+
 extension PreferencesWindowController : NSWindowDelegate {
 	
 	func windowWillClose(_ notification: Notification) {
-
+		
+		NSApp.stopModal(withCode: .OK)
 		NSApp.twitterController.verifyCredentialsIfNeed { result in
 			
 			if case .failure(let error) = result {

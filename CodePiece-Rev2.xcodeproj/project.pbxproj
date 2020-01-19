@@ -568,7 +568,6 @@
 				B15EE27D23CE7667005B268A /* MainStatusViewController.swift */,
 				B15EE27E23CE7667005B268A /* AboutViewController.swift */,
 				B15EE27F23CE7667005B268A /* Timeline */,
-				B15EE28D23CE7667005B268A /* WelcomeBoardWindowController.swift */,
 			);
 			path = Windows;
 			sourceTree = "<group>";
@@ -817,6 +816,7 @@
 			isa = PBXGroup;
 			children = (
 				B15EE27923CE7667005B268A /* WelcomeBoardViewController.swift */,
+				B15EE28D23CE7667005B268A /* WelcomeBoardWindowController.swift */,
 				B15EE27A23CE7667005B268A /* WelcomeBoard.storyboard */,
 			);
 			path = WelcomeBoard;
