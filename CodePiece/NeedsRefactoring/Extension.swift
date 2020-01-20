@@ -19,6 +19,24 @@ public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
+extension APIKit.SessionTaskError : CustomStringConvertible {
+	
+	public var description: String {
+		
+		switch self {
+			
+		case .connectionError(let error):
+			return error.localizedDescription
+			
+		case .requestError(let error):
+			 return error.localizedDescription
+			
+		case .responseError(let error):
+			return error.localizedDescription
+		}
+	}
+}
+
 // NOTE: 🐬 CodePiece の Data を扱うときに HTMLText を介すると attributedText の実装が逆に複雑化する可能性があるため、一旦保留にします。
 //public struct HTMLText {
 //

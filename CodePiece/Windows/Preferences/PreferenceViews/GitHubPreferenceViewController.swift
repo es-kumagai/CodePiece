@@ -33,18 +33,18 @@ final class GitHubPreferenceViewController: NSViewController, NotificationObserv
 		
 		Authorization.authorizationWithGitHub { result in
 			
-			authenticatingHUD.hide()
+			self.authenticatingHUD.hide()
 			
 			switch result {
 				
 			case .Created:
-				dismiss(self)
+				self.dismiss(self)
 				
 			case .Failed(let error):
-				showErrorAlert(withTitle: "Failed to authentication", message: error.description)
+				self.showErrorAlert(withTitle: "Failed to authentication", message: error.description)
 				
 			case .PinRequired:
-				showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")
+				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")
 			}
 		}
 	}

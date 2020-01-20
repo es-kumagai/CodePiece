@@ -34,11 +34,11 @@ final class Authorization : AlertDisplayable {
 
 	final class GitHub {
 		
-		var oauth2:OAuth2CodeGrant
+		var oauth2: OAuth2CodeGrant
 		
 		init() {
 			
-			let settings:OAuth2JSON = [
+			let settings: OAuth2JSON = [
 				
 				"client_id" : APIKeys.GitHub.clientId,
 				"client_secret" : APIKeys.GitHub.clientSecret,
@@ -52,7 +52,7 @@ final class Authorization : AlertDisplayable {
 				"verbose" : false
 			]
 			
-			self.oauth2 = OAuth2CodeGrant(settings: settings)
+			oauth2 = OAuth2CodeGrant(settings: settings)
 		}
 	}
 
@@ -254,46 +254,82 @@ extension Authorization {
 //		oauth.postTokenRequest(successHandler, oauthCallback: callback, errorBlock: errorHandler)
 //	}
 	
-	static func authorizationWithGitHub(completion:(AuthorizationResult)->Void) {
+	static func authorizationWithGitHub(completion: @escaping (AuthorizationResult) -> Void) {
 		
 		let oauth2 = self.github.oauth2
 		
 		#warning("OAuto2 の API が変わりすぎている様子のため、いったん無効化します。")
 		NSLog("%@", "OAuto2 の API が変わりすぎている様子のため、いったん無効化します。")
+	
+		func onAuthorize(_ parameters: OAuth2JSON) {
+
+			var scopeAndTokenFromParameters: (scope: String?, token: String?) {
+				
+				var scope: String?
+				var accessToken: String?
+				
+				for (key, value) in parameters {
+					
+					switch key {
+						
+					case "access_token":
+						accessToken = value as? String
+						
+					case "scope":
+						scope = value as? String
+						
+					default:
+						break
+					}
+				}
+				
+				return (scope, accessToken)
+			}
+			
+			guard case let (scope?, accessToken?) = scopeAndTokenFromParameters else {
+
+				_githubAuthorizationFailed(error: AuthorizationResult.Error.message("Failed to get access token by GitHub."), completion: completion)
+				return
+			}
+
+			NSLog("GitHub OAuth authentication did end successfully with scope=\(scope).")
+			DebugTime.print(" with parameters: \(parameters)")
+
+			let authorization = GitHubAuthorization.token(accessToken)
+			let request = GitHubAPI.Users.GetAuthenticatedUser(authorization: authorization)
+
+			GitHubAPI.send(request) { response in
+
+				switch response {
+
+				case .success(let user):
+					_githubAuthorizationCreateSuccessfully(user: user, authorization: authorization, completion: completion)
+
+				case .failure(let error):
+					_githubAuthorizationFailed(error: AuthorizationResult.Error.message("\(error)"), completion: completion)
+				}
+			}
+		}
+
+		func onFailure(_ error: OAuth2Error?) {
+
+			print("GitHub authorization went wrong" + (error.map { ": \($0)." } ?? "."))
+		}
+
+		NSLog("Trying authorization with GitHub OAuth.")
 		
-//		oauth2.onAuthorize = { parameters in
-//
-//			guard case let (scope?, token?) = (parameters["scope"] as? String, parameters["access_token"] as? String) else {
-//
-//				_githubAuthorizationFailed(AuthorizationResult.Error.message("Failed to get access token by GitHub."), completion: completion)
-//				return
-//			}
-//
-//			NSLog("GitHub OAuth authentication did end successfully with scope=\(scope).")
-//			DebugTime.print(" with parameters: \(parameters)")
-//
-//			let authorization = GitHubAuthorization.Token(token)
-//			let request = GitHubAPI.Users.GetAuthenticatedUser(authorization: authorization)
-//
-//			GitHubAPI.sendRequest(request) { response in
-//
-//				switch response {
-//
-//				case .success(let user):
-//					_githubAuthorizationCreateSuccessfully(user: user, authorization: authorization, completion: completion)
-//
-//				case .failure(let error):
-//					_githubAuthorizationFailed(AuthorizationResult.Error.message("\(error)"), completion: completion)
-//				}
-//			}
-//		}
-//
-//		oauth2.onFailure = { error in
-//
-//			print("GitHub authorization went wrong" + (error.map { ": \($0)." } ?? "."))
-//		}
-//
-//		NSLog("Trying authorization with GitHub OAuth.")
-//		try! oauth2.openAuthorizeURLInBrowser()
+		oauth2.authConfig.authorizeEmbedded = false
+//		oauth2.authConfig.authorizeContext =
+		
+		oauth2.authorize { json, error in
+			
+			guard let json = json else {
+				
+				onFailure(error)
+				return
+			}
+			
+			onAuthorize(json)
+		}
 	}
 }
