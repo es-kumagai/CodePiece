@@ -76,6 +76,7 @@ extension PreferencesWindowController {
 	
 	override func showWindow(_ sender: Any?) {
 		
+//		super.showWindow(sender)
 		NSApp.runModal(for: window!)
 	}
 }

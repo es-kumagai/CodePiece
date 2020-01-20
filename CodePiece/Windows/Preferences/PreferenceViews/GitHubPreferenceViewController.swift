@@ -38,7 +38,7 @@ final class GitHubPreferenceViewController: NSViewController, NotificationObserv
 			switch result {
 				
 			case .Created:
-				self.dismiss(self)
+				NSLog("%@", "GitHub authentication succeeded.")
 				
 			case .Failed(let error):
 				self.showErrorAlert(withTitle: "Failed to authentication", message: error.description)

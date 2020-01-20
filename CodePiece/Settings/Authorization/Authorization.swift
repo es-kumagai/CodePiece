@@ -258,9 +258,6 @@ extension Authorization {
 		
 		let oauth2 = self.github.oauth2
 		
-		#warning("OAuto2 の API が変わりすぎている様子のため、いったん無効化します。")
-		NSLog("%@", "OAuto2 の API が変わりすぎている様子のため、いったん無効化します。")
-	
 		func onAuthorize(_ parameters: OAuth2JSON) {
 
 			var scopeAndTokenFromParameters: (scope: String?, token: String?) {
@@ -318,8 +315,8 @@ extension Authorization {
 
 		NSLog("Trying authorization with GitHub OAuth.")
 		
-		oauth2.authConfig.authorizeEmbedded = false
-//		oauth2.authConfig.authorizeContext =
+		oauth2.authConfig.authorizeEmbedded = true
+		oauth2.authConfig.authorizeContext = NSApp.keyWindow
 		
 		oauth2.authorize { json, error in
 			
