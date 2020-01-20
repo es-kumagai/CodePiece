@@ -114,7 +114,7 @@ extension NSApplication {
 
 		preferencesWindowController.showWindow(self)
 	}
-//
+
 	func closePreferencesWindow() {
 
 		preferencesWindowController.close()
