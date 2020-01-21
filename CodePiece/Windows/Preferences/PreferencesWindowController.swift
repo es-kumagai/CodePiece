@@ -75,9 +75,16 @@ final class PreferencesWindowController: NSWindowController {
 extension PreferencesWindowController {
 	
 	override func showWindow(_ sender: Any?) {
-		
+
 		super.showWindow(sender)
 //		NSApp.runModal(for: window!)
+		
+		// runModal だと認証時の URL Scheme アクセスを受信できなくなるため Floating で対応します。
+		if let window = window {
+
+			window.hidesOnDeactivate = true
+			window.level = .floating
+		}
 	}
 }
 

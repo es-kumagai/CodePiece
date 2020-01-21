@@ -112,7 +112,7 @@ extension NSApplication {
 	
 	func showPreferencesWindow() {
 
-		preferencesWindowController.showWindow(self)
+		preferencesWindowController.showWindow(self)		
 	}
 
 	func closePreferencesWindow() {
