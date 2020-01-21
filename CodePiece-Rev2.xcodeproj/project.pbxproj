@@ -61,7 +61,7 @@
 		B15EE26223CE7658005B268A /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24023CE7658005B268A /* PostData.swift */; };
 		B15EE26323CE7658005B268A /* URLSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24223CE7658005B268A /* URLSchemeManager.swift */; };
 		B15EE26423CE7658005B268A /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24323CE7658005B268A /* URLScheme.swift */; };
-		B15EE26523CE7658005B268A /* OAuthScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24423CE7658005B268A /* OAuthScheme.swift */; };
+		B15EE26523CE7658005B268A /* GistScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24423CE7658005B268A /* GistScheme.swift */; };
 		B15EE26623CE7658005B268A /* TwitterByOSPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24623CE7658005B268A /* TwitterByOSPreferenceViewController.swift */; };
 		B15EE26723CE7658005B268A /* GitHubPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */; };
 		B15EE26823CE7658005B268A /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24823CE7658005B268A /* PreferencesWindowController.swift */; };
@@ -106,6 +106,7 @@
 		B15EE39123CF039D005B268A /* NSError+STTwitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE39023CF039C005B268A /* NSError+STTwitter.swift */; };
 		B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17B938023CAB28C00E3B490 /* MainViewController.swift */; };
 		B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17B938223CAB2A800E3B490 /* MainWindow.storyboard */; };
+		B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1806CB723D6B50F006932F5 /* SwifterScheme.swift */; };
 		B1A105FD23CA1A4A00F9C4FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */; };
 		B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1060223CA217F00F9C4FD /* APIKeys.swift */; };
 		B1A1060523CA25B100F9C4FD /* APIKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1060423CA25B100F9C4FD /* APIKeysTests.swift */; };
@@ -246,7 +247,7 @@
 		B15EE24023CE7658005B268A /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		B15EE24223CE7658005B268A /* URLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSchemeManager.swift; sourceTree = "<group>"; };
 		B15EE24323CE7658005B268A /* URLScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
-		B15EE24423CE7658005B268A /* OAuthScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthScheme.swift; sourceTree = "<group>"; };
+		B15EE24423CE7658005B268A /* GistScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistScheme.swift; sourceTree = "<group>"; };
 		B15EE24623CE7658005B268A /* TwitterByOSPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterByOSPreferenceViewController.swift; sourceTree = "<group>"; };
 		B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubPreferenceView.storyboard; sourceTree = "<group>"; };
 		B15EE24823CE7658005B268A /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
@@ -302,6 +303,7 @@
 		B15EE39023CF039C005B268A /* NSError+STTwitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+STTwitter.swift"; sourceTree = "<group>"; };
 		B17B938023CAB28C00E3B490 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B17B938223CAB2A800E3B490 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
+		B1806CB723D6B50F006932F5 /* SwifterScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterScheme.swift; sourceTree = "<group>"; };
 		B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1A105FF23CA1F1900F9C4FD /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		B1A1060023CA1FE800F9C4FD /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
@@ -537,7 +539,8 @@
 			children = (
 				B15EE24223CE7658005B268A /* URLSchemeManager.swift */,
 				B15EE24323CE7658005B268A /* URLScheme.swift */,
-				B15EE24423CE7658005B268A /* OAuthScheme.swift */,
+				B15EE24423CE7658005B268A /* GistScheme.swift */,
+				B1806CB723D6B50F006932F5 /* SwifterScheme.swift */,
 			);
 			path = URLScheme;
 			sourceTree = "<group>";
@@ -1134,7 +1137,7 @@
 				B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */,
 				B15EE26623CE7658005B268A /* TwitterByOSPreferenceViewController.swift in Sources */,
 				B15EE25C23CE7658005B268A /* GistsController.swift in Sources */,
-				B15EE26523CE7658005B268A /* OAuthScheme.swift in Sources */,
+				B15EE26523CE7658005B268A /* GistScheme.swift in Sources */,
 				B15EE39123CF039D005B268A /* NSError+STTwitter.swift in Sources */,
 				B15EE38F23CF0360005B268A /* TwitterError.swift in Sources */,
 				B15EE29A23CE7667005B268A /* AcknowledgementsViewController.swift in Sources */,
@@ -1157,6 +1160,7 @@
 				B15EE25223CE7658005B268A /* DataStoreForApp.swift in Sources */,
 				B15EE29623CE7667005B268A /* AboutWindowController.swift in Sources */,
 				B15EE22223CE7636005B268A /* TwitterAccountSelectorController.swift in Sources */,
+				B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */,
 				B15EE29F23CE7667005B268A /* TimelineViewController+Action.swift in Sources */,
 				B15EE25823CE7658005B268A /* PostData+Twitter.swift in Sources */,
 				B15EE1FF23CE7571005B268A /* BaseWindowController.swift in Sources */,

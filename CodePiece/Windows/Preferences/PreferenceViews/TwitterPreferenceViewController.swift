@@ -153,7 +153,7 @@ extension TwitterPreferenceViewController {
 extension TwitterPreferenceViewController {
 	
 	@IBAction func pushVerifyCredentialsButton(_ sender:NSButton) {
-		
+
 		verifyCredentials()
 	}
 	
@@ -163,21 +163,21 @@ extension TwitterPreferenceViewController {
 	}
 	
 	func verifyCredentials() {
-		
+
 		guard self.canVerify else {
-			
+
 			return
 		}
-		
+
 		self.verifying = NSApp.twitterController.verifyCredentialsIfNeed { result in
-			
+
 			self.verifying = false
-			
+
 			switch result {
-				
+
 			case .success:
 				NSLog("Twitter credentials verified successfully.")
-				
+
 			case .failure(let error):
 				self.showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
 			}

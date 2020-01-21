@@ -14,7 +14,7 @@ import Ocean
 @NSApplicationMain @objcMembers
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
-	var urlSchemeManager:URLSchemeManager!
+	var urlSchemeManager: URLSchemeManager!
 	
 	override func awakeFromNib() {
 		
@@ -37,7 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		
 		self.urlSchemeManager = URLSchemeManager()
 		
-		NSApp.twitterController.verifyCredentialsIfNeed()
+//		NSApp.twitterController.verifyCredentialsIfNeed()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

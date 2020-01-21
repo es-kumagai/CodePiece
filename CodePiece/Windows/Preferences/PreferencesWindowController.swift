@@ -76,8 +76,8 @@ extension PreferencesWindowController {
 	
 	override func showWindow(_ sender: Any?) {
 		
-//		super.showWindow(sender)
-		NSApp.runModal(for: window!)
+		super.showWindow(sender)
+//		NSApp.runModal(for: window!)
 	}
 }
 
@@ -85,13 +85,13 @@ extension PreferencesWindowController : NSWindowDelegate {
 	
 	func windowWillClose(_ notification: Notification) {
 		
-		NSApp.stopModal(withCode: .OK)
-		NSApp.twitterController.verifyCredentialsIfNeed { result in
-			
-			if case .failure(let error) = result {
-				
-				NSLog("Failed to verify credentials. \(error)")
-			}
-		}
+//		NSApp.stopModal(withCode: .OK)
+//		NSApp.twitterController.verifyCredentialsIfNeed { result in
+//			
+//			if case .failure(let error) = result {
+//				
+//				NSLog("Failed to verify credentials. \(error)")
+//			}
+//		}
 	}
 }

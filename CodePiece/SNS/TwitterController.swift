@@ -80,7 +80,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	private static let APINotReadyError = SNSController.AuthenticationError.NotReady(service: .Twitter, description: "Twitter API is not ready.")
 	private static let APINotReadyNSError = NSError(domain: APINotReadyError.localizedDescription, code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.localizedDescription])
 
-	fileprivate static let twitterCallbackUrl = URL(string: "https://ez-net.jp/")!
+	fileprivate static let twitterCallbackUrl = URL(string: "jp.ez-net.scheme.codepiece.authentication://twitter")!
 	
 	private enum AutoVerifyingQueueMessage : MessageTypeIgnoreInQuickSuccession {
 	
@@ -98,7 +98,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	}
 	
 	private var autoVerifyingNow: Bool = false
-	private var autoVerifyingQueue:MessageQueue<AutoVerifyingQueueMessage>!
+	private var autoVerifyingQueue: MessageQueue<AutoVerifyingQueueMessage>!
 	
 	var account: Account? {
 		
@@ -232,28 +232,28 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 
 	@discardableResult
 	func verifyCredentialsIfNeed() -> Bool {
-		
+
 		DebugTime.print("📮 Passed verify-credentials #1")
 		return self.verifyCredentialsIfNeed(callback: verifyCredentialsBasicErrorReportCallback)
 	}
 	
 	@discardableResult
 	func verifyCredentialsIfNeed(callback: @escaping (VerifyResult)->Void) -> Bool {
-		
+
 		DebugTime.print("📮 Passed verify-credentials #2")
 		guard self.readyToUse else {
-			
+
 			NSLog("Credentials verification skipped because it is not ready to use Twitter.")
 			return false
 		}
-		
+
 		DebugTime.print("📮 Passed verify-credentials #3")
 		guard !self.credentialsVerified else {
 
 			NSLog("Credentials already verifyed.")
 			return false
 		}
-		
+
 		DebugTime.print("📮 Passed verify-credentials #4")
 		self.verifyCredentials(callback: callback)
 
@@ -262,14 +262,14 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	}
 	
 	private func verifyCredentialsBasicErrorReportCallback(result:VerifyResult) -> Void {
-		
+
 		DebugTime.print("📮 Passed verify-credentials #11")
 		switch result {
-			
+
 		case .success:
 			DebugTime.print("📮 Passed verify-credentials #12")
 			NSLog("Twitter credentials verified successfully. (\(NSApp.twitterController.effectiveUserInfo?.username))")
-			
+
 		case .failure(let error):
 			DebugTime.print("📮 Passed verify-credentials #13")
 			self.showErrorAlert(withTitle: "Failed to verify credentials", message: "\(error.localizedDescription) (\(NSApp.twitterController.effectiveUserInfo?.username))")
@@ -277,7 +277,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	}
 	
 	func verifyCredentials() {
-	
+
 		self.verifyCredentials(callback: self.verifyCredentialsBasicErrorReportCallback)
 	}
 	
@@ -652,7 +652,7 @@ extension Swifter {
 
 		let failureHandler: FailureHandler = { error in
 			
-			DebugTime.print("📮 Verification failed with error '\(error)' ... #3.4.2")
+			DebugTime.print("📮 Verification failed with error '\(error.localizedDescription)' ... #3.4.2")
 			handler(.failure(error))
 		}
 		

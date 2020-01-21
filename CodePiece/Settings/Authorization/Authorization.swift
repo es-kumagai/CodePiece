@@ -11,6 +11,7 @@ import ESGists
 import APIKit
 import ESTwitter
 import OAuth2
+import Swifter
 
 enum AuthorizationState {
 	
@@ -45,7 +46,7 @@ final class Authorization : AlertDisplayable {
 				"authorize_uri" : "https://github.com/login/oauth/authorize",
 				"token_uri" : "https://github.com/login/oauth/access_token",
 				"scope" : "gist",
-				"redirect_uris" : [ "jp.ez-style.scheme.codepiece://oauth" ],
+				"redirect_uris" : [ "jp.ez-net.scheme.codepiece.authentication://gist" ],
 				"secret_in_body": true,
 				"keychain" : false,
 				"title" : "CodePiece",
@@ -56,26 +57,25 @@ final class Authorization : AlertDisplayable {
 		}
 	}
 
-//	final class Twitter {
-//
-//		var oauth: STTwitterOAuth
+	final class Twitter {
+
+		var swifter: Swifter
 //		fileprivate(set) var pinRequesting: Bool
-//
-//		init() {
-//
-//			oauth = STTwitterOAuth(consumerName: nil, consumerKey: ClientInfo.TwitterConsumerKey, consumerSecret: ClientInfo.TwitterConsumerSecret)
-//			pinRequesting = false
-//		}
-//	}
+
+		init() {
+
+			swifter = Swifter(consumerKey: APIKeys.Twitter.consumerKey, consumerSecret: APIKeys.Twitter.consumerSecret)
+		}
+	}
 
 	static var github = GitHub()
-//	static var twitter = Twitter()
+	static var twitter = Twitter()
 	
 	enum AuthorizationResult {
 
 		case Created
 		case Failed(Error)
-		case PinRequired
+//		case PinRequired
 	}
 }
 
@@ -91,7 +91,7 @@ final class Authorization : AlertDisplayable {
 
 extension Authorization.AuthorizationResult {
 
-	enum Error {
+	enum Error : Swift.Error {
 
 		case twitterError(STTwitterTwitterErrorCode)
 		case message(String)
@@ -169,16 +169,6 @@ extension Authorization {
 		}
 	}
 	
-	private static func _twitterAuthorizationCreateSuccessfully(completion:(AuthorizationResult)->Void) {
-		
-		completion(.Created)
-	}
-	
-//	private static func _twitterAuthorizationFailed(error: AuthorizationResult.Error, completion:(AuthorizationResult)->Void) {
-//
-//		completion(.Failed(error))
-//	}
-	
 	private static func _githubAuthorizationCreateSuccessfully(user: Gist.User, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
 		
 		let username = user.login
@@ -227,32 +217,48 @@ extension Authorization {
 //		oauth.postAccessTokenRequestWithPIN(pin, successBlock: successHandler, errorBlock: errorHandler)
 //	}
 	
-//	static func authorizationWithTwitter(completion:(AuthorizationResult)->Void) {
-//
-//		let oauth = self.twitter.oauth
-//		let callback = ""
-//		
-//		let successHandler = { (oauthUrl: Foundation.URL!, oauthToken: String!) in
-//
-//			NSLog("Twitter OAuth require PIN code.")
-//			DebugTime.print(" with url: \(oauthUrl), string: \(oauthToken)")
-//			
-//			NSWorkspace.shared.open(oauthUrl)
-//			
-//			completion(.PinRequired)
-//		}
-//		
-//		let errorHandler = { (error: NSError!) in
-//
+	static func authorizationWithTwitter(completion: @escaping (AuthorizationResult) -> Void) {
+
+		let callback = ""
+		
+		func successHandler(accessToken: Credential.OAuthAccessToken) {
+
+//			let account = TwitterController.Account(token: accessToken.key, tokenSecret: accessToken.secret, screenName: accessToken.screenName!)
+
+			DebugTime.print("📮 Passed verify-credentials #9")
+
+			Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: true, username: accessToken.screenName).post()
+
+			
 //			twitter.pinRequesting = false
-//
-//			print("Twitter authorization went wrong: \(error).")
-//			_twitterAuthorizationFailed(error: AuthorizationResult.Error(error), completion: completion)
-//		}
-//		
-//		twitter.pinRequesting = true
-//		oauth.postTokenRequest(successHandler, oauthCallback: callback, errorBlock: errorHandler)
-//	}
+			completion(.Created)
+		}
+		
+		func errorHandler(error: Error) {
+
+//			twitter.pinRequesting = false
+
+			print("Twitter authorization went wrong: \(error).")
+			completion(.Failed(.message(error.localizedDescription)))
+		}
+
+		twitter.swifter.authorize { result in
+			
+			switch result {
+				
+			case .success(let (.some(accessToken), name, id, response)):
+				DebugTime.print(" with: \(accessToken), \(id), \(name), \(response)")
+				successHandler(accessToken: accessToken)
+
+			case .success(let (.none, name, id, response)):
+				DebugTime.print(" Failed to get an AccessToken for: \(id), \(name), \(response)")
+				errorHandler(error: AuthorizationResult.Error.message("Failed to get an Access Token for \(name)"))
+
+			case .failure(let error):
+				errorHandler(error: error)
+			}
+		}
+	}
 	
 	static func authorizationWithGitHub(completion: @escaping (AuthorizationResult) -> Void) {
 		

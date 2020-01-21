@@ -60,30 +60,28 @@ extension TwitterByOAuthPreferenceViewController {
 		
 		self.authenticatingHUD.show()
 		
-		#warning("いったん、処理を無効化してあります。")
-		NSLog("%@", "いったん、処理を無効化してあります。")
-//		Authorization.authorizationWithTwitter { result in
-//
-//			self.authenticatingHUD.hide()
-//
-//			switch result {
-//
-//			case .Created:
-//				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (PIN is not entered)")
-//
-//			case .Failed(let error):
-//				self.showErrorAlert(withTitle: "Failed to authentication", message: error.description)
-//
+		Authorization.authorizationWithTwitter { result in
+
+			self.authenticatingHUD.hide()
+
+			switch result {
+
+			case .Created:
+				NSLog("%@", "Twitter authorization is finished successfully.")
+
+			case .Failed(let error):
+				self.showErrorAlert(withTitle: "Failed to authentication", message: error.description)
+
 //			case .PinRequired:
 //				self.enteringPinInputMode()
-//			}
-//		}
+			}
+		}
 	}
 	
-	@IBAction func doEnterPin(_ sender: NSButton) {
-		
-		#warning("いったん、処理を無効化してあります。")
-		NSLog("%@", "いったん、処理を無効化してあります。")
+//	@IBAction func doEnterPin(_ sender: NSButton) {
+//
+//		#warning("いったん、処理を無効化してあります。")
+//		NSLog("%@", "いったん、処理を無効化してあります。")
 //		authenticatingPinHUD.show()
 //
 //		Authorization.authorizationWithTwitter(pin: pinTextField.stringValue) { result in
@@ -103,7 +101,7 @@ extension TwitterByOAuthPreferenceViewController {
 //				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (PIN Required)")
 //			}
 //		}
-	}
+//	}
 	
 	var canPinEnterButtonPush: Bool {
 		
@@ -127,17 +125,17 @@ extension TwitterByOAuthPreferenceViewController {
 //		}
 //	}
 	
-	func enteringPinInputMode() {
-		
-		self.viewForStartAuthentication?.isHidden = true
-		self.viewForEnterPin?.isHidden = false
-	}
-	
-	func exitPinInputMode() {
-		
-		self.viewForStartAuthentication?.isHidden = false
-		self.viewForEnterPin?.isHidden = true
-		
-		self.pinTextField?.stringValue = ""
-	}
+//	func enteringPinInputMode() {
+//
+//		self.viewForStartAuthentication?.isHidden = true
+//		self.viewForEnterPin?.isHidden = false
+//	}
+//
+//	func exitPinInputMode() {
+//
+//		self.viewForStartAuthentication?.isHidden = false
+//		self.viewForEnterPin?.isHidden = true
+//
+//		self.pinTextField?.stringValue = ""
+//	}
 }

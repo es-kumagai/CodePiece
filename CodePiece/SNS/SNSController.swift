@@ -43,13 +43,13 @@ final class SNSController : PostController {
 		case FailedToPostTweet(String)
 	}
 	
-	var gists:GistsController
-	var twitter:TwitterController
+	var gists: GistsController
+	var twitter: TwitterController
 	
 	init() {
 
-		self.gists = GistsController()
-		self.twitter = TwitterController()
+		gists = GistsController()
+		twitter = TwitterController()
 	}
 	
 	var canPost:Bool {

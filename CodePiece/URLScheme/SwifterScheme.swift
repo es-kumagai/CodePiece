@@ -8,13 +8,13 @@
 
 import Foundation
 
-final class OAuthScheme : URLScheme {
+final class SwifterScheme : URLScheme {
 	
-	let scheme = "jp.ez-style.scheme.codepiece"
-	let host = "oauth"
+	let scheme = "jp.ez-net.scheme.codepiece.authentication"
+	let host = "twitter"
 	
 	func action(url: URL) {
 		
-		Authorization.github.oauth2.handleRedirectURL(url)
+		type(of: Authorization.twitter.swifter).handleOpenURL(url)
 	}
 }

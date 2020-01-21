@@ -318,17 +318,18 @@ final class MainViewController: NSViewController, NotificationObservable {
 			return
 		}
 		
-		twitterController.verifyCredentialsIfNeed { result in
-			
-			switch result {
-
-			case .success:
-				NSLog("Twitter credentials verified successfully.")
-				
-			case .failure(let error):
-				self.showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
-			}
-		}
+		#warning("アプリがスリープから復帰した時、SNS の認証操作が必要かも知れません。")
+//		twitterController.verifyCredentialsIfNeed { result in
+//
+//			switch result {
+//
+//			case .success:
+//				NSLog("Twitter credentials verified successfully.")
+//
+//			case .failure(let error):
+//				self.showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
+//			}
+//		}
 	}
 
 	override var representedObject: Any? {

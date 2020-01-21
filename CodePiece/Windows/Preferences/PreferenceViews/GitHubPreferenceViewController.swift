@@ -43,8 +43,8 @@ final class GitHubPreferenceViewController: NSViewController, NotificationObserv
 			case .Failed(let error):
 				self.showErrorAlert(withTitle: "Failed to authentication", message: error.description)
 				
-			case .PinRequired:
-				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")
+//			case .PinRequired:
+//				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")
 			}
 		}
 	}
