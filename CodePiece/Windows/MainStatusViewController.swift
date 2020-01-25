@@ -33,25 +33,55 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 		
 		super.viewDidLoad()
 		
-		self.githubAccountNameTextField.stringValue = none
-		self.twitterAccountNameTextField.stringValue = none
+		updateGithubAccountStatus()
+		updateTwitterAccountStatus()
 		
-		self.observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { _ in
 			
-			self.twitterAccountNameTextField.stringValue = notification.username ?? none
-			self.twitterAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
+			self.updateTwitterAccountStatus()
 		}
 		
-		self.observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { _ in
 			
-			self.githubAccountNameTextField.stringValue = notification.username ?? none
-			self.githubAccountStatusImageView.status = notification.isValid ? .Available : .Unavailable
+			self.updateGithubAccountStatus()
 		}
 		
 		self.observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
 			self.updateReachability()
 		}
+	}
+	
+	func updateTwitterAccountStatus() {
+	
+		let twitterController = NSApp.snsController.twitter
+		
+		updateTwitterAccountStatusWith(isValid: twitterController.credentialsVerified, username: twitterController.account?.username)
+	}
+	
+	// このメソッドを直接呼ぶと実際と食い違う可能性が出てきてしまうので、設定を直接参照するようにする。
+	// そうすると Authorization.TwitterAuthorizationStateDidChangeNotification が細かい情報を持たなくて良くなる可能性があるが、
+	// それだと今度は有効状態を判定しにくくなる。NSApp.snsController.twitter に状態の問い合わせメソッドを用意するのが良さそう。
+	private func updateTwitterAccountStatusWith(isValid: Bool, username: String?) {
+		
+		twitterAccountNameTextField.stringValue = username ?? none
+		twitterAccountStatusImageView.status = isValid ? .Available : .Unavailable
+	}
+	
+	func updateGithubAccountStatus() {
+		
+		let githubAccount = NSApp.settings.account
+		
+		updateGithubAccountStatusWith(isValid: githubAccount.authorizationState == .Authorized, username: githubAccount.username)
+	}
+	
+	// このメソッドを直接呼ぶと実際と食い違う可能性が出てきてしまうので、設定を直接参照するようにする。
+	// そうすると Authorization.GitHubAuthorizationStateDidChangeNotification が細かい情報を持たなくて良くなる可能性があるが、
+	// それだと今度は有効状態を判定しにくくなる。NSApp.settings.account に状態の問い合わせメソッドを用意するのが良さそう。
+	private func updateGithubAccountStatusWith(isValid: Bool, username: String?) {
+		
+		githubAccountNameTextField.stringValue = username ?? none
+		githubAccountStatusImageView.status = isValid ? .Available : .Unavailable
 	}
 	
 	override func viewWillAppear() {

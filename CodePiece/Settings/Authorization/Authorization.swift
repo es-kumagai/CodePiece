@@ -225,10 +225,9 @@ extension Authorization {
 
 			let account = TwitterController.Account(token: accessToken.key, tokenSecret: accessToken.secret, screenName: accessToken.screenName!)
 			
-			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
-
 			DebugTime.print("📮 Passed verify-credentials #9")
 
+			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
 			Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: true, username: accessToken.screenName).post()
 
 			
