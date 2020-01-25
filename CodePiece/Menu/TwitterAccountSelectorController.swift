@@ -10,7 +10,6 @@ import Cocoa
 import Accounts
 import Swim
 
-@available(macOS, deprecated: 10.15, message: "This class no longer needed.")
 @objcMembers
 final class TwitterAccountSelectorController : NSObject, AlertDisplayable {
 	

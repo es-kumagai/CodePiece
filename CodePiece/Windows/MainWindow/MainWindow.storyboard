@@ -18,15 +18,15 @@
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny3-jn-TOD">
                                 <rect key="frame" x="20" y="113" width="704" height="281"/>
                                 <clipView key="contentView" drawsBackground="NO" id="wHI-8z-ON5">
-                                    <rect key="frame" x="1" y="1" width="687" height="279"/>
+                                    <rect key="frame" x="1" y="1" width="702" height="279"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView identifier="CodeTextIdentifier" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsUndo="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="8OA-rk-WhX" customClass="CodeTextView" customModule="CodePiece" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="687" height="279"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="702" height="279"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="687" height="279"/>
+                                            <size key="minSize" width="702" height="279"/>
                                             <size key="maxSize" width="707" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <accessibility description="Code Text Field" help="Input text for post." identifier="TextFieldForInputCode"/>
@@ -39,12 +39,12 @@
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="cMV-6R-EhE"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="QNm-JD-hR4">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="QNm-JD-hR4">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="oKF-WK-zwD">
-                                    <rect key="frame" x="688" y="1" width="15" height="279"/>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="oKF-WK-zwD">
+                                    <rect key="frame" x="687" y="1" width="16" height="279"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>

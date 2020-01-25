@@ -223,7 +223,9 @@ extension Authorization {
 		
 		func successHandler(accessToken: Credential.OAuthAccessToken) {
 
-//			let account = TwitterController.Account(token: accessToken.key, tokenSecret: accessToken.secret, screenName: accessToken.screenName!)
+			let account = TwitterController.Account(token: accessToken.key, tokenSecret: accessToken.secret, screenName: accessToken.screenName!)
+			
+			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
 
 			DebugTime.print("📮 Passed verify-credentials #9")
 
