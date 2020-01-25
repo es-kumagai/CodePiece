@@ -80,7 +80,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 	private static let APINotReadyError = SNSController.AuthenticationError.NotReady(service: .Twitter, description: "Twitter API is not ready.")
 	private static let APINotReadyNSError = NSError(domain: APINotReadyError.localizedDescription, code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.localizedDescription])
 
-	fileprivate static let twitterCallbackUrl = URL(string: "jp.ez-net.scheme.codepiece.authentication://twitter")!
+	fileprivate static let twitterCallbackUrl = URL(string: "\(SwifterScheme.scheme)://twitter")!
 	
 	private enum AutoVerifyingQueueMessage : MessageTypeIgnoreInQuickSuccession {
 	

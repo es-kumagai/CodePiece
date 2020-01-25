@@ -10,10 +10,15 @@ import Foundation
 
 final class SwifterScheme : URLScheme {
 	
-	let scheme = "jp.ez-net.scheme.codepiece.authentication"
-	let host = "twitter"
+	#if DEBUG
+	static let scheme = "jp.ez-net.scheme.codepiece-beta.authentication"
+	#else
+	static let scheme = "jp.ez-net.scheme.codepiece.authentication"
+	#endif
 	
-	func action(url: URL) {
+	static let host = "twitter"
+	
+	static func action(url: URL) {
 		
 		type(of: Authorization.twitter.swifter).handleOpenURL(url)
 	}

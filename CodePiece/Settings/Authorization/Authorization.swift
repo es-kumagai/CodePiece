@@ -46,7 +46,7 @@ final class Authorization : AlertDisplayable {
 				"authorize_uri" : "https://github.com/login/oauth/authorize",
 				"token_uri" : "https://github.com/login/oauth/access_token",
 				"scope" : "gist",
-				"redirect_uris" : [ "jp.ez-net.scheme.codepiece.authentication://gist" ],
+				"redirect_uris" : [ "\(GistScheme.scheme)://gist" ],
 				"secret_in_body": true,
 				"keychain" : false,
 				"title" : "CodePiece",
@@ -321,7 +321,7 @@ extension Authorization {
 
 		NSLog("Trying authorization with GitHub OAuth.")
 		
-		oauth2.authConfig.authorizeEmbedded = true
+		oauth2.authConfig.authorizeEmbedded = false
 		oauth2.authConfig.authorizeContext = NSApp.keyWindow
 		
 		oauth2.authorize { json, error in

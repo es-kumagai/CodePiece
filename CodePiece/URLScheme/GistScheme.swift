@@ -10,10 +10,15 @@ import Foundation
 
 final class GistScheme : URLScheme {
 	
-	let scheme = "jp.ez-net.scheme.codepiece.authentication"
-	let host = "gist"
+	#if DEBUG
+	static let scheme = "jp.ez-net.scheme.codepiece-beta.authentication"
+	#else
+	static let scheme = "jp.ez-net.scheme.codepiece.authentication"
+	#endif
 	
-	func action(url: URL) {
+	static let host = "gist"
+	
+	static func action(url: URL) {
 		
 		Authorization.github.oauth2.handleRedirectURL(url)
 	}

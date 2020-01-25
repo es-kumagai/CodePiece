@@ -18,12 +18,24 @@ struct APIKeys {
         
         static var clientId: String {
             
-            plist?["GitHubClientID"] ?? ""
+			#if DEBUG
+			if let id = plist?["GitHubClientID-Beta"] {
+				return id
+			}
+			#endif
+
+			return plist?["GitHubClientID"] ?? ""
         }
         
         static var clientSecret: String {
             
-            plist?["GitHubClientSecret"] ?? ""
+			#if DEBUG
+			if let secret = plist?["GitHubClientSecret-Beta"] {
+				return secret
+			}
+			#endif
+
+            return plist?["GitHubClientSecret"] ?? ""
         }
     }
     
@@ -32,12 +44,24 @@ struct APIKeys {
         
         static var consumerKey: String {
             
-            plist?["TwitterConsumerKey"] ?? ""
+			#if DEBUG
+			if let key = plist?["TwitterConsumerKey-Beta"] {
+				return key
+			}
+			#endif
+			
+            return plist?["TwitterConsumerKey"] ?? ""
         }
         
         static var consumerSecret: String {
             
-            plist?["TwitterConsumerSecret"] ?? ""
+			#if DEBUG
+			if let secret = plist?["TwitterConsumerSecret-Beta"] {
+				return secret
+			}
+			#endif
+
+			return plist?["TwitterConsumerSecret"] ?? ""
         }
     }
 }

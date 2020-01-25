@@ -12,7 +12,7 @@ import ESTwitter
 extension PopularLanguage {
 	
 	var hashtag:ESTwitter.Hashtag {
-		
+
 		return self.language.hashtag
 	}
 }

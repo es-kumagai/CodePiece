@@ -14,7 +14,7 @@ final class URLSchemeManager {
 	let eventClass = AEEventClass(kInternetEventClass)
 	let eventID = AEEventID(kAEGetURL)
 	
-	let schemes:[URLScheme] = [ GistScheme(), SwifterScheme() ]
+	let schemes: [URLScheme.Type] = [ GistScheme.self, SwifterScheme.self ]
 	
 	init() {
 		self.eventManager.setEventHandler(self, andSelector: #selector(URLSchemeManager.handleURLEvent(event:withReply:)), forEventClass: self.eventClass, andEventID: eventID)
