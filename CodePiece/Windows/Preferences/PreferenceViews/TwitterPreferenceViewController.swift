@@ -80,7 +80,7 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 
 		self.withChangeValue(for: "hasAccount") {
 
-			NSApp.twitterController.account = nil
+			NSApp.twitterController.resetAuthentication()
 		}
 	}
 			

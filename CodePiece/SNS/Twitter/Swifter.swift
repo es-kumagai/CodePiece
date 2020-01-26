@@ -17,7 +17,7 @@ extension Swifter {
 	
 	typealias AutorizationResult = Result<(Credential.OAuthAccessToken?, userName: String, userId: String, URLResponse), Error>
 	typealias PostTweetResult = Result<ESTwitter.Status, SNSController.PostError>
-	typealias PostMediaResult = Result<[MediaID], Error>
+	typealias PostMediaResult = Result<[MediaID], SNSController.PostError>
 	typealias SearchResult = Result<(JSON, JSON), Error>
 }
 

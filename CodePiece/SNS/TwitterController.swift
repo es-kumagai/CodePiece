@@ -147,6 +147,14 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 		return swifter
 	}
 	
+	func resetAuthentication() {
+		
+		swifter = nil
+		account = nil
+		
+		Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
+	}
+	
 //	var credentialsVerified:Bool {
 //		
 //		return effectiveUserInfo != nil
@@ -356,9 +364,10 @@ final class TwitterController : NSObject, PostController, AlertDisplayable {
 				callback(PostStatusUpdateResult.success(status.text))
 
 			case .failure(let error):
+				callback(.failure(error))
 
-				#warning("ひとまず未知のエラーを報告しておきます。")
-				callback(PostStatusUpdateResult.failure(SNSController.PostError.Unexpected(error as NSError)))
+//				#warning("ひとまず未知のエラーを報告しておきます。")
+//				callback(PostStatusUpdateResult.failure(SNSController.PostError.Unexpected(error as NSError)))
 			}
 		}
 	}
@@ -555,8 +564,15 @@ extension Swifter {
 		
 		let failureHandler: FailureHandler = { error in
 			
-			DebugTime.print("📮 Failed to updload a thumbnail media ... #3.3.3.2.2")
-			handler(.failure(error))
+			if let error = error as? SwifterError {
+
+				handler(.failure(.FailedToPostTweet(error.message)))
+			}
+			else {
+				
+				DebugTime.print("📮 Failed to updload a thumbnail media ... #3.3.3.2.2")
+				handler(.failure(.Unexpected(error)))
+			}
 		}
 		
 
@@ -625,7 +641,14 @@ extension Swifter {
 			
 			var postError: SNSController.PostError {
 
-				return SNSController.PostError(twitterError: error as NSError)
+				switch error {
+					
+				case let error as SwifterError:
+					return SNSController.PostError.FailedToPostTweet(error.message)
+					
+				default:
+					return SNSController.PostError.FailedToPostTweet(error.localizedDescription)
+				}
 			}
 			
 			handler(.failure(postError))
@@ -699,25 +722,25 @@ extension Swifter {
 
 extension SNSController.PostError {
 	
-	init(twitterError error: NSError) {
-		
-		var errorCode: Int {
-			
-			return error.code
-		}
-		
-		var errorMessage: String {
-			
-			return error.localizedDescription
-		}
-		
-		switch errorCode {
-			
-		case 186:
-			self = .FailedToPostTweet(errorMessage)
-
-		default:
-			self = .FailedToPostTweet("\(errorMessage) (\(errorCode))")
-		}
-	}
+//	init(twitterError error: NSError) {
+//
+//		var errorCode: Int {
+//
+//			return error.code
+//		}
+//
+//		var errorMessage: String {
+//
+//			return error.localizedDescription
+//		}
+//
+//		switch errorCode {
+//
+//		case 186:
+//			self = .FailedToPostTweet(errorMessage)
+//
+//		default:
+//			self = .FailedToPostTweet("\(errorMessage) (\(errorCode))")
+//		}
+//	}
 }

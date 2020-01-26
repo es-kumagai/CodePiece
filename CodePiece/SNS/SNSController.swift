@@ -34,7 +34,7 @@ final class SNSController : PostController {
 	/// This means a error which may occur when post.
 	enum PostError : Error {
 		
-		case Unexpected(NSError)
+		case Unexpected(Error)
 		case SystemError(String)
 		case Description(String)
 		case Authentication(AuthenticationError)
