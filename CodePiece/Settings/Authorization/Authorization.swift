@@ -59,12 +59,12 @@ final class Authorization : AlertDisplayable {
 
 	final class Twitter {
 
-		var swifter: Swifter
+//		var swifter: Swifter
 //		fileprivate(set) var pinRequesting: Bool
 
 		init() {
 
-			swifter = Swifter(consumerKey: APIKeys.Twitter.consumerKey, consumerSecret: APIKeys.Twitter.consumerSecret)
+//			swifter = Swifter(consumerKey: APIKeys.Twitter.consumerKey, consumerSecret: APIKeys.Twitter.consumerSecret)
 		}
 	}
 
@@ -224,7 +224,7 @@ extension Authorization {
 		func successHandler(accessToken: Credential.OAuthAccessToken) {
 
 			let account = TwitterController.Account(token: accessToken.key, tokenSecret: accessToken.secret, screenName: accessToken.screenName!)
-			
+		
 			DebugTime.print("📮 Passed verify-credentials #9")
 
 			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
@@ -243,7 +243,7 @@ extension Authorization {
 			completion(.Failed(.message(error.localizedDescription)))
 		}
 
-		twitter.swifter.authorize { result in
+		NSApp.twitterController.authorize { result in
 			
 			switch result {
 				

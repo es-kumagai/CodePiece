@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 final class SwifterScheme : URLScheme {
 	
@@ -20,6 +20,6 @@ final class SwifterScheme : URLScheme {
 	
 	static func action(url: URL) {
 		
-		type(of: Authorization.twitter.swifter).handleOpenURL(url)
+		type(of: NSApp.twitterController.api).handleOpenURL(url)
 	}
 }

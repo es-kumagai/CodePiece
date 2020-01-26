@@ -61,14 +61,14 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 	}
 	
 	var credentialsNotVerified:Bool {
-	
+
 		// FIXME: 🌙 モーダル画面でベリファイしようとすると、メインスレッドで実行しているからか、閉じるまでベリファイ作業が継続されない。
-		return !NSApp.twitterController.credentialsVerified
+		return !NSApp.twitterController.readyToUse
 	}
 	
 	var credentialsVerified:Bool {
-		
-		return NSApp.twitterController.credentialsVerified
+
+		return NSApp.twitterController.readyToUse
 	}
 	
 	@IBAction func pushResetAuthorizationButton(_ sender:NSButton) {
@@ -86,7 +86,7 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 			
 	func applyAuthorizedStatus() {
 		
-		self.selectedAccountName.stringValue = NSApp.twitterController.effectiveUserInfo?.username ?? ""
+		self.selectedAccountName.stringValue = NSApp.twitterController.account?.username ?? ""
 		
 		if self.credentialsNotVerified {
 			
@@ -154,7 +154,8 @@ extension TwitterPreferenceViewController {
 	
 	@IBAction func pushVerifyCredentialsButton(_ sender:NSButton) {
 
-		verifyCredentials()
+		#warning("必要か分からないのでいったん無効化します。")
+//		verifyCredentials()
 	}
 	
 	var canVerify:Bool {
@@ -162,26 +163,26 @@ extension TwitterPreferenceViewController {
 		return !self.verifying && self.hasAccount && self.credentialsNotVerified
 	}
 	
-	func verifyCredentials() {
-
-		guard self.canVerify else {
-
-			return
-		}
-
-		self.verifying = NSApp.twitterController.verifyCredentialsIfNeed { result in
-
-			self.verifying = false
-
-			switch result {
-
-			case .success:
-				NSLog("Twitter credentials verified successfully.")
-
-			case .failure(let error):
-				self.showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
-			}
-		}
-	}
+//	func verifyCredentials() {
+//
+//		guard self.canVerify else {
+//
+//			return
+//		}
+//
+//		self.verifying = NSApp.twitterController.verifyCredentialsIfNeed { result in
+//
+//			self.verifying = false
+//
+//			switch result {
+//
+//			case .success:
+//				NSLog("Twitter credentials verified successfully.")
+//
+//			case .failure(let error):
+//				self.showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
+//			}
+//		}
+//	}
 }
 

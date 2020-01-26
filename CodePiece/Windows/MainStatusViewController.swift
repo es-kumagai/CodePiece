@@ -56,7 +56,7 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 	
 		let twitterController = NSApp.snsController.twitter
 		
-		updateTwitterAccountStatusWith(isValid: twitterController.credentialsVerified, username: twitterController.account?.username)
+		updateTwitterAccountStatusWith(isValid: twitterController.readyToUse, username: twitterController.account?.username)
 	}
 	
 	// このメソッドを直接呼ぶと実際と食い違う可能性が出てきてしまうので、設定を直接参照するようにする。
