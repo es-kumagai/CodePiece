@@ -124,7 +124,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	var canPost:Bool {
+	var canPost: Bool {
 	
 		let conditions = [
 			
@@ -395,7 +395,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
-	func textDidChange(_ notification: Notification) {
+	func controlTextDidChange(_ notification: Notification) {
 		
 		self.withChangeValue(for: "canPost")
 		self.updateControlsDisplayText()
