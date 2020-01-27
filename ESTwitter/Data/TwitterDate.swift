@@ -1,5 +1,5 @@
 //
-//  Date.swift
+//  TwitterDate.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on H27/10/04.
@@ -8,24 +8,24 @@
 
 import Foundation
 
-public struct Date : RawRepresentable {
+public struct TwitterDate : RawRepresentable {
 	
-	public var rawValue: Foundation.Date
+	public var rawValue: Date
 	
 	public init() {
 	
-		self.init(Foundation.Date())
+		self.init(Date())
 	}
 	
-	public init(rawValue: Foundation.Date) {
+	public init(rawValue: Date) {
 		
 		self.rawValue = rawValue
 	}
 }
 
-extension Date {
+extension TwitterDate {
 	
-	public static func date(fromTwitterDateString string: String) -> Foundation.Date? {
+	public static func date(fromTwitterDateString string: String) -> Date? {
 
 		let formatter = DateFormatter()
 		
@@ -36,16 +36,16 @@ extension Date {
 	}
 }
 
-extension Date {
+extension TwitterDate {
 	
-	public init(_ date: Foundation.Date) {
+	public init(_ date: Date) {
 		
 		self.rawValue = date
 	}
 	
 	public init?(_ string: String) {
 		
-		guard let date = Date.date(fromTwitterDateString: string) else {
+		guard let date = TwitterDate.date(fromTwitterDateString: string) else {
 			
 			return nil
 		}
@@ -54,7 +54,7 @@ extension Date {
 	}
 }
 
-extension Date : DateCalculatable, ReferenceDateConvertible {
+extension TwitterDate : DateCalculatable, ReferenceDateConvertible {
 
 	public typealias DateType = Self
 	
@@ -69,33 +69,39 @@ extension Date : DateCalculatable, ReferenceDateConvertible {
 	}
 }
 
-extension Date : Comparable {
+extension TwitterDate : Comparable {
 	
 }
 
-public func == (lhs: Date, rhs: Date) -> Bool {
+public func == (lhs: TwitterDate, rhs: TwitterDate) -> Bool {
 	
 	return lhs.rawValue == rhs.rawValue
 }
 
-public func < (lhs: Date, rhs: Date) -> Bool {
+public func < (lhs: TwitterDate, rhs: TwitterDate) -> Bool {
 	
 	return lhs.rawValue < rhs.rawValue
 }
 
-extension Date : Decodable {
+extension TwitterDate : Decodable {
 	
 	public init(from decoder: Decoder) throws {
 	
 		let container = try decoder.singleValueContainer()
+		let dateString = try container.decode(String.self)
 		
-		rawValue = try container.decode(Foundation.Date.self)
+		guard let date = Self.date(fromTwitterDateString: dateString) else {
+			
+			throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(dateString)")
+		}
+		
+		rawValue = date
 	}
 }
 
-extension Date : CustomStringConvertible {
+extension TwitterDate : CustomStringConvertible {
 	
-	public var description:String {
+	public var description: String {
 		
 		return rawValue.description
 	}

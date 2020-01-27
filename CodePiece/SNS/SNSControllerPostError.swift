@@ -45,7 +45,7 @@ extension SNSController.PostError : CustomStringConvertible {
 			return "Failed to upload the media. \(reason)"
 			
 		case .twitterError(let error):
-			return "Failed to post the tweet. \(error.localizedDescription)"
+			return "\(error.localizedDescription)"
 		}
 	}
 }
@@ -54,22 +54,34 @@ extension ESTwitter.PostError {
 	
 	public var localizedDescription: String {
 		
+		func messageHeader(for state: State) -> String {
+			
+			switch state {
+				
+			case .beforePosted:
+				return ""
+				
+			case .afterPosted:
+				return "Tweet has been posted but after that, following error occurred: "
+			}
+		}
+		
 		switch self {
 			
-		case .apiError(let error):
-			return error.localizedDescription
+		case .apiError(let error, let state):
+			return messageHeader(for: state) + error.localizedDescription
 
 		case .tweetError(let message):
 			return "\(message)"
 			
-		case .parseError(let message):
-			return "Failed to parse JSON. \(message)"
+		case .parseError(let message, let state):
+			return messageHeader(for: state) + "Failed to parse JSON. \(message)"
 			
-		case .internalError(let message):
-			return "Internal Error: \(message)"
+		case .internalError(let message, let state):
+			return messageHeader(for: state) + "Internal Error: \(message)"
 			
-		case .unexpected(let error):
-			return error.localizedDescription
+		case .unexpectedError(let error, let state):
+			return messageHeader(for: state) + error.localizedDescription
 		}
 	}
 }

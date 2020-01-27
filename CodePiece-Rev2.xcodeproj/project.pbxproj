@@ -125,6 +125,7 @@
 		B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17B938023CAB28C00E3B490 /* MainViewController.swift */; };
 		B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17B938223CAB2A800E3B490 /* MainWindow.storyboard */; };
 		B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1806CB723D6B50F006932F5 /* SwifterScheme.swift */; };
+		B18FFA3D23DF26B60057C977 /* DecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FFA3C23DF26B60057C977 /* DecodingError.swift */; };
 		B1A105FD23CA1A4A00F9C4FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */; };
 		B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1060223CA217F00F9C4FD /* APIKeys.swift */; };
 		B1A1060523CA25B100F9C4FD /* APIKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1060423CA25B100F9C4FD /* APIKeysTests.swift */; };
@@ -133,7 +134,7 @@
 		B1A4728C23D09DB300F73658 /* UserMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4727623D09DB200F73658 /* UserMention.swift */; };
 		B1A4728D23D09DB300F73658 /* Hashtags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4727723D09DB200F73658 /* Hashtags.swift */; };
 		B1A4728E23D09DB300F73658 /* StatusEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4727823D09DB200F73658 /* StatusEntities.swift */; };
-		B1A4728F23D09DB300F73658 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4727923D09DB200F73658 /* Date.swift */; };
+		B1A4728F23D09DB300F73658 /* TwitterDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4727923D09DB200F73658 /* TwitterDate.swift */; };
 		B1A4729023D09DB300F73658 /* UserEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4727A23D09DB300F73658 /* UserEntities.swift */; };
 		B1A4729123D09DB300F73658 /* URLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4727B23D09DB300F73658 /* URLInfo.swift */; };
 		B1A4729223D09DB300F73658 /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4727C23D09DB300F73658 /* Hashtag.swift */; };
@@ -338,6 +339,7 @@
 		B17B938023CAB28C00E3B490 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B17B938223CAB2A800E3B490 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		B1806CB723D6B50F006932F5 /* SwifterScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterScheme.swift; sourceTree = "<group>"; };
+		B18FFA3C23DF26B60057C977 /* DecodingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingError.swift; sourceTree = "<group>"; };
 		B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1A105FF23CA1F1900F9C4FD /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		B1A1060023CA1FE800F9C4FD /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
@@ -348,7 +350,7 @@
 		B1A4727623D09DB200F73658 /* UserMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMention.swift; sourceTree = "<group>"; };
 		B1A4727723D09DB200F73658 /* Hashtags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashtags.swift; sourceTree = "<group>"; };
 		B1A4727823D09DB200F73658 /* StatusEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusEntities.swift; sourceTree = "<group>"; };
-		B1A4727923D09DB200F73658 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		B1A4727923D09DB200F73658 /* TwitterDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterDate.swift; sourceTree = "<group>"; };
 		B1A4727A23D09DB300F73658 /* UserEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntities.swift; sourceTree = "<group>"; };
 		B1A4727B23D09DB300F73658 /* URLInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLInfo.swift; sourceTree = "<group>"; };
 		B1A4727C23D09DB300F73658 /* Hashtag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashtag.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				B1128CCD23DDFDB900DDA4EA /* JSON.swift */,
 				B1128CCF23DE05C000DDA4EA /* APIError.swift */,
 				B1128CD923DE1C3D00DDA4EA /* OpenUrl.swift */,
+				B18FFA3C23DF26B60057C977 /* DecodingError.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -762,7 +765,7 @@
 				B1A4727623D09DB200F73658 /* UserMention.swift */,
 				B1A4727723D09DB200F73658 /* Hashtags.swift */,
 				B1A4727823D09DB200F73658 /* StatusEntities.swift */,
-				B1A4727923D09DB200F73658 /* Date.swift */,
+				B1A4727923D09DB200F73658 /* TwitterDate.swift */,
 				B1A4727A23D09DB300F73658 /* UserEntities.swift */,
 				B1A4727B23D09DB300F73658 /* URLInfo.swift */,
 				B1A4727C23D09DB300F73658 /* Hashtag.swift */,
@@ -1111,11 +1114,12 @@
 				B1A472A023D09DB300F73658 /* StatusCoordinates.swift in Sources */,
 				B1A4728D23D09DB300F73658 /* Hashtags.swift in Sources */,
 				B1A4729023D09DB300F73658 /* UserEntities.swift in Sources */,
-				B1A4728F23D09DB300F73658 /* Date.swift in Sources */,
+				B1A4728F23D09DB300F73658 /* TwitterDate.swift in Sources */,
 				B1A4728E23D09DB300F73658 /* StatusEntities.swift in Sources */,
 				B1128CD623DE087000DDA4EA /* AuthorizationError.swift in Sources */,
 				B1128CDC23DE800D00DDA4EA /* PostOptions.swift in Sources */,
 				B1A4729223D09DB300F73658 /* Hashtag.swift in Sources */,
+				B18FFA3D23DF26B60057C977 /* DecodingError.swift in Sources */,
 				B1A4729923D09DB300F73658 /* Media.swift in Sources */,
 				B1A4729A23D09DB300F73658 /* URL.swift in Sources */,
 				B1128CDE23DE826400DDA4EA /* TweetMode.swift in Sources */,

@@ -76,7 +76,7 @@ extension API {
 		
 		guard let api = rawApi else {
 			
-			handler(.failure(.apiError(.notReady)))
+			handler(.failure(.apiError(.notReady, state: .beforePosted)))
 			return
 		}
 		
@@ -91,15 +91,15 @@ extension API {
 			}
 			catch let error as DecodingError {
 				
-				handler(.failure(.parseError(error.localizedDescription)))
+				handler(.failure(.parseError("\(error)", state: .afterPosted)))
 			}
 			catch let error as JSON.SerializationError {
 
-				handler(.failure(.unexpected(error)))
+				handler(.failure(.unexpectedError(error, state: .afterPosted)))
 			}
 			catch {
 
-				handler(.failure(.internalError("Failed to serialize a JSON data. \(error)")))
+				handler(.failure(.internalError("Failed to serialize a JSON data. \(error)", state: .afterPosted)))
 			}
 		}
 		
@@ -111,7 +111,7 @@ extension API {
 				handler(.failure(PostError(tweetError: error)))
 				
 			default:
-				handler(.failure(.unexpected(error)))
+				handler(.failure(.unexpectedError(error, state: .beforePosted)))
 			}
 		}
 		
@@ -122,7 +122,7 @@ extension API {
 		
 		guard let api = rawApi else {
 			
-			handler(.failure(.apiError(.notReady)))
+			handler(.failure(.apiError(.notReady, state: .beforePosted)))
 			return
 		}
 		
@@ -143,7 +143,7 @@ extension API {
 				handler(.failure(.init(tweetError: error)))
 				
 			default:
-				handler(.failure(.unexpected(error)))
+				handler(.failure(.unexpectedError(error, state: .beforePosted)))
 			}
 		}
 		
@@ -154,7 +154,7 @@ extension API {
 		
 		guard let api = rawApi else {
 			
-			handler(.failure(.apiError(.notReady)))
+			handler(.failure(.apiError(.notReady, state: .beforePosted)))
 			return
 		}
 		
@@ -169,15 +169,15 @@ extension API {
 			}
 			catch let error as DecodingError {
 				
-				handler(.failure(.parseError(error.localizedDescription)))
+				handler(.failure(.parseError(error.localizedDescription, state: .beforePosted)))
 			}
 			catch let error as JSON.SerializationError {
 
-				handler(.failure(.unexpected(error)))
+				handler(.failure(.unexpectedError(error, state: .beforePosted)))
 			}
 			catch {
 
-				handler(.failure(.internalError("Failed to serialize a JSON data. \(error)")))
+				handler(.failure(.internalError("Failed to serialize a JSON data. \(error)", state: .beforePosted)))
 			}
 		}
 		
@@ -189,7 +189,7 @@ extension API {
 				handler(.failure(.init(tweetError: error)))
 				
 			default:
-				handler(.failure(.unexpected(error)))
+				handler(.failure(.unexpectedError(error, state: .afterPosted)))
 			}
 		}
 		

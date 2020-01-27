@@ -10,11 +10,17 @@ import Swifter
 
 public enum PostError : Error {
 	
-	case apiError(APIError)
+	public enum State {
+	
+		case beforePosted
+		case afterPosted
+	}
+	
+	case apiError(APIError, state: State)
 	case tweetError(String)
-	case parseError(String)
-	case internalError(String)
-	case unexpected(Error)
+	case parseError(String, state: State)
+	case internalError(String, state: State)
+	case unexpectedError(Error, state: State)
 }
 
 extension PostError {

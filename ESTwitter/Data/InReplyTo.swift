@@ -8,11 +8,11 @@
 
 public struct InReplyTo : Decodable {
 	
-	public var userIdStr: String
-	public var statusIdStr: String
-	public var userId: UInt64
-	public var screenName: String
-	public var statusId: UInt64
+	public var userIdStr: String?
+	public var statusIdStr: String?
+	public var userId: UInt64?
+	public var screenName: String?
+	public var statusId: UInt64?
 }
 
 extension InReplyTo {

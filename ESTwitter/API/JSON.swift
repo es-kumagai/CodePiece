@@ -18,19 +18,19 @@ extension JSON {
 	
 	func serialized() throws -> Data {
 		
-		guard let object = self.object else {
+		let jsonString = description
+		
+		guard let jsonData = jsonString.data(using: .utf8) else {
 			
 			throw SerializationError.invalidObject(self)
 		}
 		
-		do {
-			
-			return try JSONSerialization.data(withJSONObject: object, options: [])
-		}
-		catch {
-			
-			throw SerializationError.parseError(error, self)
-		}
+//		guard JSONSerialization.isValidJSONObject(jsonData as Any) else {
+//			
+//			throw SerializationError.invalidObject(self)
+//		}
+		
+		return jsonData
 	}
 }
 

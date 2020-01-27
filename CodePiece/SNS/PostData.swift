@@ -162,7 +162,7 @@ extension PostDataContainer {
 		self.setTwitterMediaIDs(mediaIDs: mediaIDs)
 	}
 	
-	func effectiveHashtags(withAppTag:Bool, withLangTag:Bool) -> ESTwitter.HashtagSet {
+	func effectiveHashtags(withAppTag: Bool, withLangTag: Bool) -> ESTwitter.HashtagSet {
 		
 		let apptag: ESTwitter.Hashtag? = withAppTag ? CodePieceApp.hashtag : nil
 		let langtag: ESTwitter.Hashtag? = withLangTag ? self.data.language.hashtag : nil

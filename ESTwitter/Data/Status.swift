@@ -8,18 +8,17 @@
 
 import AppKit
 import Swim
-import ESGists
 
-public enum RetweetedStatus : Decodable {
-	
-	indirect case Value(Status)
-}
+//public enum RetweetedStatus : Decodable {
+//
+//	indirect case Value(Status)
+//}
 
 public struct Status : Decodable {
 	
 	public var coordinates: CoordinatesBox?
 	public var favorited: Bool
-	public var createdAt: ISO8601Date
+	public var createdAt: TwitterDate
 	public var truncated: Bool
 	public var idStr: String
 	public var entities: Entities?
@@ -30,18 +29,19 @@ public struct Status : Decodable {
 	public var id: UInt64
 	public var geo: CoordinatesBox?
 	public var retweeted: Bool
-	public var retweetedStatus: RetweetedStatus?
+//	public var retweetedStatus: RetweetedStatus?
 	public var place: Place?
-	public var possiblySensitive: Bool?
+//	public var possiblySensitive: Bool
 	public var user: User
-	public var lang: String?
+	public var lang: String
 	public var source: String
+	public var isQuoteStatus: Bool
 	
 	public enum CodingKeys : String, CodingKey {
 		
 		case coordinates
 		case favorited
-		case createdAt
+		case createdAt = "created_at"
 		case truncated
 		case idStr = "id_str"
 		case entities
@@ -56,34 +56,30 @@ public struct Status : Decodable {
 		case id
 		case geo
 		case retweeted
-		case retweetedStatus = "retweeted_status"
+//		case retweetedStatus = "retweeted_status"
 		case place
-		case possiblySensitive = "possibly_sensitive"
+//		case possiblySensitive = "possibly_sensitive"
 		case user
 		case lang
 		case source
+		case isQuoteStatus = "is_quote_status"
 	}
 }
 
-extension RetweetedStatus {
-
-	public var status:Status {
-		
-		switch self {
-			
-		case .Value(let value):
-			return value
-		}
-	}
-}
+//extension RetweetedStatus {
+//
+//	public var status:Status {
+//
+//		switch self {
+//
+//		case .Value(let value):
+//			return value
+//		}
+//	}
+//}
 
 extension Status {
 	
-	public var isRetweetedTweet: Bool {
-		
-		return retweetedStatus != nil
-	}
-
 	private func applyAttribute(text: NSMutableAttributedString, urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) {
 		
 		text.beginEditing()
@@ -232,13 +228,13 @@ extension Sequence where Element == Status {
 
 // MARK: - Decodable
 
-extension RetweetedStatus {
-	
-	public init(from decoder: Decoder) throws {
-		
-		self = try .Value(Status(from: decoder))
-	}
-}
+//extension RetweetedStatus {
+//
+//	public init(from decoder: Decoder) throws {
+//
+//		self = try .Value(Status(from: decoder))
+//	}
+//}
 
 extension Status {
 	
@@ -246,26 +242,27 @@ extension Status {
 	
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		
-		coordinates = try container.decode(CoordinatesBox.self, forKey: .coordinates)
+		coordinates = try container.decode(CoordinatesBox?.self, forKey: .coordinates)
 		favorited = try container.decode(Bool.self, forKey: .favorited)
-		createdAt = try container.decode(ISO8601Date.self, forKey: .createdAt)
+		createdAt = try container.decode(TwitterDate.self, forKey: .createdAt)
 		truncated = try container.decode(Bool.self, forKey: .truncated)
 		idStr = try container.decode(String.self, forKey: .idStr)
-		entities = try container.decode(Entities.self, forKey: .entities)
+		entities = try container.decode(Entities?.self, forKey: .entities)
 		
 		inReplyTo = try InReplyTo(from: decoder)
 		
 		text = try container.decode(String.self, forKey: .text)
-		contributors = try container.decode(String.self, forKey: .contributors)
+		contributors = try container.decode(String?.self, forKey: .contributors)
 		retweetCount = try container.decode(Int.self, forKey: .retweetCount)
 		id = try container.decode(UInt64.self, forKey: .id)
-		geo = try container.decode(CoordinatesBox.self, forKey: .geo)
+		geo = try container.decode(CoordinatesBox?.self, forKey: .geo)
 		retweeted = try container.decode(Bool.self, forKey: .retweeted)
-		retweetedStatus = try container.decode(RetweetedStatus.self, forKey: .retweetedStatus)
-		place = try container.decode(Place.self, forKey: .place)
-		possiblySensitive = try container.decode(Bool.self, forKey: .possiblySensitive)
+//		retweetedStatus = try container.decode(RetweetedStatus?.self, forKey: .retweetedStatus)
+		place = try container.decode(Place?.self, forKey: .place)
+//		possiblySensitive = try container.decode(Bool.self, forKey: .possiblySensitive)
 		user = try container.decode(User.self, forKey: .user)
 		lang = try container.decode(String.self, forKey: .lang)
 		source = try container.decode(String.self, forKey: .source)
+		isQuoteStatus = try container.decode(Bool.self, forKey: .isQuoteStatus)
 	}
 }
