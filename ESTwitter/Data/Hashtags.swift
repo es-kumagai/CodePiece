@@ -8,6 +8,32 @@
 
 public typealias HashtagSet = Set<Hashtag>
 
+extension Sequence where Element : HashtagType {
+
+	public var twitterQueryText: String {
+		
+		return twitterDisplayText
+	}
+	
+	public var twitterDisplayText: String {
+		
+		return map { $0.value }.joined(separator: " ")
+	}
+}
+
+extension Collection where Element : HashtagType {
+
+	public var twitterDisplayTextLength: Int {
+		
+		var separatorCount: Int {
+			
+			return count - 1
+		}
+		
+		return map { $0.length }.reduce(separatorCount, +)
+	}
+}
+
 extension Set where Element : HashtagType {
 	
 	public init(hashtagsDisplayText: String) {
@@ -15,35 +41,5 @@ extension Set where Element : HashtagType {
 		let hashtags = hashtagsDisplayText.split(separator: " ").compactMap(String.init).compactMap(Element.init)
 		
 		self.init(hashtags)
-	}
-	
-	public func toTwitterQueryText() -> String {
-		
-		return self.toTwitterDisplayText()
-	}
-	
-	public func toTwitterDisplayText() -> String {
-		
-		return map { $0.value } .joined(separator: " ")
-	}
-	
-	public var twitterDisplayTextLength: Int {
-		
-		func numberOfSpaces() -> Int {
-			
-			return count - 1
-		}
-		
-		switch count {
-			
-		case 0:
-			return 0
-			
-		case 1:
-			return first!.length
-			
-		default:
-			return reduce(numberOfSpaces()) { $0 + $1.length }
-		}
 	}
 }

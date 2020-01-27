@@ -479,7 +479,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 		}
 		
 		let hashtags = self.timeline.hashtags
-		let query = hashtags.toTwitterQueryText()
+		let query = hashtags.twitterQueryText
 		
 		let updateTable = { (tweets:[Status]) in
 			

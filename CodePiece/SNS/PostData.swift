@@ -213,6 +213,6 @@ extension PostDataContainer {
 		
 		return getDescription()
 			.appendStringIfNotEmpty(string: appendString, separator: " ")
-			.appendStringIfNotEmpty(string: hashtags.toTwitterDisplayText(), separator: " ")
+			.appendStringIfNotEmpty(string: hashtags.twitterDisplayText, separator: " ")
 	}
 }

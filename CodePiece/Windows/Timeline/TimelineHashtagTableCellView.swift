@@ -43,8 +43,8 @@ final class TimelineHashtagTableCellView: NSTableCellView {
 	
 		didSet {
 
-			self.previousHashtagLabel.stringValue = self.item.previousHashtags?.toTwitterDisplayText() ?? ""
-			self.currentHashtagLabel.stringValue = self.item.currentHashtags.toTwitterDisplayText()
+			self.previousHashtagLabel.stringValue = item.previousHashtags?.twitterDisplayText ?? ""
+			self.currentHashtagLabel.stringValue = item.currentHashtags.twitterDisplayText
 			
 			self.previousHashtagView.isHidden = (self.item.previousHashtags == nil)
 		}

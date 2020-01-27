@@ -141,6 +141,14 @@ final class MainViewController: NSViewController, NotificationObservable {
 		return self.languagePopUpButton.selectedItem.flatMap { Language(displayText: $0.title) }!
 	}
 	
+	var sortedHashtags: [Hashtag] {
+		
+		let languageHashtag = selectedLanguage.hashtag
+		let customHashtags = hashTagTextField.hashtags.filter { $0 != languageHashtag }
+
+		return customHashtags.sorted { $0.value < $1.value } + [languageHashtag]
+	}
+	
 	@IBAction func pushPostButton(_ sender:NSObject?) {
 	
 		self.postToSNS()
@@ -371,7 +379,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		do {
 
-			try ESTwitter.Browser.openWithQuery(query: self.hashTagTextField.hashtags.toTwitterDisplayText())
+			try ESTwitter.Browser.openWithQuery(query: hashTagTextField.hashtags.twitterQueryText)
 		}
 		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
 			

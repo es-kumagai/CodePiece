@@ -44,9 +44,9 @@ extension DataStore {
 				return userDefaults.string(forKey: AppState.HashtagKey).map { ESTwitter.HashtagSet(hashtagsDisplayText: $0) }
 			}
 			
-			set {
+			set (newHashtags) {
 				
-				userDefaults.set(newValue?.toTwitterDisplayText(), forKey: AppState.HashtagKey)
+				userDefaults.set(newHashtags?.twitterDisplayText, forKey: AppState.HashtagKey)
 			}
 		}
 		
