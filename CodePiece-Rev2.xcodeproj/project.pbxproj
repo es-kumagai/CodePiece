@@ -152,7 +152,6 @@
 		B1A4729E23D09DB300F73658 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728823D09DB300F73658 /* Color.swift */; };
 		B1A4729F23D09DB300F73658 /* PlaceBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */; };
 		B1A472A023D09DB300F73658 /* StatusCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */; };
-		B1C6737723CA2A7000A07F9E /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1A1060023CA1FE800F9C4FD /* APIKeys.plist */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
 		B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */; };
@@ -342,7 +341,6 @@
 		B18FFA3C23DF26B60057C977 /* DecodingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingError.swift; sourceTree = "<group>"; };
 		B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1A105FF23CA1F1900F9C4FD /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
-		B1A1060023CA1FE800F9C4FD /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B1A1060223CA217F00F9C4FD /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		B1A1060423CA25B100F9C4FD /* APIKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeysTests.swift; sourceTree = "<group>"; };
 		B1A4724323D09CA600F73658 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -746,7 +744,6 @@
 			isa = PBXGroup;
 			children = (
 				B1A105FF23CA1F1900F9C4FD /* TODO.md */,
-				B1A1060023CA1FE800F9C4FD /* APIKeys.plist */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -965,6 +962,7 @@
 				B1D13C6D23CA14DB0016902A /* Frameworks */,
 				B1D13C6E23CA14DB0016902A /* Resources */,
 				B132D52223CD08B800690C5F /* Embed Frameworks */,
+				B18FFA3F23DF31000057C977 /* Copying Private Files */,
 			);
 			buildRules = (
 			);
@@ -1077,7 +1075,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1C6737723CA2A7000A07F9E /* APIKeys.plist in Resources */,
 				B15EE29823CE7667005B268A /* WelcomeBoard.storyboard in Resources */,
 				B15EE29423CE7667005B268A /* AboutWindowController.storyboard in Resources */,
 				B15EE33D23CE78A5005B268A /* SourceHanCodeJP-Regular.otf in Resources */,
@@ -1100,6 +1097,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B18FFA3F23DF31000057C977 /* Copying Private Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copying Private Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Copying private files.\"\ncp -f \"${SRCROOT}/Private/APIKeys.plist\" \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B132D50723CD08B800690C5F /* Sources */ = {
