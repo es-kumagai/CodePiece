@@ -111,7 +111,6 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 //				NSApp.twitterController.account = notification.account
 //			}
 //
-////			self.verifyCredentials()
 //		}
 		
 		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
@@ -125,6 +124,8 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 			self.withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
 			self.applyAuthorizedStatus()
 		}
+
+		verifyCredentials()
     }
 	
 	override func viewWillAppear() {
@@ -161,22 +162,22 @@ extension TwitterPreferenceViewController {
 	
 	@IBAction func pushVerifyCredentialsButton(_ sender:NSButton) {
 
-		#warning("必要か分からないのでいったん無効化します。")
-//		verifyCredentials()
+		verifyCredentials()
 	}
 	
 	var canVerify: Bool {
 		
-		return !verifying && hasToken && credentialsNotVerified
+		return hasToken && credentialsNotVerified
 	}
 	
-//	func verifyCredentials() {
-//
-//		guard self.canVerify else {
-//
-//			return
-//		}
-//
+	func verifyCredentials() {
+
+		guard canVerify else {
+
+			return
+		}
+
+		NSApp.twitterController.verifyCredentialsIfNeed()
 //		self.verifying = NSApp.twitterController.verifyCredentialsIfNeed { result in
 //
 //			self.verifying = false
@@ -190,6 +191,6 @@ extension TwitterPreferenceViewController {
 //				self.showErrorAlert(withTitle: "Failed to verify credentials", message: error.localizedDescription)
 //			}
 //		}
-//	}
+	}
 }
 

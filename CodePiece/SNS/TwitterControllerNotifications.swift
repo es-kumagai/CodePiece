@@ -22,12 +22,24 @@ extension TwitterController {
 		var error: AuthorizationError
 	}
 	
+	struct AuthorizationStateInvalidNotification : NotificationProtocol {		
+	}
+	
 	struct AuthorizationResetSucceededNotification : NotificationProtocol {
 		
 	}
 	
 	struct AuthorizationResetFailureNotification : NotificationProtocol {
 		
-		public var error: Error
+		public var error: APIError
+	}
+	
+	struct CredentialsVerifySucceededNotification : NotificationProtocol {
+		
+	}
+	
+	struct CredentialsVerifyFailureNotification : NotificationProtocol {
+		
+		public var error: APIError
 	}
 }

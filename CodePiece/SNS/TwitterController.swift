@@ -121,6 +121,11 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 	
 	var readyToUse: Bool {
 		
+		return hasToken && credentialsVerified
+	}
+	
+	var hasToken: Bool {
+		
 		return token != nil
 	}
 	
@@ -134,7 +139,21 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 		return token.screenName == status.user.screenName
 	}
 	
-	private var api = ESTwitter.API(consumerKey: APIKeys.Twitter.consumerKey, tokenSecret: APIKeys.Twitter.consumerSecret)
+	private var api: ESTwitter.API!
+	
+	func prepareApi() {
+		
+		if let token = self.token {
+		
+			api = ESTwitter.API(consumerKey: APIKeys.Twitter.consumerKey, tokenSecret: APIKeys.Twitter.consumerSecret, oauthToken: token.key, oauthTokenSecret: token.secret)
+			DebugTime.print("API is prepared with token.")
+		}
+		else {
+
+			api = ESTwitter.API(consumerKey: APIKeys.Twitter.consumerKey, tokenSecret: APIKeys.Twitter.consumerSecret)
+			DebugTime.print("API is prepared without token.")
+		}
+	}
 	
 	func resetAuthentication() {
 		
@@ -248,7 +267,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 	
 	var canPost: Bool {
 		
-		return self.readyToUse
+		return readyToUse
 	}
 	
 //	func clearEffectiveUserInfo() {
@@ -265,29 +284,27 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 //		return self.verifyCredentialsIfNeed(callback: verifyCredentialsBasicErrorReportCallback)
 //	}
 	
-//	@discardableResult
-//	func verifyCredentialsIfNeed(callback: @escaping (VerifyResult)->Void) -> Bool {
-//
-//		DebugTime.print("📮 Passed verify-credentials #2")
-//		guard self.readyToUse else {
-//
-//			NSLog("Credentials verification skipped because it is not ready to use Twitter.")
-//			return false
-//		}
-//
-//		DebugTime.print("📮 Passed verify-credentials #3")
-//		guard !self.credentialsVerified else {
-//
-//			NSLog("Credentials already verifyed.")
-//			return false
-//		}
-//
-//		DebugTime.print("📮 Passed verify-credentials #4")
-//		self.verifyCredentials(callback: callback)
-//
-//		DebugTime.print("📮 Passed verify-credentials #5")
-//		return true
-//	}
+	func verifyCredentialsIfNeed() {
+
+		DebugTime.print("📮 Passed verify-credentials #2")
+		guard hasToken else {
+
+			NSLog("Twitter controller has not token. Skip verifying the credentials.")
+			return
+		}
+
+		DebugTime.print("📮 Passed verify-credentials #3")
+		guard !credentialsVerified else {
+
+			NSLog("Credentials already verifyed in Twitter.")
+			return
+		}
+
+		DebugTime.print("📮 Passed verify-credentials #4")
+		verifyCredentials()
+
+		DebugTime.print("📮 Passed verify-credentials #5")
+	}
 	
 //	private func verifyCredentialsBasicErrorReportCallback(result:VerifyResult) -> Void {
 //
@@ -309,17 +326,49 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 //		self.verifyCredentials(callback: self.verifyCredentialsBasicErrorReportCallback)
 //	}
 //
-//	func verifyCredentials(callback: @escaping (VerifyResult)->Void) {
-//
-//		DebugTime.print("📮 Passed verify-credentials #6")
-//
-//		guard let api = self.api else {
-//
-//			callback(VerifyResult.failure(TwitterController.APINotReadyNSError))
-//			return
-//		}
-//
-//		DebugTime.print("📮 Passed verify-credentials #7")
+	func verifyCredentials() {
+
+		DebugTime.print("📮 Passed verify-credentials #6")
+
+		guard hasToken else {
+
+			CredentialsVerifyFailureNotification(error: .notReady).post()
+			return
+		}
+
+		func success() {
+			
+			DebugTime.print("📮 Passed verify-credentials #9")
+			AuthorizationStateDidChangeNotification(isAuthorized: api.isCredentialVerified, screenName: token?.screenName).post()
+		}
+		
+		func failure(_ error: APIError) {
+			
+			DebugTime.print("📮 Passed verify-credentials #10")
+			switch error {
+				
+			case .responseError(code: let code, message: _) where code == 401:
+				
+				AuthorizationStateInvalidNotification().post()
+			
+			default:
+				AuthorizationStateDidChangeWithErrorNotification(error: .apiError(error)).post()
+			}
+		}
+		
+		DebugTime.print("📮 Passed verify-credentials #7")
+		api.verifyCredentials { result in
+		
+			switch result {
+				
+			case .success:
+				success()
+				
+			case .failure(let error):
+				failure(error)
+			}
+		}
+		
 //		api.authorize { result in
 //
 //			switch result {
@@ -343,7 +392,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 //				Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: self.credentialsVerified, username: self.effectiveUserInfo?.username).post()
 //			}
 //		}
-//	}
+	}
 
 //	func post(container:PostDataContainer, latitude: Double? = nil, longitude: Double? = nil, placeID: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, callback: @escaping (PostStatusUpdateResult)->Void) throws {
 //

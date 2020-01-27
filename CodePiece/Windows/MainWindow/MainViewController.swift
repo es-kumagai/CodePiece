@@ -155,7 +155,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		guard NSApp.snsController.canPost else {
 		
-			self.showErrorAlert(withTitle: "Not ready", message: "It is not ready to post. Please set SNS accounts by the CodePiece's preferences. (⌘,)")
+			self.showErrorAlert(withTitle: "Not ready", message: "It is not ready to post. Please set SNS accounts on the preferences. (⌘,)")
 			return
 		}
 		
@@ -222,6 +222,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		super.viewDidLoad()
 		
 		DebugTime.print("Main window loaded.")
+		twitterController.prepareApi()
 	}
 	
 	override func viewWillAppear() {
@@ -230,13 +231,13 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		super.viewWillAppear()
 
-		self.restoreContents()
-		self.focusToDefaultControl()
-		self.updateControlsDisplayText()
+		restoreContents()
+		focusToDefaultControl()
+		updateControlsDisplayText()
 
-		self.clearContents()
+		clearContents()
 		
-		self.observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
+		observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
 			
 			self.clearContents()
 			self.latestTweet = notification.container.twitterState.postedStatus
@@ -274,6 +275,17 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			self.setReplyTo(notification)
 		}
+		
+		observe(notification: TwitterController.AuthorizationStateInvalidNotification.self) { [unowned self] notification in
+			
+			DebugTime.print("Authorization State is invalid. Try authenticating.")
+			self.twitterController.authorize()
+		}
+		
+		observe(notification: TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
+			
+			self.showErrorAlert(withTitle: "Failed to verify credentials", message: "\(notification.error)")
+		}
 	}
 	
 	override func viewDidAppear() {
@@ -282,9 +294,16 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		super.viewDidAppear()
 		
-		if !NSApp.settings.isReady && NSApp.environment.showWelcomeBoardOnStartup {
+		if NSApp.settings.isReady {
 			
-			NSApp.showWelcomeBoard()
+			twitterController.verifyCredentialsIfNeed()
+		}
+		else {
+			
+			if NSApp.environment.showWelcomeBoardOnStartup {
+				
+				NSApp.showWelcomeBoard()
+			}
 		}
 	}
 	
@@ -318,7 +337,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			return
 		}
 		
-		#warning("アプリがスリープから復帰した時、SNS の認証操作が必要かも知れません。")
+		twitterController.verifyCredentialsIfNeed()
 //		twitterController.verifyCredentialsIfNeed { result in
 //
 //			switch result {

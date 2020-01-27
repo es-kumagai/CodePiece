@@ -18,7 +18,7 @@ public final class API {
 	public typealias PostTweetResult = Result<Status, PostError>
 	public typealias PostMediaResult = Result<[MediaId], PostError>
 	public typealias SearchResult = Result<[Status], PostError>
-	public typealias ResetResult = Result<Void, ResetError>
+	public typealias BasicResult = Result<Void, APIError>
 	
 	
 	var rawApi: Swifter?
@@ -196,11 +196,42 @@ extension API {
 		api.searchTweet(using: query, geocode: options.geocode, lang: options.language, locale: options.locale, resultType: options.resultType, count: options.count, until: options.until, sinceID: options.sinceId, maxID: options.maxId, includeEntities: options.includeEntities, callback: options.callback, tweetMode: SwifterTweetMode(options.tweetMode), success: successHandler, failure: failureHandler)
 	}
 	
-	public func reset(handler: @escaping (ResetResult) -> Void) {
+	public func verifyCredentials(handler: @escaping (BasicResult) -> Void) {
+	
+		guard let api = rawApi else {
+			
+			handler(.failure(.notReady))
+			return
+		}
+		
+		func successHandler(json: JSON) {
+			
+			isCredentialVerified = true
+			handler(.success(()))
+		}
+		
+		func failureHandler(error: Error) {
+
+			isCredentialVerified = false
+			
+			switch error {
+				
+			case let error as SwifterError:
+				handler(.failure(.init(from: error)))
+				
+			default:
+				handler(.failure(.unexpected(error)))
+			}
+		}
+		
+		api.verifyAccountCredentials(includeEntities: nil, skipStatus: nil, includeEmail: nil, success: successHandler, failure: failureHandler)
+	}
+	
+	public func reset(handler: @escaping (BasicResult) -> Void) {
 		
 		guard let api = rawApi else {
 			
-			handler(.failure(.apiError(.notReady)))
+			handler(.failure(.notReady))
 			return
 		}
 		

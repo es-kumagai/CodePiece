@@ -8,8 +8,8 @@
 
 import Swifter
 
-public enum ResetError : Error {
-	
-	case apiError(APIError)
-	case unexpected(Error)
-}
+//public enum ResetError : Error {
+//	
+//	case apiError(APIError)
+//	case unexpected(Error)
+//}

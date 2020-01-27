@@ -14,3 +14,21 @@ public enum AuthorizationError : Error {
 	case notAuthorized(Error)
 	case failedToGetAccessToken(URLResponse)
 }
+
+extension AuthorizationError : CustomStringConvertible {
+	
+	public var description: String {
+		
+		switch self {
+			
+		case .apiError(let error):
+			return "\(error)"
+			
+		case .notAuthorized(let error):
+			return "Not authorized. \(error.localizedDescription)"
+			
+		case .failedToGetAccessToken(let response):
+			return "Failed to get an access token. \(response.description)"
+		}
+	}
+}
