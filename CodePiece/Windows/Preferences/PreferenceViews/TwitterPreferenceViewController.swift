@@ -20,13 +20,13 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 	private(set) var waitingHUD:ProgressHUD = ProgressHUD(message: "Please wait...", useActivityIndicator: true)
 	private(set) var verifyingHUD:ProgressHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
 
-	@IBOutlet var credentialsVerificationStatusImageView:NSImageView!
-	@IBOutlet var credentialsVerificationStatusTextField:NSTextField!
+	@IBOutlet var credentialsVerificationStatusImageView: NSImageView!
+	@IBOutlet var credentialsVerificationStatusTextField: NSTextField!
 	@IBOutlet var credentialsVerificationButton: NSButton!
 	
-	@IBOutlet var selectedAccountName:NSTextField!
+	@IBOutlet var selectedAccountName: NSTextField!
 	
-	@IBOutlet var errorReportTextField:NSTextField? {
+	@IBOutlet var errorReportTextField: NSTextField? {
 		
 		didSet {
 			clearError()
@@ -87,7 +87,7 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 			
 	func applyAuthorizedStatus() {
 		
-//		self.selectedAccountName.stringValue = NSApp.twitterController.account?.username ?? ""
+		self.selectedAccountName.stringValue = NSApp.twitterController.token?.screenName ?? ""
 		
 		if self.credentialsNotVerified {
 			

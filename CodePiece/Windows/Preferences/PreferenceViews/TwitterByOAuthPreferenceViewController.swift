@@ -12,19 +12,19 @@ import ESProgressHUD
 @objcMembers
 final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewController {
 	
-	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
+	private var authenticatingHUD: ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
 //	private var authenticatingPinHUD:ProgressHUD = ProgressHUD(message: "Please authentication with PIN code.\n", useActivityIndicator: true)
 
 	@IBOutlet private(set) var viewForStartAuthentication: NSView!
-	@IBOutlet private(set) var viewForEnterPin: NSView!
-	
-	@IBOutlet private(set) var pinTextField: NSTextField! {
-		
-		didSet {
-			
-			pinTextField.delegate = self
-		}
-	}
+//	@IBOutlet private(set) var viewForEnterPin: NSView!
+//
+//	@IBOutlet private(set) var pinTextField: NSTextField! {
+//
+//		didSet {
+//
+//			pinTextField.delegate = self
+//		}
+//	}
 		
 	override func viewDidLoad() {
 		
@@ -54,12 +54,12 @@ extension TwitterByOAuthPreferenceViewController : NSTextFieldDelegate {
 	
 	func controlTextDidChange(_ obj: Notification) {
 
-		guard let object = obj.object as? NSTextField, object === self.pinTextField else {
-			
-			return
-		}
-		
-		withChangeValue(for: "canPinEnterButtonPush")
+//		guard let object = obj.object as? NSTextField, object === self.pinTextField else {
+//			
+//			return
+//		}
+//		
+//		withChangeValue(for: "canPinEnterButtonPush")
 	}
 }
 
@@ -116,15 +116,15 @@ extension TwitterByOAuthPreferenceViewController {
 //		}
 //	}
 	
-	var canPinEnterButtonPush: Bool {
-		
-		guard let pinTextField = self.pinTextField else {
-			
-			return false
-		}
-		
-		return !pinTextField.stringValue.isEmpty
-	}
+//	var canPinEnterButtonPush: Bool {
+//
+//		guard let pinTextField = self.pinTextField else {
+//
+//			return false
+//		}
+//
+//		return !pinTextField.stringValue.isEmpty
+//	}
 	
 //	func updatePinInputMode() {
 //
