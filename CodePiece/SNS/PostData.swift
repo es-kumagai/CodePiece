@@ -149,12 +149,12 @@ extension PostDataContainer {
 	
 	var twitterReplyToStatusID: String? {
 	
-		return self.data.replyTo?.idStr
+		return data.replyTo?.idStr
 	}
 	
 	func setTwitterMediaIDs(mediaIDs: [String]) {
 		
-		self.twitterState.mediaIDs = mediaIDs
+		twitterState.mediaIDs = mediaIDs
 	}
 	
 	func setTwitterMediaIDs(_ mediaIDs: String...) {

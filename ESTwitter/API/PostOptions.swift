@@ -12,16 +12,16 @@ extension API {
 
 	public struct PostOption {
 		
-		var inReplyTo: StatusId?
-		var mediaIDs: [MediaId]
-		var attachmentUrl: Foundation.URL?
-		var coordinate: Coordinate.Item?
-		var autoPopulateReplyMetadata: Bool?
-		var excludeReplyUserIds: Bool?
-		var placeId: Double?
-		var displayCoordinates: Bool?
-		var trimUser: Bool?
-		var tweetMode: TweetMode
+		public var inReplyTo: StatusId?
+		public var mediaIDs: [MediaId]
+		public var attachmentUrl: Foundation.URL?
+		public var coordinate: Coordinate.Item?
+		public var autoPopulateReplyMetadata: Bool?
+		public var excludeReplyUserIds: Bool?
+		public var placeId: Double?
+		public var displayCoordinates: Bool?
+		public var trimUser: Bool?
+		public var tweetMode: TweetMode
 		
 		public init(inReplyTo: StatusId? = nil, mediaIDs: [MediaId] = [], attachmentUrl: Foundation.URL? = nil, coordinate: Coordinate.Item? = nil, autoPopulateReplyMetadata: Bool? = nil, excludeReplyUserIds: Bool? = nil, placeId: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, tweetMode: TweetMode = .default) {
 			

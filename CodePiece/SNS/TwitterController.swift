@@ -653,7 +653,7 @@ extension TwitterController {
 		}
 	}
 	
-	func post(statusUsing container: PostDataContainer, options: API.PostOption = API.PostOption(), handler: @escaping (PostResult) -> Void) {
+	func post(statusUsing container: PostDataContainer, handler: @escaping (PostResult) -> Void) {
 	
 		func success(_ status: Status) {
 			
@@ -676,6 +676,8 @@ extension TwitterController {
 		
 		DebugTime.print("📮 Try to post a status by Twitter ... #3.3")
 
+		let options = API.PostOption(from: container)
+		
 		api.post(tweet: container.descriptionForTwitter(), options: options) { result in
 			
 			switch result {

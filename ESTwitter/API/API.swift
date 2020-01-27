@@ -127,12 +127,26 @@ extension API {
 		}
 		
 		func successHandler(json: JSON) {
-			
-			#warning("ここで json から MediaID を取得します。")
-			NSLog("%@", json.description)
-			let mediaId = "0"
 
-			handler(.success([mediaId]))
+			do {
+				
+				let data = try json.serialized()
+				let media = try JSONDecoder().decode(Media.self, from: data)
+				
+				handler(.success([media.idString]))
+			}
+			catch let error as DecodingError {
+				
+				handler(.failure(.parseError("\(error)", state: .afterPosted)))
+			}
+			catch let error as JSON.SerializationError {
+				
+				handler(.failure(.unexpectedError(error, state: .afterPosted)))
+			}
+			catch {
+				
+				handler(.failure(.internalError("Failed to serialize a JSON data. \(error)", state: .afterPosted)))
+			}
 		}
 		
 		func failureHandler(error: Error) {
