@@ -8,6 +8,8 @@
 
 import Foundation
 import ESGists
+import ESTwitter
+
 
 final class Settings {
 	
@@ -62,17 +64,17 @@ final class Settings {
 	
 	func loadTwitterAccount() {
 		
-		switch _store.twitter.kind {
+//		switch _store.twitter.kind {
 			
 //		case .OSAccount:
 //			loadTwitterAccountAsAccount()
 			
-		case .OAuthToken:
+//		case .OAuthToken:
 			loadTwitterAccountAsToken()
 			
-		case .Unknown:
-			loadTwitterAccountDefault()
-		}
+//		case .Unknown:
+//			loadTwitterAccountDefault()
+//		}
 	}
 	
 //	private func loadTwitterAccountAsAccount() {
@@ -94,54 +96,46 @@ final class Settings {
 	
 	private func loadTwitterAccountAsToken() {
 		
-		let token = _store.twitter.token
+		let tokenKey = _store.twitter.token
 		let tokenSecret = _store.twitter.tokenSecret
 		let tokenScreenName = _store.twitter.tokenScreenName
+		let tokenUserId = _store.twitter.tokenUserId
 		
-		let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: tokenScreenName)
+//		let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: tokenScreenName)
+		let token = ESTwitter.Token(key: tokenKey, secret: tokenSecret, userId: tokenUserId, screenName: tokenScreenName)
 		
-		NSLog("Twitter account which authenticated by OAuth restored from data store. (\(account.username))")
-		self.account.twitterAccount = account
+		NSLog("Twitter account which authenticated by OAuth restored from data store. (\(token.screenName))")
+		
+		account.twitterToken = token
 	}
 	
-	private func loadTwitterAccountDefault() {
-
-		NSLog("No Twitter account specified.")
-		self.account.twitterAccount = nil
-
-		self.saveTwitterAccount()
-	}
+//	private func loadTwitterAccountDefault() {
+//
+//		NSLog("No Twitter account specified.")
+//		self.account.twitterAccount = nil
+//
+//		self.saveTwitterAccount()
+//	}
 
 	func saveTwitterAccount() {
 		
-		NSLog("Writing Twitter account to data store. (\(self.account.twitterAccount?.username ?? "(null)"))")
+		NSLog("Writing Twitter account to data store. (\(account.twitterToken?.screenName ?? "(null)"))")
 		
-		if let account = self.account.twitterAccount {
+		if let token = account.twitterToken {
 
-			_store.twitter.kind = account.storeKind
-			
-			switch account {
-				
-//			case let .account(osAccount):
-//				_store.twitter.identifier = (osAccount.identifier ?? "") as String
-//				_store.twitter.token = ""
-//				_store.twitter.tokenSecret = ""
-//				_store.twitter.tokenScreenName = ""
-				
-			case let .token(token, tokenSecret, screenName):
-				_store.twitter.identifier = ""
-				_store.twitter.token = token
-				_store.twitter.tokenSecret = tokenSecret
-				_store.twitter.tokenScreenName = screenName
-			}
+			_store.twitter.identifier = ""
+			_store.twitter.token = token.key
+			_store.twitter.tokenSecret = token.secret
+			_store.twitter.tokenScreenName = token.screenName
+			_store.twitter.tokenUserId = token.userId
 		}
 		else {
 			
-			_store.twitter.kind = .Unknown
 			_store.twitter.identifier = ""
 			_store.twitter.token = ""
 			_store.twitter.tokenSecret = ""
 			_store.twitter.tokenScreenName = ""
+			_store.twitter.tokenUserId = ""
 		}
 		
 		_store.twitter.save()

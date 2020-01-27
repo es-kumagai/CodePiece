@@ -10,6 +10,7 @@ import Cocoa
 import ESProgressHUD
 import Ocean
 import Swim
+import ESTwitter
 
 @objcMembers
 class TwitterPreferenceViewController: NSViewController, NotificationObservable {
@@ -55,20 +56,20 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		}
 	}
 	
-	var hasAccount:Bool {
-	
-		return NSApp.twitterController.account != nil
+	var hasToken: Bool {
+
+		return NSApp.twitterController.token != nil
 	}
 	
-	var credentialsNotVerified:Bool {
+	var credentialsNotVerified: Bool {
 
 		// FIXME: 🌙 モーダル画面でベリファイしようとすると、メインスレッドで実行しているからか、閉じるまでベリファイ作業が継続されない。
-		return !NSApp.twitterController.readyToUse
+		return !NSApp.twitterController.credentialsVerified
 	}
 	
-	var credentialsVerified:Bool {
+	var credentialsVerified: Bool {
 
-		return NSApp.twitterController.readyToUse
+		return NSApp.twitterController.credentialsVerified
 	}
 	
 	@IBAction func pushResetAuthorizationButton(_ sender:NSButton) {
@@ -86,7 +87,7 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 			
 	func applyAuthorizedStatus() {
 		
-		self.selectedAccountName.stringValue = NSApp.twitterController.account?.username ?? ""
+//		self.selectedAccountName.stringValue = NSApp.twitterController.account?.username ?? ""
 		
 		if self.credentialsNotVerified {
 			
@@ -103,21 +104,27 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		observe(notification: TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.self) { [unowned self] notification in
-			
-			self.withChangeValue(for: "hasAccount") {
-				
-				NSApp.twitterController.account = notification.account
-			}
-			
-//			self.verifyCredentials()
-		}
+//		observe(notification: TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification.self) { [unowned self] notification in
+//
+//			self.withChangeValue(for: "hasAccount") {
+//
+//				NSApp.twitterController.account = notification.account
+//			}
+//
+////			self.verifyCredentials()
+//		}
 		
-		observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
 			self.applyAuthorizedStatus()
-		}		
+		}
+		
+		observe(notification: TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
+			
+			self.withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
+			self.applyAuthorizedStatus()
+		}
     }
 	
 	override func viewWillAppear() {
@@ -158,9 +165,9 @@ extension TwitterPreferenceViewController {
 //		verifyCredentials()
 	}
 	
-	var canVerify:Bool {
+	var canVerify: Bool {
 		
-		return !self.verifying && self.hasAccount && self.credentialsNotVerified
+		return !verifying && hasToken && credentialsNotVerified
 	}
 	
 //	func verifyCredentials() {

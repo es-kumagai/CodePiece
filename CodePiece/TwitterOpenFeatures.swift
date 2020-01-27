@@ -17,13 +17,13 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 	
 	override func awakeFromNib() {
 		
-		self.observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 
 			self.withChangeValue(for: "canOpenTwitterHome")
 		}		
 	}
 	
-	var canOpenTwitterHome:Bool {
+	var canOpenTwitterHome: Bool {
 		
 		guard NSApp.isReadyForUse else {
 			
@@ -40,7 +40,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 	
 	func openTwitterHome() {
 		
-		guard let username = NSApp.twitterController.account?.username else {
+		guard let username = NSApp.twitterController.token?.screenName else {
 			
 			return self.showErrorAlert(withTitle: "Failed to open Twitter", message: "Twitter user is not set.")
 		}

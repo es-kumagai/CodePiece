@@ -13,7 +13,7 @@ import ESProgressHUD
 final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewController {
 	
 	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
-	private var authenticatingPinHUD:ProgressHUD = ProgressHUD(message: "Please authentication with PIN code.\n", useActivityIndicator: true)
+//	private var authenticatingPinHUD:ProgressHUD = ProgressHUD(message: "Please authentication with PIN code.\n", useActivityIndicator: true)
 
 	@IBOutlet private(set) var viewForStartAuthentication: NSView!
 	@IBOutlet private(set) var viewForEnterPin: NSView!
@@ -28,7 +28,18 @@ final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewContro
 		
 	override func viewDidLoad() {
 		
-		super.viewDidLoad()		
+		super.viewDidLoad()
+		
+		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { notification in
+			
+			NSLog("%@", "Twitter authorization is finished successfully.")
+			self.authenticatingHUD.hide()
+		}
+		
+		observe(notification: TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
+			
+			self.showErrorAlert(withTitle: "Failed to authentication", message: notification.error.localizedDescription)
+		}
 	}
 	
 	override func viewWillAppear() {
@@ -58,24 +69,26 @@ extension TwitterByOAuthPreferenceViewController {
 	
 	@IBAction func doAuthentication(_ sender:NSButton) {
 		
-		self.authenticatingHUD.show()
+		authenticatingHUD.show()
 		
-		Authorization.authorizationWithTwitter { result in
+		NSApp.twitterController.authorize()
 
-			self.authenticatingHUD.hide()
-
-			switch result {
-
-			case .Created:
-				NSLog("%@", "Twitter authorization is finished successfully.")
-
-			case .Failed(let error):
-				self.showErrorAlert(withTitle: "Failed to authentication", message: error.description)
-
-//			case .PinRequired:
-//				self.enteringPinInputMode()
-			}
-		}
+//		Authorization.authorizationWithTwitter { result in
+//
+//			self.authenticatingHUD.hide()
+//
+//			switch result {
+//
+//			case .Created:
+//				NSLog("%@", "Twitter authorization is finished successfully.")
+//
+//			case .Failed(let error):
+//				self.showErrorAlert(withTitle: "Failed to authentication", message: error.description)
+//
+////			case .PinRequired:
+////				self.enteringPinInputMode()
+//			}
+//		}
 	}
 	
 //	@IBAction func doEnterPin(_ sender: NSButton) {

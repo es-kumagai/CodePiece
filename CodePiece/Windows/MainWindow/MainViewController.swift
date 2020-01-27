@@ -172,10 +172,10 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			switch result {
 				
-			case .Success(let container):
+			case .success(let container):
 				PostCompletelyNotification(container: container).post()
 				
-			case .Failure(let container):
+			case .failure(let container):
 				PostFailedNotification(container: container).post()
 			}
 		}
@@ -191,11 +191,11 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			if container.posted {
 				
-				callback(PostResult.Success(container))
+				callback(PostResult.success(container))
 			}
 			else {
 				
-				callback(PostResult.Failure(container))
+				callback(PostResult.failure(container))
 			}
 		}
 	}

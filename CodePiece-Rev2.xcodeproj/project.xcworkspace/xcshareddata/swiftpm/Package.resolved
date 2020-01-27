@@ -48,7 +48,7 @@
       },
       {
         "package": "Ocean",
-        "repositoryURL": "https://github.com/es-kumagai/Ocean",
+        "repositoryURL": "git@github.com:es-kumagai/Ocean.git",
         "state": {
           "branch": "master",
           "revision": "5ed003fb6e348a5ea77452b7b6820da43bc93b87",

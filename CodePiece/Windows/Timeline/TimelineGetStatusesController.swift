@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ESTwitter
 
 protocol TimelineGetStatusesController : AlertDisplayable {
 	
@@ -15,8 +16,8 @@ protocol TimelineGetStatusesController : AlertDisplayable {
 
 extension TimelineGetStatusesController {
 	
-	func reportTimelineGetStatusError(error: GetStatusesError) {
+	func reportTimelineGetStatusError(error: PostError) {
 		
-		self.timelineStatusView.errorMessage = error.description
+		self.timelineStatusView.errorMessage = "\(error)"
 	}
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import ESGists
+import ESTwitter
 
 struct AccountSetting {
 	
@@ -15,7 +16,7 @@ struct AccountSetting {
 	var username:String?
 	var authorization:GitHubAuthorization?
 	
-	var twitterAccount: TwitterController.Account?
+	var twitterToken: ESTwitter.Token?
 }
 
 extension AccountSetting {
@@ -31,8 +32,8 @@ extension AccountSetting {
 		
 		let isTwitterReady:()->Bool = {
 
-			//  Twitter は アカウントが設定されていれば準備完了とします。その有効性は判定していません。
-			return self.twitterAccount != nil
+			//  Twitter はトークンが設定されていれば準備完了とします。その有効性は判定していません。
+			return self.twitterToken != nil
 		}
 		
 		return isGitHubReady() && isTwitterReady()

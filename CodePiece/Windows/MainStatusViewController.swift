@@ -36,17 +36,17 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 		updateGithubAccountStatus()
 		updateTwitterAccountStatus()
 		
-		self.observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { _ in
+		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] _ in
 			
 			self.updateTwitterAccountStatus()
 		}
 		
-		self.observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { _ in
+		observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] _ in
 			
 			self.updateGithubAccountStatus()
 		}
 		
-		self.observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
+		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] _ in
 			
 			self.updateReachability()
 		}
@@ -56,7 +56,7 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 	
 		let twitterController = NSApp.snsController.twitter
 		
-		updateTwitterAccountStatusWith(isValid: twitterController.readyToUse, username: twitterController.account?.username)
+		updateTwitterAccountStatusWith(isValid: twitterController.readyToUse, username: twitterController.token?.screenName)
 	}
 	
 	// このメソッドを直接呼ぶと実際と食い違う可能性が出てきてしまうので、設定を直接参照するようにする。

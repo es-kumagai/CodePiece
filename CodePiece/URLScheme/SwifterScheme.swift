@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ESTwitter
 
 final class SwifterScheme : URLScheme {
 	
@@ -18,8 +19,8 @@ final class SwifterScheme : URLScheme {
 	
 	static let host = "twitter"
 	
-	static func action(url: URL) {
+	static func action(url: Foundation.URL) {
 		
-		type(of: NSApp.twitterController.api).handleOpenURL(url)
+		ESTwitter.handle(openUrl: url)
 	}
 }

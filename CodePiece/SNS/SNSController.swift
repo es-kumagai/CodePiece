@@ -39,7 +39,7 @@ final class SNSController : PostController {
 		case Description(String)
 		case Authentication(AuthenticationError)
 		case PostTextTooLong(limit: Int)
-		case FailedToUploadGistCapture(NSImage, description: String)
+		case FailedToUploadMedia(reason: String)
 		case FailedToPostTweet(String)
 	}
 	
@@ -121,14 +121,14 @@ final class SNSController : PostController {
 				
 			case .PostToTwitterMedia:
 
-				try self.twitter.postMedia(container: container, image: capturedGistImage!) { result in
+				self.twitter.post(image: capturedGistImage!, container: container) { result in
 					
 					switch result {
 						
-					case .Success:
+					case .success:
 						callNextStageRecursively(capturedGistImage)
 						
-					case .Failure:
+					case .failure:
 						exitWithFailure(container.error!)
 					}
 				}
@@ -137,20 +137,18 @@ final class SNSController : PostController {
 				
 				DebugTime.print("📮 Try posting by Twitter ... #2.1")
 				
-				try self.twitter.post(container: container) { result in
+				self.twitter.post(statusUsing: container) { result in
 					
 					DebugTime.print("📮 Posted by Twitter (\(result)) ... #2.1.1")
 					
 					switch result {
 						
 					case .success:
-						
 						DebugTime.print("📮 Posted successfully (stage:\(container.stage)) ... #2.0.1")
 						callNextStageRecursively(capturedGistImage)
 						
-					case .failure(let error):
-
-						exitWithFailure(error)
+					case .failure(let container):
+						exitWithFailure(container.error!)
 					}
 				}
 				
@@ -211,7 +209,7 @@ extension SNSController.PostError : CustomStringConvertible {
 		case let .PostTextTooLong(limit):
 			return "Post text over \(limit) characters."
 			
-		case let .FailedToUploadGistCapture(_, message):
+		case let .FailedToUploadMedia(message):
 			return "Failed to upload gist capture image. \(message)"
 			
 		case let .FailedToPostTweet(message):

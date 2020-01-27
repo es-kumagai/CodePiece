@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B1128CB723DDEAA700DDA4EA /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B1128CB623DDEAA700DDA4EA /* Ocean */; };
+		B1128CC923DDF33800DDA4EA /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CC723DDF33800DDA4EA /* Notifications.swift */; };
+		B1128CCA23DDF33800DDA4EA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CC823DDF33800DDA4EA /* API.swift */; };
+		B1128CCC23DDF89200DDA4EA /* PostError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CCB23DDF89200DDA4EA /* PostError.swift */; };
+		B1128CCE23DDFDB900DDA4EA /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CCD23DDFDB900DDA4EA /* JSON.swift */; };
+		B1128CD023DE05C000DDA4EA /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CCF23DE05C000DDA4EA /* APIError.swift */; };
+		B1128CD223DE069300DDA4EA /* ResetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CD123DE069300DDA4EA /* ResetError.swift */; };
+		B1128CD423DE081E00DDA4EA /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CD323DE081E00DDA4EA /* Token.swift */; };
+		B1128CD623DE087000DDA4EA /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CD523DE087000DDA4EA /* AuthorizationError.swift */; };
+		B1128CD823DE14CE00DDA4EA /* TwitterControllerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CD723DE14CE00DDA4EA /* TwitterControllerNotifications.swift */; };
+		B1128CDA23DE1C3D00DDA4EA /* OpenUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CD923DE1C3D00DDA4EA /* OpenUrl.swift */; };
+		B1128CDC23DE800D00DDA4EA /* PostOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CDB23DE800D00DDA4EA /* PostOptions.swift */; };
+		B1128CDE23DE826400DDA4EA /* TweetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CDD23DE826400DDA4EA /* TweetMode.swift */; };
+		B1128CE023DE915000DDA4EA /* UsersTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CDF23DE915000DDA4EA /* UsersTag.swift */; };
+		B1128CE223DE95D100DDA4EA /* SearchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CE123DE95D100DDA4EA /* SearchOptions.swift */; };
 		B124E2C823D1F47C0063D98A /* NamedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B124E2C723D1F47C0063D98A /* NamedNotification.swift */; };
 		B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1278B5B23D176C3003F3719 /* CodeText.swift */; };
 		B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B132D50423CD078800690C5F /* ESProgressHUD */; };
@@ -145,7 +160,6 @@
 		B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */; };
 		B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */; };
 		B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161D23D36E6C002D4571 /* OAuth2 */; };
-		B1FB162023D36E6C002D4571 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161F23D36E6C002D4571 /* Swifter */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +208,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B1128CC723DDF33800DDA4EA /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		B1128CC823DDF33800DDA4EA /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		B1128CCB23DDF89200DDA4EA /* PostError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostError.swift; sourceTree = "<group>"; };
+		B1128CCD23DDFDB900DDA4EA /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		B1128CCF23DE05C000DDA4EA /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		B1128CD123DE069300DDA4EA /* ResetError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetError.swift; sourceTree = "<group>"; };
+		B1128CD323DE081E00DDA4EA /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		B1128CD523DE087000DDA4EA /* AuthorizationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationError.swift; sourceTree = "<group>"; };
+		B1128CD723DE14CE00DDA4EA /* TwitterControllerNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterControllerNotifications.swift; sourceTree = "<group>"; };
+		B1128CD923DE1C3D00DDA4EA /* OpenUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenUrl.swift; sourceTree = "<group>"; };
+		B1128CDB23DE800D00DDA4EA /* PostOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOptions.swift; sourceTree = "<group>"; };
+		B1128CDD23DE826400DDA4EA /* TweetMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetMode.swift; sourceTree = "<group>"; };
+		B1128CDF23DE915000DDA4EA /* UsersTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTag.swift; sourceTree = "<group>"; };
+		B1128CE123DE95D100DDA4EA /* SearchOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOptions.swift; sourceTree = "<group>"; };
 		B124E2C723D1F47C0063D98A /* NamedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedNotification.swift; sourceTree = "<group>"; };
 		B1278B5B23D176C3003F3719 /* CodeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeText.swift; sourceTree = "<group>"; };
 		B132D50B23CD08B800690C5F /* ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -356,6 +384,7 @@
 				B136C9AF23D189C6004AEA27 /* ESGists in Frameworks */,
 				B1DDCB3E23D0C98F00418A84 /* Swim in Frameworks */,
 				B15EE38723CE9C42005B268A /* Swifter in Frameworks */,
+				B1128CB723DDEAA700DDA4EA /* Ocean in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,7 +403,6 @@
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
-				B1FB162023D36E6C002D4571 /* Swifter in Frameworks */,
 				B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
 			);
@@ -390,9 +418,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B1128CC623DDF33800DDA4EA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B1128CC723DDF33800DDA4EA /* Notifications.swift */,
+				B1128CC823DDF33800DDA4EA /* API.swift */,
+				B1128CDB23DE800D00DDA4EA /* PostOptions.swift */,
+				B1128CE123DE95D100DDA4EA /* SearchOptions.swift */,
+				B1128CDD23DE826400DDA4EA /* TweetMode.swift */,
+				B1128CDF23DE915000DDA4EA /* UsersTag.swift */,
+				B1128CD323DE081E00DDA4EA /* Token.swift */,
+				B1128CCB23DDF89200DDA4EA /* PostError.swift */,
+				B1128CD123DE069300DDA4EA /* ResetError.swift */,
+				B1128CD523DE087000DDA4EA /* AuthorizationError.swift */,
+				B1128CCD23DDFDB900DDA4EA /* JSON.swift */,
+				B1128CCF23DE05C000DDA4EA /* APIError.swift */,
+				B1128CD923DE1C3D00DDA4EA /* OpenUrl.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		B132D50C23CD08B800690C5F /* ESTwitter */ = {
 			isa = PBXGroup;
 			children = (
+				B1128CC623DDF33800DDA4EA /* API */,
 				B1A4727323D09DB200F73658 /* Browse */,
 				B1A4727523D09DB200F73658 /* Data */,
 				B1A4724323D09CA600F73658 /* Extension.swift */,
@@ -520,6 +569,7 @@
 				B15EE23C23CE7658005B268A /* PostData+Gists.swift */,
 				B15EE23D23CE7658005B268A /* Twitter.swift */,
 				B15EE23E23CE7658005B268A /* TwitterController.swift */,
+				B1128CD723DE14CE00DDA4EA /* TwitterControllerNotifications.swift */,
 				B15EE23F23CE7658005B268A /* SNSController.swift */,
 				B15EE24023CE7658005B268A /* PostData.swift */,
 			);
@@ -870,6 +920,7 @@
 				B15EE38623CE9C42005B268A /* Swifter */,
 				B1DDCB3D23D0C98F00418A84 /* Swim */,
 				B136C9AE23D189C6004AEA27 /* ESGists */,
+				B1128CB623DDEAA700DDA4EA /* Ocean */,
 			);
 			productName = ESTwitter;
 			productReference = B132D50B23CD08B800690C5F /* ESTwitter.framework */;
@@ -914,7 +965,6 @@
 				B15EE38923CE9FBB005B268A /* Reachability */,
 				B15EE38C23CEA03E005B268A /* KeychainAccess */,
 				B1FB161D23D36E6C002D4571 /* OAuth2 */,
-				B1FB161F23D36E6C002D4571 /* Swifter */,
 			);
 			productName = "CodePiece-Rev2";
 			productReference = B1D13C7023CA14DB0016902A /* CodePiece.app */;
@@ -982,6 +1032,7 @@
 				B15EE38823CE9FBB005B268A /* XCRemoteSwiftPackageReference "Reachability.swift" */,
 				B15EE38B23CEA03E005B268A /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				B1DDCB3C23D0C98F00418A84 /* XCRemoteSwiftPackageReference "Swim" */,
+				B1128CB523DDEAA700DDA4EA /* XCRemoteSwiftPackageReference "Ocean" */,
 			);
 			productRefGroup = B1D13C7123CA14DB0016902A /* Products */;
 			projectDirPath = "";
@@ -1043,7 +1094,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1128CE223DE95D100DDA4EA /* SearchOptions.swift in Sources */,
 				B1A4729C23D09DB300F73658 /* InReplyTo.swift in Sources */,
+				B1128CC923DDF33800DDA4EA /* Notifications.swift in Sources */,
 				B1A4729623D09DB300F73658 /* User.swift in Sources */,
 				B1A4729E23D09DB300F73658 /* Color.swift in Sources */,
 				B1A472A023D09DB300F73658 /* StatusCoordinates.swift in Sources */,
@@ -1051,16 +1104,27 @@
 				B1A4729023D09DB300F73658 /* UserEntities.swift in Sources */,
 				B1A4728F23D09DB300F73658 /* Date.swift in Sources */,
 				B1A4728E23D09DB300F73658 /* StatusEntities.swift in Sources */,
+				B1128CD623DE087000DDA4EA /* AuthorizationError.swift in Sources */,
+				B1128CDC23DE800D00DDA4EA /* PostOptions.swift in Sources */,
 				B1A4729223D09DB300F73658 /* Hashtag.swift in Sources */,
 				B1A4729923D09DB300F73658 /* Media.swift in Sources */,
 				B1A4729A23D09DB300F73658 /* URL.swift in Sources */,
+				B1128CDE23DE826400DDA4EA /* TweetMode.swift in Sources */,
+				B1128CDA23DE1C3D00DDA4EA /* OpenUrl.swift in Sources */,
 				B1A4729B23D09DB300F73658 /* URLEntity.swift in Sources */,
+				B1128CD023DE05C000DDA4EA /* APIError.swift in Sources */,
 				B1A4728C23D09DB300F73658 /* UserMention.swift in Sources */,
 				B1A4729D23D09DB300F73658 /* Status.swift in Sources */,
 				B1A4729723D09DB300F73658 /* Coordinate.swift in Sources */,
+				B1128CCC23DDF89200DDA4EA /* PostError.swift in Sources */,
 				B1A4725C23D09CA700F73658 /* Extension.swift in Sources */,
 				B1A4728B23D09DB300F73658 /* Browse.swift in Sources */,
 				B1A4729523D09DB300F73658 /* UserProfile.swift in Sources */,
+				B1128CE023DE915000DDA4EA /* UsersTag.swift in Sources */,
+				B1128CD423DE081E00DDA4EA /* Token.swift in Sources */,
+				B1128CCA23DDF33800DDA4EA /* API.swift in Sources */,
+				B1128CCE23DDFDB900DDA4EA /* JSON.swift in Sources */,
+				B1128CD223DE069300DDA4EA /* ResetError.swift in Sources */,
 				B1A4729823D09DB300F73658 /* Indicis.swift in Sources */,
 				B1A4729423D09DB300F73658 /* HashtagEntity.swift in Sources */,
 				B1A4729123D09DB300F73658 /* URLInfo.swift in Sources */,
@@ -1137,6 +1201,7 @@
 				B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */,
 				B15EE26623CE7658005B268A /* TwitterByOSPreferenceViewController.swift in Sources */,
 				B15EE25C23CE7658005B268A /* GistsController.swift in Sources */,
+				B1128CD823DE14CE00DDA4EA /* TwitterControllerNotifications.swift in Sources */,
 				B15EE26523CE7658005B268A /* GistScheme.swift in Sources */,
 				B15EE39123CF039D005B268A /* NSError+STTwitter.swift in Sources */,
 				B15EE38F23CF0360005B268A /* TwitterError.swift in Sources */,
@@ -1566,6 +1631,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B1128CB523DDEAA700DDA4EA /* XCRemoteSwiftPackageReference "Ocean" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:es-kumagai/Ocean.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		B1154B6823CABCFC003CFFF2 /* XCRemoteSwiftPackageReference "ESGists" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/es-kumagai/ESGists.git";
@@ -1625,6 +1698,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B1128CB623DDEAA700DDA4EA /* Ocean */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1128CB523DDEAA700DDA4EA /* XCRemoteSwiftPackageReference "Ocean" */;
+			productName = Ocean;
+		};
 		B132D50423CD078800690C5F /* ESProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B132D50323CD078800690C5F /* XCRemoteSwiftPackageReference "ESProgressHUD" */;
@@ -1659,11 +1737,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B15EE33E23CE7959005B268A /* XCRemoteSwiftPackageReference "OAuth2" */;
 			productName = OAuth2;
-		};
-		B1FB161F23D36E6C002D4571 /* Swifter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B15EE38023CE9B40005B268A /* XCRemoteSwiftPackageReference "Swifter" */;
-			productName = Swifter;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

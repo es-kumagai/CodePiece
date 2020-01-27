@@ -13,8 +13,8 @@ private let jsonDecoder = JSONDecoder()
 
 enum PostResult {
 	
-	case Success(PostDataContainer)
-	case Failure(PostDataContainer)
+	case success(PostDataContainer)
+	case failure(PostDataContainer)
 }
 
 struct PostData {
@@ -73,17 +73,9 @@ final class PostDataContainer {
 
 extension PostDataContainer {
 	
-	func postedToTwitter(postedRawStatus: [String : Any]) throws {
+	func postedToTwitter(postedStatus status: Status) {
 		
-		do {
-			
-			let data = try JSONSerialization.data(withJSONObject: postedRawStatus, options: [])
-			self.twitterState.postedStatus = try jsonDecoder.decode(ESTwitter.Status.self, from: data)
-		}
-		catch {
-			
-			throw PostDataError.TwitterRawObjectsParseError(rawObjects: postedRawStatus)
-		}
+		self.twitterState.postedStatus = status
 	}
 	
 	func postedToGist(gist: ESGists.Gist) {

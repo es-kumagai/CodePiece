@@ -11,7 +11,6 @@ import ESGists
 import APIKit
 import ESTwitter
 import OAuth2
-import Swifter
 
 enum AuthorizationState {
 	
@@ -217,50 +216,52 @@ extension Authorization {
 //		oauth.postAccessTokenRequestWithPIN(pin, successBlock: successHandler, errorBlock: errorHandler)
 //	}
 	
-	static func authorizationWithTwitter(completion: @escaping (AuthorizationResult) -> Void) {
-
-		let callback = ""
-		
-		func successHandler(accessToken: Credential.OAuthAccessToken) {
-
-			let account = TwitterController.Account(token: accessToken.key, tokenSecret: accessToken.secret, screenName: accessToken.screenName!)
-		
-			DebugTime.print("📮 Passed verify-credentials #9")
-
-			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
-			Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: true, username: accessToken.screenName).post()
-
-			
-//			twitter.pinRequesting = false
-			completion(.Created)
-		}
-		
-		func errorHandler(error: Error) {
-
-//			twitter.pinRequesting = false
-
-			print("Twitter authorization went wrong: \(error).")
-			completion(.Failed(.message(error.localizedDescription)))
-		}
-
-		NSApp.twitterController.authorize { result in
-			
-			switch result {
-				
-			case .success(let (.some(accessToken), name, id, response)):
-				DebugTime.print(" with: \(accessToken), \(id), \(name), \(response)")
-				successHandler(accessToken: accessToken)
-
-			case .success(let (.none, name, id, response)):
-				DebugTime.print(" Failed to get an AccessToken for: \(id), \(name), \(response)")
-				errorHandler(error: AuthorizationResult.Error.message("Failed to get an Access Token for \(name)"))
-
-			case .failure(let error):
-				errorHandler(error: error)
-			}
-		}
-	}
+//	#warning("TwitterController が担えば良さそう。")
+//	static func authorizationWithTwitter(completion: @escaping (AuthorizationResult) -> Void) {
+//
+//		let callback = ""
+//		
+//		func successHandler(accessToken: Credential.OAuthAccessToken) {
+//
+//			let account = TwitterController.Account(token: accessToken.key, tokenSecret: accessToken.secret, screenName: accessToken.screenName!)
+//		
+//			DebugTime.print("📮 Passed verify-credentials #9")
+//
+//			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
+//			Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: true, username: accessToken.screenName).post()
+//
+//			
+////			twitter.pinRequesting = false
+//			completion(.Created)
+//		}
+//		
+//		func errorHandler(error: Error) {
+//
+////			twitter.pinRequesting = false
+//
+//			print("Twitter authorization went wrong: \(error).")
+//			completion(.Failed(.message(error.localizedDescription)))
+//		}
+//
+//		NSApp.twitterController.authorize { result in
+//			
+//			switch result {
+//				
+//			case .success(let (.some(accessToken), name, id, response)):
+//				DebugTime.print(" with: \(accessToken), \(id), \(name), \(response)")
+//				successHandler(accessToken: accessToken)
+//
+//			case .success(let (.none, name, id, response)):
+//				DebugTime.print(" Failed to get an AccessToken for: \(id), \(name), \(response)")
+//				errorHandler(error: AuthorizationResult.Error.message("Failed to get an Access Token for \(name)"))
+//
+//			case .failure(let error):
+//				errorHandler(error: error)
+//			}
+//		}
+//	}
 	
+	#warning("GistController が担えば良さそう。")
 	static func authorizationWithGitHub(completion: @escaping (AuthorizationResult) -> Void) {
 		
 		let oauth2 = self.github.oauth2

@@ -366,12 +366,12 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		
 		switch state {
 			
-		case .ViaWiFi, .ViaCellular:
+		case .viaWiFi, .viaCellular:
 			NSLog("CodePiece has get internet connection.")
 			self.autoUpdateState.hasInternetConnection = true
 			self.autoUpdateState.setNeedsUpdate()
 			
-		case .Unreachable:
+		case .unreachable:
 			NSLog("CodePiece has lost internet connection.")
 			self.autoUpdateState.hasInternetConnection = false
 		}
@@ -405,7 +405,7 @@ extension TimelineViewController : NotificationObservable {
 
 		super.viewDidAppear()
 		
-		self.observe(notification: Authorization.TwitterAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		self.observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.message.send(message: .UpdateStatuses)
 		}
@@ -504,12 +504,12 @@ extension TimelineViewController : TimelineGetStatusesController {
 			self.timelineStatusView.OKMessage = "Last Update: \(Date().displayString)"
 		}
 		
-		let failedToGetTimeline = { (error: GetStatusesError) -> Void in
+		let failedToGetTimeline = { (error: PostError) -> Void in
 			
-			if error.isRateLimitExceeded {
-				
-				self.message.send(message: .AddAutoUpdateIntervalDelay(7.0))
-			}
+//			if error.isRateLimitExceeded {
+//				
+//				self.message.send(message: .AddAutoUpdateIntervalDelay(7.0))
+//			}
 		
             self.reportTimelineGetStatusError(error: error)
 		}
@@ -518,7 +518,11 @@ extension TimelineViewController : TimelineGetStatusesController {
 			
 			self.displayControlState = .Updating
 			
-			NSApp.twitterController.getStatusesWithQuery(query: query, since: self.timelineDataSource.latestTweetIdForHashtags(hashtags: hashtags)) { result in
+			let options = API.SearchOptions(
+				sinceId: self.timelineDataSource.latestTweetIdForHashtags(hashtags: hashtags)
+			)
+			
+			NSApp.twitterController.search(tweetWith: query, options: options) { result in
 				
 				self.displayControlState = .Updated
 

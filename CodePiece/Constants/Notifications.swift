@@ -26,17 +26,17 @@ extension Authorization {
 		}
 	}
 
-	final class TwitterAuthorizationStateDidChangeNotification : NotificationProtocol {
-		
-		private(set) var isValid:Bool
-		private(set) var username:String?
-		
-		init(isValid:Bool, username:String?) {
-			
-			self.isValid = isValid
-			self.username = username
-		}		
-	}
+//	final class TwitterAuthorizationStateDidChangeNotification : NotificationProtocol {
+//		
+//		private(set) var isValid:Bool
+//		private(set) var username:String?
+//		
+//		init(isValid:Bool, username:String?) {
+//			
+//			self.isValid = isValid
+//			self.username = username
+//		}		
+//	}
 }
 
 extension MainViewController {
@@ -64,15 +64,15 @@ extension MainViewController {
 
 extension TwitterAccountSelectorController {
 	
-	final class TwitterAccountSelectorDidChangeNotification : NotificationProtocol {
-		
-		private(set) var account: TwitterController.Account
-		
-		init(account: TwitterController.Account) {
-			
-			self.account = account
-		}
-	}
+//	final class TwitterAccountSelectorDidChangeNotification : NotificationProtocol {
+//		
+//		private(set) var account: TwitterController.Account
+//		
+//		init(account: TwitterController.Account) {
+//			
+//			self.account = account
+//		}
+//	}
 }
 
 final class HashtagsDidChangeNotification : NotificationProtocol {
