@@ -10,6 +10,11 @@ public typealias HashtagSet = Set<Hashtag>
 
 extension Sequence where Element : HashtagType {
 
+	public func sorted() -> [Element] {
+		
+		return sorted { $0.value < $1.value }
+	}
+	
 	public var twitterQueryText: String {
 		
 		return twitterDisplayText

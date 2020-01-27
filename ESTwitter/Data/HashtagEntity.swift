@@ -8,10 +8,23 @@
 
 public struct HashtagEntity {
 	
-	public var value:Hashtag
-	public var indices:Indices
+	public var value: Hashtag
+	public var indices: Indices
 }
 
 extension HashtagEntity : Decodable {
 	
+	enum CodingKeys : String, CodingKey {
+		
+		case text
+		case indices
+	}
+	
+	public init(from decoder: Decoder) throws {
+		
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		
+		value = try Hashtag(container.decode(String.self, forKey: .text))
+		indices = try container.decode(Indices.self, forKey: .indices)
+	}
 }

@@ -22,7 +22,7 @@ struct PostData {
 	var code: String?
 	var description: String
 	var language: ESGists.Language
-	var hashtags: ESTwitter.HashtagSet
+	var hashtags: [Hashtag]
 	var usePublicGists: Bool
 	var replyTo: ESTwitter.Status?
 	
@@ -162,25 +162,30 @@ extension PostDataContainer {
 		self.setTwitterMediaIDs(mediaIDs: mediaIDs)
 	}
 	
-	func effectiveHashtags(withAppTag: Bool, withLangTag: Bool) -> ESTwitter.HashtagSet {
+	func effectiveHashtags(withAppTag: Bool, withLangTag: Bool) -> [Hashtag] {
 		
-		let apptag: ESTwitter.Hashtag? = withAppTag ? CodePieceApp.hashtag : nil
-		let langtag: ESTwitter.Hashtag? = withLangTag ? self.data.language.hashtag : nil
+		var hashtags = data.hashtags
+
+		if withLangTag {
 		
-		return [ apptag, langtag ].reduce(data.hashtags) { tags, tag in
+			let langTag = data.language.hashtag
 			
-			if let tag = tag {
-				
-				return ESTwitter.HashtagSet(tags + [ tag ])
-			}
-			else {
-				
-				return tags
-			}
+			hashtags.removeAll { $0 == langTag }
+			hashtags.append(langTag)
 		}
+		
+		if withAppTag {
+			
+			let appTag = CodePieceApp.hashtag
+			
+			hashtags.removeAll { $0 == appTag }
+			hashtags.append(appTag)
+		}
+		
+		return hashtags
 	}
 	
-	func makeDescriptionWithEffectiveHashtags(hashtags:ESTwitter.HashtagSet, maxLength:Int? = nil, appendString:String? = nil) -> String {
+	func makeDescriptionWithEffectiveHashtags(hashtags: [Hashtag], maxLength:Int? = nil, appendString:String? = nil) -> String {
 		
 		func getTruncatedDescription(_ description: String, maxLength: Int) -> String {
 			

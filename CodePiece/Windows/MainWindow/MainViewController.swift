@@ -51,7 +51,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		didSet {
 			
-			if let status = self.statusForReplyTo {
+			if let status = statusForReplyTo {
 				
 				print("Set 'Reply-To:' \(status.user)")
 			}
@@ -140,14 +140,24 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		return self.languagePopUpButton.selectedItem.flatMap { Language(displayText: $0.title) }!
 	}
-	
-	var sortedHashtags: [Hashtag] {
-		
-		let languageHashtag = selectedLanguage.hashtag
-		let customHashtags = hashTagTextField.hashtags.filter { $0 != languageHashtag }
 
-		return customHashtags.sorted { $0.value < $1.value } + [languageHashtag]
+	var customHashtags: [Hashtag] {
+	
+		return hashTagTextField.hashtags.sorted()
 	}
+	
+	var customHashtagsExcludeLanguageHashtag: [Hashtag] {
+
+		let languageHashtag = selectedLanguage.hashtag
+		let customHashtags = hashTagTextField.hashtags.sorted().filter { $0 != languageHashtag }
+
+		return customHashtags
+	}
+	
+//	var effectiveHashtags: [Hashtag] {
+//
+//		return effectiveHashtagsExcludeLanguageHashtag + [selectedLanguage.hashtag]
+//	}
 	
 	@IBAction func pushPostButton(_ sender:NSObject?) {
 	
@@ -220,8 +230,8 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		DebugTime.print("Saving contents in main window.")
 		
-		NSApp.settings.appState.selectedLanguage = self.selectedLanguage
-		NSApp.settings.appState.hashtags = self.hashTagTextField.hashtags
+		NSApp.settings.appState.selectedLanguage = selectedLanguage
+		NSApp.settings.appState.hashtags = hashTagTextField.hashtags
 
 		NSApp.settings.saveAppState()
 	}

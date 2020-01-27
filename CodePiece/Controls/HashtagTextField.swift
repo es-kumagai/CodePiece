@@ -23,7 +23,7 @@ final class HashtagTextField : NSTextField {
 		
 		set (newHashtags) {
 			
-			stringValue = newHashtags.twitterDisplayText
+			stringValue = newHashtags.sorted().twitterDisplayText
 			hashtagsBeforeEditing = newHashtags
 
 			HashtagsDidChangeNotification(hashtags: newHashtags).post()
@@ -46,7 +46,7 @@ final class HashtagTextField : NSTextField {
 	override func textDidEndEditing(_ notification: Notification) {
 		
 		// 表示のために代入し直して正規化します。
-		stringValue = hashtags.twitterDisplayText
+		stringValue = hashtags.sorted().twitterDisplayText
 		
 		super.textDidEndEditing(notification)
 

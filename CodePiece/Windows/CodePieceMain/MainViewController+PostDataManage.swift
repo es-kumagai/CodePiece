@@ -19,9 +19,9 @@ extension MainViewController : PostDataManageable {
 		
 		let code = codeTextView.codeText
 		let description = descriptionTextField.twitterText
-		let language = self.selectedLanguage
-		let hashtags = self.hashTagTextField.hashtags
-		let replyTo = self.statusForReplyTo
+		let language = selectedLanguage
+		let hashtags = customHashtags
+		let replyTo = statusForReplyTo
 		
 		#if DEBUG
 			let usePublicGists = false

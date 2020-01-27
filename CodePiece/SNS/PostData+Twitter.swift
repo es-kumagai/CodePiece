@@ -65,8 +65,8 @@ extension PostDataContainer {
 		return makeDescriptionWithEffectiveHashtags(hashtags: effectiveHashtagsForTwitter, maxLength: maxLength, appendString: gistPageUrl)
 	}
 	
-	var effectiveHashtagsForTwitter: ESTwitter.HashtagSet {
+	var effectiveHashtagsForTwitter: [Hashtag] {
 		
-		return self.effectiveHashtags(withAppTag: appendAppTagToTwitter, withLangTag: appendLangTagToTwitter)
+		return effectiveHashtags(withAppTag: appendAppTagToTwitter, withLangTag: appendLangTagToTwitter)
 	}
 }

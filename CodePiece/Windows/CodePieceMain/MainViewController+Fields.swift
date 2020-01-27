@@ -66,7 +66,9 @@ extension MainViewController : FieldsController {
 	
 	func updateHashtagWatermark() {
 		
-		hashtagWatermark.stringValue = sortedHashtags.twitterDisplayText
+		let hashtags = customHashtagsExcludeLanguageHashtag + [selectedLanguage.hashtag]
+
+		hashtagWatermark.stringValue = hashtags.twitterDisplayText
 	}
 }
 
