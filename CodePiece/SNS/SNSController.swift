@@ -17,32 +17,6 @@ protocol PostController {
 
 final class SNSController : PostController {
 
-	enum Service {
-	
-		case Twitter
-		case GitHub
-	}
-	
-	enum AuthenticationError : Error {
-		
-		case CredentialsNotVerified
-		case NotAuthorized(service: Service)
-		case NotReady(service: Service, description: String)
-		case InvalidAccount(service: Service, reason: String)
-	}
-	
-	/// This means a error which may occur when post.
-	enum PostError : Error {
-		
-		case Unexpected(Error)
-		case SystemError(String)
-		case Description(String)
-		case Authentication(AuthenticationError)
-		case PostTextTooLong(limit: Int)
-		case FailedToUploadMedia(reason: String)
-		case FailedToPostTweet(String)
-	}
-	
 	var gists: GistsController
 	var twitter: TwitterController
 	
@@ -167,68 +141,33 @@ final class SNSController : PostController {
 	}
 }
 
-extension SNSController.AuthenticationError : CustomStringConvertible {
-	
-	var description: String {
-		
-		switch self {
-			
-		case .CredentialsNotVerified:
-			return "Credentials not verified."
-			
-		case .NotAuthorized(let service):
-			return "\(service) is not authorized."
-			
-		case .NotReady(let service, let message):
-			return "\(service) is not ready. \(message)"
-			
-		case .InvalidAccount(let service, let reason):
-			return "Invalid \(service) Account. \(reason)"
-		}
-	}
-}
+//extension SNSController.PostError : CustomStringConvertible {
+//
+//	var description: String {
+//
+//		switch self {
+//
+//		case let .Unexpected(error):
+//			return "Unexpected error. \(error.localizedDescription)"
+//
+//		case let .SystemError(message):
+//			return "System Error. \(message)"
+//
+//		case let .Description(message):
+//			return "\(message)"
+//
+//		case let .Authentication(error):
+//			return error.description
+//
+////		case let .PostTextTooLong(limit):
+////			return "Post text over \(limit) characters."
+//
+//		case let .FailedToUploadMedia(message):
+//			return "Failed to upload gist capture image. \(message)"
+//
+//		case let .twitterError(message):
+//			return "Failed to post tweet. \(message)"
+//		}
+//	}
+//}
 
-extension SNSController.PostError : CustomStringConvertible {
-	
-	var description: String {
-		
-		switch self {
-			
-		case let .Unexpected(error):
-			return "Unexpected error. \(error.localizedDescription)"
-			
-		case let .SystemError(message):
-			return "System Error. \(message)"
-			
-		case let .Description(message):
-			return "\(message)"
-
-		case let .Authentication(error):
-			return error.description
-			
-		case let .PostTextTooLong(limit):
-			return "Post text over \(limit) characters."
-			
-		case let .FailedToUploadMedia(message):
-			return "Failed to upload gist capture image. \(message)"
-			
-		case let .FailedToPostTweet(message):
-			return "Failed to post tweet. \(message)"
-		}
-	}
-}
-
-extension SNSController.Service : CustomStringConvertible {
-	
-	var description: String {
-		
-		switch self {
-			
-		case .Twitter:
-			return "Twitter"
-			
-		case .GitHub:
-			return "GitHub"
-		}
-	}
-}

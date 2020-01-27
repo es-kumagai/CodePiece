@@ -620,7 +620,7 @@ extension TwitterController {
 		func failure(_ error: PostError) {
 			
 			DebugTime.print("📮 Failed to post a status with failure (\(error)) ... #3.3.2")
-			container.setError(error: .FailedToPostTweet(error.localizedDescription))
+			container.setError(error: .twitterError(error))
 
 			handler(.failure(container))
 		}
