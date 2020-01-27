@@ -32,7 +32,7 @@ final class GistsController : PostController, AlertDisplayable {
 		let description = container.descriptionForGists()
 		let publicGist = container.data.usePublicGists
 
-		let file = GistFile(name: filename, content: [container.data.code!])
+		let file = GistFile(name: filename, content: container.data.code!)
 
 		let request = GitHubAPI.Gists.CreateGist(authorization: authorization, files: [file], description: description, publicGist: publicGist)
 		
@@ -51,7 +51,7 @@ final class GistsController : PostController, AlertDisplayable {
 				
 				NSLog("A Gist posted successfully. \(gist)")
 				completed(PostResult.success(container))
-				
+
 			case .failure(let error):
 
 				completed(PostResult.failure(.Description("Failed to post a gist. \(error)")))

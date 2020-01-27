@@ -63,7 +63,7 @@ final class SNSController : PostController {
 				
 				DebugTime.print("📮 Try posting by Gists ... #2.2")
 				
-				try self.gists.post(container: container) { result in
+				try gists.post(container: container) { result in
 					
 					switch result {
 						

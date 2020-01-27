@@ -26,13 +26,13 @@ extension APIKit.SessionTaskError : CustomStringConvertible {
 		switch self {
 			
 		case .connectionError(let error):
-			return error.localizedDescription
+			return "\(error)"
 			
 		case .requestError(let error):
-			 return error.localizedDescription
+			 return "\(error)"
 			
 		case .responseError(let error):
-			return error.localizedDescription
+			return "\(error)"
 		}
 	}
 }

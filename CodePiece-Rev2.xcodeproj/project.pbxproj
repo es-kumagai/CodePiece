@@ -126,6 +126,7 @@
 		B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17B938223CAB2A800E3B490 /* MainWindow.storyboard */; };
 		B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1806CB723D6B50F006932F5 /* SwifterScheme.swift */; };
 		B18FFA3D23DF26B60057C977 /* DecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FFA3C23DF26B60057C977 /* DecodingError.swift */; };
+		B18FFA4223DF5ED60057C977 /* GistErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FFA4123DF5ED60057C977 /* GistErrors.swift */; };
 		B1A105FD23CA1A4A00F9C4FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */; };
 		B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1060223CA217F00F9C4FD /* APIKeys.swift */; };
 		B1A1060523CA25B100F9C4FD /* APIKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1060423CA25B100F9C4FD /* APIKeysTests.swift */; };
@@ -339,6 +340,7 @@
 		B17B938223CAB2A800E3B490 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		B1806CB723D6B50F006932F5 /* SwifterScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterScheme.swift; sourceTree = "<group>"; };
 		B18FFA3C23DF26B60057C977 /* DecodingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingError.swift; sourceTree = "<group>"; };
+		B18FFA4123DF5ED60057C977 /* GistErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistErrors.swift; sourceTree = "<group>"; };
 		B1A105FC23CA1A4A00F9C4FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1A105FF23CA1F1900F9C4FD /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		B1A1060223CA217F00F9C4FD /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 		B15EE23423CE7658005B268A /* SNS */ = {
 			isa = PBXGroup;
 			children = (
+				B18FFA4023DF5EB40057C977 /* Gists */,
 				B15EE23523CE7658005B268A /* PostData+Twitter.swift */,
 				B15EE23623CE7658005B268A /* Twitter */,
 				B15EE23723CE7658005B268A /* Language.swift */,
@@ -738,6 +741,14 @@
 				B17B938023CAB28C00E3B490 /* MainViewController.swift */,
 			);
 			path = MainWindow;
+			sourceTree = "<group>";
+		};
+		B18FFA4023DF5EB40057C977 /* Gists */ = {
+			isa = PBXGroup;
+			children = (
+				B18FFA4123DF5ED60057C977 /* GistErrors.swift */,
+			);
+			path = Gists;
 			sourceTree = "<group>";
 		};
 		B1A105FE23CA1EF700F9C4FD /* Private */ = {
@@ -1261,6 +1272,7 @@
 				B15EE29623CE7667005B268A /* AboutWindowController.swift in Sources */,
 				B15EE22223CE7636005B268A /* TwitterAccountSelectorController.swift in Sources */,
 				B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */,
+				B18FFA4223DF5ED60057C977 /* GistErrors.swift in Sources */,
 				B15EE29F23CE7667005B268A /* TimelineViewController+Action.swift in Sources */,
 				B15EE25823CE7658005B268A /* PostData+Twitter.swift in Sources */,
 				B15EE1FF23CE7571005B268A /* BaseWindowController.swift in Sources */,

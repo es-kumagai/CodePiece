@@ -166,7 +166,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 	func postToSNS() {
 
-		guard self.canPost else {
+		guard canPost else {
 			
 			return
 		}
