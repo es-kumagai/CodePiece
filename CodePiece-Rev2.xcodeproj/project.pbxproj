@@ -1578,13 +1578,14 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				ES_MARKETING_VERSION = 2.0.0;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = "$(ES_MARKETING_VERSION)-beta";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece-Beta";
 				PRODUCT_NAME = CodePiece;
 				SWIFT_VERSION = 5.0;
@@ -1600,13 +1601,14 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				ES_MARKETING_VERSION = 2.0.0;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = "$(ES_MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_NAME = CodePiece;
 				SWIFT_VERSION = 5.0;
