@@ -30,9 +30,9 @@ struct DataStore {
 	
 	func save() throws {
 	
-		self.appState.save()
-		self.twitter.save()
-		try self.github.save()
+		appState.save()
+		twitter.save()
+		try github.save()
 	}
 }
 

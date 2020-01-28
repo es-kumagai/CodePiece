@@ -97,8 +97,8 @@ final class TimelineViewController: NSViewController {
 		}
 	}
 
-	@IBOutlet var timelineTableView:TimelineTableView!
-	@IBOutlet var timelineDataSource:TimelineTableDataSource!
+	@IBOutlet var timelineTableView: TimelineTableView!
+	@IBOutlet var timelineDataSource: TimelineTableDataSource!
 	@IBOutlet var timelineStatusView: TimelineStatusView! {
 		
 		didSet {
@@ -283,8 +283,6 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 	
 	func messageQueue(queue: MessageQueue<Message>, handlingMessage message: Message) throws {
 		
-		DebugTime.print("Message Queue: \(message)")
-
 		switch message {
 			
 		case .UpdateStatuses:
@@ -406,12 +404,6 @@ extension TimelineViewController : NotificationObservable {
 		
 		super.viewWillAppear()
 	
-	}
-	
-	override func viewDidAppear() {
-
-		super.viewDidAppear()
-		
 		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.message.send(message: .UpdateStatuses)
@@ -443,11 +435,19 @@ extension TimelineViewController : NotificationObservable {
 				
 				self.message.send(message: TimelineViewController.Message.UpdateStatuses)
 			}
-			
-			return
 		}
-		
+
 		message.send(message: .Start)
+	}
+	
+	override func viewDidAppear() {
+
+		super.viewDidAppear()
+	
+		if let hashtags = NSApp.settings.appState.hashtags {
+
+			timeline = timeline.replaceHashtags(hashtags: hashtags)
+		}
 	}
 	
 	override func viewWillDisappear() {

@@ -39,7 +39,9 @@ final class Settings {
 	func loadAppState() {
 	
 		appState.hashtags = _store.appState.hashtags
-		appState.selectedLanguage = _store.appState.selectedLanguage		
+		appState.selectedLanguage = _store.appState.selectedLanguage
+		
+		DebugTime.print("App state loaded.")
 	}
 	
 	func saveAppState() {
@@ -48,6 +50,8 @@ final class Settings {
 		_store.appState.hashtags = appState.hashtags
 		
 		_store.appState.save()
+		
+		DebugTime.print("App state saved.")
 	}
 	
 	func loadAccount() {

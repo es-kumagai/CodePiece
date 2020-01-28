@@ -13,5 +13,5 @@ import ESTwitter
 struct AppState {
 	
 	var selectedLanguage: Language?
-	var hashtags: ESTwitter.HashtagSet?
+	var hashtags: HashtagSet?
 }

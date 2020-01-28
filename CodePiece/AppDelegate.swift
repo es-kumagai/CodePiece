@@ -11,9 +11,11 @@ import Ocean
 
 // FIXME: 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整したいところです。
 @NSApplicationMain @objcMembers
-class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
+class AppDelegate: NSObject, NSApplicationDelegate, NotificationObservable {
 
 	var urlSchemeManager: URLSchemeManager!
+	var notificationHandlers = Notification.Handlers()
+	
 	
 	override func awakeFromNib() {
 		
@@ -29,6 +31,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		NSLog("Application launched.")
 		
 		urlSchemeManager = URLSchemeManager()
+		
+		observe(notification: LanguagePopupDataSource.LanguageSelectionChanged.self) { notification in
+
+			NSApp.settings.saveAppState()
+		}
+		
+		observe(notification: HashtagsDidChangeNotification.self) { notification in
+			
+			NSApp.settings.saveAppState()
+		}
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

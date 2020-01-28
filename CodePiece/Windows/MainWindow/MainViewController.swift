@@ -273,13 +273,10 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			self.updateWatermark()
 			self.updateTweetTextCount()
-
-			self.saveContents()
 		}
 		
 		observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
-			
-			self.saveContents()
+
 		}
 		
 		observe(notification: TimelineViewController.TimelineSelectionChangedNotification.self) { [unowned self] notification in
@@ -318,6 +315,10 @@ final class MainViewController: NSViewController, NotificationObservable {
 		DebugTime.print("Main window did show.")
 		
 		super.viewDidAppear()
+		
+		updateWatermark()
+		updateTweetTextCount()
+
 		
 		if NSApp.settings.isReady {
 			
