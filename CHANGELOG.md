@@ -3,6 +3,20 @@
 Change Logs.
 
 ## 2.0.0
+
+### Enhancements
+
+* Supports darkmode.
+
+### Fixes
+
+* Restore hashtag when the app crashed.
+
+### Updates
+
+* Make features of Twitter authentication more stable.
+* Rewrite with Swift 5.1
+
 ## 1.4.12
 
 ### Enhancements
