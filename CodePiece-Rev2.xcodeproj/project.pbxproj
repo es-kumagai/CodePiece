@@ -55,7 +55,6 @@
 		B15EE21A23CE761C005B268A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21623CE761C005B268A /* Application.swift */; };
 		B15EE21B23CE761C005B268A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21723CE761C005B268A /* Colors.swift */; };
 		B15EE22123CE7636005B268A /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21E23CE7636005B268A /* AboutWindowControllerSegue.swift */; };
-		B15EE22223CE7636005B268A /* TwitterAccountSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21F23CE7636005B268A /* TwitterAccountSelectorController.swift */; };
 		B15EE22323CE7636005B268A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE22023CE7636005B268A /* MenuController.swift */; };
 		B15EE22623CE7648005B268A /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE22523CE7648005B268A /* ReachabilityController.swift */; };
 		B15EE24E23CE7658005B268A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE22823CE7658005B268A /* AppState.swift */; };
@@ -81,7 +80,6 @@
 		B15EE26323CE7658005B268A /* URLSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24223CE7658005B268A /* URLSchemeManager.swift */; };
 		B15EE26423CE7658005B268A /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24323CE7658005B268A /* URLScheme.swift */; };
 		B15EE26523CE7658005B268A /* GistScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24423CE7658005B268A /* GistScheme.swift */; };
-		B15EE26623CE7658005B268A /* TwitterByOSPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24623CE7658005B268A /* TwitterByOSPreferenceViewController.swift */; };
 		B15EE26723CE7658005B268A /* GitHubPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */; };
 		B15EE26823CE7658005B268A /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24823CE7658005B268A /* PreferencesWindowController.swift */; };
 		B15EE26923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift */; };
@@ -261,7 +259,6 @@
 		B15EE21623CE761C005B268A /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		B15EE21723CE761C005B268A /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B15EE21E23CE7636005B268A /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
-		B15EE21F23CE7636005B268A /* TwitterAccountSelectorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccountSelectorController.swift; sourceTree = "<group>"; };
 		B15EE22023CE7636005B268A /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		B15EE22523CE7648005B268A /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
 		B15EE22823CE7658005B268A /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -287,7 +284,6 @@
 		B15EE24223CE7658005B268A /* URLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSchemeManager.swift; sourceTree = "<group>"; };
 		B15EE24323CE7658005B268A /* URLScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		B15EE24423CE7658005B268A /* GistScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistScheme.swift; sourceTree = "<group>"; };
-		B15EE24623CE7658005B268A /* TwitterByOSPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterByOSPreferenceViewController.swift; sourceTree = "<group>"; };
 		B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubPreferenceView.storyboard; sourceTree = "<group>"; };
 		B15EE24823CE7658005B268A /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		B15EE24923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterByOAuthPreferenceViewController.swift; sourceTree = "<group>"; };
@@ -536,7 +532,6 @@
 			isa = PBXGroup;
 			children = (
 				B15EE21E23CE7636005B268A /* AboutWindowControllerSegue.swift */,
-				B15EE21F23CE7636005B268A /* TwitterAccountSelectorController.swift */,
 				B15EE22023CE7636005B268A /* MenuController.swift */,
 			);
 			path = Menu;
@@ -934,7 +929,6 @@
 				B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */,
 				B15EE24C23CE7658005B268A /* GitHubPreferenceViewController.swift */,
 				B15EE24923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift */,
-				B15EE24623CE7658005B268A /* TwitterByOSPreferenceViewController.swift */,
 				B15EE24B23CE7658005B268A /* TwitterPreferenceView.storyboard */,
 				B15EE24D23CE7658005B268A /* TwitterPreferenceViewController.swift */,
 			);
@@ -1280,7 +1274,6 @@
 				B15EE28F23CE7667005B268A /* LatestTweetManageable.swift in Sources */,
 				B136C9B123D1BDE1004AEA27 /* Swifter.swift in Sources */,
 				B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */,
-				B15EE26623CE7658005B268A /* TwitterByOSPreferenceViewController.swift in Sources */,
 				B15EE25C23CE7658005B268A /* GistsController.swift in Sources */,
 				B1128CD823DE14CE00DDA4EA /* TwitterControllerNotifications.swift in Sources */,
 				B15EE26523CE7658005B268A /* GistScheme.swift in Sources */,
@@ -1305,7 +1298,6 @@
 				B15EE2A823CE7667005B268A /* TimelineTableItem.swift in Sources */,
 				B15EE25223CE7658005B268A /* DataStoreForApp.swift in Sources */,
 				B15EE29623CE7667005B268A /* AboutWindowController.swift in Sources */,
-				B15EE22223CE7636005B268A /* TwitterAccountSelectorController.swift in Sources */,
 				B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */,
 				B18FFA4223DF5ED60057C977 /* GistErrors.swift in Sources */,
 				B15EE29F23CE7667005B268A /* TimelineViewController+Action.swift in Sources */,

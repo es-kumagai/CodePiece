@@ -62,19 +62,6 @@ extension MainViewController {
 	}
 }
 
-extension TwitterAccountSelectorController {
-	
-//	final class TwitterAccountSelectorDidChangeNotification : NotificationProtocol {
-//		
-//		private(set) var account: TwitterController.Account
-//		
-//		init(account: TwitterController.Account) {
-//			
-//			self.account = account
-//		}
-//	}
-}
-
 final class HashtagsDidChangeNotification : NotificationProtocol {
 	
 	private(set) var hashtags: HashtagSet
