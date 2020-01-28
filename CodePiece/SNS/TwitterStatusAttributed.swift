@@ -13,11 +13,11 @@ extension Status {
 	
 	public func attributedText() -> NSAttributedString {
 		
-		return attributedText(urlColor: systemPalette.urlColor, hashtagColor: systemPalette.hashtagColor, mentionColor: systemPalette.mentionColor)
+		return attributedText(urlColor: .urlColor, hashtagColor: .hashtagColor, mentionColor: .mentionColor)
 	}
 	
 	public func attributedText(customizeExpression expression: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
 		
-		return try attributedText(urlColor: systemPalette.urlColor, hashtagColor: systemPalette.hashtagColor, mentionColor: systemPalette.mentionColor, customizeExpression: expression)
+		return try attributedText(urlColor: .urlColor, hashtagColor: .hashtagColor, mentionColor: .mentionColor, customizeExpression: expression)
 	}
 }

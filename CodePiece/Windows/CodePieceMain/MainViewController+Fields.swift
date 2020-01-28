@@ -117,7 +117,7 @@ extension FieldsController where Self : PostDataManageable {
 		let totalCount = makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
 		
 		self.descriptionCountLabel.stringValue = String(totalCount)
-		self.descriptionCountLabel.textColor = SystemColor.NeutralColor.color
+		self.descriptionCountLabel.textColor = .neutralColor
 	}	
 }
 

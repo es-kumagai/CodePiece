@@ -8,37 +8,22 @@
 
 import AppKit
 
-enum SystemColor {
+extension NSColor {
 	
-	case TextForAuthenticated
-	case TextForAuthenticatedWithNoTalken
-	case TextForNotAuthenticated
+	static let authenticatedForegroundColor = NSColor(named: "AuthenticatedForegroundColor")!
+	static let authenticatedWithNoTokenForegroundColor = NSColor(named: "AuthenticatedWithNoTokenForegroundColor")!
+	static let notAuthenticatedForegroundColor = NSColor(named: "NotAuthenticatedForegroundColor")!
 	
-	case NeutralColor
-	case WarningColor
-	case ErrorColor
+	static let neutralColor = NSColor(named: "NeutralColor")!
+	static let warningColor = NSColor(named: "WarningColor")!
+	static let errorColor = NSColor(named: "ErrorColor")!
 	
-	var color:NSColor {
-		
-		switch self {
-			
-		case .TextForAuthenticated:
-			return NSColor(red:0.210, green:0.355, blue:0.827, alpha:1.000)
-			
-		case .TextForAuthenticatedWithNoTalken:
-			return NSColor(red:0.770, green:0.549, blue:0.045, alpha:1.000)
-
-		case .TextForNotAuthenticated:
-			return NSColor(red:0.600, green:0.600, blue:0.600, alpha:1.000)
-			
-		case .NeutralColor:
-			return NSColor(white: 0.5, alpha: 1.000)
-			
-		case .WarningColor:
-			return NSColor(red:0.90, green:0.70, blue:0.0, alpha:1.000)
-			
-		case .ErrorColor:
-			return NSColor(red:0.961, green:0.271, blue:0.090, alpha:1.000)
-		}
-	}
+	static let textColor = NSColor(named: "TextColor")!
+	static let recentBackgroundColor = NSColor(named: "RecentBackgroundColor")!
+	static let pastBackgroundColor = NSColor(named: "PastBackgroundColor")!
+	static let recentSelectionBackgroundColor = NSColor(named: "RecentSelectionBackgroundColor")!
+	static let pastSelectionBackgroundColor = NSColor(named: "PastSelectionBackgroundColor")!
+	static let urlColor = NSColor(named: "URLColor")!
+	static let hashtagColor = NSColor(named: "HashtagColor")!
+	static let mentionColor = NSColor(named: "MentionColor")!
 }

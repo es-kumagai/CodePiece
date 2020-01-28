@@ -655,7 +655,6 @@
 			isa = PBXGroup;
 			children = (
 				B15EE27123CE7667005B268A /* LatestTweetManageable.swift */,
-				B15EE27223CE7667005B268A /* Timeline.storyboard */,
 				B15EE27323CE7667005B268A /* MainViewController+PostDataManage.swift */,
 				B15EE27423CE7667005B268A /* MainViewController+Fields.swift */,
 				B15EE27523CE7667005B268A /* MainViewController+SelectionAndRepliable.swift */,
@@ -666,6 +665,7 @@
 		B15EE27F23CE7667005B268A /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				B15EE27223CE7667005B268A /* Timeline.storyboard */,
 				B1C4410E23E0503C00C4715A /* Table */,
 				B1C4410D23E0500F00C4715A /* TableCell */,
 				B15EE28123CE7667005B268A /* TimelineViewController+Notifications.swift */,

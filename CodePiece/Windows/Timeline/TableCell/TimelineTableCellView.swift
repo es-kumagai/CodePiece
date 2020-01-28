@@ -90,7 +90,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 				let textRange = NSMakeRange(0, text.length)
 
 				text.addAttribute(.font, value: systemPalette.textFont, range: textRange)
-				text.addAttribute(.foregroundColor, value: systemPalette.textColor, range: textRange)
+				text.addAttribute(.foregroundColor, value: NSColor.textColor, range: textRange)
 			}
 			
 			usernameLabel.stringValue = status.user.name
@@ -214,27 +214,27 @@ extension TimelineTableCellView : TimelineTableCellType {
 
 extension TimelineTableCellView.Style {
 	
-	var backgroundColor:NSColor {
+	var backgroundColor: NSColor {
 
 		switch self {
 
 		case .Recent:
-			return .white
+			return .recentBackgroundColor
 			
 		case .Past:
-			return NSColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1.0)
+			return .pastBackgroundColor
 		}
 	}
 	
-	var selectionBackgroundColor:NSColor {
+	var selectionBackgroundColor: NSColor {
 		
 		switch self {
 			
 		case .Recent:
-			return NSColor(red: 0.858, green: 0.929, blue: 1.000, alpha: 1.0)
+			return .recentSelectionBackgroundColor
 			
 		case .Past:
-			return NSColor(red: 0.858, green: 0.858, blue: 1.000, alpha: 1.0)
+			return .pastSelectionBackgroundColor
 		}
 	}
 }

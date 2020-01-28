@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XfG-lQ-9wD">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,15 +19,15 @@
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny3-jn-TOD">
                                 <rect key="frame" x="20" y="113" width="704" height="281"/>
                                 <clipView key="contentView" drawsBackground="NO" id="wHI-8z-ON5">
-                                    <rect key="frame" x="1" y="1" width="702" height="279"/>
+                                    <rect key="frame" x="1" y="1" width="687" height="279"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView identifier="CodeTextIdentifier" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsUndo="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="8OA-rk-WhX" customClass="CodeTextView" customModule="CodePiece" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="702" height="279"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="687" height="279"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="702" height="279"/>
+                                            <size key="minSize" width="687" height="279"/>
                                             <size key="maxSize" width="707" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <accessibility description="Code Text Field" help="Input text for post." identifier="TextFieldForInputCode"/>
@@ -44,7 +45,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="oKF-WK-zwD">
-                                    <rect key="frame" x="687" y="1" width="16" height="279"/>
+                                    <rect key="frame" x="688" y="1" width="15" height="279"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -91,9 +92,9 @@
                                                 <constraint firstAttribute="width" constant="134" id="2Lt-u9-TvK"/>
                                                 <constraint firstAttribute="height" constant="23" id="FFS-Uy-smd"/>
                                             </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" drawsBackground="YES" id="qRd-iL-Ocn">
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" title="Hashtag" drawsBackground="YES" id="qRd-iL-Ocn">
                                                 <font key="font" metaFont="system"/>
-                                                <color key="textColor" red="0.34139323234558105" green="0.44181898236274719" blue="0.9985426664352417" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" name="HashtagLabelColor"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
@@ -126,24 +127,24 @@
                                             <rect key="frame" x="142" y="49" width="29" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="⌘T" drawsBackground="YES" id="Ogx-Zm-CeG">
                                                 <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" red="0.72432792189999995" green="0.72430622580000004" blue="0.7243185043" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" name="KeyForegroundColor"/>
+                                                <color key="backgroundColor" name="KeyBackgroundColor"/>
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IxY-aj-69e">
                                             <rect key="frame" x="465" y="49" width="43" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="⇧⌘H" drawsBackground="YES" id="BkG-Te-I4g">
                                                 <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" red="0.72432792189999995" green="0.72430622580000004" blue="0.7243185043" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" name="KeyForegroundColor"/>
+                                                <color key="backgroundColor" name="KeyBackgroundColor"/>
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="enm-qP-X8e">
                                             <rect key="frame" x="651" y="49" width="33" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="⌘↩" drawsBackground="YES" id="V8N-wK-5W2">
                                                 <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" red="0.72432792189999995" green="0.72430622580000004" blue="0.7243185043" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" name="KeyForegroundColor"/>
+                                                <color key="backgroundColor" name="KeyBackgroundColor"/>
                                             </textFieldCell>
                                         </textField>
                                         <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="reO-IA-mtp" userLabel="Tweet Count Stack View">
@@ -221,8 +222,8 @@
                                 <rect key="frame" x="57" y="402" width="27" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="⌘J" drawsBackground="YES" id="1Pl-tS-OYc">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" red="0.72432792186737061" green="0.72430622577667236" blue="0.72431850433349609" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" name="KeyForegroundColor"/>
+                                    <color key="backgroundColor" name="KeyBackgroundColor"/>
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="dTm-OD-heR" userLabel="Statusbar">
@@ -358,7 +359,7 @@
                                                 <rect key="frame" x="18" y="1" width="53" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Unknown" id="BKD-Nd-Aq6">
                                                     <font key="font" metaFont="message" size="11"/>
-                                                    <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" name="StatusLabelColor"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
@@ -408,7 +409,7 @@
                                                         <rect key="frame" x="67" y="1" width="48" height="14"/>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="M87-jV-SmF">
                                                             <font key="font" metaFont="message" size="11"/>
-                                                            <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" name="StatusLabelColor"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
@@ -473,7 +474,7 @@
                                                         <rect key="frame" x="67" y="1" width="48" height="14"/>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="NyD-Ff-o7r">
                                                             <font key="font" metaFont="message" size="11"/>
-                                                            <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" name="StatusLabelColor"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
@@ -562,5 +563,17 @@
     <resources>
         <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
         <image name="NSStatusNone" width="16" height="16"/>
+        <namedColor name="HashtagLabelColor">
+            <color red="0.40000000000000002" green="0.54000000000000004" blue="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="KeyBackgroundColor">
+            <color red="0.77000000000000002" green="0.77000000000000002" blue="0.77000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="KeyForegroundColor">
+            <color red="0.95999999999999996" green="0.95999999999999996" blue="0.95999999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="StatusLabelColor">
+            <color red="0.31" green="0.31" blue="0.31" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

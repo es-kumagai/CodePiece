@@ -91,12 +91,12 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		
 		if self.credentialsNotVerified {
 			
-			self.credentialsVerificationStatusTextField.textColor = SystemColor.TextForAuthenticatedWithNoTalken.color
+			self.credentialsVerificationStatusTextField.textColor = .authenticatedWithNoTokenForegroundColor
 			self.credentialsVerificationStatusTextField.stringValue = "Need to verify Credentials"
 		}
 		else {
 			
-			self.credentialsVerificationStatusTextField.textColor = SystemColor.TextForAuthenticated.color
+			self.credentialsVerificationStatusTextField.textColor = .authenticatedForegroundColor
 			self.credentialsVerificationStatusTextField.stringValue = "Credentials Verified"
 		}
 	}

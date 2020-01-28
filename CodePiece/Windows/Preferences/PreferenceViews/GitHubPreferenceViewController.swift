@@ -20,11 +20,11 @@ final class GitHubPreferenceViewController: NSViewController, NotificationObserv
 	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
 	private var removeAuthenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
 
-	@IBOutlet var authorizedStatusImageView:NSImageView!
-	@IBOutlet var authorizedStatusTextField:NSTextField!
-	@IBOutlet var authorizedAccountName:NSTextField!
-	@IBOutlet var authorizationButton:NSButton!
-	@IBOutlet var resetButton:NSButton!
+	@IBOutlet var authorizedStatusImageView: NSImageView!
+	@IBOutlet var authorizedStatusTextField: NSTextField!
+	@IBOutlet var authorizedAccountName: NSTextField!
+	@IBOutlet var authorizationButton: NSButton!
+	@IBOutlet var resetButton: NSButton!
 	
 	
 	@IBAction func doAuthentication(_ sender:NSButton) {
@@ -88,7 +88,7 @@ final class GitHubPreferenceViewController: NSViewController, NotificationObserv
 			
 		case .Authorized:
 
-			authorizedStatusTextField.textColor = SystemColor.TextForAuthenticated.color
+			authorizedStatusTextField.textColor = .authenticatedForegroundColor
 			authorizedStatusTextField.stringValue = "Authenticated"
 			
 			authorizationButton.isEnabled = false
@@ -96,7 +96,7 @@ final class GitHubPreferenceViewController: NSViewController, NotificationObserv
 					
 		case .NotAuthorized:
 			
-			authorizedStatusTextField.textColor = SystemColor.TextForNotAuthenticated.color
+			authorizedStatusTextField.textColor = .notAuthenticatedForegroundColor
 			authorizedStatusTextField.stringValue = "Not authenticated yet"
 			
 			authorizationButton.isEnabled = true

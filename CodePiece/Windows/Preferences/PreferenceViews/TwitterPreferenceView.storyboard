@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LAB-Zh-ZVS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +26,7 @@
                                 <rect key="frame" x="61" y="198" width="164" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Verify Credentials Status" id="GIK-Ik-GED">
                                     <font key="font" metaFont="menu" size="14"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="NotAuthenticatedForegroundColor"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -47,7 +48,7 @@
                                 <rect key="frame" x="76" y="234" width="15" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="▶︎" id="YXI-2w-iSP">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="0.26924949879999999" green="0.23910263179999999" blue="0.1031773165" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" name="OptionTextColor"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -55,7 +56,7 @@
                                 <rect key="frame" x="95" y="234" width="66" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Username" id="y1c-Fn-92E">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="0.26924949879999999" green="0.23910263179999999" blue="0.1031773165" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" name="OptionTextColor"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -163,4 +164,12 @@ DQ
             <point key="canvasLocation" x="364" y="244"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="NotAuthenticatedForegroundColor">
+            <color red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="OptionTextColor">
+            <color red="0.34000000000000002" green="0.29999999999999999" blue="0.16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
