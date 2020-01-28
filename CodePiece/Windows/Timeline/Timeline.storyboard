@@ -97,7 +97,7 @@
                                                     <tableColumns>
                                                         <tableColumn width="295" minWidth="40" maxWidth="1000" id="RRX-xc-pTL">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                <font key="font" metaFont="menu" size="11"/>
+                                                                <font key="font" metaFont="message" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -179,7 +179,7 @@
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="pgZ-aP-321">
                                                                                                     <rect key="frame" x="221" y="0.0" width="28" height="14"/>
                                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="date" id="i03-Vk-1xE">
-                                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                                        <font key="font" metaFont="message" size="11"/>
                                                                                                         <color key="textColor" name="TimelineDateLabelColor"/>
                                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                     </textFieldCell>
@@ -242,60 +242,94 @@
                                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bS7-fV-5fL">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="106" height="20"/>
                                                                                     <subviews>
-                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="gu3-Kb-1uH">
-                                                                                            <rect key="frame" x="6" y="3" width="14" height="14"/>
-                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↑" id="cDS-Qe-HoX">
-                                                                                                <font key="font" metaFont="smallSystemBold"/>
-                                                                                                <color key="textColor" name="HashtagStateRecentTextColor"/>
-                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                                            </textFieldCell>
-                                                                                        </textField>
-                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="0SF-DB-qdw">
-                                                                                            <rect key="frame" x="24" y="3" width="84" height="14"/>
-                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="xAo-9Z-cs6">
-                                                                                                <font key="font" metaFont="menu" size="11"/>
-                                                                                                <color key="textColor" name="HashtagStateRecentTextColor"/>
-                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                                            </textFieldCell>
-                                                                                        </textField>
+                                                                                        <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b7S-DR-pIM">
+                                                                                            <rect key="frame" x="8" y="3" width="98" height="14"/>
+                                                                                            <subviews>
+                                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="255" translatesAutoresizingMaskIntoConstraints="NO" id="gu3-Kb-1uH">
+                                                                                                    <rect key="frame" x="-2" y="0.0" width="14" height="14"/>
+                                                                                                    <constraints>
+                                                                                                        <constraint firstAttribute="width" constant="10" id="HLg-s3-EDw"/>
+                                                                                                    </constraints>
+                                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↑" id="cDS-Qe-HoX">
+                                                                                                        <font key="font" metaFont="smallSystemBold"/>
+                                                                                                        <color key="textColor" name="HashtagStateRecentTextColor"/>
+                                                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                                    </textFieldCell>
+                                                                                                </textField>
+                                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="0SF-DB-qdw">
+                                                                                                    <rect key="frame" x="16" y="0.0" width="84" height="14"/>
+                                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="xAo-9Z-cs6">
+                                                                                                        <font key="font" metaFont="message" size="11"/>
+                                                                                                        <color key="textColor" name="HashtagStateRecentTextColor"/>
+                                                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                                    </textFieldCell>
+                                                                                                </textField>
+                                                                                            </subviews>
+                                                                                            <constraints>
+                                                                                                <constraint firstItem="0SF-DB-qdw" firstAttribute="leading" secondItem="gu3-Kb-1uH" secondAttribute="trailing" constant="8" id="Qht-OB-xvi"/>
+                                                                                            </constraints>
+                                                                                            <visibilityPriorities>
+                                                                                                <integer value="1000"/>
+                                                                                                <integer value="1000"/>
+                                                                                            </visibilityPriorities>
+                                                                                            <customSpacing>
+                                                                                                <real value="3.4028234663852886e+38"/>
+                                                                                                <real value="3.4028234663852886e+38"/>
+                                                                                            </customSpacing>
+                                                                                        </stackView>
                                                                                     </subviews>
                                                                                     <edgeInsets key="edgeInsets" left="8" right="0.0" top="2" bottom="0.0"/>
                                                                                     <visibilityPriorities>
                                                                                         <integer value="1000"/>
-                                                                                        <integer value="1000"/>
                                                                                     </visibilityPriorities>
                                                                                     <customSpacing>
-                                                                                        <real value="3.4028234663852886e+38"/>
                                                                                         <real value="3.4028234663852886e+38"/>
                                                                                     </customSpacing>
                                                                                 </stackView>
                                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nVR-K7-OgL">
                                                                                     <rect key="frame" x="189" y="0.0" width="106" height="20"/>
                                                                                     <subviews>
-                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="Ro0-SP-0ba">
-                                                                                            <rect key="frame" x="-2" y="3" width="84" height="14"/>
-                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="PA1-DH-PRB">
-                                                                                                <font key="font" metaFont="menu" size="11"/>
-                                                                                                <color key="textColor" name="HashtagStatePastTextColor"/>
-                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                                            </textFieldCell>
-                                                                                        </textField>
-                                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GU9-2u-J5K">
-                                                                                            <rect key="frame" x="86" y="3" width="14" height="14"/>
-                                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↓" id="3a6-mp-bbg">
-                                                                                                <font key="font" metaFont="smallSystemBold"/>
-                                                                                                <color key="textColor" name="HashtagStatePastTextColor"/>
-                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                                            </textFieldCell>
-                                                                                        </textField>
+                                                                                        <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lzH-36-VLJ">
+                                                                                            <rect key="frame" x="0.0" y="3" width="98" height="14"/>
+                                                                                            <subviews>
+                                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="Ro0-SP-0ba">
+                                                                                                    <rect key="frame" x="-2" y="0.0" width="84" height="14"/>
+                                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="PA1-DH-PRB">
+                                                                                                        <font key="font" metaFont="message" size="11"/>
+                                                                                                        <color key="textColor" name="HashtagStatePastTextColor"/>
+                                                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                                    </textFieldCell>
+                                                                                                </textField>
+                                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GU9-2u-J5K">
+                                                                                                    <rect key="frame" x="86" y="0.0" width="14" height="14"/>
+                                                                                                    <constraints>
+                                                                                                        <constraint firstAttribute="width" constant="10" id="BNk-C4-xn8"/>
+                                                                                                    </constraints>
+                                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="↓" id="3a6-mp-bbg">
+                                                                                                        <font key="font" metaFont="smallSystemBold"/>
+                                                                                                        <color key="textColor" name="HashtagStatePastTextColor"/>
+                                                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                                    </textFieldCell>
+                                                                                                </textField>
+                                                                                            </subviews>
+                                                                                            <constraints>
+                                                                                                <constraint firstItem="GU9-2u-J5K" firstAttribute="leading" secondItem="Ro0-SP-0ba" secondAttribute="trailing" constant="8" id="ndT-DG-8zI"/>
+                                                                                            </constraints>
+                                                                                            <visibilityPriorities>
+                                                                                                <integer value="1000"/>
+                                                                                                <integer value="1000"/>
+                                                                                            </visibilityPriorities>
+                                                                                            <customSpacing>
+                                                                                                <real value="3.4028234663852886e+38"/>
+                                                                                                <real value="3.4028234663852886e+38"/>
+                                                                                            </customSpacing>
+                                                                                        </stackView>
                                                                                     </subviews>
                                                                                     <edgeInsets key="edgeInsets" left="0.0" right="8" top="0.0" bottom="-2"/>
                                                                                     <visibilityPriorities>
                                                                                         <integer value="1000"/>
-                                                                                        <integer value="1000"/>
                                                                                     </visibilityPriorities>
                                                                                     <customSpacing>
-                                                                                        <real value="3.4028234663852886e+38"/>
                                                                                         <real value="3.4028234663852886e+38"/>
                                                                                     </customSpacing>
                                                                                 </stackView>
@@ -370,7 +404,7 @@
                                                                     <constraint firstAttribute="height" constant="14" id="mHM-Gd-XBt"/>
                                                                 </constraints>
                                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Label" id="mB6-Ez-ITY">
-                                                                    <font key="font" metaFont="menu" size="11"/>
+                                                                    <font key="font" metaFont="message" size="11"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
