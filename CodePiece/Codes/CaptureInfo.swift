@@ -33,7 +33,7 @@ struct SimpleCaptureInfo : CaptureInfoType {
 struct LinedCaptureInfo : CaptureInfoType {
 	
 	let userAgent: String? = nil
-	let clientSize: NSSize = NSMakeSize(480.0, 480.0)
+	let clientSize: NSSize = NSMakeSize(680.0, 480.0)
 	
 	var targetNode: (WebView, DOMDocument) -> DOMNode? {
 		
