@@ -9,8 +9,7 @@
 import Cocoa
 import Ocean
 
-// FIXME: ⭐️ 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整します。
-
+// FIXME: 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整したいところです。
 @NSApplicationMain @objcMembers
 class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
@@ -22,9 +21,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 		
 		super.awakeFromNib()
 
-		#warning("通知を堰き止めるのは乱暴なので、それ以外の方法で適切に制御できるようにします。")
-//		NotificationManager.dammingNotifications = true
-
 		NSApplication.readyForUse()
 	}
 
@@ -32,12 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, AlertDisplayable {
 
 		NSLog("Application launched.")
 		
-		#warning("通知を堰き止めるのは乱暴なので、それ以外の方法で適切に制御できるようにします。")
-//		NotificationManager.dammingNotifications = false
-		
-		self.urlSchemeManager = URLSchemeManager()
-		
-//		NSApp.twitterController.verifyCredentialsIfNeed()
+		urlSchemeManager = URLSchemeManager()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -63,7 +63,7 @@ extension GetStatusesError {
 	}
 }
 
-#warning("TwitterController は AlertDisplayable であるべきではなさそう。")
+// FIXME: TwitterController は AlertDisplayable であるべきではなそうなので、別のビューコントローラーが持つようにした。
 @objcMembers
 final class TwitterController : NSObject, PostController, AlertDisplayable, NotificationObservable {
 	
@@ -634,10 +634,11 @@ extension TwitterController {
 
 		DebugTime.print("📮 Try uploading image for using twitter ... #3.3.3.1")
 		
-		let tweetProgress = { (bytes:Int64, processedBytes:Int64, totalBytes:Int64) -> Void in
-			
-			DebugTime.print("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
-		}
+		// STTwitter ではメディアアップロードでプログレスを指定できていました。以下はその名残です。
+//		let tweetProgress = { (bytes:Int64, processedBytes:Int64, totalBytes:Int64) -> Void in
+//
+//			DebugTime.print("bytes:\(bytes), processed:\(processedBytes), total:\(totalBytes)")
+//		}
 				
 		DebugTime.print("📮 Try posting by API ... #3.3.3.2")
 		api.post(media: data, additionalOwners: additionalOwners) { result in

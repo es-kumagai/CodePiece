@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-#warning("今は Twitter の JSON に合わせているけれど、わかりにくいので [Coordinate] になるようにしたい。")
+// FIXME: 今は Twitter の JSON に合わせているけれど、わかりにくいので [Coordinate] になるようにしたい。
 public struct Coordinate {
 	
 	var items: [Item]

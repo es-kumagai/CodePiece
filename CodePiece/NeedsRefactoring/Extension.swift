@@ -547,7 +547,7 @@ internal enum MessageQueueHandler<Message : MessageType> {
 	case Closure(messageHandler: MessageHandler, errorHandler: MessageErrorHandler)
 	case Delegate(handler: _MessageQueueHandlerProtocol)
 	
-	func handlingMessage(message: Message, byQueue queue:Queue) throws {
+	func handlingMessage(message: Message, byQueue queue: Queue) throws {
 		
 		switch self {
 			
@@ -559,7 +559,7 @@ internal enum MessageQueueHandler<Message : MessageType> {
 		}
 	}
 	
-	func handlingError(error: Error, byQueue queue:Queue) throws {
+	func handlingError(error: Error, byQueue queue: Queue) throws {
 		
 		switch self {
 
@@ -601,13 +601,13 @@ extension MessageType {
 
 public protocol PreActionMessageType : MessageType {
 	
-	func messagePreAction(queue:Queue<Self>) -> Continuous
+	func messagePreAction(queue: Queue<Self>) -> Continuous
 }
 
 public protocol MessageTypeIgnoreInQuickSuccession : PreActionMessageType {
 	
 	/// Returns true if the message may block in quick succession.
-	var mayBlockInQuickSuccession:Bool { get }
+	var mayBlockInQuickSuccession: Bool { get }
 	
 	func blockInQuickSuccession(lastMessage:Self) -> Bool
 }
@@ -619,7 +619,7 @@ extension MessageTypeIgnoreInQuickSuccession {
 		return true
 	}
 	
-	public func messagePreAction(queue:Queue<Self>) -> Continuous {
+	public func messagePreAction(queue: Queue<Self>) -> Continuous {
 		
 		guard self.mayBlockInQuickSuccession else {
 		
@@ -639,13 +639,13 @@ extension MessageTypeIgnoreInQuickSuccession {
 
 extension MessageTypeIgnoreInQuickSuccession where Self : Equatable {
 	
-	public func blockInQuickSuccession(lastMessage:Self) -> Bool {
+	public func blockInQuickSuccession(lastMessage: Self) -> Bool {
 		
 		return self == lastMessage
 	}
 }
 
-public class MessageQueue<M:MessageType> : MessageQueueType {
+public class MessageQueue<M: MessageType> : MessageQueueType {
 	
 	public static var defaultProcessingInterval: Double {
 	
@@ -657,7 +657,7 @@ public class MessageQueue<M:MessageType> : MessageQueueType {
 	public typealias MessageHandler = (Message) throws -> Void
 	public typealias MessageHandlerNoThrows = (Message) -> Void
 	
-	private(set) var identifier:String
+	private(set) var identifier: String
 	
 	private var handler:MessageQueueHandler<Message>
 	private var messageQueue:Queue<Message>
@@ -675,16 +675,16 @@ public class MessageQueue<M:MessageType> : MessageQueueType {
 		
 		let queue = DispatchQueue(label: "\(identifier)")
 		
-		self.messageProcessingQueue = queue
-		self.messageHandlerExecutionQueue = executionQueue ?? queue
+		messageProcessingQueue = queue
+		messageHandlerExecutionQueue = executionQueue ?? queue
 		
-		self.messageQueue = []
-		self.isRunning = false
+		messageQueue = []
+		isRunning = false
 
-		self.messageLoopSource = self.makeTimer(interval: Semaphore.Interval(second: processingInterval), start: true, timerAction: _messageLoopBody)
+		messageLoopSource = makeTimerSource(interval: Semaphore.Interval(second: processingInterval), start: true, timerAction: _messageLoopBody)
 	}
 
-	public convenience init(identifier:String, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueue.defaultProcessingInterval, messageHandler: @escaping MessageHandler, errorHandler:MessageErrorHandler?) {
+	public convenience init(identifier:String, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueue.defaultProcessingInterval, messageHandler: @escaping MessageHandler, errorHandler: MessageErrorHandler?) {
 
 		let handler = MessageQueueHandler.Closure(messageHandler: messageHandler, errorHandler: errorHandler)
 		
@@ -698,7 +698,7 @@ public class MessageQueue<M:MessageType> : MessageQueueType {
 		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
 	}
 	
-	public convenience init<T:_MessageQueueHandlerProtocol>(identifier:String, handler:T, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueue.defaultProcessingInterval) {
+	public convenience init<T:_MessageQueueHandlerProtocol>(identifier: String, handler: T, executionQueue: DispatchQueue? = nil, processingInterval: Double = MessageQueue.defaultProcessingInterval) {
 		
 		let handler = MessageQueueHandler<Message>.Delegate(handler: handler)
 		
@@ -707,48 +707,81 @@ public class MessageQueue<M:MessageType> : MessageQueueType {
 	
 	deinit {
 		
-		self._stopMessageLoop()
-		self.messageLoopSource.cancel()
+		messageLoopSource.cancel()
+		_stop()
 	}
 
-	public func makeTimer(interval: Semaphore.Interval, start: Bool, timerAction: @escaping () -> Void) -> DispatchSourceTimer {
-	
-		return Dispatch.makeTimer(interval: .never, queue: self.messageProcessingQueue, start: start, eventHandler: timerAction, cancelHandler: nil)
-	}
+//	public func makeTimerSource(interval: Semaphore.Interval, start: Bool, timerAction: @escaping () -> Void) -> DispatchSourceTimer {
+//
+//		let source = DispatchSource.makeTimerSource(flags: [], queue: messageProcessingQueue)
+//
+//
+//		return DispatchSource.makeTimerSource(interval: .never, queue: messageProcessingQueue, start: start, eventHandler: timerAction, cancelHandler: nil)
+//	}
 
-	public func makeTimer(interval: Semaphore.Interval, start: Bool, timerAction: @escaping () -> Void, cancelAction: (() -> Void)?) -> DispatchSourceTimer {
-	
-		return Dispatch.makeTimer(interval: .never, queue: self.messageProcessingQueue, start: start, eventHandler: timerAction, cancelHandler: cancelAction)
+	public func makeTimerSource(interval: Semaphore.Interval, start: Bool, cancelAction: (() -> Void)? = nil, timerAction: @escaping () -> Void) -> DispatchSourceTimer {
+
+		let source = DispatchSource.makeTimerSource(flags: [], queue: messageProcessingQueue)
+		
+		source.schedule(deadline: .now(), repeating: interval.second)
+		source.setEventHandler(handler: timerAction)
+		source.setCancelHandler(handler: cancelAction)
+		
+		if start {
+			
+			source.resume()
+			isRunning = true
+		}
+		
+		return source
 	}
 	
 	public func start() {
 	
-		self.send(message: .Start)
+		send(message: .Start)
 	}
 	
 	public func stop() {
 		
-		self.send(message: .Stop)
+		send(message: .Stop)
+	}
+	
+	private func _start() {
+		
+		if !isRunning {
+
+			messageLoopSource.resume()
+			isRunning = true
+		}
+	}
+	
+	private func _stop() {
+		
+		if isRunning {
+
+			messageLoopSource.suspend()
+			isRunning = false
+		}
 	}
 	
 	public func send(message: MessageQueueControl) {
 		
-		self.executeOnProcessingQueue {
+		executeOnProcessingQueue {
 
 			switch message {
 				
 			case .Start:
-				self._startMessageLoop()
+				self._start()
 				
 			case .Stop:
-				self._stopMessageLoop()
+				self._stop()
 			}
 		}
 	}
 	
 	public func send(message: Message, preAction: @escaping (Queue<Message>, Message) -> Continuous) {
 		
-		self.executeOnProcessingQueue {
+		executeOnProcessingQueue {
 
 			guard preAction(self.messageQueue, message) == .continue else {
 		
@@ -766,35 +799,35 @@ extension MessageQueue where M : MessageType {
 	
 	public func send(message: Message) {
 		
-		self.send(message: message) { (queue, message) -> Continuous in .continue }
+		send(message: message) { (queue, message) -> Continuous in .continue }
 	}
 	
-	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> DispatchSourceTimer {
-		
-		return self.makeTimer(interval: interval, start: true) { [weak self] () -> Void in
-			
-			self?.send(message: message)
-		}
-	}
+//	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> DispatchSourceTimer {
+//
+//		return makeTimerSource(interval: interval, start: true) { [weak self] () -> Void in
+//
+//			self?.send(message: message)
+//		}
+//	}
 }
 
 extension MessageQueue where M : PreActionMessageType {
 	
 	public func send(message: Message) {
 		
-        self.send(message: message) { (queue, message) -> Continuous in
+        send(message: message) { (queue, message) -> Continuous in
 			
             return message.messagePreAction(queue: queue)
 		}
 	}
 	
-	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> DispatchSourceTimer {
-		
-		return self.makeTimer(interval: interval, start: true) { [weak self] () -> Void in
-			
-			self?.send(message: message)
-		}
-	}
+//	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> DispatchSourceTimer {
+//
+//		return makeTimerSource(interval: interval, start: true) { [weak self] () -> Void in
+//
+//			self?.send(message: message)
+//		}
+//	}
 }
 
 /// If you want to manage queue handlers using Cocoa style,
@@ -809,25 +842,25 @@ public protocol MessageQueueHandlerProtocol : _MessageQueueHandlerProtocol {
 	
 	associatedtype Message : MessageType
 
-	func messageQueue(queue:MessageQueue<Message>, handlingMessage:Message) throws
-	func messageQueue(queue:MessageQueue<Message>, handlingError:Error) throws
+	func messageQueue(queue: MessageQueue<Message>, handlingMessage: Message) throws
+	func messageQueue(queue: MessageQueue<Message>, handlingError: Error) throws
 }
 
 extension MessageQueueHandlerProtocol {
 	
-	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingMessage message:Queue.Message) throws {
+	func _messageQueue<Queue>(queue: Queue, handlingMessage message: Queue.Message) throws where Queue: MessageQueueType {
 
 		let queue = queue as! MessageQueue<Message>
 		let message = message as! Message
 		
-        try self.messageQueue(queue: queue, handlingMessage: message)
+        try messageQueue(queue: queue, handlingMessage: message)
 	}
 	
-	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError error:Error) throws {
+	func _messageQueue<Queue>(queue: Queue, handlingError error: Error) throws where Queue: MessageQueueType {
 		
 		let queue = queue as! MessageQueue<Message>
 		
-        try self.messageQueue(queue: queue, handlingError: error)
+        try messageQueue(queue: queue, handlingError: error)
 	}
 }
 
@@ -859,31 +892,21 @@ extension MessageQueue {
 		messageHandlerExecutionQueue.async(execute: execute)
 	}
 	
-	func _startMessageLoop() {
-
-		self.isRunning = true
-	}
-	
-	func _stopMessageLoop() {
-
-		self.isRunning = false
-	}
-
 	func _messageLoopBody() {
 	
-		guard self.isRunning else {
+		guard isRunning else {
 			
 			return
 		}
 		
-		guard let message = self.messageQueue.dequeue() else {
+		guard let message = messageQueue.dequeue() else {
 			
 			return
 		}
 		
 		let handler = self.handler
 		
-		self.executeOnHandlerExecutionQueue {
+		executeOnHandlerExecutionQueue {
 
 			func executeErrorHandlerIfNeeds(error:Error) {
 				
@@ -920,12 +943,12 @@ public struct Repeater<Element> : Sequence {
 	
 	public init (_ generate: @escaping () -> Element) {
 		
-		self.generator = RepeaterGenerator(generate)
+		generator = RepeaterGenerator(generate)
 	}
 	
 	public func makeIterator() -> RepeaterGenerator<Element> {
 		
-		return self.generator
+		return generator
 	}
 	
 	public func zipLeftOf<S:Sequence>(s:S) -> Zip2Sequence<Repeater,S> {
@@ -950,29 +973,29 @@ public struct RepeaterGenerator<Element> : IteratorProtocol {
 	
     init (_ generate: @escaping ()->Element) {
 		
-		self._generate = generate
+		_generate = generate
 	}
 	
 	public func next() -> Element? {
 		
-		return self._generate()
+		return _generate()
 	}
 }
 
 
 public protocol Selectable : AnyObject {
 	
-	var selected:Bool { get set }
+	var selected: Bool { get set }
 }
 
 extension Selectable {
 	
-	public static func selected(instance:Self) -> () -> Bool {
+	public static func selected(instance: Self) -> () -> Bool {
 		
 		return { instance.selected }
 	}
 	
-	public static func setSelected(instance:Self) -> (Bool) -> Void {
+	public static func setSelected(instance: Self) -> (Bool) -> Void {
 		
 		return { instance.selected = $0 }
 	}
@@ -982,12 +1005,12 @@ extension Sequence where Element : Selectable {
 
 	public mutating func selectAll() {
 		
-		self.forEach { $0.selected = true }
+		forEach { $0.selected = true }
 	}
 	
 	public mutating func deselectAll() {
 		
-		self.forEach { $0.selected = false }
+		forEach { $0.selected = false }
 	}
 }
 
@@ -995,7 +1018,7 @@ extension Sequence where Element : AnyObject {
 	
 	public var selectableElementsOnly:[Selectable] {
 		
-		return self.map { $0 as? Selectable }.compactMap { $0 }
+		return map { $0 as? Selectable }.compactMap { $0 }
 	}
 }
 
@@ -1062,11 +1085,6 @@ extension Optional {
 			try expression(value)
 		}
 	}
-}
-
-public func whether(condition: @autoclosure () throws -> Bool) rethrows -> Bool {
-	
-	return try condition()
 }
 
 /// Execute `exression`. If an error occurred, write the error to standard output stream.
@@ -1356,7 +1374,7 @@ extension Bundle {
 	
 	public var appVersion:(main:String?, build:String?) {
 		
-		let info = self.infoDictionary!
+		let info = infoDictionary!
 
 		let main = info["CFBundleShortVersionString"] as? String
 		let build = info["CFBundleVersion"] as? String
@@ -1366,12 +1384,12 @@ extension Bundle {
 	
 	public var appCopyright:String? {
 		
-		return self.infoDictionary!["NSHumanReadableCopyright"] as? String
+		return infoDictionary!["NSHumanReadableCopyright"] as? String
 	}
 	
 	public var appVersionString:String {
 		
-		let version = self.appVersion
+		let version = appVersion
 		
 		let main = version.main ?? ""
 		let build = version.build.map { "build \($0)" } ?? ""
@@ -1448,7 +1466,7 @@ protocol Captureable {
 	
 	associatedtype CaptureTarget
 	
-	var captureTarget:CaptureTarget { get }
+	var captureTarget: CaptureTarget { get }
 	
 	func capture() -> NSImage
 }
@@ -1457,12 +1475,12 @@ extension Captureable where CaptureTarget == NSView {
 
 	func capture() -> NSImage {
 	
-        return CodePiece.capture(view: self.captureTarget)
+        return CodePiece.capture(view: captureTarget)
 	}
 	
-	func capture(rect:NSRect) -> NSImage {
+	func capture(rect: NSRect) -> NSImage {
 		
-        return CodePiece.capture(view: self.captureTarget, rect: rect)
+        return CodePiece.capture(view: captureTarget, rect: rect)
 	}
 }
 
@@ -1470,7 +1488,7 @@ extension Captureable where CaptureTarget == NSWindow {
 	
 	func capture() -> NSImage {
 		
-        return CodePiece.capture(window: self.captureTarget)
+        return CodePiece.capture(window: captureTarget)
 	}
 }
 
@@ -1514,12 +1532,12 @@ extension NSApplication : HavingScale {
 	}
 }
 
-func capture(view:NSView) -> NSImage {
+func capture(view: NSView) -> NSImage {
 
     return capture(view: view, rect: view.bounds)
 }
 
-func capture(view:NSView, rect:NSRect) -> NSImage {
+func capture(view: NSView, rect: NSRect) -> NSImage {
 	
     guard rect != .zero else {
 
@@ -1567,7 +1585,7 @@ func capture(view:NSView, rect:NSRect) -> NSImage {
 //	}
 //}
 
-public func createImage(image:NSImage, margin:IntMargin) -> NSImage {
+public func createImage(image: NSImage, margin: IntMargin) -> NSImage {
 
 	let newWidth = Int(image.size.width) + margin.horizontalTotal
 	let newHeight = Int(image.size.height) + margin.verticalTotal
@@ -1607,7 +1625,7 @@ public func createImage(image:NSImage, margin:IntMargin) -> NSImage {
 	return newImage
 }
 
-func capture(window:NSWindow) -> NSImage {
+func capture(window: NSWindow) -> NSImage {
 	
 	let windowId = CGWindowID(window.windowNumber)
 
@@ -1621,7 +1639,7 @@ func capture(window:NSWindow) -> NSImage {
 
 extension String {
 
-	public func appendStringIfNotEmpty(string:String?, separator:String = "") -> String {
+	public func appendStringIfNotEmpty(string: String?, separator: String = "") -> String {
 		
 		guard let string = string, !string.isEmpty else {
 			

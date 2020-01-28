@@ -77,9 +77,9 @@ extension TwitterAccountSelectorController {
 
 final class HashtagsDidChangeNotification : NotificationProtocol {
 	
-	private(set) var hashtags:ESTwitter.HashtagSet
+	private(set) var hashtags: HashtagSet
 	
-	init(hashtags:ESTwitter.HashtagSet) {
+	init(hashtags: HashtagSet) {
 		
 		self.hashtags = hashtags
 	}

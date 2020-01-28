@@ -14,6 +14,10 @@ public struct URLEntity : HasIndices {
 	public var expandedUrl: URL
 }
 
+extension URLEntity : EntityUnit {
+	
+}
+
 extension URLEntity : Decodable {
 	
 	enum CodingKeys : String, CodingKey {

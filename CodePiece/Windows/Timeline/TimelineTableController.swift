@@ -39,8 +39,8 @@ extension TimelineTableControllerType {
 			return (insertedIndexes: IndexSet(), ignoredIndexes: IndexSet(), removedIndexes: IndexSet())
 		}
 		
-		let currentRows = self.currentTimelineRows
-		let maxRows = self.maxTimelineRows
+		let currentRows = currentTimelineRows
+		let maxRows = maxTimelineRows
 		let insertRows = min(tweetCount, maxRows)
 		let overflowRows = max(0, (insertRows + currentRows) - maxRows)
 		
@@ -54,17 +54,12 @@ extension TimelineTableControllerType {
 		let ignoreIndexes = ignoreRows > 0 ? IndexSet(integersIn: getIgnoreRange()) : IndexSet()
 		let removeIndexes = overflowRows > 0 ? IndexSet(integersIn: getRemoveRange()) : IndexSet()
 
-		self.timelineDataSource.appendTweets(tweets: tweets, hashtags: hashtags)
+		timelineDataSource.appendTweets(tweets: tweets, hashtags: hashtags)
 		
-		applyingExpression(to: self.timelineTableView) {
-			
-			$0.beginUpdates()
-			
-			$0.removeRows(at: removeIndexes, withAnimation: [.effectFade, .slideDown])
-			$0.insertRows(at: insertIndexes, withAnimation: [.effectFade, .slideDown])
-			
-			$0.endUpdates()
-		}
+		timelineTableView.beginUpdates()
+		timelineTableView.removeRows(at: removeIndexes, withAnimation: [.effectFade, .slideDown])
+		timelineTableView.insertRows(at: insertIndexes, withAnimation: [.effectFade, .slideDown])
+		timelineTableView.endUpdates()
 		
 		return (insertedIndexes: insertIndexes, ignoredIndexes: ignoreIndexes, removedIndexes: removeIndexes)
 	}

@@ -108,6 +108,14 @@ extension Indices : Decodable {
 	}
 }
 
+extension Indices {
+	
+	public func added(offset: Int) -> Indices {
+		
+		return Indices(startIndex: startIndex + offset, endIndex: endIndex + offset)
+	}
+}
+
 extension NSRange {
 	
 	public init(_ indices: Indices) {

@@ -20,7 +20,7 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		
 		didSet {
 	
-			self.items.timelineLatestTweetItem.executeIfExists(expression: self.setLatestTweet)
+			items.timelineLatestTweetItem.executeIfExists(expression: setLatestTweet)
 		}
 	}
 	
@@ -28,24 +28,28 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 
 	func latestTweetIdForHashtags(hashtags: ESTwitter.HashtagSet) -> String? {
 		
-		return self._lastTweetID[hashtags]
+		return _lastTweetID[hashtags]
 	}
 	
 	func setLatestTweet(item: TimelineTweetItem) {
 		
-		self._lastTweetID[item.currentHashtags] = item.timelineItemTweetId!
+		_lastTweetID[item.currentHashtags] = item.timelineItemTweetId!
 	}
 	
 	func appendTweets(tweets: [ESTwitter.Status], hashtags: ESTwitter.HashtagSet) {
 		
-		let newTweets = tweets.orderByNewCreationDate().toTimelineTweetItems(hashtags: hashtags).timelineItemsAppend(items: self.items).prefix(self.maxTweets)
+		let newTweets = tweets
+			.orderByNewCreationDate()
+			.toTimelineTweetItems(hashtags: hashtags)
+			.timelineItemsAppend(items: items)
+			.prefix(maxTweets)
 		
-		self.items = Array(newTweets)
+		items = Array(newTweets)
 	}
 	
 	func appendHashtags(hashtags: ESTwitter.HashtagSet) -> ProcessExitStatus {
 		
-		let latestHashtags = self.items.first?.currentHashtags
+		let latestHashtags = items.first?.currentHashtags
 		let needAppending = { () -> Bool in
 			
 			switch latestHashtags {
@@ -62,7 +66,7 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 			
 			let item = TimelineHashtagTableCellItem(previousHashtags: latestHashtags, currentHashtags: hashtags)
 			
-			self.items.insert(item, at: 0)
+			items.insert(item, at: 0)
 			
 			return .passed
 		}
@@ -74,7 +78,7 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		
-		return self.items.count
+		return items.count
 	}
 
 	func setNeedsEstimateHeight() {
@@ -83,7 +87,7 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 	
 	func estimateCellHeightOfRow(row:Int, tableView:NSTableView) -> CGFloat {
 		
-		let item = self.items[row]
+		let item = items[row]
 		
 		return item.timelineCellType.estimateCellHeightForItem(item: item, tableView: tableView)
 	}

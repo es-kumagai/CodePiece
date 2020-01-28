@@ -261,7 +261,7 @@ extension Authorization {
 //		}
 //	}
 	
-	#warning("GistController が担えば良さそう。")
+	// FIXME: Gists の認証処理は GistController が担えば良さそうです。Twitter はそうしています。
 	static func authorizationWithGitHub(completion: @escaping (AuthorizationResult) -> Void) {
 		
 		let oauth2 = self.github.oauth2

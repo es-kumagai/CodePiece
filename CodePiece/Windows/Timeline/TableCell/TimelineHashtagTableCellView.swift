@@ -78,17 +78,28 @@ final class TimelineHashtagTableCellView: NSTableCellView {
 
 extension NSUserInterfaceItemIdentifier {
 	
-	static var timelineHashtagTableCellViewPrototypeCellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "TimelineHashtagCell")
+	static var timelineHashtagCell = NSUserInterfaceItemIdentifier(rawValue: "TimelineHashtagCell")
 }
 
 extension TimelineHashtagTableCellView : TimelineTableCellType {
 	
+	static var userInterfaceItemIdentifier: NSUserInterfaceItemIdentifier = .timelineHashtagCell
+	
 	static func makeCellWithItem(item: TimelineTableItem, tableView: NSTableView, owner: AnyObject?) -> NSTableCellView {
 		
-		let view = instanceApplyingExpression(with: self.makeCellForTableView(tableView: tableView, owner: owner) as! TimelineHashtagTableCellView) {
+		let rawView = makeCellForTableView(tableView: tableView, owner: owner)
+		
+		guard let view = rawView as? TimelineHashtagTableCellView else {
 			
-			$0.item = (item as! TimelineHashtagTableCellItem)
+			fatalError("Unexpected cell type: \(type(of: rawView))")
 		}
+		
+		guard let item = item as? TimelineHashtagTableCellItem else {
+			
+			fatalError("Unexpected TableView item passed.")
+		}
+		
+		view.item = item
 		
 		return view
 	}

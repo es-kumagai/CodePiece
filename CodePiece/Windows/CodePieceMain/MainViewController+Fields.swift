@@ -16,7 +16,7 @@ enum ReplyStyle {
 	case ChainPost
 }
 
-#warning("プロトコルにする必要があるのか再検討。当初は MainViewController が肥大化するのをプロトコルで避けたのかもしれないが、今に思うと用途が違う印象。")
+// FIXME: プロトコルにする必要があるのか再検討。当初は MainViewController が肥大化するのをプロトコルで避けたのかもしれないが、今に思うと用途が違う印象。
 protocol FieldsController {
 
 	var codeScrollView:NSScrollView! { get }

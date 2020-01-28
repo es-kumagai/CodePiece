@@ -8,7 +8,7 @@
 
 import WebKit
 
-#warning("ここでのキャプチャーサイズのカスタマイズ機能は廃止で良さそう。横幅と最大高さは設定画面で指定できても良さそう。")
+// FIXME: ここでのキャプチャーサイズのカスタマイズ機能一式は廃止で良さそう。横幅と最大高さは設定画面で指定できても良さそう。
 protocol CaptureInfoType {
 	
 	var userAgent: String? { get }

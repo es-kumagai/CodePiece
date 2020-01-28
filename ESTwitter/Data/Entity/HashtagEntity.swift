@@ -12,6 +12,10 @@ public struct HashtagEntity {
 	public var indices: Indices
 }
 
+extension HashtagEntity : EntityUnit {
+	
+}
+
 extension HashtagEntity : Decodable {
 	
 	enum CodingKeys : String, CodingKey {

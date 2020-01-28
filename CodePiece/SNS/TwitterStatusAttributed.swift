@@ -16,8 +16,8 @@ extension Status {
 		return attributedText(urlColor: systemPalette.urlColor, hashtagColor: systemPalette.hashtagColor, mentionColor: systemPalette.mentionColor)
 	}
 	
-	public func attributedText(tweak: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
+	public func attributedText(customizeExpression expression: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
 		
-		return try attributedText(urlColor: systemPalette.urlColor, hashtagColor: systemPalette.hashtagColor, mentionColor: systemPalette.mentionColor, tweak: tweak)
+		return try attributedText(urlColor: systemPalette.urlColor, hashtagColor: systemPalette.hashtagColor, mentionColor: systemPalette.mentionColor, customizeExpression: expression)
 	}
 }

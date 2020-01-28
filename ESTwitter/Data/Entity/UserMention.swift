@@ -26,6 +26,10 @@ public struct UserMention : Decodable, HasIndices {
 	}
 }
 
+extension UserMention : EntityUnit {
+	
+}
+
 extension UserMention {
 	
 	var url: Foundation.URL {

@@ -79,6 +79,48 @@ public struct Status : Decodable {
 //}
 
 extension Status {
+
+	func normalizedEntities<Entity>(_ entities: [Entity]?, for text: String) -> [Entity]? where Entity : EntityUnit {
+		
+		guard let entities = entities else {
+			
+			return nil
+		}
+		
+		// FIXME: Twitter の Entity で使う文字数表を作る必要があります。UTF16 ではないので、今のままだと範囲を超えてしまいます。
+		let countsDiffAsUtf16 = text.map { $0.utf16.count - 1 }
+		
+		return entities.map { entity in
+
+			let effectiveCountsDiff = countsDiffAsUtf16[0 ..< entity.indices.startIndex]
+			let offset = effectiveCountsDiff.reduce(0, +)
+			
+			var newEntity = entity
+			
+			newEntity.indices = entity.indices.added(offset: offset)
+			
+			return newEntity
+		}
+	}
+	
+	@available(macOS, deprecated: 10.15, message: "Twitter の Entity で扱う文字単位を把握できるまでは使用非推奨です。")
+	func normalizedEntities(for text: String) -> Entities? {
+
+		guard let entities = entities else {
+
+			return nil
+		}
+		
+		let urls = normalizedEntities(entities.urls, for: text)
+		let hashtags = normalizedEntities(entities.hashtags, for: text)
+		let userMentions = normalizedEntities(entities.userMentions, for: text)
+		let media = normalizedEntities(entities.media, for: text)
+
+		return Entities(urls: urls, hashtags: hashtags, userMentions: userMentions, media: media)
+	}
+}
+
+extension Status {
 	
 	private func applyAttribute(text: NSMutableAttributedString, urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) {
 		
@@ -89,99 +131,106 @@ extension Status {
 			text.endEditing()
 		}
 		
-		if let entities = entities {
+		// FIXME: ここで text プロパティーに依存して、外でそこから導出された text 引数を編集するのは適切ではない。オリジナルな String も引数で受け取るか、別の方法にする必要がある。
+		// FIXME: Twitter Entity の文字位置と macOS AttributedString の文字位置に若干の違いがあるため、把握し次第 `normalizedEntities(for: self.text)` を使って適切に処理できる必要があります。詳細は https://www.antun.net/tips/api/twitter.html に記載がありました。
+		if let entities = self.entities {
 
 			let baseAttributes = { () -> [NSAttributedString.Key : Any] in
-				
+
 				var results = [NSAttributedString.Key : Any]()
-				
+
 				text.enumerateAttributes(in: NSMakeRange(0, text.length), options: []) { (attributes: [NSAttributedString.Key : Any], range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
-					
+
 					for (name, value) in attributes {
-						
+
 						results[name] = value
 					}
 				}
-				
+
 				return results
 			}()
-			
+
 			struct LinkItem : HasIndices {
-			
+
 				var indices: Indices
 				var color: NSColor
 				var displayText: String
 				var link: Foundation.URL
-				
+
 				init(_ entity: URLEntity, color: NSColor) {
-					
+
 					self.indices = entity.indices
 					self.color = color
 					self.displayText = entity.displayUrl
 					self.link = entity.expandedUrl.url!
 				}
-				
+
 				init(_ entity: HashtagEntity, color: NSColor) {
-					
+
 					self.indices = entity.indices
 					self.color = color
 					self.displayText = entity.value.description
 					self.link = entity.value.url
 				}
-				
+
 				init(_ entity: MediaEntity, color: NSColor) {
-					
+
 					self.indices = entity.indices
 					self.color = color
 					self.displayText = entity.displayUrl
 					self.link = entity.expandedUrl.url!
 				}
-				
+
 				init(_ entity: UserMention, color: NSColor) {
-					
+
 					self.indices = entity.indices
 					self.color = color
 					self.displayText = entity.description
 					self.link = entity.url
 				}
-				
+
 				func attributedTextWithBaseAttributes(baseAttributes: [NSAttributedString.Key : Any]) -> NSAttributedString {
-				
+
 					return NSAttributedString(string: displayText, attributes: attributesWithBaseAttributes(baseAttributes: baseAttributes))
 				}
-				
+
 				var range: NSRange {
-					
+
 					return NSRange(indices)
 				}
-				
+
 				func attributesWithBaseAttributes(baseAttributes: [NSAttributedString.Key : Any]) -> [NSAttributedString.Key : Any] {
-					
+
 					var results = baseAttributes
-					
+
+					// FIXME: link の色に邪魔されて foregroundColor が実質無効になる様子です。
 					results[.link] = link
 					results[.foregroundColor] = color
-					results[.underlineStyle] = [] as NSUnderlineStyle
+					results[.underlineStyle] = 0
 					results[.underlineColor] = NSColor.clear
-					
+
 					return results
 				}
 			}
 
 			let linkItems = [
-				
-				entities.urls?.map { LinkItem.init($0, color: urlColor) },
-				entities.hashtags?.map { LinkItem.init($0, color: hashtagColor) },
-				entities.media?.map { LinkItem.init($0, color: urlColor) },
-				entities.userMentions?.map { LinkItem.init($0, color: mentionColor) }
+
+				entities.urls?.map { LinkItem($0, color: urlColor) },
+				entities.hashtags?.map { LinkItem($0, color: hashtagColor) },
+				entities.media?.map { LinkItem($0, color: urlColor) },
+				entities.userMentions?.map { LinkItem($0, color: mentionColor) }
 				]
 				.compactMap { $0 }
 				.flatMap { $0 }
 			
 			for item in linkItems.sortedByIndicesDescend {
+
+				let subtext = item.attributedTextWithBaseAttributes(baseAttributes: baseAttributes)
 				
-				text.replaceCharacters(in: item.range, with: item.attributedTextWithBaseAttributes(baseAttributes: baseAttributes))
+				text.replaceCharacters(in: item.range, with: subtext)
 			}
+			
+//			text.replaceCharacters(in: NSRange(location: 5, length: 4), with: NSAttributedString(string: "XX", attributes: [NSAttributedString.Key.foregroundColor : NSColor.red]))
 		}
 	}
 
@@ -194,13 +243,14 @@ extension Status {
 		return text.copy() as! NSAttributedString
 	}
 	
-	public func attributedText(urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor, tweak: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
+	public func attributedText(urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor, customizeExpression: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
 		
 		let text = NSMutableAttributedString(string: self.text)
 		
 		// first, apply attributes to entire text.
-		try tweak(text)
-		
+		// FIXME: このタイミングで置き換えされると、次の Entity の適用で困るので、このカスタムポイントは用意しない方が良いかもしれません。
+		try customizeExpression(text)
+
 		// then, apply attributes to parts of text.
 		applyAttribute(text: text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
 		

@@ -24,6 +24,7 @@ extension NSUserInterfaceItemIdentifier {
 
 protocol TimelineTableCellType : Selectable {
 	
+	static var userInterfaceItemIdentifier: NSUserInterfaceItemIdentifier { get }
 	static func estimateCellHeightForItem(item:TimelineTableItem, tableView:NSTableView) -> CGFloat
 
 	func toTimelineView() -> NSView
@@ -40,21 +41,21 @@ extension TimelineTableCellType {
 	
 	static func makeCellForTableView(tableView: NSTableView, owner: AnyObject?) -> TimelineTableCellType {
 
-		return tableView.makeView(withIdentifier: .timeLineCell, owner: owner) as! TimelineTableCellType
+		return tableView.makeView(withIdentifier: userInterfaceItemIdentifier, owner: owner) as! TimelineTableCellType
 	}
 }
 
 struct TimelineTweetItem : TimelineTableItem {
 	
-	var status: ESTwitter.Status
-	var hashtags: ESTwitter.HashtagSet
+	var status: Status
+	var hashtags: HashtagSet
 	
 	var timelineItemTweetId: String? {
 		
 		return self.status.idStr
 	}
 
-	var currentHashtags: ESTwitter.HashtagSet {
+	var currentHashtags: HashtagSet {
 		
 		return self.hashtags
 	}
@@ -65,9 +66,17 @@ struct TimelineTweetItem : TimelineTableItem {
 	}
 }
 
-extension Sequence where Element == ESTwitter.Status {
+extension TimelineTweetItem : Equatable {
 	
-	func toTimelineTweetItems(hashtags: ESTwitter.HashtagSet) -> [TimelineTweetItem] {
+	static func == (lhs: TimelineTweetItem, rhs: TimelineTweetItem) -> Bool {
+		
+		return lhs.status.idStr == rhs.status.idStr
+	}
+}
+
+extension Sequence where Element == Status {
+	
+	func toTimelineTweetItems(hashtags: HashtagSet) -> [TimelineTweetItem] {
 		
 		return self.map { TimelineTweetItem(status: $0, hashtags: hashtags) }
 	}

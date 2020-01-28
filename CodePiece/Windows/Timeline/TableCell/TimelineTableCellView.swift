@@ -22,18 +22,18 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		case Past
 	}
 	
-	var item:TimelineTweetItem? {
+	var item: TimelineTweetItem? {
 		
 		didSet {
 			
-			if item?.status.id != oldValue?.status.id {
+			if item != oldValue {
 
-				self.applyItem(item: self.item)
+				applyItem(item: item)
 			}
 		}
 	}
 	
-	var style:Style = .Recent {
+	var style: Style = .Recent {
 		
 		didSet {
 			
@@ -41,7 +41,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		}
 	}
 	
-	var selected:Bool = false {
+	var selected: Bool = false {
 		
 		didSet {
 			
@@ -75,7 +75,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		super.draw(dirtyRect)
 	}
 	
-	private func applyItem(item:TimelineTweetItem?) {
+	private func applyItem(item: TimelineTweetItem?) {
 
 		if let status = item?.status {
 
@@ -83,21 +83,23 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 //			let html = HTMLText(rawValue: status.text)
 //			self.textLabel.attributedStringValue = html.attributedText
 
-			self.textLabel.attributedStringValue = status.attributedText { text in
-				
+			
+			
+			textLabel.attributedStringValue = status.attributedText { text in
+
 				let textRange = NSMakeRange(0, text.length)
-				
+
 				text.addAttribute(.font, value: systemPalette.textFont, range: textRange)
 				text.addAttribute(.foregroundColor, value: systemPalette.textColor, range: textRange)
 			}
 			
-			self.usernameLabel.stringValue = status.user.name
-			self.dateLabel.stringValue = status.createdAt.description
-			self.iconButton.image = nil
-			self.retweetMark.isHidden = !status.isQuoteStatus
-			self.style = (status.createdAt > TwitterDate(NSDate().daysAgo(1) as Foundation.Date) ? .Recent : .Past)
-			
-			self.updateIconImage(status: status)
+			usernameLabel.stringValue = status.user.name
+			dateLabel.stringValue = status.createdAt.description
+			iconButton.image = nil
+			retweetMark.isHidden = !status.isQuoteStatus
+			style = (status.createdAt > TwitterDate(NSDate().daysAgo(1) as Foundation.Date) ? .Recent : .Past)
+
+			updateIconImage(status: status)
 		}
 		else {
 
@@ -152,15 +154,21 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 
 extension TimelineTableCellView : TimelineTableCellType {
 
+	static var userInterfaceItemIdentifier: NSUserInterfaceItemIdentifier = .timeLineCell
+	
 	static func makeCellWithItem(item: TimelineTableItem, tableView: NSTableView, owner: AnyObject?) -> NSTableCellView {
-		
-		let view = applyingExpression(to: makeCellForTableView(tableView: tableView, owner: owner) as! TimelineTableCellView) {
+
+		guard let tweetItem = item as? TimelineTweetItem else {
 			
-			$0.textLabel.isSelectable = false
-			$0.textLabel.allowsEditingTextAttributes = true
-			
-			$0.item = (item as! TimelineTweetItem)
+			fatalError("Unexpected table item. Expected `TimeLineTweetItem` but actual `\(type(of: item))`")
 		}
+		
+		let view = makeCellForTableView(tableView: tableView, owner: owner) as! TimelineTableCellView
+		
+		view.textLabel.isSelectable = false
+		view.textLabel.allowsEditingTextAttributes = true
+
+		view.item = tweetItem
 		
 		return view
 	}
@@ -187,15 +195,17 @@ extension TimelineTableCellView : TimelineTableCellType {
 	
 	private static func getCellForEstimateHeightForTableView(tableView: NSTableView) -> TimelineTableCellView {
 		
-		if self.cellForEstimateHeight == nil {
+		if cellForEstimateHeight == nil {
 			
 //			let cell = self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView
-			guard let topObjects = tableView.topObjectsInRegisteredNibByIdentifier(identifier: .timelineHashtagTableCellViewPrototypeCellIdentifier) else {
+			guard let topObjects = tableView.topObjectsInRegisteredNibByIdentifier(identifier: userInterfaceItemIdentifier) else {
 			
 				fatalError()
 			}
 			
-			self.cellForEstimateHeight = topObjects.compactMap { $0 as? TimelineTableCellView } .first!
+			cellForEstimateHeight = topObjects
+				.compactMap { $0 as? TimelineTableCellView }
+				.first!
 		}
 		
 		return self.cellForEstimateHeight
