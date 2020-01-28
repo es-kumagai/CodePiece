@@ -477,7 +477,6 @@ extension TimelineViewController : TimelineGetStatusesController {
 		
 		guard NSApp.twitterController.readyToUse else {
 		
-			NSLog("Cancel update for twitter timeline because current twitter account's credentials is not verified.")
 			return
 		}
 		

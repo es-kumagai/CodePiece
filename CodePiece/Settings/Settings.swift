@@ -68,17 +68,18 @@ final class Settings {
 	
 	func loadTwitterAccount() {
 		
-//		switch _store.twitter.kind {
+		switch _store.twitter.kind {
 			
 //		case .OSAccount:
 //			loadTwitterAccountAsAccount()
 			
-//		case .OAuthToken:
+		case .OAuthToken:
 			loadTwitterAccountAsToken()
 			
 //		case .Unknown:
-//			loadTwitterAccountDefault()
-//		}
+		case .notAuthorized:
+			loadTwitterAccountDefault()
+		}
 	}
 	
 //	private func loadTwitterAccountAsAccount() {
@@ -113,13 +114,11 @@ final class Settings {
 		account.twitterToken = token
 	}
 	
-//	private func loadTwitterAccountDefault() {
-//
-//		NSLog("No Twitter account specified.")
-//		self.account.twitterAccount = nil
-//
-//		self.saveTwitterAccount()
-//	}
+	private func loadTwitterAccountDefault() {
+
+		NSLog("No Twitter account specified.")
+		account.twitterToken = nil
+	}
 
 	func saveTwitterAccount() {
 		
@@ -127,6 +126,7 @@ final class Settings {
 		
 		if let token = account.twitterToken {
 
+			_store.twitter.kind = .OAuthToken
 			_store.twitter.identifier = ""
 			_store.twitter.token = token.key
 			_store.twitter.tokenSecret = token.secret
@@ -135,6 +135,7 @@ final class Settings {
 		}
 		else {
 			
+			_store.twitter.kind = .notAuthorized
 			_store.twitter.identifier = ""
 			_store.twitter.token = ""
 			_store.twitter.tokenSecret = ""
@@ -179,7 +180,17 @@ final class Settings {
 		}
 	}
 	
-	func resetGitHubAccount(saveFinally save:Bool) {
+	func resetTwitterAccount(saveFinally save: Bool) {
+		
+		account.twitterToken = nil
+		
+		if save {
+			
+			saveTwitterAccount()
+		}
+	}
+	
+	func resetGitHubAccount(saveFinally save: Bool) {
 		
 		account.id = nil
 		account.username = nil

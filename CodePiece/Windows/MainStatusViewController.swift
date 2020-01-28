@@ -35,21 +35,6 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 		
 		updateGithubAccountStatus()
 		updateTwitterAccountStatus()
-		
-		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] _ in
-			
-			self.updateTwitterAccountStatus()
-		}
-		
-		observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] _ in
-			
-			self.updateGithubAccountStatus()
-		}
-		
-		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] _ in
-			
-			self.updateReachability()
-		}
 	}
 	
 	func updateTwitterAccountStatus() {
@@ -59,7 +44,7 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 		updateTwitterAccountStatusWith(isValid: twitterController.readyToUse, username: twitterController.token?.screenName)
 	}
 	
-	// このメソッドを直接呼ぶと実際と食い違う可能性が出てきてしまうので、設定を直接参照するようにする。
+	// FIXME: このメソッドを直接呼ぶと実際と食い違う可能性が出てきてしまうので、設定を直接参照するようにする。
 	// そうすると Authorization.TwitterAuthorizationStateDidChangeNotification が細かい情報を持たなくて良くなる可能性があるが、
 	// それだと今度は有効状態を判定しにくくなる。NSApp.snsController.twitter に状態の問い合わせメソッドを用意するのが良さそう。
 	private func updateTwitterAccountStatusWith(isValid: Bool, username: String?) {
@@ -87,8 +72,30 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 	override func viewWillAppear() {
 		
 		super.viewWillAppear()
-	
+			
+		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] _ in
+			
+			self.updateTwitterAccountStatus()
+		}
+		
+		observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] _ in
+			
+			self.updateGithubAccountStatus()
+		}
+		
+		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] _ in
+			
+			self.updateReachability()
+		}
+
 		updateReachability()
+	}
+	
+	override func viewWillDisappear() {
+		
+		super.viewWillDisappear()
+		
+		notificationHandlers.releaseAll()
 	}
 	
 	func updateReachability() {

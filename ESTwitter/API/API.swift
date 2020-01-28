@@ -26,22 +26,43 @@ public final class API {
 	public var isAuthorized: Bool
 	public var isCredentialVerified: Bool
 	
+	private var consumerKey: String
+	private var tokenSecret: String
+	
 	public init(consumerKey key: String, tokenSecret secret: String) {
 		
-		rawApi = Swifter(consumerKey: key, consumerSecret: secret)
+		consumerKey = key
+		tokenSecret = secret
+
 		isAuthorized = false
 		isCredentialVerified = false
+
+		rawApi = makeUnauthorizedRawApi()
 	}
 	
-	public init(consumerKey key: String, tokenSecret secret: String, oauthToken token: String, oauthTokenSecret tokenSecret: String) {
+	public init(consumerKey key: String, tokenSecret secret: String, oauthToken oToken: String, oauthTokenSecret oTokenSecret: String) {
+
+		consumerKey = key
+		tokenSecret = secret
 		
-		rawApi = Swifter(consumerKey: key, consumerSecret: secret, oauthToken: token, oauthTokenSecret: tokenSecret)
 		isAuthorized = true
 		isCredentialVerified = false
+
+		rawApi = makeAuthorizedRawApi(oauthToken: oToken, oauthTokenSecret: oTokenSecret)
 	}
 }
 
 extension API {
+	
+	private func makeUnauthorizedRawApi() -> Swifter {
+	
+		return Swifter(consumerKey: consumerKey, consumerSecret: tokenSecret)
+	}
+	
+	private func makeAuthorizedRawApi(oauthToken oToken: String, oauthTokenSecret oTokenSecret: String) -> Swifter {
+	
+		return Swifter(consumerKey: consumerKey, consumerSecret: tokenSecret, oauthToken: oToken, oauthTokenSecret: oTokenSecret)
+	}
 	
 	public func authorize(withCallbackUrl url: Foundation.URL, handler: @escaping (AuthorizationResult) -> Void) {
 		
@@ -249,9 +270,9 @@ extension API {
 			return
 		}
 		
-		func successHandler(token: Credential.OAuthAccessToken?, urlResponse: URLResponse) {
+		func successHandler() {
 			
-			rawApi = nil
+			rawApi = makeUnauthorizedRawApi()
 			isCredentialVerified = false
 			
 			handler(.success(()))
@@ -261,7 +282,8 @@ extension API {
 
 			handler(.failure(.unexpected(error)))
 		}
-		
-		api.invalidateOAuth2BearerToken(success: successHandler, failure: failureHandler)
+
+		// FIXME: Swifter のサインアウト方法がわからないため、アプリ内の認証情報だけを削除します。
+		successHandler()
 	}
 }

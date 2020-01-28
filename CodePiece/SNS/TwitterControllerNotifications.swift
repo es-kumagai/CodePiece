@@ -13,7 +13,7 @@ extension TwitterController {
 	
 	struct AuthorizationStateDidChangeNotification : NotificationProtocol {
 		
-		var isAuthorized: Bool
+		var isCredentialVerified: Bool
 		var screenName: String?
 	}
 	

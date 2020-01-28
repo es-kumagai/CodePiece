@@ -17,9 +17,9 @@ struct DataStore {
 	static let service = "CodePiece App"
 	static let group = "jp.ez-style.appid.CodePiece"
 
-	var appState:AppState
-	var twitter:TwitterStore
-	var github:GitHubStore
+	var appState: AppState
+	var twitter: TwitterStore
+	var github: GitHubStore
 
 	init() {
 		
@@ -58,9 +58,9 @@ extension DataStore.DataStoreError : CustomStringConvertible {
 
 private extension UserDefaults {
 	
-//	typealias TwitterStoreKind = DataStore.TwitterStore.Kind
+	typealias TwitterStoreKind = DataStore.TwitterStore.Kind
 	
-//	static let twitterStoreAccountKindKey = "twitter:kind"
+	static let twitterStoreAccountKindKey = "twitter:kind"
 	static let twitterStoreAccountIdentifierKey = "twitter:identifier"
 	static let twitterStoreAccountTokenKey = "twitter:token"
 	static let twitterStoreAccountTokenSecretKey = "twitter:token-secret"
@@ -74,9 +74,9 @@ private extension UserDefaults {
 		let tokenSecret = twitterStoreAccountTokenSecret
 		let tokenScreenName = twitterStoreAccountTokenScreenName
 		let tokenUserId = twitterStoreAccountTokenUserId
-//		let kind = twitterStoreAccountKind
+		let kind = twitterStoreAccountKind
 		
-		return DataStore.TwitterStore(identifier: identifier, token: token, tokenSecret: tokenSecret, tokenScreenName: tokenScreenName, tokenUserId: tokenUserId)
+		return DataStore.TwitterStore(kind: kind, identifier: identifier, token: token, tokenSecret: tokenSecret, tokenScreenName: tokenScreenName, tokenUserId: tokenUserId)
 	}
 
 	func set(twitterStore store: DataStore.TwitterStore) {
@@ -86,7 +86,7 @@ private extension UserDefaults {
 		twitterStoreAccountTokenSecret = store.tokenSecret
 		twitterStoreAccountTokenScreenName = store.tokenScreenName
 		twitterStoreAccountTokenUserId = store.tokenUserId
-//		twitterStoreAccountKind = store.kind
+		twitterStoreAccountKind = store.kind
 	}
 	
 	var twitterStoreAccountIdentifier: String {
@@ -154,39 +154,39 @@ private extension UserDefaults {
 		}
 	}
 	
-//	var twitterStoreAccountKind: TwitterStoreKind {
-//
-//		get {
-//
-//			if let kindValue = string(forKey: UserDefaults.twitterStoreAccountKindKey) {
-//
-//				return TwitterStoreKind(rawValue: kindValue) ?? .Unknown
-//			}
-//			else {
-//
-//				return .Unknown
-//			}
-//		}
-//
-//		set (kind) {
-//
-//			set(kind.rawValue, forKey: UserDefaults.twitterStoreAccountKindKey)
-//		}
-//	}
+	var twitterStoreAccountKind: TwitterStoreKind {
+
+		get {
+
+			if let kindValue = string(forKey: UserDefaults.twitterStoreAccountKindKey) {
+
+				return TwitterStoreKind(rawValue: kindValue) ?? .notAuthorized
+			}
+			else {
+
+				return .notAuthorized
+			}
+		}
+
+		set (kind) {
+
+			set(kind.rawValue, forKey: UserDefaults.twitterStoreAccountKindKey)
+		}
+	}
 }
 
 extension DataStore {
 
 	struct TwitterStore : UserDefaultAccessible {
 
-//		enum Kind : String {
-//
-//			case Unknown = ""
+		enum Kind : String {
+
+			case notAuthorized = ""
 //			case OSAccount = "account"
-//			case OAuthToken = "token"
-//		}
+			case OAuthToken = "token"
+		}
 		
-//		var kind: Kind
+		var kind: Kind
 		var identifier: String
 		var token: String
 		var tokenSecret: String

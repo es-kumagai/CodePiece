@@ -47,6 +47,8 @@ final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewContro
 		super.viewWillAppear()
 		
 //		updatePinInputMode()
+		
+		
 	}
 }
 

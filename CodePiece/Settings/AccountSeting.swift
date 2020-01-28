@@ -12,11 +12,11 @@ import ESTwitter
 
 struct AccountSetting {
 	
-	var id:ID?
-	var username:String?
-	var authorization:GitHubAuthorization?
+	var id: ID?
+	var username: String?
+	var authorization: GitHubAuthorization?
 	
-	var twitterToken: ESTwitter.Token?
+	var twitterToken: Token?
 }
 
 extension AccountSetting {
@@ -44,7 +44,7 @@ extension AccountSetting {
 	
 	var authorizationState:AuthorizationState {
 		
-		if self.authorization != nil {
+		if authorization != nil {
 
 			return .Authorized
 		}

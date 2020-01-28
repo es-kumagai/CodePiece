@@ -154,6 +154,16 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 			DebugTime.print("API is prepared without token.")
 		}
 	}
+
+	func resetToken() {
+
+		let previousScreenName = self.token?.screenName
+
+		token = nil
+		NSApp.settings.resetTwitterAccount(saveFinally: true)
+		
+		AuthorizationStateDidChangeNotification(isCredentialVerified: false, screenName: previousScreenName).post()
+	}
 	
 	func resetAuthentication() {
 		
@@ -162,6 +172,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 			switch result {
 				
 			case .success:
+				self.resetToken()
 				AuthorizationResetSucceededNotification().post()
 				
 			case .failure(let error):
@@ -209,16 +220,11 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 //
 //		self.autoVerifyingQueue.start()
 		
-		observe(notification: AuthorizationResetSucceededNotification.self) { notification -> Void in
+		observe(notification: AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			let previousScreenName = self.token?.screenName
-			
-			self.token = nil
-			
-			AuthorizationStateDidChangeNotification(isAuthorized: false, screenName: previousScreenName).post()
 		}
 		
-		observe(notification: AuthorizationResetFailureNotification.self) { notification in
+		observe(notification: AuthorizationResetFailureNotification.self) { [unowned self] notification in
 
 			self.showErrorAlert(withTitle: "Failed to reset authorization.", message: notification.error.localizedDescription)
 		}
@@ -339,7 +345,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 		func success() {
 			
 			DebugTime.print("📮 Passed verify-credentials #9")
-			AuthorizationStateDidChangeNotification(isAuthorized: api.isCredentialVerified, screenName: token?.screenName).post()
+			AuthorizationStateDidChangeNotification(isCredentialVerified: api.isCredentialVerified, screenName: token?.screenName).post()
 		}
 		
 		func failure(_ error: APIError) {
@@ -347,10 +353,17 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 			DebugTime.print("📮 Passed verify-credentials #10")
 			switch error {
 				
-			case .responseError(code: let code, message: _) where code == 401:
-				
+			case .responseError(401, message: _):
+				resetToken()
 				AuthorizationStateInvalidNotification().post()
-			
+				AuthorizationStateDidChangeWithErrorNotification(error: .apiError(error)).post()
+
+			case .responseError(code: 220, message: _):
+				// Your credentials do not allow access to this resource
+				resetToken()
+				AuthorizationStateInvalidNotification().post()
+				AuthorizationStateDidChangeWithErrorNotification(error: .apiError(error)).post()
+				
 			default:
 				AuthorizationStateDidChangeWithErrorNotification(error: .apiError(error)).post()
 			}
@@ -728,7 +741,9 @@ extension TwitterController {
 			
 			DebugTime.print("📮 Verification successfully (Name:\(screenName), ID:\(userId)) ... #3.4.2")
 
-			AuthorizationStateDidChangeNotification(isAuthorized: true, screenName: screenName).post()
+			self.token = token
+						
+			verifyCredentials()
 		}
 
 		func failure(_ error: AuthorizationError) {

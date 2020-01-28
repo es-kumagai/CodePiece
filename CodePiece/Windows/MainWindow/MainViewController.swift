@@ -43,7 +43,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		return NSApp.snsController.twitter
 	}
 	
-	private var postingHUD:ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
+	private var postingHUD: ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
 	
 	private(set) var latestTweet: ESTwitter.Status?
 	private(set) var selectedStatuses = Array<ESTwitter.Status>()
@@ -72,16 +72,16 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 		didSet {
 			
-			self.codeTextView.font = systemPalette.codeFont
+			codeTextView.font = systemPalette.codeFont
 
 			// MARK: IB からだと自動書式調整のプロパティを変えても効かないので、ここで調整しています。
-			self.codeTextView.isAutomaticDashSubstitutionEnabled = false
-			self.codeTextView.isAutomaticDataDetectionEnabled = false
-			self.codeTextView.isAutomaticLinkDetectionEnabled = false
-			self.codeTextView.isAutomaticQuoteSubstitutionEnabled = false
-			self.codeTextView.isAutomaticSpellingCorrectionEnabled = false
-			self.codeTextView.isAutomaticTextReplacementEnabled = false
-			self.codeTextView.isContinuousSpellCheckingEnabled = false
+			codeTextView.isAutomaticDashSubstitutionEnabled = false
+			codeTextView.isAutomaticDataDetectionEnabled = false
+			codeTextView.isAutomaticLinkDetectionEnabled = false
+			codeTextView.isAutomaticQuoteSubstitutionEnabled = false
+			codeTextView.isAutomaticSpellingCorrectionEnabled = false
+			codeTextView.isAutomaticTextReplacementEnabled = false
+			codeTextView.isContinuousSpellCheckingEnabled = false
 		}
 	}
 	
@@ -111,16 +111,16 @@ final class MainViewController: NSViewController, NotificationObservable {
 		return parent as! BaseViewController
 	}
 	
-	var posting:Bool = false {
+	var posting: Bool = false {
 	
 		willSet {
 			
-			self.willChangeValue(forKey: "canPost")
+			willChangeValue(forKey: "canPost")
 		}
 		
 		didSet {
 			
-			self.didChangeValue(forKey: "canPost")
+			didChangeValue(forKey: "canPost")
 		}
 	}
 	
@@ -173,7 +173,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		guard NSApp.snsController.canPost else {
 		
-			self.showErrorAlert(withTitle: "Not ready", message: "It is not ready to post. Please set SNS accounts on the preferences. (⌘,)")
+			self.showErrorAlert(withTitle: "Not ready to post", message: "Please set SNS accounts on the preferences. (⌘,)")
 			return
 		}
 		
@@ -300,10 +300,18 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		observe(notification: TwitterController.AuthorizationStateInvalidNotification.self) { [unowned self] notification in
 			
-			DebugTime.print("Authorization State is invalid. Try authenticating.")
-			self.twitterController.authorize()
+			if NSApp.settings.isReady {
+			
+				DebugTime.print("Authorization State is invalid. Try authenticating.")
+				self.twitterController.authorize()
+			}
 		}
 		
+		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { notification in
+			
+			self.withChangeValue(for: "CanPost")
+		}
+
 		observe(notification: TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
 			
 			self.showErrorAlert(withTitle: "Failed to verify credentials", message: "\(notification.error)")

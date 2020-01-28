@@ -112,6 +112,11 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 //			}
 //
 //		}
+    }
+	
+	override func viewWillAppear() {
+		
+		super.viewWillAppear()
 		
 		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
@@ -125,14 +130,14 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 			self.applyAuthorizedStatus()
 		}
 
-		verifyCredentials()
-    }
-	
-	override func viewWillAppear() {
-		
-		super.viewWillAppear()
-		
 		applyAuthorizedStatus()
+	}
+	
+	override func viewWillDisappear() {
+		
+		super.viewWillDisappear()
+		
+		notificationHandlers.releaseAll()
 	}
 }
 
