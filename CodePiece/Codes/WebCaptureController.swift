@@ -11,7 +11,7 @@ import WebKit
 import Ocean
 import Swim
 
-private var thread = DispatchQueue(label: "jp.ez-style.CodePiece.CodeCaptureController")
+private var thread = DispatchQueue(label: "jp.ez-net.CodePiece.CodeCaptureController")
 
 final class WebCaptureController {
 	
