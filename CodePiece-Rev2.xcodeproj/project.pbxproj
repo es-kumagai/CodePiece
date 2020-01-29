@@ -154,6 +154,7 @@
 		B1A472A023D09DB300F73658 /* StatusCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */; };
 		B1C349A723E1416A0039F4E6 /* Settings+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A623E1416A0039F4E6 /* Settings+Encryption.swift */; };
 		B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A823E152A90039F4E6 /* ReachabilityController.swift */; };
+		B1C349AB23E153460039F4E6 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349AA23E153460039F4E6 /* AES.swift */; };
 		B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
@@ -371,6 +372,7 @@
 		B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCoordinates.swift; sourceTree = "<group>"; };
 		B1C349A623E1416A0039F4E6 /* Settings+Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Encryption.swift"; sourceTree = "<group>"; };
 		B1C349A823E152A90039F4E6 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
+		B1C349AA23E153460039F4E6 /* AES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				B15EE38E23CF0360005B268A /* TwitterError.swift */,
 				B15EE39023CF039C005B268A /* NSError+STTwitter.swift */,
 				B15EE1F523CE747D005B268A /* Extension.swift */,
+				B1C349AA23E153460039F4E6 /* AES.swift */,
 			);
 			path = NeedsRefactoring;
 			sourceTree = "<group>";
@@ -1259,6 +1262,7 @@
 				B15EE29E23CE7667005B268A /* TimelineViewController+Notifications.swift in Sources */,
 				B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */,
 				B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */,
+				B1C349AB23E153460039F4E6 /* AES.swift in Sources */,
 				B15EE25123CE7658005B268A /* DataStore.swift in Sources */,
 				B1128CE623DED6E000DDA4EA /* SNSControllerAuthenticationError.swift in Sources */,
 				B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */,
