@@ -37,7 +37,14 @@ class AES {
 			throw EncryptionError.invalidArgument(message: "Invalid text passed as an argument.")
 		}
 		
-		let cryptedStringLength = Int(ceil(Double(text.count / kCCBlockSizeAES128)) + 1)
+		let cryptedDataLength = Int(ceil(Double(text.count) / Double(CryptionBlockSize.aes128.rawValue)))
+		let cryptedData = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: cryptedDataLength + 1)
+		
+		CCCrypt(
+			CryptionOperation.encrypt.rawValue,
+			CryptionAlgorithm.aes,
+			CryptionOption.pkcs7Padding,
+			<#T##key: UnsafeRawPointer!##UnsafeRawPointer!#>, <#T##keyLength: Int##Int#>, <#T##iv: UnsafeRawPointer!##UnsafeRawPointer!#>, <#T##dataIn: UnsafeRawPointer!##UnsafeRawPointer!#>, <#T##dataInLength: Int##Int#>, <#T##dataOut: UnsafeMutableRawPointer!##UnsafeMutableRawPointer!#>, <#T##dataOutAvailable: Int##Int#>, <#T##dataOutMoved: UnsafeMutablePointer<Int>!##UnsafeMutablePointer<Int>!#>)
 	}
 	
 	func decrypto(_ text: String) throws -> String {

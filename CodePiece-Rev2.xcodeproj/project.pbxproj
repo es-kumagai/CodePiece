@@ -36,6 +36,12 @@
 		B136C9B123D1BDE1004AEA27 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B136C9B023D1BDE1004AEA27 /* Swifter.swift */; };
 		B140C84F23E0820B0009D57C /* MediaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C84E23E0820B0009D57C /* MediaEntity.swift */; };
 		B140C85123E082960009D57C /* EntityUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C85023E082960009D57C /* EntityUnit.swift */; };
+		B156F9F123E15C510078C851 /* CryptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156F9F023E15C510078C851 /* CryptionOperation.swift */; };
+		B156F9F323E15D2B0078C851 /* CryptionAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156F9F223E15D2B0078C851 /* CryptionAlgorithm.swift */; };
+		B156F9F623E15EB10078C851 /* CryptionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156F9F523E15EB10078C851 /* CryptionOptions.swift */; };
+		B156F9F823E15FB60078C851 /* CryptionKeySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156F9F723E15FB60078C851 /* CryptionKeySize.swift */; };
+		B156F9FA23E1611C0078C851 /* CryptionBlockSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156F9F923E1611C0078C851 /* CryptionBlockSize.swift */; };
+		B156F9FC23E161D50078C851 /* CryptionContextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156F9FB23E161D50078C851 /* CryptionContextSize.swift */; };
 		B15EE1DE23CE706C005B268A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1DD23CE706C005B268A /* Alert.swift */; };
 		B15EE1F623CE747D005B268A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F523CE747D005B268A /* Extension.swift */; };
 		B15EE1F923CE7522005B268A /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F823CE7522005B268A /* AppControllers.swift */; };
@@ -242,6 +248,12 @@
 		B136C9B023D1BDE1004AEA27 /* Swifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
 		B140C84E23E0820B0009D57C /* MediaEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEntity.swift; sourceTree = "<group>"; };
 		B140C85023E082960009D57C /* EntityUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityUnit.swift; sourceTree = "<group>"; };
+		B156F9F023E15C510078C851 /* CryptionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptionOperation.swift; sourceTree = "<group>"; };
+		B156F9F223E15D2B0078C851 /* CryptionAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptionAlgorithm.swift; sourceTree = "<group>"; };
+		B156F9F523E15EB10078C851 /* CryptionOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptionOptions.swift; sourceTree = "<group>"; };
+		B156F9F723E15FB60078C851 /* CryptionKeySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptionKeySize.swift; sourceTree = "<group>"; };
+		B156F9F923E1611C0078C851 /* CryptionBlockSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptionBlockSize.swift; sourceTree = "<group>"; };
+		B156F9FB23E161D50078C851 /* CryptionContextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptionContextSize.swift; sourceTree = "<group>"; };
 		B15EE1DD23CE706C005B268A /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		B15EE1F523CE747D005B268A /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B15EE1F823CE7522005B268A /* AppControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppControllers.swift; sourceTree = "<group>"; };
@@ -487,6 +499,20 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		B156F9F423E15DCA0078C851 /* ESCommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				B1C349AA23E153460039F4E6 /* AES.swift */,
+				B156F9F023E15C510078C851 /* CryptionOperation.swift */,
+				B156F9F223E15D2B0078C851 /* CryptionAlgorithm.swift */,
+				B156F9F523E15EB10078C851 /* CryptionOptions.swift */,
+				B156F9F723E15FB60078C851 /* CryptionKeySize.swift */,
+				B156F9F923E1611C0078C851 /* CryptionBlockSize.swift */,
+				B156F9FB23E161D50078C851 /* CryptionContextSize.swift */,
+			);
+			path = ESCommonCrypto;
+			sourceTree = "<group>";
+		};
 		B15EE1DC23CE706C005B268A /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,10 +524,10 @@
 		B15EE1F723CE7482005B268A /* NeedsRefactoring */ = {
 			isa = PBXGroup;
 			children = (
+				B156F9F423E15DCA0078C851 /* ESCommonCrypto */,
 				B15EE38E23CF0360005B268A /* TwitterError.swift */,
 				B15EE39023CF039C005B268A /* NSError+STTwitter.swift */,
 				B15EE1F523CE747D005B268A /* Extension.swift */,
-				B1C349AA23E153460039F4E6 /* AES.swift */,
 			);
 			path = NeedsRefactoring;
 			sourceTree = "<group>";
@@ -1229,6 +1255,7 @@
 				B1128CE823DED87D00DDA4EA /* SNSControllerService.swift in Sources */,
 				B15EE26C23CE7658005B268A /* GitHubPreferenceViewController.swift in Sources */,
 				B15EE21923CE761C005B268A /* Notifications.swift in Sources */,
+				B156F9F623E15EB10078C851 /* CryptionOptions.swift in Sources */,
 				B15EE2A323CE7667005B268A /* TimelineViewController.swift in Sources */,
 				B15EE21B23CE761C005B268A /* Colors.swift in Sources */,
 				B15EE26423CE7658005B268A /* URLScheme.swift in Sources */,
@@ -1278,20 +1305,25 @@
 				B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */,
 				B1DDCB4623D0D37700418A84 /* TwitterAccountMenuItem.swift in Sources */,
 				B15EE25623CE7658005B268A /* AccountSeting.swift in Sources */,
+				B156F9F123E15C510078C851 /* CryptionOperation.swift in Sources */,
 				B15EE28F23CE7667005B268A /* LatestTweetManageable.swift in Sources */,
 				B136C9B123D1BDE1004AEA27 /* Swifter.swift in Sources */,
 				B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */,
+				B156F9FA23E1611C0078C851 /* CryptionBlockSize.swift in Sources */,
 				B15EE25C23CE7658005B268A /* GistsController.swift in Sources */,
 				B1128CD823DE14CE00DDA4EA /* TwitterControllerNotifications.swift in Sources */,
+				B156F9FC23E161D50078C851 /* CryptionContextSize.swift in Sources */,
 				B15EE26523CE7658005B268A /* GistScheme.swift in Sources */,
 				B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */,
 				B15EE39123CF039D005B268A /* NSError+STTwitter.swift in Sources */,
 				B15EE38F23CF0360005B268A /* TwitterError.swift in Sources */,
+				B156F9F323E15D2B0078C851 /* CryptionAlgorithm.swift in Sources */,
 				B15EE29A23CE7667005B268A /* AcknowledgementsViewController.swift in Sources */,
 				B15EE1DE23CE706C005B268A /* Alert.swift in Sources */,
 				B15EE26D23CE7658005B268A /* TwitterPreferenceViewController.swift in Sources */,
 				B15EE21023CE7612005B268A /* LanguagePopupDataSource.swift in Sources */,
 				B15EE21A23CE761C005B268A /* Application.swift in Sources */,
+				B156F9F823E15FB60078C851 /* CryptionKeySize.swift in Sources */,
 				B15EE25F23CE7658005B268A /* Twitter.swift in Sources */,
 				B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */,
 				B15EE25423CE7658005B268A /* DataStore_AuthInfo.swift in Sources */,
