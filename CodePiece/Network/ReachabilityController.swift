@@ -6,8 +6,9 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import ReachabilitySwift
-import ESNotification
+import Foundation
+import Reachability
+import Ocean
 
 extension StatusImageView.Status {
 
@@ -15,47 +16,49 @@ extension StatusImageView.Status {
 		
 		switch reachabilityState {
 			
-		case .ViaWiFi:
+		case .viaWiFi:
 			self = .Available
 			
-		case .ViaCellular:
+		case .viaCellular:
 			self = .Available
 			
-		case .Unreachable:
+		case .unreachable:
 			self = .Unavailable
 		}
 	}
 }
 
-final class ReachabilityController {
-
-	private var notificationHandler: HandlerID!
+final class ReachabilityController : NotificationObservable {
+	
+	let notificationHandlers = Notification.Handlers()
+	
+	private var notificationHandler: Notification.Token!
 	
 	private let reachability:Reachability!
 	
 	enum State {
 		
-		case ViaWiFi
-		case ViaCellular
-		case Unreachable
+		case viaWiFi
+		case viaCellular
+		case unreachable
 		
-		init(_ rawState:Reachability.NetworkStatus) {
+		init(_ rawState: Reachability.Connection) {
 			
 			switch rawState {
 				
-			case .ReachableViaWiFi:
-				self = ViaWiFi
+			case .wifi:
+				self = .viaWiFi
 				
-			case .ReachableViaWWAN:
-				self = ViaCellular
+			case .cellular:
+				self = .viaCellular
 				
-			case .NotReachable:
-				self = Unreachable
+			case .unavailable, .none:
+				self = .unreachable
 			}
 		}
 	}
 	
-	final class ReachabilityChangedNotification : Notification {
+	final class ReachabilityChangedNotification : NotificationProtocol {
 		
 		private(set) var state:State
 		
@@ -70,7 +73,7 @@ final class ReachabilityController {
 		
 		do {
 			
-			self.reachability = try Reachability.reachabilityForInternetConnection()
+			self.reachability = try Reachability()
 		}
 		catch {
 			
@@ -78,7 +81,7 @@ final class ReachabilityController {
 			throw error
 		}
 		
-		self.notificationHandler = NamedNotification.observe(ReachabilitySwift.ReachabilityChangedNotification, handler: reachabilityDidChange)
+		observe(notification: ReachabilityChangedNotification.self, using: reachabilityDidChange)
 		
 		try self.reachability.startNotifier()
 	}
@@ -90,15 +93,15 @@ final class ReachabilityController {
 	
 	var state:State {
 		
-		return State(self.reachability.currentReachabilityStatus)
+		return State(reachability.connection)
 	}
 	
-	func reachabilityDidChange(notification:NamedNotification) {
+	func reachabilityDidChange(notification: ReachabilityChangedNotification) {
 		
-		guard notification.object === self.reachability else {
-			
-			fatalError("Reachability notification posted with unknown reachability object (\(notification.object))")
-		}
+//		guard notification.object === self.reachability else {
+//			
+//			fatalError("Reachability notification posted with unknown reachability object (\(notification.object))")
+//		}
 
 		ReachabilityChangedNotification(self.state).post()
 	}
@@ -110,13 +113,13 @@ extension ReachabilityController.State : CustomStringConvertible {
 		
 		switch self {
 			
-		case .ViaWiFi:
+		case .viaWiFi:
 			return "Wi-Fi"
 			
-		case .ViaCellular:
+		case .viaCellular:
 			return "Cellular"
 			
-		case .Unreachable:
+		case .unreachable:
 			return "Unreachable"
 		}
 	}

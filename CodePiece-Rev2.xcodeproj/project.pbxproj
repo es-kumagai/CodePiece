@@ -56,7 +56,6 @@
 		B15EE21B23CE761C005B268A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21723CE761C005B268A /* Colors.swift */; };
 		B15EE22123CE7636005B268A /* AboutWindowControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE21E23CE7636005B268A /* AboutWindowControllerSegue.swift */; };
 		B15EE22323CE7636005B268A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE22023CE7636005B268A /* MenuController.swift */; };
-		B15EE22623CE7648005B268A /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE22523CE7648005B268A /* ReachabilityController.swift */; };
 		B15EE24E23CE7658005B268A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE22823CE7658005B268A /* AppState.swift */; };
 		B15EE24F23CE7658005B268A /* ProjectSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE22923CE7658005B268A /* ProjectSetting.swift */; };
 		B15EE25023CE7658005B268A /* UserDefaultsAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE22A23CE7658005B268A /* UserDefaultsAccessible.swift */; };
@@ -153,6 +152,8 @@
 		B1A4729E23D09DB300F73658 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728823D09DB300F73658 /* Color.swift */; };
 		B1A4729F23D09DB300F73658 /* PlaceBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */; };
 		B1A472A023D09DB300F73658 /* StatusCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */; };
+		B1C349A723E1416A0039F4E6 /* Settings+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A623E1416A0039F4E6 /* Settings+Encryption.swift */; };
+		B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A823E152A90039F4E6 /* ReachabilityController.swift */; };
 		B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
@@ -260,7 +261,6 @@
 		B15EE21723CE761C005B268A /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B15EE21E23CE7636005B268A /* AboutWindowControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowControllerSegue.swift; sourceTree = "<group>"; };
 		B15EE22023CE7636005B268A /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		B15EE22523CE7648005B268A /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
 		B15EE22823CE7658005B268A /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		B15EE22923CE7658005B268A /* ProjectSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSetting.swift; sourceTree = "<group>"; };
 		B15EE22A23CE7658005B268A /* UserDefaultsAccessible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsAccessible.swift; sourceTree = "<group>"; };
@@ -369,6 +369,8 @@
 		B1A4728823D09DB300F73658 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBoundingBox.swift; sourceTree = "<group>"; };
 		B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCoordinates.swift; sourceTree = "<group>"; };
+		B1C349A623E1416A0039F4E6 /* Settings+Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Encryption.swift"; sourceTree = "<group>"; };
+		B1C349A823E152A90039F4E6 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -540,7 +542,7 @@
 		B15EE22423CE7648005B268A /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B15EE22523CE7648005B268A /* ReachabilityController.swift */,
+				B1C349A823E152A90039F4E6 /* ReachabilityController.swift */,
 			);
 			name = Network;
 			path = ../../CodePiece/CodePiece/Network;
@@ -555,6 +557,7 @@
 				B15EE22B23CE7658005B268A /* DataStore.swift */,
 				B15EE22C23CE7658005B268A /* DataStoreForApp.swift */,
 				B15EE22D23CE7658005B268A /* Settings.swift */,
+				B1C349A623E1416A0039F4E6 /* Settings+Encryption.swift */,
 				B15EE22E23CE7658005B268A /* DataStore_AuthInfo.swift */,
 				B15EE22F23CE7658005B268A /* Authorization */,
 				B15EE23123CE7658005B268A /* AccountSeting.swift */,
@@ -1230,6 +1233,7 @@
 				B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */,
 				B15EE2A723CE7667005B268A /* TimelineGetStatusesController.swift in Sources */,
 				B15EE24E23CE7658005B268A /* AppState.swift in Sources */,
+				B1C349A723E1416A0039F4E6 /* Settings+Encryption.swift in Sources */,
 				B15EE2A923CE7667005B268A /* TimelineTableController.swift in Sources */,
 				B15EE25D23CE7658005B268A /* TwitterStatusAttributed.swift in Sources */,
 				B15EE25923CE7658005B268A /* Language.swift in Sources */,
@@ -1252,7 +1256,6 @@
 				B15EE20B23CE7593005B268A /* GitHubOpenFeatures.swift in Sources */,
 				B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */,
 				B15EE20723CE7593005B268A /* SystemPalette.swift in Sources */,
-				B15EE22623CE7648005B268A /* ReachabilityController.swift in Sources */,
 				B15EE29E23CE7667005B268A /* TimelineViewController+Notifications.swift in Sources */,
 				B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */,
 				B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */,
@@ -1277,6 +1280,7 @@
 				B15EE25C23CE7658005B268A /* GistsController.swift in Sources */,
 				B1128CD823DE14CE00DDA4EA /* TwitterControllerNotifications.swift in Sources */,
 				B15EE26523CE7658005B268A /* GistScheme.swift in Sources */,
+				B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */,
 				B15EE39123CF039D005B268A /* NSError+STTwitter.swift in Sources */,
 				B15EE38F23CF0360005B268A /* TwitterError.swift in Sources */,
 				B15EE29A23CE7667005B268A /* AcknowledgementsViewController.swift in Sources */,
