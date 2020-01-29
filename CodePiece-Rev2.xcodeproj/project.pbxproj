@@ -573,8 +573,7 @@
 			children = (
 				B1C349A823E152A90039F4E6 /* ReachabilityController.swift */,
 			);
-			name = Network;
-			path = ../../CodePiece/CodePiece/Network;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		B15EE22723CE7658005B268A /* Settings */ = {
