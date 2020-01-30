@@ -381,6 +381,7 @@
 		B1C34A2123E351800039F4E6 /* Geometory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometory.swift; sourceTree = "<group>"; };
 		B1C34A2323E355DA0039F4E6 /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 		B1C34A2623E363660039F4E6 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
+		B1C34A2B23E37ECF0039F4E6 /* PrivacyPolicy */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PrivacyPolicy; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -865,6 +866,7 @@
 				B15EE2AB23CE76A0005B268A /* HowToBuild.md */,
 				B15EE2AE23CE76A0005B268A /* LICENSE */,
 				B15EE2AC23CE76A0005B268A /* README.md */,
+				B1C34A2B23E37ECF0039F4E6 /* PrivacyPolicy */,
 				B15EE2C623CE76FD005B268A /* ss */,
 				B1A105FE23CA1EF700F9C4FD /* Private */,
 				B1D13C7223CA14DB0016902A /* CodePiece */,
