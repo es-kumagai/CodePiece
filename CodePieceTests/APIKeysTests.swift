@@ -23,7 +23,7 @@ class APIKeysTests: XCTestCase {
 
         XCTAssertNotEqual(APIKeys.Twitter.consumerKey, "")
         XCTAssertNotEqual(APIKeys.Twitter.consumerSecret, "")
-        XCTAssertNotEqual(APIKeys.GitHub.clientId, "")
-        XCTAssertNotEqual(APIKeys.GitHub.clientSecret, "")
+        XCTAssertNotEqual(APIKeys.Gist.clientId, "")
+        XCTAssertNotEqual(APIKeys.Gist.clientSecret, "")
     }
 }

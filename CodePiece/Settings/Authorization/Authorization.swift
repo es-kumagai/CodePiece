@@ -32,13 +32,13 @@ enum AuthorizationState {
 
 final class Authorization : AlertDisplayable {
 
-	final class GitHub {
+	final class Gist {
 		
 		var oauth2: OAuth2CodeGrant
 		
 		init() {
 			
-			guard let clientId = APIKeys.GitHub.clientId, let clientSecret = APIKeys.GitHub.clientSecret else {
+			guard let clientId = APIKeys.Gist.clientId, let clientSecret = APIKeys.Gist.clientSecret else {
 				
 				fatalError("You MUST specify id and key in `APIKeys.GitHub`.")
 			}
@@ -72,7 +72,7 @@ final class Authorization : AlertDisplayable {
 		}
 	}
 
-	static var github = GitHub()
+	static var gist = Gist()
 	static var twitter = Twitter()
 	
 	enum AuthorizationResult {
@@ -136,14 +136,14 @@ extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
 
 extension Authorization {
 
-	static func resetAuthorizationOfGitHub(id:ID, completion: @escaping (Result<Void, SessionTaskError>)->Void) {
+	static func resetAuthorizationOfGist(id:ID, completion: @escaping (Result<Void, SessionTaskError>)->Void) {
 		
 		guard let authorization = NSApp.settings.account.authorization else {
 
 			self.showWarningAlert(withTitle: "Failed to reset authorization", message: "Could't get the current authentication information. Reset authentication information which saved in this app.")
 			
-			NSApp.settings.resetGitHubAccount(saveFinally: true)
-			GitHubAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
+			NSApp.settings.resetGistAccount(saveFinally: true)
+			GistAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
 
 			return
 		}
@@ -154,7 +154,7 @@ extension Authorization {
 			
 			defer {
 				
-				GitHubAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
+				GistAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
 			}
 
 			switch response {
@@ -162,35 +162,35 @@ extension Authorization {
 			case .success:
 				
 				// Token では削除できないようなので、403 で失敗しても認証情報を削除するだけにしています。
-				NSApp.settings.resetGitHubAccount(saveFinally: true)
+				NSApp.settings.resetGistAccount(saveFinally: true)
 				completion(response)
 				
 			case .failure(_):
 
-				NSApp.settings.resetGitHubAccount(saveFinally: true)
+				NSApp.settings.resetGistAccount(saveFinally: true)
 				completion(response)
 			}
 		}
 	}
 	
-	private static func _githubAuthorizationCreateSuccessfully(user: Gist.User, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
+	private static func _githubAuthorizationCreateSuccessfully(user: ESGists.Gist.User, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
 		
 		let username = user.login
 		let id = user.id
 		
 		defer {
 			
-			GitHubAuthorizationStateDidChangeNotification(isValid: true, username: username).post()
+			GistAuthorizationStateDidChangeNotification(isValid: true, username: username).post()
 		}
 		
-		NSApp.settings.replaceGitHubAccount(username: username, id: id, authorization: authorization, saveFinally: true)
+		NSApp.settings.replaceGistAccount(username: username, id: id, authorization: authorization, saveFinally: true)
 		
 		completion(.Created)
 	}
 	
 	private static func _githubAuthorizationFailed(error: AuthorizationResult.Error, completion:(AuthorizationResult)->Void) {
 		
-		NSApp.settings.resetGitHubAccount(saveFinally: true)
+		NSApp.settings.resetGistAccount(saveFinally: true)
 		completion(.Failed(error))
 	}
 
@@ -267,9 +267,9 @@ extension Authorization {
 //	}
 	
 	// FIXME: Gists の認証処理は GistController が担えば良さそうです。Twitter はそうしています。
-	static func authorizationWithGitHub(completion: @escaping (AuthorizationResult) -> Void) {
+	static func authorizationWithGist(completion: @escaping (AuthorizationResult) -> Void) {
 		
-		let oauth2 = self.github.oauth2
+		let oauth2 = self.gist.oauth2
 		
 		func onAuthorize(_ parameters: OAuth2JSON) {
 

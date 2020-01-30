@@ -1,5 +1,5 @@
 //
-//  GitHubPreferenceViewController.swift
+//  GistPreferenceViewController.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on H27/07/21.
@@ -13,7 +13,7 @@ import ESTwitter
 import ESGists
 
 @objcMembers
-final class GitHubPreferenceViewController: NSViewController, NotificationObservable {
+final class GistPreferenceViewController: NSViewController, NotificationObservable {
 
 	var notificationHandlers = Notification.Handlers()
 	
@@ -31,7 +31,7 @@ final class GitHubPreferenceViewController: NSViewController, NotificationObserv
 	
 		authenticatingHUD.show()
 		
-		Authorization.authorizationWithGitHub { result in
+		Authorization.authorizationWithGist { result in
 			
 			self.authenticatingHUD.hide()
 			
@@ -53,13 +53,13 @@ final class GitHubPreferenceViewController: NSViewController, NotificationObserv
 		
 		guard let id = NSApp.settings.account.id else {
 			
-			NSApp.settings.resetGitHubAccount(saveFinally: true)
+			NSApp.settings.resetGistAccount(saveFinally: true)
 			return
 		}
 		
 		self.removeAuthenticatingHUD.show()
 		
-		Authorization.resetAuthorizationOfGitHub(id: id) { result in
+		Authorization.resetAuthorizationOfGist(id: id) { result in
 			
 			self.removeAuthenticatingHUD.hide()
 			
@@ -116,7 +116,7 @@ final class GitHubPreferenceViewController: NSViewController, NotificationObserv
 	
 		super.viewWillAppear()
 		
-		observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(notification: Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			NSLog("Detect GitHub authorization state changed.")
 			
 			self.applyAuthorizedStatus()

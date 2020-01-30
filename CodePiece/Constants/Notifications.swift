@@ -14,7 +14,7 @@ import ESTwitter
 
 extension Authorization {
 
-	final class GitHubAuthorizationStateDidChangeNotification : NotificationProtocol {
+	final class GistAuthorizationStateDidChangeNotification : NotificationProtocol {
 		
 		private(set) var isValid:Bool
 		private(set) var username:String?

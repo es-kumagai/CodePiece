@@ -79,12 +79,12 @@
 		B15EE26323CE7658005B268A /* URLSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24223CE7658005B268A /* URLSchemeManager.swift */; };
 		B15EE26423CE7658005B268A /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24323CE7658005B268A /* URLScheme.swift */; };
 		B15EE26523CE7658005B268A /* GistScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24423CE7658005B268A /* GistScheme.swift */; };
-		B15EE26723CE7658005B268A /* GitHubPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */; };
+		B15EE26723CE7658005B268A /* GistPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE24723CE7658005B268A /* GistPreferenceView.storyboard */; };
 		B15EE26823CE7658005B268A /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24823CE7658005B268A /* PreferencesWindowController.swift */; };
 		B15EE26923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift */; };
 		B15EE26A23CE7658005B268A /* PreferencesWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE24A23CE7658005B268A /* PreferencesWindow.storyboard */; };
 		B15EE26B23CE7658005B268A /* TwitterPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE24B23CE7658005B268A /* TwitterPreferenceView.storyboard */; };
-		B15EE26C23CE7658005B268A /* GitHubPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24C23CE7658005B268A /* GitHubPreferenceViewController.swift */; };
+		B15EE26C23CE7658005B268A /* GistPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24C23CE7658005B268A /* GistPreferenceViewController.swift */; };
 		B15EE26D23CE7658005B268A /* TwitterPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24D23CE7658005B268A /* TwitterPreferenceViewController.swift */; };
 		B15EE28F23CE7667005B268A /* LatestTweetManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27123CE7667005B268A /* LatestTweetManageable.swift */; };
 		B15EE29023CE7667005B268A /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE27223CE7667005B268A /* Timeline.storyboard */; };
@@ -286,12 +286,12 @@
 		B15EE24223CE7658005B268A /* URLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSchemeManager.swift; sourceTree = "<group>"; };
 		B15EE24323CE7658005B268A /* URLScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		B15EE24423CE7658005B268A /* GistScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistScheme.swift; sourceTree = "<group>"; };
-		B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubPreferenceView.storyboard; sourceTree = "<group>"; };
+		B15EE24723CE7658005B268A /* GistPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GistPreferenceView.storyboard; sourceTree = "<group>"; };
 		B15EE24823CE7658005B268A /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		B15EE24923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterByOAuthPreferenceViewController.swift; sourceTree = "<group>"; };
 		B15EE24A23CE7658005B268A /* PreferencesWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PreferencesWindow.storyboard; sourceTree = "<group>"; };
 		B15EE24B23CE7658005B268A /* TwitterPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TwitterPreferenceView.storyboard; sourceTree = "<group>"; };
-		B15EE24C23CE7658005B268A /* GitHubPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubPreferenceViewController.swift; sourceTree = "<group>"; };
+		B15EE24C23CE7658005B268A /* GistPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistPreferenceViewController.swift; sourceTree = "<group>"; };
 		B15EE24D23CE7658005B268A /* TwitterPreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterPreferenceViewController.swift; sourceTree = "<group>"; };
 		B15EE27123CE7667005B268A /* LatestTweetManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestTweetManageable.swift; sourceTree = "<group>"; };
 		B15EE27223CE7667005B268A /* Timeline.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Timeline.storyboard; sourceTree = "<group>"; };
@@ -943,8 +943,8 @@
 		B1FB161C23D36BC6002D4571 /* PreferenceViews */ = {
 			isa = PBXGroup;
 			children = (
-				B15EE24723CE7658005B268A /* GitHubPreferenceView.storyboard */,
-				B15EE24C23CE7658005B268A /* GitHubPreferenceViewController.swift */,
+				B15EE24723CE7658005B268A /* GistPreferenceView.storyboard */,
+				B15EE24C23CE7658005B268A /* GistPreferenceViewController.swift */,
 				B15EE24923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift */,
 				B15EE24B23CE7658005B268A /* TwitterPreferenceView.storyboard */,
 				B15EE24D23CE7658005B268A /* TwitterPreferenceViewController.swift */,
@@ -1140,7 +1140,7 @@
 				B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */,
 				B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */,
 				B15EE29023CE7667005B268A /* Timeline.storyboard in Resources */,
-				B15EE26723CE7658005B268A /* GitHubPreferenceView.storyboard in Resources */,
+				B15EE26723CE7658005B268A /* GistPreferenceView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1216,7 +1216,7 @@
 				B15EE29B23CE7667005B268A /* MainStatusViewController.swift in Sources */,
 				B15EE22323CE7636005B268A /* MenuController.swift in Sources */,
 				B1128CE823DED87D00DDA4EA /* SNSControllerService.swift in Sources */,
-				B15EE26C23CE7658005B268A /* GitHubPreferenceViewController.swift in Sources */,
+				B15EE26C23CE7658005B268A /* GistPreferenceViewController.swift in Sources */,
 				B15EE21923CE761C005B268A /* Notifications.swift in Sources */,
 				B15EE2A323CE7667005B268A /* TimelineViewController.swift in Sources */,
 				B15EE21B23CE761C005B268A /* Colors.swift in Sources */,

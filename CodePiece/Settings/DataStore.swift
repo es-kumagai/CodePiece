@@ -19,20 +19,20 @@ struct DataStore {
 
 	var appState: AppState
 	var twitter: TwitterStore
-	var github: GitHubStore
+	var gist: GistStore
 
 	init() {
 		
 		self.appState = AppState()
 		self.twitter = TwitterStore()
-		self.github = GitHubStore()
+		self.gist = GistStore()
 	}
 	
 	func save() throws {
 	
 		appState.save()
 		twitter.save()
-		try github.save()
+		try gist.save()
 	}
 }
 
@@ -210,7 +210,7 @@ extension DataStore.TwitterStore {
 
 extension DataStore {
 	
-	struct GitHubStore {
+	struct GistStore {
 
 		static let AuthorizationKey = "github:auth-info"
 
@@ -244,9 +244,9 @@ extension DataStore {
 		
 		private init(useKeychain:Void) {
 		
-			let keychain = GitHubStore.keychain
+			let keychain = GistStore.keychain
 
-			guard let data = handleError(expression: try! keychain.getData(GitHubStore.AuthorizationKey), to: &OutputStream), data != nil else {
+			guard let data = handleError(expression: try! keychain.getData(GistStore.AuthorizationKey), to: &OutputStream), data != nil else {
 		
 				self.authInfo = AuthInfo()
 				return
@@ -271,8 +271,8 @@ extension DataStore {
 				return
 			}
 			
-			let keychain = GitHubStore.keychain
-			let keyForAuthInfo = GitHubStore.AuthorizationKey
+			let keychain = GistStore.keychain
+			let keyForAuthInfo = GistStore.AuthorizationKey
 
 			NSLog("Will save authentication information to Keychain.")
 			

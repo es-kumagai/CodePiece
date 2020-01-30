@@ -20,7 +20,7 @@ struct APIKeys {
 	**/
 	
 	/// APIKey data for GitHub.
-	struct GitHub {
+	struct Gist {
 		
 		static var clientId: String? {
 			
@@ -61,7 +61,7 @@ private extension APIKeys {
 			return nil
 		}
 		
-		return NSDictionary(contentsOf: url) as? Dictionary<String, String>
+		return NSDictionary(contentsOf: url) as? Dictionary<String, Any>
 	}
 	
 	static func stringValueFromPlistDirectly(_ name: String) -> String? {
@@ -77,7 +77,7 @@ private extension APIKeys {
 	static func value(of name: String) -> String? {
 		
 		#if DEBUG
-		if let value = dataValueFromPlistDirectly("\(name)-Crypted-Beta") {
+		if let value = dataValueFromPlistDirectly("\(name)-Beta-Crypted") {
 		
 			return try! cipher.decrypto(value, initialVector: nil)
 		}

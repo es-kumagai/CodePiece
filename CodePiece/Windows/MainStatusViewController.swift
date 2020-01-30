@@ -16,10 +16,10 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 
 	var notificationHandlers = Notification.Handlers()
 	
-	@IBOutlet var githubAccountNameTextField:NSTextField!
+	@IBOutlet var gistAccountNameTextField:NSTextField!
 	@IBOutlet var twitterAccountNameTextField:NSTextField!
 	@IBOutlet var reachabilityTextField:NSTextField!
-	@IBOutlet var githubAccountStatusImageView:StatusImageView!
+	@IBOutlet var gistAccountStatusImageView:StatusImageView!
 	@IBOutlet var twitterAccountStatusImageView:StatusImageView!
 	@IBOutlet var reachabilityStatusImageView:StatusImageView!
 
@@ -33,7 +33,7 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 		
 		super.viewDidLoad()
 		
-		updateGithubAccountStatus()
+		updateGistAccountStatus()
 		updateTwitterAccountStatus()
 	}
 	
@@ -53,20 +53,20 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 		twitterAccountStatusImageView.status = isValid ? .Available : .Unavailable
 	}
 	
-	func updateGithubAccountStatus() {
+	func updateGistAccountStatus() {
 		
-		let githubAccount = NSApp.settings.account
+		let gistAccount = NSApp.settings.account
 		
-		updateGithubAccountStatusWith(isValid: githubAccount.authorizationState == .Authorized, username: githubAccount.username)
+		updateGistAccountStatusWith(isValid: gistAccount.authorizationState == .Authorized, username: gistAccount.username)
 	}
 	
 	// このメソッドを直接呼ぶと実際と食い違う可能性が出てきてしまうので、設定を直接参照するようにする。
-	// そうすると Authorization.GitHubAuthorizationStateDidChangeNotification が細かい情報を持たなくて良くなる可能性があるが、
+	// そうすると Authorization.GistAuthorizationStateDidChangeNotification が細かい情報を持たなくて良くなる可能性があるが、
 	// それだと今度は有効状態を判定しにくくなる。NSApp.settings.account に状態の問い合わせメソッドを用意するのが良さそう。
-	private func updateGithubAccountStatusWith(isValid: Bool, username: String?) {
+	private func updateGistAccountStatusWith(isValid: Bool, username: String?) {
 		
-		githubAccountNameTextField.stringValue = username ?? none
-		githubAccountStatusImageView.status = isValid ? .Available : .Unavailable
+		gistAccountNameTextField.stringValue = username ?? none
+		gistAccountStatusImageView.status = isValid ? .Available : .Unavailable
 	}
 	
 	override func viewWillAppear() {
@@ -78,9 +78,9 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 			self.updateTwitterAccountStatus()
 		}
 		
-		observe(notification: Authorization.GitHubAuthorizationStateDidChangeNotification.self) { [unowned self] _ in
+		observe(notification: Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] _ in
 			
-			self.updateGithubAccountStatus()
+			self.updateGistAccountStatus()
 		}
 		
 		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] _ in

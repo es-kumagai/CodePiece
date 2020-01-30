@@ -64,6 +64,6 @@ struct Storyboard {
 	
 	static let WelcomeBoard = StoryboardItem(name: "WelcomeBoard", controllerType: WelcomeBoardWindowController.self)
 	static let PreferencesWindow = StoryboardItem(name: "PreferencesWindow", controllerType: PreferencesWindowController.self)
-	static let GitHubPreferenceView = StoryboardItem(name: "GitHubPreferenceView", controllerType: GitHubPreferenceViewController.self)
+	static let GistPreferenceView = StoryboardItem(name: "GistPreferenceView", controllerType: GistPreferenceViewController.self)
 	static let TwitterPreferenceView = StoryboardItem(name: "TwitterPreferenceView", controllerType: TwitterPreferenceViewController.self)
 }

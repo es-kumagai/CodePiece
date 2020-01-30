@@ -20,6 +20,6 @@ final class GistScheme : URLScheme {
 	
 	static func action(url: URL) {
 		
-		Authorization.github.oauth2.handleRedirectURL(url)
+		Authorization.gist.oauth2.handleRedirectURL(url)
 	}
 }

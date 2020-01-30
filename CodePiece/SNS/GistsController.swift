@@ -25,7 +25,7 @@ final class GistsController : PostController, AlertDisplayable {
 
 		guard let authorization = NSApp.settings.account.authorization else {
 			
-			throw SNSController.AuthenticationError.NotAuthorized(service: .GitHub)
+			throw SNSController.AuthenticationError.NotAuthorized(service: .Gist)
 		}
 
 		let filename = container.filenameForGists

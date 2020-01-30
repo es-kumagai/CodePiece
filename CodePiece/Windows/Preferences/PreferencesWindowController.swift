@@ -40,7 +40,7 @@ final class PreferencesWindowController: NSWindowController {
 	
 	@IBAction func showGitHubPreference(_ sender:NSToolbarItem?) {
 
-		self.contentViewController = try! Storyboard.GitHubPreferenceView.getInitialController()
+		self.contentViewController = try! Storyboard.GistPreferenceView.getInitialController()
 	}
 	
 	@IBAction func showTwitterPreference(_ sender:NSToolbarItem?) {
@@ -52,7 +52,7 @@ final class PreferencesWindowController: NSWindowController {
 
 		super.windowDidLoad()
 
-		self.contentViewController = try! Storyboard.GitHubPreferenceView.getInitialController()
+		self.contentViewController = try! Storyboard.GistPreferenceView.getInitialController()
     }
 	
 	override func flagsChanged(with theEvent: NSEvent) {

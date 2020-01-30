@@ -57,13 +57,13 @@ final class Settings {
 	func loadAccount() {
 		
 		loadTwitterAccount()
-		loadGitHubAccount()
+		loadGistAccount()
 	}
 	
 	func saveAccount() {
 		
 		saveTwitterAccount()
-		saveGitHubAccount()
+		saveGistAccount()
 	}
 	
 	func loadTwitterAccount() {
@@ -146,29 +146,29 @@ final class Settings {
 		_store.twitter.save()
 	}
 	
-	func loadGitHubAccount() {
+	func loadGistAccount() {
 		
-		account.id = _store.github.authInfo.id
-		account.username = _store.github.authInfo.username
-		account.authorization = _store.github.authInfo.token.map(GitHubAuthorization.init)
+		account.id = _store.gist.authInfo.id
+		account.username = _store.gist.authInfo.username
+		account.authorization = _store.gist.authInfo.token.map(GitHubAuthorization.init)
 
-		NSLog("GitHub account information restored from data store. (\(account.username ?? "(null)"))")
+		NSLog("Gist account information restored from data store. (\(account.username ?? "(null)"))")
 		
-		Authorization.GitHubAuthorizationStateDidChangeNotification(isValid: account.authorizationState == .Authorized, username: self.account.username).post()
+		Authorization.GistAuthorizationStateDidChangeNotification(isValid: account.authorizationState == .Authorized, username: self.account.username).post()
 	}
 
-	func saveGitHubAccount() {
+	func saveGistAccount() {
 		
-		NSLog("Writing GitHub account to data store. (\(self.account.username ?? "(null)"))")
+		NSLog("Writing Gist account to data store. (\(self.account.username ?? "(null)"))")
 		
-		_store.github.authInfo.id = account.id
-		_store.github.authInfo.username = account.username
-		_store.github.authInfo.token = account.authorization?.token!
+		_store.gist.authInfo.id = account.id
+		_store.gist.authInfo.username = account.username
+		_store.gist.authInfo.token = account.authorization?.token!
 		
-		try! handleError(expression: _store.github.save())
+		try! handleError(expression: _store.gist.save())
 	}
 	
-	func replaceGitHubAccount(username:String, id:ID, authorization:GitHubAuthorization, saveFinally save:Bool) {
+	func replaceGistAccount(username: String, id: ID, authorization: GitHubAuthorization, saveFinally save: Bool) {
 	
 		account.id = id
 		account.username = username
@@ -176,7 +176,7 @@ final class Settings {
 
 		if save {
 			
-			saveGitHubAccount()
+			saveGistAccount()
 		}
 	}
 	
@@ -190,7 +190,7 @@ final class Settings {
 		}
 	}
 	
-	func resetGitHubAccount(saveFinally save: Bool) {
+	func resetGistAccount(saveFinally save: Bool) {
 		
 		account.id = nil
 		account.username = nil
@@ -198,7 +198,7 @@ final class Settings {
 		
 		if save {
 			
-			saveGitHubAccount()
+			saveGistAccount()
 		}
 	}
 }
