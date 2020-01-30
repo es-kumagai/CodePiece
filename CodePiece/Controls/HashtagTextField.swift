@@ -12,13 +12,13 @@ import ESTwitter
 @objcMembers
 final class HashtagTextField : NSTextField {
 	
-	private var hashtagsBeforeEditing:ESTwitter.HashtagSet = []
+	private var hashtagsBeforeEditing: HashtagSet = []
 	
-	var hashtags: ESTwitter.HashtagSet {
+	var hashtags: HashtagSet {
 
 		get {
 
-			return ESTwitter.HashtagSet(hashtagsDisplayText: super.stringValue)
+			return HashtagSet(hashtagsDisplayText: super.stringValue)
 		}
 		
 		set (newHashtags) {
