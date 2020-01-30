@@ -36,6 +36,8 @@
 		B136C9B123D1BDE1004AEA27 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B136C9B023D1BDE1004AEA27 /* Swifter.swift */; };
 		B140C84F23E0820B0009D57C /* MediaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C84E23E0820B0009D57C /* MediaEntity.swift */; };
 		B140C85123E082960009D57C /* EntityUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C85023E082960009D57C /* EntityUnit.swift */; };
+		B156FA2D23E2BD580078C851 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B156FA2B23E2BD050078C851 /* CodePieceSupport.framework */; };
+		B156FA2E23E2BD580078C851 /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B156FA2B23E2BD050078C851 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B15EE1DE23CE706C005B268A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1DD23CE706C005B268A /* Alert.swift */; };
 		B15EE1F623CE747D005B268A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F523CE747D005B268A /* Extension.swift */; };
 		B15EE1F923CE7522005B268A /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F823CE7522005B268A /* AppControllers.swift */; };
@@ -156,7 +158,6 @@
 		B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A823E152A90039F4E6 /* ReachabilityController.swift */; };
 		B1C349D323E2712E0039F4E6 /* APIKeysData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349D223E2712E0039F4E6 /* APIKeysData.swift */; };
 		B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C349DA23E285BF0039F4E6 /* APIKeys.plist */; };
-		B1C349DF23E292780039F4E6 /* Cryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349DE23E292780039F4E6 /* Cryption.swift */; };
 		B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
@@ -209,6 +210,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B156FA2E23E2BD580078C851 /* CodePieceSupport.framework in Embed Frameworks */,
 				B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -244,6 +246,7 @@
 		B136C9B023D1BDE1004AEA27 /* Swifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swifter.swift; sourceTree = "<group>"; };
 		B140C84E23E0820B0009D57C /* MediaEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEntity.swift; sourceTree = "<group>"; };
 		B140C85023E082960009D57C /* EntityUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityUnit.swift; sourceTree = "<group>"; };
+		B156FA2B23E2BD050078C851 /* CodePieceSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CodePieceSupport.framework; sourceTree = "<group>"; };
 		B15EE1DD23CE706C005B268A /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		B15EE1F523CE747D005B268A /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B15EE1F823CE7522005B268A /* AppControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppControllers.swift; sourceTree = "<group>"; };
@@ -376,7 +379,6 @@
 		B1C349A823E152A90039F4E6 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
 		B1C349D223E2712E0039F4E6 /* APIKeysData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeysData.swift; sourceTree = "<group>"; };
 		B1C349DA23E285BF0039F4E6 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
-		B1C349DE23E292780039F4E6 /* Cryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cryption.swift; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 			files = (
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
+				B156FA2D23E2BD580078C851 /* CodePieceSupport.framework in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
 				B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
@@ -750,6 +753,7 @@
 		B15EE38523CE9C42005B268A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B156FA2B23E2BD050078C851 /* CodePieceSupport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -895,7 +899,6 @@
 				B15EE1FC23CE7571005B268A /* BaseViewController.swift */,
 				B15EE1FD23CE7571005B268A /* BaseWindowController.swift */,
 				B15EE20023CE757C005B268A /* DebugSupport.swift */,
-				B1C349DE23E292780039F4E6 /* Cryption.swift */,
 				B1278B5B23D176C3003F3719 /* CodeText.swift */,
 				B15EE20423CE7593005B268A /* Environments.swift */,
 				B15EE20623CE7593005B268A /* GitHubOpenFeatures.swift */,
@@ -1105,8 +1108,8 @@
 			projectRoot = "";
 			targets = (
 				B1D13C6F23CA14DB0016902A /* CodePiece */,
-				B1D13C8123CA14DD0016902A /* CodePieceTests */,
 				B132D50A23CD08B800690C5F /* ESTwitter */,
+				B1D13C8123CA14DD0016902A /* CodePieceTests */,
 				B132D51223CD08B800690C5F /* ESTwitterTests */,
 			);
 		};
@@ -1247,7 +1250,6 @@
 				B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */,
 				B15EE2AA23CE7667005B268A /* WelcomeBoardWindowController.swift in Sources */,
 				B15EE2A523CE7667005B268A /* TimelineViewController+MainWindow.swift in Sources */,
-				B1C349DF23E292780039F4E6 /* Cryption.swift in Sources */,
 				B15EE20B23CE7593005B268A /* GitHubOpenFeatures.swift in Sources */,
 				B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */,
 				B15EE20723CE7593005B268A /* SystemPalette.swift in Sources */,
@@ -1580,6 +1582,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				ES_MARKETING_VERSION = 2.0.0;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1603,6 +1609,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				ES_MARKETING_VERSION = 2.0.0;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
