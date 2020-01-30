@@ -157,7 +157,9 @@
 		B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C349DA23E285BF0039F4E6 /* APIKeys.plist */; };
 		B1C349E723E29B940039F4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349E623E29B940039F4E6 /* main.swift */; };
 		B1C349EB23E29BE80039F4E6 /* APIKeysData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349D223E2712E0039F4E6 /* APIKeysData.swift */; };
-		B1C349F423E32A030039F4E6 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C349F323E32A030039F4E6 /* CodePieceSupport.framework */; };
+		B1C349FC23E332A00039F4E6 /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B1C349FB23E332A00039F4E6 /* Ocean */; };
+		B1C34A1F23E33DDD0039F4E6 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
+		B1C34A2023E33DDD0039F4E6 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
 		B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
@@ -217,12 +219,12 @@
 		};
 		B1C349E223E29B940039F4E6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -388,7 +390,7 @@
 		B1C349DA23E285BF0039F4E6 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B1C349E423E29B940039F4E6 /* EncryptionTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EncryptionTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C349E623E29B940039F4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		B1C349F323E32A030039F4E6 /* CodePieceSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CodePieceSupport.framework; sourceTree = "<group>"; };
+		B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CodePieceSupport.framework; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -430,6 +432,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C34A2023E33DDD0039F4E6 /* CodePieceSupport.framework in Frameworks */,
+				B1C349FC23E332A00039F4E6 /* Ocean in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,7 +443,7 @@
 			files = (
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
-				B1C349F423E32A030039F4E6 /* CodePieceSupport.framework in Frameworks */,
+				B1C34A1F23E33DDD0039F4E6 /* CodePieceSupport.framework in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
 				B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
@@ -770,7 +774,7 @@
 		B15EE38523CE9C42005B268A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B1C349F323E32A030039F4E6 /* CodePieceSupport.framework */,
+				B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1054,6 +1058,9 @@
 			dependencies = (
 			);
 			name = EncryptionTool;
+			packageProductDependencies = (
+				B1C349FB23E332A00039F4E6 /* Ocean */,
+			);
 			productName = EncryptionTool;
 			productReference = B1C349E423E29B940039F4E6 /* EncryptionTool */;
 			productType = "com.apple.product-type.tool";
@@ -1516,6 +1523,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1525,6 +1536,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1897,6 +1912,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B15EE38B23CEA03E005B268A /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		B1C349FB23E332A00039F4E6 /* Ocean */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1128CB523DDEAA700DDA4EA /* XCRemoteSwiftPackageReference "Ocean" */;
+			productName = Ocean;
 		};
 		B1DDCB3D23D0C98F00418A84 /* Swim */ = {
 			isa = XCSwiftPackageProductDependency;
