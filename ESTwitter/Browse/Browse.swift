@@ -24,7 +24,7 @@ public final class Browser {
 		
 		guard let escaped = (string as NSString).addingPercentEncoding(withAllowedCharacters: allowedCharacters) else {
 			
-			throw BrowseError.OperationFailure(reason: "Failed to escape a parameter '\(string)'.")
+			throw BrowseError.OperationFailure(reason: "Failed to escaping a parameter '\(string)'.")
 		}
 		
 		return escaped
@@ -44,7 +44,7 @@ public final class Browser {
 		
 		guard let url = Foundation.URL(string: string) else {
 			
-			throw BrowseError.OperationFailure(reason: "Failed to make URL for open twitter tweet '\(string)'.")
+			throw BrowseError.OperationFailure(reason: "Failed to make the URL for open tweet item: '\(string)'")
 		}
 		
 		try open(url: url)
@@ -56,7 +56,7 @@ public final class Browser {
 		
 		guard let url = Foundation.URL(string: string) else {
 			
-			throw BrowseError.OperationFailure(reason: "Failed to make URL for open twitter home '\(string)'.")
+			throw BrowseError.OperationFailure(reason: "Failed to make the URL for open twitter home: \(string)")
 		}
 		
 		try open(url: url)
@@ -69,7 +69,7 @@ public final class Browser {
 		
 		guard let url = Foundation.URL(string: string) else {
 			
-			throw BrowseError.OperationFailure(reason: "Failed to make URL for search '\(string)'.")
+			throw BrowseError.OperationFailure(reason: "Failed to make the URL for searching tweet: \(string)")
 		}
 		
 		try open(url: url)

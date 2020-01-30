@@ -16,7 +16,13 @@ extension Polygon : Decodable {
 	public init(from decoder: Decoder) throws {
 		
 		let container = try decoder.singleValueContainer()
+		let array = try container.decode([CoordinatesElement].self)
+		
+		guard array.count == 4 else {
+			
+			throw DecodingError.dataCorruptedError(in: container, debugDescription: "Incorrect polygon value.")
+		}
 
-		points = try container.decode([CoordinatesElement].self)
+		points = array
 	}
 }

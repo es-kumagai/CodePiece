@@ -16,7 +16,7 @@ final class AboutWindowControllerSegue : NSStoryboardSegue {
 		
 		applyingExpression(to: self.destinationController as! AboutWindowController) {
 			
-			$0.acknowledgementsName = "Pods-CodePiece-acknowledgements"
+			$0.acknowledgementsName = "Acknowledgements"
 		}
 		
 		super.perform()

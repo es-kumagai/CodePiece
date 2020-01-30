@@ -37,7 +37,7 @@ extension CoordinatesElement : Decodable {
 
 		guard array.count == 2 else {
 			
-			throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot values for latitude and longitude.")
+			throw DecodingError.dataCorruptedError(in: container, debugDescription: "Incorrect values for latitude and longitude.")
 		}
 		
 		latitude = array[1]
@@ -54,7 +54,7 @@ extension GeoCoordinatesElement : Decodable {
 
 		guard array.count == 2 else {
 			
-			throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot values for latitude and longitude.")
+			throw DecodingError.dataCorruptedError(in: container, debugDescription: "Incorrect values for latitude and longitude.")
 		}
 		
 		latitude = array[0]

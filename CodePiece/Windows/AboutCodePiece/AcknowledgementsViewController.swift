@@ -23,7 +23,7 @@ final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSou
 		super.init()
 	}
 	
-	public func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+	public func numberOfRows(in tableView: NSTableView) -> Int {
 		
 		return self.acknowledgements.pods.count
 	}

@@ -30,7 +30,7 @@ extension Color.InitializeError : CustomStringConvertible {
 		switch self {
 			
 		case let .InvalidFormat(string):
-			return "Color Initialize Error : Invalid Format (\(string))"
+			return "Color Initialization Error : Invalid Format (\(string))"
 		}
 	}
 }

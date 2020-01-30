@@ -13,7 +13,7 @@ struct ProjectSetting {
 extension ProjectSetting {
 	
 	// 設定がされていることを確認します。有効性は判定しません。
-	var isReady:Bool {
+	var isReady: Bool {
 		
 		return true
 	}

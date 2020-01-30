@@ -45,7 +45,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RU2-eg-vOe"/>
                             </imageView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-jY-0Jr">
-                                <rect key="frame" x="300" y="188" width="166" height="32"/>
+                                <rect key="frame" x="300" y="189" width="166" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DsE-ej-daq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -71,11 +71,11 @@
                                 </textFieldCell>
                             </textField>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tnH-dE-TzC">
-                                <rect key="frame" x="20" y="32" width="440" height="125"/>
+                                <rect key="frame" x="20" y="33" width="440" height="125"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4L-c2-OGD">
-                                        <rect key="frame" x="-2" y="93" width="439" height="32"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece request permission only for make Gists. Please authenticate from the Authentication button below." id="roN-jh-jrr">
+                                        <rect key="frame" x="-2" y="93" width="380" height="32"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece requires permission only for creating Gists. Please authenticate from the button below." id="roN-jh-jrr">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -95,8 +95,8 @@ DQ
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pim-Rm-T1g">
-                                        <rect key="frame" x="-2" y="0.0" width="428" height="32"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When you push the button, default browser will be opend with GitHub authentication page." id="AQu-dh-ACz">
+                                        <rect key="frame" x="-2" y="0.0" width="416" height="32"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When you push the button, default browser will be opend to access the GitHub's authentication page." id="AQu-dh-ACz">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -119,7 +119,7 @@ DQ
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="vPC-jY-0Jr" firstAttribute="baseline" secondItem="8X9-Tf-XVS" secondAttribute="baseline" id="2Hj-Ue-LJE"/>
+                            <constraint firstItem="vPC-jY-0Jr" firstAttribute="centerY" secondItem="8X9-Tf-XVS" secondAttribute="centerY" id="2Hj-Ue-LJE"/>
                             <constraint firstItem="5cj-jM-cXY" firstAttribute="top" secondItem="tiQ-Tx-wOb" secondAttribute="bottom" constant="8" id="4Ss-kW-Plq"/>
                             <constraint firstItem="eF3-de-P5v" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="20" id="50m-UE-CE8"/>
                             <constraint firstAttribute="trailing" secondItem="tnH-dE-TzC" secondAttribute="trailing" constant="20" id="51Y-Sq-CYE"/>

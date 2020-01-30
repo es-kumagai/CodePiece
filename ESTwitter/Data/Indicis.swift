@@ -66,7 +66,7 @@ extension Indices.InitializeError : CustomStringConvertible {
 		switch self {
 			
 		case let .InvalidArgument(argument):
-			return "Indices Initialize Error : Invalid Argument (\(argument))"
+			return "Indices Initialization Error : Invalid Argument (\(argument))"
 		}
 	}
 }
