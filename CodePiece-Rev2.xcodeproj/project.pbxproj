@@ -1019,7 +1019,6 @@
 				B1D13C6D23CA14DB0016902A /* Frameworks */,
 				B1D13C6E23CA14DB0016902A /* Resources */,
 				B132D52223CD08B800690C5F /* Embed Frameworks */,
-				B18FFA3F23DF31000057C977 /* Copying Private Files */,
 			);
 			buildRules = (
 			);
@@ -1155,28 +1154,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B18FFA3F23DF31000057C977 /* Copying Private Files */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copying Private Files";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"Copying private files.\"\ncp -f \"${SRCROOT}/Private/APIKeys.plist\" \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B132D50723CD08B800690C5F /* Sources */ = {
