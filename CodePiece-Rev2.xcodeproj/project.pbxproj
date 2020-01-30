@@ -151,11 +151,12 @@
 		B1A4729D23D09DB300F73658 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728723D09DB300F73658 /* Status.swift */; };
 		B1A4729E23D09DB300F73658 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728823D09DB300F73658 /* Color.swift */; };
 		B1A4729F23D09DB300F73658 /* PlaceBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */; };
-		B1A472A023D09DB300F73658 /* StatusCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */; };
 		B1C349A723E1416A0039F4E6 /* Settings+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A623E1416A0039F4E6 /* Settings+Encryption.swift */; };
 		B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A823E152A90039F4E6 /* ReachabilityController.swift */; };
 		B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C349DA23E285BF0039F4E6 /* APIKeys.plist */; };
 		B1C34A1F23E33DDD0039F4E6 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
+		B1C34A2223E351800039F4E6 /* Geometory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C34A2123E351800039F4E6 /* Geometory.swift */; };
+		B1C34A2423E355DA0039F4E6 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C34A2323E355DA0039F4E6 /* Polygon.swift */; };
 		B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
@@ -370,11 +371,12 @@
 		B1A4728723D09DB300F73658 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		B1A4728823D09DB300F73658 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBoundingBox.swift; sourceTree = "<group>"; };
-		B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCoordinates.swift; sourceTree = "<group>"; };
 		B1C349A623E1416A0039F4E6 /* Settings+Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Encryption.swift"; sourceTree = "<group>"; };
 		B1C349A823E152A90039F4E6 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
 		B1C349DA23E285BF0039F4E6 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CodePieceSupport.framework; sourceTree = "<group>"; };
+		B1C34A2123E351800039F4E6 /* Geometory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometory.swift; sourceTree = "<group>"; };
+		B1C34A2323E355DA0039F4E6 /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -807,9 +809,10 @@
 				B1A4728423D09DB300F73658 /* URL.swift */,
 				B1A4728623D09DB300F73658 /* InReplyTo.swift */,
 				B1A4728723D09DB300F73658 /* Status.swift */,
+				B1C34A2323E355DA0039F4E6 /* Polygon.swift */,
+				B1C34A2123E351800039F4E6 /* Geometory.swift */,
 				B1A4728823D09DB300F73658 /* Color.swift */,
 				B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */,
-				B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1163,8 +1166,8 @@
 				B1128CC923DDF33800DDA4EA /* Notifications.swift in Sources */,
 				B140C84F23E0820B0009D57C /* MediaEntity.swift in Sources */,
 				B1A4729623D09DB300F73658 /* User.swift in Sources */,
+				B1C34A2223E351800039F4E6 /* Geometory.swift in Sources */,
 				B1A4729E23D09DB300F73658 /* Color.swift in Sources */,
-				B1A472A023D09DB300F73658 /* StatusCoordinates.swift in Sources */,
 				B1A4728D23D09DB300F73658 /* Hashtags.swift in Sources */,
 				B1A4729023D09DB300F73658 /* UserEntities.swift in Sources */,
 				B1A4728F23D09DB300F73658 /* TwitterDate.swift in Sources */,
@@ -1174,6 +1177,7 @@
 				B1A4729223D09DB300F73658 /* Hashtag.swift in Sources */,
 				B18FFA3D23DF26B60057C977 /* DecodingError.swift in Sources */,
 				B1A4729923D09DB300F73658 /* Media.swift in Sources */,
+				B1C34A2423E355DA0039F4E6 /* Polygon.swift in Sources */,
 				B1A4729A23D09DB300F73658 /* URL.swift in Sources */,
 				B1128CDE23DE826400DDA4EA /* TweetMode.swift in Sources */,
 				B140C85123E082960009D57C /* EntityUnit.swift in Sources */,

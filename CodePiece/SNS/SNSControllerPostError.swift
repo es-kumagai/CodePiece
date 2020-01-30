@@ -63,6 +63,9 @@ extension ESTwitter.PostError {
 				
 			case .afterPosted:
 				return "Tweet has been posted but after that, following error occurred: "
+				
+			case .noPost:
+				return ""
 			}
 		}
 		

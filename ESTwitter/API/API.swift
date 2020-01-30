@@ -189,7 +189,7 @@ extension API {
 		
 		guard let api = rawApi else {
 			
-			handler(.failure(.apiError(.notReady, state: .beforePosted)))
+			handler(.failure(.apiError(.notReady, state: .noPost)))
 			return
 		}
 		
@@ -204,15 +204,15 @@ extension API {
 			}
 			catch let error as DecodingError {
 				
-				handler(.failure(.parseError(error.localizedDescription, state: .beforePosted)))
+				handler(.failure(.parseError("\(error)", state: .noPost)))
 			}
 			catch let error as JSON.SerializationError {
 
-				handler(.failure(.unexpectedError(error, state: .beforePosted)))
+				handler(.failure(.unexpectedError(error, state: .noPost)))
 			}
 			catch {
 
-				handler(.failure(.internalError("Failed to serialize a JSON data. \(error)", state: .beforePosted)))
+				handler(.failure(.internalError("Failed to serialize a JSON data. \(error)", state: .noPost)))
 			}
 		}
 		
@@ -224,7 +224,7 @@ extension API {
 				handler(.failure(.init(tweetError: error)))
 				
 			default:
-				handler(.failure(.unexpectedError(error, state: .afterPosted)))
+				handler(.failure(.unexpectedError(error, state: .noPost)))
 			}
 		}
 		

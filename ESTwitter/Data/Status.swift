@@ -16,7 +16,7 @@ import Swim
 
 public struct Status : Decodable {
 	
-	public var coordinates: CoordinatesBox?
+	public var coordinates: Coordinates?
 	public var favorited: Bool
 	public var createdAt: TwitterDate
 	public var truncated: Bool
@@ -27,7 +27,7 @@ public struct Status : Decodable {
 	public var contributors: String?
 	public var retweetCount: Int
 	public var id: UInt64
-	public var geo: CoordinatesBox?
+	public var geo: Geometory?
 	public var retweeted: Bool
 //	public var retweetedStatus: RetweetedStatus?
 	public var place: Place?
@@ -292,7 +292,7 @@ extension Status {
 	
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		
-		coordinates = try container.decode(CoordinatesBox?.self, forKey: .coordinates)
+		coordinates = try container.decode(Coordinates?.self, forKey: .coordinates)
 		favorited = try container.decode(Bool.self, forKey: .favorited)
 		createdAt = try container.decode(TwitterDate.self, forKey: .createdAt)
 		truncated = try container.decode(Bool.self, forKey: .truncated)
@@ -305,7 +305,7 @@ extension Status {
 		contributors = try container.decode(String?.self, forKey: .contributors)
 		retweetCount = try container.decode(Int.self, forKey: .retweetCount)
 		id = try container.decode(UInt64.self, forKey: .id)
-		geo = try container.decode(CoordinatesBox?.self, forKey: .geo)
+		geo = try container.decode(Geometory?.self, forKey: .geo)
 		retweeted = try container.decode(Bool.self, forKey: .retweeted)
 //		retweetedStatus = try container.decode(RetweetedStatus?.self, forKey: .retweetedStatus)
 		place = try container.decode(Place?.self, forKey: .place)

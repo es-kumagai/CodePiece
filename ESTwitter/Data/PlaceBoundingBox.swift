@@ -10,7 +10,7 @@ extension Place {
 
 	public struct BoundingBox : Decodable {
 	
-		var coordinates: [Coordinate]
+		var coordinates: [Polygon]
 		var type: String
 	}
 }

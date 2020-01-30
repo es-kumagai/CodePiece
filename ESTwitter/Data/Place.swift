@@ -8,7 +8,7 @@
 
 public struct Place {
 	
-	public var attributes: [String:String]
+	public var attributes: [String : String]
 	public var boundingBox: BoundingBox
 	public var containedWithin: [String]
 	public var country: String
