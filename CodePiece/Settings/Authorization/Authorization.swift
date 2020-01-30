@@ -38,9 +38,9 @@ final class Authorization : AlertDisplayable {
 		
 		init() {
 			
-			guard let clientId = APIKeys.GitHub.id, let clientSecret = APIKeys.GitHub.secret else {
+			guard let clientId = APIKeys.GitHub.clientId, let clientSecret = APIKeys.GitHub.clientSecret else {
 				
-				fatalError("You MUST specify id and key for GitHub in `APIKeys.GitHub`.")
+				fatalError("You MUST specify id and key in `APIKeys.GitHub`.")
 			}
 			
 			let settings: OAuth2JSON = [

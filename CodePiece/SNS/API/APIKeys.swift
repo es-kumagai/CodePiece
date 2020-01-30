@@ -22,12 +22,12 @@ struct APIKeys {
 	/// APIKey data for GitHub.
 	struct GitHub {
 		
-		static var clientId: String {
+		static var clientId: String? {
 			
 			return value(of: "GitHubClientID")
 		}
 		
-		static var clientSecret: String {
+		static var clientSecret: String? {
 			
 			return value(of: "GitHubClientSecret")
 		}
@@ -36,12 +36,12 @@ struct APIKeys {
 	/// APIKey data for Twitter.
 	struct Twitter {
 		
-		static var consumerKey: String {
+		static var consumerKey: String? {
 			
 			return value(of: "TwitterConsumerKey")
 		}
 		
-		static var consumerSecret: String {
+		static var consumerSecret: String? {
 			
 			return value(of: "TwitterConsumerSecret")
 		}
@@ -74,12 +74,12 @@ private extension APIKeys {
 		return plist?[name] as? Data
 	}
 	
-	static func value(of name: String) -> String {
+	static func value(of name: String) -> String? {
 		
 		#if DEBUG
 		if let value = dataValueFromPlistDirectly("\(name)-Crypted-Beta") {
 		
-			return try! chiper.decrypto(value, initialVector: iv)
+			return try! cipher.decrypto(value, initialVector: nil)
 		}
 		
 		if let value = stringValueFromPlistDirectly("\(name)-Beta") {
@@ -90,9 +90,9 @@ private extension APIKeys {
 
 		if let value = dataValueFromPlistDirectly("\(name)-Crypted") {
 		
-			return try! chiper.decrypto(value, initialVector: iv)
+			return try! cipher.decrypto(value, initialVector: nil)
 		}
 
-		return stringValueFromPlistDirectly(name) ?? ""
+		return stringValueFromPlistDirectly(name)
 	}
 }
