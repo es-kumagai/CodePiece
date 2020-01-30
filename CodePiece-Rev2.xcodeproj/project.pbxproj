@@ -154,9 +154,10 @@
 		B1A472A023D09DB300F73658 /* StatusCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */; };
 		B1C349A723E1416A0039F4E6 /* Settings+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A623E1416A0039F4E6 /* Settings+Encryption.swift */; };
 		B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A823E152A90039F4E6 /* ReachabilityController.swift */; };
-		B1C349D323E2712E0039F4E6 /* APIKeysData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349D223E2712E0039F4E6 /* APIKeysData.swift */; };
 		B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C349DA23E285BF0039F4E6 /* APIKeys.plist */; };
 		B1C349DF23E292780039F4E6 /* Cryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349DE23E292780039F4E6 /* Cryption.swift */; };
+		B1C349E723E29B940039F4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349E623E29B940039F4E6 /* main.swift */; };
+		B1C349EB23E29BE80039F4E6 /* APIKeysData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349D223E2712E0039F4E6 /* APIKeysData.swift */; };
 		B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
@@ -213,6 +214,15 @@
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1C349E223E29B940039F4E6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -374,9 +384,11 @@
 		B1A4728A23D09DB300F73658 /* StatusCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCoordinates.swift; sourceTree = "<group>"; };
 		B1C349A623E1416A0039F4E6 /* Settings+Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Encryption.swift"; sourceTree = "<group>"; };
 		B1C349A823E152A90039F4E6 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
-		B1C349D223E2712E0039F4E6 /* APIKeysData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeysData.swift; sourceTree = "<group>"; };
+		B1C349D223E2712E0039F4E6 /* APIKeysData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIKeysData.swift; path = ../Private/APIKeysData.swift; sourceTree = "<group>"; };
 		B1C349DA23E285BF0039F4E6 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B1C349DE23E292780039F4E6 /* Cryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cryption.swift; sourceTree = "<group>"; };
+		B1C349E423E29B940039F4E6 /* EncryptionTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EncryptionTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1C349E623E29B940039F4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -411,6 +423,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B132D51423CD08B800690C5F /* ESTwitter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1C349E123E29B940039F4E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,7 +795,6 @@
 			children = (
 				B1A105FF23CA1F1900F9C4FD /* TODO.md */,
 				B1C349DA23E285BF0039F4E6 /* APIKeys.plist */,
-				B1C349D223E2712E0039F4E6 /* APIKeysData.swift */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -823,6 +841,15 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		B1C349E523E29B940039F4E6 /* EncryptionTool */ = {
+			isa = PBXGroup;
+			children = (
+				B1C349E623E29B940039F4E6 /* main.swift */,
+				B1C349D223E2712E0039F4E6 /* APIKeysData.swift */,
+			);
+			path = EncryptionTool;
+			sourceTree = "<group>";
+		};
 		B1C4410D23E0500F00C4715A /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -856,6 +883,7 @@
 				B1D13C8523CA14DD0016902A /* CodePieceTests */,
 				B132D50C23CD08B800690C5F /* ESTwitter */,
 				B132D51923CD08B800690C5F /* ESTwitterTests */,
+				B1C349E523E29B940039F4E6 /* EncryptionTool */,
 				B1D13C7123CA14DB0016902A /* Products */,
 				B15EE38523CE9C42005B268A /* Frameworks */,
 			);
@@ -869,6 +897,7 @@
 				B1D13C8223CA14DD0016902A /* CodePieceTests.xctest */,
 				B132D50B23CD08B800690C5F /* ESTwitter.framework */,
 				B132D51323CD08B800690C5F /* ESTwitterTests.xctest */,
+				B1C349E423E29B940039F4E6 /* EncryptionTool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1011,6 +1040,23 @@
 			productReference = B132D51323CD08B800690C5F /* ESTwitterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B1C349E323E29B940039F4E6 /* EncryptionTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1C349E823E29B940039F4E6 /* Build configuration list for PBXNativeTarget "EncryptionTool" */;
+			buildPhases = (
+				B1C349E023E29B940039F4E6 /* Sources */,
+				B1C349E123E29B940039F4E6 /* Frameworks */,
+				B1C349E223E29B940039F4E6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EncryptionTool;
+			productName = EncryptionTool;
+			productReference = B1C349E423E29B940039F4E6 /* EncryptionTool */;
+			productType = "com.apple.product-type.tool";
+		};
 		B1D13C6F23CA14DB0016902A /* CodePiece */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B1D13C8B23CA14DD0016902A /* Build configuration list for PBXNativeTarget "CodePiece" */;
@@ -1072,6 +1118,9 @@
 						CreatedOnToolsVersion = 11.3;
 						TestTargetID = B1D13C6F23CA14DB0016902A;
 					};
+					B1C349E323E29B940039F4E6 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 					B1D13C6F23CA14DB0016902A = {
 						CreatedOnToolsVersion = 11.3;
 					};
@@ -1108,6 +1157,7 @@
 				B1D13C8123CA14DD0016902A /* CodePieceTests */,
 				B132D50A23CD08B800690C5F /* ESTwitter */,
 				B132D51223CD08B800690C5F /* ESTwitterTests */,
+				B1C349E323E29B940039F4E6 /* EncryptionTool */,
 			);
 		};
 /* End PBXProject section */
@@ -1210,6 +1260,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1C349E023E29B940039F4E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1C349EB23E29BE80039F4E6 /* APIKeysData.swift in Sources */,
+				B1C349E723E29B940039F4E6 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B1D13C6C23CA14DB0016902A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1263,7 +1322,6 @@
 				B15EE25723CE7658005B268A /* Storyboard.swift in Sources */,
 				B1128CE423DED6A800DDA4EA /* SNSControllerPostError.swift in Sources */,
 				B15EE26123CE7658005B268A /* SNSController.swift in Sources */,
-				B1C349D323E2712E0039F4E6 /* APIKeysData.swift in Sources */,
 				B15EE20923CE7593005B268A /* Environments.swift in Sources */,
 				B15EE1FB23CE752D005B268A /* AppExtension.swift in Sources */,
 				B15EE20123CE757C005B268A /* DebugSupport.swift in Sources */,
@@ -1451,6 +1509,24 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece.app/Contents/MacOS/CodePiece";
+			};
+			name = Release;
+		};
+		B1C349E923E29B940039F4E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B1C349EA23E29B940039F4E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1674,6 +1750,15 @@
 			buildConfigurations = (
 				B132D52523CD08B800690C5F /* Debug */,
 				B132D52623CD08B800690C5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1C349E823E29B940039F4E6 /* Build configuration list for PBXNativeTarget "EncryptionTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1C349E923E29B940039F4E6 /* Debug */,
+				B1C349EA23E29B940039F4E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
