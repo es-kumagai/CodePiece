@@ -26,4 +26,8 @@ extension NSColor {
 	static let urlColor = NSColor(named: "URLColor")!
 	static let hashtagColor = NSColor(named: "HashtagColor")!
 	static let mentionColor = NSColor(named: "MentionColor")!
+	static let statusOkTextColor = NSColor(named: "StatusOkTextColor")!
+	static let statusErrorTextColor = NSColor(named: "StatusErrorTextColor")!
+	static let statusOkBackgroundColor = NSColor(named: "StatusOkBackgroundColor")!
+	static let statusErrorBackgroundColor = NSColor(named: "StatusErrorBackgroundColor")!
 }
