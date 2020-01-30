@@ -143,14 +143,19 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 	
 	func prepareApi() {
 		
+		guard let consumerKey = APIKeys.Twitter.id, let consumerSecret = APIKeys.Twitter.secret else {
+			
+			fatalError("You MUST specify id and key for GitHub in `APIKeys.Twitter`.")
+		}
+		
 		if let token = self.token {
 		
-			api = ESTwitter.API(consumerKey: APIKeys.Twitter.consumerKey, tokenSecret: APIKeys.Twitter.consumerSecret, oauthToken: token.key, oauthTokenSecret: token.secret)
+			api = ESTwitter.API(consumerKey: consumerKey, tokenSecret: consumerSecret, oauthToken: token.key, oauthTokenSecret: token.secret)
 			DebugTime.print("API is prepared with token.")
 		}
 		else {
 
-			api = ESTwitter.API(consumerKey: APIKeys.Twitter.consumerKey, tokenSecret: APIKeys.Twitter.consumerSecret)
+			api = ESTwitter.API(consumerKey: consumerKey, tokenSecret: consumerSecret)
 			DebugTime.print("API is prepared without token.")
 		}
 	}

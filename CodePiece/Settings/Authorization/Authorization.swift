@@ -38,10 +38,15 @@ final class Authorization : AlertDisplayable {
 		
 		init() {
 			
+			guard let clientId = APIKeys.GitHub.id, let clientSecret = APIKeys.GitHub.secret else {
+				
+				fatalError("You MUST specify id and key for GitHub in `APIKeys.GitHub`.")
+			}
+			
 			let settings: OAuth2JSON = [
 				
-				"client_id" : APIKeys.GitHub.clientId,
-				"client_secret" : APIKeys.GitHub.clientSecret,
+				"client_id" : clientId,
+				"client_secret" : clientSecret,
 				"authorize_uri" : "https://github.com/login/oauth/authorize",
 				"token_uri" : "https://github.com/login/oauth/access_token",
 				"scope" : "gist",

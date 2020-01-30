@@ -1,1 +1,4 @@
-*.plist
+*
+!.gitkeep
+!.gitignore
+!TODO.md
