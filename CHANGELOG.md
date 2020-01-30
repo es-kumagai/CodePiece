@@ -11,6 +11,7 @@ Change Logs.
 ### Fixes
 
 * Restore hashtag when the app crashed.
+* Fix a problem that some tweet could not be show in timeline.
 
 ### Updates
 
