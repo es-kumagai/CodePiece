@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ps4-Eu-nrG">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--GitHub-->
+        <scene sceneID="tmi-bp-2Z8">
+            <objects>
+                <viewController title="GitHub" id="ps4-Eu-nrG" customClass="GistPreferenceViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Vqw-xa-717">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eF3-de-P5v">
+                                <rect key="frame" x="26" y="234" width="47" height="16"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub" id="UyK-pT-fKy">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8X9-Tf-XVS">
+                                <rect key="frame" x="61" y="198" width="120" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Authorized Status" id="E8g-oe-Wto">
+                                    <font key="font" metaFont="menu" size="14"/>
+                                    <color key="textColor" name="NotAuthenticatedForegroundColor"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-Tx-wOb">
+                                <rect key="frame" x="20" y="222" width="275" height="5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="mSM-Fd-yK5"/>
+                                </constraints>
+                            </box>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5cj-jM-cXY">
+                                <rect key="frame" x="35" y="196" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="4c7-Xn-3Zo"/>
+                                    <constraint firstAttribute="height" constant="20" id="7SL-qe-gEJ"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RU2-eg-vOe"/>
+                            </imageView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-jY-0Jr">
+                                <rect key="frame" x="300" y="189" width="166" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DsE-ej-daq">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="doReset:" target="ps4-Eu-nrG" id="eG2-vm-x3W"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X40-Kf-trQ">
+                                <rect key="frame" x="77" y="234" width="15" height="16"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="▶︎" id="jhb-us-wsd">
+                                    <font key="font" size="13" name="LucidaGrande"/>
+                                    <color key="textColor" name="OptionTextColor"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-hX-roe">
+                                <rect key="frame" x="96" y="234" width="66" height="16"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Username" id="cc9-AA-BeY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="OptionTextColor"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tnH-dE-TzC">
+                                <rect key="frame" x="20" y="33" width="440" height="125"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4L-c2-OGD">
+                                        <rect key="frame" x="-2" y="93" width="380" height="32"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece requires permission only for creating Gists. Please authenticate from the button below." id="roN-jh-jrr">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AFn-Gq-0En">
+                                        <rect key="frame" x="-6" y="45" width="128" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRz-PP-aVw">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="doAuthentication:" target="ps4-Eu-nrG" id="VKT-wo-BB0"/>
+                                        </connections>
+                                    </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pim-Rm-T1g">
+                                        <rect key="frame" x="-2" y="0.0" width="416" height="32"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When you push the button, default browser will be opend to access the GitHub's authentication page." id="AQu-dh-ACz">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="440" id="C83-02-zBZ"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="vPC-jY-0Jr" firstAttribute="centerY" secondItem="8X9-Tf-XVS" secondAttribute="centerY" id="2Hj-Ue-LJE"/>
+                            <constraint firstItem="5cj-jM-cXY" firstAttribute="top" secondItem="tiQ-Tx-wOb" secondAttribute="bottom" constant="8" id="4Ss-kW-Plq"/>
+                            <constraint firstItem="eF3-de-P5v" firstAttribute="top" secondItem="Vqw-xa-717" secondAttribute="top" constant="20" id="50m-UE-CE8"/>
+                            <constraint firstAttribute="trailing" secondItem="tnH-dE-TzC" secondAttribute="trailing" constant="20" id="51Y-Sq-CYE"/>
+                            <constraint firstItem="tnH-dE-TzC" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="5Dm-R8-NH7"/>
+                            <constraint firstItem="tiQ-Tx-wOb" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="20" id="CFS-nN-6G8"/>
+                            <constraint firstAttribute="trailing" secondItem="vPC-jY-0Jr" secondAttribute="trailing" constant="20" id="KKZ-Km-3RU"/>
+                            <constraint firstItem="tiQ-Tx-wOb" firstAttribute="top" secondItem="eF3-de-P5v" secondAttribute="bottom" constant="9" id="WKr-XE-7mN"/>
+                            <constraint firstItem="5cj-jM-cXY" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="35" id="Ym7-hQ-dhw"/>
+                            <constraint firstItem="eF3-de-P5v" firstAttribute="leading" secondItem="Vqw-xa-717" secondAttribute="leading" constant="28" id="adt-6R-Taj"/>
+                            <constraint firstItem="X40-Kf-trQ" firstAttribute="leading" secondItem="eF3-de-P5v" secondAttribute="trailing" constant="8" id="cbR-Ex-3cS"/>
+                            <constraint firstItem="uLd-hX-roe" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="hXU-7B-rIs"/>
+                            <constraint firstItem="uLd-hX-roe" firstAttribute="leading" secondItem="X40-Kf-trQ" secondAttribute="trailing" constant="8" id="pz9-cL-egc"/>
+                            <constraint firstItem="8X9-Tf-XVS" firstAttribute="centerY" secondItem="5cj-jM-cXY" secondAttribute="centerY" id="sPM-Lb-NSW"/>
+                            <constraint firstItem="8X9-Tf-XVS" firstAttribute="leading" secondItem="5cj-jM-cXY" secondAttribute="trailing" constant="8" id="srI-ID-bfq"/>
+                            <constraint firstItem="tnH-dE-TzC" firstAttribute="top" secondItem="vPC-jY-0Jr" secondAttribute="bottom" constant="38" id="ttM-7B-Xbo"/>
+                            <constraint firstItem="X40-Kf-trQ" firstAttribute="baseline" secondItem="eF3-de-P5v" secondAttribute="baseline" id="yro-rf-7Da"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="authorizationButton" destination="AFn-Gq-0En" id="1gS-1V-nLJ"/>
+                        <outlet property="authorizedAccountName" destination="uLd-hX-roe" id="zvN-fg-4nh"/>
+                        <outlet property="authorizedStatusImageView" destination="5cj-jM-cXY" id="VwE-XG-fmV"/>
+                        <outlet property="authorizedStatusTextField" destination="8X9-Tf-XVS" id="q1b-mO-fap"/>
+                        <outlet property="resetButton" destination="vPC-jY-0Jr" id="n3R-cC-G4s"/>
+                    </connections>
+                </viewController>
+                <customObject id="uXz-0g-Yk7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="693" y="513"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="NotAuthenticatedForegroundColor">
+            <color red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="OptionTextColor">
+            <color red="0.34000000357627869" green="0.30000001192092896" blue="0.15999999642372131" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

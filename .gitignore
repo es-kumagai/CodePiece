@@ -1,7 +1,5 @@
-/Private/
 *.xcuserdatad
 *.xcscmblueprint
 *.xccheckout
-/Pods
 .DS_Store
 
