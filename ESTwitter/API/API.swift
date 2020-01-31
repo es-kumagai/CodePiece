@@ -87,7 +87,22 @@ extension API {
 		
 		func failureHandler(error: Error) {
 
-			handler(.failure(.notAuthorized(error)))
+			switch error {
+				
+			case let error as SwifterError:
+				
+				switch SwifterError.Response(error: error) {
+					
+				case let .some(response):
+					handler(.failure(.notAuthorized(message: response.message)))
+
+				case .none:
+					handler(.failure(.notAuthorized(message: error.message)))
+				}
+
+			default:
+				handler(.failure(.notAuthorized(message: "\(error)")))
+			}
 		}
 		
 		api.authorize(withCallback: url, forceLogin: false, success: successHandler, failure: failureHandler)

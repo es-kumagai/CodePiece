@@ -41,7 +41,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 				NSLog("%@", "GitHub authentication succeeded.")
 				
 			case .Failed(let error):
-				self.showErrorAlert(withTitle: "Failed to authentication", message: "\(error)")
+				NSLog("Failed to authentication. %@", "\(error)")
 				
 //			case .PinRequired:
 //				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")

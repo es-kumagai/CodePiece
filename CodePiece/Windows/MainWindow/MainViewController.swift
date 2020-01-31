@@ -313,8 +313,16 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 
 		observe(notification: TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
-			
-			self.showErrorAlert(withTitle: "Failed to verify credentials", message: "\(notification.error)")
+
+			switch notification.error {
+
+			case .notAuthorized(let message):
+
+				self.showErrorAlert(withTitle: "Failed to authorization", message: message)
+
+			default:
+				self.showErrorAlert(withTitle: "Failed to authorization", message: "\(notification.error)")
+			}
 		}
 	}
 	

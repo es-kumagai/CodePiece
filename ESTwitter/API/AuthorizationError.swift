@@ -11,7 +11,7 @@ import Foundation
 public enum AuthorizationError : Error {
 	
 	case apiError(APIError)
-	case notAuthorized(Error)
+	case notAuthorized(message: String)
 	case failedToGetAccessToken(URLResponse)
 }
 
@@ -24,8 +24,8 @@ extension AuthorizationError : CustomStringConvertible {
 		case .apiError(let error):
 			return "\(error)"
 			
-		case .notAuthorized(let error):
-			return "Not authorized. \(error.localizedDescription)"
+		case .notAuthorized(let message):
+			return "Not authorized. \(message)"
 			
 		case .failedToGetAccessToken(let response):
 			return "Failed to get an access token. \(response.description)"

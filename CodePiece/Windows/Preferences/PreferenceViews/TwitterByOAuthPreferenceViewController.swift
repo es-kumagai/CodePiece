@@ -37,8 +37,9 @@ final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewContro
 		}
 		
 		observe(notification: TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
-			
-			self.showErrorAlert(withTitle: "Failed to authentication", message: "\(notification.error)")
+
+			NSLog("Twitter authorization failure. %@", "\(notification.error)")
+			self.authenticatingHUD.hide()
 		}
 	}
 	
