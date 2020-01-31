@@ -8,12 +8,8 @@
 <h1>CodePiece</h1>
 
 <p>
-入力したコードとコメントを Gists へ投稿してリンクをツイートするアプリです。プログラミングの勉強会でコードを添えて呟くのに重宝するかもしれません。
+This is an application that <strong>program codes</strong> and description post to <strong>gist</strong>, then post the link and the capture image to <strong>Twitter</strong>. It may be used to discussion of programming meetup on Twitter.
 </p>
-
-<blockquote>
-<p>GitHub で公開しているものは beta 版です。正式リリースは Mac App Store で行っています。</p>
-</blockquote>
 
 </div>
 
@@ -21,79 +17,68 @@
 
 ---
 
-<img src="ss/main.png" style="width: 100%; max-width: 800px">
+<img src="ss/main.png" style="max-width: 98%">
 
-# CodePiece で出来ること
+# What the app can do
 
-## コードを添えてツイートできる
+## Post tweet with Source Code
 
-CodePiece アプリにコードを入力して、コメントを添えて投稿すると、その内容が [Gists](https://gist.github.com/) に投稿されて、そのリンクと画像サムネイルを添えたツイートが [Twitter](https://twitter.com/) に投稿されます。
+By type codes by the CodePiece and type description, you can **post** the codes to [Gists](https://gist.github.com/), then the **gist link and the thumbnail** are posted to [Twitter](https://twitter.com/).
 
-<img src="ss/tweet-with-code.png" width="100%" style="max-width: 500px; border: 1px solid #AAA">
+<img src="ss/tweet-with-code.png" style="max-width: 500px; border: 1px solid #AAA; margin-left: 8px">
 
-## コードを添えず、普通にツイートできる
+## Also post tweet without codes
 
-コードを入力しなければ、普通にツイートを [Twitter](https://twitter.com/) に投稿できます。
+If you don't type program codes, you **can post** tweet to [Twitter](https://twitter.com/) **normally** too.
+In this time, post tweet adding entered **hashtags**, so you can use the CodePiece in daily use when you don't need to add a program code.
 
-指定してあるハッシュタグも添えられるので、プログラミングの勉強会でコードを添える必要がないときでも CodePiece から普通にツイートできます。
+## Keeping Hashtags
 
-ハッシュタグは投稿した後も入力欄に残されるので、投稿するたびに入力し直す必要がありません。
-あらかじめハッシュタグが設定されている勉強会などで設定しておくと、気軽にツイートできます。
+Entered **hashtags are kept** after post, so you don't warry about forgetting adding hashtags. It's very useful in an event where you post some tweets using the same hashtags; for example a programming meetup.
 
-## ハッシュタグのツイートが見られる
+In addition, you can enter **more than one hashtags** too. It is good at tweet with two or more hashtags continuously.
 
-ハッシュタグを設定しておくと、右側にそのハッシュタグを持つツイートが表示されます。勉強会など、関連するツイートを追いながら、思い思いにツイートしたい時に便利です。
+## Show timeline of entered hashtags.
 
-# CodePiece を使うために必要なもの
+You can always **see the tweets** searched with entered hashtags.
+To enter hashtags for tweet, The CodePiece app **query** the tweet with, and **show** the tweets on right side area.It is useful to **do tweeting** something **while watching** tweets about entered hashtags.
 
-CodePiece を利用するには、次の環境が必要になります。
 
-* Mac OS X 10.10 以上
-* GitHub アカウント
-* Twitter アカウント
+# Required
 
-# CodePiece のセットアップ
+The following environment is required to use the CodePiece app.
 
-## Twitter アカウントを登録する
+* macOS X 10.15 or greater
+* GitHub account
+* Twitter account
 
-Twitter アカウントは Mac の環境設定にある ```インターネットアカウント``` 設定で行います。
+# How to setup
 
-<img src="ss/internet-accounts.png" style="width: 100%; max-width: 800px">
+## Install the CodePiece
 
-ここに CodePiece で使いたいツイッターアカウントを登録してください。複数のアカウントを登録した場合はその中のどれかを CodePiece で選択して使います。
-
-## アプリをインストールする
-
-アプリ本体 ```CodePiece.app``` を /Applications フォルダーに保存してください。
+Store the App `CodePiece.app` to `/Applications` folder or `~/Applications` folder, or other folder as you like.
 
 ![CodePiece](ss/Icon.CodePiece.png)
 
-> 保存するフォルダーは /Applications でなくても構いません。
+## Register GitHub account
 
-## GitHub アカウントを登録する
+To post gist, you have to register a GitHub account on the app's preference pane in the CodePiece app.
 
-GitHub アカウントは CodePiece アプリを起動してから、環境設定で行います。
-
-システムメニューの ```CodePiece``` → ```Preferences...``` を選択すると、設定画面が表示されます。この上側のメニューバーで ```GitHub``` を選択すると、GitHub の設定画面が表示されます。
+To select `CodePiece` → `Preferences...` on the system menu, 
+you can see the CodePiece app's preference window.
+On the preference window, select `GitHub` on the menu bar.
 
 ![環境設定](ss/preferences-github.png)
 
-ここの  ```Authentication``` ボタンをクリックすると、既定のブラウザーで GitHub の認証ページが開かれます。そこで GitHub アカウントを使って認証すると CodePiece でそのアカウントが利用できるようになります。
+Push the `Authentication` button, then default browser will be launched and show the authorization page of GitHub. To authorizing with your GitHub account in the page, you are able to post gists using the CodePiece.
 
-> * 認証には OAuth2 を使用します。アクセストークンが取得され、それがアプリ内に記録されます。
-> * OAuth2 認証では Gist を作成する権限だけを取得します。
-> * アクセストークンは Keychain に保存されます。
+## Register Twitter account
 
-## Twitter アカウントを登録する
+To post tweet, you have to register a Twitter account like registering a GitHub account.
 
-Mac に登録されている Twitter アカウントが複数ある場合は、CodePiece で使用する Twitter アカウントを選択する必要が有ります。
-
-CodePiece アプリを起動したら、システムメニューの ```CodePiece``` → ```Preferences...``` を選択すると、設定画面が表示されます。この上側のメニューバーで ```Twitter``` を選択すると、GitHub の設定画面が表示されます。
+In the CodePiece's preference window, to push `Twitter` button, you can see the preference pane for registering twitter account.
 
 ![環境設定](ss/preferences-twitter.png)
 
-ここにあるプルダウンメニューから Twitter アカウントを選択することで、そのアカウントを使って CodePiece からコードやつぶやきをツイートできるようになります。
-
-> * Mac に Twitter アカウントがひとつだけしか登録されていない場合は、それが CodePiece でも使用されます。
-> * Mac で CodePiece から Twitter アカウントを利用する許可が与えられている必要があります。許可の設定は Mac のシステム環境設定にある ```セキュリティとプライバシー``` で行えます。
+Push the `Authentication` button, then default browser will be launched and show the authorization page of Twitter. To authorizing with your Twitter account in the page, you are able to tweet using the CodePiece.
 
