@@ -11,7 +11,7 @@ import Swim
 import Ocean
 import ESTwitter
 
-private var isReadyForUse:Bool = false
+private var _isReadyForUse: Bool = false
 
 extension NSApplication : AlertDisplayable {
 	
@@ -19,14 +19,14 @@ extension NSApplication : AlertDisplayable {
 
 extension NSApplication {
 	
-	var baseViewController:BaseViewController? {
+	var baseViewController: BaseViewController? {
 	
 		return self.keyWindow?.contentViewController as? BaseViewController
 	}
 	
 	static func readyForUse() {
 		
-		guard !CodePiece.isReadyForUse else {
+		guard !_isReadyForUse else {
 		
 			fatalError("Application is already ready.")
 		}
@@ -35,12 +35,12 @@ extension NSApplication {
 		self.settings = Settings()
 		self.controllers = AppGlobalControllers()
 		
-		CodePiece.isReadyForUse = true
+		_isReadyForUse = true
 	}
 	
-	var isReadyForUse:Bool {
+	var isReadyForUse: Bool {
 	
-		return CodePiece.isReadyForUse
+		return _isReadyForUse
 	}
 }
 
@@ -48,48 +48,48 @@ extension NSApplication {
 
 extension NSApplication {
 	
-	private static var environment:Environment!
-	private static var controllers:AppGlobalControllers!
-	private static var settings:Settings!
+	private static var environment: Environment!
+	private static var controllers: AppGlobalControllers!
+	private static var settings: Settings!
 	
-	var environment:Environment {
+	var environment: Environment {
 		
 		return Self.environment
 	}
 	
-	var settings:Settings {
+	var settings: Settings {
 	
 		return Self.settings
 	}
 	
-	var controllers:AppGlobalControllers {
+	var controllers: AppGlobalControllers {
 
 		return Self.controllers
 	}
 	
-	var snsController:SNSController {
+	var snsController: SNSController {
 		
-		return self.controllers.sns
+		return controllers.sns
 	}
 	
-	var twitterController:TwitterController {
+	var twitterController: TwitterController {
 		
-		return self.snsController.twitter
+		return snsController.twitter
 	}
 	
-	var gistsController:GistsController {
+	var gistsController: GistsController {
 		
-		return self.snsController.gists
+		return snsController.gists
 	}
 	
-	var captureController:WebCaptureController {
+	var captureController: WebCaptureController {
 		
-		return self.controllers.captureController
+		return controllers.captureController
 	}
 	
-	var reachabilityController:ReachabilityController {
+	var reachabilityController: ReachabilityController {
 		
-		return self.controllers.reachabilityController
+		return controllers.reachabilityController
 	}
 }
 

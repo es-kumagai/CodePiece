@@ -382,7 +382,7 @@
 		B1C34A2623E363660039F4E6 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		B1C34A2B23E37ECF0039F4E6 /* PrivacyPolicy */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PrivacyPolicy; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
-		B1D13C7023CA14DB0016902A /* CodePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1D13C7023CA14DB0016902A /* CodePiece-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CodePiece-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1D13C7A23CA14DD0016902A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B1D13C7C23CA14DD0016902A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -880,7 +880,7 @@
 		B1D13C7123CA14DB0016902A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B1D13C7023CA14DB0016902A /* CodePiece.app */,
+				B1D13C7023CA14DB0016902A /* CodePiece-Beta.app */,
 				B1D13C8223CA14DD0016902A /* CodePieceTests.xctest */,
 				B132D50B23CD08B800690C5F /* ESTwitter.framework */,
 				B132D51323CD08B800690C5F /* ESTwitterTests.xctest */,
@@ -1046,7 +1046,7 @@
 				B1FB161D23D36E6C002D4571 /* OAuth2 */,
 			);
 			productName = "CodePiece-Rev2";
-			productReference = B1D13C7023CA14DB0016902A /* CodePiece.app */;
+			productReference = B1D13C7023CA14DB0016902A /* CodePiece-Beta.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B1D13C8123CA14DD0016902A /* CodePieceTests */ = {
@@ -1595,7 +1595,7 @@
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
+					"${PROJECT_DIR}",
 				);
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1604,7 +1604,8 @@
 				);
 				MARKETING_VERSION = "$(ES_MARKETING_VERSION)-beta";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece-Beta";
-				PRODUCT_NAME = CodePiece;
+				PRODUCT_MODULE_NAME = CodePiece;
+				PRODUCT_NAME = "CodePiece-Beta";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -1623,7 +1624,7 @@
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
+					"${PROJECT_DIR}",
 				);
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1632,6 +1633,7 @@
 				);
 				MARKETING_VERSION = "$(ES_MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
+				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = CodePiece;
 				SWIFT_VERSION = 5.0;
 			};
