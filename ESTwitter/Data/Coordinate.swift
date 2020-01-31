@@ -12,12 +12,6 @@ public struct CoordinatesElement {
 	var longitude: Double
 }
 
-public struct GeoCoordinatesElement {
-
-	var latitude: Double
-	var longitude: Double
-}
-
 public struct Coordinates {
 	
 	var coordinates: CoordinatesElement
@@ -42,22 +36,5 @@ extension CoordinatesElement : Decodable {
 		
 		latitude = array[1]
 		longitude = array[0]
-	}
-}
-
-extension GeoCoordinatesElement : Decodable {
-
-	public init(decoder: Decoder) throws {
-	
-		let container = try decoder.singleValueContainer()
-		let array = try container.decode([Double].self)
-
-		guard array.count == 2 else {
-			
-			throw DecodingError.dataCorruptedError(in: container, debugDescription: "Incorrect values for latitude and longitude.")
-		}
-		
-		latitude = array[0]
-		longitude = array[1]
 	}
 }
