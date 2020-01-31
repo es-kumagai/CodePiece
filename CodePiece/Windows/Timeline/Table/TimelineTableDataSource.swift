@@ -47,7 +47,8 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		items = Array(newTweets)
 	}
 	
-	func appendHashtags(hashtags: ESTwitter.HashtagSet) -> ProcessExitStatus {
+	@discardableResult
+	func appendHashtags(hashtags: HashtagSet) -> ProcessExitStatus {
 		
 		let latestHashtags = items.first?.currentHashtags
 		let needAppending = { () -> Bool in

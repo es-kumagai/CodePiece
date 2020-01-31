@@ -56,7 +56,7 @@ final class TimelineViewController: NSViewController {
 		
 		init() {
 		
-			self.init(hashtags: [""])
+			self.init(hashtags: [])
 		}
 		
 		init(hashtags: HashtagSet) {
@@ -139,7 +139,7 @@ final class TimelineViewController: NSViewController {
 		return true
 	}
 	
-	var timeline = TimelineInformation() {
+	var timeline = TimelineInformation(hashtags: NSApp.settings.appState.hashtags ?? []) {
 		
 		didSet {
 			
@@ -286,25 +286,25 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		switch message {
 			
 		case .UpdateStatuses:
-			self._updateStatuses()
+			_updateStatuses()
 			
 		case .AutoUpdate(enable: let enable):
-            self._changeAutoUpdateState(enable: enable)
+            _changeAutoUpdateState(enable: enable)
 			
 		case .SetAutoUpdateInterval(let interval):
-            self._changeAutoUpdateInterval(interval: interval)
+            _changeAutoUpdateInterval(interval: interval)
 			
 		case .AddAutoUpdateIntervalDelay(let interval):
-            self._changeAutoUpdateIntervalDelay(interval: interval)
+            _changeAutoUpdateIntervalDelay(interval: interval)
 			
 		case .ResetAutoUpdateIntervalDeray:
-			self._resetAutoUpdateIntervalDelay()
+			_resetAutoUpdateIntervalDelay()
 			
 		case .SetReachability(let state):
-            self._changeReachability(state: state)
+            _changeReachability(state: state)
 			
 		case .ChangeHashtags(let hashtags):
-			self._changeHashtags(hashtags: hashtags)
+			_changeHashtags(hashtags: hashtags)
 		}
 	}
 	
@@ -320,7 +320,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		DispatchQueue.main.async(execute: updateStatuses)
 	}
 	
-	private func _changeHashtags(hashtags: Set<ESTwitter.Hashtag>) {
+	private func _changeHashtags(hashtags: Set<Hashtag>) {
 		
 		if timelineDataSource.appendHashtags(hashtags: hashtags).passed {
 		
@@ -393,6 +393,7 @@ extension TimelineViewController : NotificationObservable {
 		message = MessageQueue(identifier: "CodePiece.Timeline", handler: self)
 		updateTimerSource = message.makeTimerSource(interval: Semaphore.Interval(second: 0.03), start: true, timerAction: autoUpdateAction)
 		
+		
 		updateDisplayControlsForState()
 		
 		message.send(message: .SetAutoUpdateInterval(statusesAutoUpdateInterval))
@@ -444,10 +445,6 @@ extension TimelineViewController : NotificationObservable {
 
 		super.viewDidAppear()
 	
-		if let hashtags = NSApp.settings.appState.hashtags {
-
-			timeline = timeline.replaceHashtags(hashtags: hashtags)
-		}
 	}
 	
 	override func viewWillDisappear() {
