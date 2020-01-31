@@ -89,7 +89,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 
 				let textRange = NSMakeRange(0, text.length)
 
-				text.addAttribute(.font, value: systemPalette.textFont, range: textRange)
+				text.addAttribute(.font, value: NSFont.textFont, range: textRange)
 				text.addAttribute(.foregroundColor, value: NSColor.textColor, range: textRange)
 			}
 			

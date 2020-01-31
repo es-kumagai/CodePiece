@@ -17,8 +17,8 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 
 	var notificationHandlers = Notification.Handlers()
 	
-	private var authenticatingHUD:ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
-	private var removeAuthenticatingHUD:ProgressHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
+	private var authenticatingHUD = ProgressHUD(message: "Please authenticate with the launched browser.\n", useActivityIndicator: true)
+	private var removeAuthenticatingHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
 
 	@IBOutlet var authorizedStatusImageView: NSImageView!
 	@IBOutlet var authorizedStatusTextField: NSTextField!
@@ -41,7 +41,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 				NSLog("%@", "GitHub authentication succeeded.")
 				
 			case .Failed(let error):
-				self.showErrorAlert(withTitle: "Failed to authentication", message: error.description)
+				self.showErrorAlert(withTitle: "Failed to authentication", message: "\(error)")
 				
 //			case .PinRequired:
 //				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")
@@ -66,11 +66,11 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 			switch result {
 				
 			case .success:
-				NSLog("Reset successfully. Please perform authentication before you post to Gist again.")
+				NSLog("Reset successfully. Please authenticate before you post to Gist again.")
 				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
 
 			case .failure(let error):
-				self.showWarningAlert(withTitle: "Failed to reset authorization", message: "Could't reset the current authentication information. Reset authentication information which saved in this app force. (\(error))")
+				self.showWarningAlert(withTitle: "Failed to reset authentication", message: "Could't reset the current authentication information correctly. Reset authentication information force. (\(error))")
 			}
 		}
 	}

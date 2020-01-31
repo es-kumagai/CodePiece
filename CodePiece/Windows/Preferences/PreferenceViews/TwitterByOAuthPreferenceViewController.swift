@@ -12,7 +12,7 @@ import ESProgressHUD
 @objcMembers
 final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewController {
 	
-	private var authenticatingHUD: ProgressHUD = ProgressHUD(message: "Please authentication with in browser which will be opened.\n", useActivityIndicator: true)
+	private var authenticatingHUD = ProgressHUD(message: "Please authenticate with the launched browser.\n", useActivityIndicator: true)
 //	private var authenticatingPinHUD:ProgressHUD = ProgressHUD(message: "Please authentication with PIN code.\n", useActivityIndicator: true)
 
 	@IBOutlet private(set) var viewForStartAuthentication: NSView!
@@ -38,7 +38,7 @@ final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewContro
 		
 		observe(notification: TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
 			
-			self.showErrorAlert(withTitle: "Failed to authentication", message: notification.error.localizedDescription)
+			self.showErrorAlert(withTitle: "Failed to authentication", message: "\(notification.error)")
 		}
 	}
 	
