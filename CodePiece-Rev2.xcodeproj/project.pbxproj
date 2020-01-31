@@ -168,8 +168,8 @@
 		B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4323D0D37700418A84 /* CodeTextView.swift */; };
 		B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */; };
 		B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */; };
+		B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B1F2C78923E48B89008BBCA0 /* Fonts */; };
 		B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161D23D36E6C002D4571 /* OAuth2 */; };
-		B1FB8A3123E3FBDF006AB7DA /* SourceHanCodeJP-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B15EE30423CE771F005B268A /* SourceHanCodeJP-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,17 +214,6 @@
 				B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B1FB8A2B23E3FA1F006AB7DA /* Copy Font Resources */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Fonts;
-			dstSubfolderSpec = 7;
-			files = (
-				B1FB8A3123E3FBDF006AB7DA /* SourceHanCodeJP-Regular.otf in Copy Font Resources */,
-			);
-			name = "Copy Font Resources";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -339,15 +328,6 @@
 		B15EE2AC23CE76A0005B268A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B15EE2AD23CE76A0005B268A /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		B15EE2AE23CE76A0005B268A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		B15EE2C623CE76FD005B268A /* ss */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ss; sourceTree = "<group>"; };
-		B15EE2CA23CE771F005B268A /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
-		B15EE2CB23CE771F005B268A /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
-		B15EE2CC23CE771F005B268A /* posted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posted.png; sourceTree = "<group>"; };
-		B15EE2CE23CE771F005B268A /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
-		B15EE2CF23CE771F005B268A /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
-		B15EE2D023CE771F005B268A /* posted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posted.png; sourceTree = "<group>"; };
-		B15EE2EC23CE771F005B268A /* ArchiveZip.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ArchiveZip.sh; sourceTree = "<group>"; };
-		B15EE30423CE771F005B268A /* SourceHanCodeJP-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanCodeJP-Regular.otf"; sourceTree = "<group>"; };
 		B15EE33B23CE7738005B268A /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		B15EE33C23CE7738005B268A /* Mark */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mark; sourceTree = "<group>"; };
 		B15EE38E23CF0360005B268A /* TwitterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterError.swift; sourceTree = "<group>"; };
@@ -406,6 +386,9 @@
 		B1DDCB4323D0D37700418A84 /* CodeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 		B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkLabel.swift; sourceTree = "<group>"; };
 		B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTextField.swift; sourceTree = "<group>"; };
+		B1F2C78723E48AC3008BBCA0 /* Screenshots */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Screenshots; sourceTree = "<group>"; };
+		B1F2C78923E48B89008BBCA0 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		B1F2C78B23E48C9E008BBCA0 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -703,58 +686,12 @@
 		B15EE2C723CE771F005B268A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B1F2C78B23E48C9E008BBCA0 /* Images */,
+				B1F2C78723E48AC3008BBCA0 /* Screenshots */,
 				B15EE33B23CE7738005B268A /* Icon */,
 				B15EE33C23CE7738005B268A /* Mark */,
-				B15EE2C823CE771F005B268A /* Screenshots */,
-				B15EE2EB23CE771F005B268A /* Scripts */,
-				B15EE30323CE771F005B268A /* Fonts */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		B15EE2C823CE771F005B268A /* Screenshots */ = {
-			isa = PBXGroup;
-			children = (
-				B15EE2C923CE771F005B268A /* 1.4 */,
-				B15EE2CD23CE771F005B268A /* 1.3 */,
-			);
-			path = Screenshots;
-			sourceTree = "<group>";
-		};
-		B15EE2C923CE771F005B268A /* 1.4 */ = {
-			isa = PBXGroup;
-			children = (
-				B15EE2CA23CE771F005B268A /* settings.png */,
-				B15EE2CB23CE771F005B268A /* main.png */,
-				B15EE2CC23CE771F005B268A /* posted.png */,
-			);
-			path = 1.4;
-			sourceTree = "<group>";
-		};
-		B15EE2CD23CE771F005B268A /* 1.3 */ = {
-			isa = PBXGroup;
-			children = (
-				B15EE2CE23CE771F005B268A /* settings.png */,
-				B15EE2CF23CE771F005B268A /* main.png */,
-				B15EE2D023CE771F005B268A /* posted.png */,
-			);
-			path = 1.3;
-			sourceTree = "<group>";
-		};
-		B15EE2EB23CE771F005B268A /* Scripts */ = {
-			isa = PBXGroup;
-			children = (
-				B15EE2EC23CE771F005B268A /* ArchiveZip.sh */,
-			);
-			path = Scripts;
-			sourceTree = "<group>";
-		};
-		B15EE30323CE771F005B268A /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				B15EE30423CE771F005B268A /* SourceHanCodeJP-Regular.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		B15EE38523CE9C42005B268A /* Frameworks */ = {
@@ -871,13 +808,13 @@
 		B1D13C6723CA14DB0016902A = {
 			isa = PBXGroup;
 			children = (
+				B1F2C78C23E48CBC008BBCA0 /* BundleResources */,
 				B15EE2C723CE771F005B268A /* Resources */,
 				B15EE2AD23CE76A0005B268A /* CHANGELOG.md */,
 				B15EE2AB23CE76A0005B268A /* HowToBuild.md */,
 				B15EE2AE23CE76A0005B268A /* LICENSE */,
 				B15EE2AC23CE76A0005B268A /* README.md */,
 				B1C34A2B23E37ECF0039F4E6 /* PrivacyPolicy */,
-				B15EE2C623CE76FD005B268A /* ss */,
 				B1A105FE23CA1EF700F9C4FD /* Private */,
 				B1D13C7223CA14DB0016902A /* CodePiece */,
 				B1D13C8523CA14DD0016902A /* CodePieceTests */,
@@ -954,6 +891,14 @@
 				B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		B1F2C78C23E48CBC008BBCA0 /* BundleResources */ = {
+			isa = PBXGroup;
+			children = (
+				B1F2C78923E48B89008BBCA0 /* Fonts */,
+			);
+			path = BundleResources;
 			sourceTree = "<group>";
 		};
 		B1FB161B23D36B2C002D4571 /* WelcomeBoard */ = {
@@ -1042,7 +987,6 @@
 				B1D13C6C23CA14DB0016902A /* Sources */,
 				B1D13C6D23CA14DB0016902A /* Frameworks */,
 				B1D13C6E23CA14DB0016902A /* Resources */,
-				B1FB8A2B23E3FA1F006AB7DA /* Copy Font Resources */,
 				B132D52223CD08B800690C5F /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1161,6 +1105,7 @@
 				B1C34A2723E363660039F4E6 /* Acknowledgements.plist in Resources */,
 				B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */,
 				B1A105FD23CA1A4A00F9C4FD /* Assets.xcassets in Resources */,
+				B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */,
 				B15EE29923CE7667005B268A /* AcknowledgementsViewController.storyboard in Resources */,
 				B15EE26B23CE7658005B268A /* TwitterPreferenceView.storyboard in Resources */,
 				B15EE26A23CE7658005B268A /* PreferencesWindow.storyboard in Resources */,

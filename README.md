@@ -1,7 +1,7 @@
 <div style="float: left; text-align: center;">
-<a href="https://itunes.apple.com/jp/app/codepiece/id1021284423?mt=12"><img src="ss/CodePiece.128x128.png" width="100px"></a>
+<a href="https://itunes.apple.com/jp/app/codepiece/id1021284423?mt=12"><img src="Resources/Images/CodePiece.128x128.png" width="100px"></a>
 <br/>
-<a href="https://itunes.apple.com/jp/app/codepiece/id1021284423?mt=12"><img src="ss/Download_on_the_App_Store_Badge.135x40.png" width="135px"/></a>
+<a href="https://itunes.apple.com/jp/app/codepiece/id1021284423?mt=12"><img src="Resources/Images/Download_on_the_App_Store_Badge.135x40.png" width="135px"/></a>
 </div>
 
 <div style="padding-left: 160px; padding-top: 0pt;">
@@ -17,7 +17,7 @@ This is an application that <strong>program codes</strong> and description post 
 
 ---
 
-<img src="ss/main.png" style="max-width: 98%">
+<img src="Resources/Screenshots/2.0/main.png" style="max-width: 98%">
 
 # What the app can do
 
@@ -25,7 +25,7 @@ This is an application that <strong>program codes</strong> and description post 
 
 By type codes by the CodePiece and type description, you can **post** the codes to [Gists](https://gist.github.com/), then the **gist link and the thumbnail** are posted to [Twitter](https://twitter.com/).
 
-<img src="ss/tweet-with-code.png" style="max-width: 500px; border: 1px solid #AAA; margin-left: 8px">
+<img src="Resources/Screenshots/2.0/tweet-with-code.png" style="max-width: 500px; border: 1px solid #AAA; margin-left: 8px">
 
 ## Also post tweet without codes
 
@@ -58,7 +58,7 @@ The following environment is required to use the CodePiece app.
 
 Store the App `CodePiece.app` to `/Applications` folder or `~/Applications` folder, or other folder as you like.
 
-![CodePiece](ss/Icon.CodePiece.png)
+![CodePiece](Resources/Images/Icon.CodePiece.png)
 
 ## Register GitHub account
 
@@ -68,7 +68,7 @@ To select `CodePiece` → `Preferences...` on the system menu,
 you can see the CodePiece app's preference window.
 On the preference window, select `GitHub` on the menu bar.
 
-![環境設定](ss/preferences-github.png)
+![環境設定](Resources/Screenshots/2.0/preferences-github.png)
 
 Push the `Authentication` button, then default browser will be launched and show the authorization page of GitHub. To authorizing with your GitHub account in the page, you are able to post gists using the CodePiece.
 
@@ -78,7 +78,7 @@ To post tweet, you have to register a Twitter account like registering a GitHub 
 
 In the CodePiece's preference window, to push `Twitter` button, you can see the preference pane for registering twitter account.
 
-![環境設定](ss/preferences-twitter.png)
+![環境設定](Resources/Screenshots/2.0/preferences-twitter.png)
 
 Push the `Authentication` button, then default browser will be launched and show the authorization page of Twitter. To authorizing with your Twitter account in the page, you are able to tweet using the CodePiece.
 
