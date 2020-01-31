@@ -12,7 +12,7 @@ import ESTwitter
 
 protocol TimelineTableItem {
 
-	var currentHashtags: ESTwitter.HashtagSet { get }
+	var currentHashtags: HashtagSet { get }
 	var timelineItemTweetId: String? { get }
 	var timelineCellType: TimelineTableCellType.Type { get }
 }

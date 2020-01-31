@@ -13,7 +13,15 @@ extension TimelineViewController {
 	
 	var canReplyRequest: Bool {
 	
-		return timelineTableView.selectedAnyRows
+		guard timelineTableView.selectedSingleRow else {
+			
+			return false
+		}
+
+		let indexes = timelineDataSource.items.indexes { $0 is TimelineTweetItem }
+		let result = Set(timelineTableView.selectedRowIndexes).isSubset(of: indexes)
+
+		return result
 	}
 	
 	@IBAction func replyRequest(_ sender: AnyObject) {
@@ -22,8 +30,16 @@ extension TimelineViewController {
 	}
 	
 	var canOpenBrowserWithCurrentTwitterStatus: Bool {
-		
-		return timelineTableView.selectedSingleRow
+
+		guard timelineTableView.selectedSingleRow else {
+			
+			return false
+		}
+
+		let indexes = timelineDataSource.items.indexes { $0 is TimelineTweetItem }
+		let result = Set(timelineTableView.selectedRowIndexes).isSubset(of: indexes)
+
+		return result
 	}
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {

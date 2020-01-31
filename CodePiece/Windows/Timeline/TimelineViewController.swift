@@ -41,7 +41,7 @@ final class TimelineViewController: NSViewController {
                 didChangeValue(forKey: "canOpenBrowserWithCurrentTwitterStatus")
 			}
 			
-			timelineTableView.makedCells.forEach { cell in
+			for cell in timelineTableView.makedCells {
 				
 				cell.applySelection()
 			}
@@ -103,7 +103,7 @@ final class TimelineViewController: NSViewController {
 		
 		didSet {
 			
-			self.timelineStatusView.clearMessage()
+			timelineStatusView.clearMessage()
 		}
 	}
 	
@@ -111,7 +111,7 @@ final class TimelineViewController: NSViewController {
 	
 		didSet {
 			
-			self.timelineUpdateIndicator?.usesThreadedAnimation = true
+			timelineUpdateIndicator?.usesThreadedAnimation = true
 		}
 	}
 	
@@ -560,7 +560,7 @@ extension TimelineViewController : NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		
-		let items = self.timelineDataSource.items
+		let items = timelineDataSource.items
 		
 		guard row < items.count else {
 			
@@ -571,7 +571,7 @@ extension TimelineViewController : NSTableViewDelegate {
         let cell = item.timelineCellType.makeCellWithItem(item: item, tableView: tableView, owner: self) as! TimelineTableCellType
 
 //		cell.selected = tableView.isRowSelected(row)
-        cell.selected = self.currentTimelineSelectedRowIndexes.contains(row)
+        cell.selected = currentTimelineSelectedRowIndexes.contains(row)
 
 		return cell.toTimelineView()
 	}
@@ -583,7 +583,7 @@ extension TimelineViewController : NSTableViewDelegate {
 
     func tableViewSelectionIsChanging(_ notification: Notification) {
 		
-		guard let tableView = notification.object as? TimelineTableView, tableView === self.timelineTableView else {
+		guard let tableView = notification.object as? TimelineTableView, tableView === timelineTableView else {
 			
 			return
 		}
@@ -591,7 +591,7 @@ extension TimelineViewController : NSTableViewDelegate {
 	
     func tableViewSelectionDidChange(_ notification: Notification) {
 		
-		guard let tableView = notification.object as? TimelineTableView, tableView === self.timelineTableView else {
+		guard let tableView = notification.object as? TimelineTableView, tableView === timelineTableView else {
 			
 			return
 		}
