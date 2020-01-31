@@ -19,9 +19,9 @@ struct Environment {
 		let environments = ProcessInfo.processInfo.environment
 		
 		#if DEBUG
-			debugOnXcodeServer = environments.keys.contains("XCS")
+		debugOnXcodeServer = environments.keys.contains("XCS")
 		#else
-			debugOnXcodeServer = false
+		debugOnXcodeServer = { false }()
 		#endif
 		
 		if debugOnXcodeServer {
