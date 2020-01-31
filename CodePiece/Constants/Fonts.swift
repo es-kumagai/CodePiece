@@ -8,16 +8,10 @@
 
 import Cocoa
 
-let systemPalette = SystemPalette()
-
-struct SystemPalette {
+extension NSFont {
 	
-	let textFont = SystemFont.forText.font(withSize: 13.0)!
-	let codeFont = SystemFont.forCode.font(withSize: 14.0)!
-	
-	fileprivate init() {
-		
-	}
+	static let textFont = SystemFont.forText.font(size: 13.0)!
+	static let codeFont = SystemFont.forCode.font(size: 14.0)!
 }
 
 private enum SystemFont {
@@ -25,7 +19,7 @@ private enum SystemFont {
 	case forText
 	case forCode
 	
-	func font(withSize size:CGFloat) -> NSFont? {
+	func font(size: CGFloat) -> NSFont? {
 		
 		switch self {
 			

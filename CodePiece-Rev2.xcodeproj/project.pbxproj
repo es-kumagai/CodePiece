@@ -43,7 +43,7 @@
 		B15EE1FE23CE7571005B268A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1FC23CE7571005B268A /* BaseViewController.swift */; };
 		B15EE1FF23CE7571005B268A /* BaseWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1FD23CE7571005B268A /* BaseWindowController.swift */; };
 		B15EE20123CE757C005B268A /* DebugSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE20023CE757C005B268A /* DebugSupport.swift */; };
-		B15EE20723CE7593005B268A /* SystemPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE20223CE7593005B268A /* SystemPalette.swift */; };
+		B15EE20723CE7593005B268A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE20223CE7593005B268A /* Fonts.swift */; };
 		B15EE20823CE7593005B268A /* TwitterOpenFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE20323CE7593005B268A /* TwitterOpenFeatures.swift */; };
 		B15EE20923CE7593005B268A /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE20423CE7593005B268A /* Environments.swift */; };
 		B15EE20A23CE7593005B268A /* TwitterText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE20523CE7593005B268A /* TwitterText.swift */; };
@@ -114,7 +114,6 @@
 		B15EE2A823CE7667005B268A /* TimelineTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28B23CE7667005B268A /* TimelineTableItem.swift */; };
 		B15EE2A923CE7667005B268A /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28C23CE7667005B268A /* TimelineTableController.swift */; };
 		B15EE2AA23CE7667005B268A /* WelcomeBoardWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28D23CE7667005B268A /* WelcomeBoardWindowController.swift */; };
-		B15EE33D23CE78A5005B268A /* SourceHanCodeJP-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B15EE30423CE771F005B268A /* SourceHanCodeJP-Regular.otf */; };
 		B15EE38723CE9C42005B268A /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38623CE9C42005B268A /* Swifter */; };
 		B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38923CE9FBB005B268A /* Reachability */; };
 		B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38C23CEA03E005B268A /* KeychainAccess */; };
@@ -170,6 +169,7 @@
 		B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */; };
 		B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */; };
 		B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161D23D36E6C002D4571 /* OAuth2 */; };
+		B1FB8A3123E3FBDF006AB7DA /* SourceHanCodeJP-Regular.otf in Copy Font Resources */ = {isa = PBXBuildFile; fileRef = B15EE30423CE771F005B268A /* SourceHanCodeJP-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,6 +216,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1FB8A2B23E3FA1F006AB7DA /* Copy Font Resources */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Fonts;
+			dstSubfolderSpec = 7;
+			files = (
+				B1FB8A3123E3FBDF006AB7DA /* SourceHanCodeJP-Regular.otf in Copy Font Resources */,
+			);
+			name = "Copy Font Resources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -253,7 +264,7 @@
 		B15EE1FC23CE7571005B268A /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B15EE1FD23CE7571005B268A /* BaseWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWindowController.swift; sourceTree = "<group>"; };
 		B15EE20023CE757C005B268A /* DebugSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugSupport.swift; sourceTree = "<group>"; };
-		B15EE20223CE7593005B268A /* SystemPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPalette.swift; sourceTree = "<group>"; };
+		B15EE20223CE7593005B268A /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B15EE20323CE7593005B268A /* TwitterOpenFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterOpenFeatures.swift; sourceTree = "<group>"; };
 		B15EE20423CE7593005B268A /* Environments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		B15EE20523CE7593005B268A /* TwitterText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterText.swift; sourceTree = "<group>"; };
@@ -528,6 +539,7 @@
 			children = (
 				B15EE21523CE761C005B268A /* Notifications.swift */,
 				B15EE21623CE761C005B268A /* Application.swift */,
+				B15EE20223CE7593005B268A /* Fonts.swift */,
 				B15EE21723CE761C005B268A /* Colors.swift */,
 			);
 			path = Constants;
@@ -595,8 +607,8 @@
 			children = (
 				B1C349CF23E270830039F4E6 /* API */,
 				B18FFA4023DF5EB40057C977 /* Gists */,
-				B15EE23523CE7658005B268A /* PostData+Twitter.swift */,
 				B15EE23623CE7658005B268A /* Twitter */,
+				B15EE23523CE7658005B268A /* PostData+Twitter.swift */,
 				B15EE23723CE7658005B268A /* Language.swift */,
 				B15EE23823CE7658005B268A /* TwitterAccount.swift */,
 				B15EE23A23CE7658005B268A /* GistsController.swift */,
@@ -913,7 +925,6 @@
 				B1278B5B23D176C3003F3719 /* CodeText.swift */,
 				B15EE20423CE7593005B268A /* Environments.swift */,
 				B15EE20623CE7593005B268A /* GitHubOpenFeatures.swift */,
-				B15EE20223CE7593005B268A /* SystemPalette.swift */,
 				B15EE20323CE7593005B268A /* TwitterOpenFeatures.swift */,
 				B15EE20523CE7593005B268A /* TwitterText.swift */,
 				B1D13C7C23CA14DD0016902A /* Info.plist */,
@@ -1031,6 +1042,7 @@
 				B1D13C6C23CA14DB0016902A /* Sources */,
 				B1D13C6D23CA14DB0016902A /* Frameworks */,
 				B1D13C6E23CA14DB0016902A /* Resources */,
+				B1FB8A2B23E3FA1F006AB7DA /* Copy Font Resources */,
 				B132D52223CD08B800690C5F /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1147,7 +1159,6 @@
 				B15EE29823CE7667005B268A /* WelcomeBoard.storyboard in Resources */,
 				B15EE29423CE7667005B268A /* AboutWindowController.storyboard in Resources */,
 				B1C34A2723E363660039F4E6 /* Acknowledgements.plist in Resources */,
-				B15EE33D23CE78A5005B268A /* SourceHanCodeJP-Regular.otf in Resources */,
 				B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */,
 				B1A105FD23CA1A4A00F9C4FD /* Assets.xcassets in Resources */,
 				B15EE29923CE7667005B268A /* AcknowledgementsViewController.storyboard in Resources */,
@@ -1264,7 +1275,7 @@
 				B15EE2A523CE7667005B268A /* TimelineViewController+MainWindow.swift in Sources */,
 				B15EE20B23CE7593005B268A /* GitHubOpenFeatures.swift in Sources */,
 				B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */,
-				B15EE20723CE7593005B268A /* SystemPalette.swift in Sources */,
+				B15EE20723CE7593005B268A /* Fonts.swift in Sources */,
 				B15EE29E23CE7667005B268A /* TimelineViewController+Notifications.swift in Sources */,
 				B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */,
 				B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */,
@@ -1590,7 +1601,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 65;
+				CURRENT_PROJECT_VERSION = 66;
 				ES_MARKETING_VERSION = 2.0.0;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1619,7 +1630,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 65;
+				CURRENT_PROJECT_VERSION = 66;
 				ES_MARKETING_VERSION = 2.0.0;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
 				FRAMEWORK_SEARCH_PATHS = (

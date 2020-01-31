@@ -72,7 +72,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 		didSet {
 			
-			codeTextView.font = systemPalette.codeFont
+			codeTextView.font = .codeFont
 
 			// MARK: IB からだと自動書式調整のプロパティを変えても効かないので、ここで調整しています。
 			codeTextView.isAutomaticDashSubstitutionEnabled = false
@@ -173,7 +173,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		guard NSApp.snsController.canPost else {
 		
-			self.showErrorAlert(withTitle: "Not ready to post", message: "Please set SNS accounts on the preferences. (⌘,)")
+			self.showErrorAlert(withTitle: "Not ready to post", message: "Please set SNS accounts on the app's preferences. If you'd like to open the preference, type `⌘,`.)")
 			return
 		}
 		
