@@ -92,7 +92,7 @@
                                                 <constraint firstAttribute="width" constant="134" id="2Lt-u9-TvK"/>
                                                 <constraint firstAttribute="height" constant="23" id="FFS-Uy-smd"/>
                                             </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" title="Hashtag" drawsBackground="YES" id="qRd-iL-Ocn">
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" drawsBackground="YES" id="qRd-iL-Ocn">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="HashtagLabelColor"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

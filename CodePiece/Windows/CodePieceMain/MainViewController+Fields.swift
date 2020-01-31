@@ -85,22 +85,22 @@ extension FieldsController {
 
 	func focusToDefaultControl() {
 		
-		self.focusToCodeArea()
+		focusToCodeArea()
 	}
 	
 	func focusToCodeArea() {
 		
-		self.codeScrollView.becomeFirstResponder()
+		codeScrollView.becomeFirstResponder()
 	}
 	
 	func focusToDescription() {
 		
-		self.descriptionTextField.becomeFirstResponder()
+		descriptionTextField.becomeFirstResponder()
 	}
 	
 	func focusToHashtag() {
 		
-		self.hashTagTextField.becomeFirstResponder()
+		hashTagTextField.becomeFirstResponder()
 	}
 	
 	func focusToLanguage() {
@@ -116,8 +116,8 @@ extension FieldsController where Self : PostDataManageable {
 		let includesGistsLink = codeTextView.hasCode
 		let totalCount = makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
 		
-		self.descriptionCountLabel.stringValue = String(totalCount)
-		self.descriptionCountLabel.textColor = .neutralColor
+		descriptionCountLabel.stringValue = String(totalCount)
+		descriptionCountLabel.textColor = .neutralColor
 	}	
 }
 
@@ -186,7 +186,7 @@ extension FieldsController where Self : KeyValueChangeable {
 	
 	func updatePostButtonTitle() {
 		
-		self.postButton.title = getPostButtonTitle()
+		postButton.title = getPostButtonTitle()
 	}
 	
 	func clearCodeText() {
@@ -209,7 +209,7 @@ extension FieldsController where Self : KeyValueChangeable {
 		
 		withChangeValue(for: "canPost") {
 			
-			self.hashTagTextField.hashtags = []
+			hashTagTextField.hashtags = []
 			updateHashtagWatermark()
 		}
 	}
