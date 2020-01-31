@@ -156,8 +156,6 @@
 		B1C34A2223E351800039F4E6 /* Geometory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C34A2123E351800039F4E6 /* Geometory.swift */; };
 		B1C34A2423E355DA0039F4E6 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C34A2323E355DA0039F4E6 /* Polygon.swift */; };
 		B1C34A2723E363660039F4E6 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C34A2623E363660039F4E6 /* Acknowledgements.plist */; };
-		B1C34A2823E3788A0039F4E6 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
-		B1C34A2923E3788A0039F4E6 /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
@@ -169,6 +167,8 @@
 		B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */; };
 		B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */; };
 		B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B1F2C78923E48B89008BBCA0 /* Fonts */; };
+		B1F2C78D23E48FB4008BBCA0 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
+		B1F2C78E23E48FB4008BBCA0 /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161D23D36E6C002D4571 /* OAuth2 */; };
 /* End PBXBuildFile section */
 
@@ -210,7 +210,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B1C34A2923E3788A0039F4E6 /* CodePieceSupport.framework in Embed Frameworks */,
+				B1F2C78E23E48FB4008BBCA0 /* CodePieceSupport.framework in Embed Frameworks */,
 				B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -417,7 +417,7 @@
 			files = (
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
-				B1C34A2823E3788A0039F4E6 /* CodePieceSupport.framework in Frameworks */,
+				B1F2C78D23E48FB4008BBCA0 /* CodePieceSupport.framework in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
 				B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
@@ -686,10 +686,11 @@
 		B15EE2C723CE771F005B268A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B1F2C78B23E48C9E008BBCA0 /* Images */,
-				B1F2C78723E48AC3008BBCA0 /* Screenshots */,
 				B15EE33B23CE7738005B268A /* Icon */,
+				B1F2C78B23E48C9E008BBCA0 /* Images */,
 				B15EE33C23CE7738005B268A /* Mark */,
+				B1C34A2B23E37ECF0039F4E6 /* PrivacyPolicy */,
+				B1F2C78723E48AC3008BBCA0 /* Screenshots */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -697,7 +698,6 @@
 		B15EE38523CE9C42005B268A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -808,13 +808,12 @@
 		B1D13C6723CA14DB0016902A = {
 			isa = PBXGroup;
 			children = (
-				B1F2C78C23E48CBC008BBCA0 /* BundleResources */,
+				B1F2C78C23E48CBC008BBCA0 /* Bundle */,
 				B15EE2C723CE771F005B268A /* Resources */,
 				B15EE2AD23CE76A0005B268A /* CHANGELOG.md */,
 				B15EE2AB23CE76A0005B268A /* HowToBuild.md */,
 				B15EE2AE23CE76A0005B268A /* LICENSE */,
 				B15EE2AC23CE76A0005B268A /* README.md */,
-				B1C34A2B23E37ECF0039F4E6 /* PrivacyPolicy */,
 				B1A105FE23CA1EF700F9C4FD /* Private */,
 				B1D13C7223CA14DB0016902A /* CodePiece */,
 				B1D13C8523CA14DD0016902A /* CodePieceTests */,
@@ -893,12 +892,21 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
-		B1F2C78C23E48CBC008BBCA0 /* BundleResources */ = {
+		B1F2C78C23E48CBC008BBCA0 /* Bundle */ = {
 			isa = PBXGroup;
 			children = (
 				B1F2C78923E48B89008BBCA0 /* Fonts */,
+				B1F2C78F23E48FDD008BBCA0 /* Frameworks */,
 			);
-			path = BundleResources;
+			path = Bundle;
+			sourceTree = "<group>";
+		};
+		B1F2C78F23E48FDD008BBCA0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */,
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		B1FB161B23D36B2C002D4571 /* WelcomeBoard */ = {
@@ -1552,6 +1560,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PROJECT_DIR}",
+					"$(PROJECT_DIR)/Bundle/Frameworks",
 				);
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1581,6 +1590,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PROJECT_DIR}",
+					"$(PROJECT_DIR)/Bundle/Frameworks",
 				);
 				INFOPLIST_FILE = CodePiece/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
