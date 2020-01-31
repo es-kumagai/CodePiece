@@ -9,7 +9,7 @@
 import Cocoa
 import ESGists
 import Ocean
-import Quartz
+//import Quartz
 import Swim
 import ESProgressHUD
 import ESTwitter

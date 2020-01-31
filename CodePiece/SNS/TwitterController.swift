@@ -24,7 +24,7 @@ struct GetStatusesError : Error, CustomStringConvertible {
 		case UnexpectedError
 		
 		// STTwitter
-		case TwitterError(STTwitterTwitterErrorCode)
+//		case TwitterError(STTwitterTwitterErrorCode)
 	}
 	
 	var type: Type
@@ -41,11 +41,11 @@ struct GetStatusesError : Error, CustomStringConvertible {
 		self.reason = reason
 	}
 	
-	init(code: STTwitterTwitterErrorCode, reason: String) {
-		
-		self.reason = reason
-		self.type = .TwitterError(code)
-	}
+//	init(code: STTwitterTwitterErrorCode, reason: String) {
+//
+//		self.reason = reason
+//		self.type = .TwitterError(code)
+//	}
 }
 
 extension GetStatusesError {
@@ -54,8 +54,8 @@ extension GetStatusesError {
 		
 		switch type {
 			
-		case .TwitterError(.rateLimitExceeded):
-			return true
+//		case .TwitterError(.rateLimitExceeded):
+//			return true
 			
 		default:
 			return false

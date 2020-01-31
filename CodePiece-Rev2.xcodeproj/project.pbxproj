@@ -164,7 +164,6 @@
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
 		B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */; };
 		B1DDCB3E23D0C98F00418A84 /* Swim in Frameworks */ = {isa = PBXBuildFile; productRef = B1DDCB3D23D0C98F00418A84 /* Swim */; };
-		B1DDCB4623D0D37700418A84 /* TwitterAccountMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4023D0D37700418A84 /* TwitterAccountMenuItem.swift */; };
 		B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */; };
 		B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4223D0D37700418A84 /* StatusImageView.swift */; };
 		B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4323D0D37700418A84 /* CodeTextView.swift */; };
@@ -391,7 +390,6 @@
 		B1D13C8223CA14DD0016902A /* CodePieceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodePieceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePiece_Rev2Tests.swift; sourceTree = "<group>"; };
 		B1D13C8823CA14DD0016902A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B1DDCB4023D0D37700418A84 /* TwitterAccountMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccountMenuItem.swift; sourceTree = "<group>"; };
 		B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
 		B1DDCB4223D0D37700418A84 /* StatusImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusImageView.swift; sourceTree = "<group>"; };
 		B1DDCB4323D0D37700418A84 /* CodeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
@@ -938,7 +936,6 @@
 		B1DDCB3F23D0D37700418A84 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				B1DDCB4023D0D37700418A84 /* TwitterAccountMenuItem.swift */,
 				B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */,
 				B1DDCB4223D0D37700418A84 /* StatusImageView.swift */,
 				B1DDCB4323D0D37700418A84 /* CodeTextView.swift */,
@@ -1284,7 +1281,6 @@
 				B15EE1FB23CE752D005B268A /* AppExtension.swift in Sources */,
 				B15EE20123CE757C005B268A /* DebugSupport.swift in Sources */,
 				B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */,
-				B1DDCB4623D0D37700418A84 /* TwitterAccountMenuItem.swift in Sources */,
 				B15EE25623CE7658005B268A /* AccountSeting.swift in Sources */,
 				B15EE28F23CE7667005B268A /* LatestTweetManageable.swift in Sources */,
 				B136C9B123D1BDE1004AEA27 /* Swifter.swift in Sources */,

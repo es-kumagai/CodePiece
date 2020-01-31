@@ -97,7 +97,7 @@ extension Authorization.AuthorizationResult {
 
 	enum Error : Swift.Error {
 
-		case twitterError(STTwitterTwitterErrorCode)
+//		case twitterError(STTwitterTwitterErrorCode)
 		case message(String)
 	}
 }
@@ -108,8 +108,8 @@ extension Authorization.AuthorizationResult.Error {
 
 		switch error.domain {
 
-		case kSTTwitterTwitterErrorDomain:
-			self = .twitterError(STTwitterTwitterErrorCode(rawValue: error.code)!)
+//		case kSTTwitterTwitterErrorDomain:
+//			self = .twitterError(STTwitterTwitterErrorCode(rawValue: error.code)!)
 
 		default:
 			self = .message(error.localizedDescription)
@@ -123,8 +123,8 @@ extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
 
 		switch self {
 
-		case .twitterError(let code):
-			return code.description
+//		case .twitterError(let code):
+//			return code.description
 
 		case .message(let message):
 			return message
