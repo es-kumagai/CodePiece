@@ -38,26 +38,12 @@ final class Authorization : AlertDisplayable {
 		
 		init() {
 			
-			guard let clientId = APIKeys.Gist.clientId, let clientSecret = APIKeys.Gist.clientSecret else {
-				
-				fatalError("You MUST specify id and key in `APIKeys.GitHub`.")
-			}
+			oauth2 = Self.makeNewCodeGrant()
+		}
+		
+		func reset() {
 			
-			let settings: OAuth2JSON = [
-				
-				"client_id" : clientId,
-				"client_secret" : clientSecret,
-				"authorize_uri" : "https://github.com/login/oauth/authorize",
-				"token_uri" : "https://github.com/login/oauth/access_token",
-				"scope" : "gist",
-				"redirect_uris" : [ "\(GistScheme.scheme)://gist" ],
-				"secret_in_body": true,
-				"keychain" : false,
-				"title" : "CodePiece",
-				"verbose" : false
-			]
-			
-			oauth2 = OAuth2CodeGrant(settings: settings)
+			oauth2 = Self.makeNewCodeGrant()
 		}
 	}
 
@@ -136,7 +122,7 @@ extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
 
 extension Authorization {
 
-	static func resetAuthorizationOfGist(id:ID, completion: @escaping (Result<Void, SessionTaskError>)->Void) {
+	static func resetAuthorizationOfGist(id: ID, completion: @escaping (Result<Void, SessionTaskError>)->Void) {
 		
 		guard let authorization = NSApp.settings.account.authorization else {
 
@@ -163,11 +149,15 @@ extension Authorization {
 				
 				// Token では削除できないようなので、403 で失敗しても認証情報を削除するだけにしています。
 				NSApp.settings.resetGistAccount(saveFinally: true)
+				gist.reset()
+				
 				completion(response)
 				
 			case .failure(_):
 
 				NSApp.settings.resetGistAccount(saveFinally: true)
+				gist.reset()
+
 				completion(response)
 			}
 		}
@@ -269,7 +259,7 @@ extension Authorization {
 	// FIXME: Gists の認証処理は GistController が担えば良さそうです。Twitter はそうしています。
 	static func authorizationWithGist(completion: @escaping (AuthorizationResult) -> Void) {
 		
-		let oauth2 = self.gist.oauth2
+		let oauth2 = gist.oauth2
 		
 		func onAuthorize(_ parameters: OAuth2JSON) {
 
@@ -298,7 +288,9 @@ extension Authorization {
 			
 			guard case let (scope?, accessToken?) = scopeAndTokenFromParameters else {
 
-				_githubAuthorizationFailed(error: AuthorizationResult.Error.message("Failed to get access token by GitHub."), completion: completion)
+				_githubAuthorizationFailed(error: AuthorizationResult.Error.message("Failed to get access token by GitHub. Please try again later"), completion: completion)
+
+				gist.reset()
 				return
 			}
 
@@ -341,5 +333,35 @@ extension Authorization {
 			
 			onAuthorize(json)
 		}
+	}
+}
+
+private extension Authorization.Gist {
+	
+	static func makeNewCodeGrant() -> OAuth2CodeGrant {
+		
+		return OAuth2CodeGrant(settings: settings)
+	}
+	
+	static var settings: OAuth2JSON {
+		
+		guard let clientId = APIKeys.Gist.clientId, let clientSecret = APIKeys.Gist.clientSecret else {
+			
+			fatalError("You MUST specify id and key in `APIKeys.GitHub`.")
+		}
+		
+		return [
+			
+			"client_id" : clientId,
+			"client_secret" : clientSecret,
+			"authorize_uri" : "https://github.com/login/oauth/authorize",
+			"token_uri" : "https://github.com/login/oauth/access_token",
+			"scope" : "gist",
+			"redirect_uris" : [ "\(GistScheme.scheme)://gist" ],
+			"secret_in_body": true,
+			"keychain" : false,
+			"title" : "CodePiece",
+			"verbose" : false
+		]
 	}
 }
