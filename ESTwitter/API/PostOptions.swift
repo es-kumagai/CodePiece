@@ -14,7 +14,7 @@ extension API {
 		
 		public var inReplyTo: StatusId?
 		public var mediaIDs: [MediaId]
-		public var attachmentUrl: Foundation.URL?
+		public var attachmentUrl: URL?
 		public var coordinate: CoordinatesElement?
 		public var autoPopulateReplyMetadata: Bool?
 		public var excludeReplyUserIds: Bool?
@@ -23,7 +23,7 @@ extension API {
 		public var trimUser: Bool?
 		public var tweetMode: TweetMode
 		
-		public init(inReplyTo: StatusId? = nil, mediaIDs: [MediaId] = [], attachmentUrl: Foundation.URL? = nil, coordinate: CoordinatesElement? = nil, autoPopulateReplyMetadata: Bool? = nil, excludeReplyUserIds: Bool? = nil, placeId: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, tweetMode: TweetMode = .default) {
+		public init(inReplyTo: StatusId? = nil, mediaIDs: [MediaId] = [], attachmentUrl: URL? = nil, coordinate: CoordinatesElement? = nil, autoPopulateReplyMetadata: Bool? = nil, excludeReplyUserIds: Bool? = nil, placeId: Double? = nil, displayCoordinates: Bool? = nil, trimUser: Bool? = nil, tweetMode: TweetMode = .default) {
 			
 			self.inReplyTo = inReplyTo
 			self.mediaIDs = mediaIDs

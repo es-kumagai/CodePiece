@@ -9,10 +9,8 @@
 import Cocoa
 import ESTwitter
 import ESGists
-//import Accounts
 import Ocean
 import Swim
-//import Swifter
 
 private let jsonDecoder = JSONDecoder()
 
@@ -20,11 +18,8 @@ struct GetStatusesError : Error, CustomStringConvertible {
 
 	enum `Type` {
 	
-		case DecodeResultError
-		case UnexpectedError
-		
-		// STTwitter
-//		case TwitterError(STTwitterTwitterErrorCode)
+		case decodeResultError
+		case unexpectedError
 	}
 	
 	var type: Type
@@ -32,7 +27,7 @@ struct GetStatusesError : Error, CustomStringConvertible {
 	
 	var description: String {
 		
-		return "\(self.reason) (\(self.type))"
+		return "\(reason) (\(type))"
 	}
 	
 	init(type: Type, reason: String) {
@@ -79,7 +74,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 //	private static let accountType: ACAccountType = TwitterController.accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
 	private static let accountOptions:[NSObject:AnyObject]? = nil
 	
-	private static let APINotReadyError = SNSController.AuthenticationError.NotReady(service: .Twitter, description: "Twitter API is not ready.")
+	private static let APINotReadyError = SNSController.AuthenticationError.notReady(service: .twitter, description: "Twitter API is not ready.")
 	private static let APINotReadyNSError = NSError(domain: APINotReadyError.localizedDescription, code: 0, userInfo: [NSLocalizedDescriptionKey:APINotReadyError.localizedDescription])
 
 	fileprivate static let twitterCallbackUrl = URL(string: "\(SwifterScheme.scheme)://twitter")!

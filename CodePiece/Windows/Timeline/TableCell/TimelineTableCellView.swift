@@ -115,7 +115,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		self.needsDisplay = true
 	}
 	
-	private func updateIconImage(status:ESTwitter.Status) {
+	private func updateIconImage(status: ESTwitter.Status) {
 
 		let setImage = { (url: Foundation.URL) in
 			

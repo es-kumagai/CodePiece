@@ -155,7 +155,7 @@ extension Status {
 				var indices: Indices
 				var color: NSColor
 				var displayText: String
-				var link: Foundation.URL
+				var link: URL
 
 				init(_ entity: URLEntity, color: NSColor) {
 

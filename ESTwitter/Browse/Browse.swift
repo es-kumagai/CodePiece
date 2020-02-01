@@ -30,7 +30,7 @@ public final class Browser {
 		return escaped
 	}
 	
-	private static func open(url: Foundation.URL) throws {
+	private static func open(url: URL) throws {
 		
 		guard NSWorkspace.shared.open(url) else {
 			
@@ -42,7 +42,7 @@ public final class Browser {
 		
 		let string = "\(self.baseUrl)/\(status.user.screenName)/status/\(status.idStr)"
 		
-		guard let url = Foundation.URL(string: string) else {
+		guard let url = URL(string: string) else {
 			
 			throw BrowseError.OperationFailure(reason: "Failed to make the URL for open tweet item: '\(string)'")
 		}
@@ -54,7 +54,7 @@ public final class Browser {
 		
 		let string = "\(self.baseUrl)/\(username)"
 		
-		guard let url = Foundation.URL(string: string) else {
+		guard let url = URL(string: string) else {
 			
 			throw BrowseError.OperationFailure(reason: "Failed to make the URL for open twitter home: \(string)")
 		}
@@ -67,7 +67,7 @@ public final class Browser {
 		let language = language ?? ""
 		let string = try "\(self.searchUrl)?f=tweets&vertical=default&q=\(escape(string: query))&src=typd&lang=\(escape(string: language))"
 		
-		guard let url = Foundation.URL(string: string) else {
+		guard let url = URL(string: string) else {
 			
 			throw BrowseError.OperationFailure(reason: "Failed to make the URL for searching tweet: \(string)")
 		}

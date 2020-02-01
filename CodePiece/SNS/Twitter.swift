@@ -12,25 +12,25 @@ struct Twitter {
 	
 	enum SpecialCounting {
 		
-		case Media
-		case HTTPUrl
-		case HTTPSUrl
+		case media
+		case httpUrl
+		case httpsUrl
 	}
 }
 
 extension Twitter.SpecialCounting {
 	
-	var length:Int {
+	var length: Int {
 		
 		switch self {
 			
-		case .Media:
+		case .media:
 			return 23
 			
-		case .HTTPUrl:
+		case .httpUrl:
 			return 22
 			
-		case .HTTPSUrl:
+		case .httpsUrl:
 			return 23
 		}
 	}

@@ -10,8 +10,8 @@ import AppKit
 
 struct StoryboardItem<Controller> {
 
-	var name:String
-	var initialControllerType:Controller.Type
+	var name: String
+	var initialControllerType: Controller.Type
 	var bundle: Bundle?
 	
 	init(name:String, controllerType type: Controller.Type, bundle: Bundle? = nil) {
@@ -21,14 +21,14 @@ struct StoryboardItem<Controller> {
 		self.bundle = bundle
 	}
 	
-	var storyboard:NSStoryboard {
+	var storyboard: NSStoryboard {
 		
-		return NSStoryboard(name: self.name, bundle: self.bundle)
+		return NSStoryboard(name: name, bundle: bundle)
 	}
 	
 	func getInitialController() throws -> Controller {
 		
-		guard let instance = self.storyboard.instantiateInitialController() else {
+		guard let instance = storyboard.instantiateInitialController() else {
 			
 			throw StoryboardError.FailedToGetController
 		}
@@ -43,7 +43,7 @@ struct StoryboardItem<Controller> {
 	
 	func getControllerByIdentifier(identifier: String) throws -> Controller {
 
-		let instance = self.storyboard.instantiateController(withIdentifier: identifier)
+		let instance = storyboard.instantiateController(withIdentifier: identifier)
 		
 		guard let controller = instance as? Controller else {
 			

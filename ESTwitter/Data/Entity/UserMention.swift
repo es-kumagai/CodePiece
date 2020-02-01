@@ -32,9 +32,9 @@ extension UserMention : EntityUnit {
 
 extension UserMention {
 	
-	var url: Foundation.URL {
+	var url: URL {
 		
-		Foundation.NSURL(scheme: "https", host: "twitter.com", path: "/\(screenName)")! as Foundation.URL
+		Foundation.NSURL(scheme: "https", host: "twitter.com", path: "/\(screenName)")! as URL
 	}
 }
 

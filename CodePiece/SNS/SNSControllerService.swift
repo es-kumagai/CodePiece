@@ -12,8 +12,8 @@ extension SNSController {
 	
 	enum Service {
 	
-		case Twitter
-		case Gist
+		case twitter
+		case gist
 	}
 }
 
@@ -23,10 +23,10 @@ extension SNSController.Service : CustomStringConvertible {
 		
 		switch self {
 			
-		case .Twitter:
+		case .twitter:
 			return "Twitter"
 			
-		case .Gist:
+		case .gist:
 			return "Gist"
 		}
 	}

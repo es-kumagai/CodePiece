@@ -86,7 +86,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 		
 		switch authorizationState {
 			
-		case .Authorized:
+		case .authorized:
 
 			authorizedStatusTextField.textColor = .authenticatedForegroundColor
 			authorizedStatusTextField.stringValue = "Authenticated"
@@ -94,7 +94,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 			authorizationButton.isEnabled = false
 			resetButton.isEnabled = true
 					
-		case .NotAuthorized:
+		case .notAuthorized:
 			
 			authorizedStatusTextField.textColor = .notAuthenticatedForegroundColor
 			authorizedStatusTextField.stringValue = "Not authenticated yet"

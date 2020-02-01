@@ -44,7 +44,7 @@ extension PostDataContainer {
 	
 	func descriptionLengthForTwitter(includesGistsLink:Bool) -> Int {
 
-		let countsForGistsLink = includesGistsLink ? Twitter.SpecialCounting.Media.length + Twitter.SpecialCounting.HTTPSUrl.length + 2 : 0
+		let countsForGistsLink = includesGistsLink ? Twitter.SpecialCounting.media.length + Twitter.SpecialCounting.httpsUrl.length + 2 : 0
 
 		return descriptionForTwitter().utf16.count + countsForGistsLink
 	}
@@ -57,7 +57,7 @@ extension PostDataContainer {
 			
 			let twitterTotalCount = maxLength ?? 140
 			let reserveUrlCount = 23
-			let reserveGistCount = Twitter.SpecialCounting.Media.length
+			let reserveGistCount = Twitter.SpecialCounting.media.length
 			
 			maxLength = twitterTotalCount - reserveUrlCount - reserveGistCount
 		}

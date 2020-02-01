@@ -50,14 +50,14 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 	private func updateTwitterAccountStatusWith(isValid: Bool, username: String?) {
 		
 		twitterAccountNameTextField.stringValue = username ?? none
-		twitterAccountStatusImageView.status = isValid ? .Available : .Unavailable
+		twitterAccountStatusImageView.status = isValid ? .available : .unavailable
 	}
 	
 	func updateGistAccountStatus() {
 		
 		let gistAccount = NSApp.settings.account
 		
-		updateGistAccountStatusWith(isValid: gistAccount.authorizationState == .Authorized, username: gistAccount.username)
+		updateGistAccountStatusWith(isValid: gistAccount.authorizationState == .authorized, username: gistAccount.username)
 	}
 	
 	// このメソッドを直接呼ぶと実際と食い違う可能性が出てきてしまうので、設定を直接参照するようにする。
@@ -66,7 +66,7 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 	private func updateGistAccountStatusWith(isValid: Bool, username: String?) {
 		
 		gistAccountNameTextField.stringValue = username ?? none
-		gistAccountStatusImageView.status = isValid ? .Available : .Unavailable
+		gistAccountStatusImageView.status = isValid ? .available : .unavailable
 	}
 	
 	override func viewWillAppear() {

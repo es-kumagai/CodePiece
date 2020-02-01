@@ -24,9 +24,9 @@ final class WebCaptureController {
 		self.requests = [Request]()
 	}
 	
-	func capture<CaptureInfo:CaptureInfoType>(url: String, of sourceFilename: String, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, completion: @escaping CaptureCompletionHandler) {
+	func capture<CaptureInfo:CaptureInfoType>(url: String, of sourceFilename: String, captureInfo: CaptureInfo, completion: @escaping CaptureCompletionHandler) {
 	
-		post(Request(url: url, sourceFilename: sourceFilename, owner: self, clientSize: size, captureInfo: captureInfo, handler: completion))
+		post(Request(url: url, sourceFilename: sourceFilename, owner: self, captureInfo: captureInfo, handler: completion))
 	}
 	
 	private func post(_ request: Request) {
@@ -53,7 +53,7 @@ extension WebCaptureController {
 		
 		var view: WKWebView
 		
-		init<CaptureInfo:CaptureInfoType>(url: String, sourceFilename: String, owner: WebCaptureController, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, handler: @escaping WebCaptureController.CaptureCompletionHandler) {
+		init<CaptureInfo:CaptureInfoType>(url: String, sourceFilename: String, owner: WebCaptureController, captureInfo: CaptureInfo, handler: @escaping WebCaptureController.CaptureCompletionHandler) {
 			
 			self.owner = owner
 			
@@ -62,19 +62,7 @@ extension WebCaptureController {
 			self.sourceFilename = sourceFilename
 			self.completionHandler = handler
 			
-			let makeView:() -> WKWebView = {
-
-				if let size = size {
-					
-					return WKWebView(frame: NSRect(x: 0.0, y: 0.0, width: size.width, height: size.height))
-				}
-				else {
-					
-					return WKWebView()
-				}
-			}
-			
-			self.view = makeView()
+			self.view = WKWebView(frame: NSRect(origin: .zero, size: captureInfo.frameSize))
 			
 			super.init()
 			
@@ -223,23 +211,6 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 					}
 				}
 			}
-//			// TODO: 汎用性を確保するためには DOM を渡して切り取る範囲を返す機能を切り出す必要があります。
-//			let content = frame!.domDocument!.getElementsByClassName("blob-file-content")!.item(0)
-//			let contentBound = node?.boundingBox()
-			
-//			let content = self.captureInfo.targetNode(sender, dom)
-//
-//			// TODO: content が取得できず nil になる場合もあるので対応が必要
-//			if let contentBound = content?.boundingBox() {
-//
-////				let image = frame.frameView.documentView!.capture(contentBound)
-//
-//			}
-//			else {
-//
-//				self.fulfillRequest(for: nil)
-//			}
-			
 		}
 	}
 	

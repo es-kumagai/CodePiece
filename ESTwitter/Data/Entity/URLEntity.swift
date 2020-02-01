@@ -8,10 +8,10 @@
 
 public struct URLEntity : HasIndices {
 	
-	public var url: URL
+	public var url: TwitterUrl
 	public var indices: Indices
 	public var displayUrl: String
-	public var expandedUrl: URL
+	public var expandedUrl: TwitterUrl
 }
 
 extension URLEntity : EntityUnit {

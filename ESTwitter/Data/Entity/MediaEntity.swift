@@ -16,15 +16,15 @@ public struct MediaEntity : HasIndices {
 	}
 	
 	public var idStr: String
-	public var mediaUrlHttps: URL
-	public var expandedUrl: URL
+	public var mediaUrlHttps: TwitterUrl
+	public var expandedUrl: TwitterUrl
 	public var id: UInt64
 	public var sizes: [String : Size]
 	public var displayUrl: String
 	public var type: String
 	public var indices: Indices
-	public var mediaUrl: URL
-	public var url: URL
+	public var mediaUrl: TwitterUrl
+	public var url: TwitterUrl
 }
 
 extension MediaEntity : EntityUnit {

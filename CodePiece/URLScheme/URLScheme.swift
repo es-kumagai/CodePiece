@@ -10,8 +10,8 @@ import Foundation
 
 protocol URLScheme {
 	
-	static var scheme:String { get }
-	static var host:String { get }
+	static var scheme: String { get }
+	static var host: String { get }
 	
 	static func action(url: URL)
 }
@@ -20,7 +20,7 @@ extension URLScheme {
 	
 	static func match(url: URL) -> Bool {
 		
-		return url.scheme == self.scheme && url.host == self.host
+		return url.scheme == scheme && url.host == host
 	}
 }
 

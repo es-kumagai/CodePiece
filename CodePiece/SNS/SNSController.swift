@@ -55,12 +55,12 @@ final class SNSController : PostController {
 		
 		switch container.stage {
 			
-		case .Initialized:
+		case .initialized:
 			
 			container.clearErrors()
 			callNextStageRecursively(capturedGistImage)
 			
-		case .PostToGists:
+		case .postToGists:
 			
 			DebugTime.print("📮 Try posting by Gists ... #2.2")
 			
@@ -79,32 +79,31 @@ final class SNSController : PostController {
 			}
 			catch let error as AuthenticationError {
 				
-				exitWithFailure(.authentication(error, state: .occurred(on: .PostToGists)))
+				exitWithFailure(.authentication(error, state: .occurred(on: .postToGists)))
 			}
 			catch let error as NSError {
 				
-				exitWithFailure(.unexpected(error, state: .occurred(on: .PostToGists)))
+				exitWithFailure(.unexpected(error, state: .occurred(on: .postToGists)))
 			}
 			
-		case .CaptureGists:
+		case .captureGists:
 			
 			let gist = container.gistsState.gist!
 			DebugTime.print("📮 Capturing a gist (\(gist)) ... #2.2.1.1")
 			
 			let captureInfo = LinedCaptureInfo()
-			let size = NSMakeSize(560.0, 560.0)
 			
-			NSApp.captureController.capture(url: gist.urls.htmlUrl.rawValue, of: container.filenameForGists, clientSize: size, captureInfo: captureInfo) { image in
+			NSApp.captureController.capture(url: gist.urls.htmlUrl.rawValue, of: container.filenameForGists, captureInfo: captureInfo) { image in
 				
 				DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
 				callNextStageRecursively(image)
 			}
 			
-		case .PostProcessToTwitter:
+		case .postProcessToTwitter:
 			
 			callNextStageRecursively(capturedGistImage)
 			
-		case .PostToTwitterMedia:
+		case .postToTwitterMedia:
 			
 			if let image = capturedGistImage {
 				
@@ -122,11 +121,11 @@ final class SNSController : PostController {
 			}
 			else {
 				
-				container.setError(.failedToUploadMedia(reason: "Failed to take Gist capture image.", state: .occurred(on: .PostToTwitterMedia)))
+				container.setError(.failedToUploadMedia(reason: "Failed to take Gist capture image.", state: .occurred(on: .postToTwitterMedia)))
 				callNextStageRecursively(capturedGistImage)
 			}
 			
-		case .PostToTwitterStatus:
+		case .postToTwitterStatus:
 			
 			DebugTime.print("📮 Try posting by Twitter ... #2.1")
 			
@@ -145,40 +144,9 @@ final class SNSController : PostController {
 				}
 			}
 			
-		case .Posted:
+		case .posted:
 			
 			completed(container)
 		}
 	}
 }
-
-//extension SNSController.PostError : CustomStringConvertible {
-//
-//	var description: String {
-//
-//		switch self {
-//
-//		case let .Unexpected(error):
-//			return "Unexpected error. \(error.localizedDescription)"
-//
-//		case let .SystemError(message):
-//			return "System Error. \(message)"
-//
-//		case let .Description(message):
-//			return "\(message)"
-//
-//		case let .Authentication(error):
-//			return error.description
-//
-////		case let .PostTextTooLong(limit):
-////			return "Post text over \(limit) characters."
-//
-//		case let .FailedToUploadMedia(message):
-//			return "Failed to upload gist capture image. \(message)"
-//
-//		case let .twitterError(message):
-//			return "Failed to post tweet. \(message)"
-//		}
-//	}
-//}
-

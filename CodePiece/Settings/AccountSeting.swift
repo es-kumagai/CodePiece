@@ -24,13 +24,13 @@ extension AccountSetting {
 	// 設定がされていることを確認します。認証の正当性などは判定しません。
 	var isReady:Bool {
 		
-		let isGistReady:()->Bool = {
+		let isGistReady: ()->Bool = {
 
 			// GitHub は Token が設定されているかで設定が有効かを判定します。
 			self.authorization != nil
 		}
 		
-		let isTwitterReady:()->Bool = {
+		let isTwitterReady: ()->Bool = {
 
 			//  Twitter はトークンが設定されていれば準備完了とします。その有効性は判定していません。
 			return self.twitterToken != nil
@@ -46,11 +46,11 @@ extension AccountSetting {
 		
 		if authorization != nil {
 
-			return .Authorized
+			return .authorized
 		}
 		else {
 			
-			return .NotAuthorized
+			return .notAuthorized
 		}
 	}
 }

@@ -70,34 +70,13 @@ final class Settings {
 		
 		switch _store.twitter.kind {
 			
-//		case .OSAccount:
-//			loadTwitterAccountAsAccount()
-			
-		case .OAuthToken:
+		case .oAuthToken:
 			loadTwitterAccountAsToken()
 			
-//		case .Unknown:
 		case .notAuthorized:
 			loadTwitterAccountDefault()
 		}
 	}
-	
-//	private func loadTwitterAccountAsAccount() {
-//
-//		NSLog("🐋 Loading Twitter Account as OS Account.")
-//
-//		let identifier = _store.twitter.identifier
-//
-//		if let account = TwitterController.Account(identifier: identifier) {
-//
-//			NSLog("Twitter account which authenticated by OS restored from data store. (\(account.username))")
-//			self.account.twitterAccount = account
-//		}
-//		else {
-//
-//			NSLog("Twitter account which authenticated by OS restored from data store but the account is not exists. (\(identifier))")
-//		}
-//	}
 	
 	private func loadTwitterAccountAsToken() {
 		
@@ -106,7 +85,6 @@ final class Settings {
 		let tokenScreenName = _store.twitter.tokenScreenName
 		let tokenUserId = _store.twitter.tokenUserId
 		
-//		let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: tokenScreenName)
 		let token = ESTwitter.Token(key: tokenKey, secret: tokenSecret, userId: tokenUserId, screenName: tokenScreenName)
 		
 		NSLog("Twitter account which authenticated by OAuth restored from data store. (\(token.screenName))")
@@ -126,7 +104,7 @@ final class Settings {
 		
 		if let token = account.twitterToken {
 
-			_store.twitter.kind = .OAuthToken
+			_store.twitter.kind = .oAuthToken
 			_store.twitter.identifier = ""
 			_store.twitter.token = token.key
 			_store.twitter.tokenSecret = token.secret
@@ -154,7 +132,7 @@ final class Settings {
 
 		NSLog("Gist account information restored from data store. (\(account.username ?? "(null)"))")
 		
-		Authorization.GistAuthorizationStateDidChangeNotification(isValid: account.authorizationState == .Authorized, username: self.account.username).post()
+		Authorization.GistAuthorizationStateDidChangeNotification(isValid: account.authorizationState == .authorized, username: self.account.username).post()
 	}
 
 	func saveGistAccount() {

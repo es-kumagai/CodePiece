@@ -17,7 +17,7 @@ final class URLSchemeManager {
 	let schemes: [URLScheme.Type] = [ GistScheme.self, SwifterScheme.self ]
 	
 	init() {
-		self.eventManager.setEventHandler(self, andSelector: #selector(URLSchemeManager.handleURLEvent(event:withReply:)), forEventClass: self.eventClass, andEventID: eventID)
+		eventManager.setEventHandler(self, andSelector: #selector(URLSchemeManager.handleURLEvent(event:withReply:)), forEventClass: eventClass, andEventID: eventID)
 	}
 	
 	deinit {

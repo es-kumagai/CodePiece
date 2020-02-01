@@ -17,13 +17,13 @@ extension StatusImageView.Status {
 		switch reachabilityState {
 			
 		case .viaWiFi:
-			self = .Available
+			self = .available
 			
 		case .viaCellular:
-			self = .Available
+			self = .available
 			
 		case .unreachable:
-			self = .Unavailable
+			self = .unavailable
 		}
 	}
 }

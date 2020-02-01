@@ -183,7 +183,7 @@ extension DataStore {
 
 			case notAuthorized = ""
 //			case OSAccount = "account"
-			case OAuthToken = "token"
+			case oAuthToken = "token"
 		}
 		
 		var kind: Kind
@@ -295,12 +295,12 @@ extension DataStore {
 		
 		private func archiveAuthorizationData() -> Data? {
 
-			guard !self.authInfo.noData else {
+			guard !authInfo.noData else {
 
 				return nil
 			}
 			
-			return NSKeyedArchiver.archivedData(withRootObject: self.authInfo)
+			return NSKeyedArchiver.archivedData(withRootObject: authInfo)
 		}
 	}
 }

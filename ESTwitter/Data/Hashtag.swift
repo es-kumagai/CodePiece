@@ -97,9 +97,9 @@ extension Hashtag {
 		return self.value.isEmpty
 	}
 	
-	public var url: Foundation.URL {
+	public var url: URL {
 		
-		return NSURL(scheme: "https", host: "twitter.com", path: "/hashtag/\(valueWithoutPrefix)?f=tweets")! as Foundation.URL
+		return NSURL(scheme: "https", host: "twitter.com", path: "/hashtag/\(valueWithoutPrefix)?f=tweets")! as URL
 	}
 }
 

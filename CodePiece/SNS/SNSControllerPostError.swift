@@ -85,16 +85,16 @@ extension SNSController.PostError : CustomStringConvertible {
 			
 			switch passedStage {
 				
-			case .Initialized:
+			case .initialized:
 				return ""
 
-			case .PostToGists, .CaptureGists:
+			case .postToGists, .captureGists:
 				return "Posted gist, but following error occurred: "
 
-			case .PostProcessToTwitter, .PostToTwitterMedia:
+			case .postProcessToTwitter, .postToTwitterMedia:
 				return "Posted gist, but following error occurred: "
 
-			case .PostToTwitterStatus, .Posted:
+			case .postToTwitterStatus, .posted:
 				return "All items posted completely, but following error occurred: "
 			}
 		}

@@ -9,7 +9,7 @@
 import Foundation
 import Swifter
 
-public func handle(openUrl url: Foundation.URL) {
+public func handle(openUrl url: URL) {
 	
 	Swifter.handleOpenURL(url)
 }

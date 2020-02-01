@@ -12,14 +12,14 @@ import Cocoa
 @IBDesignable final class StatusImageView: NSImageView {
 
 	private let StatusCodingKey = "StatusImageViewStatusCoding"
-	private let StatusDefault = Status.None
+	private let StatusDefault = Status.none
 	
 	@objc public enum Status : Int {
 
-		case None
-		case Available
-		case PartiallyAvailable
-		case Unavailable
+		case none
+		case available
+		case partiallyAvailable
+		case unavailable
 		
 		var image: NSImage {
 			
@@ -78,16 +78,16 @@ extension NSImage {
 		
 		switch status {
 			
-		case .None:
+		case .none:
 			self.init(named: "NSStatusNone")!
 			
-		case .Available:
+		case .available:
 			self.init(named: "NSStatusAvailable")!
 
-		case .PartiallyAvailable:
+		case .partiallyAvailable:
 			self.init(named: "NSStatusPartiallyAvailable")!
 
-		case .Unavailable:
+		case .unavailable:
 			self.init(named: "NSStatusUnavailable")!
 		}
 	}

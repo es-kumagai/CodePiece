@@ -10,10 +10,10 @@ extension SNSController {
 
 	enum AuthenticationError : Error {
 		
-		case CredentialsNotVerified
-		case NotAuthorized(service: Service)
-		case NotReady(service: Service, description: String)
-		case InvalidAccount(service: Service, reason: String)
+		case credentialsNotVerified
+		case notAuthorized(service: Service)
+		case notReady(service: Service, description: String)
+		case invalidAccount(service: Service, reason: String)
 	}
 }
 
@@ -23,16 +23,16 @@ extension SNSController.AuthenticationError : CustomStringConvertible {
 		
 		switch self {
 			
-		case .CredentialsNotVerified:
+		case .credentialsNotVerified:
 			return "Credentials not verified."
 			
-		case .NotAuthorized(let service):
+		case .notAuthorized(let service):
 			return "\(service) is not authorized."
 			
-		case .NotReady(let service, let message):
+		case .notReady(let service, let message):
 			return "\(service) is not ready. \(message)"
 			
-		case .InvalidAccount(let service, let reason):
+		case .invalidAccount(let service, let reason):
 			return "Invalid \(service) Account. \(reason)"
 		}
 	}

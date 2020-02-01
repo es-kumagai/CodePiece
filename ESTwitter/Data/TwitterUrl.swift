@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct URL : RawRepresentable {
+public struct TwitterUrl : RawRepresentable {
 	
 	public var rawValue: String
 	
@@ -18,7 +18,7 @@ public struct URL : RawRepresentable {
 	}
 }
 
-extension URL : Decodable {
+extension TwitterUrl : Decodable {
 	
 	public init(from decoder: Decoder) throws {
 		
@@ -26,15 +26,15 @@ extension URL : Decodable {
 	}
 }
 
-extension URL {
+extension TwitterUrl {
 	
-	public var url: Foundation.URL? {
+	public var url: URL? {
 		
-		return Foundation.URL(string: self.rawValue)
+		return URL(string: rawValue)
 	}
 }
 
-extension URL : CustomStringConvertible {
+extension TwitterUrl : CustomStringConvertible {
 	
 	public var description:String {
 		

@@ -19,7 +19,7 @@ final class SwifterScheme : URLScheme {
 	
 	static let host = "twitter"
 	
-	static func action(url: Foundation.URL) {
+	static func action(url: URL) {
 		
 		ESTwitter.handle(openUrl: url)
 	}

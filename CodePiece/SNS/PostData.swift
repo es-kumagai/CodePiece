@@ -32,7 +32,7 @@ final class PostDataContainer {
 
 	var data: PostData
 	
-	private(set) var stage = PostStage.Initialized
+	private(set) var stage = PostStage.initialized
 	private(set) var gistsState = GistsState()
 	private(set) var twitterState = TwitterState()
 	private(set) var errors: [SNSController.PostError] = []
@@ -55,13 +55,13 @@ final class PostDataContainer {
 
 	enum PostStage : CaseIterable {
 		
-		case Initialized
-		case PostToGists
-		case CaptureGists
-		case PostProcessToTwitter
-		case PostToTwitterMedia
-		case PostToTwitterStatus
-		case Posted
+		case initialized
+		case postToGists
+		case captureGists
+		case postProcessToTwitter
+		case postToTwitterMedia
+		case postToTwitterStatus
+		case posted
 	}
 }
 
@@ -81,32 +81,32 @@ extension PostDataContainer {
 		
 		switch stage {
 			
-		case .Initialized:
-			stage = (hasCode ? .PostToGists : .PostProcessToTwitter)
+		case .initialized:
+			stage = (hasCode ? .postToGists : .postProcessToTwitter)
 			
-		case .PostToGists:
-			stage = .CaptureGists
+		case .postToGists:
+			stage = .captureGists
 			
-		case .CaptureGists:
-			stage = .PostProcessToTwitter
+		case .captureGists:
+			stage = .postProcessToTwitter
 			
-		case .PostProcessToTwitter:
-			stage = (hasGist ? .PostToTwitterMedia : .PostToTwitterStatus)
+		case .postProcessToTwitter:
+			stage = (hasGist ? .postToTwitterMedia : .postToTwitterStatus)
 			
-		case .PostToTwitterMedia:
-			stage = .PostToTwitterStatus
+		case .postToTwitterMedia:
+			stage = .postToTwitterStatus
 			
-		case .PostToTwitterStatus:
-			stage = .Posted
+		case .postToTwitterStatus:
+			stage = .posted
 			
-		case .Posted:
+		case .posted:
 			break
 		}
 	}
 	
 	var posted: Bool {
 	
-		if case .Posted = stage {
+		if case .posted = stage {
 			
 			return true
 		}

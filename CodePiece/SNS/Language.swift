@@ -11,15 +11,15 @@ import ESTwitter
 
 extension PopularLanguage {
 	
-	var hashtag:ESTwitter.Hashtag {
+	var hashtag: Hashtag {
 
-		return self.language.hashtag
+		return language.hashtag
 	}
 }
 
 extension Language {
 
-	var hashtag:ESTwitter.Hashtag {
+	var hashtag: Hashtag {
 		
 		switch self {
 			

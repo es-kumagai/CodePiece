@@ -212,7 +212,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 				switch container.latestError {
 
 				case .some(let error):
-					container.setError(.postError(error.descriptionWithoutState, state: .occurred(on: .Posted)))
+					container.setError(.postError(error.descriptionWithoutState, state: .occurred(on: .posted)))
 					callback(.success(container))
 
 				case .none:

@@ -64,7 +64,7 @@ extension API {
 		return Swifter(consumerKey: consumerKey, consumerSecret: tokenSecret, oauthToken: oToken, oauthTokenSecret: oTokenSecret)
 	}
 	
-	public func authorize(withCallbackUrl url: Foundation.URL, handler: @escaping (AuthorizationResult) -> Void) {
+	public func authorize(withCallbackUrl url: URL, handler: @escaping (AuthorizationResult) -> Void) {
 		
 		guard let api = rawApi else {
 			

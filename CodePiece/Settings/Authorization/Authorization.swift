@@ -14,17 +14,17 @@ import OAuth2
 
 enum AuthorizationState {
 	
-	case Authorized
-	case NotAuthorized
+	case authorized
+	case notAuthorized
 	
 	var isValid:Bool {
 		
 		switch self {
 			
-		case .Authorized:
+		case .authorized:
 			return true
 			
-		case .NotAuthorized:
+		case .notAuthorized:
 			return false
 		}
 	}
@@ -49,41 +49,26 @@ final class Authorization : AlertDisplayable {
 
 	final class Twitter {
 
-//		var swifter: Swifter
-//		fileprivate(set) var pinRequesting: Bool
-
 		init() {
-
-//			swifter = Swifter(consumerKey: APIKeys.Twitter.consumerKey, consumerSecret: APIKeys.Twitter.consumerSecret)
 		}
 	}
 
 	static var gist = Gist()
-	static var twitter = Twitter()
+//	static var twitter = Twitter()
 	
 	enum AuthorizationResult {
 
 		case Created
 		case Failed(Error)
-//		case PinRequired
 	}
 }
 
 // MARK: Twitter
 
-//extension Authorization {
-//
-//	static var isTwitterPinRequesting: Bool {
-//
-//		return twitter.pinRequesting
-//	}
-//}
-
 extension Authorization.AuthorizationResult {
 
 	enum Error : Swift.Error {
 
-//		case twitterError(STTwitterTwitterErrorCode)
 		case message(String)
 	}
 }
@@ -93,9 +78,6 @@ extension Authorization.AuthorizationResult.Error {
 	init(_ error: NSError) {
 
 		switch error.domain {
-
-//		case kSTTwitterTwitterErrorDomain:
-//			self = .twitterError(STTwitterTwitterErrorCode(rawValue: error.code)!)
 
 		default:
 			self = .message(error.localizedDescription)
@@ -108,9 +90,6 @@ extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
 	var description: String {
 
 		switch self {
-
-//		case .twitterError(let code):
-//			return code.description
 
 		case .message(let message):
 			return message
@@ -183,78 +162,6 @@ extension Authorization {
 		NSApp.settings.resetGistAccount(saveFinally: true)
 		completion(.Failed(error))
 	}
-
-//	static func authorizationWithTwitter(pin: String, completion:(AuthorizationResult)->Void) {
-//
-//		let oauth = self.twitter.oauth
-//
-//		let successHandler = { (token: String!, tokenSecret: String!, userId: String!, screenName: String!) in
-//
-//			NSLog("Twitter OAuth authentication did end successfully.")
-//			DebugTime.print(" with: \(token), \(tokenSecret), \(userId), \(screenName)")
-//
-//			let account = TwitterController.Account(token: token, tokenSecret: tokenSecret, screenName: screenName)
-//
-//			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
-//
-//			twitter.pinRequesting = false
-//			_twitterAuthorizationCreateSuccessfully(completion: completion)
-//		}
-//
-//		let errorHandler = { (error: NSError!) in
-//
-//			print("Twitter authorization went wrong: \(error).")
-//
-//			_twitterAuthorizationFailed(error: .message("Check entered PIN code and try again."), completion: completion)
-//		}
-//
-//		oauth.postAccessTokenRequestWithPIN(pin, successBlock: successHandler, errorBlock: errorHandler)
-//	}
-	
-//	#warning("TwitterController が担えば良さそう。")
-//	static func authorizationWithTwitter(completion: @escaping (AuthorizationResult) -> Void) {
-//
-//		let callback = ""
-//		
-//		func successHandler(accessToken: Credential.OAuthAccessToken) {
-//
-//			let account = TwitterController.Account(token: accessToken.key, tokenSecret: accessToken.secret, screenName: accessToken.screenName!)
-//		
-//			DebugTime.print("📮 Passed verify-credentials #9")
-//
-//			TwitterAccountSelectorController.TwitterAccountSelectorDidChangeNotification(account: account).post()
-//			Authorization.TwitterAuthorizationStateDidChangeNotification(isValid: true, username: accessToken.screenName).post()
-//
-//			
-////			twitter.pinRequesting = false
-//			completion(.Created)
-//		}
-//		
-//		func errorHandler(error: Error) {
-//
-////			twitter.pinRequesting = false
-//
-//			print("Twitter authorization went wrong: \(error).")
-//			completion(.Failed(.message(error.localizedDescription)))
-//		}
-//
-//		NSApp.twitterController.authorize { result in
-//			
-//			switch result {
-//				
-//			case .success(let (.some(accessToken), name, id, response)):
-//				DebugTime.print(" with: \(accessToken), \(id), \(name), \(response)")
-//				successHandler(accessToken: accessToken)
-//
-//			case .success(let (.none, name, id, response)):
-//				DebugTime.print(" Failed to get an AccessToken for: \(id), \(name), \(response)")
-//				errorHandler(error: AuthorizationResult.Error.message("Failed to get an Access Token for \(name)"))
-//
-//			case .failure(let error):
-//				errorHandler(error: error)
-//			}
-//		}
-//	}
 	
 	// FIXME: Gists の認証処理は GistController が担えば良さそうです。Twitter はそうしています。
 	static func authorizationWithGist(completion: @escaping (AuthorizationResult) -> Void) {

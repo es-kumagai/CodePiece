@@ -12,17 +12,17 @@ import Ocean
 @objcMembers
 final class MenuController : NSObject {
 
-	var application:NSApplication {
+	var application: NSApplication {
 		
 		return NSApp
 	}
 	
-	var mainViewController:MainViewController? {
+	var mainViewController: MainViewController? {
 		
 		return application.baseViewController?.mainViewController
 	}
 	
-	var timelineViewController:TimelineViewController? {
+	var timelineViewController: TimelineViewController? {
 		
 		return application.baseViewController?.timelineViewController
 	}
@@ -39,68 +39,68 @@ final class MenuController : NSObject {
 
 	var isMainViewControllerActive: Bool {
 	
-		return self.mainViewController != nil
+		return mainViewController != nil
 	}
 	
-	var canPostToSNS:Bool {
+	var canPostToSNS: Bool {
 		
-		return self.mainViewController?.canPost ?? false
+		return mainViewController?.canPost ?? false
 	}
 	
-	@IBAction func showPreferences(_ sender:NSMenuItem?) {
+	@IBAction func showPreferences(_ sender: NSMenuItem?) {
 		
 		NSApp.showPreferencesWindow()
 	}
 
-	@IBAction func showWelcomeBoard(_ sender:NSMenuItem?) {
+	@IBAction func showWelcomeBoard(_ sender: NSMenuItem?) {
 		
 		NSApp.showWelcomeBoard()
 	}
 	
-	@IBAction func moveFocusToCodeArea(_ sender:NSObject?) {
+	@IBAction func moveFocusToCodeArea(_ sender: NSObject?) {
 		
-		self.mainViewController?.focusToCodeArea()
+		mainViewController?.focusToCodeArea()
 	}
 	
-	@IBAction func moveFocusToDescription(_ sender:NSObject?) {
+	@IBAction func moveFocusToDescription(_ sender: NSObject?) {
 		
-		self.mainViewController?.focusToDescription()
+		mainViewController?.focusToDescription()
 	}
 	
-	@IBAction func moveFocusToHashtag(_ sender:NSObject?) {
+	@IBAction func moveFocusToHashtag(_ sender: NSObject?) {
 		
-		self.mainViewController?.focusToHashtag()
+		mainViewController?.focusToHashtag()
 	}
 	
-	@IBAction func moveFocusToLanguage(_ sender:NSObject?) {
+	@IBAction func moveFocusToLanguage(_ sender: NSObject?) {
 		
-		self.mainViewController?.focusToLanguage()
+		mainViewController?.focusToLanguage()
 	}
 	
-	@IBAction func postToSNS(_ sender:NSMenuItem?) {
+	@IBAction func postToSNS(_ sender: NSMenuItem?) {
 		
-		self.mainViewController?.postToSNS()
+		mainViewController?.postToSNS()
 	}
 	
-	@IBAction func clearTweetAndDescription(_ sender:NSMenuItem?) {
+	@IBAction func clearTweetAndDescription(_ sender: NSMenuItem?) {
 		
-		self.mainViewController?.clearDescriptionText()
+		mainViewController?.clearDescriptionText()
 	}
 	
 	@IBAction func clearCodeAndDescription(_ sender: NSMenuItem?) {
 	
-		self.mainViewController?.clearCodeText()
-		self.mainViewController?.clearDescriptionText()
+		mainViewController?.clearCodeText()
+		mainViewController?.clearDescriptionText()
 	}
 	
-	@IBAction func clearHashtag(_ sender:NSMenuItem?) {
+	@IBAction func clearHashtag(_ sender: NSMenuItem?) {
 		
-		self.mainViewController?.clearHashtags()
+		mainViewController?.clearHashtags()
 	}
 	
-	@IBAction func clearCode(_ sender:NSMenuItem?) {
+	@IBAction func clearCode(_ sender: NSMenuItem?) {
 		
-		self.mainViewController?.clearCodeText()
+		mainViewController?.clearCodeText()
 	}
 	
 	var hasReplyingToStatusID: Bool {
@@ -115,31 +115,31 @@ final class MenuController : NSObject {
 	
 	var canOpenBrowserWithSearchHashtagPage:Bool {
 	
-		return self.mainViewController?.canOpenBrowserWithSearchHashtagPage ?? false
+		return mainViewController?.canOpenBrowserWithSearchHashtagPage ?? false
 	}
 	
-	@IBAction func openBrowserWithSearchHashtagPage(_ sender:NSMenuItem?) {
+	@IBAction func openBrowserWithSearchHashtagPage(_ sender: NSMenuItem?) {
 		
 		self.mainViewController?.openBrowserWithSearchHashtagPage()
 	}
 	
 	var isTimelineActive: Bool {
 	
-		return self.timelineViewController?.isTimelineActive ?? false
+		return timelineViewController?.isTimelineActive ?? false
 	}
 	
 	@IBAction func reloadTimeline(_ sender: NSMenuItem?) {
 		
-		self.timelineViewController?.reloadTimeline()
+		timelineViewController?.reloadTimeline()
 	}
 	
 	var canOpenBrowserWithCurrentTwitterStatus:Bool {
 		
-		return self.mainViewController?.canOpenBrowserWithCurrentTwitterStatus ?? false
+		return mainViewController?.canOpenBrowserWithCurrentTwitterStatus ?? false
 	}
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {
 		
-		self.mainViewController?.openBrowserWithCurrentTwitterStatus()
+		mainViewController?.openBrowserWithCurrentTwitterStatus()
 	}
 }
