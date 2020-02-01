@@ -11,12 +11,6 @@ import ESTwitter
 
 private let jsonDecoder = JSONDecoder()
 
-enum PostResult {
-	
-	case success(PostDataContainer)
-	case failure(PostDataContainer)
-}
-
 struct PostData {
 	
 	var code: String?
@@ -41,7 +35,7 @@ final class PostDataContainer {
 	private(set) var stage = PostStage.Initialized
 	private(set) var gistsState = GistsState()
 	private(set) var twitterState = TwitterState()
-	private(set) var error: SNSController.PostError? = nil
+	private(set) var errors: [SNSController.PostError] = []
 	
 	init(_ data: PostData) {
 		
@@ -59,12 +53,12 @@ final class PostDataContainer {
 		var gist: ESGists.Gist? = nil
 	}
 
-	enum PostStage {
+	enum PostStage : CaseIterable {
 		
 		case Initialized
 		case PostToGists
 		case CaptureGists
-		case PostToTwitter
+		case PostProcessToTwitter
 		case PostToTwitterMedia
 		case PostToTwitterStatus
 		case Posted
@@ -75,35 +69,35 @@ extension PostDataContainer {
 	
 	func postedToTwitter(postedStatus status: Status) {
 		
-		self.twitterState.postedStatus = status
+		twitterState.postedStatus = status
 	}
 	
 	func postedToGist(gist: ESGists.Gist) {
 		
-		self.gistsState.gist = gist
+		gistsState.gist = gist
 	}
 	
 	func proceedToNextStage() {
 		
-		switch self.stage {
+		switch stage {
 			
 		case .Initialized:
-			self.stage = (self.hasCode ? .PostToGists : .PostToTwitter)
+			stage = (hasCode ? .PostToGists : .PostProcessToTwitter)
 			
 		case .PostToGists:
-			self.stage = .CaptureGists
+			stage = .CaptureGists
 			
 		case .CaptureGists:
-			self.stage = .PostToTwitter
+			stage = .PostProcessToTwitter
 			
-		case .PostToTwitter:
-			self.stage = (self.hasGist ? .PostToTwitterMedia : .PostToTwitterStatus)
+		case .PostProcessToTwitter:
+			stage = (hasGist ? .PostToTwitterMedia : .PostToTwitterStatus)
 			
 		case .PostToTwitterMedia:
-			self.stage = .PostToTwitterStatus
+			stage = .PostToTwitterStatus
 			
 		case .PostToTwitterStatus:
-			self.stage = .Posted
+			stage = .Posted
 			
 		case .Posted:
 			break
@@ -112,7 +106,7 @@ extension PostDataContainer {
 	
 	var posted: Bool {
 	
-		if case .Posted = self.stage {
+		if case .Posted = stage {
 			
 			return true
 		}
@@ -124,27 +118,32 @@ extension PostDataContainer {
 	
 	var hasError: Bool {
 	
-		return self.error != nil
+		return errors.count > 0
 	}
 	
 	var hasCode: Bool {
 		
-		return self.data.code != nil
+		return data.code != nil
 	}
 	
 	var hasMediaIDs: Bool {
 		
-		return !self.twitterState.mediaIDs.isEmpty
+		return !twitterState.mediaIDs.isEmpty
 	}
 	
-	func setError(error: SNSController.PostError) {
-	
-		self.error = error
-	}
-	
-	func resetError() {
+	var latestError: SNSController.PostError? {
 		
-		self.error = nil
+		return errors.last
+	}
+	
+	func setError(_ error: SNSController.PostError) {
+	
+		errors.append(error)
+	}
+	
+	func clearErrors() {
+		
+		errors.removeAll()
 	}
 	
 	var twitterReplyToStatusID: String? {
@@ -159,7 +158,7 @@ extension PostDataContainer {
 	
 	func setTwitterMediaIDs(_ mediaIDs: String...) {
 	
-		self.setTwitterMediaIDs(mediaIDs: mediaIDs)
+		setTwitterMediaIDs(mediaIDs: mediaIDs)
 	}
 	
 	func effectiveHashtags(withAppTag: Bool, withLangTag: Bool) -> [Hashtag] {

@@ -622,7 +622,7 @@ extension TwitterController : LatestTweetManageable {
 
 extension TwitterController {
 		
-	func post(image: NSImage, container: PostDataContainer, additionalOwners: API.UsersTag? = nil, handler: @escaping (PostResult) -> Void) {
+	func post(image: NSImage, container: PostDataContainer, additionalOwners: API.UsersTag? = nil, handler: @escaping (SNSController.PostResult) -> Void) {
 		
 		let rawData = image.tiffRepresentation!
 		let bitmap = NSBitmapImageRep(data: rawData)!
@@ -631,7 +631,7 @@ extension TwitterController {
 		post(media: mediaData, container: container, additionalOwners: additionalOwners, handler: handler)
 	}
 	
-	func post(media data: Data, container: PostDataContainer, additionalOwners: API.UsersTag? = nil, handler: @escaping (PostResult) -> Void) {
+	func post(media data: Data, container: PostDataContainer, additionalOwners: API.UsersTag? = nil, handler: @escaping (SNSController.PostResult) -> Void) {
 		
 		func success(_ mediaIds: [API.MediaId]) {
 			
@@ -644,9 +644,11 @@ extension TwitterController {
 		func failure(_ error: PostError) {
 			
 			DebugTime.print("📮 Failed to updload a thumbnail media ... #3.3.3.2.2")
-			container.setError(error: .FailedToUploadMedia(reason: error.localizedDescription))
 			
-			handler(.failure(container))
+			let error = SNSController.PostError.failedToUploadMedia(reason: "\(error)", state: .postMediaDirectly)
+
+			container.setError(error)
+			handler(.failure(error))
 		}
 		
 
@@ -672,7 +674,7 @@ extension TwitterController {
 		}
 	}
 	
-	func post(statusUsing container: PostDataContainer, handler: @escaping (PostResult) -> Void) {
+	func post(statusUsing container: PostDataContainer, handler: @escaping (SNSController.PostResult) -> Void) {
 	
 		func success(_ status: Status) {
 			
@@ -688,9 +690,11 @@ extension TwitterController {
 		func failure(_ error: PostError) {
 			
 			DebugTime.print("📮 Failed to post a status with failure (\(error)) ... #3.3.2")
-			container.setError(error: .twitterError(error))
+			
+			let error = SNSController.PostError.twitterError(error, state: .postTweetDirectly)
+			container.setError(error)
 
-			handler(.failure(container))
+			handler(.failure(error))
 		}
 		
 		DebugTime.print("📮 Try to post a status by Twitter ... #3.3")

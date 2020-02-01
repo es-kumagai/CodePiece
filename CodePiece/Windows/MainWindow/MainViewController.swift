@@ -193,13 +193,13 @@ final class MainViewController: NSViewController, NotificationObservable {
 			case .success(let container):
 				PostCompletelyNotification(container: container).post()
 				
-			case .failure(let container):
-				PostFailedNotification(container: container).post()
+			case .failure(let error):
+				PostFailedNotification(error: error).post()
 			}
 		}
 	}
 	
-	func post(callback: @escaping (PostResult) -> Void) {
+	func post(callback: @escaping (SNSController.PostResult) -> Void) {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		
@@ -209,11 +209,26 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			if container.posted {
 				
-				callback(PostResult.success(container))
+				switch container.latestError {
+
+				case .some(let error):
+					container.setError(.postError(error.descriptionWithoutState, state: .occurred(on: .Posted)))
+					callback(.success(container))
+
+				case .none:
+					callback(.success(container))
+				}
 			}
 			else {
 				
-				callback(PostResult.failure(container))
+				switch container.latestError {
+					
+				case .some(let error):
+					callback(.failure(error))
+					
+				case .none:
+					callback(.failure(.systemError("Unknown error.", state: .unidentifiable)))
+				}
 			}
 		}
 	}
@@ -257,16 +272,23 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
 			
+			let container = notification.container
+			
 			self.clearContents()
-			self.latestTweet = notification.container.twitterState.postedStatus
+			self.latestTweet = container.twitterState.postedStatus
 			self.nextReplyToType = .LatestTweet
+			
+			if let error = container.latestError {
+				
+				self.showErrorAlert(withTitle: "Finish posting, but ...", message: "\(error)")
+			}
 			
 			NSLog("Posted completely \(notification.container.twitterState.postedStatus)")
 		}
 		
 		observe(notification: PostFailedNotification.self) { [unowned self] notification in
 			
-			self.showErrorAlert(withTitle: "Cannot post", message: notification.container.error!.description)
+			self.showErrorAlert(withTitle: "Failed to post", message: "\(notification.error)")
 		}
 		
 		observe(notification: LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in

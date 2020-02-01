@@ -53,11 +53,11 @@ extension MainViewController {
 	
 	final class PostFailedNotification : NotificationProtocol {
 		
-		var container: PostDataContainer
+		var error: SNSController.PostError
 		
-		init(container: PostDataContainer) {
+		init(error: SNSController.PostError) {
 			
-			self.container = container
+			self.error = error
 		}
 	}
 }

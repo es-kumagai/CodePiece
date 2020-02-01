@@ -14,14 +14,12 @@ final class GistsController : PostController, AlertDisplayable {
 
 	let filename = "CodePiece"
 
-	typealias PostResult = Result<PostDataContainer, SNSController.PostError>
-	
-	var canPost:Bool {
+	var canPost: Bool {
 	
 		return NSApp.settings.account.authorizationState.isValid
 	}
 	
-	func post(container:PostDataContainer, completed: @escaping (PostResult)->Void) throws {
+	func post(container: PostDataContainer, completed: @escaping (SNSController.PostResult)->Void) throws {
 
 		guard let authorization = NSApp.settings.account.authorization else {
 			
@@ -50,11 +48,11 @@ final class GistsController : PostController, AlertDisplayable {
 				container.postedToGist(gist: gist)
 				
 				NSLog("A Gist posted successfully. \(gist)")
-				completed(PostResult.success(container))
+				completed(.success(container))
 
 			case .failure(let error):
 
-				completed(PostResult.failure(.Description("Failed to post a gist. \(error)")))
+				completed(.failure(.description("Failed to post a gist. \(error)", state: .postGistDirectly)))
 			}
 		}
 	}
