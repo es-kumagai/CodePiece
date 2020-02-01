@@ -24,9 +24,9 @@ final class WebCaptureController {
 		self.requests = [Request]()
 	}
 	
-	func capture<CaptureInfo:CaptureInfoType>(url: String, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, completion: @escaping CaptureCompletionHandler) {
+	func capture<CaptureInfo:CaptureInfoType>(url: String, of sourceFilename: String, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, completion: @escaping CaptureCompletionHandler) {
 	
-		post(Request(url: url, owner: self, clientSize: size, captureInfo: captureInfo, handler: completion))
+		post(Request(url: url, sourceFilename: sourceFilename, owner: self, clientSize: size, captureInfo: captureInfo, handler: completion))
 	}
 	
 	private func post(_ request: Request) {
@@ -48,16 +48,18 @@ extension WebCaptureController {
 
 		var captureInfo: CaptureInfoType
 		var url: String
+		var sourceFilename: String
 		var completionHandler: WebCaptureController.CaptureCompletionHandler
 		
 		var view: WKWebView
 		
-		init<CaptureInfo:CaptureInfoType>(url: String, owner: WebCaptureController, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, handler: @escaping WebCaptureController.CaptureCompletionHandler) {
+		init<CaptureInfo:CaptureInfoType>(url: String, sourceFilename: String, owner: WebCaptureController, clientSize size: CGSize? = nil, captureInfo: CaptureInfo, handler: @escaping WebCaptureController.CaptureCompletionHandler) {
 			
 			self.owner = owner
 			
 			self.captureInfo = captureInfo
 			self.url = url
+			self.sourceFilename = sourceFilename
 			self.completionHandler = handler
 			
 			let makeView:() -> WKWebView = {
@@ -116,10 +118,19 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 		
 		DispatchQueue.main.async { [unowned self] in
 
+			var containerNodeId: String {
+				
+				let targetName = self.sourceFilename
+					.replacingOccurrences(of: ".", with: "-")
+					.lowercased()
+				
+				return "file-\(targetName)"
+			}
+			
 			let applyingStyleScript = """
 				const tableNode = document.getElementsByTagName('table')[0];
 				tableNode.style.tabSize = '4';
-				const containerNode = document.getElementById('file-codepiece-swift');
+				const containerNode = document.getElementById('\(containerNodeId)');
 				const searchNodes = containerNode.getElementsByTagName('div');
 
 				for (let i = 0; i != searchNodes.length; ++i) {
@@ -151,40 +162,63 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 				[x, y, width, height, bodyWidth, bodyHeight];
 				"""
 			
-			webView.evaluateJavaScript("\(applyingStyleScript)\n\(gettingBoundsScript)") { object, error in
+			webView.evaluate(javaScript: applyingStyleScript) { result in
+				
+				func finishEvaluating(with error: Error) {
+					
+					NSLog("Script evaluation error: \(error)")
+					self.fulfillRequest(for: nil)
+				}
+				
+				if case let .failure(error) = result {
 
-				guard let object = object as? Array<Int> else {
-					
-					return self.fulfillRequest(for: nil)
+					finishEvaluating(with: error)
 				}
 				
-				let x = object[0]
-				let y = object[1]
-				let width = object[2]
-				let height = object[3]
-				let bodyWidth = object[4]
-				let bodyHeight = object[5]
-				
-				let rect = NSRect(x: x, y: y, width: width, height: height)
-				
-				self.view.frame = NSRect(x: 0, y: 0, width: bodyWidth, height: bodyHeight)
-				
-				print(rect)
-				
-				let configuration = instanceApplyingExpression(with: WKSnapshotConfiguration()) { settings in
+				webView.evaluate(javaScript: gettingBoundsScript) { result in
 					
-					settings.rect = rect
-				}
-				
-				webView.takeSnapshot(with: configuration) { image, error in
-					
-					guard let image = image else {
+					do {
 						
-						self.fulfillRequest(for: nil)
-						return
+						let object = try result.get()
+						
+						guard let results = object as? Array<Int> else {
+							
+							return self.fulfillRequest(for: nil)
+						}
+						
+						let x = results[0]
+						let y = results[1]
+						let width = results[2]
+						let height = results[3]
+						let bodyWidth = results[4]
+						let bodyHeight = results[5]
+						
+						let rect = NSRect(x: x, y: y, width: width, height: height)
+						
+						self.view.frame = NSRect(x: 0, y: 0, width: bodyWidth, height: bodyHeight)
+						
+						print(rect)
+						
+						let configuration = instanceApplyingExpression(with: WKSnapshotConfiguration()) { settings in
+							
+							settings.rect = rect
+						}
+						
+						webView.takeSnapshot(with: configuration) { image, error in
+							
+							guard let image = image else {
+								
+								self.fulfillRequest(for: nil)
+								return
+							}
+							
+							self.fulfillRequest(for: image)
+						}
 					}
-					
-					self.fulfillRequest(for: image)
+					catch {
+						
+						finishEvaluating(with: error)
+					}
 				}
 			}
 //			// TODO: 汎用性を確保するためには DOM を渡して切り取る範囲を返す機能を切り出す必要があります。

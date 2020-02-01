@@ -94,7 +94,7 @@ final class SNSController : PostController {
 			let captureInfo = LinedCaptureInfo()
 			let size = NSMakeSize(560.0, 560.0)
 			
-			NSApp.captureController.capture(url: gist.urls.htmlUrl.rawValue, clientSize: size, captureInfo: captureInfo) { image in
+			NSApp.captureController.capture(url: gist.urls.htmlUrl.rawValue, of: container.filenameForGists, clientSize: size, captureInfo: captureInfo) { image in
 				
 				DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
 				callNextStageRecursively(image)

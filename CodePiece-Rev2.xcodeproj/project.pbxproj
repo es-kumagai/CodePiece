@@ -169,6 +169,7 @@
 		B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B1F2C78923E48B89008BBCA0 /* Fonts */; };
 		B1F2C78D23E48FB4008BBCA0 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
 		B1F2C78E23E48FB4008BBCA0 /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1F2C79123E57F2D008BBCA0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F2C79023E57F2D008BBCA0 /* WebView.swift */; };
 		B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161D23D36E6C002D4571 /* OAuth2 */; };
 /* End PBXBuildFile section */
 
@@ -389,6 +390,7 @@
 		B1F2C78723E48AC3008BBCA0 /* Screenshots */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Screenshots; sourceTree = "<group>"; };
 		B1F2C78923E48B89008BBCA0 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		B1F2C78B23E48C9E008BBCA0 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
+		B1F2C79023E57F2D008BBCA0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -503,6 +505,7 @@
 				B15EE38E23CF0360005B268A /* TwitterError.swift */,
 				B15EE39023CF039C005B268A /* NSError+STTwitter.swift */,
 				B15EE1F523CE747D005B268A /* Extension.swift */,
+				B1F2C79023E57F2D008BBCA0 /* WebView.swift */,
 			);
 			path = NeedsRefactoring;
 			sourceTree = "<group>";
@@ -1210,6 +1213,7 @@
 				B15EE2A923CE7667005B268A /* TimelineTableController.swift in Sources */,
 				B15EE25D23CE7658005B268A /* TwitterStatusAttributed.swift in Sources */,
 				B15EE25923CE7658005B268A /* Language.swift in Sources */,
+				B1F2C79123E57F2D008BBCA0 /* WebView.swift in Sources */,
 				B15EE26223CE7658005B268A /* PostData.swift in Sources */,
 				B15EE20A23CE7593005B268A /* TwitterText.swift in Sources */,
 				B15EE2A223CE7667005B268A /* TimelineStatusView.swift in Sources */,
