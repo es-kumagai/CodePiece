@@ -1558,7 +1558,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 68;
+				CURRENT_PROJECT_VERSION = 69;
 				ES_MARKETING_VERSION = 2.0.0;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1588,7 +1588,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 68;
+				CURRENT_PROJECT_VERSION = 69;
 				ES_MARKETING_VERSION = 2.0.0;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
 				FRAMEWORK_SEARCH_PATHS = (
