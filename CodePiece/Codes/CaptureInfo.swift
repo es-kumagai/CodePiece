@@ -14,12 +14,14 @@ protocol CaptureInfoType {
 	var userAgent: String? { get }
 	var targetNode: (WebView, DOMDocument) -> DOMNode? { get }
 	var clientSize: NSSize { get }
+	var maxWidth: Int { get }
 }
 
 struct SimpleCaptureInfo : CaptureInfoType {
 	
 	let userAgent: String? = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4"
-	let clientSize: NSSize = NSMakeSize(560.0, 560.0)
+	let clientSize: NSSize = NSMakeSize(560, 560)
+	let maxWidth: Int = 253
 
 	var targetNode: (WebView, DOMDocument) -> DOMNode? {
 		
@@ -33,7 +35,8 @@ struct SimpleCaptureInfo : CaptureInfoType {
 struct LinedCaptureInfo : CaptureInfoType {
 	
 	let userAgent: String? = nil
-	let clientSize: NSSize = NSMakeSize(680.0, 480.0)
+	let clientSize: NSSize = NSMakeSize(680, 480)
+	let maxWidth: Int = 320
 	
 	var targetNode: (WebView, DOMDocument) -> DOMNode? {
 		

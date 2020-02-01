@@ -193,7 +193,9 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 						let bodyWidth = results[4]
 						let bodyHeight = results[5]
 						
-						let rect = NSRect(x: x, y: y, width: width, height: height)
+						let maxWidth = max(height * 2, self.captureInfo.maxWidth)
+						
+						let rect = NSRect(x: x, y: y, width: min(width, maxWidth), height: height)
 						
 						self.view.frame = NSRect(x: 0, y: 0, width: bodyWidth, height: bodyHeight)
 						
