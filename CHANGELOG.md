@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.0.1
+
+### Fixes
+
+* Applying entities more precisely in Timeline View.
+
 ## 2.0.0
 
 ### Enhancements
