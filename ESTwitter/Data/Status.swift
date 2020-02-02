@@ -87,12 +87,14 @@ extension Status {
 			return nil
 		}
 		
-		// FIXME: Twitter の Entity で使う文字数表を作る必要があります。UTF16 ではないので、今のままだと範囲を超えてしまいます。
-		let countsDiffAsUtf16 = text.map { $0.utf16.count - 1 }
+		let wordCountsByTwitterCharacter = text.twitterCharacterView.map { $0.wordCountForIndices }
+		let wordCountsByUtf16Character = text.map { $0.utf16.count }
+
+		let wordCountsDiff = zip(wordCountsByUtf16Character, wordCountsByTwitterCharacter).map { $0 - $1 }
 		
 		return entities.map { entity in
 
-			let effectiveCountsDiff = countsDiffAsUtf16[0 ..< entity.indices.startIndex]
+			let effectiveCountsDiff = wordCountsDiff[0 ..< entity.indices.startIndex]
 			let offset = effectiveCountsDiff.reduce(0, +)
 			
 			var newEntity = entity
@@ -103,7 +105,6 @@ extension Status {
 		}
 	}
 	
-	@available(macOS, deprecated: 10.15, message: "Twitter の Entity で扱う文字単位を把握できるまでは使用非推奨です。")
 	func normalizedEntities(for text: String) -> Entities? {
 
 		guard let entities = entities else {
@@ -122,24 +123,17 @@ extension Status {
 
 extension Status {
 	
-	private func applyAttribute(text: NSMutableAttributedString, urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) {
+	private func applyingAttribute(to text: String, urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) -> NSAttributedString {
 		
-		text.beginEditing()
+		var result = NSMutableAttributedString(string: text)
 		
-		defer {
-			
-			text.endEditing()
-		}
-		
-		// FIXME: ここで text プロパティーに依存して、外でそこから導出された text 引数を編集するのは適切ではない。オリジナルな String も引数で受け取るか、別の方法にする必要がある。
-		// FIXME: Twitter Entity の文字位置と macOS AttributedString の文字位置に若干の違いがあるため、把握し次第 `normalizedEntities(for: self.text)` を使って適切に処理できる必要があります。詳細は https://www.antun.net/tips/api/twitter.html に記載がありました。
-		if let entities = self.entities {
+		if let entities = normalizedEntities(for: text) {
 
 			let baseAttributes = { () -> [NSAttributedString.Key : Any] in
 
 				var results = [NSAttributedString.Key : Any]()
 
-				text.enumerateAttributes(in: NSMakeRange(0, text.length), options: []) { (attributes: [NSAttributedString.Key : Any], range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
+				result.enumerateAttributes(in: NSMakeRange(0, result.length), options: []) { (attributes: [NSAttributedString.Key : Any], range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
 
 					for (name, value) in attributes {
 
@@ -225,35 +219,57 @@ extension Status {
 			
 			for item in linkItems.sortedByIndicesDescend {
 
+				var canApplyingItem: Bool {
+					
+					let string = result.string
+					
+					return string.count >= item.range.location + item.range.length
+				}
+
 				let subtext = item.attributedTextWithBaseAttributes(baseAttributes: baseAttributes)
+
+				guard canApplyingItem else {
+
+					#warning("範囲を超えてしまう Entity があるので要改善")
+					NSLog("""
+						WARNING: Ignore applying an entity because it's range is out of bounds.
+						\tEntity text: \(item.displayText)
+						\tIndices: \(item.indices.startIndex) ..< \(item.indices.endIndex)
+						\tRange: \(item.range)
+						\tType: \(type(of: item))
+						\tTarget Text: \(result.string.prefix(50).replacingOccurrences(of: "\n", with: " "))...
+						\tTarget Text Length: \(result.length)
+						""")
+					continue
+				}
 				
-				text.replaceCharacters(in: item.range, with: subtext)
+				result.replaceCharacters(in: item.range, with: subtext)
 			}
-			
+						
 //			text.replaceCharacters(in: NSRange(location: 5, length: 4), with: NSAttributedString(string: "XX", attributes: [NSAttributedString.Key.foregroundColor : NSColor.red]))
 		}
+		
+		return result.copy() as! NSAttributedString
 	}
 
 	public func attributedText(urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) -> NSAttributedString {
 	
-		let text = NSMutableAttributedString(string: self.text)
-		
-		applyAttribute(text: text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
-		
-		return text.copy() as! NSAttributedString
+		return applyingAttribute(to: text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
 	}
 	
 	public func attributedText(urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor, customizeExpression: (NSMutableAttributedString) throws -> Void) rethrows -> NSAttributedString {
 		
-		let text = NSMutableAttributedString(string: self.text)
+		let text = applyingAttribute(to: self.text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor).mutableCopy() as! NSMutableAttributedString
+
+		text.beginEditing()
 		
-		// first, apply attributes to entire text.
-		// FIXME: このタイミングで置き換えされると、次の Entity の適用で困るので、このカスタムポイントは用意しない方が良いかもしれません。
+		defer {
+			
+			text.endEditing()
+		}
+		
 		try customizeExpression(text)
 
-		// then, apply attributes to parts of text.
-		applyAttribute(text: text, urlColor: urlColor, hashtagColor: hashtagColor, mentionColor: mentionColor)
-		
 		return text.copy() as! NSAttributedString
 	}
 }

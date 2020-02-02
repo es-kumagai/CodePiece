@@ -38,16 +38,6 @@
                ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B132D51223CD08B800690C5F"
-               BuildableName = "ESTwitterTests.xctest"
-               BlueprintName = "ESTwitterTests"
-               ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

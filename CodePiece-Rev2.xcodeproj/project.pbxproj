@@ -151,6 +151,14 @@
 		B1C34A2423E355DA0039F4E6 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C34A2323E355DA0039F4E6 /* Polygon.swift */; };
 		B1C34A2723E363660039F4E6 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C34A2623E363660039F4E6 /* Acknowledgements.plist */; };
 		B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */; };
+		B1CE4CD323E6F24C003D1399 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE4CD223E6F24C003D1399 /* Character.swift */; };
+		B1CE4CD523E6F605003D1399 /* CharacterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE4CD423E6F605003D1399 /* CharacterTests.swift */; };
+		B1CE4CE823E6F83A003D1399 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE4CE723E6F83A003D1399 /* AppDelegate.swift */; };
+		B1CE4CEA23E6F83A003D1399 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE4CE923E6F83A003D1399 /* ViewController.swift */; };
+		B1CE4CEC23E6F83B003D1399 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1CE4CEB23E6F83B003D1399 /* Assets.xcassets */; };
+		B1CE4CEF23E6F83B003D1399 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1CE4CED23E6F83B003D1399 /* Main.storyboard */; };
+		B1CE4D0523E6F88C003D1399 /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
+		B1CE4D0623E6F88C003D1399 /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
 		B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */; };
@@ -189,6 +197,20 @@
 			remoteGlobalIDString = B132D50A23CD08B800690C5F;
 			remoteInfo = ESTwitter;
 		};
+		B1CE4D0323E6F861003D1399 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1D13C6823CA14DB0016902A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1CE4CE423E6F83A003D1399;
+			remoteInfo = ESTwitterTestsHost;
+		};
+		B1CE4D0723E6F88C003D1399 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1D13C6823CA14DB0016902A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B132D50A23CD08B800690C5F;
+			remoteInfo = ESTwitter;
+		};
 		B1D13C8323CA14DD0016902A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B1D13C6823CA14DB0016902A /* Project object */;
@@ -207,6 +229,17 @@
 			files = (
 				B1F2C78E23E48FB4008BBCA0 /* CodePieceSupport.framework in Embed Frameworks */,
 				B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1CE4D0923E6F88C003D1399 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B1CE4D0623E6F88C003D1399 /* ESTwitter.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +395,15 @@
 		B1C34A2623E363660039F4E6 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		B1C34A2B23E37ECF0039F4E6 /* PrivacyPolicy */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PrivacyPolicy; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
+		B1CE4CD223E6F24C003D1399 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		B1CE4CD423E6F605003D1399 /* CharacterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTests.swift; sourceTree = "<group>"; };
+		B1CE4CE523E6F83A003D1399 /* ESTwitterTestsHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ESTwitterTestsHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1CE4CE723E6F83A003D1399 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B1CE4CE923E6F83A003D1399 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B1CE4CEB23E6F83B003D1399 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B1CE4CEE23E6F83B003D1399 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B1CE4CF023E6F83B003D1399 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1CE4CF123E6F83B003D1399 /* ESTwitterTestsHost.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ESTwitterTestsHost.entitlements; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CodePiece-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1D13C7A23CA14DD0016902A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -398,6 +440,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B132D51423CD08B800690C5F /* ESTwitter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1CE4CE223E6F83A003D1399 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1CE4D0523E6F88C003D1399 /* ESTwitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +502,7 @@
 				B1A4727323D09DB200F73658 /* Browse */,
 				B1A4727523D09DB200F73658 /* Data */,
 				B1A4724323D09CA600F73658 /* Extension.swift */,
+				B1CE4CD223E6F24C003D1399 /* Character.swift */,
 				B132D50D23CD08B800690C5F /* ESTwitter.h */,
 				B132D50E23CD08B800690C5F /* Info.plist */,
 			);
@@ -462,6 +513,7 @@
 			isa = PBXGroup;
 			children = (
 				B132D51A23CD08B800690C5F /* ESTwitterTests.swift */,
+				B1CE4CD423E6F605003D1399 /* CharacterTests.swift */,
 				B132D51C23CD08B800690C5F /* Info.plist */,
 			);
 			path = ESTwitterTests;
@@ -774,6 +826,19 @@
 			path = Table;
 			sourceTree = "<group>";
 		};
+		B1CE4CE623E6F83A003D1399 /* ESTwitterTestsHost */ = {
+			isa = PBXGroup;
+			children = (
+				B1CE4CE723E6F83A003D1399 /* AppDelegate.swift */,
+				B1CE4CE923E6F83A003D1399 /* ViewController.swift */,
+				B1CE4CEB23E6F83B003D1399 /* Assets.xcassets */,
+				B1CE4CED23E6F83B003D1399 /* Main.storyboard */,
+				B1CE4CF023E6F83B003D1399 /* Info.plist */,
+				B1CE4CF123E6F83B003D1399 /* ESTwitterTestsHost.entitlements */,
+			);
+			path = ESTwitterTestsHost;
+			sourceTree = "<group>";
+		};
 		B1D13C6723CA14DB0016902A = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +853,7 @@
 				B1D13C8523CA14DD0016902A /* CodePieceTests */,
 				B132D50C23CD08B800690C5F /* ESTwitter */,
 				B132D51923CD08B800690C5F /* ESTwitterTests */,
+				B1CE4CE623E6F83A003D1399 /* ESTwitterTestsHost */,
 				B1D13C7123CA14DB0016902A /* Products */,
 				B15EE38523CE9C42005B268A /* Frameworks */,
 			);
@@ -801,6 +867,7 @@
 				B1D13C8223CA14DD0016902A /* CodePieceTests.xctest */,
 				B132D50B23CD08B800690C5F /* ESTwitter.framework */,
 				B132D51323CD08B800690C5F /* ESTwitterTests.xctest */,
+				B1CE4CE523E6F83A003D1399 /* ESTwitterTestsHost.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -951,11 +1018,31 @@
 			dependencies = (
 				B132D51623CD08B800690C5F /* PBXTargetDependency */,
 				B132D51823CD08B800690C5F /* PBXTargetDependency */,
+				B1CE4D0423E6F861003D1399 /* PBXTargetDependency */,
 			);
 			name = ESTwitterTests;
 			productName = ESTwitterTests;
 			productReference = B132D51323CD08B800690C5F /* ESTwitterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B1CE4CE423E6F83A003D1399 /* ESTwitterTestsHost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1CE4CFD23E6F83C003D1399 /* Build configuration list for PBXNativeTarget "ESTwitterTestsHost" */;
+			buildPhases = (
+				B1CE4CE123E6F83A003D1399 /* Sources */,
+				B1CE4CE223E6F83A003D1399 /* Frameworks */,
+				B1CE4CE323E6F83A003D1399 /* Resources */,
+				B1CE4D0923E6F88C003D1399 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1CE4D0823E6F88C003D1399 /* PBXTargetDependency */,
+			);
+			name = ESTwitterTestsHost;
+			productName = ESTwitterTestsHost;
+			productReference = B1CE4CE523E6F83A003D1399 /* ESTwitterTestsHost.app */;
+			productType = "com.apple.product-type.application";
 		};
 		B1D13C6F23CA14DB0016902A /* CodePiece */ = {
 			isa = PBXNativeTarget;
@@ -1016,7 +1103,10 @@
 					};
 					B132D51223CD08B800690C5F = {
 						CreatedOnToolsVersion = 11.3;
-						TestTargetID = B1D13C6F23CA14DB0016902A;
+						TestTargetID = B1CE4CE423E6F83A003D1399;
+					};
+					B1CE4CE423E6F83A003D1399 = {
+						CreatedOnToolsVersion = 11.3.1;
 					};
 					B1D13C6F23CA14DB0016902A = {
 						CreatedOnToolsVersion = 11.3;
@@ -1051,9 +1141,10 @@
 			projectRoot = "";
 			targets = (
 				B1D13C6F23CA14DB0016902A /* CodePiece */,
-				B132D50A23CD08B800690C5F /* ESTwitter */,
 				B1D13C8123CA14DD0016902A /* CodePieceTests */,
+				B132D50A23CD08B800690C5F /* ESTwitter */,
 				B132D51223CD08B800690C5F /* ESTwitterTests */,
+				B1CE4CE423E6F83A003D1399 /* ESTwitterTestsHost */,
 			);
 		};
 /* End PBXProject section */
@@ -1070,6 +1161,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1CE4CE323E6F83A003D1399 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1CE4CEC23E6F83B003D1399 /* Assets.xcassets in Resources */,
+				B1CE4CEF23E6F83B003D1399 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1138,6 +1238,7 @@
 				B1A4728B23D09DB300F73658 /* Browse.swift in Sources */,
 				B1A4729523D09DB300F73658 /* UserProfile.swift in Sources */,
 				B1128CE023DE915000DDA4EA /* UsersTag.swift in Sources */,
+				B1CE4CD323E6F24C003D1399 /* Character.swift in Sources */,
 				B1128CD423DE081E00DDA4EA /* Token.swift in Sources */,
 				B1128CCA23DDF33800DDA4EA /* API.swift in Sources */,
 				B1128CCE23DDFDB900DDA4EA /* JSON.swift in Sources */,
@@ -1155,6 +1256,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B132D51B23CD08B800690C5F /* ESTwitterTests.swift in Sources */,
+				B1CE4CD523E6F605003D1399 /* CharacterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1CE4CE123E6F83A003D1399 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1CE4CEA23E6F83A003D1399 /* ViewController.swift in Sources */,
+				B1CE4CE823E6F83A003D1399 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1280,6 +1391,16 @@
 			target = B132D50A23CD08B800690C5F /* ESTwitter */;
 			targetProxy = B132D51E23CD08B800690C5F /* PBXContainerItemProxy */;
 		};
+		B1CE4D0423E6F861003D1399 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1CE4CE423E6F83A003D1399 /* ESTwitterTestsHost */;
+			targetProxy = B1CE4D0323E6F861003D1399 /* PBXContainerItemProxy */;
+		};
+		B1CE4D0823E6F88C003D1399 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B132D50A23CD08B800690C5F /* ESTwitter */;
+			targetProxy = B1CE4D0723E6F88C003D1399 /* PBXContainerItemProxy */;
+		};
 		B1D13C8423CA14DD0016902A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B1D13C6F23CA14DB0016902A /* CodePiece */;
@@ -1288,6 +1409,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		B1CE4CED23E6F83B003D1399 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B1CE4CEE23E6F83B003D1399 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		B1D13C7923CA14DD0016902A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1371,7 +1500,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.ESTwitterTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece.app/Contents/MacOS/CodePiece";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ESTwitterTestsHost.app/Contents/MacOS/ESTwitterTestsHost";
 			};
 			name = Debug;
 		};
@@ -1390,7 +1519,43 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.ESTwitterTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece.app/Contents/MacOS/CodePiece";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ESTwitterTestsHost.app/Contents/MacOS/ESTwitterTestsHost";
+			};
+			name = Release;
+		};
+		B1CE4CFE23E6F83C003D1399 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ESTwitterTestsHost/ESTwitterTestsHost.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ESTwitterTestsHost/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.ESTwitterTestsHost";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B1CE4CFF23E6F83C003D1399 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ESTwitterTestsHost/ESTwitterTestsHost.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ESTwitterTestsHost/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.ESTwitterTestsHost";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1628,6 +1793,15 @@
 			buildConfigurations = (
 				B132D52523CD08B800690C5F /* Debug */,
 				B132D52623CD08B800690C5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1CE4CFD23E6F83C003D1399 /* Build configuration list for PBXNativeTarget "ESTwitterTestsHost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1CE4CFE23E6F83C003D1399 /* Debug */,
+				B1CE4CFF23E6F83C003D1399 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
