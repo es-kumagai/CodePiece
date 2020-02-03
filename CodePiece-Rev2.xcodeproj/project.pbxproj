@@ -1696,7 +1696,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 71;
-				ES_MARKETING_VERSION = 2.0.1;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1708,7 +1707,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = "$(ES_MARKETING_VERSION)-beta";
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece-Beta";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = "CodePiece-Beta";
@@ -1726,7 +1725,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 71;
-				ES_MARKETING_VERSION = 2.0.1;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1738,7 +1736,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = "$(ES_MARKETING_VERSION)";
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = CodePiece;

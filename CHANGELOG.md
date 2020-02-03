@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.0.2 *
+
+### Updates
+
+* Change the save method of GitHub authorization information. (Needs re-authorization.)
+
 ## 2.0.1
 
 ### Fixes
