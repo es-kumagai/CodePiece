@@ -31,23 +31,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NotificationObservable {
 		NSLog("Application launched.")
 		
 		urlSchemeManager = URLSchemeManager()
-		
-		observe(notification: LanguagePopupDataSource.LanguageSelectionChanged.self) { notification in
-
-			NSApp.settings.saveAppState()
-		}
-		
-		observe(notification: HashtagsDidChangeNotification.self) { notification in
-			
-			NSApp.settings.saveAppState()
-		}
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
 
 		NSLog("Application terminated.")
     }
-
-
 }
 

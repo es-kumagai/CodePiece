@@ -14,4 +14,6 @@ struct AppState {
 	
 	var selectedLanguage: Language?
 	var hashtags: HashtagSet?
+	var description: String?
+	var code: String?
 }

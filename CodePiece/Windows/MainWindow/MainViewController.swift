@@ -19,12 +19,12 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 	enum ReplyToType {
 		
-		case None
-		case LatestTweet
-		case SelectedStatus
+		case none
+		case latestTweet
+		case selectedStatus
 	}
 	
-	var nextReplyToType = ReplyToType.None {
+	var nextReplyToType = ReplyToType.none {
 		
 		willSet {
 			
@@ -159,8 +159,17 @@ final class MainViewController: NSViewController, NotificationObservable {
 //		return effectiveHashtagsExcludeLanguageHashtag + [selectedLanguage.hashtag]
 //	}
 	
+	func terminate(_ sender: Any) {
+		
+		clearContents()
+		saveContents()
+
+		NSApp.terminate(self)
+	}
+
 	@IBAction func pushPostButton(_ sender:NSObject?) {
 	
+		self.saveContents()
 		self.postToSNS()
 	}
 	
@@ -239,6 +248,8 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		NSApp.settings.appState.selectedLanguage.executeIfExists(expression: self.languagePopUpDataSource.selectLanguage)
 		NSApp.settings.appState.hashtags.executeIfExists { self.hashTagTextField.hashtags = $0 }
+		NSApp.settings.appState.description.executeIfExists { self.descriptionTextField.stringValue = $0 }
+		NSApp.settings.appState.code.executeIfExists { self.codeTextView.string = $0}
 	}
 	
 	func saveContents() {
@@ -247,10 +258,12 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		NSApp.settings.appState.selectedLanguage = selectedLanguage
 		NSApp.settings.appState.hashtags = hashTagTextField.hashtags
+		NSApp.settings.appState.description = descriptionTextField.stringValue
+		NSApp.settings.appState.code = codeTextView.string
 
 		NSApp.settings.saveAppState()
 	}
-	
+		
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -276,8 +289,10 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			self.clearContents()
 			self.latestTweet = container.twitterState.postedStatus
-			self.nextReplyToType = .LatestTweet
-			
+			self.nextReplyToType = .latestTweet
+
+			self.saveContents()
+
 			if let error = container.latestError {
 				
 				self.showErrorAlert(withTitle: "Finish posting, but ...", message: "\(error)")
@@ -295,10 +310,12 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			self.updateWatermark()
 			self.updateTweetTextCount()
+			self.saveContents()
 		}
 		
 		observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
 
+			self.saveContents()
 		}
 		
 		observe(notification: TimelineViewController.TimelineSelectionChangedNotification.self) { [unowned self] notification in
@@ -310,7 +327,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			}
 
 			self.selectedStatuses = notification.selectedCells.compactMap { $0.cell?.item?.status }
-			self.nextReplyToType = .SelectedStatus
+			self.nextReplyToType = .selectedStatus
 			
 			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
 		}
@@ -329,7 +346,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			}
 		}
 		
-		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { notification in
+		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.withChangeValue(for: "CanPost")
 		}
@@ -375,7 +392,9 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 		DebugTime.print("Main window will hide.")
 		
+		clearContents()
 		saveContents()
+		
 		notificationHandlers.releaseAll()
 		
 		super.viewWillDisappear()
@@ -508,7 +527,7 @@ extension MainViewController : ViewControllerSelectionAndRepliable {
 	
 		withChangeValue(for: "canPost") {
 			
-			self.statusForReplyTo = nil
+			statusForReplyTo = nil
 			updateControlsDisplayText()
 		}
 	}
@@ -522,7 +541,7 @@ extension MainViewController : ViewControllerSelectionAndRepliable {
 		
 		withChangeValue(for: "canPost") {
 		
-			self.statusForReplyTo = selectedStatuses.first!
+			statusForReplyTo = selectedStatuses.first!
 			updateControlsDisplayText()
 		}
 	}
@@ -539,7 +558,7 @@ extension MainViewController : LatestTweetReplyable {
 		
 		withChangeValue(for: "canPost") {
 			
-			self.statusForReplyTo = latestTweet
+			statusForReplyTo = latestTweet
 			
 			updateControlsDisplayText()
 		}

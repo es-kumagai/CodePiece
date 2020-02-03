@@ -76,13 +76,13 @@ extension MainViewController {
 
 		switch nextReplyToType {
 			
-		case .LatestTweet:
+		case .latestTweet:
 			setReplyToByLatestTweet()
 			
-		case .SelectedStatus:
+		case .selectedStatus:
 			setReplyToBySelectedStatuses()
 			
-		case .None:
+		case .none:
 			fatalError()
 		}
 

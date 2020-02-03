@@ -13,7 +13,7 @@ import ESTwitter
 
 final class Settings {
 	
-	private var _store = DataStore()
+	private var _store = DataStore()	// FIXME: 存在が冗長な印象
 	
 	var appState = AppState()
 	var account = AccountSetting()
@@ -40,6 +40,8 @@ final class Settings {
 	
 		appState.hashtags = _store.appState.hashtags
 		appState.selectedLanguage = _store.appState.selectedLanguage
+		appState.description = _store.appState.description
+		appState.code = _store.appState.code
 		
 		DebugTime.print("App state loaded.")
 	}
@@ -48,6 +50,8 @@ final class Settings {
 	
 		_store.appState.selectedLanguage = appState.selectedLanguage
 		_store.appState.hashtags = appState.hashtags
+		_store.appState.description = appState.description
+		_store.appState.code = appState.code
 		
 		_store.appState.save()
 		
