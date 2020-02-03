@@ -27,7 +27,11 @@ public struct UserMention : Decodable, HasIndices {
 }
 
 extension UserMention : EntityUnit {
-	
+
+	var displayText: String {
+		
+		description
+	}
 }
 
 extension UserMention {

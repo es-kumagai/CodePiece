@@ -18,19 +18,21 @@ extension String {
 
 public struct TwitterCharacter {
 	
-	private(set) var rawCharacters: [unichar]
+	private(set) var units: [UTF16Character]
 	
 	public init(_ character: Character) {
 	
-		rawCharacters = character.utf16.map { $0 }
+		units = character.utf16.map(UTF16Character.init)
 	}
 }
 
 extension TwitterCharacter {
 	
-	public var rawValue: String {
+	public var rawString: String {
 	
-		return rawCharacters.withUnsafeBufferPointer { buffer in
+		return units
+			.map { $0.rawValue }
+			.withUnsafeBufferPointer { buffer in
 
 			guard let address = buffer.baseAddress else {
 				
@@ -40,6 +42,21 @@ extension TwitterCharacter {
 			return String(utf16CodeUnits: address, count: buffer.count)
 		}
 	}
+	
+	public var utf8: String.UTF8View {
+		
+		return rawString.utf8
+	}
+	
+	public var unitCount: Int {
+	
+		return units.count
+	}
+	
+	public func contains(_ element: UTF16Character) -> Bool {
+		
+		return units.contains(element)
+	}
 
 	public var wordCountForPost: Double {
 
@@ -47,33 +64,29 @@ extension TwitterCharacter {
 			
 			return 0.5
 		}
-		else {
+		else if contains(.tpvs)  {
 
-			let tpvs = rawCharacters.indexes { $0 == 0xFE0E }
-		
-			return 1 + Double(tpvs.count)
+			return 2
+		}
+		else {
+			
+			return 1
 		}
 	}
 
 	public var wordCountForIndices: Int {
 		
-		let tpvs = rawCharacters.indexes { $0 == 0xFE0E }
-		
-		// Entities で受け取る indices の文字カウントは、絵文字を２と扱う様子
-		// UTF8 のコードポイント単位で計算しているらしいとの情報があるので実装を変える必要があるかもしれない。
-		let epvs = rawCharacters.indexes { $0 == 0xFE0F }
-
-		return 1 + tpvs.count + epvs.count
+		return utf8.map(UTF8Character.init).utf8LeadingByteCount
 	}
 	
 	public var isEnglish: Bool {
 		
-		guard rawCharacters.count == 1 else {
+		guard units.count == 1 else {
 			
 			return false
 		}
 		
-		switch rawCharacters.first! {
+		switch units.first!.rawValue {
 			
 		case 0x0000 ... 0x10FF,
 			 0x2000 ... 0x200D,
@@ -86,10 +99,3 @@ extension TwitterCharacter {
 		}
 	}
 }
-
-//func countOfCharacter(character: Character) -> (utf16: Int, twitter: Int) {
-//	
-////	character.utf16.count
-//	
-//	
-//}

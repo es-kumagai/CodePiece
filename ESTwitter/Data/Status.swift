@@ -88,19 +88,59 @@ extension Status {
 		}
 		
 		let wordCountsByTwitterCharacter = text.twitterCharacterView.map { $0.wordCountForIndices }
-		let wordCountsByUtf16Character = text.map { $0.utf16.count }
+		let wordCountsByUtf16Character = text.twitterCharacterView.map { $0.unitCount }
 
-		let wordCountsDiff = zip(wordCountsByUtf16Character, wordCountsByTwitterCharacter).map { $0 - $1 }
+		var wordCountsDiffTable: [Int] {
+
+			let diffsBetweenTwitterAndInternal = zip(wordCountsByTwitterCharacter, wordCountsByUtf16Character).map { $1 - $0 }
+
+			let firstDiffs = [0]
+			let followingDiffs = zip(diffsBetweenTwitterAndInternal, wordCountsByTwitterCharacter).flatMap { (diff: Int, twitterCharacterPadding: Int) -> [Int] in
+				
+				if twitterCharacterPadding > 1 {
+					
+					return [ diff ] + Array(repeating: 0, count: twitterCharacterPadding - 1)
+				}
+				else {
+					
+					return [diff]
+				}
+			}
+			
+			return firstDiffs + followingDiffs
+		}
 		
 		return entities.map { entity in
 
-			let effectiveCountsDiff = wordCountsDiff[0 ..< entity.indices.startIndex]
-			let offset = effectiveCountsDiff.reduce(0, +)
+			guard wordCountsDiffTable.endIndex > entity.indices.startIndex else {
+				
+				NSLog("""
+					WARNING: Ignore entity normalizing.
+					\tEntity Text: \(entity.displayText)
+					\tEntity Indices: \(entity.indices)
+					\tWord count Table (\(wordCountsDiffTable.count)): \(wordCountsDiffTable)
+					""")
+				
+				return entity
+			}
+			
+			let effectiveCountsDiffTable = wordCountsDiffTable[0 ..< entity.indices.startIndex]
+			let offset = effectiveCountsDiffTable.reduce(0, +)
 			
 			var newEntity = entity
 			
 			newEntity.indices = entity.indices.added(offset: offset)
 			
+//			NSLog("""
+//				NOTE: Entity normalizing.
+//				\tEntity Text: \(entity.displayText)
+//				\tEntity Indices: \(entity.indices)
+//				\tNew Entity Indices: \(newEntity.indices)
+//				\tOffset: \(offset)
+//				\tDiff Table (\(wordCountsDiffTable.count)): \(wordCountsDiffTable)
+//				\tEffective Diff Table (\(effectiveCountsDiffTable.count)): \(effectiveCountsDiffTable)
+//				""")
+
 			return newEntity
 		}
 	}
@@ -221,16 +261,20 @@ extension Status {
 
 				var canApplyingItem: Bool {
 					
-					let string = result.string
+					guard item.range.location >= 0 else {
+						
+						return false
+					}
 					
-					return string.count >= item.range.location + item.range.length
+					let internalCount = result.string.utf16.count
+					
+					return internalCount >= item.range.location + item.range.length
 				}
 
 				let subtext = item.attributedTextWithBaseAttributes(baseAttributes: baseAttributes)
 
 				guard canApplyingItem else {
 
-					#warning("範囲を超えてしまう Entity があるので要改善")
 					NSLog("""
 						WARNING: Ignore applying an entity because it's range is out of bounds.
 						\tEntity text: \(item.displayText)
@@ -243,6 +287,16 @@ extension Status {
 					continue
 				}
 				
+//				NSLog("""
+//					NOTE: Applying an entity because it's range is out of bounds.
+//					\tEntity text: \(item.displayText)
+//					\tIndices: \(item.indices.startIndex) ..< \(item.indices.endIndex)
+//					\tRange: \(item.range)
+//					\tType: \(type(of: item))
+//					\tTarget Text: \(result.string.prefix(50).replacingOccurrences(of: "\n", with: " "))...
+//					\tTarget Text Length: \(result.length)
+//					""")
+
 				result.replaceCharacters(in: item.range, with: subtext)
 			}
 						

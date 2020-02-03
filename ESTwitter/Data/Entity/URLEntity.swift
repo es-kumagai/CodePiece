@@ -16,6 +16,10 @@ public struct URLEntity : HasIndices {
 
 extension URLEntity : EntityUnit {
 	
+	var displayText: String {
+		
+		displayUrl
+	}
 }
 
 extension URLEntity : Decodable {

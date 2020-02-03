@@ -9,4 +9,5 @@
 protocol EntityUnit {
 	
 	var indices: Indices { get set }
+	var displayText: String { get }
 }

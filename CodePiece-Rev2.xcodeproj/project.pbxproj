@@ -159,6 +159,7 @@
 		B1CE4CEF23E6F83B003D1399 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1CE4CED23E6F83B003D1399 /* Main.storyboard */; };
 		B1CE4D0523E6F88C003D1399 /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
 		B1CE4D0623E6F88C003D1399 /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1CE4D0C23E7C5A4003D1399 /* CharacterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE4D0A23E7C3CC003D1399 /* CharacterExtension.swift */; };
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
 		B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */; };
@@ -404,6 +405,7 @@
 		B1CE4CEE23E6F83B003D1399 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B1CE4CF023E6F83B003D1399 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1CE4CF123E6F83B003D1399 /* ESTwitterTestsHost.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ESTwitterTestsHost.entitlements; sourceTree = "<group>"; };
+		B1CE4D0A23E7C3CC003D1399 /* CharacterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtension.swift; sourceTree = "<group>"; };
 		B1D13C7023CA14DB0016902A /* CodePiece-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CodePiece-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C7323CA14DB0016902A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1D13C7A23CA14DD0016902A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 		B132D50C23CD08B800690C5F /* ESTwitter */ = {
 			isa = PBXGroup;
 			children = (
+				B1CE4D0D23E7C5AA003D1399 /* NeedsRefactor */,
 				B1128CC623DDF33800DDA4EA /* API */,
 				B1A4727323D09DB200F73658 /* Browse */,
 				B1A4727523D09DB200F73658 /* Data */,
@@ -837,6 +840,14 @@
 				B1CE4CF123E6F83B003D1399 /* ESTwitterTestsHost.entitlements */,
 			);
 			path = ESTwitterTestsHost;
+			sourceTree = "<group>";
+		};
+		B1CE4D0D23E7C5AA003D1399 /* NeedsRefactor */ = {
+			isa = PBXGroup;
+			children = (
+				B1CE4D0A23E7C3CC003D1399 /* CharacterExtension.swift */,
+			);
+			path = NeedsRefactor;
 			sourceTree = "<group>";
 		};
 		B1D13C6723CA14DB0016902A = {
@@ -1216,6 +1227,7 @@
 				B1A4729E23D09DB300F73658 /* Color.swift in Sources */,
 				B1A4728D23D09DB300F73658 /* Hashtags.swift in Sources */,
 				B1A4729023D09DB300F73658 /* UserEntities.swift in Sources */,
+				B1CE4D0C23E7C5A4003D1399 /* CharacterExtension.swift in Sources */,
 				B1A4728F23D09DB300F73658 /* TwitterDate.swift in Sources */,
 				B1A4728E23D09DB300F73658 /* StatusEntities.swift in Sources */,
 				B1128CD623DE087000DDA4EA /* AuthorizationError.swift in Sources */,
@@ -1751,7 +1763,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceTests-Rev2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece.app/Contents/MacOS/CodePiece";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece-Beta.app/Contents/MacOS/CodePiece-Beta";
 			};
 			name = Debug;
 		};
@@ -1772,7 +1784,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceTests-Rev2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece.app/Contents/MacOS/CodePiece";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece-Beta.app/Contents/MacOS/CodePiece-Beta";
 			};
 			name = Release;
 		};

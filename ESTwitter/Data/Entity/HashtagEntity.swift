@@ -14,6 +14,10 @@ public struct HashtagEntity {
 
 extension HashtagEntity : EntityUnit {
 	
+	var displayText: String {
+		
+		value.value
+	}
 }
 
 extension HashtagEntity : Decodable {

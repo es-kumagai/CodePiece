@@ -29,6 +29,10 @@ public struct MediaEntity : HasIndices {
 
 extension MediaEntity : EntityUnit {
 	
+	var displayText: String {
+		
+		displayUrl
+	}
 }
 
 extension MediaEntity : Decodable {
