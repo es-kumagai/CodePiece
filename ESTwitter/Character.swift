@@ -98,4 +98,14 @@ extension TwitterCharacter {
 			return false
 		}
 	}
+	
+	public var isSurrogatePair: Bool {
+		
+		guard units.count == 2 else {
+			
+			return false
+		}
+		
+		return units[0].isSurrogateHight && units[1].isSurrogateLow
+	}
 }

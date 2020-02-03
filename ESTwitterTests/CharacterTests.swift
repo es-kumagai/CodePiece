@@ -79,6 +79,19 @@ class CharacterTests: XCTestCase {
 		XCTAssertEqual(attributedString.mutableString, "❣️ @TEST")
 	}
 
+	func testReplaceTextedNew() {
+
+		let string = "🆕 #test"
+		let attributedString = NSMutableAttributedString(string: string)
+		
+		let range = NSRange(location: 3, length: 5)
+		let subtext = NSAttributedString(string: "@TEST", attributes: [.foregroundColor : NSColor.red])
+		
+		attributedString.replaceCharacters(in: range, with: subtext)
+		
+		XCTAssertEqual(attributedString.mutableString, "🆕 @TEST")
+	}
+
 	func testCharacterCount() {
 
 		let s1 = "👨‍👩‍👦‍👦"	// ゼロ幅接合子
@@ -88,6 +101,7 @@ class CharacterTests: XCTestCase {
 		XCTAssertEqual(s1.twitterCharacterView.first!.wordCountForIndices, 7)
 		XCTAssertEqual(s1.twitterCharacterView.first!.wordCountForPost, 1)
 		XCTAssertFalse(s1.twitterCharacterView.first!.isEnglish)
+		XCTAssertFalse(s1.twitterCharacterView.first!.isSurrogatePair)
 
 		let s2 = "🐲"	// サロゲートペア
 
@@ -96,6 +110,7 @@ class CharacterTests: XCTestCase {
 		XCTAssertEqual(s2.twitterCharacterView.first!.wordCountForIndices, 1)
 		XCTAssertEqual(s2.twitterCharacterView.first!.wordCountForPost, 1)
 		XCTAssertFalse(s2.twitterCharacterView.first!.isEnglish)
+		XCTAssertTrue(s2.twitterCharacterView.first!.isSurrogatePair)
 
 		let s3 = "1️⃣"	// 絵文字シーケンス
 
@@ -104,6 +119,7 @@ class CharacterTests: XCTestCase {
 		XCTAssertEqual(s3.twitterCharacterView.first!.wordCountForIndices, 3)
 		XCTAssertEqual(s3.twitterCharacterView.first!.wordCountForPost, 1)
 		XCTAssertFalse(s3.twitterCharacterView.first!.isEnglish)
+		XCTAssertFalse(s3.twitterCharacterView.first!.isSurrogatePair)
 
 		let s4 = "⭐️"	// 絵文字スタイル化 異体字セレクタ EPVS
 
@@ -112,6 +128,7 @@ class CharacterTests: XCTestCase {
 		XCTAssertEqual(s4.twitterCharacterView.first!.wordCountForIndices, 2)
 		XCTAssertEqual(s4.twitterCharacterView.first!.wordCountForPost, 1)
 		XCTAssertFalse(s4.twitterCharacterView.first!.isEnglish)
+		XCTAssertFalse(s4.twitterCharacterView.first!.isSurrogatePair)
 
 		let s5 = "⭐︎"	// テキストスタイル化する 異体字セレクタ TPVS
 
@@ -120,6 +137,7 @@ class CharacterTests: XCTestCase {
 		XCTAssertEqual(s5.twitterCharacterView.first!.wordCountForIndices, 2)
 		XCTAssertEqual(s5.twitterCharacterView.first!.wordCountForPost, 2)
 		XCTAssertFalse(s5.twitterCharacterView.first!.isEnglish)
+		XCTAssertFalse(s5.twitterCharacterView.first!.isSurrogatePair)
 
 		let s6 = "Z"
 		XCTAssertEqual(s6.count , 1)
@@ -127,6 +145,7 @@ class CharacterTests: XCTestCase {
 		XCTAssertEqual(s6.twitterCharacterView.first!.wordCountForIndices, 1)
 		XCTAssertEqual(s6.twitterCharacterView.first!.wordCountForPost, 0.5)
 		XCTAssertTrue(s6.twitterCharacterView.first!.isEnglish)
+		XCTAssertFalse(s6.twitterCharacterView.first!.isSurrogatePair)
 
 		let s7 = "☃️"
 		
@@ -137,7 +156,8 @@ class CharacterTests: XCTestCase {
 		XCTAssertEqual(s7.twitterCharacterView.first!.wordCountForIndices, 2)
 		XCTAssertEqual(s7.twitterCharacterView.first!.wordCountForPost, 1)
 		XCTAssertFalse(s7.twitterCharacterView.first!.isEnglish)
-		
+		XCTAssertFalse(s7.twitterCharacterView.first!.isSurrogatePair)
+
 		let s8 = "❣️"
 
 		print(s8, s8.utf16.map { String(format: "0x%04X", $0) })
@@ -147,6 +167,18 @@ class CharacterTests: XCTestCase {
 		XCTAssertEqual(s8.twitterCharacterView.first!.wordCountForIndices, 2)
 		XCTAssertEqual(s8.twitterCharacterView.first!.wordCountForPost, 1)
 		XCTAssertFalse(s8.twitterCharacterView.first!.isEnglish)
+		XCTAssertFalse(s8.twitterCharacterView.first!.isSurrogatePair)
+
+		let s9 = "🆕"
+
+		print(s9, s9.utf16.map { String(format: "0x%04X", $0) })
+
+		XCTAssertEqual(s9.count, 1)
+		XCTAssertEqual(s9.utf16.count, 2)
+		XCTAssertEqual(s9.twitterCharacterView.first!.wordCountForIndices, 1)
+		XCTAssertEqual(s9.twitterCharacterView.first!.wordCountForPost, 1)
+		XCTAssertFalse(s9.twitterCharacterView.first!.isEnglish)
+		XCTAssertTrue(s9.twitterCharacterView.first!.isSurrogatePair)
 	}
 
 }
