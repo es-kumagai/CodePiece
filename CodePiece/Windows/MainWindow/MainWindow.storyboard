@@ -257,10 +257,10 @@
                                 </popUpButtonCell>
                             </popUpButton>
                             <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fV7-JG-IRI" userLabel="Watermark State View">
-                                <rect key="frame" x="421" y="135" width="279" height="111"/>
+                                <rect key="frame" x="66" y="135" width="634" height="111"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAe-oN-MPK" customClass="WatermarkLabel" customModule="CodePiece" customModuleProvider="target">
-                                        <rect key="frame" x="-2" y="33" width="283" height="78"/>
+                                        <rect key="frame" x="353" y="33" width="283" height="78"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Language" id="yPe-Wr-XPi">
                                             <font key="font" metaFont="system" size="66"/>
                                             <color key="textColor" name="WatermarkColor"/>
@@ -270,9 +270,9 @@
                                             <outlet property="transparentResponder" destination="8OA-rk-WhX" id="9HY-RI-cFR"/>
                                         </connections>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z7v-7K-Ol4" userLabel="Hashtag Watermark" customClass="WatermarkLabel" customModule="CodePiece" customModuleProvider="target">
-                                        <rect key="frame" x="175" y="0.0" width="106" height="33"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Hashtag" id="tMj-DA-3LT">
+                                    <textField horizontalHuggingPriority="500" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="z7v-7K-Ol4" userLabel="Hashtag Watermark" customClass="WatermarkLabel" customModule="CodePiece" customModuleProvider="target">
+                                        <rect key="frame" x="530" y="0.0" width="106" height="33"/>
+                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Hashtag" id="tMj-DA-3LT">
                                             <font key="font" metaFont="system" size="28"/>
                                             <color key="textColor" name="WatermarkColor"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -299,6 +299,7 @@
                             <constraint firstItem="3hT-FM-HsJ" firstAttribute="top" secondItem="fV7-JG-IRI" secondAttribute="bottom" constant="22" id="FHY-D2-oNB"/>
                             <constraint firstAttribute="trailing" secondItem="Ny3-jn-TOD" secondAttribute="trailing" constant="20" id="Gah-4W-Hdo"/>
                             <constraint firstItem="Ny3-jn-TOD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="KZA-YY-iff"/>
+                            <constraint firstItem="fV7-JG-IRI" firstAttribute="width" secondItem="Ny3-jn-TOD" secondAttribute="width" multiplier="0.9" id="M0X-YF-lGU"/>
                             <constraint firstItem="f8Q-oO-N5A" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="RbA-ac-h6D"/>
                             <constraint firstItem="GDd-Xx-hX6" firstAttribute="baseline" secondItem="f8Q-oO-N5A" secondAttribute="baseline" id="SD8-1u-wto"/>
                             <constraint firstAttribute="bottom" secondItem="dTm-OD-heR" secondAttribute="bottom" constant="2" id="Xa6-Us-QMA"/>
