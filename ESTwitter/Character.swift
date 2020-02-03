@@ -109,3 +109,11 @@ extension TwitterCharacter {
 		return units[0].isSurrogateHight && units[1].isSurrogateLow
 	}
 }
+
+extension Sequence where Element == TwitterCharacter {
+	
+	public var wordCountForPost: Double {
+		
+		return reduce(0) { $0 + $1.wordCountForPost }
+	}
+}

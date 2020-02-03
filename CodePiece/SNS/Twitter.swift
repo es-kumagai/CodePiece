@@ -20,18 +20,18 @@ struct Twitter {
 
 extension Twitter.SpecialCounting {
 	
-	var length: Int {
+	var length: Double {
 		
 		switch self {
 			
 		case .media:
-			return 23
+			return 11.5
 			
 		case .httpUrl:
-			return 22
+			return 11.5
 			
 		case .httpsUrl:
-			return 23
+			return 11.5
 		}
 	}
 }
