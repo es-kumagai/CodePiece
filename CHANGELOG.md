@@ -7,6 +7,7 @@ Change Logs.
 ### Fixes
 
 * Applying entities more precisely in Timeline View.
+* Save application state when terminating.
 
 ## 2.0.0
 
