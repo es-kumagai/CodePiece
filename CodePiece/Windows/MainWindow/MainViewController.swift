@@ -246,10 +246,10 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		DebugTime.print("Restoring contents in main window.")
 		
-		NSApp.settings.appState.selectedLanguage.executeIfExists(expression: self.languagePopUpDataSource.selectLanguage)
-		NSApp.settings.appState.hashtags.executeIfExists { self.hashTagTextField.hashtags = $0 }
-		NSApp.settings.appState.description.executeIfExists { self.descriptionTextField.stringValue = $0 }
-		NSApp.settings.appState.code.executeIfExists { self.codeTextView.string = $0}
+		NSApp.settings.appState.selectedLanguage.executeIfExists(languagePopUpDataSource.selectLanguage)
+		NSApp.settings.appState.hashtags.executeIfExists { hashTagTextField.hashtags = $0 }
+		NSApp.settings.appState.description.executeIfExists { descriptionTextField.stringValue = $0 }
+		NSApp.settings.appState.code.executeIfExists { codeTextView.string = $0 }
 	}
 	
 	func saveContents() {

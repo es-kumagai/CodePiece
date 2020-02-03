@@ -20,7 +20,7 @@ final class TimelineTableDataSource : NSObject, NSTableViewDataSource {
 		
 		didSet {
 	
-			items.timelineLatestTweetItem.executeIfExists(expression: setLatestTweet)
+			items.timelineLatestTweetItem.executeIfExists(setLatestTweet)
 		}
 	}
 	

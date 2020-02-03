@@ -1078,7 +1078,7 @@ public class NullOutputStream : OutputStream {
 
 extension Optional {
 	
-	public func executeIfExists(expression:(Wrapped) throws -> Void) rethrows -> Void {
+	public func executeIfExists(_ expression: (Wrapped) throws -> Void) rethrows -> Void {
 		
 		if let value = self {
 

@@ -236,31 +236,35 @@ extension DataStore {
 			}
 		}
 		
-		private init(unuseKeychain:Void) {
+		private init(unuseKeychain: Void) {
 			
 			NSLog("To using keychain is disabled by CodePiece.")
-			self.authInfo = AuthInfo()
+			authInfo = AuthInfo()
 		}
 		
-		private init(useKeychain:Void) {
+		private init(useKeychain: Void) {
 		
 			let keychain = GistStore.keychain
 
-			guard let data = handleError(expression: try! keychain.getData(GistStore.AuthorizationKey), to: &OutputStream), data != nil else {
-		
-				self.authInfo = AuthInfo()
-				return
-			}
-			
-			NSLog("Restoring authentication information from Keychain.")
-			
-			guard let authInfo = NSKeyedUnarchiver.unarchiveObject(with: data!) as? AuthInfo else {
+			do {
 				
-				self.authInfo = AuthInfo()
-				return
+				guard let data = try keychain.getData(GistStore.AuthorizationKey) else {
+					
+					authInfo = AuthInfo()
+					return
+				}
+				
+				NSLog("Restoring authentication information from Keychain.")
+								
+				let info = try JSONDecoder().decode(AuthInfo.self, from: data)
+									
+				authInfo = info
 			}
-			
-			self.authInfo = authInfo
+			catch {
+				
+				NSLog("Failed to get a gist store. Ignoring.")
+				authInfo = AuthInfo()
+			}
 		}
 		
 		func save() throws {
@@ -278,29 +282,16 @@ extension DataStore {
 			
 			do {
 
-				if let data = self.archiveAuthorizationData() {
+				let data = try JSONEncoder().encode(authInfo)
 				
-					try keychain.set(data, key: keyForAuthInfo)
-				}
-				else {
-				
-					try keychain.remove(keyForAuthInfo)
-				}
+				try keychain.set(data, key: keyForAuthInfo)
 			}
-			catch let error as NSError {
-				
+			catch {
+
+				NSLog("Failed to save the git store.")
+				try keychain.remove(keyForAuthInfo)
 				throw DataStoreError.failedToSave(error.localizedDescription)
 			}
-		}
-		
-		private func archiveAuthorizationData() -> Data? {
-
-			guard !authInfo.noData else {
-
-				return nil
-			}
-			
-			return NSKeyedArchiver.archivedData(withRootObject: authInfo)
 		}
 	}
 }
