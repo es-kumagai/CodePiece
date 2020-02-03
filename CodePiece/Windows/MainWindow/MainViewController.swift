@@ -214,7 +214,8 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		NSApp.snsController.post(container: makePostDataContainer()) { container in
 			
-			DebugTime.print("📮 Posted \(container.twitterState.postedStatus) ... #1.1.1")
+			
+			DebugTime.print("📮 Posted \(container.twitterState.postedStatus?.text ?? "(unknown)") ... #1.1.1")
 			
 			if container.posted {
 				
@@ -298,7 +299,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 				self.showErrorAlert(withTitle: "Finish posting, but ...", message: "\(error)")
 			}
 			
-			NSLog("Posted completely \(notification.container.twitterState.postedStatus)")
+			NSLog("Posted completely \(notification.container.twitterState.postedStatus?.text ?? "(unknown)")")
 		}
 		
 		observe(notification: PostFailedNotification.self) { [unowned self] notification in

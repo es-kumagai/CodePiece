@@ -62,7 +62,9 @@ extension Hashtag {
 		
 		if value.hasPrefix("#") {
 			
-			return value.substring(from: value.index(after: value.startIndex))
+			let index = value.index(after: value.startIndex)
+			
+			return String(value.suffix(from: index))
 		}
 		else {
 			
@@ -99,7 +101,14 @@ extension Hashtag {
 	
 	public var url: URL {
 		
-		return NSURL(scheme: "https", host: "twitter.com", path: "/hashtag/\(valueWithoutPrefix)?f=tweets")! as URL
+		var components = URLComponents()
+		
+		components.scheme = "https"
+		components.host = "twitter.com"
+		components.path = "/hashtag/\(valueWithoutPrefix)"
+		components.query = "f=tweets"
+
+		return components.url!
 	}
 }
 

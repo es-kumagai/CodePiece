@@ -58,7 +58,7 @@ extension Color {
 			let start = string.index(string.startIndex, offsetBy: location)
 			let end = string.index(string.startIndex, offsetBy: location + 2)
 			
-			return string.substring(with: start ..< end)
+			return String(string[start ..< end])
 		}
 		
 		let toColorElement = { (part:String) throws -> CGFloat in

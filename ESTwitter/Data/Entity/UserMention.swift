@@ -38,7 +38,13 @@ extension UserMention {
 	
 	var url: URL {
 		
-		Foundation.NSURL(scheme: "https", host: "twitter.com", path: "/\(screenName)")! as URL
+		var components = URLComponents()
+		
+		components.scheme = "https"
+		components.host = "twitter.com"
+		components.path = "/\(screenName)"
+		
+		return components.url!
 	}
 }
 

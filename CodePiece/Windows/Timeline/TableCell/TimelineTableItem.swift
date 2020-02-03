@@ -86,7 +86,7 @@ extension Sequence where Element == TimelineTableItem {
 	
 	var timelineLatestTweetItem: TimelineTweetItem? {
 		
-		let validTweetItems = self.flatMap { $0 as? TimelineTweetItem }
+		let validTweetItems = self.compactMap { $0 as? TimelineTweetItem }
 		
 		return validTweetItems.first
 	}
