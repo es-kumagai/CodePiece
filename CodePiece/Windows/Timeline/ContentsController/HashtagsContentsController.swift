@@ -37,6 +37,11 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		return dataSource
 	}
 	
+	override var associatedHashtags: HashtagSet {
+	
+		return hashtags
+	}
+	
 	override func activate() {
 		
 		super.activate()

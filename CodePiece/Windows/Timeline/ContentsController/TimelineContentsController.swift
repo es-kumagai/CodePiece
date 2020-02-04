@@ -97,6 +97,11 @@ class TimelineContentsController : NSObject {
 		return 200
 	}
 	
+	var associatedHashtags: HashtagSet {
+		
+		return []
+	}
+	
 	// MARK: - Neeeds Override
 	
 	var tableViewDataSource: TimelineTableDataSource {
@@ -113,9 +118,4 @@ class TimelineContentsController : NSObject {
 		
 		fatalError("Not implemented yet.")
 	}
-}
-
-@objc protocol TimelineContentsControllerDelegate : class {
-
-	@objc optional func timelineContentsNeedsUpdate(_ sender: TimelineContentsController)
 }

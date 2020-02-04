@@ -21,7 +21,7 @@ extension NSApplication {
 	
 	var baseViewController: BaseViewController? {
 	
-		return self.keyWindow?.contentViewController as? BaseViewController
+		return keyWindow?.contentViewController as? BaseViewController
 	}
 	
 	static func readyForUse() {
@@ -31,9 +31,9 @@ extension NSApplication {
 			fatalError("Application is already ready.")
 		}
 		
-		self.environment = Environment()
-		self.settings = Settings()
-		self.controllers = AppGlobalControllers()
+		environment = Environment()
+		settings = Settings()
+		controllers = AppGlobalControllers()
 		
 		_isReadyForUse = true
 	}

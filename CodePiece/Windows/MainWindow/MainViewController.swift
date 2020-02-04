@@ -266,6 +266,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 	}
 		
 	override func viewDidLoad() {
+		
 		super.viewDidLoad()
 		
 		DebugTime.print("Main window loaded.")

@@ -20,26 +20,25 @@ final class TimelineViewController: NSViewController {
 	
 	@IBOutlet var menuController: MenuController!
 	
-	@IBOutlet var timelineKindStateController: TimelineKindStateController! {
+	@IBOutlet var tableView: TimelineTableView! {
 		
 		didSet {
 			
-			#warning("検証用に既定値を変更します。")
-			timelineKindStateController.timelineKind = .myTweets
+			contentsController.tableView = tableView
 		}
 	}
 	
-	var currentTimelineKind: TimelineKind? {
+	var contentsController: TimelineContentsController! {
 		
-		return timelineKindStateController.timelineKind
+		didSet {
+			
+			contentsController.delegate = self
+		}
 	}
 	
 	var notificationHandlers = Notification.Handlers()
 	
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
-	
-	@IBOutlet var hashtagsContentsController: HashtagsContentsController!
-	@IBOutlet var myTweetsContentsController: MyTweetsContentsController!
 	
 	
 	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
@@ -100,20 +99,20 @@ final class TimelineViewController: NSViewController {
 		}
 	}
 	
-	var activeTimelineContentsController: TimelineContentsController {
-		
-		switch currentTimelineKind {
-			
-		case .hashtags:
-			return hashtagsContentsController
-			
-		case .myTweets:
-			return myTweetsContentsController
-			
-		case .none:
-			fatalError("Timeline kind is not specified.")
-		}
-	}
+//	var activeTimelineContentsController: TimelineContentsController {
+//
+//		switch currentTimelineKind {
+//
+//		case .hashtags:
+//			return hashtagsContentsController
+//
+//		case .myTweets:
+//			return myTweetsContentsController
+//
+//		case .none:
+//			fatalError("Timeline kind is not specified.")
+//		}
+//	}
 	
 	@IBOutlet var timelineUpdateIndicator: NSProgressIndicator? {
 		
@@ -152,8 +151,8 @@ extension TimelineViewController {
 	
 	func updateTimeline() {
 		
-		activeTimelineContentsController.tableView = timelineTableView
-		activeTimelineContentsController.updateContents()
+		tableView = timelineTableView
+		contentsController.updateContents()
 	}
 }
 // MARK: - Message Handler
@@ -410,8 +409,7 @@ extension TimelineViewController : NotificationObservable {
 		
 		super.viewWillAppear()
 		
-		hashtagsContentsController.activate()
-		myTweetsContentsController.activate()
+		contentsController.activate()
 		
 		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
@@ -478,7 +476,7 @@ extension TimelineViewController {
 	
 	var maxTimelineRows: Int {
 		
-		return activeTimelineContentsController.maxTimelineRows
+		return contentsController.maxTimelineRows
 	}
 	
 	
@@ -506,7 +504,7 @@ extension TimelineViewController {
 		let ignoreIndexes = ignoreRows > 0 ? IndexSet(integersIn: getIgnoreRange()) : IndexSet()
 		let removeIndexes = overflowRows > 0 ? IndexSet(integersIn: getRemoveRange()) : IndexSet()
 		
-		activeTimelineContentsController.appendTweets(tweets: tweets)
+		contentsController.appendTweets(tweets: tweets)
 		
 		timelineTableView.beginUpdates()
 		timelineTableView.removeRows(at: removeIndexes, withAnimation: [.effectFade, .slideDown])
@@ -548,7 +546,8 @@ extension TimelineViewController {
 		return shiftIndexes(currentIndexes: self.currentTimelineSelectedRowIndexes, insertIndexes: insertedIndexes)
 	}
 }
-extension TimelineViewController : TimelineGetStatusesController {
+
+extension TimelineViewController {
 	
 	private func updateStatuses() {
 		
@@ -576,7 +575,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 		
 		displayControlState = .Updating
 		
-		activeTimelineContentsController.updateContents { result in
+		contentsController.updateContents { result in
 			
 			self.displayControlState = .Updated
 			
@@ -597,7 +596,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 				//					self.message.send(message: .AddAutoUpdateIntervalDelay(7.0))
 				//				}
 				
-				self.reportTimelineGetStatusError(error: error)
+				self.timelineStatusView.setMessage(with: error)
 			}
 		}
 	}
@@ -607,7 +606,7 @@ extension TimelineViewController : NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		
-		let cell = activeTimelineContentsController.tableCell(for: row)
+		let cell = contentsController.tableCell(for: row)
 
 //		cell?.selected = tableView.isRowSelected(row)
         cell?.selected = currentTimelineSelectedRowIndexes.contains(row)
@@ -617,7 +616,7 @@ extension TimelineViewController : NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		
-		return activeTimelineContentsController.estimateCellHeight(of: row)
+		return contentsController.estimateCellHeight(of: row)
 	}
 
     func tableViewSelectionIsChanging(_ notification: Notification) {

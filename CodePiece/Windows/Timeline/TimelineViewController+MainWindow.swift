@@ -18,7 +18,7 @@ extension TimelineViewController {
 			return false
 		}
 
-		return activeTimelineContentsController.canReplyRequest
+		return contentsController.canReplyRequest
 	}
 	
 	@IBAction func replyRequest(_ sender: AnyObject) {
@@ -33,7 +33,7 @@ extension TimelineViewController {
 			return false
 		}
 
-		return activeTimelineContentsController.canOpenBrowserWithCurrentTwitterStatus
+		return contentsController.canOpenBrowserWithCurrentTwitterStatus
 	}
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {

@@ -11,38 +11,44 @@ import Cocoa
 @objcMembers
 final class BaseViewController: NSSplitViewController {
 
-	private(set) weak var mainSplitViewItem:NSSplitViewItem? {
+	private(set) weak var mainSplitViewItem: NSSplitViewItem? {
 		
 		didSet {
 			
-			self.mainViewController = self.mainSplitViewItem.map { $0.viewController as! MainViewController }
+			mainViewController = mainSplitViewItem.map { $0.viewController as! MainViewController }
 		}
 	}
 
-	private(set) weak var timelineSplitViewItem:NSSplitViewItem? {
+	private(set) weak var timelineSplitViewItem: NSSplitViewItem? {
 		
 		didSet {
 			
-			self.timelineViewController = self.timelineSplitViewItem.map { $0.viewController as! TimelineViewController }
+			timelineViewController = timelineSplitViewItem.map { $0.viewController as! TimelineViewController }
 		}
 	}
 
-	private(set) weak var mainViewController:MainViewController?
-	private(set) weak var timelineViewController:TimelineViewController?
+	private(set) weak var mainViewController: MainViewController?
+	private(set) weak var timelineViewController: TimelineViewController?
+	
+	override func awakeFromNib() {
+		
+		super.awakeFromNib()
+		
+	}
 	
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
 		
-		for item in self.splitViewItems {
+		for item in splitViewItems {
 			
 			switch item.viewController {
 				
 			case is MainViewController:
-				self.mainSplitViewItem = item
+				mainSplitViewItem = item
 				
 			case is TimelineViewController:
-				self.timelineSplitViewItem = item
+				timelineSplitViewItem = item
 				
 			default:
 				break

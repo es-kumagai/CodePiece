@@ -72,7 +72,7 @@ final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDelegate 
 	
 	public func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		
-		let defaultCellHeight:CGFloat = tableView.rowHeight
+		let defaultCellHeight: CGFloat = tableView.rowHeight
 		
 		guard let owner = self.owner else {
 			

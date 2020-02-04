@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import ESTwitter
+
 
 @objcMembers
 final class TimelineStatusView: NSView {
@@ -86,6 +88,34 @@ final class TimelineStatusView: NSView {
 	func clearMessage() {
 		
 		OKMessage = ""
+	}
+	
+	func setMessage(with error: PostError) {
+		
+		var description: (kind: String, message: String) {
+			
+			switch error {
+				
+			case .apiError(let error, _):
+				return ("API Error", "\(error)")
+				
+			case .tweetError(let message):
+				return ("Tweet Error", message)
+				
+			case .parseError(let message, _):
+				return ("Parse Error", message)
+				
+			case .internalError(let message, _):
+				return ("Internal Error", message)
+				
+			case .unexpectedError(let error):
+				return ("Unexpected Error", "\(error)")
+			}
+		}
+		
+		DebugTime.print("An error occurres when updating timeline (\(description.kind)): \(description.message)")
+		
+		errorMessage = description.message
 	}
 	
 	var foregroundColor: NSColor {

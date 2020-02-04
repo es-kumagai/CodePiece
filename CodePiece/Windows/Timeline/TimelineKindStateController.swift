@@ -25,6 +25,7 @@ final class TimelineKindStateController : NSObject {
 				return
 			}
 			
+			updateButtonState()
 			delegate?.timelineKindStateChanged?(self, kind: timelineKind!)
 		}
 	}

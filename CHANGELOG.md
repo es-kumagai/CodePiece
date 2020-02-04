@@ -4,6 +4,10 @@ Change Logs.
 
 ## 2.0.2 *
 
+### Enhancement
+
+* Switch showing tweets between having hashtags and posted user own in Timeline view.
+
 ### Updates
 
 * Change the save method of GitHub authorization information. (Needs re-authorization.)
