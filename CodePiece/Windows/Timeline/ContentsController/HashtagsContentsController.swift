@@ -28,6 +28,11 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		}
 	}
 	
+	override var tableViewDataSource: TimelineTableDataSource {
+		
+		return dataSource
+	}
+	
 	override func activate() {
 		
 		super.activate()
@@ -66,32 +71,6 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		}
 	}
 	
-	override var canReplyRequest: Bool {
-		
-		guard let tableView = tableView else {
-			
-			return false
-		}
-		
-		let indexes = dataSource.items.indexes { $0 is TimelineTweetItem }
-		let result = Set(tableView.selectedRowIndexes).isSubset(of: indexes)
-
-		return result
-	}
-	
-	override var canOpenBrowserWithCurrentTwitterStatus: Bool {
-		
-		guard let tableView = tableView else {
-			
-			return false
-		}
-		
-		let indexes = dataSource.items.indexes { $0 is TimelineTweetItem }
-		let result = Set(tableView.selectedRowIndexes).isSubset(of: indexes)
-
-		return result
-	}
-	
 	override func estimateCellHeight(of row: Int) -> CGFloat {
 
 		guard let tableView = tableView else {
@@ -103,27 +82,7 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		
 		return item.timelineCellType.estimateCellHeightForItem(item: item, tableView: tableView)
 	}
-	
-	override func tableCell(for row: Int) -> TimelineTableCellType? {
 		
-		guard let tableView = tableView else {
-			
-			return nil
-		}
-		
-		let items = dataSource.items
-		
-		guard row < items.count else {
-			
-			return nil
-		}
-		
-		let item = items[row]
-		let cell = item.timelineCellType.makeCellWithItem(item: item, tableView: tableView, owner: self) as! TimelineTableCellType
-		
-		return cell
-	}
-	
 	override func appendTweets(tweets: [Status]) {
 		
 		let newTweets = tweets
@@ -133,17 +92,6 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 			.prefix(maxTimelineRows)
 		
 		dataSource.items = Array(newTweets)
-	}
-	
-	override func updateContents() {
-		
-		guard let tableView = tableView else {
-
-			return
-		}
-		
-		tableView.dataSource = dataSource
-		tableView.reloadData()
 	}
 }
 

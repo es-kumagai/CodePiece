@@ -12,7 +12,7 @@ import Cocoa
 
 protocol TimelineTableDataSource : NSTableViewDataSource {
 
-//	var canReplyRequest: Bool { get }
+	var items: Array<TimelineTableItem> { get }
 }
 
 //@objcMembers
