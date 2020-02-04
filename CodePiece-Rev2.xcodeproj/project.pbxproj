@@ -37,6 +37,8 @@
 		B140C85123E082960009D57C /* EntityUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C85023E082960009D57C /* EntityUnit.swift */; };
 		B1508BDB23E92E9800973728 /* TimelineKindState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDA23E92E9800973728 /* TimelineKindState.swift */; };
 		B1508BDD23E92F0C00973728 /* TimelineKindStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */; };
+		B1508BE023E9435600973728 /* HashtagsContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDF23E9435600973728 /* HashtagsContentsController.swift */; };
+		B1508BE423E9472000973728 /* TimelineContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BE323E9472000973728 /* TimelineContentsController.swift */; };
 		B15EE1DE23CE706C005B268A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1DD23CE706C005B268A /* Alert.swift */; };
 		B15EE1F623CE747D005B268A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F523CE747D005B268A /* Extension.swift */; };
 		B15EE1F923CE7522005B268A /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F823CE7522005B268A /* AppControllers.swift */; };
@@ -278,6 +280,8 @@
 		B140C85023E082960009D57C /* EntityUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityUnit.swift; sourceTree = "<group>"; };
 		B1508BDA23E92E9800973728 /* TimelineKindState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineKindState.swift; sourceTree = "<group>"; };
 		B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineKindStateController.swift; sourceTree = "<group>"; };
+		B1508BDF23E9435600973728 /* HashtagsContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagsContentsController.swift; sourceTree = "<group>"; };
+		B1508BE323E9472000973728 /* TimelineContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineContentsController.swift; sourceTree = "<group>"; };
 		B15EE1DD23CE706C005B268A /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		B15EE1F523CE747D005B268A /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B15EE1F823CE7522005B268A /* AppControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppControllers.swift; sourceTree = "<group>"; };
@@ -538,6 +542,15 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		B1508BDE23E9433000973728 /* ContentsController */ = {
+			isa = PBXGroup;
+			children = (
+				B1508BE323E9472000973728 /* TimelineContentsController.swift */,
+				B1508BDF23E9435600973728 /* HashtagsContentsController.swift */,
+			);
+			path = ContentsController;
+			sourceTree = "<group>";
+		};
 		B15EE1DC23CE706C005B268A /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,6 +716,7 @@
 		B15EE27F23CE7667005B268A /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				B1508BDE23E9433000973728 /* ContentsController */,
 				B15EE27223CE7667005B268A /* Timeline.storyboard */,
 				B1C4410E23E0503C00C4715A /* Table */,
 				B1C4410D23E0500F00C4715A /* TableCell */,
@@ -1312,6 +1326,7 @@
 				B15EE20A23CE7593005B268A /* TwitterText.swift in Sources */,
 				B15EE2A223CE7667005B268A /* TimelineStatusView.swift in Sources */,
 				B15EE20823CE7593005B268A /* TwitterOpenFeatures.swift in Sources */,
+				B1508BE423E9472000973728 /* TimelineContentsController.swift in Sources */,
 				B15EE29223CE7667005B268A /* MainViewController+Fields.swift in Sources */,
 				B15EE25E23CE7658005B268A /* PostData+Gists.swift in Sources */,
 				B15EE26923CE7658005B268A /* TwitterByOAuthPreferenceViewController.swift in Sources */,
@@ -1343,6 +1358,7 @@
 				B15EE20123CE757C005B268A /* DebugSupport.swift in Sources */,
 				B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */,
 				B15EE25623CE7658005B268A /* AccountSeting.swift in Sources */,
+				B1508BE023E9435600973728 /* HashtagsContentsController.swift in Sources */,
 				B15EE28F23CE7667005B268A /* LatestTweetManageable.swift in Sources */,
 				B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */,
 				B15EE25C23CE7658005B268A /* GistsController.swift in Sources */,

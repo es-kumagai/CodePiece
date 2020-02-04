@@ -8,13 +8,13 @@
 
 import AppKit
 
-final class TimelineKindStateController : NSObject {
+@objc enum TimelineKind : Int, Codable {
 	
-	@objc enum TimelineKind : Int, Codable {
-		
-		case hashtags = 0
-		case myTweets = 1
-	}
+	case hashtags = 0
+	case myTweets = 1
+}
+
+final class TimelineKindStateController : NSObject {
 	
 	var timelineKind: TimelineKind? {
 		
@@ -80,7 +80,7 @@ private extension TimelineKindStateController {
 	}
 }
 
-extension TimelineKindStateController.TimelineKind : CustomStringConvertible {
+extension TimelineKind : CustomStringConvertible {
 	
 	var description: String {
 		

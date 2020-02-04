@@ -19,11 +19,22 @@ private let TableViewInsertAnimationOptions: NSTableView.AnimationOptions = [.sl
 final class TimelineViewController: NSViewController {
 
 	@IBOutlet var menuController: MenuController!
-	@IBOutlet var timelineKindStateController: TimelineKindStateController!
 	
+	@IBOutlet var timelineKindStateController: TimelineKindStateController! {
+		
+		didSet {
+			
+			timelineKindStateController.timelineKind = currentTimelineKind
+		}
+	}
+	
+	var currentTimelineKind: TimelineKind = .hashtags
     var notificationHandlers = Notification.Handlers()
 	
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
+	
+	@IBOutlet var hashtagsContentsController: HashtagsContentsController!
+	
 	
 	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
 	var currentTimelineSelectedRowIndexes = IndexSet() {
@@ -48,30 +59,6 @@ final class TimelineViewController: NSViewController {
 			}
 
 			TimelineSelectionChangedNotification(timelineViewController: self, selectedCells: timelineTableView.selectedCells).post()
-		}
-	}
-	
-	struct TimelineInformation {
-	
-		var hashtags: HashtagSet
-		
-		init() {
-		
-			self.init(hashtags: [])
-		}
-		
-		init(hashtags: HashtagSet) {
-			
-			self.hashtags = hashtags
-		}
-		
-		func replaceHashtags(hashtags: HashtagSet) -> TimelineInformation {
-			
-			defer {
-				NSLog("Hashtag did change: \(hashtags)")
-			}
-			
-			return TimelineInformation(hashtags: hashtags)
 		}
 	}
 	
@@ -138,17 +125,6 @@ final class TimelineViewController: NSViewController {
 	var isTimelineActive: Bool {
 	
 		return true
-	}
-	
-	var timeline = TimelineInformation(hashtags: NSApp.settings.appState.hashtags ?? []) {
-		
-		didSet {
-			
-			if timeline.hashtags != oldValue.hashtags {
-				
-				message.send(message: .ChangeHashtags(timeline.hashtags))
-			}
-		}
 	}
 }
 
@@ -411,16 +387,13 @@ extension TimelineViewController : NotificationObservable {
 		
 		super.viewWillAppear()
 	
+		hashtagsContentsController.activate()
+				
 		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.message.send(message: .UpdateStatuses)
 		}
-		
-		observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
-			
-			self.timeline = self.timeline.replaceHashtags(hashtags: notification.hashtags)
-		}
-		
+				
 		observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
 			
 			self.message.send(message: .AutoUpdate(enable: false))
@@ -483,7 +456,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 			return
 		}
 		
-		let hashtags = timeline.hashtags
+		let hashtags = hashtagsContentsController.hashtags
 		let query = hashtags.twitterQueryText
 		
 		let updateTable = { (tweets:[Status]) in
@@ -605,8 +578,19 @@ extension TimelineViewController : NSTableViewDelegate {
 
 extension TimelineViewController : TimelineKindStateDelegate {
 	
-	func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKindStateController.TimelineKind) {
+	func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKind) {
 		
 		print(kind.description)
+	}
+}
+
+extension TimelineViewController : TimelineContentsControllerDelegate {
+	
+	func timelineContentsChanged(_ sender: TimelineContentsController) {
+		
+		#warning("ここで hashtagsContentsController に依存させないこと。")
+		let hashtags = hashtagsContentsController.hashtags
+		
+		message.send(message: .ChangeHashtags(hashtags))
 	}
 }

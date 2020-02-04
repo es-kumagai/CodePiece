@@ -79,7 +79,7 @@
                                                     <tableColumns>
                                                         <tableColumn width="311" minWidth="40" maxWidth="1000" id="RRX-xc-pTL">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                <font key="font" metaFont="label" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -161,7 +161,7 @@
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="pgZ-aP-321">
                                                                                                     <rect key="frame" x="237" y="0.0" width="28" height="14"/>
                                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="date" id="i03-Vk-1xE">
-                                                                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                                         <color key="textColor" name="TimelineDateLabelColor"/>
                                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                     </textFieldCell>
@@ -241,7 +241,7 @@
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="0SF-DB-qdw">
                                                                                                     <rect key="frame" x="16" y="0.0" width="84" height="14"/>
                                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="xAo-9Z-cs6">
-                                                                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                                         <color key="textColor" name="HashtagStateRecentTextColor"/>
                                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                     </textFieldCell>
@@ -277,7 +277,7 @@
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="Ro0-SP-0ba">
                                                                                                     <rect key="frame" x="-2" y="0.0" width="84" height="14"/>
                                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="PA1-DH-PRB">
-                                                                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                                         <color key="textColor" name="HashtagStatePastTextColor"/>
                                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                     </textFieldCell>
@@ -445,7 +445,7 @@
                                                                     <constraint firstAttribute="height" constant="14" id="mHM-Gd-XBt"/>
                                                                 </constraints>
                                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Label" id="mB6-Ez-ITY">
-                                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                                    <font key="font" metaFont="label" size="11"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -538,6 +538,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="hashtagsContentsController" destination="gzs-Yv-F3B" id="7fU-aK-mtF"/>
                         <outlet property="menuController" destination="DpM-X5-doD" id="Qw9-i1-dYz"/>
                         <outlet property="timelineDataSource" destination="zPm-Mr-oy7" id="nS5-eP-bqO"/>
                         <outlet property="timelineKindStateController" destination="8og-KC-eHv" id="NgF-01-ro4"/>
@@ -557,6 +558,11 @@
                         <outlet property="delegate" destination="gED-XW-6vA" id="WZj-Ae-Vfd"/>
                         <outlet property="hashtagsButton" destination="FxF-MW-DU4" id="Upb-V9-s3D"/>
                         <outlet property="myTweetsButton" destination="g50-GN-89h" id="qGU-mY-6ZD"/>
+                    </connections>
+                </customObject>
+                <customObject id="gzs-Yv-F3B" customClass="HashtagsContentsController" customModule="CodePiece" customModuleProvider="target">
+                    <connections>
+                        <outlet property="delegate" destination="gED-XW-6vA" id="bSf-V0-avl"/>
                     </connections>
                 </customObject>
             </objects>

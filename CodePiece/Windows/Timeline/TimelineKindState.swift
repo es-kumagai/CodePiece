@@ -10,5 +10,5 @@ import Foundation
 
 @objc protocol TimelineKindStateDelegate : class {
 	
-	@objc optional func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKindStateController.TimelineKind)
+	@objc optional func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKind)
 }
