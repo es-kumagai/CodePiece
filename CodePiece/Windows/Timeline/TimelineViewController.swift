@@ -556,7 +556,7 @@ extension TimelineViewController {
 			return
 		}
 		
-		func update(tweets: [Status], hashtags: HashtagSet) {
+		func update(tweets: [Status], associatedHashtags hashtags: HashtagSet) {
 			
 			DebugTime.print("Current Selection:\n\tCurrentTimelineSelectedRows: \(self.currentTimelineSelectedRowIndexes)\n\tNative: \(self.timelineTableView.selectedRowIndexes)")
 			
@@ -583,8 +583,7 @@ extension TimelineViewController {
 				
 			case .success(let statuses, let hashtags):
 				
-				#warning("ここで hashtags に依存すると融通が効かない。")
-				update(tweets: statuses, hashtags: hashtags)
+				update(tweets: statuses, associatedHashtags: hashtags)
 				
 				self.message.send(message: .resetAutoUpdateIntervalDeray)
 				self.timelineStatusView.OKMessage = "Last Update: \(Date().displayString)"

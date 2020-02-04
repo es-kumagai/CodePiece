@@ -102,7 +102,6 @@
                 <customObject id="rsG-e1-hQh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="6D8-kG-lSc"/>
                 <userDefaultsController representsSharedInstance="YES" id="Sqo-G7-fcf"/>
-                <customObject id="DpM-X5-doD" customClass="MenuController" customModule="CodePiece" customModuleProvider="target"/>
                 <customObject id="8og-KC-eHv" customClass="TimelineKindStateController" customModule="CodePiece" customModuleProvider="target">
                     <connections>
                         <outlet property="delegate" destination="gED-XW-6vA" id="WZj-Ae-Vfd"/>
@@ -457,7 +456,7 @@
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                         <connections>
-                                                            <action selector="openBrowserWithCurrentTwitterStatus:" target="DpM-X5-doD" id="69Q-Yn-Hes"/>
+                                                            <action selector="openBrowserWithCurrentTwitterStatus:" target="xz6-86-o4Y" id="krF-Yy-gHa"/>
                                                             <binding destination="oqG-TL-2I0" name="enabled" keyPath="canOpenBrowserWithCurrentTwitterStatus" id="FHc-ZI-y2E"/>
                                                         </connections>
                                                     </button>
@@ -596,7 +595,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="menuController" destination="DpM-X5-doD" id="5BQ-XF-kur"/>
+                        <outlet property="menuController" destination="xz6-86-o4Y" id="xS2-BW-7zH"/>
                         <outlet property="tableView" destination="3Sc-gh-ozk" id="8zH-vD-T2V"/>
                         <outlet property="timelineRefreshButton" destination="Ff4-If-Tyd" id="FCD-EV-8aW"/>
                         <outlet property="timelineStatusView" destination="Uy7-j7-dI6" id="3Bx-TN-3Fq"/>
