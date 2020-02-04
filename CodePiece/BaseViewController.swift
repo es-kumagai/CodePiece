@@ -55,4 +55,9 @@ final class BaseViewController: NSSplitViewController {
 			}
 		}
 	}
+	
+	override func splitView(_ splitView: NSSplitView, effectiveRect proposedEffectiveRect: NSRect, forDrawnRect drawnRect: NSRect, ofDividerAt dividerIndex: Int) -> NSRect {
+		
+		return .zero
+	}
 }

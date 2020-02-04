@@ -393,7 +393,7 @@ extension TimelineViewController : NotificationObservable {
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
-		
+				
 		message = MessageQueue(identifier: "CodePiece.Timeline", handler: self)
 		updateTimerSource = message.makeTimerSource(interval: Semaphore.Interval(second: 0.03), start: true, timerAction: autoUpdateAction)
 		
@@ -408,7 +408,7 @@ extension TimelineViewController : NotificationObservable {
 	override func viewWillAppear() {
 		
 		super.viewWillAppear()
-		
+
 		contentsController.activate()
 		
 		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
