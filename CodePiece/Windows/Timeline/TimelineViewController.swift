@@ -24,16 +24,22 @@ final class TimelineViewController: NSViewController {
 		
 		didSet {
 			
-			timelineKindStateController.timelineKind = currentTimelineKind
+			#warning("検証用に既定値を変更します。")
+			timelineKindStateController.timelineKind = .myTweets
 		}
 	}
 	
-	var currentTimelineKind: TimelineKind = .hashtags
+	var currentTimelineKind: TimelineKind? {
+		
+		return timelineKindStateController.timelineKind
+	}
+	
 	var notificationHandlers = Notification.Handlers()
 	
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
 	
 	@IBOutlet var hashtagsContentsController: HashtagsContentsController!
+	@IBOutlet var myTweetsContentsController: MyTweetsContentsController!
 	
 	
 	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
@@ -102,8 +108,10 @@ final class TimelineViewController: NSViewController {
 			return hashtagsContentsController
 			
 		case .myTweets:
-			#warning("未完成につき、ランタイムエラーを発生させます。")
-			fatalError()
+			return myTweetsContentsController
+			
+		case .none:
+			fatalError("Timeline kind is not specified.")
 		}
 	}
 	
@@ -403,6 +411,7 @@ extension TimelineViewController : NotificationObservable {
 		super.viewWillAppear()
 		
 		hashtagsContentsController.activate()
+		myTweetsContentsController.activate()
 		
 		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
@@ -473,7 +482,7 @@ extension TimelineViewController {
 	}
 	
 	
-	func appendTweets(tweets: [Status], hashtags: HashtagSet) -> (insertedIndexes: IndexSet, ignoredIndexes: IndexSet, removedIndexes: IndexSet) {
+	func appendTweets(tweets: [Status], associatedHashtags hashtags: HashtagSet) -> (insertedIndexes: IndexSet, ignoredIndexes: IndexSet, removedIndexes: IndexSet) {
 		
 		let tweetCount = tweets.count
 		
@@ -552,7 +561,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 			
 			DebugTime.print("Current Selection:\n\tCurrentTimelineSelectedRows: \(self.currentTimelineSelectedRowIndexes)\n\tNative: \(self.timelineTableView.selectedRowIndexes)")
 			
-			let result = self.appendTweets(tweets: tweets, hashtags: hashtags)
+			let result = self.appendTweets(tweets: tweets, associatedHashtags: hashtags)
 			let nextSelectedIndexes = self.getNextTimelineSelection(insertedIndexes: result.insertedIndexes)
 			
 			NSLog("Tweet: \(tweets.count)")
@@ -567,7 +576,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 		
 		displayControlState = .Updating
 		
-		hashtagsContentsController.updateContents { result in
+		activeTimelineContentsController.updateContents { result in
 			
 			self.displayControlState = .Updated
 			
@@ -575,6 +584,7 @@ extension TimelineViewController : TimelineGetStatusesController {
 				
 			case .success(let statuses, let hashtags):
 				
+				#warning("ここで hashtags に依存すると融通が効かない。")
 				update(tweets: statuses, hashtags: hashtags)
 				
 				self.message.send(message: .resetAutoUpdateIntervalDeray)
@@ -631,7 +641,7 @@ extension TimelineViewController : NSTableViewDelegate {
 
 extension TimelineViewController : TimelineKindStateDelegate {
 	
-	func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKind) {
+	@objc func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKind) {
 		
 		updateTimeline()
 	}
@@ -639,14 +649,11 @@ extension TimelineViewController : TimelineKindStateDelegate {
 
 extension TimelineViewController : TimelineContentsControllerDelegate {
 	
-	func timelineContents(_ sender: TimelineContentsController, changed: Bool) {
+	func timelineContentsNeedsUpdate(_ sender: TimelineContentsController) {
 		
 		//		message.send(message: .changeHashtags(hashtags))
 		
-		if changed {
-			
-			timelineTableView.insertRows(at: IndexSet(integer: 0), withAnimation: TableViewInsertAnimationOptions)
-			message.send(message: .updateStatuses)
-		}
+		timelineTableView.insertRows(at: IndexSet(integer: 0), withAnimation: TableViewInsertAnimationOptions)
+		message.send(message: .updateStatuses)
 	}
 }

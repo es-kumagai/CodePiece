@@ -732,6 +732,42 @@ extension TwitterController {
 		}
 	}
 	
+	func timeline(options: API.TimelineOptions = .init(), handler: @escaping (GetStatusesResult) -> Void) {
+	
+		guard let id = token?.userId else {
+			
+			handler(.failure(.apiError(.notReady, state: .withNoPostProcess)))
+			return
+		}
+		
+		timeline(of: .id(id), options: options, handler: handler)
+	}
+	
+	func timeline(of user: API.UserSelector, options: API.TimelineOptions = .init(), handler: @escaping (GetStatusesResult) -> Void) {
+		
+		func success(_ statuses: [Status]) {
+			
+			handler(.success(statuses))
+		}
+		
+		func failure(_ error: PostError) {
+
+			handler(.failure(error))
+		}
+		
+		api.timeline(of: user, options: options) { result in
+			
+			switch result {
+				
+			case .success(let statuses):
+				success(statuses)
+				
+			case .failure(let error):
+				failure(error)
+			}
+		}
+	}
+	
 	func authorize() {
 
 		func success(_ token: Token) {

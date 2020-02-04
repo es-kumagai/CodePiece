@@ -200,7 +200,35 @@ extension API {
 		api.postMedia(media, additionalOwners: additionalOwners.map(SwifterUsersTag.init), success: successHandler, failure: failureHandler)
 	}
 	
-	public func search(usingQuery query: String, options: API.SearchOptions = API.SearchOptions(), handler: @escaping (SearchResult) -> Void) {
+	public func timeline(of user: UserSelector, options: TimelineOptions = .init(), handler: @escaping (SearchResult) -> Void) {
+	
+		guard let api = rawApi else {
+			
+			handler(.failure(.apiError(.notReady, state: .withNoPostProcess)))
+			return
+		}
+		
+		func successHandler(json: JSON) {
+			
+			handler(statuses(from: json))
+		}
+		
+		func failureHandler(error: Error) {
+			
+			switch error {
+				
+			case let error as SwifterError:
+				handler(.failure(.init(tweetError: error)))
+				
+			default:
+				handler(.failure(.unexpectedError(error, state: .withNoPostProcess)))
+			}
+		}
+		
+		api.getTimeline(for: UserTag(user), customParam: [:], count: options.count, sinceID: options.sinceId, maxID: options.maxId, trimUser: options.trimUser, excludeReplies: options.excludeReplies, includeRetweets: options.includeRetweets, contributorDetails: options.contributorDetails, includeEntities: options.includeEntities, tweetMode: SwifterTweetMode(options.tweetMode), success: successHandler, failure: failureHandler)
+	}
+	
+	public func search(usingQuery query: String, options: SearchOptions = .init(), handler: @escaping (SearchResult) -> Void) {
 		
 		guard let api = rawApi else {
 			
@@ -210,25 +238,7 @@ extension API {
 		
 		func successHandler(json: JSON, metadata: JSON) {
 			
-			do {
-
-				let data = try json.serialized()
-				let statuses = try JSONDecoder().decode([Status].self, from: data)
-			
-				handler(.success(statuses))
-			}
-			catch let error as DecodingError {
-				
-				handler(.failure(.parseError("\(error)", state: .withNoPostProcess)))
-			}
-			catch let error as JSON.SerializationError {
-
-				handler(.failure(.unexpectedError(error, state: .withNoPostProcess)))
-			}
-			catch {
-
-				handler(.failure(.internalError("Failed to serialize a JSON data. \(error)", state: .withNoPostProcess)))
-			}
+			handler(statuses(from: json))
 		}
 		
 		func failureHandler(error: Error) {
@@ -300,5 +310,31 @@ extension API {
 
 		// FIXME: Swifter のサインアウト方法がわからないため、アプリ内の認証情報だけを削除します。
 		successHandler()
+	}
+}
+
+extension API {
+	
+	func statuses(from json: JSON) -> SearchResult {
+		
+		do {
+
+			let data = try json.serialized()
+			let statuses = try JSONDecoder().decode([Status].self, from: data)
+		
+			return .success(statuses)
+		}
+		catch let error as DecodingError {
+			
+			return .failure(.parseError("\(error)", state: .withNoPostProcess))
+		}
+		catch let error as JSON.SerializationError {
+
+			return .failure(.unexpectedError(error, state: .withNoPostProcess))
+		}
+		catch {
+
+			return .failure(.internalError("Failed to serialize a JSON data. \(error)", state: .withNoPostProcess))
+		}
 	}
 }

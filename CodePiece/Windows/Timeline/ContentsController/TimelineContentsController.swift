@@ -11,7 +11,7 @@ import ESTwitter
 
 class TimelineContentsController : NSObject {
 	
-	typealias UpdateResult = Result<(statuses: [Status], hashtags: HashtagSet), PostError>
+	typealias UpdateResult = Result<([Status], associatedHashtags: HashtagSet), PostError>
 	
 	var notificationHandlers = Notification.Handlers()
 
@@ -117,5 +117,5 @@ class TimelineContentsController : NSObject {
 
 @objc protocol TimelineContentsControllerDelegate : class {
 
-	@objc optional func timelineContents(_ sender: TimelineContentsController, changed: Bool)
+	@objc optional func timelineContentsNeedsUpdate(_ sender: TimelineContentsController)
 }

@@ -78,7 +78,7 @@ extension Sequence where Element == Status {
 	
 	func toTimelineTweetItems(hashtags: HashtagSet) -> [TimelineTweetItem] {
 		
-		return self.map { TimelineTweetItem(status: $0, hashtags: hashtags) }
+		return map { TimelineTweetItem(status: $0, hashtags: hashtags) }
 	}
 }
 

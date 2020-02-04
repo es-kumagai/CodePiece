@@ -20,7 +20,10 @@ final class TimelineKindStateController : NSObject {
 		
 		didSet (previousKind) {
 			
-			guard timelineKind != previousKind else { return }
+			guard timelineKind != previousKind else {
+				
+				return
+			}
 			
 			delegate?.timelineKindStateChanged?(self, kind: timelineKind!)
 		}

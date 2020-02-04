@@ -1,5 +1,5 @@
 //
-//  HashtagsContentsController.swift
+//  MyTweetsContentsController.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on 2020/02/04.
@@ -11,27 +11,10 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class HashtagsContentsController : TimelineContentsController, NotificationObservable {
+final class MyTweetsContentsController : TimelineContentsController, NotificationObservable {
 	
 	var dataSource = DataSource()
-	
-	var hashtags: HashtagSet = NSApp.settings.appState.hashtags ?? [] {
 		
-		didSet (previousHashtags) {
-			
-			guard hashtags != previousHashtags else {
-				
-				return
-			}
-
-			if dataSource.appendHashtags(hashtags: hashtags).passed {
-
-				NSLog("Hashtag did change: \(hashtags)")
-				delegate?.timelineContentsNeedsUpdate?(self)
-			}
-		}
-	}
-	
 	override var tableViewDataSource: TimelineTableDataSource {
 		
 		return dataSource
@@ -41,33 +24,21 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		
 		super.activate()
 		
-		observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
-			
-			self.hashtags = notification.hashtags
-		}
 	}
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
-		
-		let query = hashtags.twitterQueryText
-		
-		guard !query.isEmpty else {
+
+		let options = API.TimelineOptions(
 			
-			return
-		}
-		
-				
-		let options = API.SearchOptions(
-			
-			sinceId: dataSource.latestTweetIdForHashtags(hashtags: hashtags)
+			sinceId: dataSource.lastTweetId
 		)
 		
-		NSApp.twitterController.search(tweetWith: query, options: options) { result in
+		NSApp.twitterController.timeline(options: options) { result in
 			
 			switch result {
 				
 			case .success(let statuses):
-				callback(.success((statuses, self.hashtags)))
+				callback(.success((statuses, [])))
 				
 			case .failure(let error):
 				callback(.failure(error))
@@ -91,7 +62,7 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		
 		let newTweets = tweets
 			.orderByNewCreationDate()
-			.toTimelineTweetItems(hashtags: hashtags)
+			.toTimelineTweetItems(hashtags: [])
 			.timelineItemsAppend(items: dataSource.items)
 			.prefix(maxTimelineRows)
 		
@@ -99,40 +70,31 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 	}
 }
 
-// MARK: - NSTableViewDataSource
-
-extension HashtagsContentsController {
+extension MyTweetsContentsController {
 	
 	final class DataSource: NSObject, TimelineTableDataSource {
 		
-		private var lastTweetId = Dictionary<HashtagSet, String>()
+		var lastTweetId: String? = nil
 
 		var items = Array<TimelineTableItem>() {
 			
-			didSet {
+			didSet (previousItems) {
 		
-				items.timelineLatestTweetItem.executeIfExists(setLatestTweet)
+				if let item = items.timelineLatestTweetItem {
+					
+					lastTweetId = item.timelineItemTweetId
+				}
 			}
 		}
 		
 	}
 }
 
-extension HashtagsContentsController.DataSource {
+extension MyTweetsContentsController.DataSource {
 
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		
 		return items.count
-	}
-	
-	func latestTweetIdForHashtags(hashtags: HashtagSet) -> String? {
-		
-		return lastTweetId[hashtags]
-	}
-
-	func setLatestTweet(item: TimelineTweetItem) {
-		
-		lastTweetId[item.currentHashtags] = item.timelineItemTweetId!
 	}
 
 	@discardableResult
