@@ -8,19 +8,23 @@
 
 import Cocoa
 import ESTwitter
+import Swim
 import Ocean
 
-class HashtagsContentsController : TimelineContentsController, NotificationObservable {
+final class HashtagsContentsController : TimelineContentsController, NotificationObservable {
+	
+	var dataSource = DataSource()
 	
 	var hashtags: HashtagSet = NSApp.settings.appState.hashtags ?? [] {
 		
 		didSet (previousHashtags) {
 			
 			guard hashtags != previousHashtags else { return }
-			
+
+			let appendResult = dataSource.appendHashtags(hashtags: hashtags)
 			NSLog("Hashtag did change: \(hashtags)")
 
-			delegate?.timelineContentsChanged?(self)
+			delegate?.timelineContents?(self, changed: appendResult.passed)
 		}
 	}
 	
@@ -31,6 +35,189 @@ class HashtagsContentsController : TimelineContentsController, NotificationObser
 		observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
 			
 			self.hashtags = notification.hashtags
+		}
+	}
+	
+	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
+		
+		let query = hashtags.twitterQueryText
+		
+		guard !query.isEmpty else {
+			
+			return
+		}
+		
+				
+		let options = API.SearchOptions(
+			
+			sinceId: dataSource.latestTweetIdForHashtags(hashtags: hashtags)
+		)
+		
+		NSApp.twitterController.search(tweetWith: query, options: options) { result in
+			
+			switch result {
+				
+			case .success(let statuses):
+				callback(.success((statuses, self.hashtags)))
+				
+			case .failure(let error):
+				callback(.failure(error))
+			}
+		}
+	}
+	
+	override var canReplyRequest: Bool {
+		
+		guard let tableView = tableView else {
+			
+			return false
+		}
+		
+		let indexes = dataSource.items.indexes { $0 is TimelineTweetItem }
+		let result = Set(tableView.selectedRowIndexes).isSubset(of: indexes)
+
+		return result
+	}
+	
+	override var canOpenBrowserWithCurrentTwitterStatus: Bool {
+		
+		guard let tableView = tableView else {
+			
+			return false
+		}
+		
+		let indexes = dataSource.items.indexes { $0 is TimelineTweetItem }
+		let result = Set(tableView.selectedRowIndexes).isSubset(of: indexes)
+
+		return result
+	}
+	
+	override func estimateCellHeight(of row: Int) -> CGFloat {
+
+		guard let tableView = tableView else {
+			
+			return 0
+		}
+		
+		let item = dataSource.items[row]
+		
+		return item.timelineCellType.estimateCellHeightForItem(item: item, tableView: tableView)
+	}
+	
+	override func tableCell(for row: Int) -> TimelineTableCellType? {
+		
+		guard let tableView = tableView else {
+			
+			return nil
+		}
+		
+		let items = dataSource.items
+		
+		guard row < items.count else {
+			
+			return nil
+		}
+		
+		let item = items[row]
+		let cell = item.timelineCellType.makeCellWithItem(item: item, tableView: tableView, owner: self) as! TimelineTableCellType
+		
+		return cell
+	}
+	
+	override func appendTweets(tweets: [Status]) {
+		
+		let newTweets = tweets
+			.orderByNewCreationDate()
+			.toTimelineTweetItems(hashtags: hashtags)
+			.timelineItemsAppend(items: dataSource.items)
+			.prefix(maxTimelineRows)
+		
+		dataSource.items = Array(newTweets)
+	}
+	
+	override func updateContents() {
+		
+		guard let tableView = tableView else {
+
+			return
+		}
+		
+		tableView.dataSource = dataSource
+		tableView.reloadData()
+	}
+}
+
+// MARK: - NSTableViewDataSource
+
+extension HashtagsContentsController {
+	
+	final class DataSource: NSObject, NSTableViewDataSource {
+		
+		private var lastTweetId = Dictionary<HashtagSet, String>()
+
+		var items = Array<TimelineTableItem>() {
+			
+			didSet {
+		
+				items.timelineLatestTweetItem.executeIfExists(setLatestTweet)
+			}
+		}
+		
+	}
+}
+
+extension HashtagsContentsController.DataSource : TimelineTableDataSource {
+
+	func numberOfRows(in tableView: NSTableView) -> Int {
+		
+		return items.count
+	}
+
+//	func setNeedsEstimateHeight() {
+//
+//	}
+	
+}
+
+extension HashtagsContentsController.DataSource {
+	
+	func latestTweetIdForHashtags(hashtags: HashtagSet) -> String? {
+		
+		return lastTweetId[hashtags]
+	}
+
+	func setLatestTweet(item: TimelineTweetItem) {
+		
+		lastTweetId[item.currentHashtags] = item.timelineItemTweetId!
+	}
+
+	@discardableResult
+	func appendHashtags(hashtags: HashtagSet) -> ProcessExitStatus {
+		
+		let latestHashtags = items.first?.currentHashtags
+		let needAppending = { () -> Bool in
+			
+			switch latestHashtags {
+				
+			case .none:
+				return true
+				
+			case .some(let v):
+				return v != hashtags
+			}
+		}
+		
+		if needAppending() {
+			
+			let item = TimelineHashtagTableCellItem(previousHashtags: latestHashtags, currentHashtags: hashtags)
+			
+			items.insert(item, at: 0)
+			
+			return .passed
+		}
+		else {
+
+			return .aborted(in: -1)
 		}
 	}
 }

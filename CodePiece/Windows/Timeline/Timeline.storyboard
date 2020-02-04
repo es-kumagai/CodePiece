@@ -356,7 +356,6 @@
                                                         </tableColumn>
                                                     </tableColumns>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="zPm-Mr-oy7" id="6Jj-hy-Guc"/>
                                                         <outlet property="delegate" destination="gED-XW-6vA" id="kIc-9M-M20"/>
                                                     </connections>
                                                 </tableView>
@@ -540,16 +539,14 @@
                     <connections>
                         <outlet property="hashtagsContentsController" destination="gzs-Yv-F3B" id="7fU-aK-mtF"/>
                         <outlet property="menuController" destination="DpM-X5-doD" id="Qw9-i1-dYz"/>
-                        <outlet property="timelineDataSource" destination="zPm-Mr-oy7" id="nS5-eP-bqO"/>
                         <outlet property="timelineKindStateController" destination="8og-KC-eHv" id="NgF-01-ro4"/>
                         <outlet property="timelineRefreshButton" destination="inc-OH-Dv4" id="FUs-dQ-SJR"/>
                         <outlet property="timelineStatusView" destination="sj5-bJ-doT" id="IMX-0u-O5y"/>
-                        <outlet property="timelineTableView" destination="TsF-qR-Gkc" id="36U-Wc-31I"/>
+                        <outlet property="timelineTableView" destination="TsF-qR-Gkc" id="3pl-Zk-Dea"/>
                         <outlet property="timelineUpdateIndicator" destination="g8k-wC-lpq" id="Ulg-uF-BDe"/>
                     </connections>
                 </viewController>
                 <customObject id="rsG-e1-hQh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <customObject id="zPm-Mr-oy7" customClass="TimelineTableDataSource" customModule="CodePiece" customModuleProvider="target"/>
                 <userDefaultsController id="6D8-kG-lSc"/>
                 <userDefaultsController representsSharedInstance="YES" id="Sqo-G7-fcf"/>
                 <customObject id="DpM-X5-doD" customClass="MenuController" customModule="CodePiece" customModuleProvider="target"/>
@@ -563,6 +560,7 @@
                 <customObject id="gzs-Yv-F3B" customClass="HashtagsContentsController" customModule="CodePiece" customModuleProvider="target">
                     <connections>
                         <outlet property="delegate" destination="gED-XW-6vA" id="bSf-V0-avl"/>
+                        <outlet property="tableView" destination="TsF-qR-Gkc" id="osp-Dl-C3p"/>
                     </connections>
                 </customObject>
             </objects>

@@ -57,16 +57,16 @@ final class TimelineTableView: NSTableView {
 		return makedCells.filter { $0.selection }
 	}
 	
-	func timelineTableDataSource() -> TimelineTableDataSource {
-		
-		return super.dataSource as! TimelineTableDataSource
-	}
+//	func timelineTableDataSource() -> TimelineTableDataSource {
+//
+//		return super.dataSource as! TimelineTableDataSource
+//	}
 	
 	override func resize(withOldSuperviewSize oldSize: NSSize) {
 		
 		super.resize(withOldSuperviewSize: oldSize)
 		
-		self.timelineTableDataSource().setNeedsEstimateHeight()
+//		self.timelineTableDataSource().setNeedsEstimateHeight()
 		self.reloadData()
 	}
 }

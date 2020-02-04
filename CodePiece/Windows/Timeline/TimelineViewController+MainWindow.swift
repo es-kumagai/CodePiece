@@ -18,10 +18,7 @@ extension TimelineViewController {
 			return false
 		}
 
-		let indexes = timelineDataSource.items.indexes { $0 is TimelineTweetItem }
-		let result = Set(timelineTableView.selectedRowIndexes).isSubset(of: indexes)
-
-		return result
+		return activeTimelineContentsController.canReplyRequest
 	}
 	
 	@IBAction func replyRequest(_ sender: AnyObject) {
@@ -36,10 +33,7 @@ extension TimelineViewController {
 			return false
 		}
 
-		let indexes = timelineDataSource.items.indexes { $0 is TimelineTweetItem }
-		let result = Set(timelineTableView.selectedRowIndexes).isSubset(of: indexes)
-
-		return result
+		return activeTimelineContentsController.canOpenBrowserWithCurrentTwitterStatus
 	}
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {
