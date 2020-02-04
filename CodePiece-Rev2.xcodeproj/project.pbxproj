@@ -35,6 +35,8 @@
 		B136C9AF23D189C6004AEA27 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B136C9AE23D189C6004AEA27 /* ESGists */; };
 		B140C84F23E0820B0009D57C /* MediaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C84E23E0820B0009D57C /* MediaEntity.swift */; };
 		B140C85123E082960009D57C /* EntityUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C85023E082960009D57C /* EntityUnit.swift */; };
+		B1508BDB23E92E9800973728 /* TimelineKindState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDA23E92E9800973728 /* TimelineKindState.swift */; };
+		B1508BDD23E92F0C00973728 /* TimelineKindStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */; };
 		B15EE1DE23CE706C005B268A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1DD23CE706C005B268A /* Alert.swift */; };
 		B15EE1F623CE747D005B268A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F523CE747D005B268A /* Extension.swift */; };
 		B15EE1F923CE7522005B268A /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F823CE7522005B268A /* AppControllers.swift */; };
@@ -274,6 +276,8 @@
 		B132D51C23CD08B800690C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B140C84E23E0820B0009D57C /* MediaEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEntity.swift; sourceTree = "<group>"; };
 		B140C85023E082960009D57C /* EntityUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityUnit.swift; sourceTree = "<group>"; };
+		B1508BDA23E92E9800973728 /* TimelineKindState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineKindState.swift; sourceTree = "<group>"; };
+		B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineKindStateController.swift; sourceTree = "<group>"; };
 		B15EE1DD23CE706C005B268A /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		B15EE1F523CE747D005B268A /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B15EE1F823CE7522005B268A /* AppControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppControllers.swift; sourceTree = "<group>"; };
@@ -704,6 +708,8 @@
 				B1C4410D23E0500F00C4715A /* TableCell */,
 				B15EE28123CE7667005B268A /* TimelineViewController+Notifications.swift */,
 				B15EE28223CE7667005B268A /* TimelineViewController+Action.swift */,
+				B1508BDA23E92E9800973728 /* TimelineKindState.swift */,
+				B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */,
 				B15EE28523CE7667005B268A /* TimelineStatusView.swift */,
 				B15EE28623CE7667005B268A /* TimelineViewController.swift */,
 				B15EE28723CE7667005B268A /* TimelineViewController+Display.swift */,
@@ -1365,7 +1371,9 @@
 				B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */,
 				B15EE29F23CE7667005B268A /* TimelineViewController+Action.swift in Sources */,
 				B15EE25823CE7658005B268A /* PostData+Twitter.swift in Sources */,
+				B1508BDD23E92F0C00973728 /* TimelineKindStateController.swift in Sources */,
 				B15EE1FF23CE7571005B268A /* BaseWindowController.swift in Sources */,
+				B1508BDB23E92E9800973728 /* TimelineKindState.swift in Sources */,
 				B15EE2A123CE7667005B268A /* TimelineHashtagTableCellView.swift in Sources */,
 				B15EE29D23CE7667005B268A /* TimelineTableCellView.swift in Sources */,
 				B15EE2A623CE7667005B268A /* TimelineTableView.swift in Sources */,

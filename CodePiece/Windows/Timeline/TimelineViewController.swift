@@ -19,6 +19,7 @@ private let TableViewInsertAnimationOptions: NSTableView.AnimationOptions = [.sl
 final class TimelineViewController: NSViewController {
 
 	@IBOutlet var menuController: MenuController!
+	@IBOutlet var timelineKindStateController: TimelineKindStateController!
 	
     var notificationHandlers = Notification.Handlers()
 	
@@ -386,6 +387,11 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 
 extension TimelineViewController : NotificationObservable {
 
+	override func awakeFromNib() {
+		
+		super.awakeFromNib()
+	}
+	
 	override func viewDidLoad() {
 		
         super.viewDidLoad()
@@ -597,3 +603,10 @@ extension TimelineViewController : NSTableViewDelegate {
 	}
 }
 
+extension TimelineViewController : TimelineKindStateDelegate {
+	
+	func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKindStateController.TimelineKind) {
+		
+		print(kind.description)
+	}
+}
