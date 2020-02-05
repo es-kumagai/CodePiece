@@ -12,8 +12,8 @@ extension TimelineViewController {
 	
 	enum DisplayControlState {
 		
-		case Updating
-		case Updated
+		case updating
+		case updated
 	}
 	
 	var displayControlsForUpdating: [NSView?] {
@@ -26,12 +26,12 @@ extension TimelineViewController {
 		return [self.timelineRefreshButton]
 	}
 	
-	func updateDisplayControlsForState() {
+	func updateDisplayControlsVisiblityForState() {
 		
-        self.updateDisplayControlsForState(state: displayControlState)
+        self.updateDisplayControlsVisiblityForState(state: displayControlState)
 	}
 	
-	func updateDisplayControlsForState(state: DisplayControlState) {
+	func updateDisplayControlsVisiblityForState(state: DisplayControlState) {
         
 		precondition(Thread.isMainThread)
 		
@@ -40,15 +40,15 @@ extension TimelineViewController {
 		
 		switch state {
 			
-		case .Updating:
-			self.timelineUpdateIndicator?.startAnimation(self)
-			controlsForShow = self.displayControlsForUpdating
-			controlsForHide = self.displayControlsForUpdated
+		case .updating:
+			timelineUpdateIndicator?.startAnimation(self)
+			controlsForShow = displayControlsForUpdating
+			controlsForHide = displayControlsForUpdated
 			
-		case .Updated:
-			self.timelineUpdateIndicator?.stopAnimation(self)
-			controlsForShow = self.displayControlsForUpdated
-			controlsForHide = self.displayControlsForUpdating
+		case .updated:
+			timelineUpdateIndicator?.stopAnimation(self)
+			controlsForShow = displayControlsForUpdated
+			controlsForHide = displayControlsForUpdating
 		}
 
         controlsForShow.forEach { $0?.isHidden = false }

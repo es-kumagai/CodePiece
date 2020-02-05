@@ -24,16 +24,24 @@ final class TimelineStatusView: NSView {
 	
 	enum State {
 		
-		case OK
-		case Error
+		case ok(String)
+		case error(PostError)
 	}
 	
-	var state: State = .OK {
+	var state: State = .ok("") {
 		
 		didSet {
 			
 			applyForegroundColorToStatusLabel()
             setNeedsDisplay(frame)
+			
+			statusLabel?.stringValue = message
+			
+			#if DEBUG
+			if case .error = state {
+				NSLog("An error occurres when updating timeline: \(message)")
+			}
+			#endif
 		}
 	}
 	
@@ -42,90 +50,43 @@ final class TimelineStatusView: NSView {
 		statusLabel?.textColor = foregroundColor
 	}
 	
-	var OKMessage: String {
+	var message: String {
 		
-		get {
+		switch state {
 			
-			guard state == .OK else {
-				
-				return ""
-			}
+		case .ok(let message):
+			return message
 			
-			return statusLabel?.stringValue ?? ""
-		}
-		
-		set {
+		case .error(.apiError(let error, _)):
+			return "\(error)"
 			
-			state = .OK
-			statusLabel?.stringValue = newValue
-		}
-	}
-
-	var errorMessage: String {
-		
-		get {
+		case .error(.tweetError(let message)):
+			return message
 			
-			guard state == .Error else {
-
-				return ""
-			}
-
-			return statusLabel?.stringValue ?? ""
-		}
-		
-		set {
-
-			guard !newValue.isEmpty else {
-				
-				return resetMessage()
-			}
+		case .error(.parseError(let message, _)):
+			return message
 			
-			state = .Error
-			statusLabel?.stringValue = newValue
+		case .error(.internalError(let message, _)):
+			return message
+			
+		case .error(.unexpectedError(let error)):
+			return "\(error)"
 		}
 	}
 	
 	func clearMessage() {
 		
-		OKMessage = ""
+		state = .ok("")
 	}
-	
-	func setMessage(with error: PostError) {
 		
-		var description: (kind: String, message: String) {
-			
-			switch error {
-				
-			case .apiError(let error, _):
-				return ("API Error", "\(error)")
-				
-			case .tweetError(let message):
-				return ("Tweet Error", message)
-				
-			case .parseError(let message, _):
-				return ("Parse Error", message)
-				
-			case .internalError(let message, _):
-				return ("Internal Error", message)
-				
-			case .unexpectedError(let error):
-				return ("Unexpected Error", "\(error)")
-			}
-		}
-		
-		DebugTime.print("An error occurres when updating timeline (\(description.kind)): \(description.message)")
-		
-		errorMessage = description.message
-	}
-	
 	var foregroundColor: NSColor {
 		
 		switch state {
 			
-		case .OK:
+		case .ok:
             return .statusOkTextColor
 			
-		case .Error:
+		case .error:
 			return .statusErrorTextColor
 		}
 	}
@@ -134,18 +95,12 @@ final class TimelineStatusView: NSView {
 		
 		switch state {
 			
-		case .OK:
+		case .ok:
             return .statusOkBackgroundColor
 			
-		case .Error:
+		case .error:
 			return .statusErrorBackgroundColor
 		}
-	}
-	
-	func resetMessage() {
-		
-		state = .OK
-		statusLabel?.stringValue = ""
 	}
 	
 	override func draw(_ dirtyRect: NSRect) {

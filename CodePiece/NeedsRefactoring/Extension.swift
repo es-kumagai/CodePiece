@@ -738,12 +738,12 @@ public class MessageQueue<M: MessageType> : MessageQueueType {
 	
 	public func start() {
 	
-		send(message: .Start)
+		send(.start)
 	}
 	
 	public func stop() {
 		
-		send(message: .Stop)
+		send(.stop)
 	}
 	
 	private func _start() {
@@ -764,16 +764,16 @@ public class MessageQueue<M: MessageType> : MessageQueueType {
 		}
 	}
 	
-	public func send(message: MessageQueueControl) {
+	public func send(_ message: MessageQueueControl) {
 		
 		executeOnProcessingQueue {
 
 			switch message {
 				
-			case .Start:
+			case .start:
 				self._start()
 				
-			case .Stop:
+			case .stop:
 				self._stop()
 			}
 		}
@@ -813,7 +813,7 @@ extension MessageQueue where M : MessageType {
 
 extension MessageQueue where M : PreActionMessageType {
 	
-	public func send(message: Message) {
+	public func send(_ message: Message) {
 		
         send(message: message) { (queue, message) -> Continuous in
 			
@@ -866,8 +866,8 @@ extension MessageQueueHandlerProtocol {
 
 public enum MessageQueueControl {
 	
-	case Start
-	case Stop
+	case start
+	case stop
 }
 
 extension MessageQueue {

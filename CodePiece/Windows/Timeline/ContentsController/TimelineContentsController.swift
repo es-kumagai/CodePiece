@@ -104,6 +104,11 @@ class TimelineContentsController : NSObject {
 	
 	// MARK: - Neeeds Override
 	
+	var kind: TimelineKind {
+	
+		fatalError("Not implemented yet.")
+	}
+	
 	var tableViewDataSource: TimelineTableDataSource {
 		
 		fatalError("Not implemented yet.")

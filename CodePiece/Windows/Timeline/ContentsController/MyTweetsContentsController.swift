@@ -13,6 +13,11 @@ import Ocean
 
 final class MyTweetsContentsController : TimelineContentsController, NotificationObservable {
 	
+	override var kind: TimelineKind {
+		
+		return .myTweets
+	}
+	
 	var dataSource = DataSource()
 		
 	override var tableViewDataSource: TimelineTableDataSource {

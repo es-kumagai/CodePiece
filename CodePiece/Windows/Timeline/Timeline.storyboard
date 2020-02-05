@@ -596,10 +596,9 @@
                     </view>
                     <connections>
                         <outlet property="menuController" destination="xz6-86-o4Y" id="xS2-BW-7zH"/>
-                        <outlet property="tableView" destination="3Sc-gh-ozk" id="8zH-vD-T2V"/>
                         <outlet property="timelineRefreshButton" destination="Ff4-If-Tyd" id="FCD-EV-8aW"/>
                         <outlet property="timelineStatusView" destination="Uy7-j7-dI6" id="3Bx-TN-3Fq"/>
-                        <outlet property="timelineTableView" destination="3Sc-gh-ozk" id="Dxx-0a-wR3"/>
+                        <outlet property="timelineTableView" destination="3Sc-gh-ozk" id="PcO-dn-JeG"/>
                         <outlet property="timelineUpdateIndicator" destination="FzS-qL-7bn" id="ySr-jh-69W"/>
                     </connections>
                 </viewController>

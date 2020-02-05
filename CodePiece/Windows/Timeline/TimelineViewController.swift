@@ -15,16 +15,30 @@ import Dispatch
 
 private let TableViewInsertAnimationOptions: NSTableView.AnimationOptions = [.slideDown, .effectFade]
 
+extension Sequence where Element : TimelineViewController {
+
+	func activate() {
+		
+		forEach { $0.activate() }
+	}
+	
+	func deactivate() {
+		
+		forEach { $0.deactivate() }
+	}
+}
+
 @objcMembers
 final class TimelineViewController: NSViewController {
 	
 	@IBOutlet var menuController: MenuController!
 	
-	@IBOutlet var tableView: TimelineTableView! {
+	@IBOutlet var timelineTableView: TimelineTableView! {
 		
 		didSet {
 			
-			contentsController.tableView = tableView
+			contentsController.tableView = timelineTableView
+			refreshDisplayState()
 		}
 	}
 	
@@ -40,6 +54,19 @@ final class TimelineViewController: NSViewController {
 	
 	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
 	
+	var isActive: Bool = false
+	var contentsState: TimelineStatusView.State = .ok("") {
+		
+		didSet {
+			
+			guard isViewLoaded else {
+				
+				return
+			}
+			
+			refreshDisplayState()
+		}
+	}
 	
 	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
 	var currentTimelineSelectedRowIndexes = IndexSet() {
@@ -56,6 +83,11 @@ final class TimelineViewController: NSViewController {
 				
 				didChangeValue(forKey: "canReplyRequest")
 				didChangeValue(forKey: "canOpenBrowserWithCurrentTwitterStatus")
+			}
+			
+			guard isViewLoaded else {
+				
+				return
 			}
 			
 			for cell in timelineTableView.makedCells {
@@ -75,7 +107,6 @@ final class TimelineViewController: NSViewController {
 		case setReachability(ReachabilityController.State)
 		case autoUpdate(enable: Bool)
 		case updateStatuses
-		//		case changeHashtags(HashtagSet)
 		
 		func blockInQuickSuccession(lastMessage: Message) -> Bool {
 			
@@ -90,29 +121,14 @@ final class TimelineViewController: NSViewController {
 		}
 	}
 	
-	@IBOutlet var timelineTableView: TimelineTableView!
 	@IBOutlet var timelineStatusView: TimelineStatusView! {
 		
 		didSet {
 			
 			timelineStatusView.clearMessage()
+			refreshDisplayState()
 		}
 	}
-	
-//	var activeTimelineContentsController: TimelineContentsController {
-//
-//		switch currentTimelineKind {
-//
-//		case .hashtags:
-//			return hashtagsContentsController
-//
-//		case .myTweets:
-//			return myTweetsContentsController
-//
-//		case .none:
-//			fatalError("Timeline kind is not specified.")
-//		}
-//	}
 	
 	@IBOutlet var timelineUpdateIndicator: NSProgressIndicator? {
 		
@@ -126,13 +142,13 @@ final class TimelineViewController: NSViewController {
 	
 	let statusesAutoUpdateInterval:Double = 20
 	
-	private(set) var displayControlState = DisplayControlState.Updated {
+	private(set) var displayControlState = DisplayControlState.updated {
 		
 		didSet {
 			
 			precondition(Thread.isMainThread)
 			
-			self.updateDisplayControlsForState()
+			self.updateDisplayControlsVisiblityForState()
 		}
 	}
 	
@@ -149,9 +165,14 @@ final class TimelineViewController: NSViewController {
 
 extension TimelineViewController {
 	
-	func updateTimeline() {
+	var contentsKind: TimelineKind {
+	
+		return contentsController.kind
+	}
+	
+	func refreshDisplayState() {
 		
-		tableView = timelineTableView
+		timelineStatusView.state = contentsState
 		contentsController.updateContents()
 	}
 }
@@ -278,7 +299,7 @@ extension TimelineViewController {
 			}
 			
 			autoUpdateState.setUpdated()
-			message.send(message: .updateStatuses)
+			message.send(.updateStatuses)
 		}
 	}
 }
@@ -321,7 +342,10 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		
 		autoUpdateState.updateNextUpdateTime()
 		
-		DispatchQueue.main.async(execute: updateStatuses)
+		DispatchQueue.main.async {
+			
+			self.updateStatuses()
+		}
 	}
 	
 	//	private func _changeHashtags(hashtags: Set<Hashtag>) {
@@ -390,77 +414,100 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 
 extension TimelineViewController : NotificationObservable {
 	
-	override func viewDidLoad() {
+	override func awakeFromNib() {
 		
-		super.viewDidLoad()
-				
+		super.awakeFromNib()
+		
 		message = MessageQueue(identifier: "CodePiece.Timeline", handler: self)
 		updateTimerSource = message.makeTimerSource(interval: Semaphore.Interval(second: 0.03), start: true, timerAction: autoUpdateAction)
-		
-		
-		updateDisplayControlsForState()
-		
-		message.send(message: .setAutoUpdateInterval(statusesAutoUpdateInterval))
-		message.send(message: .setReachability(NSApp.reachabilityController.state))
-		message.send(message: .autoUpdate(enable: true))
-	}
-	
-	override func viewWillAppear() {
-		
-		super.viewWillAppear()
 
-		contentsController.activate()
 		
 		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			self.message.send(message: .updateStatuses)
+			self.message.send(.updateStatuses)
 		}
 		
 		observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
 			
-			self.message.send(message: .autoUpdate(enable: false))
+			self.message.send(.autoUpdate(enable: false))
 		}
 		
 		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
 			
-			self.message.send(message: .autoUpdate(enable: true))
+			self.message.send(.autoUpdate(enable: true))
 		}
 		
 		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
-			self.message.send(message: .setReachability(notification.state))
+			self.message.send(.setReachability(notification.state))
 		}
 		
 		observe(notification: MainViewController.PostCompletelyNotification.self) { [unowned self] notification in
 			
 			DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
 				
-				self.message.send(message: TimelineViewController.Message.updateStatuses)
+				self.message.send(TimelineViewController.Message.updateStatuses)
 			}
 		}
+	}
+	
+	func activate() {
 		
-		message.send(message: .Start)
+		guard !isActive else {
+			
+			return
+		}
+
+		DebugTime.print("Timeline of \(contentsKind) is now active.")
+
+		isActive = true
+		
+		contentsController.activate()
+		
+		message.send(.start)
+		message.send(.setAutoUpdateInterval(statusesAutoUpdateInterval))
+		message.send(.setReachability(NSApp.reachabilityController.state))
+		message.send(.autoUpdate(enable: true))
+	}
+	
+	func deactivate() {
+		
+		guard isActive else {
+			
+			return
+		}
+
+		DebugTime.print("Timeline of \(contentsKind) is now deactive.")
+
+		isActive = false
+		
+		message.send(.autoUpdate(enable: false))
+		message.send(.stop)
+	}
+	
+	override func viewWillAppear() {
+		
+		super.viewWillAppear()
+		
+		updateDisplayControlsVisiblityForState()
 	}
 	
 	override func viewDidAppear() {
 		
 		super.viewDidAppear()
 		
-		updateTimeline()
+		refreshDisplayState()
 	}
 	
 	override func viewWillDisappear() {
 		
 		super.viewWillDisappear()
 		
-		notificationHandlers.releaseAll()
-		
-		message.send(message: .Stop)
 	}
 	
 	func reloadTimeline() {
 		
-		message.send(message: .updateStatuses)
+		message.send(.updateStatuses)
 	}
 }
 
@@ -470,6 +517,11 @@ extension TimelineViewController : NotificationObservable {
 extension TimelineViewController {
 	
 	var currentTimelineRows: Int {
+		
+		guard isViewLoaded else {
+
+			return 0
+		}
 		
 		return timelineTableView.numberOfRows
 	}
@@ -489,6 +541,8 @@ extension TimelineViewController {
 			return (insertedIndexes: IndexSet(), ignoredIndexes: IndexSet(), removedIndexes: IndexSet())
 		}
 		
+		contentsController.appendTweets(tweets: tweets)
+		
 		let currentRows = currentTimelineRows
 		let maxRows = maxTimelineRows
 		let insertRows = min(tweetCount, maxRows)
@@ -504,12 +558,13 @@ extension TimelineViewController {
 		let ignoreIndexes = ignoreRows > 0 ? IndexSet(integersIn: getIgnoreRange()) : IndexSet()
 		let removeIndexes = overflowRows > 0 ? IndexSet(integersIn: getRemoveRange()) : IndexSet()
 		
-		contentsController.appendTweets(tweets: tweets)
-		
-		timelineTableView.beginUpdates()
-		timelineTableView.removeRows(at: removeIndexes, withAnimation: [.effectFade, .slideDown])
-		timelineTableView.insertRows(at: insertIndexes, withAnimation: [.effectFade, .slideDown])
-		timelineTableView.endUpdates()
+		if isViewLoaded {
+			
+			timelineTableView.beginUpdates()
+			timelineTableView.removeRows(at: removeIndexes, withAnimation: [.effectFade, .slideDown])
+			timelineTableView.insertRows(at: insertIndexes, withAnimation: [.effectFade, .slideDown])
+			timelineTableView.endUpdates()
+		}
 		
 		return (insertedIndexes: insertIndexes, ignoredIndexes: ignoreIndexes, removedIndexes: removeIndexes)
 	}
@@ -558,9 +613,26 @@ extension TimelineViewController {
 		
 		func update(tweets: [Status], associatedHashtags hashtags: HashtagSet) {
 			
-			DebugTime.print("Current Selection:\n\tCurrentTimelineSelectedRows: \(self.currentTimelineSelectedRowIndexes)\n\tNative: \(self.timelineTableView.selectedRowIndexes)")
+			func _debugTimeReportTableState() {
+
+				#if DEBUG
+				guard let timelineTableView = timelineTableView else {
+				
+					NSLog("Table view for '\(contentsKind) is still inactive.")
+					return
+				}
+				
+				DebugTime.print("""
+				Current Selection:
+					CurrentTimelineSelectedRows: \(currentTimelineSelectedRowIndexes)
+					Native: \(timelineTableView.selectedRowIndexes)")
+				""")
+				#endif
+			}
 			
-			let result = self.appendTweets(tweets: tweets, associatedHashtags: hashtags)
+			_debugTimeReportTableState()
+
+			let result = appendTweets(tweets: tweets, associatedHashtags: hashtags)
 			let nextSelectedIndexes = self.getNextTimelineSelection(insertedIndexes: result.insertedIndexes)
 			
 			NSLog("Tweet: \(tweets.count)")
@@ -570,14 +642,16 @@ extension TimelineViewController {
 			
 			self.currentTimelineSelectedRowIndexes = nextSelectedIndexes
 			
-			DebugTime.print("Next Selection:\n\tCurrentTimelineSelectedRows: \(self.currentTimelineSelectedRowIndexes)\n\tNative: \(self.timelineTableView.selectedRowIndexes)")
+			_debugTimeReportTableState()
 		}
 		
-		displayControlState = .Updating
+		displayControlState = .updating
+		
+		DebugTime.print("Start updating contents of \(contentsKind).")
 		
 		contentsController.updateContents { result in
 			
-			self.displayControlState = .Updated
+			self.displayControlState = .updated
 			
 			switch result {
 				
@@ -585,8 +659,8 @@ extension TimelineViewController {
 				
 				update(tweets: statuses, associatedHashtags: hashtags)
 				
-				self.message.send(message: .resetAutoUpdateIntervalDeray)
-				self.timelineStatusView.OKMessage = "Last Update: \(Date().displayString)"
+				self.message.send(.resetAutoUpdateIntervalDeray)
+				self.contentsState = .ok("Last Update: \(Date().displayString)")
 				
 			case .failure(let error):
 				
@@ -595,7 +669,7 @@ extension TimelineViewController {
 				//					self.message.send(message: .AddAutoUpdateIntervalDelay(7.0))
 				//				}
 				
-				self.timelineStatusView.setMessage(with: error)
+				self.contentsState = .error(error)
 			}
 		}
 	}
@@ -637,14 +711,6 @@ extension TimelineViewController : NSTableViewDelegate {
 	}
 }
 
-extension TimelineViewController : TimelineKindStateDelegate {
-	
-	@objc func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKind) {
-		
-		updateTimeline()
-	}
-}
-
 extension TimelineViewController : TimelineContentsControllerDelegate {
 	
 	func timelineContentsNeedsUpdate(_ sender: TimelineContentsController) {
@@ -652,6 +718,6 @@ extension TimelineViewController : TimelineContentsControllerDelegate {
 		//		message.send(message: .changeHashtags(hashtags))
 		
 		timelineTableView.insertRows(at: IndexSet(integer: 0), withAnimation: TableViewInsertAnimationOptions)
-		message.send(message: .updateStatuses)
+		message.send(.updateStatuses)
 	}
 }

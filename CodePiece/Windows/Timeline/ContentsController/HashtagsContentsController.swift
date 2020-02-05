@@ -13,6 +13,11 @@ import Ocean
 
 final class HashtagsContentsController : TimelineContentsController, NotificationObservable {
 	
+	override var kind: TimelineKind {
+		
+		return .hashtags
+	}
+	
 	var dataSource = DataSource()
 	
 	var hashtags: HashtagSet = NSApp.settings.appState.hashtags ?? [] {
