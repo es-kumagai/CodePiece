@@ -2,11 +2,12 @@
 
 Change Logs.
 
-## 2.0.3 *
+## 2.0.3
 
 ### Enhancement
 
 * Timelines now continue refreshing in background.
+* Mentions can be shown in Timeline view.
 
 ## 2.0.2
 

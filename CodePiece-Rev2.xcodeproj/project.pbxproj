@@ -1747,7 +1747,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 73;
+				CURRENT_PROJECT_VERSION = 74;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1776,7 +1776,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 73;
+				CURRENT_PROJECT_VERSION = 74;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
