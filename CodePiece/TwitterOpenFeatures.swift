@@ -15,9 +15,11 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 	
 	var notificationHandlers = Notification.Handlers()
 	
-	override func awakeFromNib() {
+	override init() {
 		
-		self.observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		super.init()
+		
+		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 
 			self.withChangeValue(for: "canOpenTwitterHome")
 		}		

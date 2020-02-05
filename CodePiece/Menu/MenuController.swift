@@ -32,11 +32,6 @@ final class MenuController : NSObject {
 		super.init()
 	}
 	
-	override func awakeFromNib() {
-		
-		super.awakeFromNib()
-	}
-
 	var isMainViewControllerActive: Bool {
 	
 		return mainViewController != nil

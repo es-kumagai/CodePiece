@@ -25,7 +25,14 @@ enum TimelineState {
 final class TimelineKindStateController : NSObject, NotificationObservable {
 
 	var notificationHandlers = Notification.Handlers()
-	
+
+	var tabInformations: Set<TabInformation> = [] {
+		
+		didSet {
+			
+			updateButtonState()
+		}
+	}
 	
 	var timelineKind: TimelineKind? {
 		
@@ -49,11 +56,12 @@ final class TimelineKindStateController : NSObject, NotificationObservable {
 	@IBOutlet var myTweetsButton: NSButton!
 	@IBOutlet var mentionsButton: NSButton!
 
-	override func awakeFromNib() {
+	func prepare() {
 	
-		super.awakeFromNib()
-		
-		updateButtonState()
+		tabInformations.insert(.init(kind: .hashtags, button: hashtagsButton, state: .neutral))
+		tabInformations.insert(.init(kind: .myTweets, button: myTweetsButton, state: .neutral))
+		tabInformations.insert(.init(kind: .mentions, button: mentionsButton, state: .neutral))
+
 		
 		observe(notification: MentionUpdatedNotification.self) { [unowned self] notification in
 			
@@ -75,20 +83,12 @@ final class TimelineKindStateController : NSObject, NotificationObservable {
 			updateButtonState()
 		}
 		
-		switch button {
-		
-		case hashtagsButton:
-			timelineKind = .hashtags
+		guard let information = tabInformations.first(where: { $0.button === button }) else {
 			
-		case myTweetsButton:
-			timelineKind = .myTweets
-			
-		case mentionsButton:
-			timelineKind = .mentions
-			
-		default:
-			timelineKind = nil
+			fatalError("INTERNAL ERROR: Unexpected button pushed.\n\(button)")
 		}
+		
+		timelineKind = information.kind
 	}
 }
 
@@ -134,9 +134,10 @@ private extension TimelineKindStateController {
 			button.attributedTitle = NSAttributedString(string: button.title, attributes: buttonTitleAttributes)
 		}
 		
-		applyState(to: hashtagsButton, kind: .hashtags)
-		applyState(to: myTweetsButton, kind: .myTweets)
-		applyState(to: mentionsButton, kind: .mentions)
+		for information in tabInformations {
+			
+			applyState(to: information.button, kind: information.kind)
+		}
 	}
 }
 

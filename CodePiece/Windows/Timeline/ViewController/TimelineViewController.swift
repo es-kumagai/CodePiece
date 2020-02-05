@@ -143,6 +143,11 @@ final class TimelineViewController: NSViewController {
 	var statusesAutoUpdateInterval: Double = 20 {
 		
 		didSet {
+
+			guard isActive else {
+				
+				return
+			}
 			
 			message.send(.setAutoUpdateInterval(statusesAutoUpdateInterval))
 		}
@@ -160,7 +165,17 @@ final class TimelineViewController: NSViewController {
 	
 	private var autoUpdateState = AutoUpdateState()
 	
-	private(set) var message: MessageQueue<Message>!
+	private(set) lazy var message: MessageQueue<Message> = {
+		
+		DebugTime.print("Message Queue for Timeline of \(contentsKind) will be Initialize.")
+		
+		let queue = MessageQueue<Message>(identifier: "CodePiece.Timeline.\(contentsKind)", handler: self)
+
+		updateTimerSource = queue.makeTimerSource(interval: Semaphore.Interval(second: 0.03), start: true, timerAction: autoUpdateAction)
+		
+		return queue
+	}()
+	
 	private var updateTimerSource: DispatchSourceTimer!
 	
 	var isTimelineActive: Bool {
@@ -426,35 +441,6 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 
 extension TimelineViewController : NotificationObservable {
 	
-	override func awakeFromNib() {
-		
-		super.awakeFromNib()
-		
-		message = MessageQueue(identifier: "CodePiece.Timeline", handler: self)
-		updateTimerSource = message.makeTimerSource(interval: Semaphore.Interval(second: 0.03), start: true, timerAction: autoUpdateAction)
-
-		
-		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
-			
-			self.message.send(.updateStatuses)
-		}
-		
-		observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
-			
-			self.message.send(.autoUpdate(enable: false))
-		}
-		
-		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
-			
-			self.message.send(.autoUpdate(enable: true))
-		}
-		
-		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
-			
-			self.message.send(.setReachability(notification.state))
-		}		
-	}
-	
 	func activate() {
 		
 		guard !isActive else {
@@ -493,6 +479,27 @@ extension TimelineViewController : NotificationObservable {
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
+
+		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+			
+			self.message.send(.updateStatuses)
+		}
+		
+		observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
+			
+			self.message.send(.autoUpdate(enable: false))
+		}
+		
+		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
+			
+			self.message.send(.autoUpdate(enable: true))
+		}
+		
+		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
+			
+			self.message.send(.setReachability(notification.state))
+		}
+
 		contentsController.timelineViewDidLoad(isTableViewAssigned: timelineTableView != nil)
 	}
 	

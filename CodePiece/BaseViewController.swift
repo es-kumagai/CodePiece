@@ -30,15 +30,14 @@ final class BaseViewController: NSSplitViewController {
 	private(set) weak var mainViewController: MainViewController?
 	private(set) weak var timelineViewController: TimelineViewController?
 	
-	override func awakeFromNib() {
-		
-		super.awakeFromNib()
-		
-	}
-	
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
+		
+		defer {
+			
+			CodePieceMainViewDidLoadNotification().post()
+		}
 		
 		for item in splitViewItems {
 			

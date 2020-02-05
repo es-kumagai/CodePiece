@@ -27,6 +27,7 @@
 		B1128CE823DED87D00DDA4EA /* SNSControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CE723DED87D00DDA4EA /* SNSControllerService.swift */; };
 		B122598E23EA8BE5006D819D /* MentionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122598D23EA8BE5006D819D /* MentionOptions.swift */; };
 		B122599023EA90F0006D819D /* MentionsContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122598F23EA90F0006D819D /* MentionsContentsController.swift */; };
+		B122599223EAB8F5006D819D /* TimelineTabViewItemInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */; };
 		B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1278B5B23D176C3003F3719 /* CodeText.swift */; };
 		B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B132D50423CD078800690C5F /* ESProgressHUD */; };
 		B132D51423CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
@@ -274,6 +275,7 @@
 		B1128CE723DED87D00DDA4EA /* SNSControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSControllerService.swift; sourceTree = "<group>"; };
 		B122598D23EA8BE5006D819D /* MentionOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionOptions.swift; sourceTree = "<group>"; };
 		B122598F23EA90F0006D819D /* MentionsContentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsContentsController.swift; sourceTree = "<group>"; };
+		B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTabViewItemInformation.swift; sourceTree = "<group>"; };
 		B1278B5B23D176C3003F3719 /* CodeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeText.swift; sourceTree = "<group>"; };
 		B132D50B23CD08B800690C5F /* ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B132D50D23CD08B800690C5F /* ESTwitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESTwitter.h; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 			children = (
 				B15EE27223CE7667005B268A /* Timeline.storyboard */,
 				B1508BED23E9BCF100973728 /* TimelineTabViewController.swift */,
+				B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */,
 				B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */,
 				B122598C23EA89F5006D819D /* ViewController */,
 				B1508BDE23E9433000973728 /* ContentsController */,
@@ -1348,6 +1351,7 @@
 				B15EE25D23CE7658005B268A /* TwitterStatusAttributed.swift in Sources */,
 				B15EE25923CE7658005B268A /* Language.swift in Sources */,
 				B1F2C79123E57F2D008BBCA0 /* WebView.swift in Sources */,
+				B122599223EAB8F5006D819D /* TimelineTabViewItemInformation.swift in Sources */,
 				B15EE26223CE7658005B268A /* PostData.swift in Sources */,
 				B15EE20A23CE7593005B268A /* TwitterText.swift in Sources */,
 				B15EE2A223CE7667005B268A /* TimelineStatusView.swift in Sources */,

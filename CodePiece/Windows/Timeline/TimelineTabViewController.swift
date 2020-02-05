@@ -23,18 +23,16 @@ import Ocean
 		return timelineKindStateController.timelineKind
 	}
 	
-	override func awakeFromNib() {
-		
-		super.awakeFromNib()
-		
-		DebugTime.print("Timeline Tab View Controller did awake.")
-	}
-	
 	override func viewDidLoad() {
 
 		super.viewDidLoad()
 
 		DebugTime.print("Timeline Tab View Controller did load.")
+
+		observe(notification: CodePieceMainViewDidLoadNotification.self) { [unowned self] notification in
+			
+			self.timelineKindStateController.prepare()
+		}
 
 		addTimelineViewController(with: HashtagsContentsController(), isKindOf: .hashtags)
 		addTimelineViewController(with: MyTweetsContentsController(), isKindOf: .myTweets, autoUpdateInterval: 60)

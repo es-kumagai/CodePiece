@@ -42,11 +42,6 @@ final class LanguagePopupDataSource : NSObject {
 		return populars.union(others)
 	}()
 	
-	override func awakeFromNib() {
-	
-		super.awakeFromNib()
-	}
-	
 	func selectLanguage(_ language:Language) {
 	
 		popupButton.selectItem(withTitle: language.description)

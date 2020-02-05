@@ -100,3 +100,7 @@ final class MentionUpdatedNotification : NotificationProtocol {
 		self.hasNewMention = includesNewMention
 	}
 }
+
+final class CodePieceMainViewDidLoadNotification : NotificationProtocol {
+	
+}

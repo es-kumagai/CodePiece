@@ -23,12 +23,6 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 	@IBOutlet var twitterAccountStatusImageView:StatusImageView!
 	@IBOutlet var reachabilityStatusImageView:StatusImageView!
 
-	override func awakeFromNib() {
-
-		super.awakeFromNib()
-		
-	}
-	
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
