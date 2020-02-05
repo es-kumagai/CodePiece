@@ -27,7 +27,7 @@
                                         <rect key="frame" x="0.0" y="230" width="300" height="32"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FxF-MW-DU4">
-                                                <rect key="frame" x="0.0" y="6" width="68" height="19"/>
+                                                <rect key="frame" x="0.0" y="6" width="70" height="19"/>
                                                 <buttonCell key="cell" type="recessed" title="Hashtags" bezelStyle="recessed" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3FP-SN-qSe">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                     <font key="font" metaFont="systemBold" size="12"/>
@@ -37,7 +37,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g50-GN-89h">
-                                                <rect key="frame" x="72" y="6" width="75" height="19"/>
+                                                <rect key="frame" x="74" y="6" width="76" height="19"/>
                                                 <buttonCell key="cell" type="recessed" title="My Tweets" bezelStyle="recessed" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pXv-HH-yN4">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                     <font key="font" metaFont="systemBold" size="12"/>
@@ -47,7 +47,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KIO-8Z-xMu">
-                                                <rect key="frame" x="151" y="6" width="66" height="19"/>
+                                                <rect key="frame" x="154" y="6" width="68" height="19"/>
                                                 <buttonCell key="cell" type="recessed" title="Mentions" bezelStyle="recessed" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WBA-2a-ka9">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                     <font key="font" metaFont="systemBold" size="12"/>
@@ -57,7 +57,7 @@
                                                 </connections>
                                             </button>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="g2V-xa-hJR" userLabel="Spacer">
-                                                <rect key="frame" x="221" y="0.0" width="79" height="32"/>
+                                                <rect key="frame" x="226" y="0.0" width="74" height="32"/>
                                             </customView>
                                         </subviews>
                                         <constraints>
@@ -152,7 +152,7 @@
                                                     <tableColumns>
                                                         <tableColumn width="280" minWidth="40" maxWidth="1000" id="Ivl-66-GC3">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                <font key="font" metaFont="label" size="11"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -234,7 +234,7 @@
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-M6-CoS">
                                                                                                     <rect key="frame" x="206" y="0.0" width="28" height="14"/>
                                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="date" id="bd7-Tg-lgn">
-                                                                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                                         <color key="textColor" name="TimelineDateLabelColor"/>
                                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                     </textFieldCell>
@@ -314,7 +314,7 @@
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="v9L-c7-Ygh">
                                                                                                     <rect key="frame" x="16" y="0.0" width="84" height="14"/>
                                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="Mtg-yX-gdl">
-                                                                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                                         <color key="textColor" name="HashtagStateRecentTextColor"/>
                                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                     </textFieldCell>
@@ -350,7 +350,7 @@
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="246" translatesAutoresizingMaskIntoConstraints="NO" id="1lD-T6-tFk">
                                                                                                     <rect key="frame" x="-2" y="0.0" width="84" height="14"/>
                                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="TZm-PY-Gs5">
-                                                                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                                         <color key="textColor" name="HashtagStatePastTextColor"/>
                                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                     </textFieldCell>
@@ -517,7 +517,7 @@
                                                                     <constraint firstAttribute="height" constant="14" id="aO0-Kl-BQ7"/>
                                                                 </constraints>
                                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Label" id="3PV-if-NoQ">
-                                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                                    <font key="font" metaFont="label" size="11"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>

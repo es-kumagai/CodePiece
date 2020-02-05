@@ -17,6 +17,7 @@ extension NSColor {
 	static let neutralColor = NSColor(named: "NeutralColor")!
 	static let warningColor = NSColor(named: "WarningColor")!
 	static let errorColor = NSColor(named: "ErrorColor")!
+	static let attentionColor = NSColor(named: "AttentionColor")!
 	
 	static let textColor = NSColor(named: "TextColor")!
 	static let recentBackgroundColor = NSColor(named: "RecentBackgroundColor")!

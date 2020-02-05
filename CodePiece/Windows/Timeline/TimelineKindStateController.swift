@@ -7,6 +7,7 @@
 //
 
 import AppKit
+import Ocean
 
 @objc enum TimelineKind : Int, Codable {
 	
@@ -15,7 +16,16 @@ import AppKit
 	case mentions = 2
 }
 
-final class TimelineKindStateController : NSObject {
+enum TimelineState {
+	
+	case havingNew
+	case neutral
+}
+
+final class TimelineKindStateController : NSObject, NotificationObservable {
+
+	var notificationHandlers = Notification.Handlers()
+	
 	
 	var timelineKind: TimelineKind? {
 		
@@ -31,6 +41,8 @@ final class TimelineKindStateController : NSObject {
 		}
 	}
 	
+	var timelineState: [TimelineKind : TimelineState] = [:]
+	
 	@IBOutlet weak var delegate: TimelineKindStateDelegate?
 	
 	@IBOutlet var hashtagsButton: NSButton!
@@ -42,6 +54,18 @@ final class TimelineKindStateController : NSObject {
 		super.awakeFromNib()
 		
 		updateButtonState()
+		
+		observe(notification: MentionUpdatedNotification.self) { [unowned self] notification in
+			
+			self.timelineState[.mentions] = (notification.hasNewMention ? .havingNew : .neutral)
+			self.updateButtonState()
+		}
+		
+		observe(notification: TimelineSelectionChangedNotification.self) { [unowned self] notification in
+			
+			self.timelineState[notification.timelineViewController.contentsKind] = .neutral
+			self.updateButtonState()
+		}
 	}
 	
 	@IBAction func pushButton(_ button: NSButton) {
@@ -84,9 +108,35 @@ private extension TimelineKindStateController {
 			}
 		}
 		
-		hashtagsButton?.state = currentState(of: .hashtags)
-		myTweetsButton?.state = currentState(of: .myTweets)
-		mentionsButton?.state = currentState(of: .mentions)
+		func applyState(to button: NSButton?, kind: TimelineKind) {
+			
+			guard let button = button else {
+				
+				return
+			}
+			
+			let buttonState = currentState(of: kind)
+			let timelineState = self.timelineState[kind] ?? .neutral
+			
+			var buttonTitleAttributes: [NSAttributedString.Key : Any] {
+				
+				switch timelineState {
+					
+				case .havingNew:
+					return [.foregroundColor : NSColor.attentionColor]
+					
+				case .neutral:
+					return [:]
+				}
+			}
+
+			button.state = buttonState
+			button.attributedTitle = NSAttributedString(string: button.title, attributes: buttonTitleAttributes)
+		}
+		
+		applyState(to: hashtagsButton, kind: .hashtags)
+		applyState(to: myTweetsButton, kind: .myTweets)
+		applyState(to: mentionsButton, kind: .mentions)
 	}
 }
 
