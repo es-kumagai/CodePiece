@@ -55,6 +55,20 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 			
 			self.hashtags = notification.hashtags
 		}
+		
+		// Following code is disabled because the tweet you posted cannnot detect immediately.
+//		observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
+//
+//			guard notification.hashtags == self.hashtags else {
+//
+//				return
+//			}
+//
+//			DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//
+//				self.delegate?.timelineContentsNeedsUpdate?(self)
+//			}
+//		}
 	}
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {

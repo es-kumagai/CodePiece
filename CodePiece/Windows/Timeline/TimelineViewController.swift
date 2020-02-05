@@ -140,7 +140,13 @@ final class TimelineViewController: NSViewController {
 	
 	@IBOutlet var timelineRefreshButton: NSButton?
 	
-	let statusesAutoUpdateInterval:Double = 20
+	var statusesAutoUpdateInterval: Double = 20 {
+		
+		didSet {
+			
+			message.send(.setAutoUpdateInterval(statusesAutoUpdateInterval))
+		}
+	}
 	
 	private(set) var displayControlState = DisplayControlState.updated {
 		
@@ -362,6 +368,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 	
 	private func _changeAutoUpdateInterval(interval: Double) {
 		
+		DebugTime.print("Timeline auto update interval of \(contentsKind): \(interval)")
 		autoUpdateState.updateInterval = Semaphore.Interval(second: interval)
 	}
 	
@@ -440,15 +447,7 @@ extension TimelineViewController : NotificationObservable {
 		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
 			self.message.send(.setReachability(notification.state))
-		}
-		
-		observe(notification: MainViewController.PostCompletelyNotification.self) { [unowned self] notification in
-			
-			DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
-				
-				self.message.send(TimelineViewController.Message.updateStatuses)
-			}
-		}
+		}		
 	}
 	
 	func activate() {
@@ -464,10 +463,11 @@ extension TimelineViewController : NotificationObservable {
 		
 		contentsController.activate()
 		
-		message.send(.start)
 		message.send(.setAutoUpdateInterval(statusesAutoUpdateInterval))
 		message.send(.setReachability(NSApp.reachabilityController.state))
 		message.send(.autoUpdate(enable: true))
+
+		message.send(.start)
 	}
 	
 	func deactivate() {
@@ -485,24 +485,38 @@ extension TimelineViewController : NotificationObservable {
 		message.send(.stop)
 	}
 	
+	override func viewDidLoad() {
+		
+		super.viewDidLoad()
+		contentsController.timelineViewDidLoad(isTableViewAssigned: timelineTableView != nil)
+	}
+	
 	override func viewWillAppear() {
 		
 		super.viewWillAppear()
-		
+		contentsController.timelineViewWillAppear(isTableViewAssigned: timelineTableView != nil)
+
 		updateDisplayControlsVisiblityForState()
 	}
 	
 	override func viewDidAppear() {
 		
 		super.viewDidAppear()
-		
+		contentsController.timelineViewDidAppear()
+
 		refreshDisplayState()
 	}
 	
 	override func viewWillDisappear() {
 		
 		super.viewWillDisappear()
+		contentsController.timelineViewWillDisappear()
+	}
+	
+	override func viewDidDisappear() {
 		
+		super.viewDidDisappear()
+		contentsController.timelineViewDidDisappear()
 	}
 	
 	func reloadTimeline() {
@@ -715,9 +729,11 @@ extension TimelineViewController : TimelineContentsControllerDelegate {
 	
 	func timelineContentsNeedsUpdate(_ sender: TimelineContentsController) {
 		
-		//		message.send(message: .changeHashtags(hashtags))
+		if isViewLoaded, contentsController.items.count > 0 {
+			
+			timelineTableView.insertRows(at: IndexSet(integer: 0), withAnimation: TableViewInsertAnimationOptions)
+		}
 		
-		timelineTableView.insertRows(at: IndexSet(integer: 0), withAnimation: TableViewInsertAnimationOptions)
 		message.send(.updateStatuses)
 	}
 }

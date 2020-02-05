@@ -200,7 +200,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			switch result {
 				
 			case .success(let container):
-				PostCompletelyNotification(container: container).post()
+				PostCompletelyNotification(container: container, postedStatus: container.twitterState.postedStatus, hashtags: self.hashTagTextField.hashtags).post()
 				
 			case .failure(let error):
 				PostFailedNotification(error: error).post()

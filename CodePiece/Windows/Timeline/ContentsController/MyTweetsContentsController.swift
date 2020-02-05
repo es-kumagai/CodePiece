@@ -28,7 +28,18 @@ final class MyTweetsContentsController : TimelineContentsController, Notificatio
 	override func activate() {
 		
 		super.activate()
+	
+		observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
+			
+			self.delegate?.timelineContentsNeedsUpdate?(self)
+		}
+	}
+
+	override func timelineViewDidAppear() {
+
+		super.timelineViewDidAppear()
 		
+		delegate?.timelineContentsNeedsUpdate?(self)
 	}
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {

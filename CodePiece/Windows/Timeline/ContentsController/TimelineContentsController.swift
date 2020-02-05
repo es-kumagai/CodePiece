@@ -102,6 +102,13 @@ class TimelineContentsController : NSObject {
 		return []
 	}
 	
+	
+	func timelineViewDidLoad(isTableViewAssigned: Bool) {}
+	func timelineViewWillAppear(isTableViewAssigned: Bool) {}
+	func timelineViewDidAppear() {}
+	func timelineViewWillDisappear() {}
+	func timelineViewDidDisappear() {}
+
 	// MARK: - Neeeds Override
 	
 	var kind: TimelineKind {

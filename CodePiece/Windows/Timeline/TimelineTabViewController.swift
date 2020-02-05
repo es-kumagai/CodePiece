@@ -37,7 +37,7 @@ import Ocean
 		DebugTime.print("Timeline Tab View Controller did load.")
 
 		addTimelineViewController(with: HashtagsContentsController(), isKindOf: .hashtags)
-		addTimelineViewController(with: MyTweetsContentsController(), isKindOf: .myTweets)
+		addTimelineViewController(with: MyTweetsContentsController(), isKindOf: .myTweets, autoUpdateInterval: 60)
 		
 		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
 			
@@ -82,12 +82,16 @@ extension TimelineTabViewController : TimelineKindStateDelegate {
 private extension TimelineTabViewController {
 	
 	@discardableResult
-	func addTimelineViewController(with contentsController: TimelineContentsController, isKindOf kind: TimelineKind) -> TimelineViewController {
+	func addTimelineViewController(with contentsController: TimelineContentsController, isKindOf kind: TimelineKind, autoUpdateInterval interval: Double? = nil) -> TimelineViewController {
 		
 		let timelineViewController = (storyboard!.instantiateController(withIdentifier: "TimelineViewController") as! TimelineViewController)
 	
 		timelineViewController.contentsController = contentsController
 
+		if let interval = interval {
+			
+			timelineViewController.statusesAutoUpdateInterval = interval
+		}
 
 		timelineViewControllers.append(timelineViewController)
 

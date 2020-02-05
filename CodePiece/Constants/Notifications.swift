@@ -39,26 +39,27 @@ extension Authorization {
 //	}
 }
 
-extension MainViewController {
-
-	final class PostCompletelyNotification : NotificationProtocol {
-		
-		var container: PostDataContainer
-		
-		init(container: PostDataContainer) {
-			
-			self.container = container
-		}
-	}
+final class PostCompletelyNotification : NotificationProtocol {
 	
-	final class PostFailedNotification : NotificationProtocol {
+	var container: PostDataContainer
+	var postedStatus: Status?
+	var hashtags: HashtagSet
+	
+	init(container: PostDataContainer, postedStatus status: Status?, hashtags: HashtagSet) {
 		
-		var error: SNSController.PostError
+		self.container = container
+		self.postedStatus = status
+		self.hashtags = hashtags
+	}
+}
+
+final class PostFailedNotification : NotificationProtocol {
+	
+	var error: SNSController.PostError
+	
+	init(error: SNSController.PostError) {
 		
-		init(error: SNSController.PostError) {
-			
-			self.error = error
-		}
+		self.error = error
 	}
 }
 
