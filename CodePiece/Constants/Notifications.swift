@@ -7,8 +7,10 @@
 //
 
 import Ocean
-//import Accounts
+
 import ESTwitter
+import ESGists
+
 
 // MARK: - Settings Notification
 
@@ -60,6 +62,36 @@ final class PostFailedNotification : NotificationProtocol {
 	init(error: SNSController.PostError) {
 		
 		self.error = error
+	}
+}
+
+final class HashtagsChangeRequestNotification : NotificationProtocol {
+	
+	private(set) var hashtags: HashtagSet
+	
+	init(hashtags: HashtagSet) {
+		
+		self.hashtags = hashtags
+	}
+}
+
+final class LanguageSelectionChangeRequestNotification : NotificationProtocol {
+	
+	private(set) var language: Language
+	
+	init(language: Language) {
+		
+		self.language = language
+	}
+}
+
+final class CodeChangeRequestNotification : NotificationProtocol {
+	
+	private(set) var code: String
+	
+	init(code: String) {
+		
+		self.code = code
 	}
 }
 

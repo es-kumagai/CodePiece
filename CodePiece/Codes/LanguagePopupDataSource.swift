@@ -16,11 +16,11 @@ final class LanguagePopupDataSource : NSObject {
 	
 	let defaultLanguage = Language.swift
 	
-	@IBOutlet var popupButton:NSPopUpButton! {
+	@IBOutlet var popupButton: NSPopUpButton! {
 		
 		didSet {
 
-			self.popupButton.addItem(withTitle: self.defaultLanguage.description)
+			popupButton.addItem(withTitle: self.defaultLanguage.description)
 			
 			for language in languages.sort() {
 
@@ -29,7 +29,7 @@ final class LanguagePopupDataSource : NSObject {
 					$0.target = self
 				}
 				
-				self.popupButton.menu!.addItem(menu)
+				popupButton.menu!.addItem(menu)
 			}
 		}
 	}
@@ -42,7 +42,7 @@ final class LanguagePopupDataSource : NSObject {
 		return populars.union(others)
 	}()
 	
-	func selectLanguage(_ language:Language) {
+	func selectLanguage(_ language: Language) {
 	
 		popupButton.selectItem(withTitle: language.description)
 		popupButton.selectedItem.executeIfExists(popupSelected)

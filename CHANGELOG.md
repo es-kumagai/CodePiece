@@ -4,6 +4,9 @@ Change Logs.
 
 ## 2.0.4 *
 
+### Enhancement
+
+* Add URL scheme named "codepiece://open" that is used to open CodePiece with specifying custom hashtags and language and code.
 
 ## 2.0.3
 

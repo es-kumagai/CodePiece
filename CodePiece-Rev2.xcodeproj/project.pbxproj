@@ -153,6 +153,7 @@
 		B1A4729D23D09DB300F73658 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728723D09DB300F73658 /* Status.swift */; };
 		B1A4729E23D09DB300F73658 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728823D09DB300F73658 /* Color.swift */; };
 		B1A4729F23D09DB300F73658 /* PlaceBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */; };
+		B1C1F1C223EB0B420010C28F /* CodePieceScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */; };
 		B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A823E152A90039F4E6 /* ReachabilityController.swift */; };
 		B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C349DA23E285BF0039F4E6 /* APIKeys.plist */; };
 		B1C34A2223E351800039F4E6 /* Geometory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C34A2123E351800039F4E6 /* Geometory.swift */; };
@@ -404,6 +405,7 @@
 		B1A4728723D09DB300F73658 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		B1A4728823D09DB300F73658 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBoundingBox.swift; sourceTree = "<group>"; };
+		B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodePieceScheme.swift; sourceTree = "<group>"; };
 		B1C349A823E152A90039F4E6 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
 		B1C349DA23E285BF0039F4E6 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CodePieceSupport.framework; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 				B15EE24323CE7658005B268A /* URLScheme.swift */,
 				B15EE24423CE7658005B268A /* GistScheme.swift */,
 				B1806CB723D6B50F006932F5 /* SwifterScheme.swift */,
+				B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */,
 			);
 			path = URLScheme;
 			sourceTree = "<group>";
@@ -1424,6 +1427,7 @@
 				B15EE2A123CE7667005B268A /* TimelineHashtagTableCellView.swift in Sources */,
 				B15EE29D23CE7667005B268A /* TimelineTableCellView.swift in Sources */,
 				B15EE2A623CE7667005B268A /* TimelineTableView.swift in Sources */,
+				B1C1F1C223EB0B420010C28F /* CodePieceScheme.swift in Sources */,
 				B15EE26023CE7658005B268A /* TwitterController.swift in Sources */,
 				B15EE29C23CE7667005B268A /* AboutViewController.swift in Sources */,
 				B1508BEE23E9BCF100973728 /* TimelineTabViewController.swift in Sources */,
@@ -1753,6 +1757,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 74;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
+				ES_URLSCHEME_SIMPLE = "codepiece-beta";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PROJECT_DIR}",
@@ -1782,6 +1787,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 74;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
+				ES_URLSCHEME_SIMPLE = codepiece;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PROJECT_DIR}",

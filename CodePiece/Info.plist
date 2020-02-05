@@ -32,6 +32,16 @@
 				<string>$(ES_URLSCHEME)</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>$(ES_URLSCHEME_SIMPLE)</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(ES_URLSCHEME_SIMPLE)</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>

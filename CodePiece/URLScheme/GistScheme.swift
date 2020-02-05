@@ -20,6 +20,7 @@ final class GistScheme : URLScheme {
 	
 	static func action(url: URL) {
 		
+		DebugTime.print("🙋🏻‍♀️ Detected URL scheme for Gist authentication.")
 		Authorization.gist.oauth2.handleRedirectURL(url)
 	}
 }

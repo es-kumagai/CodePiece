@@ -82,3 +82,16 @@ In the CodePiece's preference window, to push `Twitter` button, you can see the 
 
 Push the `Authentication` button, then default browser will be launched and show the authorization page of Twitter. To authorizing with your Twitter account in the page, you are able to tweet using the CodePiece.
 
+# URL Scheme
+
+You can use following url scheme.
+
+## codepiece://open
+
+Launch the CodePiece app with custom informations. Following query string is accepted.
+
+|Key|Value|
+|:---|:---|
+|hashtags|Open with the hashtags. If you want to specify two or more hashtags, set these separating with space.|
+|language|Open with the language. Specifying language is available only language the CodePice app is able to detect.|
+|hashtags|Open with the code text.|

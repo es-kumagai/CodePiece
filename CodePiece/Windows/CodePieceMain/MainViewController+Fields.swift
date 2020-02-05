@@ -19,17 +19,17 @@ enum ReplyStyle {
 // FIXME: プロトコルにする必要があるのか再検討。当初は MainViewController が肥大化するのをプロトコルで避けたのかもしれないが、今に思うと用途が違う印象。
 protocol FieldsController {
 
-	var codeScrollView:NSScrollView! { get }
-	var codeTextView:CodeTextView! { get }
+	var codeScrollView: NSScrollView! { get }
+	var codeTextView: CodeTextView! { get }
 
-	var descriptionTextField:DescriptionTextField! { get }
-	var hashTagTextField:HashtagTextField! { get }
-	var languagePopUpButton:NSPopUpButton! { get }
+	var descriptionTextField: DescriptionTextField! { get }
+	var hashTagTextField: HashtagTextField! { get }
+	var languagePopUpButton: NSPopUpButton! { get }
 	var languageWatermark: WatermarkLabel! { get }
 	var hashtagWatermark: WatermarkLabel! { get }
-	var postButton:NSButton! { get }
+	var postButton: NSButton! { get }
 	
-	var descriptionCountLabel:NSTextField! { get }
+	var descriptionCountLabel: NSTextField! { get }
 	
 	
 	func updateControlsDisplayText()

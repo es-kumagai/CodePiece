@@ -21,6 +21,7 @@ final class SwifterScheme : URLScheme {
 	
 	static func action(url: URL) {
 		
+		DebugTime.print("❕ Detected URL scheme for Twitter authentication.")
 		ESTwitter.handle(openUrl: url)
 	}
 }

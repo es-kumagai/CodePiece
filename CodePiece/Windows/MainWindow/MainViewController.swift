@@ -136,7 +136,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		return conditions.meetsAll(of: true)
 	}
 	
-	var selectedLanguage:Language {
+	var selectedLanguage: Language {
 		
 		return self.languagePopUpButton.selectedItem.flatMap { Language(displayText: $0.title) }!
 	}
@@ -306,6 +306,21 @@ final class MainViewController: NSViewController, NotificationObservable {
 		observe(notification: PostFailedNotification.self) { [unowned self] notification in
 			
 			self.showErrorAlert(withTitle: "Failed to post", message: "\(notification.error)")
+		}
+		
+		observe(notification: HashtagsChangeRequestNotification.self) { [unowned self] notification in
+			
+			self.hashTagTextField.hashtags = notification.hashtags
+		}
+		
+		observe(notification: LanguageSelectionChangeRequestNotification.self) { [unowned self] notification in
+			
+			self.languagePopUpDataSource.selectLanguage(notification.language)
+		}
+		
+		observe(notification: CodeChangeRequestNotification.self) { [unowned self] notification in
+			
+			self.codeTextView.string = notification.code
 		}
 		
 		observe(notification: LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
