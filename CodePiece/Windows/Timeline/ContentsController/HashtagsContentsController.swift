@@ -77,6 +77,7 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		
 		guard !query.isEmpty else {
 			
+			callback(.success(([], associatedHashtags: [])))
 			return
 		}
 		

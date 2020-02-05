@@ -15,7 +15,13 @@ class TimelineContentsController : NSObject {
 	
 	var notificationHandlers = Notification.Handlers()
 
-	@IBOutlet var tableView: TimelineTableView?
+	@IBOutlet var tableView: TimelineTableView? {
+		
+		didSet {
+			
+			tableView?.dataSource = tableViewDataSource
+		}
+	}
 	@IBOutlet weak var delegate: TimelineContentsControllerDelegate?
 	
 	var items = Array<TimelineTableItem>()
@@ -66,7 +72,6 @@ class TimelineContentsController : NSObject {
 			return
 		}
 		
-		tableView.dataSource = tableViewDataSource
 		tableView.reloadData()
 	}
 

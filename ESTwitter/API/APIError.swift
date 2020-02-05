@@ -12,6 +12,7 @@ public enum APIError : Error {
 	
 	case notReady
 	case responseError(code: Int, message: String)
+	case operationError(String)
 	case unexpected(Error)
 }
 
@@ -40,6 +41,9 @@ extension APIError : CustomStringConvertible {
 			return "API is not ready."
 
 		case .responseError(_, let message):
+			return message
+			
+		case .operationError(let message):
 			return message
 			
 		case .unexpected(let error):

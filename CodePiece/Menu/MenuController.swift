@@ -130,7 +130,7 @@ final class MenuController : NSObject {
 	
 	@IBAction func reloadTimeline(_ sender: NSMenuItem?) {
 		
-		timelineViewController?.reloadTimeline()
+		timelineViewController?.updateTimeline()
 	}
 	
 	var canOpenBrowserWithCurrentTwitterStatus:Bool {

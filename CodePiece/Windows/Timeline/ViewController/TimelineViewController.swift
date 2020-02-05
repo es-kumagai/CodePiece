@@ -170,7 +170,7 @@ final class TimelineViewController: NSViewController {
 	
 	@IBAction func pushTimelineRefreshButton(_ sender: AnyObject!) {
 		
-		reloadTimeline()
+		updateTimeline()
 	}
 }
 
@@ -524,7 +524,7 @@ extension TimelineViewController : NotificationObservable {
 		contentsController.timelineViewDidDisappear()
 	}
 	
-	func reloadTimeline() {
+	func updateTimeline() {
 		
 		message.send(.updateStatuses)
 	}

@@ -18,17 +18,17 @@ extension TimelineViewController {
 	
 	var displayControlsForUpdating: [NSView?] {
 		
-		return [self.timelineUpdateIndicator]
+		return [timelineUpdateIndicator]
 	}
 	
 	var displayControlsForUpdated: [NSView?] {
 		
-		return [self.timelineRefreshButton]
+		return [timelineRefreshButton]
 	}
 	
 	func updateDisplayControlsVisiblityForState() {
 		
-        self.updateDisplayControlsVisiblityForState(state: displayControlState)
+        updateDisplayControlsVisiblityForState(state: displayControlState)
 	}
 	
 	func updateDisplayControlsVisiblityForState(state: DisplayControlState) {

@@ -169,8 +169,8 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 	@IBAction func pushPostButton(_ sender:NSObject?) {
 	
-		self.saveContents()
-		self.postToSNS()
+		saveContents()
+		postToSNS()
 	}
 	
 	func postToSNS() {
