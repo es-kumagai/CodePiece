@@ -38,7 +38,8 @@ import Ocean
 
 		addTimelineViewController(with: HashtagsContentsController(), isKindOf: .hashtags)
 		addTimelineViewController(with: MyTweetsContentsController(), isKindOf: .myTweets, autoUpdateInterval: 60)
-		
+		addTimelineViewController(with: MentionsContentsController(), isKindOf: .mentions)
+
 		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
 			
 			self.timelineViewControllers.activate()

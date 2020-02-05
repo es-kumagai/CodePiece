@@ -709,25 +709,30 @@ extension TwitterController {
 	
 	func search(tweetWith query: String, options: API.SearchOptions = API.SearchOptions(), handler: @escaping (GetStatusesResult) -> Void) {
 
-		func success(_ statuses: [Status]) {
-			
-			handler(.success(statuses))
-		}
-		
-		func failure(_ error: PostError) {
-
-			handler(.failure(error))
-		}
-		
 		api.search(usingQuery: query, options: options) { result in
 
 			switch result {
 				
 			case .success(let statuses):
-				success(statuses)
-				
+				handler(.success(statuses))
+
 			case .failure(let error):
-				failure(error)
+				handler(.failure(error))
+			}
+		}
+	}
+	
+	func mentions(options: API.MentionOptions = .init(), handler: @escaping (GetStatusesResult) -> Void) {
+	
+		api.mentions(options: options) { result in
+			
+			switch result {
+				
+			case .success(let statuses):
+				handler(.success(statuses))
+
+			case .failure(let error):
+				handler(.failure(error))
 			}
 		}
 	}
@@ -745,25 +750,15 @@ extension TwitterController {
 	
 	func timeline(of user: API.UserSelector, options: API.TimelineOptions = .init(), handler: @escaping (GetStatusesResult) -> Void) {
 		
-		func success(_ statuses: [Status]) {
-			
-			handler(.success(statuses))
-		}
-		
-		func failure(_ error: PostError) {
-
-			handler(.failure(error))
-		}
-		
 		api.timeline(of: user, options: options) { result in
 			
 			switch result {
 				
 			case .success(let statuses):
-				success(statuses)
-				
+				handler(.success(statuses))
+
 			case .failure(let error):
-				failure(error)
+				handler(.failure(error))
 			}
 		}
 	}
@@ -808,5 +803,4 @@ extension TwitterController {
 			}
 		}
 	}
-	
 }

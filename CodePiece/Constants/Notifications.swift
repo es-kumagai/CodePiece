@@ -88,3 +88,15 @@ final class TimelineSelectionChangedNotification : NotificationProtocol {
 final class TimelineReplyToSelectionRequestNotification : NotificationProtocol {
 	
 }
+
+final class MentionUpdatedNotification : NotificationProtocol {
+	
+	var mentions: [Status]
+	var hasNewMention: Bool
+	
+	init(mentions: [Status], includesNewMention: Bool) {
+		
+		self.mentions = mentions
+		self.hasNewMention = includesNewMention
+	}
+}

@@ -12,6 +12,7 @@ import AppKit
 	
 	case hashtags = 0
 	case myTweets = 1
+	case mentions = 2
 }
 
 final class TimelineKindStateController : NSObject {
@@ -34,6 +35,7 @@ final class TimelineKindStateController : NSObject {
 	
 	@IBOutlet var hashtagsButton: NSButton!
 	@IBOutlet var myTweetsButton: NSButton!
+	@IBOutlet var mentionsButton: NSButton!
 
 	override func awakeFromNib() {
 	
@@ -56,6 +58,9 @@ final class TimelineKindStateController : NSObject {
 			
 		case myTweetsButton:
 			timelineKind = .myTweets
+			
+		case mentionsButton:
+			timelineKind = .mentions
 			
 		default:
 			timelineKind = nil
@@ -81,6 +86,7 @@ private extension TimelineKindStateController {
 		
 		hashtagsButton?.state = currentState(of: .hashtags)
 		myTweetsButton?.state = currentState(of: .myTweets)
+		mentionsButton?.state = currentState(of: .mentions)
 	}
 }
 
@@ -95,6 +101,9 @@ extension TimelineKind : CustomStringConvertible {
 			
 		case .myTweets:
 			return "My Tweets"
+			
+		case .mentions:
+			return "Mentions"
 		}
 	}
 }

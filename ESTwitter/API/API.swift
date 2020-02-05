@@ -200,8 +200,8 @@ extension API {
 		api.postMedia(media, additionalOwners: additionalOwners.map(SwifterUsersTag.init), success: successHandler, failure: failureHandler)
 	}
 	
-	public func timeline(of user: UserSelector, options: TimelineOptions = .init(), handler: @escaping (SearchResult) -> Void) {
-	
+	public func mentions(options: MentionOptions = .init(), handler: @escaping (SearchResult) -> Void) {
+		
 		guard let api = rawApi else {
 			
 			handler(.failure(.apiError(.notReady, state: .withNoPostProcess)))
@@ -215,14 +215,29 @@ extension API {
 		
 		func failureHandler(error: Error) {
 			
-			switch error {
-				
-			case let error as SwifterError:
-				handler(.failure(.init(tweetError: error)))
-				
-			default:
-				handler(.failure(.unexpectedError(error, state: .withNoPostProcess)))
-			}
+			handler(searchErrorResult(error))
+		}
+		
+		api.getMentionsTimelineTweets(count: options.count, sinceID: options.sinceId, maxID: options.maxId, trimUser: options.trimUser, contributorDetails: options.contributorDetails, includeEntities: options.includeEntities, tweetMode: SwifterTweetMode(options.tweetMode), success: successHandler, failure: failureHandler)
+	}
+	
+	public func timeline(of user: UserSelector, options: TimelineOptions = .init(), handler: @escaping (SearchResult) -> Void) {
+	
+		
+		guard let api = rawApi else {
+			
+			handler(.failure(.apiError(.notReady, state: .withNoPostProcess)))
+			return
+		}
+		
+		func successHandler(json: JSON) {
+			
+			handler(statuses(from: json))
+		}
+		
+		func failureHandler(error: Error) {
+			
+			handler(searchErrorResult(error))
 		}
 		
 		api.getTimeline(for: UserTag(user), customParam: [:], count: options.count, sinceID: options.sinceId, maxID: options.maxId, trimUser: options.trimUser, excludeReplies: options.excludeReplies, includeRetweets: options.includeRetweets, contributorDetails: options.contributorDetails, includeEntities: options.includeEntities, tweetMode: SwifterTweetMode(options.tweetMode), success: successHandler, failure: failureHandler)
@@ -243,14 +258,7 @@ extension API {
 		
 		func failureHandler(error: Error) {
 			
-			switch error {
-				
-			case let error as SwifterError:
-				handler(.failure(.init(tweetError: error)))
-				
-			default:
-				handler(.failure(.unexpectedError(error, state: .withNoPostProcess)))
-			}
+			handler(searchErrorResult(error))
 		}
 		
 		api.searchTweet(using: query, geocode: options.geocode, lang: options.language, locale: options.locale, resultType: options.resultType, count: options.count, until: options.until, sinceID: options.sinceId, maxID: options.maxId, includeEntities: options.includeEntities, callback: options.callback, tweetMode: SwifterTweetMode(options.tweetMode), success: successHandler, failure: failureHandler)
@@ -313,7 +321,7 @@ extension API {
 	}
 }
 
-extension API {
+private extension API {
 	
 	func statuses(from json: JSON) -> SearchResult {
 		
@@ -335,6 +343,18 @@ extension API {
 		catch {
 
 			return .failure(.internalError("Failed to serialize a JSON data. \(error)", state: .withNoPostProcess))
+		}
+	}
+	
+	func searchErrorResult(_ error: Error) -> SearchResult {
+		
+		switch error {
+			
+		case let error as SwifterError:
+			return .failure(.init(tweetError: error))
+			
+		default:
+			return .failure(.unexpectedError(error, state: .withNoPostProcess))
 		}
 	}
 }
