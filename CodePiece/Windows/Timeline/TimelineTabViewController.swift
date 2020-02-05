@@ -22,6 +22,20 @@ import Ocean
 		
 		return timelineKindStateController.timelineKind
 	}
+
+	private func prepare() {
+		
+		timelineKindStateController.prepare()
+
+		let informations = timelineKindStateController.tabInformations.sorted { $0.tabOrder < $1.tabOrder }
+		
+		for information in informations {
+		
+			addTimelineViewController(with: information.controller, isKindOf: information.kind, autoUpdateInterval: information.autoUpdateInterval)
+		}
+		
+		timelineViewControllers.activate()
+	}
 	
 	override func viewDidLoad() {
 
@@ -30,13 +44,9 @@ import Ocean
 		DebugTime.print("Timeline Tab View Controller did load.")
 
 		observe(notification: CodePieceMainViewDidLoadNotification.self) { [unowned self] notification in
-			
-			self.timelineKindStateController.prepare()
-		}
 
-		addTimelineViewController(with: HashtagsContentsController(), isKindOf: .hashtags)
-		addTimelineViewController(with: MyTweetsContentsController(), isKindOf: .myTweets, autoUpdateInterval: 60)
-		addTimelineViewController(with: MentionsContentsController(), isKindOf: .mentions)
+			self.prepare()
+		}
 
 		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
 			
@@ -47,8 +57,6 @@ import Ocean
 			
 			self.timelineViewControllers.deactivate()
 		}
-		
-		timelineViewControllers.activate()
 	}
 	
 	override func viewWillAppear() {

@@ -26,6 +26,11 @@ class TimelineContentsController : NSObject {
 	
 	var items = Array<TimelineTableItem>()
 
+	override required init() {
+	
+		super.init()
+	}
+	
 	func activate() {}
 	func updateContents(callback: @escaping (UpdateResult) -> Void) {}
 	

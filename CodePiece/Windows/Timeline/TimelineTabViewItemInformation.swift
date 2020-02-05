@@ -15,6 +15,14 @@ extension TimelineKindStateController {
 		var kind: TimelineKind
 		var button: NSButton
 		var state: TimelineState
+		var controller: TimelineContentsController
+		var autoUpdateInterval: Double? = nil
+		
+		/// Tab item order.
+		///
+		/// Now the value is not effectively. If tab buttons become to generate
+		/// automatically by code, this value used to ordering tabs.
+		var tabOrder: Int
 	}
 }
 

@@ -58,10 +58,11 @@ final class TimelineKindStateController : NSObject, NotificationObservable {
 
 	func prepare() {
 	
-		tabInformations.insert(.init(kind: .hashtags, button: hashtagsButton, state: .neutral))
-		tabInformations.insert(.init(kind: .myTweets, button: myTweetsButton, state: .neutral))
-		tabInformations.insert(.init(kind: .mentions, button: mentionsButton, state: .neutral))
-
+		// Register Timeline View Controllers
+		
+		tabInformations.register(HashtagsContentsController.self, for: .hashtags, button: hashtagsButton)
+		tabInformations.register(MyTweetsContentsController.self, for: .myTweets, button: myTweetsButton, autoUpdateInterval: 60)
+		tabInformations.register(MentionsContentsController.self, for: .mentions, button: mentionsButton)
 		
 		observe(notification: MentionUpdatedNotification.self) { [unowned self] notification in
 			
@@ -156,5 +157,17 @@ extension TimelineKind : CustomStringConvertible {
 		case .mentions:
 			return "Mentions"
 		}
+	}
+}
+
+private extension Set where Element == TimelineKindStateController.TabInformation {
+	
+	static var nextTabOrder = 0
+	
+	mutating func register<T: TimelineContentsController>(_ controller: T.Type, for kind: TimelineKind, button: NSButton, state: TimelineState = .neutral, autoUpdateInterval interval: Double? = nil) {
+
+		insert(Element(kind: kind, button: button, state: state, controller: T.init(), autoUpdateInterval: interval, tabOrder: Self.nextTabOrder))
+		
+		Self.nextTabOrder += 1
 	}
 }
