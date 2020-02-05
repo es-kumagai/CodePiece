@@ -108,8 +108,6 @@
 		B15EE29B23CE7667005B268A /* MainStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27D23CE7667005B268A /* MainStatusViewController.swift */; };
 		B15EE29C23CE7667005B268A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE27E23CE7667005B268A /* AboutViewController.swift */; };
 		B15EE29D23CE7667005B268A /* TimelineTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28023CE7667005B268A /* TimelineTableCellView.swift */; };
-		B15EE29E23CE7667005B268A /* TimelineViewController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28123CE7667005B268A /* TimelineViewController+Notifications.swift */; };
-		B15EE29F23CE7667005B268A /* TimelineViewController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28223CE7667005B268A /* TimelineViewController+Action.swift */; };
 		B15EE2A023CE7667005B268A /* TimelineTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28323CE7667005B268A /* TimelineTableDataSource.swift */; };
 		B15EE2A123CE7667005B268A /* TimelineHashtagTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28423CE7667005B268A /* TimelineHashtagTableCellView.swift */; };
 		B15EE2A223CE7667005B268A /* TimelineStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28523CE7667005B268A /* TimelineStatusView.swift */; };
@@ -118,7 +116,6 @@
 		B15EE2A523CE7667005B268A /* TimelineViewController+MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28823CE7667005B268A /* TimelineViewController+MainWindow.swift */; };
 		B15EE2A623CE7667005B268A /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28923CE7667005B268A /* TimelineTableView.swift */; };
 		B15EE2A823CE7667005B268A /* TimelineTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28B23CE7667005B268A /* TimelineTableItem.swift */; };
-		B15EE2A923CE7667005B268A /* TimelineTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28C23CE7667005B268A /* TimelineTableController.swift */; };
 		B15EE2AA23CE7667005B268A /* WelcomeBoardWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28D23CE7667005B268A /* WelcomeBoardWindowController.swift */; };
 		B15EE38723CE9C42005B268A /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38623CE9C42005B268A /* Swifter */; };
 		B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38923CE9FBB005B268A /* Reachability */; };
@@ -355,8 +352,6 @@
 		B15EE27D23CE7667005B268A /* MainStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStatusViewController.swift; sourceTree = "<group>"; };
 		B15EE27E23CE7667005B268A /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		B15EE28023CE7667005B268A /* TimelineTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableCellView.swift; sourceTree = "<group>"; };
-		B15EE28123CE7667005B268A /* TimelineViewController+Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Notifications.swift"; sourceTree = "<group>"; };
-		B15EE28223CE7667005B268A /* TimelineViewController+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+Action.swift"; sourceTree = "<group>"; };
 		B15EE28323CE7667005B268A /* TimelineTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableDataSource.swift; sourceTree = "<group>"; };
 		B15EE28423CE7667005B268A /* TimelineHashtagTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineHashtagTableCellView.swift; sourceTree = "<group>"; };
 		B15EE28523CE7667005B268A /* TimelineStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineStatusView.swift; sourceTree = "<group>"; };
@@ -365,7 +360,6 @@
 		B15EE28823CE7667005B268A /* TimelineViewController+MainWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimelineViewController+MainWindow.swift"; sourceTree = "<group>"; };
 		B15EE28923CE7667005B268A /* TimelineTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableView.swift; sourceTree = "<group>"; };
 		B15EE28B23CE7667005B268A /* TimelineTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableItem.swift; sourceTree = "<group>"; };
-		B15EE28C23CE7667005B268A /* TimelineTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableController.swift; sourceTree = "<group>"; };
 		B15EE28D23CE7667005B268A /* WelcomeBoardWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBoardWindowController.swift; sourceTree = "<group>"; };
 		B15EE2AB23CE76A0005B268A /* HowToBuild.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = HowToBuild.md; sourceTree = "<group>"; };
 		B15EE2AC23CE76A0005B268A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -513,6 +507,27 @@
 				B18FFA3C23DF26B60057C977 /* DecodingError.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		B122598B23EA89C8006D819D /* SupportTypes */ = {
+			isa = PBXGroup;
+			children = (
+				B1508BDA23E92E9800973728 /* TimelineKindState.swift */,
+				B15EE28523CE7667005B268A /* TimelineStatusView.swift */,
+				B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */,
+				B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */,
+			);
+			path = SupportTypes;
+			sourceTree = "<group>";
+		};
+		B122598C23EA89F5006D819D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B15EE28623CE7667005B268A /* TimelineViewController.swift */,
+				B15EE28723CE7667005B268A /* TimelineViewController+Display.swift */,
+				B15EE28823CE7667005B268A /* TimelineViewController+MainWindow.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		B132D50C23CD08B800690C5F /* ESTwitter */ = {
@@ -728,21 +743,13 @@
 		B15EE27F23CE7667005B268A /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
-				B1508BDE23E9433000973728 /* ContentsController */,
 				B15EE27223CE7667005B268A /* Timeline.storyboard */,
+				B1508BED23E9BCF100973728 /* TimelineTabViewController.swift */,
+				B122598C23EA89F5006D819D /* ViewController */,
+				B1508BDE23E9433000973728 /* ContentsController */,
+				B122598B23EA89C8006D819D /* SupportTypes */,
 				B1C4410E23E0503C00C4715A /* Table */,
 				B1C4410D23E0500F00C4715A /* TableCell */,
-				B15EE28123CE7667005B268A /* TimelineViewController+Notifications.swift */,
-				B15EE28223CE7667005B268A /* TimelineViewController+Action.swift */,
-				B1508BDA23E92E9800973728 /* TimelineKindState.swift */,
-				B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */,
-				B15EE28523CE7667005B268A /* TimelineStatusView.swift */,
-				B15EE28623CE7667005B268A /* TimelineViewController.swift */,
-				B15EE28723CE7667005B268A /* TimelineViewController+Display.swift */,
-				B15EE28823CE7667005B268A /* TimelineViewController+MainWindow.swift */,
-				B15EE28C23CE7667005B268A /* TimelineTableController.swift */,
-				B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */,
-				B1508BED23E9BCF100973728 /* TimelineTabViewController.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -1331,7 +1338,6 @@
 				B15EE26323CE7658005B268A /* URLSchemeManager.swift in Sources */,
 				B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */,
 				B15EE24E23CE7658005B268A /* AppState.swift in Sources */,
-				B15EE2A923CE7667005B268A /* TimelineTableController.swift in Sources */,
 				B15EE25D23CE7658005B268A /* TwitterStatusAttributed.swift in Sources */,
 				B15EE25923CE7658005B268A /* Language.swift in Sources */,
 				B1F2C79123E57F2D008BBCA0 /* WebView.swift in Sources */,
@@ -1354,7 +1360,6 @@
 				B15EE20B23CE7593005B268A /* GitHubOpenFeatures.swift in Sources */,
 				B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */,
 				B15EE20723CE7593005B268A /* Fonts.swift in Sources */,
-				B15EE29E23CE7667005B268A /* TimelineViewController+Notifications.swift in Sources */,
 				B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */,
 				B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */,
 				B15EE25123CE7658005B268A /* DataStore.swift in Sources */,
@@ -1399,7 +1404,6 @@
 				B15EE25223CE7658005B268A /* DataStoreForApp.swift in Sources */,
 				B15EE29623CE7667005B268A /* AboutWindowController.swift in Sources */,
 				B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */,
-				B15EE29F23CE7667005B268A /* TimelineViewController+Action.swift in Sources */,
 				B15EE25823CE7658005B268A /* PostData+Twitter.swift in Sources */,
 				B1508BDD23E92F0C00973728 /* TimelineKindStateController.swift in Sources */,
 				B15EE1FF23CE7571005B268A /* BaseWindowController.swift in Sources */,

@@ -167,6 +167,11 @@ final class TimelineViewController: NSViewController {
 		
 		return true
 	}
+	
+	@IBAction func pushTimelineRefreshButton(_ sender: AnyObject!) {
+		
+		reloadTimeline()
+	}
 }
 
 extension TimelineViewController {

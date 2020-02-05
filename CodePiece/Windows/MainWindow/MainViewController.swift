@@ -320,7 +320,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			self.saveContents()
 		}
 		
-		observe(notification: TimelineViewController.TimelineSelectionChangedNotification.self) { [unowned self] notification in
+		observe(notification: TimelineSelectionChangedNotification.self) { [unowned self] notification in
 			
 			guard notification.selectedCells.count == 1 else {
 
@@ -334,7 +334,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
 		}
 		
-		observe(notification: TimelineViewController.TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
+		observe(notification: TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
 			
 			self.setReplyTo(notification)
 		}

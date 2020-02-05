@@ -38,6 +38,6 @@ extension TimelineViewController {
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {
 		
-		self.menuController.openBrowserWithCurrentTwitterStatus(sender)
+		menuController.openBrowserWithCurrentTwitterStatus(sender)
 	}
 }
