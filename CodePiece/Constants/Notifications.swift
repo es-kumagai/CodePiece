@@ -105,6 +105,16 @@ final class HashtagsDidChangeNotification : NotificationProtocol {
 	}
 }
 
+final class HashtagsTimelineDidUpdateNotification : NotificationProtocol {
+	
+	private(set) var statuses: [Status]
+	
+	init(statuses: [Status]) {
+		
+		self.statuses = statuses
+	}
+}
+
 final class TimelineSelectionChangedNotification : NotificationProtocol {
 	
 	private(set) unowned var timelineViewController: TimelineViewController

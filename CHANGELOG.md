@@ -2,10 +2,11 @@
 
 Change Logs.
 
-## 2.0.4 *
+## 2.0.4
 
 ### Enhancement
 
+* It is able to show that tweets posted by users who talk about specified hashtags in Timeline view.
 * Add URL scheme named "codepiece://open" that is used to open CodePiece with specifying custom hashtags and language and code.
 
 ## 2.0.3

@@ -11,15 +11,27 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class HashtagsContentsController : TimelineContentsController, NotificationObservable {
+final class RelatedTweetsContentsController : TimelineContentsController, NotificationObservable {
 	
 	override var kind: TimelineKind {
 		
-		return .hashtags
+		return .relatedTweets
 	}
 	
 	var dataSource = ManagedByHashtagsContentsDataSource()
 	
+	private var needsUpdate = false {
+		
+		didSet {
+			
+			if needsUpdate {
+				
+				DispatchQueue.main.async(execute: checkNeedsUpdates)
+			}
+		}
+	}
+	
+	var relatedUsers: Set<User> = []
 	var hashtags: HashtagSet = NSApp.settings.appState.hashtags ?? [] {
 		
 		didSet (previousHashtags) {
@@ -32,8 +44,17 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 			if dataSource.appendHashtags(hashtags: hashtags).passed {
 
 				NSLog("Hashtag did change: \(hashtags)")
-				delegate?.timelineContentsNeedsUpdate?(self)
+				needsUpdate = true
 			}
+		}
+	}
+	
+	private func checkNeedsUpdates() {
+		
+		if needsUpdate {
+			
+			needsUpdate = false
+			delegate?.timelineContentsNeedsUpdate?(self)
 		}
 	}
 	
@@ -53,7 +74,17 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		
 		observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
 			
+			self.relatedUsers = []
 			self.hashtags = notification.hashtags
+			self.needsUpdate = true
+		}
+		
+		observe(notification: HashtagsTimelineDidUpdateNotification.self) { [unowned self] notification in
+			
+			let users = notification.statuses.map { $0.user }
+			
+			self.relatedUsers.formUnion(users)
+			self.needsUpdate = true
 		}
 		
 		// Following code is disabled because the tweet you posted cannnot detect immediately.
@@ -73,7 +104,9 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
 		
-		let query = hashtags.twitterQueryText
+		let query = relatedUsers
+			.map { "from:\($0.screenName)" }
+			.joined(separator: " OR ")
 		
 		guard !query.isEmpty else {
 			
@@ -81,7 +114,6 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 			return
 		}
 		
-				
 		let options = API.SearchOptions(
 			
 			sinceId: dataSource.latestTweetIdForHashtags(hashtags: hashtags)
@@ -92,7 +124,6 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 			switch result {
 				
 			case .success(let statuses):
-				HashtagsTimelineDidUpdateNotification(statuses: statuses).post()
 				callback(.success((statuses, self.hashtags)))
 				
 			case .failure(let error):
@@ -124,3 +155,4 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		dataSource.items = Array(newTweets)
 	}
 }
+

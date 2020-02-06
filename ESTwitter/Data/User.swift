@@ -41,6 +41,19 @@ public struct User {
 	public var following: Bool
 }
 
+extension User : Hashable {
+
+	public func hash(into hasher: inout Hasher) {
+		
+		idStr.hash(into: &hasher)
+	}
+	
+	public static func ==(lhs: User, rhs: User) -> Bool {
+		
+		return lhs.idStr == rhs.idStr
+	}
+}
+
 extension User : Decodable {
 
 	enum CodingKeys : String, CodingKey {

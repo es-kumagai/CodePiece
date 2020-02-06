@@ -14,6 +14,7 @@ import Ocean
 	case hashtags = 0
 	case myTweets = 1
 	case mentions = 2
+	case relatedTweets = 3
 }
 
 enum TimelineState {
@@ -55,6 +56,7 @@ final class TimelineKindStateController : NSObject, NotificationObservable {
 	@IBOutlet var hashtagsButton: NSButton!
 	@IBOutlet var myTweetsButton: NSButton!
 	@IBOutlet var mentionsButton: NSButton!
+	@IBOutlet var relatedTweetsButton: NSButton!
 
 	func prepare() {
 	
@@ -63,6 +65,8 @@ final class TimelineKindStateController : NSObject, NotificationObservable {
 		tabInformations.register(HashtagsContentsController.self, for: .hashtags, button: hashtagsButton)
 		tabInformations.register(MyTweetsContentsController.self, for: .myTweets, button: myTweetsButton, autoUpdateInterval: 60)
 		tabInformations.register(MentionsContentsController.self, for: .mentions, button: mentionsButton)
+		tabInformations.register(RelatedTweetsContentsController.self, for: .relatedTweets, button: relatedTweetsButton)
+		
 		
 		observe(notification: MentionUpdatedNotification.self) { [unowned self] notification in
 			
@@ -156,6 +160,9 @@ extension TimelineKind : CustomStringConvertible {
 			
 		case .mentions:
 			return "Mentions"
+			
+		case .relatedTweets:
+			return "Related Tweets"
 		}
 	}
 }
