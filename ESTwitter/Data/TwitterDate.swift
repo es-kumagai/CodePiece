@@ -101,8 +101,21 @@ extension TwitterDate : Decodable {
 
 extension TwitterDate : CustomStringConvertible {
 	
+	private static let dateFormatter: DateFormatter = {
+		
+		let formatter = DateFormatter()
+		
+		formatter.locale = .current
+		formatter.timeZone = .current
+		formatter.dateStyle = .short
+		formatter.timeStyle = .short
+		formatter.doesRelativeDateFormatting = true
+		
+		return formatter
+	}()
+	
 	public var description: String {
 		
-		return rawValue.description
+		return Self.dateFormatter.string(from: rawValue)
 	}
 }
