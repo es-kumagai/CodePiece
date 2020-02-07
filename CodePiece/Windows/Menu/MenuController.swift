@@ -22,9 +22,14 @@ final class MenuController : NSObject {
 		return application.baseViewController?.mainViewController
 	}
 	
-	var timelineViewController: TimelineViewController? {
+	var timelineTabViewController: TimelineTabViewController? {
 		
-		return application.baseViewController?.timelineViewController
+		return application.baseViewController?.timelineTabViewController
+	}
+	
+	var currentTimelineViewController: TimelineViewController? {
+		
+		return application.timelineTabViewController?.currentTimelineViewController
 	}
 	
 	override init() {
@@ -108,9 +113,29 @@ final class MenuController : NSObject {
 		mainViewController?.clearReplyTo()
 	}
 	
-	var canOpenBrowserWithSearchHashtagPage:Bool {
+	var canOpenBrowserWithSearchHashtagPage: Bool {
 	
-		return mainViewController?.canOpenBrowserWithSearchHashtagPage ?? false
+		return mainViewController?.canOpenBrowserWithRelatedTweets ?? false
+	}
+	
+	var canOpenBrowserWithCurrentTwitterStatus: Bool {
+		
+		return mainViewController?.canOpenBrowserWithCurrentTwitterStatus ?? false
+	}
+	
+	var canOpenBrowserWithRelatedTweets: Bool {
+		
+		return mainViewController?.canOpenBrowserWithRelatedTweets ?? false
+	}
+	
+	var isTimelineActive: Bool {
+	
+		return currentTimelineViewController?.isTimelineActive ?? false
+	}
+	
+	@IBAction func reloadTimeline(_ sender: NSMenuItem?) {
+		
+		currentTimelineViewController?.updateTimeline()
 	}
 	
 	@IBAction func openBrowserWithSearchHashtagPage(_ sender: NSMenuItem?) {
@@ -118,23 +143,13 @@ final class MenuController : NSObject {
 		self.mainViewController?.openBrowserWithSearchHashtagPage()
 	}
 	
-	var isTimelineActive: Bool {
-	
-		return timelineViewController?.isTimelineActive ?? false
-	}
-	
-	@IBAction func reloadTimeline(_ sender: NSMenuItem?) {
-		
-		timelineViewController?.updateTimeline()
-	}
-	
-	var canOpenBrowserWithCurrentTwitterStatus:Bool {
-		
-		return mainViewController?.canOpenBrowserWithCurrentTwitterStatus ?? false
-	}
-	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {
 		
 		mainViewController?.openBrowserWithCurrentTwitterStatus()
+	}
+
+	@IBAction func openBrowserWithRelatedStatuses(_ sender: AnyObject) {
+		
+		mainViewController?.openBrowserWithRelatedTweets()
 	}
 }

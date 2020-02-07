@@ -104,9 +104,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
 		
-		let query = relatedUsers
-			.map { "from:\($0.screenName)" }
-			.joined(separator: " OR ")
+		let query = relatedUsers.tweetFromAllUsersQuery
 		
 		guard !query.isEmpty else {
 			
@@ -156,3 +154,11 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 	}
 }
 
+extension Set where Element == User {
+	
+	var tweetFromAllUsersQuery: String {
+		
+		return map { "from:\($0.screenName)" }
+			.joined(separator: " OR ")
+	}
+}

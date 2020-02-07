@@ -181,19 +181,19 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Navigate" id="plw-yh-OX5">
                                     <items>
-                                        <menuItem title="Move Focus To Code Area" keyEquivalent="j" id="cpf-PW-ztV">
+                                        <menuItem title="Move Focus to Code Area" keyEquivalent="j" id="cpf-PW-ztV">
                                             <connections>
                                                 <action selector="moveFocusToCodeArea:" target="p69-Rc-ib8" id="v7c-L5-7li"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="u3b-2G-903"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Move Focus To Tweet &amp; Description" keyEquivalent="t" id="INB-gt-HfH">
+                                        <menuItem title="Move Focus to Description" keyEquivalent="t" id="INB-gt-HfH">
                                             <connections>
                                                 <action selector="moveFocusToDescription:" target="p69-Rc-ib8" id="5wp-RX-I73"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="r5n-DF-Z6v"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Move Focus To Hashtag" keyEquivalent="H" id="LXg-40-rgh">
+                                        <menuItem title="Move Focus to Hashtags" keyEquivalent="H" id="LXg-40-rgh">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
                                                 <action selector="moveFocusToHashtag:" target="p69-Rc-ib8" id="8Tz-fs-42y"/>
@@ -207,7 +207,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Editor" id="ufy-Hc-iBV">
                                     <items>
-                                        <menuItem title="Clear Code And Description" keyEquivalent="C" id="cqU-D4-TA8">
+                                        <menuItem title="Clear Code and Description" keyEquivalent="C" id="cqU-D4-TA8">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="clearCodeAndDescription:" target="p69-Rc-ib8" id="k25-gx-905"/>
@@ -221,14 +221,14 @@
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="Qye-5A-wcx"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Clear Tweet &amp; Description" keyEquivalent="T" id="dWd-q2-zPv">
+                                        <menuItem title="Clear Description" keyEquivalent="T" id="dWd-q2-zPv">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="clearTweetAndDescription:" target="p69-Rc-ib8" id="YSQ-s2-WSf"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="rJh-tt-DVh"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Clear Hashtag" keyEquivalent="H" id="XGy-vZ-8rK">
+                                        <menuItem title="Clear Hashtags" keyEquivalent="H" id="XGy-vZ-8rK">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="clearHashtag:" target="p69-Rc-ib8" id="w7P-JH-1EK"/>
@@ -250,7 +250,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Action" id="emn-ui-tRh">
                                     <items>
-                                        <menuItem title="Post Code and Description To SNS" id="Rc4-4N-6ac">
+                                        <menuItem title="Post Code and Description" id="Rc4-4N-6ac">
                                             <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -260,7 +260,7 @@ DQ
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="CYJ-mj-Wam"/>
-                                        <menuItem title="Reply To Selection" keyEquivalent="r" id="yiL-UH-fkg">
+                                        <menuItem title="Reply to Selection" keyEquivalent="r" id="yiL-UH-fkg">
                                             <connections>
                                                 <action selector="replyTo:" target="p69-Rc-ib8" id="nbW-X6-90O"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="canReplyTo" id="Vne-po-qbr"/>
@@ -280,29 +280,36 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Browser" id="2G8-Th-w1k">
                                     <items>
-                                        <menuItem title="Search Current Hashtag Using Twitter" keyEquivalent="H" id="oLV-JD-69o">
+                                        <menuItem title="Search Hashtags in Twitter" keyEquivalent="H" id="oLV-JD-69o">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="openBrowserWithSearchHashtagPage:" target="p69-Rc-ib8" id="Slu-5F-UTT"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.canOpenBrowserWithSearchHashtagPage" id="ydB-pS-lTr"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithSearchHashtagPage" id="Nib-vh-UZC"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Search Related Tweets in Twitter" keyEquivalent="H" id="RfH-Af-A9E">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openBrowserWithRelatedStatuses:" target="p69-Rc-ib8" id="q35-5d-2gZ"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithRelatedTweets" id="TgJ-Pt-2Fe"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="1ah-80-qc4"/>
-                                        <menuItem title="Open Selecting Tweet In Browser" keyEquivalent="o" id="OU8-Vh-UBa">
+                                        <menuItem title="Open Selection in Browser" keyEquivalent="o" id="OU8-Vh-UBa">
                                             <connections>
                                                 <action selector="openBrowserWithCurrentTwitterStatus:" target="p69-Rc-ib8" id="q1v-gT-lJe"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithCurrentTwitterStatus" id="6x2-jq-RDd"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
-                                        <menuItem title="Open Twitter Home" keyEquivalent="T" id="uQw-tc-WtZ">
+                                        <menuItem title="Open Twitter" keyEquivalent="T" id="uQw-tc-WtZ">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="openTwitterHomeAction:" target="k6Z-Lx-p1R" id="h8X-Nk-vJP"/>
                                                 <binding destination="k6Z-Lx-p1R" name="enabled" keyPath="self.canOpenTwitterHome" id="L91-Mn-k2k"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Open GitHub Home" keyEquivalent="G" id="cBq-DM-e57" userLabel="Open GitHub Home">
+                                        <menuItem title="Open GitHub" keyEquivalent="G" id="cBq-DM-e57" userLabel="Open GitHub Home">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="openGitHubHomeAction:" target="noF-Hz-Tly" id="tj4-Fk-2Fp"/>
@@ -316,7 +323,7 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
                                     <items>
-                                        <menuItem title="Welcome To CodePiece" id="JfM-uk-0pM">
+                                        <menuItem title="Welcome to CodePiece" id="JfM-uk-0pM">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="showWelcomeBoard:" target="p69-Rc-ib8" id="8Dj-th-7fk"/>

@@ -457,9 +457,14 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 	}
 	
-	var canOpenBrowserWithSearchHashtagPage:Bool {
+	var canOpenBrowserWithSearchHashtagPage: Bool {
 	
 		return !hashTagTextField.hashtags.isEmpty
+	}
+	
+	var canOpenBrowserWithRelatedTweets: Bool {
+	
+		return canOpenBrowserWithSearchHashtagPage
 	}
 	
 	func openBrowserWithSearchHashtagPage() {
@@ -507,6 +512,32 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 		catch {
 			
+			self.showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
+		}
+	}
+
+	func openBrowserWithRelatedTweets() {
+		
+		guard canOpenBrowserWithRelatedTweets else {
+			
+			fatalError("Cannot open browser.")
+		}
+		
+		do {
+
+			guard let timelineContents = NSApp.timelineTabViewController?.timelineContentsController(of: .relatedTweets) as? RelatedTweetsContentsController else {
+				
+				fatalError("INTERNAL ERROR: Failed to get the Related Tweets Contents Controller.")
+			}
+			
+			try ESTwitter.Browser.openWithQuery(query: timelineContents.relatedUsers.tweetFromAllUsersQuery)
+		}
+		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
+			
+			self.showErrorAlert(withTitle: "Failed to open browser", message: reason)
+		}
+		catch {
+
 			self.showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
 		}
 	}
