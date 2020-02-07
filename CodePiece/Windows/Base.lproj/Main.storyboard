@@ -287,7 +287,7 @@ DQ
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithSearchHashtagPage" id="Nib-vh-UZC"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Search Related Tweets in Twitter" keyEquivalent="H" id="RfH-Af-A9E">
+                                        <menuItem title="Search Related Tweets in Twitter" keyEquivalent="R" id="RfH-Af-A9E">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="openBrowserWithRelatedStatuses:" target="p69-Rc-ib8" id="q35-5d-2gZ"/>
