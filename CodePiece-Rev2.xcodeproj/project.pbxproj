@@ -1779,7 +1779,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
 				ES_URLSCHEME_SIMPLE = "codepiece-beta";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1809,7 +1809,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
 				ES_URLSCHEME_SIMPLE = codepiece;
 				FRAMEWORK_SEARCH_PATHS = (
