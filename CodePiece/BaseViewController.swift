@@ -23,12 +23,12 @@ final class BaseViewController: NSSplitViewController {
 		
 		didSet {
 			
-			timelineViewController = timelineSplitViewItem.map { $0.viewController as! TimelineViewController }
+			timelineTabViewController = timelineSplitViewItem.map { $0.viewController as! TimelineTabViewController }
 		}
 	}
 
 	private(set) weak var mainViewController: MainViewController?
-	private(set) weak var timelineViewController: TimelineViewController?
+	private(set) weak var timelineTabViewController: TimelineTabViewController?
 	
 	override func viewDidLoad() {
 		
@@ -46,7 +46,7 @@ final class BaseViewController: NSSplitViewController {
 			case is MainViewController:
 				mainSplitViewItem = item
 				
-			case is TimelineViewController:
+			case is TimelineTabViewController:
 				timelineSplitViewItem = item
 				
 			default:

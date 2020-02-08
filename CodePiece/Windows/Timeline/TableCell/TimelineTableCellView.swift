@@ -37,7 +37,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		
 		didSet {
 			
-			self.needsDisplay = true
+			needsDisplay = true
 		}
 	}
 	
@@ -45,29 +45,29 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		
 		didSet {
 			
-			if self.selected != oldValue {
+			if selected != oldValue {
 
-				self.textLabel.isSelectable = self.selected
-				self.needsDisplay = true
+				textLabel.isSelectable = selected
+				needsDisplay = true
 			}
 		}
 	}
 	
-	@IBOutlet var usernameLabel:NSTextField!
-	@IBOutlet var textLabel:NSTextField!
-	@IBOutlet var iconButton:NSButton!
-	@IBOutlet var dateLabel:NSTextField!
+	@IBOutlet var usernameLabel: NSTextField!
+	@IBOutlet var textLabel: NSTextField!
+	@IBOutlet var iconButton: NSButton!
+	@IBOutlet var dateLabel: NSTextField!
 	@IBOutlet var retweetMark: NSView!
 
 	override func draw(_ dirtyRect: NSRect) {
 
-		if self.selected {
+		if selected {
 
-			self.style.selectionBackgroundColor.set()
+			style.selectionBackgroundColor.set()
 		}
 		else {
 
-			self.style.backgroundColor.set()
+			style.backgroundColor.set()
 		}
 		
 		dirtyRect.fill()
@@ -103,16 +103,16 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		}
 		else {
 
-			self.textLabel.attributedStringValue = NSAttributedString(string: "")
-			self.usernameLabel.stringValue = ""
-			self.dateLabel.stringValue = ""
-			self.iconButton.image = nil
-			self.retweetMark.isHidden = true
-			self.style = .Recent
-			self.iconButton.image = nil
+			textLabel.attributedStringValue = NSAttributedString(string: "")
+			usernameLabel.stringValue = ""
+			dateLabel.stringValue = ""
+			iconButton.image = nil
+			retweetMark.isHidden = true
+			style = .Recent
+			iconButton.image = nil
 		}
 		
-		self.needsDisplay = true
+		needsDisplay = true
 	}
 	
 	private func updateIconImage(status: ESTwitter.Status) {
@@ -197,7 +197,6 @@ extension TimelineTableCellView : TimelineTableCellType {
 		
 		if cellForEstimateHeight == nil {
 			
-//			let cell = self.makeCellForTableView(tableView, owner: self) as! TimelineTableCellView
 			guard let topObjects = tableView.topObjectsInRegisteredNibByIdentifier(identifier: userInterfaceItemIdentifier) else {
 			
 				fatalError()

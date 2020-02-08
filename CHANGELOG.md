@@ -2,11 +2,21 @@
 
 Change Logs.
 
-## 2.0.5
+## 2.0.6
 
 ### Fixes
 
 * Fix a problem that truncated tweet unexpectedly when the tweet is long.
+
+## 2.0.5
+
+### Enhancement
+
+* It can open in Twitter that tweets related to current hashtags from menu bar.
+
+### Fixes
+
+* Fix a problem that the CodePiece crash when try to open selecting tweet in Twitter from menu bar.
 
 ## 2.0.4
 

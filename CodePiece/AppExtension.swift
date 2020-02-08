@@ -24,6 +24,16 @@ extension NSApplication {
 		return keyWindow?.contentViewController as? BaseViewController
 	}
 	
+	var mainViewController: MainViewController? {
+		
+		return baseViewController?.mainViewController
+	}
+	
+	var timelineTabViewController: TimelineTabViewController? {
+		
+		return baseViewController?.timelineTabViewController
+	}
+	
 	static func readyForUse() {
 		
 		guard !_isReadyForUse else {

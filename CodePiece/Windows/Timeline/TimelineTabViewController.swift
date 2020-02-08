@@ -31,7 +31,7 @@ import Ocean
 		
 		for information in informations {
 		
-			addTimelineViewController(with: information.controller, isKindOf: information.kind, autoUpdateInterval: information.autoUpdateInterval)
+			addTimelineViewController(with: information.controller, autoUpdateInterval: information.autoUpdateInterval)
 		}
 		
 		timelineViewControllers.activate()
@@ -86,10 +86,48 @@ extension TimelineTabViewController : TimelineKindStateDelegate {
 	}
 }
 
+extension TimelineTabViewController {
+	
+	var currentTimelineViewController: TimelineViewController? {
+	
+		guard let kind = currentTimelineKind else {
+			
+			return nil
+		}
+
+		return timelineViewController(of: kind)
+	}
+	
+	var currentTimelineContentsController: TimelineContentsController? {
+	
+		guard let kind = currentTimelineKind else {
+			
+			return nil
+		}
+
+		return timelineViewController(of: kind).contentsController
+	}
+	
+	func timelineViewController(of kind: TimelineKind) -> TimelineViewController {
+	
+		guard let viewController = timelineViewControllers.first(where: { $0.contentsKind == kind }) else {
+			
+			fatalError("INTERNAL ERROR: Unknown kind '\(kind)' of Timeline View Controller specified.")
+		}
+		
+		return viewController
+	}
+	
+	func timelineContentsController(of kind: TimelineKind) -> TimelineContentsController {
+	
+		return timelineViewController(of: kind).contentsController
+	}
+}
+
 private extension TimelineTabViewController {
 	
 	@discardableResult
-	func addTimelineViewController(with contentsController: TimelineContentsController, isKindOf kind: TimelineKind, autoUpdateInterval interval: Double? = nil) -> TimelineViewController {
+	func addTimelineViewController(with contentsController: TimelineContentsController, autoUpdateInterval interval: Double? = nil) -> TimelineViewController {
 		
 		let timelineViewController = (storyboard!.instantiateController(withIdentifier: "TimelineViewController") as! TimelineViewController)
 	
