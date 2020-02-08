@@ -51,7 +51,7 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		
 		super.activate()
 		
-		observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
+		observe(HashtagsDidChangeNotification.self) { [unowned self] notification in
 			
 			self.hashtags = notification.hashtags
 		}

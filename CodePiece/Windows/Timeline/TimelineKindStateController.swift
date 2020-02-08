@@ -68,13 +68,13 @@ final class TimelineKindStateController : NSObject, NotificationObservable {
 		tabInformations.register(RelatedTweetsContentsController.self, for: .relatedTweets, button: relatedTweetsButton)
 		
 		
-		observe(notification: MentionUpdatedNotification.self) { [unowned self] notification in
+		observe(MentionUpdatedNotification.self) { [unowned self] notification in
 			
 			self.timelineState[.mentions] = (notification.hasNewMention ? .havingNew : .neutral)
 			self.updateButtonState()
 		}
 		
-		observe(notification: TimelineSelectionChangedNotification.self) { [unowned self] notification in
+		observe(TimelineSelectionChangedNotification.self) { [unowned self] notification in
 			
 			self.timelineState[notification.timelineViewController.contentsKind] = .neutral
 			self.updateButtonState()

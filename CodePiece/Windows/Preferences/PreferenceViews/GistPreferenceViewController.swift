@@ -116,7 +116,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 	
 		super.viewWillAppear()
 		
-		observe(notification: Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			NSLog("Detect GitHub authorization state changed.")
 			
 			self.applyAuthorizedStatus()

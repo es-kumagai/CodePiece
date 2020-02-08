@@ -29,7 +29,7 @@ final class MyTweetsContentsController : TimelineContentsController, Notificatio
 		
 		super.activate()
 	
-		observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
+		observe(PostCompletelyNotification.self) { [unowned self] notification in
 			
 			self.delegate?.timelineContentsNeedsUpdate?(self)
 		}

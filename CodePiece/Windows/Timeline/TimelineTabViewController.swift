@@ -43,7 +43,7 @@ import Ocean
 
 		DebugTime.print("Timeline Tab View Controller did load.")
 
-		observe(notification: CodePieceMainViewDidLoadNotification.self) { [unowned self] notification in
+		observe(CodePieceMainViewDidLoadNotification.self) { [unowned self] notification in
 
 			self.prepare()
 		}

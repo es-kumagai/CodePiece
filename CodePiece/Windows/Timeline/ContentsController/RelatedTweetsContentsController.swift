@@ -79,7 +79,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			self.needsUpdate = true
 		}
 		
-		observe(notification: HashtagsTimelineDidUpdateNotification.self) { [unowned self] notification in
+		observe(HashtagsTimelineDidUpdateNotification.self) { [unowned self] notification in
 			
 			let users = notification.statuses.map { $0.user }
 			

@@ -118,13 +118,13 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		
 		super.viewWillAppear()
 		
-		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
 			self.applyAuthorizedStatus()
 		}
 		
-		observe(notification: TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
+		observe(TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
 			
 			self.withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
 			self.applyAuthorizedStatus()

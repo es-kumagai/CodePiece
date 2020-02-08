@@ -67,17 +67,17 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 		
 		super.viewWillAppear()
 			
-		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] _ in
+		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] _ in
 			
 			self.updateTwitterAccountStatus()
 		}
 		
-		observe(notification: Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] _ in
+		observe(Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] _ in
 			
 			self.updateGistAccountStatus()
 		}
 		
-		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] _ in
+		observe(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] _ in
 			
 			self.updateReachability()
 		}

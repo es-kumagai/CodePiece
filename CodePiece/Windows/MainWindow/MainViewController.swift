@@ -285,7 +285,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		clearContents()
 		
-		observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
+		observe(PostCompletelyNotification.self) { [unowned self] notification in
 			
 			let container = notification.container
 			
@@ -303,39 +303,39 @@ final class MainViewController: NSViewController, NotificationObservable {
 			NSLog("Posted completely \(notification.container.twitterState.postedStatus?.text ?? "(unknown)")")
 		}
 		
-		observe(notification: PostFailedNotification.self) { [unowned self] notification in
+		observe(PostFailedNotification.self) { [unowned self] notification in
 			
 			self.showErrorAlert(withTitle: "Failed to post", message: "\(notification.error)")
 		}
 		
-		observe(notification: HashtagsChangeRequestNotification.self) { [unowned self] notification in
+		observe(HashtagsChangeRequestNotification.self) { [unowned self] notification in
 			
 			self.hashTagTextField.hashtags = notification.hashtags
 		}
 		
-		observe(notification: LanguageSelectionChangeRequestNotification.self) { [unowned self] notification in
+		observe(LanguageSelectionChangeRequestNotification.self) { [unowned self] notification in
 			
 			self.languagePopUpDataSource.selectLanguage(notification.language)
 		}
 		
-		observe(notification: CodeChangeRequestNotification.self) { [unowned self] notification in
+		observe(CodeChangeRequestNotification.self) { [unowned self] notification in
 			
 			self.codeTextView.string = notification.code
 		}
 		
-		observe(notification: LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
+		observe(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
 			
 			self.updateWatermark()
 			self.updateTweetTextCount()
 			self.saveContents()
 		}
 		
-		observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
+		observe(HashtagsDidChangeNotification.self) { [unowned self] notification in
 
 			self.saveContents()
 		}
 		
-		observe(notification: TimelineSelectionChangedNotification.self) { [unowned self] notification in
+		observe(TimelineSelectionChangedNotification.self) { [unowned self] notification in
 			
 			guard notification.selectedCells.count == 1 else {
 
@@ -349,12 +349,12 @@ final class MainViewController: NSViewController, NotificationObservable {
 			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
 		}
 		
-		observe(notification: TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
+		observe(TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
 			
 			self.setReplyTo(notification)
 		}
 		
-		observe(notification: TwitterController.AuthorizationStateInvalidNotification.self) { [unowned self] notification in
+		observe(TwitterController.AuthorizationStateInvalidNotification.self) { [unowned self] notification in
 			
 			if NSApp.settings.isReady {
 			
@@ -363,12 +363,12 @@ final class MainViewController: NSViewController, NotificationObservable {
 			}
 		}
 		
-		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.withChangeValue(for: "CanPost")
 		}
 
-		observe(notification: TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
+		observe(TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
 
 			switch notification.error {
 

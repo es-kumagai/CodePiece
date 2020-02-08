@@ -19,7 +19,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		
 		super.init()
 		
-		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 
 			self.withChangeValue(for: "canOpenTwitterHome")
 		}		

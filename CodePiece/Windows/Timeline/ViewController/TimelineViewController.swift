@@ -480,7 +480,7 @@ extension TimelineViewController : NotificationObservable {
 		
 		super.viewDidLoad()
 
-		observe(notification: TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.message.send(.updateStatuses)
 		}
@@ -495,7 +495,7 @@ extension TimelineViewController : NotificationObservable {
 			self.message.send(.autoUpdate(enable: true))
 		}
 		
-		observe(notification: ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
+		observe(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
 			self.message.send(.setReachability(notification.state))
 		}

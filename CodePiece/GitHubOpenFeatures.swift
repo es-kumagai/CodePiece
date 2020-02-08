@@ -18,7 +18,7 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObserva
 		
 		super.init()
 		
-		observe(notification: Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+		observe(Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			self.withChangeValue(for: "canOpenGitHubHome")
 		}

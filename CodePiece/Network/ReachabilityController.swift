@@ -81,7 +81,7 @@ final class ReachabilityController : NotificationObservable {
 			throw error
 		}
 		
-		observe(notification: ReachabilityChangedNotification.self, using: reachabilityDidChange)
+		observe(ReachabilityChangedNotification.self, using: reachabilityDidChange)
 		
 		try self.reachability.startNotifier()
 	}
