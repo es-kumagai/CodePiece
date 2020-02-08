@@ -51,20 +51,45 @@ extension PostDataContainer {
 	
 	func makeDescriptionForTwitter(forCountingLength: Bool = false) -> String {
 		
+		func internalErrorUnexpectedRange<R>(_ range: NSRange, for text: String, note: String?, result: @autoclosure () -> R) -> R {
+
+			let message = "Unexpected range '\(range)' for \(text) \(note != nil ? "(\(note!))" : "")"
+
+			#if DEBUG
+			fatalError(message)
+			#else
+			NSLog("INTERNAL ERROR: %@", message)
+			return result()
+			#endif
+		}
+
 		func replacingDescriptionWithPercentEscapingUrl(_ text: String) -> String {
 			
 			var result = text
-			
+						
 			let urlPattern = try! NSRegularExpression(pattern:
 				#"(?:^|\s)((http(?:s|)):\/\/([^\/\s]+?)/([^\?\s]*?)(?:|\?([^\s]*?)))(?:\s|$)"#
 				, options: [])
 
 			for match in urlPattern.matches(in: result, options: [], range: NSRange(location: 0, length: text.count)).reversed() {
-				
-				let targetRange = Range(match.range(at: 1), for: result)!
-				
-				let scheme = String(result[Range(match.range(at: 2), for: result)!])
-				let host = String(result[Range(match.range(at: 3), for: result)!])
+
+				guard let targetRange = Range(match.range(at: 1), for: result) else {
+					
+					return internalErrorUnexpectedRange(match.range(at: 1), for: text, note: #function, result: text)
+				}
+
+				guard let schemeRange = Range(match.range(at: 2), for: result) else {
+					
+					return internalErrorUnexpectedRange(match.range(at: 2), for: text, note: #function, result: text)
+				}
+
+				guard let hostRange = Range(match.range(at: 3), for: result) else {
+					
+					return internalErrorUnexpectedRange(match.range(at: 3), for: text, note: #function, result: text)
+				}
+
+				let scheme = String(result[schemeRange])
+				let host = String(result[hostRange])
 				var uri = Range(match.range(at: 4), for: result).map { String(result[$0]) } ?? ""
 				var query = Range(match.range(at: 5), for: result).map { String(result[$0]) } ?? ""
 
@@ -121,9 +146,14 @@ extension PostDataContainer {
 				#"(^|\s)(http(s|):\/\/[\#(urlWord)]+)(\s|$)"#
 				, options: [])
 
-			urlPattern.replaceAllMatches(onto: &result) { text, range, match in
+			urlPattern.replaceAllMatches(onto: &result) { item, range, match in
 				
-				range = Range(match.range(at: 2), for: text)!
+				guard let newRange = Range(match.range(at: 2), for: text) else {
+
+					return internalErrorUnexpectedRange(match.range(at: 2), for: text, note: #function, result: item)
+				}
+				
+				range = newRange
 				return "xxxxxxxxxxxxxxxxxxxxxxx"
 			}
 			
