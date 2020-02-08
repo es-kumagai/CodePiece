@@ -1711,3 +1711,24 @@ extension Range where Bound == String.Index {
 		self = start ..< end
 	}
 }
+
+extension NSRegularExpression {
+	
+	func replaceAllMatches(on text: inout String, options: NSRegularExpression.MatchingOptions = [], replacement: (String) throws -> String) rethrows {
+		
+		let range = NSRange(location: 0, length: text.count)
+		
+		for match in matches(in: text, options: options, range: range).reversed() {
+			
+			let range = Range(match.range, for: text)
+			let item = String(text[range])
+			
+			text = try text.replacingCharacters(in: range, with: replacement(item))
+		}
+	}
+	
+	func replaceAllMatches(on text: inout String, options: NSRegularExpression.MatchingOptions = [], with replacement: String) {
+
+		replaceAllMatches(on: &text) { _ in replacement }
+	}
+}
