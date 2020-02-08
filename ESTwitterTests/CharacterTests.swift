@@ -173,7 +173,7 @@ class CharacterTests: XCTestCase {
 
 		XCTAssertEqual(s4_1.count, 1)
 		XCTAssertEqual(s4_1.utf16.count, 2)
-		XCTAssertEqual(s4_1.twitterCharacterView.first!.wordCountForIndices, 2)
+		XCTAssertEqual(s4_1.twitterCharacterView.first!.wordCountForIndices, 1)
 		XCTAssertEqual(s4_1.twitterCharacterView.first!.wordCountForPost, 1)
 		XCTAssertFalse(s4_1.twitterCharacterView.first!.isEnglish)
 		XCTAssertTrue(s4_1.twitterCharacterView.first!.isSurrogatePair)

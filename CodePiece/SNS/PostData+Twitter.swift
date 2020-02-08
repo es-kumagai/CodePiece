@@ -42,7 +42,7 @@ extension PostDataContainer {
 		return twitterState.postedStatus?.text
 	}
 	
-	func descriptionLengthForTwitter(includesGistsLink:Bool) -> Int {
+	func descriptionLengthForTwitter(includesGistsLink: Bool) -> Int {
 
 		let countsForGistsLink = includesGistsLink ? Twitter.SpecialCounting.media.length + Twitter.SpecialCounting.httpsUrl.length + 2 : 0
 
@@ -56,17 +56,17 @@ extension PostDataContainer {
 			var result = text
 			
 			let urlPattern = try! NSRegularExpression(pattern:
-				#"(?:^|\s)((http(?:s|)):\/\/([^\/]+)/([^\?]*)\?(.+?))(?:\s|$)"#
+				#"(?:^|\s)((http(?:s|)):\/\/([^\/\s]+?)/([^\?\s]*?)(?:|\?([^\s]*?)))(?:\s|$)"#
 				, options: [])
 
 			for match in urlPattern.matches(in: result, options: [], range: NSRange(location: 0, length: text.count)).reversed() {
 				
-				let targetRange = Range(match.range(at: 1), for: result)
+				let targetRange = Range(match.range(at: 1), for: result)!
 				
-				let scheme = String(result[Range(match.range(at: 2), for: result)])
-				let host = String(result[Range(match.range(at: 3), for: result)])
-				var uri = String(result[Range(match.range(at: 4), for: result)])
-				var query = String(result[Range(match.range(at: 5), for: result)])
+				let scheme = String(result[Range(match.range(at: 2), for: result)!])
+				let host = String(result[Range(match.range(at: 3), for: result)!])
+				var uri = Range(match.range(at: 4), for: result).map { String(result[$0]) } ?? ""
+				var query = Range(match.range(at: 5), for: result).map { String(result[$0]) } ?? ""
 
 				let uriPattern = try! NSRegularExpression(pattern: #"[^\/\.]+"#)
 				let queryPattern = try! NSRegularExpression(pattern: #"[^=&]+"#)
@@ -79,40 +79,34 @@ extension PostDataContainer {
 					let escapedPattern = try! NSRegularExpression(pattern: #"%\d\d"#)
 					let allowedWordPattern = try! NSRegularExpression(pattern: #"[A-Za-z0-9-_\.\?:#/@%!\$&'\(\)\*\+,;=~]"#)
 					
-					escapedPattern.replaceAllMatches(on: &text, with: "")
-					allowedWordPattern.replaceAllMatches(on: &text, with: "")
+					escapedPattern.replaceAllMatches(onto: &text, with: "")
+					allowedWordPattern.replaceAllMatches(onto: &text, with: "")
 					
 					print(text, text.isEmpty)
 					return !text.isEmpty
 				}
 
-				for match in uriPattern.matches(in: uri, options: [], range: NSRange(location: 0, length: uri.count)).reversed() {
+				uriPattern.replaceAllMatches(onto: &uri) {
 
-					let range = Range(match.range, for: uri)
-					let item = String(uri[range])
+					guard needsToEscape($0) else {
 
-					guard needsToEscape(item) else {
-						
-						continue
+						return $0
 					}
-					
-					uri = uri.replacingCharacters(in: range, with: item.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!)
+
+					return $0.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
 				}
 
-				for match in queryPattern.matches(in: query, options: [], range: NSRange(location: 0, length: query.count)).reversed() {
-
-					let range = Range(match.range, for: query)
-					let item = String(query[range])
-
-					guard needsToEscape(item) else {
-						
-						continue
-					}
+				queryPattern.replaceAllMatches(onto: &query) {
 					
-					query = query.replacingCharacters(in: range, with: item.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!)
+					guard needsToEscape($0) else {
+
+						return $0
+					}
+
+					return $0.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
 				}
-				
-				result = result.replacingCharacters(in: targetRange, with: "\(scheme)://\(host)/\(uri)?\(query)")
+
+				result = result.replacingCharacters(in: targetRange, with: "\(scheme)://\(host)/\(uri)\(query.isEmpty ? "" : "?")\(query)")
 			}
 			
 			return result
@@ -123,13 +117,14 @@ extension PostDataContainer {
 			var result = text
 			
 			let urlWord = #"A-Za-z0-9-_\.\?:#/@%!\$&'\(\)\*\+,;=~"#
-			let urlPattern = try! NSRegularExpression(pattern: #"(^|\s)(http(s|):\/\/[\#(urlWord)]+)(\s|$)"#, options: [])
+			let urlPattern = try! NSRegularExpression(pattern:
+				#"(^|\s)(http(s|):\/\/[\#(urlWord)]+)(\s|$)"#
+				, options: [])
 
-			for match in urlPattern.matches(in: result, options: [], range: NSRange(location: 0, length: text.count)).reversed() {
+			urlPattern.replaceAllMatches(onto: &result) { text, range, match in
 				
-				let range = match.range(at: 2)
-
-				result = result.replacingCharacters(in: Range(range, for: result), with: "xxxxxxxxxxxxxxxxxxxxxxx")
+				range = Range(match.range(at: 2), for: text)!
+				return "xxxxxxxxxxxxxxxxxxxxxxx"
 			}
 			
 			return result

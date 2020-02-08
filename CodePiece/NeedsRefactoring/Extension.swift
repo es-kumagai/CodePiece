@@ -1703,7 +1703,12 @@ extension APIKit.SessionTaskError : CustomDebugStringConvertible {
 
 extension Range where Bound == String.Index {
 	
-	init(_ range: NSRange, for text: String) {
+	init?(_ range: NSRange, for text: String) {
+		
+		guard range.location != NSNotFound else {
+		
+			return nil
+		}
 		
 		let start = text.index(text.startIndex, offsetBy: range.location)
 		let end = text.index(start, offsetBy: range.length)
@@ -1713,22 +1718,32 @@ extension Range where Bound == String.Index {
 }
 
 extension NSRegularExpression {
+
+	func replaceAllMatches(onto text: inout String, options: NSRegularExpression.MatchingOptions = [], replacement: (String) throws -> String) rethrows {
+		
+		try replaceAllMatches(onto: &text) { text, _, _ in
+
+			return try replacement(text)
+		}
+	}
 	
-	func replaceAllMatches(on text: inout String, options: NSRegularExpression.MatchingOptions = [], replacement: (String) throws -> String) rethrows {
+	func replaceAllMatches(onto text: inout String, options: NSRegularExpression.MatchingOptions = [], replacement: (String, inout Range<String.Index>, NSTextCheckingResult) throws -> String) rethrows {
 		
 		let range = NSRange(location: 0, length: text.count)
 		
 		for match in matches(in: text, options: options, range: range).reversed() {
 			
-			let range = Range(match.range, for: text)
+			var range = Range(match.range, for: text)!
 			let item = String(text[range])
 			
-			text = try text.replacingCharacters(in: range, with: replacement(item))
+			let newText = try replacement(item, &range, match)
+			
+			text = text.replacingCharacters(in: range, with: newText)
 		}
 	}
 	
-	func replaceAllMatches(on text: inout String, options: NSRegularExpression.MatchingOptions = [], with replacement: String) {
+	func replaceAllMatches(onto text: inout String, options: NSRegularExpression.MatchingOptions = [], with replacement: String) {
 
-		replaceAllMatches(on: &text) { _ in replacement }
+		replaceAllMatches(onto: &text) { _ in replacement }
 	}
 }
