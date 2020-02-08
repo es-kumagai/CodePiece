@@ -692,7 +692,7 @@ extension TwitterController {
 
 		let options = API.PostOption(from: container)
 		
-		api.post(tweet: container.descriptionForTwitter(), options: options) { result in
+		api.post(tweet: container.makeDescriptionForTwitter(), options: options) { result in
 			
 			switch result {
 				

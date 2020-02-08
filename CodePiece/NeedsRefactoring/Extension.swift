@@ -1242,10 +1242,10 @@ public extension NSAppleEventDescriptor {
 
 public final class DebugTime {
 
-	public static func print(_ message:String) {
+	public static func print(_ message: String) {
 
 		#if DEBUG
-		NSLog("\(message)")
+		NSLog("%@", message)
 		#endif
 	}
 }
@@ -1698,5 +1698,16 @@ extension APIKit.SessionTaskError : CustomDebugStringConvertible {
 		case .responseError(let error):
 			return "Response error: \(error.localizedDescription)"
 		}
+	}
+}
+
+extension Range where Bound == String.Index {
+	
+	init(_ range: NSRange, for text: String) {
+		
+		let start = text.index(text.startIndex, offsetBy: range.location)
+		let end = text.index(start, offsetBy: range.length)
+		
+		self = start ..< end
 	}
 }

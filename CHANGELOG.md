@@ -4,6 +4,11 @@ Change Logs.
 
 ## 2.0.6
 
+### Enhancement
+
+* Count length of entering description having URL more correctly.
+* Escape URL with '%' in description when non ASCII characters are detected.
+
 ### Fixes
 
 * Fix a problem that truncated tweet unexpectedly when the tweet is long.
