@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.0.5
+
+### Fixes
+
+* Fix a problem that truncated tweet unexpectedly when the tweet is long.
+
 ## 2.0.4
 
 ### Enhancement

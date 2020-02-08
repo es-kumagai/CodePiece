@@ -72,7 +72,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 		
 		super.activate()
 		
-		observe(notification: HashtagsDidChangeNotification.self) { [unowned self] notification in
+		observe(HashtagsDidChangeNotification.self) { [unowned self] notification in
 			
 			self.relatedUsers = []
 			self.hashtags = notification.hashtags

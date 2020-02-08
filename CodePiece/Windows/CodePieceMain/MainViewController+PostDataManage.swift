@@ -11,6 +11,7 @@ import Foundation
 protocol PostDataManageable {
 	
 	func makePostData() -> PostData
+	var descriptionCountForPost: Int { get }
 }
 
 extension MainViewController : PostDataManageable {

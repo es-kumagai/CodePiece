@@ -184,35 +184,35 @@ extension PostDataContainer {
 		return hashtags
 	}
 	
-	func makeDescriptionWithEffectiveHashtags(hashtags: [Hashtag], maxLength:Int? = nil, appendString:String? = nil) -> String {
+	func makeDescriptionWithEffectiveHashtags(hashtags: [Hashtag], appendString:String? = nil) -> String {
 		
-		func getTruncatedDescription(_ description: String, maxLength: Int) -> String {
-			
-			let descriptionLength = maxLength - hashtags.twitterDisplayTextLength
-			
-			guard description.count > descriptionLength else {
-				
-				return description
-			}
-			
-			let sourceDescription = description
-			
-			let start = sourceDescription.startIndex
-			let end = sourceDescription.index(start, offsetBy: descriptionLength - 2)
-			
-			return String(sourceDescription.prefix(through: end)) + " …"
-		}
+//		func getTruncatedDescription(_ description: String, maxLength: Int) -> String {
+//
+//			let descriptionLength = Int(ceil(Double(maxLength) - hashtags.twitterDisplayTextLength))
+//
+//			guard description.count > descriptionLength else {
+//
+//				return description
+//			}
+//
+//			let sourceDescription = description
+//
+//			let start = sourceDescription.startIndex
+//			let end = sourceDescription.index(start, offsetBy: descriptionLength - 2)
+//
+//			return String(sourceDescription.prefix(through: end)) + " …"
+//		}
 		
 		func getDescription() -> String {
 
-			if let maxLength = maxLength {
-				
-				return getTruncatedDescription(data.description, maxLength: maxLength)
-			}
-			else {
+//			if let maxLength = maxLength {
+//
+//				return getTruncatedDescription(data.description, maxLength: maxLength)
+//			}
+//			else {
 				
 				return data.description
-			}
+//			}
 		}
 		
 		return getDescription()

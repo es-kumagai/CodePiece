@@ -113,10 +113,7 @@ extension FieldsController where Self : PostDataManageable {
 	
 	func updateTweetTextCount() {
 		
-		let includesGistsLink = codeTextView.hasCode
-		let totalCount = makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
-		
-		descriptionCountLabel.stringValue = String(totalCount)
+		descriptionCountLabel.stringValue = String(descriptionCountForPost)
 		descriptionCountLabel.textColor = .neutralColor
 	}	
 }

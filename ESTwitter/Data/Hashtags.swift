@@ -28,14 +28,21 @@ extension Sequence where Element : HashtagType {
 
 extension Collection where Element : HashtagType {
 
-	public var twitterDisplayTextLength: Int {
+	public var twitterDisplayTextLength: Double {
 		
-		var separatorCount: Int {
+		var separatorCount: Double {
 			
-			return count - 1
+			return Double(count - 1) * 0.5
 		}
 		
-		return map { $0.length }.reduce(separatorCount, +)
+		let wordCounts = map { hashtag in
+			
+			hashtag.value
+				.map { TwitterCharacter($0) }
+				.wordCountForPost
+		}
+		
+		return wordCounts.reduce(separatorCount, +)
 	}
 }
 

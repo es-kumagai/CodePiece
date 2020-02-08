@@ -17,6 +17,8 @@ import ESTwitter
 @objcMembers
 final class MainViewController: NSViewController, NotificationObservable {
 
+	let maxDescriptionLength = 140
+	
 	enum ReplyToType {
 		
 		case none
@@ -126,14 +128,24 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 	var canPost: Bool {
 	
+		DebugTime.print("Text Count: \(descriptionTextField.integerValue)")
 		let conditions = [
 			
-			!self.posting,
-			!self.descriptionTextField.twitterText.isEmpty,
-			self.codeTextView.hasCode || !self.descriptionTextField.isReplyAddressOnly
+			!posting,
+			!descriptionTextField.twitterText.isEmpty,
+			descriptionCountForPost < maxDescriptionLength,
+			codeTextView.hasCode || !descriptionTextField.isReplyAddressOnly
 		]
 		
 		return conditions.meetsAll(of: true)
+	}
+	
+	var descriptionCountForPost: Int {
+		
+		let includesGistsLink = codeTextView.hasCode
+		let totalCount = makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
+		
+		return totalCount
 	}
 	
 	var selectedLanguage: Language {
