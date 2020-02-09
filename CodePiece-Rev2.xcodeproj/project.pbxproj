@@ -37,6 +37,7 @@
 		B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B136C9AF23D189C6004AEA27 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B136C9AE23D189C6004AEA27 /* ESGists */; };
 		B139E0C023EF350200EEA5BE /* DescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B139E0BF23EF350200EEA5BE /* DescriptionTests.swift */; };
+		B139E0C223F0063600EEA5BE /* RegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B139E0C123F0063600EEA5BE /* RegularExpressionExtension.swift */; };
 		B140C84F23E0820B0009D57C /* MediaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C84E23E0820B0009D57C /* MediaEntity.swift */; };
 		B140C85123E082960009D57C /* EntityUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C85023E082960009D57C /* EntityUnit.swift */; };
 		B1508BDB23E92E9800973728 /* TimelineKindState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDA23E92E9800973728 /* TimelineKindState.swift */; };
@@ -289,6 +290,7 @@
 		B132D51A23CD08B800690C5F /* ESTwitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESTwitterTests.swift; sourceTree = "<group>"; };
 		B132D51C23CD08B800690C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B139E0BF23EF350200EEA5BE /* DescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTests.swift; sourceTree = "<group>"; };
+		B139E0C123F0063600EEA5BE /* RegularExpressionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionExtension.swift; sourceTree = "<group>"; };
 		B140C84E23E0820B0009D57C /* MediaEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEntity.swift; sourceTree = "<group>"; };
 		B140C85023E082960009D57C /* EntityUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityUnit.swift; sourceTree = "<group>"; };
 		B1508BDA23E92E9800973728 /* TimelineKindState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineKindState.swift; sourceTree = "<group>"; };
@@ -917,6 +919,7 @@
 			isa = PBXGroup;
 			children = (
 				B1CE4D0A23E7C3CC003D1399 /* CharacterExtension.swift */,
+				B139E0C123F0063600EEA5BE /* RegularExpressionExtension.swift */,
 			);
 			path = NeedsRefactor;
 			sourceTree = "<group>";
@@ -1321,6 +1324,7 @@
 				B1A4725C23D09CA700F73658 /* Extension.swift in Sources */,
 				B1A4728B23D09DB300F73658 /* Browse.swift in Sources */,
 				B1A4729523D09DB300F73658 /* UserProfile.swift in Sources */,
+				B139E0C223F0063600EEA5BE /* RegularExpressionExtension.swift in Sources */,
 				B1508BEA23E99E4900973728 /* TimelineOptions.swift in Sources */,
 				B1128CE023DE915000DDA4EA /* UsersTag.swift in Sources */,
 				B1CE4CD323E6F24C003D1399 /* Character.swift in Sources */,

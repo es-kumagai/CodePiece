@@ -324,6 +324,17 @@ extension Status {
 		
 		try customizeExpression(text)
 
+		
+		let patterns = try! [
+			(NSRegularExpression(pattern: "&lt;"), "<"),
+			(NSRegularExpression(pattern: "&gt;"), ">")
+		]
+
+		for (pattern, replacement) in patterns {
+			
+			pattern.replaceAllMatches(in: text, with: replacement)
+		}
+
 		return text.copy() as! NSAttributedString
 	}
 }

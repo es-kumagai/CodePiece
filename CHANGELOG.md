@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.0.7
+
+### Updates
+
+* Decode '&lt;' and '&gt;' in Timeline view.
+
 ## 2.0.6
 
 ### Enhancement
