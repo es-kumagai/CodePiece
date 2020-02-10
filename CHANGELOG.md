@@ -2,6 +2,13 @@
 
 Change Logs.
 
+## 2.0.9
+
+### Updates
+
+* There are many related user about hashtags, adopted users recently tweets in Related tweets view.
+* Related tweets's update interval become bigger when the view is disappeared.
+
 ## 2.0.8
 
 ### Fixes

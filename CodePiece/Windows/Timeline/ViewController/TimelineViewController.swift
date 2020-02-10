@@ -52,6 +52,7 @@ final class TimelineViewController: NSViewController {
 		
 		didSet {
 			
+			contentsController.owner = self
 			contentsController.delegate = self
 		}
 	}

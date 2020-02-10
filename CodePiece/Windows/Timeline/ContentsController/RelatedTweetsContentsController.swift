@@ -13,6 +13,16 @@ import Ocean
 
 final class RelatedTweetsContentsController : TimelineContentsController, NotificationObservable {
 	
+	var statusesAutoUpdateIntervalForAppeared: Double {
+		
+		return owner!.statusesAutoUpdateInterval
+	}
+	
+	var statusesAutoUpdateIntervalForDisappeared: Double {
+		
+		return owner!.statusesAutoUpdateInterval * 2.5
+	}
+	
 	override var kind: TimelineKind {
 		
 		return .relatedTweets
@@ -87,6 +97,8 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			self.needsUpdate = true
 		}
 		
+		owner!.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
+		
 		// Following code is disabled because the tweet you posted cannnot detect immediately.
 //		observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
 //
@@ -100,6 +112,30 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 //				self.delegate?.timelineContentsNeedsUpdate?(self)
 //			}
 //		}
+	}
+	
+	override func timelineViewWillAppear(isTableViewAssigned: Bool) {
+	
+		super.timelineViewWillAppear(isTableViewAssigned: isTableViewAssigned)
+		
+		guard isTableViewAssigned, let owner = owner else {
+			
+			return
+		}
+		
+		owner.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForAppeared))
+	}
+	
+	override func timelineViewDidDisappear() {
+
+		super.timelineViewDidDisappear()
+		
+		guard let owner = owner else {
+			
+			return
+		}
+		
+		owner.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
 	}
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {

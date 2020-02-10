@@ -22,7 +22,9 @@ class TimelineContentsController : NSObject {
 			tableView?.dataSource = tableViewDataSource
 		}
 	}
+	
 	@IBOutlet weak var delegate: TimelineContentsControllerDelegate?
+	weak var owner: TimelineViewController?
 	
 	var items = Array<TimelineTableItem>()
 
