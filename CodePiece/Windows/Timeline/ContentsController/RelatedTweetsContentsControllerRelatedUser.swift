@@ -54,15 +54,14 @@ extension Set where Element == RelatedTweetsContentsController.RelatedUser {
 		let maxQueryCount = 500
 		
 		var result = ""
-		let users = appeareDateDescendingOrderedUsers()
+
+		for user in appeareDateDescendingOrderedUsers() {
 		
-		for (offset, user) in users.enumerated() {
-		
-			let query = "\(offset != 0 ? " OR " : "")\(user.screenName)"
+			let query = "\(result)\(result.isEmpty ? "" : " OR ")from:\(user.screenName)"
 			
 			guard query.count <= maxQueryCount else {
 				
-				NSLog("Query is truncated under %d characters: %@", maxQueryCount, result)
+				NSLog("Query is truncated characters to %d/%d: %@", result.count, maxQueryCount, result)
 				return result
 			}
 			
