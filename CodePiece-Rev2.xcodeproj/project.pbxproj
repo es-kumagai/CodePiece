@@ -126,6 +126,7 @@
 		B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38923CE9FBB005B268A /* Reachability */; };
 		B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38C23CEA03E005B268A /* KeychainAccess */; };
 		B16CFCB223F1540600772AA4 /* GetStatusesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB123F1540600772AA4 /* GetStatusesError.swift */; };
+		B16CFCB823F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */; };
 		B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17B938023CAB28C00E3B490 /* MainViewController.swift */; };
 		B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17B938223CAB2A800E3B490 /* MainWindow.storyboard */; };
 		B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1806CB723D6B50F006932F5 /* SwifterScheme.swift */; };
@@ -383,6 +384,7 @@
 		B15EE33B23CE7738005B268A /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		B15EE33C23CE7738005B268A /* Mark */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mark; sourceTree = "<group>"; };
 		B16CFCB123F1540600772AA4 /* GetStatusesError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatusesError.swift; sourceTree = "<group>"; };
+		B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedTweetsContentsControllerRelatedUser.swift; sourceTree = "<group>"; };
 		B17B938023CAB28C00E3B490 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B17B938223CAB2A800E3B490 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		B1806CB723D6B50F006932F5 /* SwifterScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterScheme.swift; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 				B1508BEB23E9B3E000973728 /* TimelineContentsControllerDelegate.swift */,
 				B1508BDF23E9435600973728 /* HashtagsContentsController.swift */,
 				B191D86A23EC242C00590948 /* RelatedTweetsContentsController.swift */,
+				B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */,
 				B1508BE523E995E500973728 /* MyTweetsContentsController.swift */,
 				B122598F23EA90F0006D819D /* MentionsContentsController.swift */,
 			);
@@ -1463,6 +1466,7 @@
 				B15EE29C23CE7667005B268A /* AboutViewController.swift in Sources */,
 				B1508BEE23E9BCF100973728 /* TimelineTabViewController.swift in Sources */,
 				B15EE29523CE7667005B268A /* AboutWindow.swift in Sources */,
+				B16CFCB823F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift in Sources */,
 				B1A2F60523DF94220065526F /* PostOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

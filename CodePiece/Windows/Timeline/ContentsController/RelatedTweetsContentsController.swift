@@ -31,7 +31,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 		}
 	}
 	
-	var relatedUsers: Set<User> = []
+	var relatedUsers: Set<RelatedUser> = []
 	var hashtags: HashtagSet = NSApp.settings.appState.hashtags ?? [] {
 		
 		didSet (previousHashtags) {
@@ -83,7 +83,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			
 			let users = notification.statuses.map { $0.user }
 			
-			self.relatedUsers.formUnion(users)
+			self.relatedUsers.append(users: users)
 			self.needsUpdate = true
 		}
 		
@@ -151,14 +151,5 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			.prefix(maxTimelineRows)
 		
 		dataSource.items = Array(newTweets)
-	}
-}
-
-extension Set where Element == User {
-	
-	var tweetFromAllUsersQuery: String {
-		
-		return map { "from:\($0.screenName)" }
-			.joined(separator: " OR ")
 	}
 }
