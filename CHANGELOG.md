@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.0.8
+
+### Fixes
+
+* Fix a problem the app crashed when open twitter with selecting status after once moved out to other Timeline view.
+
 ## 2.0.7
 
 ### Updates
