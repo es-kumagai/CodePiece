@@ -140,7 +140,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
 		
-		let query = relatedUsers.tweetFromAllUsersQuery
+		let query = relatedUsers.tweetFromAllUsersQuery(maxMargin: 50)
 		
 		guard !query.isEmpty else {
 			

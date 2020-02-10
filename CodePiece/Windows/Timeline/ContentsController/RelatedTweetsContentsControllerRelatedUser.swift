@@ -49,9 +49,9 @@ extension Set where Element == RelatedTweetsContentsController.RelatedUser {
 		formUnion(relatedUsers)
 	}
 	
-	var tweetFromAllUsersQuery: String {
+	func tweetFromAllUsersQuery(maxMargin: Int) -> String {
 	
-		let maxQueryCount = 500
+		let maxQueryCount = 500 - maxMargin
 		
 		var result = ""
 
@@ -59,7 +59,7 @@ extension Set where Element == RelatedTweetsContentsController.RelatedUser {
 		
 			let query = "\(result)\(result.isEmpty ? "" : " OR ")from:\(user.screenName)"
 			
-			guard query.count <= maxQueryCount else {
+			guard query.count < maxQueryCount else {
 				
 				NSLog("Query is truncated characters to %d/%d: %@", result.count, maxQueryCount, result)
 				return result

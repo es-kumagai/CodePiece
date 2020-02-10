@@ -571,7 +571,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 				fatalError("INTERNAL ERROR: Failed to get the Related Tweets Contents Controller.")
 			}
 			
-			try ESTwitter.Browser.openWithQuery(query: timelineContents.relatedUsers.tweetFromAllUsersQuery)
+			try ESTwitter.Browser.openWithQuery(query: timelineContents.relatedUsers.tweetFromAllUsersQuery(maxMargin: 0))
 		}
 		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
 			
