@@ -603,13 +603,13 @@ extension TwitterController {
 //	}
 }
 
-extension TwitterController : LatestTweetManageable {
-	
-	func resetLatestTweet() {
-		
-		self.latestTweet = nil
-	}
-}
+//extension TwitterController : LatestTweetManageable {
+//	
+//	func resetLatestTweet() {
+//		
+//		self.latestTweet = nil
+//	}
+//}
 
 extension TwitterController {
 		

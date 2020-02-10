@@ -8,6 +8,7 @@
 
 import Cocoa
 import Ocean
+import ESTwitter
 
 @objc class TimelineTabViewController : NSViewController, NSTabViewDelegate, NotificationObservable {
 	
@@ -23,6 +24,31 @@ import Ocean
 		return timelineKindStateController.timelineKind
 	}
 
+	var currentSelectedCells: [TimelineViewController.SelectingStatusInfo] {
+	
+		guard let timelineViewController = currentTimelineViewController else {
+			
+			return []
+		}
+		
+		return timelineViewController.timelineSelectedStatuses
+	}
+	
+	var currentSelectedStatuses: [Status] {
+		
+		return currentSelectedCells.compactMap { $0.status }
+	}
+	
+	var isCurrentSingleRowSelected: Bool {
+		
+		return currentSelectedCells.count == 1
+	}
+	
+	var isCurrentSingleOrMoreRowsSelected: Bool {
+		
+		return currentSelectedCells.count > 0
+	}
+	
 	private func prepare() {
 		
 		timelineKindStateController.prepare()

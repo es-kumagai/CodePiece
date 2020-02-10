@@ -8,14 +8,14 @@
 
 import ESTwitter
 
-protocol LatestTweetManageable : class {
-	
-	var latestTweet: ESTwitter.Status? { get }
-	
-	func resetLatestTweet()
-}
-
-extension LatestTweetManageable {
+//protocol LatestTweetManageable : class {
+//	
+//	var latestTweet: ESTwitter.Status? { get }
+//	
+//	func resetLatestTweet()
+//}
+//
+extension TwitterController {
 
 	var hasLatestTweet: Bool {
 		

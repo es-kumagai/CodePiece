@@ -44,31 +44,31 @@ class TimelineContentsController : NSObject {
 		deactivate()
 	}
 
-	var canReplyRequest: Bool {
-
-		guard let tableView = tableView else {
-			
-			return false
-		}
-		
-		let indexes = tableViewDataSource.items.indexes { $0 is TimelineTweetItem }
-		let result = Set(tableView.selectedRowIndexes).isSubset(of: indexes)
-
-		return result
-	}
+//	var canReplyRequest: Bool {
+//
+//		guard let tableView = tableView else {
+//			
+//			return false
+//		}
+//		
+//		let indexes = tableViewDataSource.items.indexes { $0 is TimelineTweetItem }
+//		let result = Set(tableView.selectedRowIndexes).isSubset(of: indexes)
+//
+//		return result
+//	}
 	
-	var canOpenBrowserWithCurrentTwitterStatus: Bool {
-		
-		guard let tableView = tableView else {
-			
-			return false
-		}
-		
-		let indexes = tableViewDataSource.items.indexes { $0 is TimelineTweetItem }
-		let result = Set(tableView.selectedRowIndexes).isSubset(of: indexes)
-
-		return result
-	}
+//	var canOpenBrowserWithCurrentTwitterStatus: Bool {
+//
+//		guard let tableView = tableView else {
+//
+//			return false
+//		}
+//
+//		let indexes = tableViewDataSource.items.indexes { $0 is TimelineTweetItem }
+//		let result = Set(tableView.selectedRowIndexes).isSubset(of: indexes)
+//
+//		return result
+//	}
 	
 	func updateContents() {
 		

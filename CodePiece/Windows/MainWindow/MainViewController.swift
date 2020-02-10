@@ -48,7 +48,8 @@ final class MainViewController: NSViewController, NotificationObservable {
 	private var postingHUD: ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
 	
 	private(set) var latestTweet: ESTwitter.Status?
-	private(set) var selectedStatuses = Array<ESTwitter.Status>()
+	
+//	private(set) var selectedStatuses = Array<ESTwitter.Status>()
 	private(set) var statusForReplyTo: ESTwitter.Status? {
 		
 		didSet {
@@ -349,16 +350,11 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		observe(TimelineSelectionChangedNotification.self) { [unowned self] notification in
 			
-			guard notification.selectedCells.count == 1 else {
-
-				self.selectedStatuses = []
-				return
-			}
-
-			self.selectedStatuses = notification.selectedCells.compactMap { $0.cell?.item?.status }
 			self.nextReplyToType = .selectedStatus
 			
-			print("Selection Changed : \(self.selectedStatuses.map { "\($0.user.screenName) : \($0.text)" } )")
+			let selectedStatuses = notification.selectedCells.compactMap { $0.cell?.item?.status }
+			
+			print("Selection Changed : \(selectedStatuses.map { "\($0.user.screenName) : \($0.text.prefix(20))" } )")
 		}
 		
 		observe(TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
@@ -483,7 +479,12 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		guard canOpenBrowserWithSearchHashtagPage else {
 			
-			fatalError("Cannot open browser.")
+			let message = "UNEXPECTED ERROR: Try to open related tweets with browser, but don't ready to open it. (hashtags: \(hashTagTextField.hashtags))"
+			
+			NSLog("%@", message)
+			assertionFailure(message)
+			
+			return
 		}
 		
 		do {
@@ -500,19 +501,42 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 	}
 
-	var canOpenBrowserWithCurrentTwitterStatus:Bool {
+	var canOpenBrowserWithCurrentTwitterStatus: Bool {
 		
-		return self.selectedStatuses.count == 1
+//		guard let tabViewController = NSApp.timelineTabViewController else {
+//
+//			assertionFailure("UNEXPECTED ERROR: TimelineTabViewController is not ready.")
+//			return false
+//		}
+		
+		return NSApp.timelineTabViewController.isCurrentSingleRowSelected
 	}
 	
 	func openBrowserWithCurrentTwitterStatus() {
 		
-		guard self.canOpenBrowserWithCurrentTwitterStatus else {
+		guard canOpenBrowserWithCurrentTwitterStatus else {
 			
-			fatalError("Cannot open browser.")
+			let message = "UNEXPECTED ERROR: Try to open selection with browser, but not ready to open browser. (selection: \(NSApp.timelineTabViewController.currentSelectedCells.map { $0.row })"
+			
+			NSLog("%@", message)
+//			assertionFailure(message)
+			
+			return
 		}
 		
-		let status = self.selectedStatuses.first!
+		let selectedStatuses = NSApp.timelineTabViewController.currentSelectedStatuses
+
+		guard selectedStatuses.count > 0 else {
+			
+			let message = "UNEXPECTED ERROR: Try to open selection with browser, but don't ready to open current status. (selection: \(NSApp.timelineTabViewController.currentSelectedStatuses)"
+			
+			NSLog("%@", message)
+//			assertionFailure(message)
+			
+			return
+		}
+		
+		let status = selectedStatuses.first!
 		
 		do {
 			
@@ -520,11 +544,11 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
 			
-			self.showErrorAlert(withTitle: "Failed to open browser", message: reason)
+			showErrorAlert(withTitle: "Failed to open browser", message: reason)
 		}
 		catch {
 			
-			self.showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
+			showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
 		}
 	}
 
@@ -532,12 +556,17 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		guard canOpenBrowserWithRelatedTweets else {
 			
-			fatalError("Cannot open browser.")
+			let message = "UNEXPECTED ERROR: Try to open related tweets with browser, but don't ready to open it. (hashtags: \(hashTagTextField.hashtags))"
+			
+			NSLog("%@", message)
+//			assertionFailure(message)
+			
+			return
 		}
 		
 		do {
 
-			guard let timelineContents = NSApp.timelineTabViewController?.timelineContentsController(of: .relatedTweets) as? RelatedTweetsContentsController else {
+			guard let timelineContents = NSApp.timelineTabViewController.timelineContentsController(of: .relatedTweets) as? RelatedTweetsContentsController else {
 				
 				fatalError("INTERNAL ERROR: Failed to get the Related Tweets Contents Controller.")
 			}
@@ -581,7 +610,7 @@ extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	}
 }
 
-extension MainViewController : ViewControllerSelectionAndRepliable {
+extension MainViewController {
 
 	func clearReplyTo() {
 	
@@ -601,19 +630,24 @@ extension MainViewController : ViewControllerSelectionAndRepliable {
 		
 		withChangeValue(for: "canPost") {
 		
-			statusForReplyTo = selectedStatuses.first!
+			statusForReplyTo = NSApp.timelineTabViewController.currentSelectedStatuses.first!
 			updateControlsDisplayText()
 		}
 	}
 }
 
-extension MainViewController : LatestTweetReplyable {
+extension MainViewController {
 	
 	func resetLatestTweet() {
 		
-		self.latestTweet = nil
+		latestTweet = nil
 	}
 	
+	var hasLatestTweet: Bool {
+		
+		return latestTweet != nil
+	}
+
 	func setReplyToByLatestTweet() {
 		
 		withChangeValue(for: "canPost") {

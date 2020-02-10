@@ -118,7 +118,8 @@ extension FieldsController where Self : PostDataManageable {
 	}	
 }
 
-extension FieldsController where Self : ViewControllerSelectionAndRepliable {
+// extension FieldsController where Self : ViewControllerSelectionAndRepliable {
+extension MainViewController {
 	
 	func getPostButtonTitle() -> String {
 		
@@ -166,10 +167,6 @@ extension FieldsController where Self : ViewControllerSelectionAndRepliable {
 			return true
 		}
 	}
-}
-
-extension FieldsController where Self : ViewControllerSelectionAndRepliable, Self : KeyValueChangeable {
-	
 }
 
 extension FieldsController where Self : KeyValueChangeable {

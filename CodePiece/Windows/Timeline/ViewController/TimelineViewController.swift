@@ -31,6 +31,12 @@ extension Sequence where Element : TimelineViewController {
 @objcMembers
 final class TimelineViewController: NSViewController {
 	
+	struct SelectingStatusInfo {
+	
+		var row: Int
+		var status: Status
+	}
+	
 	@IBOutlet var menuController: MenuController!
 	
 	@IBOutlet var timelineTableView: TimelineTableView! {
@@ -69,10 +75,10 @@ final class TimelineViewController: NSViewController {
 	}
 	
 	// Manage current selection by this property because selection indexes is reset when call insertRowsAtIndexes method for insert second cell.
-	var currentTimelineSelectedRowIndexes = IndexSet() {
+	var timelineSelectedStatuses: [SelectingStatusInfo] = [] {
 		
 		willSet {
-			
+
 			willChangeValue(forKey: "canReplyRequest")
 			willChangeValue(forKey: "canOpenBrowserWithCurrentTwitterStatus")
 		}
@@ -80,7 +86,7 @@ final class TimelineViewController: NSViewController {
 		didSet {
 			
 			defer {
-				
+
 				didChangeValue(forKey: "canReplyRequest")
 				didChangeValue(forKey: "canOpenBrowserWithCurrentTwitterStatus")
 			}
@@ -97,6 +103,16 @@ final class TimelineViewController: NSViewController {
 			
 			TimelineSelectionChangedNotification(timelineViewController: self, selectedCells: timelineTableView.selectedCells).post()
 		}
+	}
+	
+	var isTimelineSingleRowSelected: Bool {
+		
+		return timelineSelectedStatuses.count == 1
+	}
+	
+	var isTimelineSingleOrMoreRowsSelected: Bool {
+		
+		return timelineSelectedStatuses.count > 0
 	}
 	
 	enum Message : MessageTypeIgnoreInQuickSuccession {
@@ -509,6 +525,9 @@ extension TimelineViewController : NotificationObservable {
 		contentsController.timelineViewWillAppear(isTableViewAssigned: timelineTableView != nil)
 
 		updateDisplayControlsVisiblityForState()
+
+		// When each time the view will appear, synchronous the current selection again.
+//		currentTimelineSelectedRowIndexes = timelineTableView.selectedRowIndexes
 	}
 	
 	override func viewDidAppear() {
@@ -557,7 +576,7 @@ extension TimelineViewController {
 		return contentsController.maxTimelineRows
 	}
 	
-	
+	@discardableResult
 	func appendTweets(tweets: [Status], associatedHashtags hashtags: HashtagSet) -> (insertedIndexes: IndexSet, ignoredIndexes: IndexSet, removedIndexes: IndexSet) {
 		
 		let tweetCount = tweets.count
@@ -595,36 +614,36 @@ extension TimelineViewController {
 		return (insertedIndexes: insertIndexes, ignoredIndexes: ignoreIndexes, removedIndexes: removeIndexes)
 	}
 	
-	func getNextTimelineSelection(insertedIndexes: IndexSet) -> IndexSet {
-		
-		func shiftIndex(currentIndexes: IndexSet, insertIndex: Int) -> IndexSet {
-			
-			let currentIndexes = currentIndexes.sorted(by: <)
-			
-			let noEffectIndexes = currentIndexes.filter { $0 < insertIndex }
-			let shiftedIndexes = currentIndexes.filter { $0 >= insertIndex } .map { $0 + 1 }
-			
-			return IndexSet(noEffectIndexes + shiftedIndexes)
+	func getNextTimelineSelection(insertedIndexes: IndexSet) -> [SelectingStatusInfo] {
+
+		func shiftIndex(currentSelections: [SelectingStatusInfo], insertIndex: Int) -> [SelectingStatusInfo] {
+
+			let currentSelections = currentSelections.sorted { $0.row < $1.row }
+
+			let noEffectSelections = currentSelections.filter { $0.row < insertIndex }
+			let shiftedSelections = currentSelections.filter { $0.row >= insertIndex } .map { SelectingStatusInfo(row: $0.row + 1, status: $0.status) }
+
+			return noEffectSelections + shiftedSelections
 		}
-		
-		func shiftIndexes(currentIndexes: IndexSet, insertIndexes: IndexSet) -> IndexSet {
-			
+
+		func shiftIndexes(currentSelections: [SelectingStatusInfo], insertIndexes: IndexSet) -> [SelectingStatusInfo] {
+
 			var insertIndexesGenerator = insertIndexes.makeIterator()
-			
+
 			if let insertIndex = insertIndexesGenerator.next() {
-				
-				let currentIndexes = shiftIndex(currentIndexes: currentIndexes, insertIndex: insertIndex)
+
+				let currentSelections = shiftIndex(currentSelections: currentSelections, insertIndex: insertIndex)
 				let insertIndexes = IndexSet(insertIndexes.dropFirst())
-				
-				return shiftIndexes(currentIndexes: currentIndexes, insertIndexes: insertIndexes)
+
+				return shiftIndexes(currentSelections: currentSelections, insertIndexes: insertIndexes)
 			}
 			else {
-				
-				return currentIndexes
+
+				return currentSelections
 			}
 		}
-		
-		return shiftIndexes(currentIndexes: self.currentTimelineSelectedRowIndexes, insertIndexes: insertedIndexes)
+
+		return shiftIndexes(currentSelections: timelineSelectedStatuses, insertIndexes: insertedIndexes)
 	}
 }
 
@@ -650,7 +669,7 @@ extension TimelineViewController {
 				
 				DebugTime.print("""
 				Current Selection:
-					CurrentTimelineSelectedRows: \(currentTimelineSelectedRowIndexes)
+					CurrentTimelineSelectedRows: \(timelineSelectedStatuses.map { $0.row })
 					Native: \(timelineTableView.selectedRowIndexes)")
 				""")
 				#endif
@@ -659,14 +678,14 @@ extension TimelineViewController {
 			_debugTimeReportTableState()
 
 			let result = appendTweets(tweets: tweets, associatedHashtags: hashtags)
-			let nextSelectedIndexes = self.getNextTimelineSelection(insertedIndexes: result.insertedIndexes)
-			
-			NSLog("Tweet: \(tweets.count)")
-			NSLog("Inserted: \(result.insertedIndexes)")
-			NSLog("Ignored: \(result.ignoredIndexes)")
-			NSLog("Removed: \(result.removedIndexes)")
-			
-			self.currentTimelineSelectedRowIndexes = nextSelectedIndexes
+			let nextSelectedStatuses = self.getNextTimelineSelection(insertedIndexes: result.insertedIndexes)
+
+			DebugTime.print("Tweet: \(tweets.count)")
+			DebugTime.print("Inserted: \(result.insertedIndexes)")
+			DebugTime.print("Ignored: \(result.ignoredIndexes)")
+			DebugTime.print("Removed: \(result.removedIndexes)")
+
+			timelineSelectedStatuses = nextSelectedStatuses
 			
 			_debugTimeReportTableState()
 		}
@@ -708,7 +727,7 @@ extension TimelineViewController : NSTableViewDelegate {
 		let cell = contentsController.tableCell(for: row)
 
 //		cell?.selected = tableView.isRowSelected(row)
-        cell?.selected = currentTimelineSelectedRowIndexes.contains(row)
+		cell?.selected = timelineSelectedStatuses.contains(row: row)
 
 		return cell?.toTimelineView()
 	}
@@ -733,7 +752,15 @@ extension TimelineViewController : NSTableViewDelegate {
 			return
 		}
 		
-        currentTimelineSelectedRowIndexes = tableView.selectedRowIndexes
+		timelineSelectedStatuses = tableView.selectedCells.compactMap {
+			
+			guard let status = $0.cell?.item?.status else {
+				
+				return nil
+			}
+
+			return SelectingStatusInfo(row: $0.row, status: status)
+		}
 	}
 }
 
@@ -747,5 +774,13 @@ extension TimelineViewController : TimelineContentsControllerDelegate {
 		}
 		
 		message.send(.updateStatuses)
+	}
+}
+
+extension Sequence where Element == TimelineViewController.SelectingStatusInfo {
+	
+	func contains(row: Int) -> Bool {
+		
+		return map { $0.row }.contains(row)
 	}
 }

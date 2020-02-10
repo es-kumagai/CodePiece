@@ -19,15 +19,15 @@ final class TimelineTableView: NSTableView {
 		var selection: Bool
 	}
 	
-	var selectedAnyRows: Bool {
-		
-		return selectedRowIndexes.count > 0
-	}
-	
-	var selectedSingleRow: Bool {
-		
-		return selectedRowIndexes.count == 1
-	}
+//	var selectedSingleOrMoreRows: Bool {
+//		
+//		return selectedRowIndexes.count > 0
+//	}
+//	
+//	var selectedSingleRow: Bool {
+//		
+//		return selectedRowIndexes.count == 1
+//	}
 	
 	var cells: [CellInfo] {
 	

@@ -13,12 +13,7 @@ extension TimelineViewController {
 	
 	var canReplyRequest: Bool {
 	
-		guard timelineTableView.selectedSingleRow else {
-			
-			return false
-		}
-
-		return contentsController.canReplyRequest
+		return isTimelineSingleRowSelected
 	}
 	
 	@IBAction func replyRequest(_ sender: AnyObject) {
@@ -28,12 +23,7 @@ extension TimelineViewController {
 	
 	var canOpenBrowserWithCurrentTwitterStatus: Bool {
 
-		guard timelineTableView.selectedSingleRow else {
-			
-			return false
-		}
-
-		return contentsController.canOpenBrowserWithCurrentTwitterStatus
+		return isTimelineSingleRowSelected
 	}
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {

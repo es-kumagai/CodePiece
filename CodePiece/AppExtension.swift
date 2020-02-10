@@ -19,17 +19,17 @@ extension NSApplication : AlertDisplayable {
 
 extension NSApplication {
 	
-	var baseViewController: BaseViewController? {
+	var baseViewController: BaseViewController! {
 	
 		return keyWindow?.contentViewController as? BaseViewController
 	}
 	
-	var mainViewController: MainViewController? {
+	var mainViewController: MainViewController! {
 		
 		return baseViewController?.mainViewController
 	}
 	
-	var timelineTabViewController: TimelineTabViewController? {
+	var timelineTabViewController: TimelineTabViewController! {
 		
 		return baseViewController?.timelineTabViewController
 	}

@@ -9,37 +9,37 @@
 import Cocoa
 import ESTwitter
 
-protocol ViewControllerSelectable : class {
-	
-	var selectedStatuses: Array<ESTwitter.Status> { get }
-}
+//protocol ViewControllerSelectable : class {
+//
+//	var selectedStatuses: Array<ESTwitter.Status> { get }
+//}
 
-protocol ViewControllerRepliable : class {
-	
-	var statusForReplyTo: ESTwitter.Status? { get }
-	
-	var canReplyTo: Bool { get }
-}
+//protocol ViewControllerRepliable : class {
+//	
+//	var statusForReplyTo: ESTwitter.Status? { get }
+//	
+//	var canReplyTo: Bool { get }
+//}
 
-protocol ViewControllerSelectionAndRepliable : ViewControllerSelectable, ViewControllerRepliable {
-	
-	func setReplyToBySelectedStatuses()
-}
+//protocol ViewControllerSelectionAndRepliable : ViewControllerSelectable, ViewControllerRepliable {
+//
+//	func setReplyToBySelectedStatuses()
+//}
+//
+//protocol LatestTweetReplyable : LatestTweetManageable {
+//
+//	func setReplyToByLatestTweet()
+//}
 
-protocol LatestTweetReplyable : LatestTweetManageable {
-	
-	func setReplyToByLatestTweet()
-}
-
-extension ViewControllerSelectable {
+extension MainViewController /*ViewControllerSelectable*/ {
 	
 	var canReplyToSelectedStatuses: Bool {
 		
-		return selectedStatuses.count == 1
+		return NSApp.timelineTabViewController.currentSelectedStatuses.count == 1
 	}
 }
 
-extension ViewControllerRepliable {
+extension MainViewController /*ViewControllerRepliable*/ {
 	
 	var hasStatusForReplyTo: Bool {
 		
@@ -47,16 +47,12 @@ extension ViewControllerRepliable {
 	}
 }
 
-extension LatestTweetReplyable {
+extension MainViewController /*LatestTweetReplyable*/ {
 	
 	var canReplyToLatestTweet: Bool {
 		
 		return hasLatestTweet
 	}
-}
-
-extension ViewControllerRepliable where Self : FieldsController {
-
 }
 
 extension MainViewController {
