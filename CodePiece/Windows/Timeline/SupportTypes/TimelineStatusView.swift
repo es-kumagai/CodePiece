@@ -25,7 +25,7 @@ final class TimelineStatusView: NSView {
 	enum State {
 		
 		case ok(String)
-		case error(PostError)
+		case error(GetStatusesError)
 	}
 	
 	var state: State = .ok("") {
@@ -57,19 +57,7 @@ final class TimelineStatusView: NSView {
 		case .ok(let message):
 			return message
 			
-		case .error(.apiError(let error, _)):
-			return "\(error)"
-			
-		case .error(.tweetError(let message)):
-			return message
-			
-		case .error(.parseError(let message, _)):
-			return message
-			
-		case .error(.internalError(let message, _)):
-			return message
-			
-		case .error(.unexpectedError(let error)):
+		case .error(let error):
 			return "\(error)"
 		}
 	}

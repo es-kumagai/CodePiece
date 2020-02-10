@@ -14,49 +14,49 @@ import Swim
 
 private let jsonDecoder = JSONDecoder()
 
-struct GetStatusesError : Error, CustomStringConvertible {
-
-	enum `Type` {
-	
-		case decodeResultError
-		case unexpectedError
-	}
-	
-	var type: Type
-	var reason: String
-	
-	var description: String {
-		
-		return "\(reason) (\(type))"
-	}
-	
-	init(type: Type, reason: String) {
-	
-		self.type = type
-		self.reason = reason
-	}
-	
-//	init(code: STTwitterTwitterErrorCode, reason: String) {
+//struct GetStatusesError : Error, CustomStringConvertible {
 //
-//		self.reason = reason
-//		self.type = .TwitterError(code)
+//	enum `Type` {
+//	
+//		case decodeResultError
+//		case unexpectedError
 //	}
-}
+//	
+//	var type: Type
+//	var reason: String
+//	
+//	var description: String {
+//		
+//		return "\(reason) (\(type))"
+//	}
+//	
+//	init(type: Type, reason: String) {
+//	
+//		self.type = type
+//		self.reason = reason
+//	}
+//	
+////	init(code: STTwitterTwitterErrorCode, reason: String) {
+////
+////		self.reason = reason
+////		self.type = .TwitterError(code)
+////	}
+//}
 
-extension GetStatusesError {
-	
-	var isRateLimitExceeded: Bool {
-		
-		switch type {
-			
-//		case .TwitterError(.rateLimitExceeded):
-//			return true
-			
-		default:
-			return false
-		}
-	}
-}
+//extension GetStatusesError {
+//	
+//	var isRateLimitExceeded: Bool {
+//		
+//		switch type {
+//			
+////		case .TwitterError(.rateLimitExceeded):
+////			return true
+//			
+//		default:
+//			return false
+//		}
+//	}
+//}
 
 // FIXME: TwitterController は AlertDisplayable であるべきではなそうなので、別のビューコントローラーが持つようにした。
 @objcMembers
@@ -741,7 +741,7 @@ extension TwitterController {
 	
 		guard let id = token?.userId else {
 			
-			handler(.failure(.apiError(.notReady, state: .withNoPostProcess)))
+			handler(.failure(.apiError(.notReady)))
 			return
 		}
 		

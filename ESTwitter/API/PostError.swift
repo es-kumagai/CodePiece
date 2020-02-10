@@ -14,7 +14,7 @@ public enum PostError : Error {
 	
 		case beforePosted
 		case afterPosted
-		case withNoPostProcess
+//		case withNoPostProcess
 	}
 	
 	case apiError(APIError, state: State)

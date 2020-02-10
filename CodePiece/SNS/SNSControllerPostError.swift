@@ -141,6 +141,36 @@ extension SNSController.PostError : CustomStringConvertible {
 	}
 }
 
+extension GetStatusesError : CustomStringConvertible {
+	
+	public var description: String {
+
+		switch self {
+			
+		case .apiError(let error):
+			return "\(error)"
+			
+		case .parseError(let message):
+			return message
+			
+		case .unexpected(let error):
+			return "Unexpected error: \(error)"
+			
+		case .unexpectedWithDescription(let message):
+			return "Unexpected error: \(message)"
+
+		case .genericError(let message):
+			return message
+			
+		case .responseError(code: let code, message: let message):
+			return "\(message) (\(code))"
+			
+		case .missingOrInvalidUrlParameter:
+			return "Missing or invalid url parameter."
+		}
+	}
+}
+
 extension SNSController.PostError.State {
 
 	var isUnidentifiable: Bool {
@@ -170,8 +200,8 @@ extension ESTwitter.PostError {
 			case .afterPosted:
 				return "Tweet has been posted but after that, following error occurred: "
 				
-			case .withNoPostProcess:
-				return ""
+//			case .withNoPostProcess:
+//				return ""
 			}
 		}
 		

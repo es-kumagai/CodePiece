@@ -125,6 +125,7 @@
 		B15EE38723CE9C42005B268A /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38623CE9C42005B268A /* Swifter */; };
 		B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38923CE9FBB005B268A /* Reachability */; };
 		B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38C23CEA03E005B268A /* KeychainAccess */; };
+		B16CFCB223F1540600772AA4 /* GetStatusesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB123F1540600772AA4 /* GetStatusesError.swift */; };
 		B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17B938023CAB28C00E3B490 /* MainViewController.swift */; };
 		B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17B938223CAB2A800E3B490 /* MainWindow.storyboard */; };
 		B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1806CB723D6B50F006932F5 /* SwifterScheme.swift */; };
@@ -381,6 +382,7 @@
 		B15EE2AE23CE76A0005B268A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B15EE33B23CE7738005B268A /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		B15EE33C23CE7738005B268A /* Mark */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mark; sourceTree = "<group>"; };
+		B16CFCB123F1540600772AA4 /* GetStatusesError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatusesError.swift; sourceTree = "<group>"; };
 		B17B938023CAB28C00E3B490 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B17B938223CAB2A800E3B490 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		B1806CB723D6B50F006932F5 /* SwifterScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwifterScheme.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				B1128CDF23DE915000DDA4EA /* UsersTag.swift */,
 				B1128CD323DE081E00DDA4EA /* Token.swift */,
 				B1128CCB23DDF89200DDA4EA /* PostError.swift */,
+				B16CFCB123F1540600772AA4 /* GetStatusesError.swift */,
 				B1128CD123DE069300DDA4EA /* ResetError.swift */,
 				B1128CD523DE087000DDA4EA /* AuthorizationError.swift */,
 				B1128CCD23DDFDB900DDA4EA /* JSON.swift */,
@@ -1334,6 +1337,7 @@
 				B1128CD223DE069300DDA4EA /* ResetError.swift in Sources */,
 				B1A4729823D09DB300F73658 /* Indicis.swift in Sources */,
 				B1A4729423D09DB300F73658 /* HashtagEntity.swift in Sources */,
+				B16CFCB223F1540600772AA4 /* GetStatusesError.swift in Sources */,
 				B1A4729123D09DB300F73658 /* URLInfo.swift in Sources */,
 				B1A4729323D09DB300F73658 /* Place.swift in Sources */,
 				B1508BE823E99A9A00973728 /* UserSelector.swift in Sources */,

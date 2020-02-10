@@ -17,7 +17,7 @@ public final class API {
 	public typealias AuthorizationResult = Result<Token, AuthorizationError>
 	public typealias PostTweetResult = Result<Status, PostError>
 	public typealias PostMediaResult = Result<[MediaId], PostError>
-	public typealias SearchResult = Result<[Status], PostError>
+	public typealias SearchResult = Result<[Status], GetStatusesError>
 	public typealias BasicResult = Result<Void, APIError>
 	
 	
@@ -204,7 +204,7 @@ extension API {
 		
 		guard let api = rawApi else {
 			
-			handler(.failure(.apiError(.notReady, state: .withNoPostProcess)))
+			handler(.failure(.apiError(.notReady)))
 			return
 		}
 		
@@ -226,7 +226,7 @@ extension API {
 		
 		guard let api = rawApi else {
 			
-			handler(.failure(.apiError(.notReady, state: .withNoPostProcess)))
+			handler(.failure(.apiError(.notReady)))
 			return
 		}
 		
@@ -247,7 +247,7 @@ extension API {
 		
 		guard let api = rawApi else {
 			
-			handler(.failure(.apiError(.notReady, state: .withNoPostProcess)))
+			handler(.failure(.apiError(.notReady)))
 			return
 		}
 		
@@ -334,15 +334,15 @@ private extension API {
 		}
 		catch let error as DecodingError {
 			
-			return .failure(.parseError("\(error)", state: .withNoPostProcess))
+			return .failure(.parseError("\(error)"))
 		}
 		catch let error as JSON.SerializationError {
 
-			return .failure(.unexpectedError(error, state: .withNoPostProcess))
+			return .failure(.unexpected(error))
 		}
 		catch {
 
-			return .failure(.internalError("Failed to serialize a JSON data. \(error)", state: .withNoPostProcess))
+			return .failure(.unexpectedWithDescription("Failed to serialize a JSON data. \(error)"))
 		}
 	}
 	
@@ -354,7 +354,7 @@ private extension API {
 			return .failure(.init(tweetError: error))
 			
 		default:
-			return .failure(.unexpectedError(error, state: .withNoPostProcess))
+			return .failure(.unexpected(error))
 		}
 	}
 }

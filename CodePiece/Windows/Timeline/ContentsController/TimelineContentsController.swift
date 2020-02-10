@@ -11,7 +11,7 @@ import ESTwitter
 
 class TimelineContentsController : NSObject {
 	
-	typealias UpdateResult = Result<([Status], associatedHashtags: HashtagSet), PostError>
+	typealias UpdateResult = Result<([Status], associatedHashtags: HashtagSet), GetStatusesError>
 	
 	var notificationHandlers = Notification.Handlers()
 
@@ -47,10 +47,10 @@ class TimelineContentsController : NSObject {
 //	var canReplyRequest: Bool {
 //
 //		guard let tableView = tableView else {
-//			
+//
 //			return false
 //		}
-//		
+//
 //		let indexes = tableViewDataSource.items.indexes { $0 is TimelineTweetItem }
 //		let result = Set(tableView.selectedRowIndexes).isSubset(of: indexes)
 //
