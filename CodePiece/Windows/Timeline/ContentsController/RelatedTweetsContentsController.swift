@@ -13,6 +13,25 @@ import Ocean
 
 final class RelatedTweetsContentsController : TimelineContentsController, NotificationObservable {
 	
+	private struct QueryControl {
+		
+		var maxMargin = 30
+		var step = 5
+		var underLimit = 100
+		
+		mutating func reduce() {
+			
+			guard maxMargin > underLimit else {
+			
+				return
+			}
+			
+			maxMargin = max(underLimit, maxMargin - step)
+		}
+	}
+
+	private var queryControl = QueryControl()
+	
 	var statusesAutoUpdateIntervalForAppeared: Double {
 		
 		return owner!.statusesAutoUpdateInterval
@@ -140,7 +159,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
 		
-		let query = relatedUsers.tweetFromAllUsersQuery(maxMargin: 50)
+		let query = relatedUsers.tweetFromAllUsersQuery(maxMargin: queryControl.maxMargin)
 		
 		guard !query.isEmpty else {
 			
@@ -159,6 +178,11 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 				
 			case .success(let statuses):
 				callback(.success((statuses, self.hashtags)))
+				
+			case .failure(.missingOrInvalidUrlParameter):
+				self.queryControl.reduce()
+				NSLog("Reducing max uplimit margin for searching related tweets query length to \(self.queryControl.maxMargin)")
+				callback(.failure(.missingOrInvalidUrlParameter))
 				
 			case .failure(let error):
 				callback(.failure(error))
