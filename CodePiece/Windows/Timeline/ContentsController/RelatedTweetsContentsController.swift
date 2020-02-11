@@ -15,18 +15,18 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 	
 	private struct QueryControl {
 		
-		var maxMargin = 30
+		var lengthMargin = 30
 		var step = 5
-		var underLimit = 100
+		var upperLimit = 200
 		
 		mutating func reduce() {
 			
-			guard maxMargin > underLimit else {
+			guard lengthMargin < upperLimit else {
 			
 				return
 			}
 			
-			maxMargin = max(underLimit, maxMargin - step)
+			lengthMargin = min(upperLimit, lengthMargin + step)
 		}
 	}
 
@@ -159,7 +159,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
 		
-		let query = relatedUsers.tweetFromAllUsersQuery(maxMargin: queryControl.maxMargin)
+		let query = relatedUsers.tweetFromAllUsersQuery(withQueryLengthMargin: queryControl.lengthMargin)
 		
 		guard !query.isEmpty else {
 			
@@ -181,7 +181,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 				
 			case .failure(.missingOrInvalidUrlParameter):
 				self.queryControl.reduce()
-				NSLog("Reducing max uplimit margin for searching related tweets query length to \(self.queryControl.maxMargin)")
+				NSLog("Reducing max uplimit margin for searching related tweets query length to \(self.queryControl.lengthMargin)")
 				callback(.failure(.missingOrInvalidUrlParameter))
 				
 			case .failure(let error):
