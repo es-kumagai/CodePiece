@@ -29,6 +29,7 @@
 		B122599023EA90F0006D819D /* MentionsContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122598F23EA90F0006D819D /* MentionsContentsController.swift */; };
 		B122599223EAB8F5006D819D /* TimelineTabViewItemInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */; };
 		B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1278B5B23D176C3003F3719 /* CodeText.swift */; };
+		B131864623F28D7000BA9AA7 /* GetStatusesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB123F1540600772AA4 /* GetStatusesError.swift */; };
 		B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B132D50423CD078800690C5F /* ESProgressHUD */; };
 		B132D51423CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
 		B132D51B23CD08B800690C5F /* ESTwitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B132D51A23CD08B800690C5F /* ESTwitterTests.swift */; };
@@ -125,7 +126,6 @@
 		B15EE38723CE9C42005B268A /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38623CE9C42005B268A /* Swifter */; };
 		B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38923CE9FBB005B268A /* Reachability */; };
 		B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38C23CEA03E005B268A /* KeychainAccess */; };
-		B16CFCB223F1540600772AA4 /* GetStatusesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB123F1540600772AA4 /* GetStatusesError.swift */; };
 		B16CFCB823F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */; };
 		B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17B938023CAB28C00E3B490 /* MainViewController.swift */; };
 		B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17B938223CAB2A800E3B490 /* MainWindow.storyboard */; };
@@ -511,6 +511,7 @@
 		B1128CC623DDF33800DDA4EA /* API */ = {
 			isa = PBXGroup;
 			children = (
+				B131864523F28D1700BA9AA7 /* Error */,
 				B1128CC723DDF33800DDA4EA /* Notifications.swift */,
 				B1128CC823DDF33800DDA4EA /* API.swift */,
 				B1508BE723E99A9A00973728 /* UserSelector.swift */,
@@ -521,10 +522,6 @@
 				B1128CDD23DE826400DDA4EA /* TweetMode.swift */,
 				B1128CDF23DE915000DDA4EA /* UsersTag.swift */,
 				B1128CD323DE081E00DDA4EA /* Token.swift */,
-				B1128CCB23DDF89200DDA4EA /* PostError.swift */,
-				B16CFCB123F1540600772AA4 /* GetStatusesError.swift */,
-				B1128CD123DE069300DDA4EA /* ResetError.swift */,
-				B1128CD523DE087000DDA4EA /* AuthorizationError.swift */,
 				B1128CCD23DDFDB900DDA4EA /* JSON.swift */,
 				B1128CCF23DE05C000DDA4EA /* APIError.swift */,
 				B1128CD923DE1C3D00DDA4EA /* OpenUrl.swift */,
@@ -551,6 +548,17 @@
 				B15EE28823CE7667005B268A /* TimelineViewController+MainWindow.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		B131864523F28D1700BA9AA7 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				B1128CCB23DDF89200DDA4EA /* PostError.swift */,
+				B16CFCB123F1540600772AA4 /* GetStatusesError.swift */,
+				B1128CD123DE069300DDA4EA /* ResetError.swift */,
+				B1128CD523DE087000DDA4EA /* AuthorizationError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		B132D50C23CD08B800690C5F /* ESTwitter */ = {
@@ -1326,6 +1334,7 @@
 				B1A4728C23D09DB300F73658 /* UserMention.swift in Sources */,
 				B1A4729D23D09DB300F73658 /* Status.swift in Sources */,
 				B1A4729723D09DB300F73658 /* Coordinate.swift in Sources */,
+				B131864623F28D7000BA9AA7 /* GetStatusesError.swift in Sources */,
 				B1128CCC23DDF89200DDA4EA /* PostError.swift in Sources */,
 				B1A4725C23D09CA700F73658 /* Extension.swift in Sources */,
 				B1A4728B23D09DB300F73658 /* Browse.swift in Sources */,
@@ -1340,7 +1349,6 @@
 				B1128CD223DE069300DDA4EA /* ResetError.swift in Sources */,
 				B1A4729823D09DB300F73658 /* Indicis.swift in Sources */,
 				B1A4729423D09DB300F73658 /* HashtagEntity.swift in Sources */,
-				B16CFCB223F1540600772AA4 /* GetStatusesError.swift in Sources */,
 				B1A4729123D09DB300F73658 /* URLInfo.swift in Sources */,
 				B1A4729323D09DB300F73658 /* Place.swift in Sources */,
 				B1508BE823E99A9A00973728 /* UserSelector.swift in Sources */,

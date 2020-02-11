@@ -20,6 +20,7 @@ public enum GetStatusesError : Error {
 
 	// Specific Error
 	
+	case rateLimitExceeded
 	case missingOrInvalidUrlParameter
 }
 
@@ -33,6 +34,9 @@ extension GetStatusesError {
 			
 			switch SwifterError.Response(fromMessage: error.message) {
 				
+			case .some(let response) where response.code == 88:
+				self = .rateLimitExceeded
+				
 			case .some(let response) where response.code == 195:
 				self = .missingOrInvalidUrlParameter
 				
@@ -45,6 +49,21 @@ extension GetStatusesError {
 			
 		default:
 			self = .genericError(error.message)
+		}
+	}
+}
+
+extension GetStatusesError {
+
+	public var isRateLimitExceeded: Bool {
+
+		if case .rateLimitExceeded = self {
+
+			return true
+		}
+		else {
+
+			return false
 		}
 	}
 }

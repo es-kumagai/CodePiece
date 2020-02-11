@@ -463,7 +463,7 @@ extension Semaphore.Interval : CustomStringConvertible {
 
 	public var description: String {
 		
-		return "\(self.second)"
+		return String(second)
 	}
 }
 
@@ -1332,7 +1332,7 @@ public struct Acknowledgements {
 
 extension Acknowledgements : CustomStringConvertible {
 	
-	public var description:String {
+	public var description: String {
 		
 		var results = [String]()
 		

@@ -165,6 +165,9 @@ extension GetStatusesError : CustomStringConvertible {
 		case .responseError(code: let code, message: let message):
 			return "\(message) (\(code))"
 			
+		case .rateLimitExceeded:
+			return "Late limit exceeded."
+			
 		case .missingOrInvalidUrlParameter:
 			return "Missing or invalid url parameter."
 		}

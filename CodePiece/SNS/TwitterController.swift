@@ -43,21 +43,6 @@ private let jsonDecoder = JSONDecoder()
 ////	}
 //}
 
-//extension GetStatusesError {
-//	
-//	var isRateLimitExceeded: Bool {
-//		
-//		switch type {
-//			
-////		case .TwitterError(.rateLimitExceeded):
-////			return true
-//			
-//		default:
-//			return false
-//		}
-//	}
-//}
-
 // FIXME: TwitterController は AlertDisplayable であるべきではなそうなので、別のビューコントローラーが持つようにした。
 @objcMembers
 final class TwitterController : NSObject, PostController, AlertDisplayable, NotificationObservable {

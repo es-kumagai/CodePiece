@@ -119,7 +119,7 @@ final class TimelineViewController: NSViewController {
 	enum Message : MessageTypeIgnoreInQuickSuccession {
 		
 		case setAutoUpdateInterval(Double)
-		case addAutoUpdateIntervalDelay(Double)
+		case addAutoUpdateIntervalDelay(bySecond: Double)
 		case resetAutoUpdateIntervalDeray
 		case setReachability(ReachabilityController.State)
 		case autoUpdate(enable: Bool)
@@ -363,7 +363,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 			_changeAutoUpdateInterval(interval: interval)
 			
 		case .addAutoUpdateIntervalDelay(let interval):
-			_changeAutoUpdateIntervalDelay(interval: interval)
+			_changeAutoUpdateIntervalDelay(bySecond: interval)
 			
 		case .resetAutoUpdateIntervalDeray:
 			_resetAutoUpdateIntervalDelay()
@@ -409,11 +409,11 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		autoUpdateState.updateInterval = Semaphore.Interval(second: interval)
 	}
 	
-	private func _changeAutoUpdateIntervalDelay(interval: Double) {
+	private func _changeAutoUpdateIntervalDelay(bySecond interval: Double) {
 		
 		autoUpdateState.addUpdateIntervalDelay(bySecond: interval)
 		
-		NSLog("Next update of timeline will delay %@ seconds.", autoUpdateState.updateIntervalDelay.description)
+		NSLog("Next timeline update will delay %@ seconds.", autoUpdateState.updateIntervalDelay.description)
 	}
 	
 	private func _resetAutoUpdateIntervalDelay() {
@@ -424,7 +424,7 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		}
 		
 		autoUpdateState.resetUpdateIntervalDelay()
-		NSLog("Delay for update of timeline was solved.")
+		NSLog("Delay for timeline update turns to neutral.")
 	}
 	
 	private func _changeAutoUpdateState(enable: Bool) {
@@ -710,10 +710,10 @@ extension TimelineViewController {
 				
 			case .failure(let error):
 				
-				//				if error.isRateLimitExceeded {
-				//
-				//					self.message.send(message: .AddAutoUpdateIntervalDelay(7.0))
-				//				}
+				if error.isRateLimitExceeded {
+
+					self.message.send(message: .addAutoUpdateIntervalDelay(bySecond: 7.0))
+				}
 				
 				self.contentsState = .error(error)
 			}
