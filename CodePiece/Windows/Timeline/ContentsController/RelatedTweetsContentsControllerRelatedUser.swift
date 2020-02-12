@@ -52,7 +52,8 @@ extension Set where Element == RelatedTweetsContentsController.RelatedUser {
 	func tweetFromAllUsersQuery(withQueryLengthMargin queryLengthMargin: Int) -> String {
 	
 		let maxQueryLength = 500 - queryLengthMargin
-		
+
+		// FIXME: ここを first で result を初期化して、prefix(from:) で連結処理するようにすると、どういうコードになるんだろう。
 		var result = ""
 
 		for user in appeareDateDescendingOrderedUsers() {

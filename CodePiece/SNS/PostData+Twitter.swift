@@ -131,6 +131,7 @@ extension PostDataContainer {
 					return $0.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
 				}
 
+				// FIXME: ここのパッと見て複雑な印象を解消した。
 				result = result.replacingCharacters(in: targetRange, with: "\(scheme)://\(host)/\(uri)\(query.isEmpty ? "" : "?")\(query)")
 			}
 			
