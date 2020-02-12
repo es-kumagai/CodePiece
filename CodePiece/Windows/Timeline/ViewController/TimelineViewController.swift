@@ -664,7 +664,7 @@ extension TimelineViewController {
 				#if DEBUG
 				guard let timelineTableView = timelineTableView else {
 				
-					NSLog("Table view for '\(contentsKind) is still inactive.")
+					NSLog("%@", "Table view for '\(contentsKind)' is still inactive.")
 					return
 				}
 				
