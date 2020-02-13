@@ -681,6 +681,7 @@ extension TimelineViewController {
 			let result = appendTweets(tweets: tweets, associatedHashtags: hashtags)
 			let nextSelectedStatuses = self.getNextTimelineSelection(insertedIndexes: result.insertedIndexes)
 
+			// FIXME: 複雑なデバッグ表示は DebugTime にメソッドとして載せて１業で表現しても良いかもしれない。
 			DebugTime.print("Tweet: \(tweets.count)")
 			DebugTime.print("Inserted: \(result.insertedIndexes)")
 			DebugTime.print("Ignored: \(result.ignoredIndexes)")
