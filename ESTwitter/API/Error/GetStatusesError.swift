@@ -21,6 +21,7 @@ public enum GetStatusesError : Error {
 	// Specific Error
 	
 	case rateLimitExceeded
+	case internalError
 	case missingOrInvalidUrlParameter
 }
 
@@ -36,6 +37,9 @@ extension GetStatusesError {
 				
 			case .some(let response) where response.code == 88:
 				self = .rateLimitExceeded
+				
+			case .some(let response) where response.code == 131:
+				self = .internalError
 				
 			case .some(let response) where response.code == 195:
 				self = .missingOrInvalidUrlParameter
