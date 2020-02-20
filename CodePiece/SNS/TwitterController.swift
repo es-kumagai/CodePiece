@@ -345,6 +345,9 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 				AuthorizationStateInvalidNotification().post()
 				AuthorizationStateDidChangeWithErrorNotification(error: .apiError(error)).post()
 				
+			case .offline:
+				AuthorizationStateDidChangeWithErrorNotification(error: .apiError(error)).post()
+				
 			default:
 				AuthorizationStateDidChangeWithErrorNotification(error: .apiError(error)).post()
 			}

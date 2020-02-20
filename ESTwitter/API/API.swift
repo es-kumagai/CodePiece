@@ -6,7 +6,7 @@
 //  Copyright © 2020 Tomohiro Kumagai. All rights reserved.
 //
 
-import Foundation
+import AppKit
 import Swifter
 
 public final class API {
@@ -287,6 +287,9 @@ extension API {
 			case let error as SwifterError:
 				handler(.failure(.init(from: error)))
 				
+			case let error as NSError:
+				handler(.failure(.init(from: error)))
+				
 			default:
 				handler(.failure(.unexpected(error)))
 			}
@@ -352,6 +355,9 @@ private extension API {
 			
 		case let error as SwifterError:
 			return .failure(.init(tweetError: error))
+			
+		case let error as NSError:
+			return .failure(.init(nsError: error))
 			
 		default:
 			return .failure(.unexpected(error))

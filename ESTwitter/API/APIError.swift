@@ -13,6 +13,7 @@ public enum APIError : Error {
 	case notReady
 	case responseError(code: Int, message: String)
 	case operationError(String)
+	case offline(String)
 	case unexpected(Error)
 }
 
@@ -26,6 +27,18 @@ internal extension APIError {
 		}
 		else {
 			
+			self = .unexpected(error)
+		}
+	}
+	
+	init(from error: NSError) {
+		
+		switch error.code {
+			
+		case -1009:
+			self = .offline(error.localizedDescription)
+			
+		default:
 			self = .unexpected(error)
 		}
 	}
@@ -44,6 +57,9 @@ extension APIError : CustomStringConvertible {
 			return message
 			
 		case .operationError(let message):
+			return message
+			
+		case .offline(let message):
 			return message
 			
 		case .unexpected(let error):

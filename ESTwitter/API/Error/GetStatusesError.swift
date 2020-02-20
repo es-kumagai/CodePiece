@@ -55,6 +55,11 @@ extension GetStatusesError {
 			self = .genericError(error.message)
 		}
 	}
+	
+	init(nsError error: NSError) {
+		
+		self = .apiError(.init(from: error))
+	}
 }
 
 extension GetStatusesError {
