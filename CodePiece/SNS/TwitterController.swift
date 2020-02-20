@@ -209,6 +209,11 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 
 			self.showErrorAlert(withTitle: "Failed to reset authorization.", message: notification.error.localizedDescription)
 		}
+		
+		observe(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] _ in
+			
+			self.verifyCredentialsIfNeed()
+		}
 	}
 	
 //	convenience override init() {

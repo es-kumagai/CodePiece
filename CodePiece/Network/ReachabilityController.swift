@@ -81,7 +81,7 @@ final class ReachabilityController : NotificationObservable {
 			throw error
 		}
 		
-		observe(ReachabilityChangedNotification.self, using: reachabilityDidChange)
+		observe(notificationNamed: .reachabilityChanged, using: reachabilityDidChange)
 		
 		try self.reachability.startNotifier()
 	}
@@ -96,14 +96,14 @@ final class ReachabilityController : NotificationObservable {
 		return State(reachability.connection)
 	}
 	
-	func reachabilityDidChange(notification: ReachabilityChangedNotification) {
+	func reachabilityDidChange(notification: Notification) {
 		
 //		guard notification.object === self.reachability else {
 //			
 //			fatalError("Reachability notification posted with unknown reachability object (\(notification.object))")
 //		}
 
-		ReachabilityChangedNotification(self.state).post()
+		ReachabilityChangedNotification(state).post()
 	}
 }
 
