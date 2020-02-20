@@ -9,6 +9,10 @@ Change Logs.
 * There are many related user about hashtags, adopted users recently tweets in Related tweets view.
 * Related tweets's update interval become bigger when the view is disappeared.
 
+### Fixes
+
+* Fix a problem the app cannot detect the changes of internet connectivity.
+
 ## 2.0.8
 
 ### Fixes
