@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B101B6FB23FF6CC90095DDC0"
-               BuildableName = "CodePiece.appex"
+               BuildableName = "CodePiece Extension.appex"
                BlueprintName = "XcodeSourceEditorExtension"
                ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
             </BuildableReference>
