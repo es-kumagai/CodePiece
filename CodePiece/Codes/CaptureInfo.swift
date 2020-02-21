@@ -22,5 +22,5 @@ struct LinedCaptureInfo : CaptureInfoType {
 	let userAgent: String? = nil
 	let frameSize: NSSize = NSMakeSize(560, 560)
 	let clientSize: NSSize = NSMakeSize(680, 480)
-	let maxWidth: Int = 320
+	let maxWidth: Int = 380
 }
