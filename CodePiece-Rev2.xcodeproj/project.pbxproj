@@ -10,7 +10,6 @@
 		B101B6FD23FF6CC90095DDC0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B101B6E823FF6B1B0095DDC0 /* Cocoa.framework */; };
 		B101B70023FF6CC90095DDC0 /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101B6FF23FF6CC90095DDC0 /* SourceEditorExtension.swift */; };
 		B101B70223FF6CC90095DDC0 /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101B70123FF6CC90095DDC0 /* SourceEditorCommand.swift */; };
-		B101B70723FF6CC90095DDC0 /* CodePiece-Beta.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B101B6FC23FF6CC90095DDC0 /* CodePiece-Beta.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B1128CB723DDEAA700DDA4EA /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B1128CB623DDEAA700DDA4EA /* Ocean */; };
 		B1128CC923DDF33800DDA4EA /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CC723DDF33800DDA4EA /* Notifications.swift */; };
 		B1128CCA23DDF33800DDA4EA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CC823DDF33800DDA4EA /* API.swift */; };
@@ -189,6 +188,10 @@
 		B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4323D0D37700418A84 /* CodeTextView.swift */; };
 		B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */; };
 		B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */; };
+		B1E2139923FF8C5400DE511D /* CodePiece Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B101B6FC23FF6CC90095DDC0 /* CodePiece Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B1E2139B23FF935000DE511D /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2139A23FF935000DE511D /* Errors.swift */; };
+		B1E2139D23FF9E2800DE511D /* XCSourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2139C23FF9E2800DE511D /* XCSourceEditorCommand.swift */; };
+		B1E2139F23FF9E8700DE511D /* CodePieceUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2139E23FF9E8700DE511D /* CodePieceUrl.swift */; };
 		B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B1F2C78923E48B89008BBCA0 /* Fonts */; };
 		B1F2C78D23E48FB4008BBCA0 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
 		B1F2C78E23E48FB4008BBCA0 /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -255,7 +258,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				B101B70723FF6CC90095DDC0 /* CodePiece-Beta.appex in Embed App Extensions */,
+				B1E2139923FF8C5400DE511D /* CodePiece Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,7 +290,7 @@
 
 /* Begin PBXFileReference section */
 		B101B6E823FF6B1B0095DDC0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		B101B6FC23FF6CC90095DDC0 /* CodePiece-Beta.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "CodePiece-Beta.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B101B6FC23FF6CC90095DDC0 /* CodePiece Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "CodePiece Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B101B6FF23FF6CC90095DDC0 /* SourceEditorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorExtension.swift; sourceTree = "<group>"; };
 		B101B70123FF6CC90095DDC0 /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
 		B101B70323FF6CC90095DDC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -479,6 +482,9 @@
 		B1DDCB4323D0D37700418A84 /* CodeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 		B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkLabel.swift; sourceTree = "<group>"; };
 		B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTextField.swift; sourceTree = "<group>"; };
+		B1E2139A23FF935000DE511D /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		B1E2139C23FF9E2800DE511D /* XCSourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCSourceEditorCommand.swift; sourceTree = "<group>"; };
+		B1E2139E23FF9E8700DE511D /* CodePieceUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePieceUrl.swift; sourceTree = "<group>"; };
 		B1F2C78723E48AC3008BBCA0 /* Screenshots */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Screenshots; sourceTree = "<group>"; };
 		B1F2C78923E48B89008BBCA0 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		B1F2C78B23E48C9E008BBCA0 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
@@ -551,6 +557,9 @@
 				B101B70123FF6CC90095DDC0 /* SourceEditorCommand.swift */,
 				B101B70323FF6CC90095DDC0 /* Info.plist */,
 				B101B70423FF6CC90095DDC0 /* XcodeSourceEditorExtension.entitlements */,
+				B1E2139A23FF935000DE511D /* Errors.swift */,
+				B1E2139C23FF9E2800DE511D /* XCSourceEditorCommand.swift */,
+				B1E2139E23FF9E8700DE511D /* CodePieceUrl.swift */,
 			);
 			path = XcodeSourceEditorExtension;
 			sourceTree = "<group>";
@@ -1016,7 +1025,7 @@
 				B132D50B23CD08B800690C5F /* ESTwitter.framework */,
 				B132D51323CD08B800690C5F /* ESTwitterTests.xctest */,
 				B1CE4CE523E6F83A003D1399 /* ESTwitterTestsHost.app */,
-				B101B6FC23FF6CC90095DDC0 /* CodePiece-Beta.appex */,
+				B101B6FC23FF6CC90095DDC0 /* CodePiece Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1144,7 +1153,7 @@
 			);
 			name = XcodeSourceEditorExtension;
 			productName = XcodeSourceEditorExtension;
-			productReference = B101B6FC23FF6CC90095DDC0 /* CodePiece-Beta.appex */;
+			productReference = B101B6FC23FF6CC90095DDC0 /* CodePiece Extension.appex */;
 			productType = "com.apple.product-type.xcode-extension";
 		};
 		B132D50A23CD08B800690C5F /* ESTwitter */ = {
@@ -1386,7 +1395,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1E2139D23FF9E2800DE511D /* XCSourceEditorCommand.swift in Sources */,
 				B101B70023FF6CC90095DDC0 /* SourceEditorExtension.swift in Sources */,
+				B1E2139F23FF9E8700DE511D /* CodePieceUrl.swift in Sources */,
+				B1E2139B23FF935000DE511D /* Errors.swift in Sources */,
 				B101B70223FF6CC90095DDC0 /* SourceEditorCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1642,11 +1654,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = XcodeSourceEditorExtension/XcodeSourceEditorExtension.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 81;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LRWC3F8ACE;
 				INFOPLIST_FILE = XcodeSourceEditorExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1655,7 +1667,7 @@
 				);
 				MARKETING_VERSION = 2.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece-Beta.XcodeSourceEditorExtension";
-				PRODUCT_NAME = "CodePiece-Beta";
+				PRODUCT_NAME = "CodePiece Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1677,7 +1689,7 @@
 				);
 				MARKETING_VERSION = 2.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.XcodeSourceEditorExtension";
-				PRODUCT_NAME = CodePiece;
+				PRODUCT_NAME = "CodePiece Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1687,11 +1699,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1716,11 +1729,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1935,10 +1949,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-$(ES_BUILD_TYPE)";
 				CODE_SIGN_ENTITLEMENTS = CodePiece/CodePiece.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 81;
+				DEVELOPMENT_TEAM = LRWC3F8ACE;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
 				ES_URLSCHEME_SIMPLE = "codepiece-beta";
 				FRAMEWORK_SEARCH_PATHS = (

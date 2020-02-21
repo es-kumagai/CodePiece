@@ -47,7 +47,10 @@ final class CodePieceScheme : URLScheme {
 				}
 				
 			case ("code", let value?):
-				CodeChangeRequestNotification(code: value).post()
+				
+				if let code = value.removingPercentEncoding {
+					CodeChangeRequestNotification(code: code).post()
+				}
 				
 			default:
 				break
