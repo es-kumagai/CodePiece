@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B101B6FD23FF6CC90095DDC0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B101B6E823FF6B1B0095DDC0 /* Cocoa.framework */; };
-		B101B70023FF6CC90095DDC0 /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101B6FF23FF6CC90095DDC0 /* SourceEditorExtension.swift */; };
-		B101B70223FF6CC90095DDC0 /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101B70123FF6CC90095DDC0 /* SourceEditorCommand.swift */; };
 		B1128CB723DDEAA700DDA4EA /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B1128CB623DDEAA700DDA4EA /* Ocean */; };
 		B1128CC923DDF33800DDA4EA /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CC723DDF33800DDA4EA /* Notifications.swift */; };
 		B1128CCA23DDF33800DDA4EA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CC823DDF33800DDA4EA /* API.swift */; };
@@ -189,9 +187,10 @@
 		B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */; };
 		B1DDCB4B23D0D37700418A84 /* DescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */; };
 		B1E2139923FF8C5400DE511D /* CodePiece Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B101B6FC23FF6CC90095DDC0 /* CodePiece Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B1E2139B23FF935000DE511D /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2139A23FF935000DE511D /* Errors.swift */; };
-		B1E2139D23FF9E2800DE511D /* XCSourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2139C23FF9E2800DE511D /* XCSourceEditorCommand.swift */; };
-		B1E2139F23FF9E8700DE511D /* CodePieceUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2139E23FF9E8700DE511D /* CodePieceUrl.swift */; };
+		B1E213AC2400ABB200DE511D /* CodePieceUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2139E23FF9E8700DE511D /* CodePieceUrl.swift */; };
+		B1E213AD2400AC3B00DE511D /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101B6FF23FF6CC90095DDC0 /* SourceEditorExtension.swift */; };
+		B1E213AE2400AC3E00DE511D /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101B70123FF6CC90095DDC0 /* SourceEditorCommand.swift */; };
+		B1E213AF2400AC4600DE511D /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2139A23FF935000DE511D /* Errors.swift */; };
 		B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B1F2C78923E48B89008BBCA0 /* Fonts */; };
 		B1F2C78D23E48FB4008BBCA0 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
 		B1F2C78E23E48FB4008BBCA0 /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -483,8 +482,8 @@
 		B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkLabel.swift; sourceTree = "<group>"; };
 		B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTextField.swift; sourceTree = "<group>"; };
 		B1E2139A23FF935000DE511D /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		B1E2139C23FF9E2800DE511D /* XCSourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCSourceEditorCommand.swift; sourceTree = "<group>"; };
 		B1E2139E23FF9E8700DE511D /* CodePieceUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePieceUrl.swift; sourceTree = "<group>"; };
+		B1E213A82400AAB000DE511D /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
 		B1F2C78723E48AC3008BBCA0 /* Screenshots */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Screenshots; sourceTree = "<group>"; };
 		B1F2C78923E48B89008BBCA0 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		B1F2C78B23E48C9E008BBCA0 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
@@ -558,7 +557,6 @@
 				B101B70323FF6CC90095DDC0 /* Info.plist */,
 				B101B70423FF6CC90095DDC0 /* XcodeSourceEditorExtension.entitlements */,
 				B1E2139A23FF935000DE511D /* Errors.swift */,
-				B1E2139C23FF9E2800DE511D /* XCSourceEditorCommand.swift */,
 				B1E2139E23FF9E8700DE511D /* CodePieceUrl.swift */,
 			);
 			path = XcodeSourceEditorExtension;
@@ -864,6 +862,7 @@
 		B15EE38523CE9C42005B268A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B1E213A82400AAB000DE511D /* XcodeKit.framework */,
 				B101B6E823FF6B1B0095DDC0 /* Cocoa.framework */,
 			);
 			name = Frameworks;
@@ -1395,11 +1394,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1E2139D23FF9E2800DE511D /* XCSourceEditorCommand.swift in Sources */,
-				B101B70023FF6CC90095DDC0 /* SourceEditorExtension.swift in Sources */,
-				B1E2139F23FF9E8700DE511D /* CodePieceUrl.swift in Sources */,
-				B1E2139B23FF935000DE511D /* Errors.swift in Sources */,
-				B101B70223FF6CC90095DDC0 /* SourceEditorCommand.swift in Sources */,
+				B1E213AF2400AC4600DE511D /* Errors.swift in Sources */,
+				B1E213AC2400ABB200DE511D /* CodePieceUrl.swift in Sources */,
+				B1E213AD2400AC3B00DE511D /* SourceEditorExtension.swift in Sources */,
+				B1E213AE2400AC3E00DE511D /* SourceEditorCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
