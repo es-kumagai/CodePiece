@@ -10,13 +10,32 @@ import Foundation
 import XcodeKit
 
 class SourceEditorExtension: NSObject, XCSourceEditorExtension {
-    
-    func extensionDidFinishLaunching() {
-        // If your extension needs to do any work at launch, implement this optional method.
-    }
-    
-//    var commandDefinitions: [[XCSourceEditorCommandDefinitionKey: Any]] {
-//        // If your extension needs to return a collection of command definitions that differs from those in its Info.plist, implement this optional property getter.
-//		return []
-//    }
+	
+	func extensionDidFinishLaunching() {
+		// If your extension needs to do any work at launch, implement this optional method.
+	}
+
+	// ここでメニューを生成しようとするとなぜか Bad access で落ちてしまうため
+	// 今のところは Info.plist でメニューを生成します。
+//	var commandDefinitions: [[XCSourceEditorCommandDefinitionKey: Any]] {
+//
+//		let identifier = Bundle(for: Self.self).bundleIdentifier!
+//
+//		func command<T: NSObject>(for class: T.Type, name: String) -> Dictionary<XCSourceEditorCommandDefinitionKey, Any> {
+//
+//			let className = T.className()
+//			let classNameWithModule = NSStringFromClass(T.self)
+//
+//			return [
+//				.identifierKey : "\(identifier).\(className)",
+//				.classNameKey : classNameWithModule,
+//				.nameKey : name
+//			]
+//		}
+//
+//		return [
+//			command(for: OpenCodePieceCommand.self, name: "Open CodePiece"),
+//			command(for: SendToCodePieceCommand.self, name: "Send to CodePiece")
+//		]
+//	}
 }

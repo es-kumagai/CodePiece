@@ -1,5 +1,5 @@
 //
-//  SourceEditorCommand.swift
+//  SendToCodePieceCommand.swift
 //  XcodeSourceEditorExtension
 //
 //  Created by Tomohiro Kumagai on 2020/02/21.

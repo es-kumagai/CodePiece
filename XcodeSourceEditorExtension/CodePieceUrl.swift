@@ -11,8 +11,8 @@ import Foundation
 struct CodePieceUrlScheme {
 	
 	var method: String
-	var language: String
-	var code: String
+	var language: String? = nil
+	var code: String? = nil
 }
 
 extension URL {
@@ -28,7 +28,25 @@ extension URL {
 		#endif
 
 		components.host = "open"
-		components.query = "code=\(url.code)"
+		
+		var query: String {
+		
+			var results = [String]()
+			
+			if let language = url.language {
+				
+				results.append("language=\(language)")
+			}
+			
+			if let code = url.code {
+				
+				results.append("code=\(code)")
+			}
+			
+			return results.joined(separator: "&")
+		}
+
+		components.query = query
 
 		guard let instance = components.url else {
 			
