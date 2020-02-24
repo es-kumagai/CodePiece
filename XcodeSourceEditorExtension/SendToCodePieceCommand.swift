@@ -81,7 +81,7 @@ class SendToCodePieceCommand: NSObject, XCSourceEditorCommand {
 			return trimmedIndentation(from: lines, indentCount: indentCount)
 		}
 		
-		let codes = lines[selection.start.line ... selection.end.line]
+		let codes = lines[selection.start.line ..< selection.end.line]
 		let code = normalizedIndentation(of: codes).joined()
 		
 		guard !code.isEmpty else {
