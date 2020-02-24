@@ -29,24 +29,24 @@ extension URL {
 
 		components.host = "open"
 		
-		var query: String {
+		var queryItems: [URLQueryItem] {
 		
-			var results = [String]()
+			var items = [URLQueryItem]()
 			
 			if let language = url.language {
 				
-				results.append("language=\(language)")
+				items.append(.init(name: "language", value: language))
 			}
 			
 			if let code = url.code {
 				
-				results.append("code=\(code)")
+				items.append(.init(name: "code", value: code))
 			}
 			
-			return results.joined(separator: "&")
+			return items
 		}
 
-		components.query = query
+		components.queryItems = queryItems
 
 		guard let instance = components.url else {
 			
