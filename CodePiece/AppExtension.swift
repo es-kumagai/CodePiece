@@ -52,6 +52,11 @@ extension NSApplication {
 	
 		return _isReadyForUse
 	}
+	
+	func moveToFront() {
+		
+		mainWindow?.makeKeyAndOrderFront(self)
+	}
 }
 
 // MARK: - Controllers
