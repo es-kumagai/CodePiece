@@ -12,7 +12,7 @@ Change Logs.
 ### Fixes
 
 * Fix a problem the app crush when selecting last line in Xcode and send it to the app using Xcode Source Editor Extension.
-* Fix a problem that selected code was truncated if the code includes a '%' character.
+* Fix a problem that selected code was truncated if the code includes a '&' character.
 
 ## 2.1.0
 
