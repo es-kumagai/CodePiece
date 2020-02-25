@@ -1660,6 +1660,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = LRWC3F8ACE;
+				ES_BUNDLE_NAME = "CodePiece-Beta";
 				INFOPLIST_FILE = XcodeSourceEditorExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1680,6 +1681,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				ES_BUNDLE_NAME = CodePiece;
 				INFOPLIST_FILE = XcodeSourceEditorExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
