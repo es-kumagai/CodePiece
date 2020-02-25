@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.1.2
+
+### Fixes
+
+* Fix a problem truncating last line when sending to Xcode.
+
 ## 2.1.1
 
 ### Updates
