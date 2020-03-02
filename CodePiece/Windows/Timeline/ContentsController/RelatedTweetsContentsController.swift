@@ -110,10 +110,15 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 		
 		observe(HashtagsTimelineDidUpdateNotification.self) { [unowned self] notification in
 			
-			let users = notification.statuses.map { $0.user }
+			let users = notification.statuses
+				.filter { $0.createdAt > $0.createdAt.yesterday }
+				.map { $0.user }
 			
-			self.relatedUsers.append(users: users)
-			self.needsUpdate = true
+			if users.count > 0 {
+
+				self.relatedUsers.append(users: users)
+				self.needsUpdate = true
+			}
 		}
 		
 		owner!.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))

@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.1.3
+
+### Updates
+
+* Show related tweets only users who talked about the current hashtags from yesterday.
+
 ## 2.1.2
 
 ### Fixes
