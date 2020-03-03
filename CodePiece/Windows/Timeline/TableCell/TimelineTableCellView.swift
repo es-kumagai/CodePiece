@@ -28,7 +28,10 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 			
 			if item != oldValue {
 
-				applyItem(item: item)
+				applyItem(item: item) { image in
+					
+					self.item?.iconImage = image
+				}
 			}
 		}
 	}
@@ -75,7 +78,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		super.draw(dirtyRect)
 	}
 	
-	private func applyItem(item: TimelineTweetItem?) {
+	private func applyItem(item: TimelineTweetItem?, appliedCallback callback: @escaping (NSImage?) -> Void) {
 
 		if let status = item?.status {
 
@@ -95,11 +98,18 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 			
 			usernameLabel.stringValue = status.user.name
 			dateLabel.stringValue = status.createdAt.description
-			iconButton.image = nil
 			retweetMark.isHidden = !status.isQuoteStatus
 			style = (status.createdAt > TwitterDate(NSDate().daysAgo(1) as Foundation.Date) ? .Recent : .Past)
 
-			updateIconImage(status: status)
+			switch item?.iconImage {
+				
+			case .some(let image):
+				iconButton.image = image
+
+			case .none:
+				iconButton.image = nil
+				updateIconImage(status: status, appliedCallback: callback)
+			}
 		}
 		else {
 
@@ -110,12 +120,14 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 			retweetMark.isHidden = true
 			style = .Recent
 			iconButton.image = nil
+			
+			callback(nil)
 		}
 		
 		needsDisplay = true
 	}
 	
-	private func updateIconImage(status: ESTwitter.Status) {
+	private func updateIconImage(status: ESTwitter.Status, appliedCallback callback: @escaping (NSImage?) -> Void) {
 
 		let setImage = { (url: Foundation.URL) in
 			
@@ -123,11 +135,19 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 				
 				if let image = NSImage(contentsOf: url) {
 					
-					DispatchQueue.main.async { self.iconButton.image = image }
+					DispatchQueue.main.async {
+						
+						self.iconButton.image = image
+						callback(image)
+					}
 				}
 				else {
 					
-					DispatchQueue.main.async { self.iconButton.image = nil }
+					DispatchQueue.main.async {
+						
+						self.iconButton.image = nil
+						callback(nil)
+					}
 				}
 			}
 		}
@@ -135,8 +155,9 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		let resetImage = {
 			
 			DispatchQueue.main.async {
-				
+
 				self.iconButton.image = nil
+				callback(nil)
 			}
 		}
 		
@@ -173,7 +194,7 @@ extension TimelineTableCellView : TimelineTableCellType {
 		return view
 	}
 	
-	static func estimateCellHeightForItem(item:TimelineTableItem, tableView:NSTableView) -> CGFloat {
+	static func estimateCellHeightForItem(item: TimelineTableItem, tableView:NSTableView) -> CGFloat {
 
 		let item = item as! TimelineTweetItem
 

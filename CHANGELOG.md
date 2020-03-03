@@ -7,6 +7,8 @@ Change Logs.
 ### Updates
 
 * Decode '&amp;' in Timeline view.
+* Skip updating a timeline while other update process running.
+* Make drawing icon stable a little bit in Timeline view.
 
 ## 2.1.3
 
