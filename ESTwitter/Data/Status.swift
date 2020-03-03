@@ -327,7 +327,8 @@ extension Status {
 		
 		let patterns = try! [
 			(NSRegularExpression(pattern: "&lt;"), "<"),
-			(NSRegularExpression(pattern: "&gt;"), ">")
+			(NSRegularExpression(pattern: "&gt;"), ">"),
+			(NSRegularExpression(pattern: "&amp;"), "&")
 		]
 
 		for (pattern, replacement) in patterns {

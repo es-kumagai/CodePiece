@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.1.4
+
+### Updates
+
+* Decode '&amp;' in Timeline view.
+
 ## 2.1.3
 
 ### Updates
