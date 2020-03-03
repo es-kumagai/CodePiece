@@ -657,6 +657,12 @@ extension TimelineViewController {
 			return
 		}
 		
+		guard displayControlState != .updating else {
+			
+			NSLog("%@", "Skip update \(contentsKind) contents because other updating process still running.")
+			return
+		}
+		
 		func update(tweets: [Status], associatedHashtags hashtags: HashtagSet) {
 			
 			func _debugTimeReportTableState() {

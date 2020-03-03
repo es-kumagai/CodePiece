@@ -659,14 +659,14 @@ public class MessageQueue<M: MessageType> : MessageQueueType {
 	
 	private(set) var identifier: String
 	
-	private var handler:MessageQueueHandler<Message>
-	private var messageQueue:Queue<Message>
+	private var handler: MessageQueueHandler<Message>
+	private var messageQueue: Queue<Message>
 	
 	private var messageProcessingQueue: DispatchQueue
 	private var messageHandlerExecutionQueue: DispatchQueue
 	private var messageLoopSource: DispatchSourceTimer!
 	
-	public private(set) var isRunning:Bool
+	public private(set) var isRunning: Bool
 
 	internal init(identifier:String, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueue.defaultProcessingInterval, handler:MessageQueueHandler<Message>) {
 		
