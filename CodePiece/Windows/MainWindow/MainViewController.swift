@@ -134,7 +134,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			!posting,
 			!descriptionTextField.twitterText.isEmpty,
-			descriptionCountForPost < maxDescriptionLength,
+			descriptionCountForPost <= maxDescriptionLength,
 			codeTextView.hasCode || !descriptionTextField.isReplyAddressOnly
 		]
 		
