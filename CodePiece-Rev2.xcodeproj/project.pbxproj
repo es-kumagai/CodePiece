@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B101B6FD23FF6CC90095DDC0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B101B6E823FF6B1B0095DDC0 /* Cocoa.framework */; };
+		B10A3635240F55C000CEF654 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A3633240F551100CEF654 /* Icons.swift */; };
 		B1128CB723DDEAA700DDA4EA /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B1128CB623DDEAA700DDA4EA /* Ocean */; };
 		B1128CC923DDF33800DDA4EA /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CC723DDF33800DDA4EA /* Notifications.swift */; };
 		B1128CCA23DDF33800DDA4EA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1128CC823DDF33800DDA4EA /* API.swift */; };
@@ -295,6 +296,7 @@
 		B101B70123FF6CC90095DDC0 /* SendToCodePieceCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendToCodePieceCommand.swift; sourceTree = "<group>"; };
 		B101B70323FF6CC90095DDC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B101B70423FF6CC90095DDC0 /* XcodeSourceEditorExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XcodeSourceEditorExtension.entitlements; sourceTree = "<group>"; };
+		B10A3633240F551100CEF654 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		B1128CC723DDF33800DDA4EA /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B1128CC823DDF33800DDA4EA /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		B1128CCB23DDF89200DDA4EA /* PostError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostError.swift; sourceTree = "<group>"; };
@@ -767,6 +769,7 @@
 		B15EE23423CE7658005B268A /* SNS */ = {
 			isa = PBXGroup;
 			children = (
+				B10A3633240F551100CEF654 /* Icons.swift */,
 				B1C349CF23E270830039F4E6 /* API */,
 				B15EE23523CE7658005B268A /* PostData+Twitter.swift */,
 				B15EE23723CE7658005B268A /* Language.swift */,
@@ -1486,6 +1489,7 @@
 				B15EE22323CE7636005B268A /* MenuController.swift in Sources */,
 				B1128CE823DED87D00DDA4EA /* SNSControllerService.swift in Sources */,
 				B15EE26C23CE7658005B268A /* GistPreferenceViewController.swift in Sources */,
+				B10A3635240F55C000CEF654 /* Icons.swift in Sources */,
 				B15EE21923CE761C005B268A /* Notifications.swift in Sources */,
 				B15EE2A323CE7667005B268A /* TimelineViewController.swift in Sources */,
 				B15EE21B23CE761C005B268A /* Colors.swift in Sources */,
@@ -1861,7 +1865,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 85;
+				CURRENT_PROJECT_VERSION = 86;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1881,7 +1885,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 2.1.3;
+				MARKETING_VERSION = 2.1.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1924,7 +1928,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 85;
+				CURRENT_PROJECT_VERSION = 86;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1938,7 +1942,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 2.1.3;
+				MARKETING_VERSION = 2.1.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

@@ -8,13 +8,16 @@
 
 import AppKit
 import Swim
+import Ocean
 import ESTwitter
 import ESGists
 
 @objcMembers
-final class TimelineTableCellView: NSTableCellView, Selectable {
+final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObservable {
 
 	private static var cellForEstimateHeight: TimelineTableCellView!
+	
+	var notificationHandlers = Notification.Handlers()
 	
 	enum Style {
 	
@@ -28,10 +31,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 			
 			if item != oldValue {
 
-				applyItem(item: item) { image in
-					
-					self.item?.iconImage = image
-				}
+				applyItem()
 			}
 		}
 	}
@@ -78,7 +78,23 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 		super.draw(dirtyRect)
 	}
 	
-	private func applyItem(item: TimelineTweetItem?, appliedCallback callback: @escaping (NSImage?) -> Void) {
+	override func awakeFromNib() {
+		
+		super.awakeFromNib()
+
+		observe(TwitterIconLoader.TwitterIconDidLoadNotification.self) { [unowned self] notification in
+
+			guard self.item?.status.user == notification.user else {
+				
+				return
+			}
+
+			self.iconButton.image = notification.icon
+			NSLog("%@", "\(notification.user.screenName)'s icon did load.")
+		}
+	}
+	
+	private func applyItem() {
 
 		if let status = item?.status {
 
@@ -100,16 +116,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 			dateLabel.stringValue = status.createdAt.description
 			retweetMark.isHidden = !status.isQuoteStatus
 			style = (status.createdAt > TwitterDate(NSDate().daysAgo(1) as Foundation.Date) ? .Recent : .Past)
-
-			switch item?.iconImage {
-				
-			case .some(let image):
-				iconButton.image = image
-
-			case .none:
-				iconButton.image = nil
-				updateIconImage(status: status, appliedCallback: callback)
-			}
+			iconButton.image = twitterIconLoader.requestImage(for: status.user).image
 		}
 		else {
 
@@ -120,56 +127,9 @@ final class TimelineTableCellView: NSTableCellView, Selectable {
 			retweetMark.isHidden = true
 			style = .Recent
 			iconButton.image = nil
-			
-			callback(nil)
 		}
 		
 		needsDisplay = true
-	}
-	
-	private func updateIconImage(status: ESTwitter.Status, appliedCallback callback: @escaping (NSImage?) -> Void) {
-
-		let setImage = { (url: Foundation.URL) in
-			
-			DispatchQueue.global(qos: .background).async {
-				
-				if let image = NSImage(contentsOf: url) {
-					
-					DispatchQueue.main.async {
-						
-						self.iconButton.image = image
-						callback(image)
-					}
-				}
-				else {
-					
-					DispatchQueue.main.async {
-						
-						self.iconButton.image = nil
-						callback(nil)
-					}
-				}
-			}
-		}
-		
-		let resetImage = {
-			
-			DispatchQueue.main.async {
-
-				self.iconButton.image = nil
-				callback(nil)
-			}
-		}
-		
-		// FIXME: 🐬 ここで読み込み済みの画像を使いまわしたり、同じ URL で読み込み中のものがあればそれを待つ処理を実装しないといけない。
-		if let url = status.user.profile.imageUrlHttps.url {
-
-			setImage(url)
-		}
-		else {
-
-			resetImage()
-		}
 	}
 }
 

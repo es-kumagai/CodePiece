@@ -49,7 +49,6 @@ struct TimelineTweetItem : TimelineTableItem {
 	
 	var status: Status
 	var hashtags: HashtagSet
-	var iconImage: NSImage?
 	
 	var timelineItemTweetId: String? {
 		
@@ -79,7 +78,7 @@ extension Sequence where Element == Status {
 	
 	func toTimelineTweetItems(hashtags: HashtagSet) -> [TimelineTweetItem] {
 		
-		return map { TimelineTweetItem(status: $0, hashtags: hashtags, iconImage: nil) }
+		return map { TimelineTweetItem(status: $0, hashtags: hashtags) }
 	}
 }
 
