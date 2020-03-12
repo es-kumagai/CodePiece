@@ -168,6 +168,34 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="6ng-Ta-apn">
                                     <items>
+                                        <menuItem title="Timeline" id="goB-A4-jTh">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Timeline" id="V5l-rl-9xb">
+                                                <items>
+                                                    <menuItem title="Hashtags" keyEquivalent="1" id="54B-BM-NgG">
+                                                        <connections>
+                                                            <action selector="selectTimeline:" target="p69-Rc-ib8" id="FbI-zA-sK5"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="My Tweets" keyEquivalent="2" id="iNV-OF-GTY">
+                                                        <connections>
+                                                            <action selector="selectTimeline:" target="p69-Rc-ib8" id="ib2-bq-dst"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Mentions" keyEquivalent="3" id="O0I-0L-OPS">
+                                                        <connections>
+                                                            <action selector="selectTimeline:" target="p69-Rc-ib8" id="9c6-Vs-QLc"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Related Tweets" keyEquivalent="4" id="Aau-LH-2xF">
+                                                        <connections>
+                                                            <action selector="selectTimeline:" target="p69-Rc-ib8" id="oiQ-NI-yVQ"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="xgO-RS-Col"/>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="Fey-Q3-GG0">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
@@ -198,6 +226,43 @@
                                             <connections>
                                                 <action selector="moveFocusToHashtag:" target="p69-Rc-ib8" id="8Tz-fs-42y"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="y5N-re-000"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="JfM-kZ-59c"/>
+                                        <menuItem title="Search Hashtags in Twitter" keyEquivalent="H" id="oLV-JD-69o">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openBrowserWithSearchHashtagPage:" target="p69-Rc-ib8" id="Slu-5F-UTT"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithSearchHashtagPage" id="Nib-vh-UZC"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Search Related Tweets in Twitter" keyEquivalent="R" id="RfH-Af-A9E">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openBrowserWithRelatedStatuses:" target="p69-Rc-ib8" id="q35-5d-2gZ"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithRelatedTweets" id="TgJ-Pt-2Fe"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="1ah-80-qc4"/>
+                                        <menuItem title="Open Selection in Browser" keyEquivalent="o" id="OU8-Vh-UBa">
+                                            <connections>
+                                                <action selector="openBrowserWithCurrentTwitterStatus:" target="p69-Rc-ib8" id="q1v-gT-lJe"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithCurrentTwitterStatus" id="6x2-jq-RDd"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                                        <menuItem title="Open Twitter" keyEquivalent="T" id="uQw-tc-WtZ">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openTwitterHomeAction:" target="k6Z-Lx-p1R" id="h8X-Nk-vJP"/>
+                                                <binding destination="k6Z-Lx-p1R" name="enabled" keyPath="self.canOpenTwitterHome" id="L91-Mn-k2k"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Open GitHub" keyEquivalent="G" id="cBq-DM-e57" userLabel="Open GitHub Home">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openGitHubHomeAction:" target="noF-Hz-Tly" id="tj4-Fk-2Fp"/>
+                                                <binding destination="noF-Hz-Tly" name="enabled" keyPath="self.canOpenGitHubHome" id="dxd-Dq-wxv"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -276,49 +341,6 @@ DQ
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Browser" id="ycU-sM-BPz">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Browser" id="2G8-Th-w1k">
-                                    <items>
-                                        <menuItem title="Search Hashtags in Twitter" keyEquivalent="H" id="oLV-JD-69o">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="openBrowserWithSearchHashtagPage:" target="p69-Rc-ib8" id="Slu-5F-UTT"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithSearchHashtagPage" id="Nib-vh-UZC"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Search Related Tweets in Twitter" keyEquivalent="R" id="RfH-Af-A9E">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="openBrowserWithRelatedStatuses:" target="p69-Rc-ib8" id="q35-5d-2gZ"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithRelatedTweets" id="TgJ-Pt-2Fe"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="1ah-80-qc4"/>
-                                        <menuItem title="Open Selection in Browser" keyEquivalent="o" id="OU8-Vh-UBa">
-                                            <connections>
-                                                <action selector="openBrowserWithCurrentTwitterStatus:" target="p69-Rc-ib8" id="q1v-gT-lJe"/>
-                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canOpenBrowserWithCurrentTwitterStatus" id="6x2-jq-RDd"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
-                                        <menuItem title="Open Twitter" keyEquivalent="T" id="uQw-tc-WtZ">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="openTwitterHomeAction:" target="k6Z-Lx-p1R" id="h8X-Nk-vJP"/>
-                                                <binding destination="k6Z-Lx-p1R" name="enabled" keyPath="self.canOpenTwitterHome" id="L91-Mn-k2k"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Open GitHub" keyEquivalent="G" id="cBq-DM-e57" userLabel="Open GitHub Home">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="openGitHubHomeAction:" target="noF-Hz-Tly" id="tj4-Fk-2Fp"/>
-                                                <binding destination="noF-Hz-Tly" name="enabled" keyPath="self.canOpenGitHubHome" id="dxd-Dq-wxv"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
                             <menuItem title="Window" id="aUF-d1-5bR">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -349,7 +371,14 @@ DQ
                     </connections>
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="CodePiece" customModuleProvider="target"/>
-                <customObject id="p69-Rc-ib8" customClass="MenuController" customModule="CodePiece" customModuleProvider="target"/>
+                <customObject id="p69-Rc-ib8" customClass="MenuController" customModule="CodePiece" customModuleProvider="target">
+                    <connections>
+                        <outlet property="timelineHashtagsMenuItem" destination="54B-BM-NgG" id="MNa-yM-l5a"/>
+                        <outlet property="timelineMentionsMenuItem" destination="O0I-0L-OPS" id="SjM-pY-Ex8"/>
+                        <outlet property="timelineMyTweetsMenuItem" destination="iNV-OF-GTY" id="Fvm-bn-vuv"/>
+                        <outlet property="timelineRelatedTweetsMenuItem" destination="Aau-LH-2xF" id="O21-oB-3En"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="IIP-oo-arA"/>
                 <userDefaultsController id="9K9-ir-1p7"/>

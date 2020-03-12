@@ -21,7 +21,15 @@ import ESTwitter
 	
 	var currentTimelineKind: TimelineKind? {
 		
-		return timelineKindStateController.timelineKind
+		get {
+
+			return timelineKindStateController.timelineKind
+		}
+		
+		set (kind) {
+			
+			timelineKindStateController.timelineKind = kind
+		}
 	}
 
 	var currentSelectedCells: [TimelineViewController.SelectingStatusInfo] {

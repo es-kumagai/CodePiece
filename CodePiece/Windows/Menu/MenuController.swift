@@ -12,6 +12,21 @@ import Ocean
 @objcMembers
 final class MenuController : NSObject {
 
+	@IBOutlet var timelineHashtagsMenuItem: NSMenuItem!
+	@IBOutlet var timelineMyTweetsMenuItem: NSMenuItem!
+	@IBOutlet var timelineMentionsMenuItem: NSMenuItem!
+	@IBOutlet var timelineRelatedTweetsMenuItem: NSMenuItem!
+
+	var timelineMenuItemsOrderedByTimelineIndex: [NSMenuItem] {
+
+		return [
+			timelineHashtagsMenuItem,
+			timelineMyTweetsMenuItem,
+			timelineMentionsMenuItem,
+			timelineRelatedTweetsMenuItem
+		]
+	}
+	
 	var application: NSApplication {
 		
 		return NSApp
@@ -140,7 +155,7 @@ final class MenuController : NSObject {
 	
 	@IBAction func openBrowserWithSearchHashtagPage(_ sender: NSMenuItem?) {
 		
-		self.mainViewController?.openBrowserWithSearchHashtagPage()
+		mainViewController?.openBrowserWithSearchHashtagPage()
 	}
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {
@@ -151,5 +166,22 @@ final class MenuController : NSObject {
 	@IBAction func openBrowserWithRelatedStatuses(_ sender: AnyObject) {
 		
 		mainViewController?.openBrowserWithRelatedTweets()
+	}
+	
+	@IBAction func selectTimeline(_ sender: Any) {
+		
+		guard let menuItem = sender as? NSMenuItem else {
+			
+			return
+		}
+		
+		guard let target = timelineMenuItemsOrderedByTimelineIndex.enumerated()
+			.first(where: { $0.element === menuItem }) else {
+				
+				NSLog("%@", "Unknown timeline is selected. (\(type(of: menuItem))")
+				return
+		}
+
+		timelineTabViewController?.currentTimelineKind = TimelineKind(rawValue: target.offset)
 	}
 }

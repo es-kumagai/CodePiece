@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.1.6
+
+### Updates
+
+* Timeline view now can be selected using keyboard shortcuts.
+
 ## 2.1.5
 
 ### Updates
