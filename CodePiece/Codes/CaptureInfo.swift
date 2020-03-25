@@ -15,12 +15,14 @@ protocol CaptureInfoType {
 	var frameSize: NSSize { get }
 	var clientSize: NSSize { get }
 	var maxWidth: Int { get }
+	var maxHeight: Int { get }
 }
 
 struct LinedCaptureInfo : CaptureInfoType {
 	
 	let userAgent: String? = nil
 	let frameSize: NSSize = NSMakeSize(560, 560)
-	let clientSize: NSSize = NSMakeSize(680, 480)
+	let clientSize: NSSize = NSMakeSize(680, 40)
 	let maxWidth: Int = 380
+	let maxHeight: Int = 3000
 }

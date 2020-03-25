@@ -128,7 +128,8 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 						node.style.border = 'thin solid #f7f7f7';
 						node.style.padding = '6px';
 						node.style.width = '\(self.captureInfo.clientSize.width)px';
-						node.style.maxHeight = '\(self.captureInfo.clientSize.height)px';
+						node.style.minHeight = '\(self.captureInfo.clientSize.height)px';
+						node.style.maxHeight = '\(self.captureInfo.maxHeight)px';
 						node.style.overflow = 'auto';
 						break;
 					}

@@ -7,6 +7,7 @@ Change Logs.
 ### Updates
 
 * Timeline view now can be selected using keyboard shortcuts.
+* Adjust capture image size.
 
 ## 2.1.5
 
