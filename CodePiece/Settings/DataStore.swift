@@ -12,6 +12,7 @@ import ESGists
 import Ocean
 import Swim
 
+// FIXME: Twitter のデータストアが Keychain ではないため、Gists と合わせる必要あり
 struct DataStore {
 	
 	static let service = "CodePiece App"
@@ -212,7 +213,11 @@ extension DataStore {
 	
 	struct GistStore {
 
+		#if DEBUG
+		static let AuthorizationKey = "github:debug:auth-info"
+		#else
 		static let AuthorizationKey = "github:auth-info"
+		#endif
 
 		var authInfo:AuthInfo
 		
