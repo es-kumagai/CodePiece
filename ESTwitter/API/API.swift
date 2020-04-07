@@ -300,7 +300,7 @@ extension API {
 	
 	public func reset(handler: @escaping (BasicResult) -> Void) {
 		
-		guard let api = rawApi else {
+		guard let _ = rawApi else {
 			
 			handler(.failure(.notReady))
 			return

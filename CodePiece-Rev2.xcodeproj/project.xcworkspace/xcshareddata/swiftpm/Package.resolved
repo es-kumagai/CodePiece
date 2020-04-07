@@ -12,10 +12,10 @@
       },
       {
         "package": "ESGists",
-        "repositoryURL": "https://github.com/es-kumagai/ESGists.git",
+        "repositoryURL": "git@github.com:es-kumagai/ESGists.git",
         "state": {
           "branch": "master",
-          "revision": "07a1e32c3f993942de005dbe78c951c787516152",
+          "revision": "55daeaab5aafe5246782e2459be5715e79eeba61",
           "version": null
         }
       },
@@ -51,7 +51,7 @@
         "repositoryURL": "git@github.com:es-kumagai/Ocean.git",
         "state": {
           "branch": "master",
-          "revision": "9c96cd9079b5d035c4cf33f407ea8f9c415c727b",
+          "revision": "83aef072221cf8703ad77a63f0bd48d47d358580",
           "version": null
         }
       },
@@ -84,10 +84,10 @@
       },
       {
         "package": "Swim",
-        "repositoryURL": "https://github.com/es-kumagai/Swim.git",
+        "repositoryURL": "git@github.com:es-kumagai/Swim.git",
         "state": {
           "branch": "master",
-          "revision": "183d0cf57d48f37cedb77d017b6fcff7b10c754d",
+          "revision": "5aee06a884c65bd4733115a193bbe8c261ea88bc",
           "version": null
         }
       }

@@ -708,7 +708,7 @@ extension TimelineViewController {
 			
 			switch result {
 				
-			case .success(let statuses, let hashtags):
+			case .success(let (statuses, hashtags)):
 				
 				update(tweets: statuses, associatedHashtags: hashtags)
 				

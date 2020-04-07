@@ -7,13 +7,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>CodePieceSupport</string>
+	<string>Ocean</string>
 	<key>CFBundleIdentifier</key>
-	<string>jp.ez-style.appid.CodePieceSupport</string>
+	<string>Ocean</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>CodePieceSupport</string>
+	<string>Ocean</string>
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
@@ -23,7 +23,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>1</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -40,7 +40,5 @@
 	<string>11E146</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.15</string>
-	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2020 Tomohiro Kumagai. All rights reserved.</string>
 </dict>
 </plist>
