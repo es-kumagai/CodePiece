@@ -2,6 +2,13 @@
 
 Change Logs.
 
+## 2.1.7
+
+### Updates
+
+* Change a shortcut for move focus to Description from '⌘T' to '⌘D".
+* Separate `Reply to selection` mode and `Reply to my latest tweet` mode.
+
 ## 2.1.6
 
 ### Updates

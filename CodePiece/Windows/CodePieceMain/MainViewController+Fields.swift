@@ -41,7 +41,7 @@ protocol FieldsController {
 	
 	func getPostButtonTitle() -> String
 	
-	func clearReplyTo()
+	func clearReplyingStatus()
 	func clearCodeText()
 	func clearDescriptionText()
 	func clearHashtags()
@@ -78,7 +78,7 @@ extension FieldsController {
 		
 		clearCodeText()
 		clearDescriptionText()
-		clearReplyTo()
+		clearReplyingStatus()
 		
 		updateControlsDisplayText()
 	}

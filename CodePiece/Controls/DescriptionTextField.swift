@@ -15,13 +15,13 @@ final class DescriptionTextField: NSTextField {
 		
 		if !containsScreenName(screenName: screenName) {
 			
-			self.stringValue = "@\(screenName) "
+			stringValue = "@\(screenName) "
 		}
 	}
 	
 	func clearTwitterText() {
 		
-		self.stringValue = ""
+		stringValue = ""
 	}
 }
 

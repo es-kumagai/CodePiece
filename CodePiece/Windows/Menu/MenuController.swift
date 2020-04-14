@@ -125,7 +125,7 @@ final class MenuController : NSObject {
 	
 	@IBAction func clearReplyingToStatusID(_ sender: NSMenuItem?) {
 		
-		mainViewController?.clearReplyTo()
+		mainViewController?.clearReplyingStatus()
 	}
 	
 	var canOpenBrowserWithSearchHashtagPage: Bool {

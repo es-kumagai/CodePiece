@@ -26,18 +26,19 @@ final class MainViewController: NSViewController, NotificationObservable {
 		case selectedStatus
 	}
 	
-	var nextReplyToType = ReplyToType.none {
-		
-		willSet {
-			
-			willChangeValue(forKey: "canReplyTo")
-		}
-		
-		didSet {
-			
-			didChangeValue(forKey: "canReplyTo")
-		}
-	}
+//	var nextReplyToType = ReplyToType.none {
+//
+//		willSet {
+//
+//			willChangeValue(forKey: "canReplyTo")
+//		}
+//
+//		didSet {
+//
+//			didChangeValue(forKey: "canReplyTo")
+//		}
+//	}
+	
 	var notificationHandlers = Notification.Handlers()
 	
 	var twitterController: TwitterController {
@@ -304,7 +305,6 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			self.clearContents()
 			self.latestTweet = container.twitterState.postedStatus
-			self.nextReplyToType = .latestTweet
 
 			self.saveContents()
 
@@ -348,9 +348,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			self.saveContents()
 		}
 		
-		observe(TimelineSelectionChangedNotification.self) { [unowned self] notification in
-			
-			self.nextReplyToType = .selectedStatus
+		observe(TimelineSelectionChangedNotification.self) { notification in
 			
 			let selectedStatuses = notification.selectedCells.compactMap { $0.cell?.item?.status }
 			
@@ -612,7 +610,7 @@ extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 
 extension MainViewController {
 
-	func clearReplyTo() {
+	func clearReplyingStatus() {
 	
 		withChangeValue(for: "canPost") {
 			

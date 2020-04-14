@@ -59,28 +59,34 @@ extension MainViewController {
 
 	var canReplyTo: Bool {
 	
-		return canReplyToLatestTweet || canReplyToSelectedStatuses
+		return canReplyToSelectedStatuses
 	}
 	
-	@IBAction func setReplyTo(_ sender: AnyObject) {
+	var canMakeThread: Bool {
+	
+		return canReplyToLatestTweet
+	}
+	
+	@IBAction func setMakeThread(_ sender: Any) {
+	
+		guard canMakeThread else {
+
+			clearReplyingStatus()
+			return
+		}
+		
+		setReplyToByLatestTweet()
+	}
+	
+	@IBAction func setReplyTo(_ sender: Any) {
 		
 		guard canReplyTo else {
 			
-			clearReplyTo()
+			clearReplyingStatus()
 			return
 		}
-
-		switch nextReplyToType {
-			
-		case .latestTweet:
-			setReplyToByLatestTweet()
-			
-		case .selectedStatus:
-			setReplyToBySelectedStatuses()
-			
-		case .none:
-			fatalError()
-		}
+		
+		setReplyToBySelectedStatuses()
 
 		if let status = self.statusForReplyTo, !twitterController.isMyTweet(status: status) {
 
@@ -100,8 +106,18 @@ extension MenuController {
 		return mainViewController?.canReplyTo ?? false
 	}
 	
-	@IBAction func replyTo(_ sender:NSMenuItem) {
+	@IBAction func replyTo(_ sender: NSMenuItem) {
 		
 		mainViewController?.setReplyTo(sender)
+	}
+	
+	var canMakeThread: Bool {
+		
+		return mainViewController?.canMakeThread ?? false
+	}
+	
+	@IBAction func makeThread(_ sender: NSMenuItem) {
+		
+		mainViewController?.setMakeThread(sender)
 	}
 }

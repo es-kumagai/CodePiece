@@ -325,6 +325,12 @@ DQ
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="CYJ-mj-Wam"/>
+                                        <menuItem title="Reply to My Latest Tweet as Thread" keyEquivalent="t" id="OVh-H0-9Qd">
+                                            <connections>
+                                                <action selector="makeThread:" target="p69-Rc-ib8" id="4mM-TL-dRc"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="canMakeThread" id="pOc-Se-OoI"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Reply to Selection" keyEquivalent="r" id="yiL-UH-fkg">
                                             <connections>
                                                 <action selector="replyTo:" target="p69-Rc-ib8" id="nbW-X6-90O"/>
