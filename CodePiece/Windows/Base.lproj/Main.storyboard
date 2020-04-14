@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -215,7 +215,7 @@
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="u3b-2G-903"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Move Focus to Description" keyEquivalent="t" id="INB-gt-HfH">
+                                        <menuItem title="Move Focus to Description" keyEquivalent="d" id="INB-gt-HfH">
                                             <connections>
                                                 <action selector="moveFocusToDescription:" target="p69-Rc-ib8" id="5wp-RX-I73"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="r5n-DF-Z6v"/>
