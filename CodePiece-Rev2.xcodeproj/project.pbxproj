@@ -126,12 +126,12 @@
 		B15EE38723CE9C42005B268A /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38623CE9C42005B268A /* Swifter */; };
 		B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38923CE9FBB005B268A /* Reachability */; };
 		B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38C23CEA03E005B268A /* KeychainAccess */; };
+		B1627DC9244628CC005D1902 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1627DC7244628A8005D1902 /* CodePieceSupport.framework */; };
+		B1627DCA244628CC005D1902 /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1627DC7244628A8005D1902 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B16CFCB823F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */; };
 		B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17B938023CAB28C00E3B490 /* MainViewController.swift */; };
 		B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17B938223CAB2A800E3B490 /* MainWindow.storyboard */; };
 		B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1806CB723D6B50F006932F5 /* SwifterScheme.swift */; };
-		B18B24C6243CC2C100B824AD /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
-		B18B24C7243CC2C100B824AD /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B18B24D2243CC6D100B824AD /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B18B24D1243CC6D100B824AD /* Ocean */; };
 		B18B24D3243CC6D100B824AD /* Ocean in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B18B24D1243CC6D100B824AD /* Ocean */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B18FFA3D23DF26B60057C977 /* DecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18FFA3C23DF26B60057C977 /* DecodingError.swift */; };
@@ -203,8 +203,6 @@
 		B1E213AF2400AC4600DE511D /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2139A23FF935000DE511D /* Errors.swift */; };
 		B1E213B22403AAAA00DE511D /* OpenCodePieceCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E213B12403AAAA00DE511D /* OpenCodePieceCommand.swift */; };
 		B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B1F2C78923E48B89008BBCA0 /* Fonts */; };
-		B1F2C78D23E48FB4008BBCA0 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; };
-		B1F2C78E23E48FB4008BBCA0 /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1F2C79123E57F2D008BBCA0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F2C79023E57F2D008BBCA0 /* WebView.swift */; };
 		B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161D23D36E6C002D4571 /* OAuth2 */; };
 /* End PBXBuildFile section */
@@ -280,9 +278,9 @@
 			dstSubfolderSpec = 10;
 			files = (
 				B1BCCD36243CCABC00F03577 /* ESGists in Embed Frameworks */,
-				B1F2C78E23E48FB4008BBCA0 /* CodePieceSupport.framework in Embed Frameworks */,
 				B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */,
 				B1BCCD39243CD2F300F03577 /* Swim in Embed Frameworks */,
+				B1627DCA244628CC005D1902 /* CodePieceSupport.framework in Embed Frameworks */,
 				B18B24D3243CC6D100B824AD /* Ocean in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -294,7 +292,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B18B24C7243CC2C100B824AD /* CodePieceSupport.framework in Embed Frameworks */,
 				B1BCCD25243CC88C00F03577 /* ESGists in Embed Frameworks */,
 				B1BCCD33243CCA7A00F03577 /* Swim in Embed Frameworks */,
 			);
@@ -441,6 +438,7 @@
 		B15EE2AE23CE76A0005B268A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B15EE33B23CE7738005B268A /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		B15EE33C23CE7738005B268A /* Mark */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mark; sourceTree = "<group>"; };
+		B1627DC7244628A8005D1902 /* CodePieceSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CodePieceSupport.framework; sourceTree = "<group>"; };
 		B16CFCB123F1540600772AA4 /* GetStatusesError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatusesError.swift; sourceTree = "<group>"; };
 		B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedTweetsContentsControllerRelatedUser.swift; sourceTree = "<group>"; };
 		B17B938023CAB28C00E3B490 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -480,7 +478,6 @@
 		B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodePieceScheme.swift; sourceTree = "<group>"; };
 		B1C349A823E152A90039F4E6 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
 		B1C349DA23E285BF0039F4E6 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
-		B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CodePieceSupport.framework; sourceTree = "<group>"; };
 		B1C34A2123E351800039F4E6 /* Geometory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometory.swift; sourceTree = "<group>"; };
 		B1C34A2323E355DA0039F4E6 /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 		B1C34A2623E363660039F4E6 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
@@ -535,7 +532,6 @@
 				B1BCCD32243CCA7A00F03577 /* Swim in Frameworks */,
 				B1BCCD24243CC88C00F03577 /* ESGists in Frameworks */,
 				B15EE38723CE9C42005B268A /* Swifter in Frameworks */,
-				B18B24C6243CC2C100B824AD /* CodePieceSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,8 +559,8 @@
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B1BCCD38243CD2F300F03577 /* Swim in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
-				B1F2C78D23E48FB4008BBCA0 /* CodePieceSupport.framework in Frameworks */,
 				B18B24D2243CC6D100B824AD /* Ocean in Frameworks */,
+				B1627DC9244628CC005D1902 /* CodePieceSupport.framework in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
 				B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
@@ -1131,7 +1127,7 @@
 		B1F2C78F23E48FDD008BBCA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B1C34A1E23E33DDD0039F4E6 /* CodePieceSupport.framework */,
+				B1627DC7244628A8005D1902 /* CodePieceSupport.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -1908,7 +1904,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1928,7 +1924,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 2.1.6;
+				MARKETING_VERSION = 2.1.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1971,7 +1967,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1985,7 +1981,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 2.1.6;
+				MARKETING_VERSION = 2.1.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
