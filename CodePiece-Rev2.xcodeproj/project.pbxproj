@@ -126,8 +126,7 @@
 		B15EE38723CE9C42005B268A /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38623CE9C42005B268A /* Swifter */; };
 		B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38923CE9FBB005B268A /* Reachability */; };
 		B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38C23CEA03E005B268A /* KeychainAccess */; };
-		B1627DC9244628CC005D1902 /* CodePieceSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1627DC7244628A8005D1902 /* CodePieceSupport.framework */; };
-		B1627DCA244628CC005D1902 /* CodePieceSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1627DC7244628A8005D1902 /* CodePieceSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1627DE4244633C9005D1902 /* libCodePieceSupportLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1627DE3244633C9005D1902 /* libCodePieceSupportLib.a */; };
 		B16CFCB823F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */; };
 		B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17B938023CAB28C00E3B490 /* MainViewController.swift */; };
 		B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17B938223CAB2A800E3B490 /* MainWindow.storyboard */; };
@@ -280,7 +279,6 @@
 				B1BCCD36243CCABC00F03577 /* ESGists in Embed Frameworks */,
 				B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */,
 				B1BCCD39243CD2F300F03577 /* Swim in Embed Frameworks */,
-				B1627DCA244628CC005D1902 /* CodePieceSupport.framework in Embed Frameworks */,
 				B18B24D3243CC6D100B824AD /* Ocean in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -438,7 +436,8 @@
 		B15EE2AE23CE76A0005B268A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B15EE33B23CE7738005B268A /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		B15EE33C23CE7738005B268A /* Mark */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mark; sourceTree = "<group>"; };
-		B1627DC7244628A8005D1902 /* CodePieceSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CodePieceSupport.framework; sourceTree = "<group>"; };
+		B1627DE3244633C9005D1902 /* libCodePieceSupportLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCodePieceSupportLib.a; sourceTree = "<group>"; };
+		B1627DE5244638FB005D1902 /* CodePieceSupportLib.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CodePieceSupportLib.swiftmodule; sourceTree = "<group>"; };
 		B16CFCB123F1540600772AA4 /* GetStatusesError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatusesError.swift; sourceTree = "<group>"; };
 		B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedTweetsContentsControllerRelatedUser.swift; sourceTree = "<group>"; };
 		B17B938023CAB28C00E3B490 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -557,10 +556,10 @@
 			files = (
 				B1BCCD35243CCABC00F03577 /* ESGists in Frameworks */,
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
+				B1627DE4244633C9005D1902 /* libCodePieceSupportLib.a in Frameworks */,
 				B1BCCD38243CD2F300F03577 /* Swim in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
 				B18B24D2243CC6D100B824AD /* Ocean in Frameworks */,
-				B1627DC9244628CC005D1902 /* CodePieceSupport.framework in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
 				B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
@@ -898,6 +897,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B1627DE224463324005D1902 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				B1627DE5244638FB005D1902 /* CodePieceSupportLib.swiftmodule */,
+				B1627DE3244633C9005D1902 /* libCodePieceSupportLib.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
 		B17B937F23CAB1EC00E3B490 /* MainWindow */ = {
 			isa = PBXGroup;
 			children = (
@@ -1027,6 +1035,7 @@
 		B1D13C6723CA14DB0016902A = {
 			isa = PBXGroup;
 			children = (
+				B1627DE224463324005D1902 /* Libraries */,
 				B1F2C78C23E48CBC008BBCA0 /* Bundle */,
 				B15EE2C723CE771F005B268A /* Resources */,
 				B15EE2AD23CE76A0005B268A /* CHANGELOG.md */,
@@ -1127,7 +1136,6 @@
 		B1F2C78F23E48FDD008BBCA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B1627DC7244628A8005D1902 /* CodePieceSupport.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -1904,7 +1912,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 90;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1967,7 +1975,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 90;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2013,10 +2021,15 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.Beta";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = "CodePiece-Beta";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_INCLUDE_PATHS = "$(inherited) $(PROJECT_DIR)/Libraries";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -2044,9 +2057,14 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = CodePiece;
+				SWIFT_INCLUDE_PATHS = "$(inherited) $(PROJECT_DIR)/Libraries";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
