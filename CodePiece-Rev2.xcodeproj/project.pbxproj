@@ -190,6 +190,7 @@
 		B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C7323CA14DB0016902A /* AppDelegate.swift */; };
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
 		B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */; };
+		B1D4D9A7245F4FBD00B80206 /* WatermarkStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D4D9A6245F4FBD00B80206 /* WatermarkStackView.swift */; };
 		B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */; };
 		B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4223D0D37700418A84 /* StatusImageView.swift */; };
 		B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4323D0D37700418A84 /* CodeTextView.swift */; };
@@ -500,6 +501,7 @@
 		B1D13C8223CA14DD0016902A /* CodePieceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodePieceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePiece_Rev2Tests.swift; sourceTree = "<group>"; };
 		B1D13C8823CA14DD0016902A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1D4D9A6245F4FBD00B80206 /* WatermarkStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatermarkStackView.swift; sourceTree = "<group>"; };
 		B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagTextField.swift; sourceTree = "<group>"; };
 		B1DDCB4223D0D37700418A84 /* StatusImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusImageView.swift; sourceTree = "<group>"; };
 		B1DDCB4323D0D37700418A84 /* CodeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
@@ -1119,6 +1121,7 @@
 				B1DDCB4223D0D37700418A84 /* StatusImageView.swift */,
 				B1DDCB4323D0D37700418A84 /* CodeTextView.swift */,
 				B1DDCB4423D0D37700418A84 /* WatermarkLabel.swift */,
+				B1D4D9A6245F4FBD00B80206 /* WatermarkStackView.swift */,
 				B1DDCB4523D0D37700418A84 /* DescriptionTextField.swift */,
 			);
 			path = Controls;
@@ -1585,6 +1588,7 @@
 				B15EE26D23CE7658005B268A /* TwitterPreferenceViewController.swift in Sources */,
 				B15EE21023CE7612005B268A /* LanguagePopupDataSource.swift in Sources */,
 				B15EE21A23CE761C005B268A /* Application.swift in Sources */,
+				B1D4D9A7245F4FBD00B80206 /* WatermarkStackView.swift in Sources */,
 				B1508BEC23E9B3E000973728 /* TimelineContentsControllerDelegate.swift in Sources */,
 				B15EE25F23CE7658005B268A /* Twitter.swift in Sources */,
 				B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */,
@@ -1912,7 +1916,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 90;
+				CURRENT_PROJECT_VERSION = 91;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1932,7 +1936,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 2.1.7;
+				MARKETING_VERSION = 2.1.8;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1975,7 +1979,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 90;
+				CURRENT_PROJECT_VERSION = 91;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1989,7 +1993,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 2.1.7;
+				MARKETING_VERSION = 2.1.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

@@ -2,6 +2,12 @@
 
 Change Logs.
 
+## 2.1.8
+
+### Fixes
+
+* Fix a problem that the code field cannot get a focus when user clicked around watermark text.
+
 ## 2.1.7
 
 ### Updates

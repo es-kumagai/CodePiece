@@ -256,7 +256,7 @@
                                     <menu key="menu" id="QCr-cN-4U9"/>
                                 </popUpButtonCell>
                             </popUpButton>
-                            <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fV7-JG-IRI" userLabel="Watermark State View">
+                            <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fV7-JG-IRI" userLabel="Watermark State View" customClass="WatermarkStackView" customModule="CodePiece" customModuleProvider="target">
                                 <rect key="frame" x="66" y="135" width="634" height="111"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAe-oN-MPK" customClass="WatermarkLabel" customModule="CodePiece" customModuleProvider="target">
@@ -290,6 +290,9 @@
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
+                                <connections>
+                                    <outlet property="transparentResponder" destination="8OA-rk-WhX" id="W7S-Tv-ptv"/>
+                                </connections>
                             </stackView>
                         </subviews>
                         <constraints>
