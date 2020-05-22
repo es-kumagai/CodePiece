@@ -8,6 +8,7 @@
 
 import AppKit
 import XcodeKit
+import CodePieceCore
 
 class SendToCodePieceCommand: NSObject, XCSourceEditorCommand {
     
@@ -24,63 +25,7 @@ class SendToCodePieceCommand: NSObject, XCSourceEditorCommand {
 			completionHandler(NSError(.failedToOpenCodePiece("Unexpected lines selected: \(selection)")))
 			return
 		}
-		
-		func normalizedIndentation<T:Sequence>(of lines: T) -> [String] where T.Element == String {
-			
-			func replacingTabToSpace(_ lines: T, spacesPerTab: Int) -> [String] {
-
-				lines.map {
-					
-					$0.replacingOccurrences(of: "\t", with: String(repeating: " ", count: spacesPerTab))
-				}
-			}
-			
-			func minimumCountOfSpace(_ lines: [String]) -> Int {
 				
-				let emptyPattern = try! NSRegularExpression(pattern: ##"^\s*\n$"##)
-				let indentPattern = try! NSRegularExpression(pattern: ##"^( *)"##)
-				
-				let counts = lines.compactMap { line -> Int? in
-					
-					let lineRange = NSRange(location: 0, length: line.count)
-					
-					guard emptyPattern.firstMatch(in: line, range: lineRange) == nil else {
-					
-						return nil
-					}
-					
-					guard let match = indentPattern.firstMatch(in: line, range: NSRange(location: 0, length: line.count)) else {
-						
-						return nil
-					}
-					
-					return match.range.length
-				}
-				
-				return counts.min() ?? 0
-			}
-			
-			func trimmedIndentation(from lines: [String], indentCount: Int) -> [String] {
-				
-				guard indentCount > 0 else {
-					
-					return lines
-				}
-				
-				let pattern = "^\(String(repeating: " ", count: indentCount))"
-				
-				return lines.map { line in
-					
-					return line.replacingOccurrences(of: pattern, with: "", options: .regularExpression, range: line.startIndex ..< line.endIndex)
-				}
-			}
-			
-			let lines = replacingTabToSpace(lines, spacesPerTab: 4)
-			let indentCount = minimumCountOfSpace(lines)
-			
-			return trimmedIndentation(from: lines, indentCount: indentCount)
-		}
-		
 		var endLine: Int {
 			
 			switch selection.end.column {
@@ -96,7 +41,7 @@ class SendToCodePieceCommand: NSObject, XCSourceEditorCommand {
 		let startLine = selection.start.line
 		
 		let codes = lines[startLine ... endLine]
-		let code = normalizedIndentation(of: codes).joined()
+		let code = Code(newlineTerminatedLines: codes)
 		
 		guard !code.isEmpty else {
 			
@@ -104,7 +49,7 @@ class SendToCodePieceCommand: NSObject, XCSourceEditorCommand {
 			return
 		}
 		
-		let scheme = CodePieceUrlScheme(method: "open", language: "Swift", code: code)
+		let scheme = CodePieceUrlScheme(method: "open", language: "Swift", code: code.description)
 
 		guard let url = URL(scheme) else {
 			

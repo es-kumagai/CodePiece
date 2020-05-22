@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CodePieceCore
 
 protocol PostDataManageable {
 	
@@ -18,7 +19,7 @@ extension MainViewController : PostDataManageable {
 	
 	func makePostData() -> PostData {
 		
-		let code = codeTextView.codeText
+		let code = codeTextView.code
 		let description = descriptionTextField.twitterText
 		let language = selectedLanguage
 		let hashtags = customHashtags

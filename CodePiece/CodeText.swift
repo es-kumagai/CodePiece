@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import CodePieceCore
 
 protocol CodeTextType {
 	
-	var codeText: String? { get }
+	var code: Code { get }
 	
 	mutating func clearCodeText()
 }
@@ -19,6 +20,6 @@ extension CodeTextType {
 	
 	var hasCode: Bool {
 		
-		return codeText != nil
+		return !code.isEmpty
 	}
 }

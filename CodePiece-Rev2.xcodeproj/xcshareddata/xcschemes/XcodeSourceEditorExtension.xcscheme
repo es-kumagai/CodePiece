@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B101B6FB23FF6CC90095DDC0"
-               BuildableName = "CodePiece Extension.appex"
-               BlueprintName = "XcodeSourceEditorExtension"
+               BlueprintIdentifier = "B1D13C6F23CA14DB0016902A"
+               BuildableName = "CodePiece.app"
+               BlueprintName = "CodePiece"
                ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,9 +29,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1D13C6F23CA14DB0016902A"
-               BuildableName = "CodePiece.app"
-               BlueprintName = "CodePiece"
+               BlueprintIdentifier = "B101B6FB23FF6CC90095DDC0"
+               BuildableName = "CodePiece Extension.appex"
+               BlueprintName = "XcodeSourceEditorExtension"
                ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -57,6 +57,7 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
+         BundleIdentifier = "com.apple.dt.Xcode"
          FilePath = "/Applications/Xcode.app">
       </PathRunnable>
       <MacroExpansion>

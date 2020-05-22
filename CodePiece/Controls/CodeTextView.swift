@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import CodePieceCore
 
 @objcMembers
 final class CodeTextView: NSTextView {
@@ -15,20 +16,13 @@ final class CodeTextView: NSTextView {
 
 extension CodeTextView : CodeTextType {
 	
-	var codeText: String? {
-		
-		let code = self.string.trimmingCharacters(in: .whitespaces)
-		
-		guard !code.isEmpty else {
-			
-			return nil
-		}
-		
-		return code
+	var code: Code {
+
+		return Code(string)
 	}
 	
 	func clearCodeText() {
 		
-		self.string = ""
+		string = ""
 	}
 }

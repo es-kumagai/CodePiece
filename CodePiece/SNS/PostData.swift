@@ -8,12 +8,13 @@
 
 import ESGists
 import ESTwitter
+import CodePieceCore
 
 private let jsonDecoder = JSONDecoder()
 
 struct PostData {
 	
-	var code: String?
+	var code: Code
 	var description: String
 	var language: ESGists.Language
 	var hashtags: [Hashtag]
@@ -123,7 +124,7 @@ extension PostDataContainer {
 	
 	var hasCode: Bool {
 		
-		return data.code != nil
+		return !data.code.isEmpty
 	}
 	
 	var hasMediaIDs: Bool {
