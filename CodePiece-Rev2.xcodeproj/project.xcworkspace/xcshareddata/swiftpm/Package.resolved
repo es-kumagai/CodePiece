@@ -15,7 +15,7 @@
         "repositoryURL": "git@github.com:es-kumagai/ESGists.git",
         "state": {
           "branch": "master",
-          "revision": "55daeaab5aafe5246782e2459be5715e79eeba61",
+          "revision": "e8d1d14a1b63d25fea36d3eb1df926396cd16593",
           "version": null
         }
       },
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
         "state": {
           "branch": null,
-          "revision": "b920ad7df3c73189dcdd4aa05c540849b2010dbf",
-          "version": "4.1.0"
+          "revision": "3d0ea2c0806791abcc5d7f0d9f62f1cfd4a7264d",
+          "version": "4.2.0"
         }
       },
       {
@@ -51,7 +51,7 @@
         "repositoryURL": "git@github.com:es-kumagai/Ocean.git",
         "state": {
           "branch": "master",
-          "revision": "83aef072221cf8703ad77a63f0bd48d47d358580",
+          "revision": "ea9d083629eadb85bd80e44abf2911c48e9c331f",
           "version": null
         }
       },
@@ -87,7 +87,7 @@
         "repositoryURL": "git@github.com:es-kumagai/Swim.git",
         "state": {
           "branch": "master",
-          "revision": "5aee06a884c65bd4733115a193bbe8c261ea88bc",
+          "revision": "f2968724355ac940beb1cf23dcb99dfa2e4fc430",
           "version": null
         }
       }
