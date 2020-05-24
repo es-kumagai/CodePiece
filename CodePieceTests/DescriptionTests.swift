@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import CodePiece
+@testable import CodePieceCore
 import ESTwitter
 
 class DescriptionTests: XCTestCase {
@@ -22,7 +23,7 @@ class DescriptionTests: XCTestCase {
 
     func testDescriptionForTwitter() {
 
-		let data = PostData(code: "", description: "", language: .swift, hashtags: [Hashtag("#CodePiece")], usePublicGists: false, replyTo: nil, appendAppTagToTwitter: true)
+		let data = PostData(code: Code(""), description: "", language: .swift, hashtags: [Hashtag("#CodePiece")], usePublicGists: false, replyTo: nil, appendAppTagToTwitter: true)
 		let container = PostDataContainer(data)
 
 		

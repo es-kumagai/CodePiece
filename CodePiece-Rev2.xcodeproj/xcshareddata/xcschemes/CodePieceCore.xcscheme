@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1150"
+   LastUpgradeVersion = "1140"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1D13C6F23CA14DB0016902A"
-               BuildableName = "CodePiece.app"
-               BlueprintName = "CodePiece"
-               ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DA23DBEB247A71A6007B023F"
-               BuildableName = "CodePieceCoreTests.xctest"
-               BlueprintName = "CodePieceCoreTests"
+               BlueprintIdentifier = "B119A7092477E48D008505EE"
+               BuildableName = "CodePieceCore.framework"
+               BlueprintName = "CodePieceCore"
                ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,29 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B132D51223CD08B800690C5F"
-               BuildableName = "ESTwitterTests.xctest"
-               BlueprintName = "ESTwitterTests"
-               ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "DA23DBEB247A71A6007B023F"
                BuildableName = "CodePieceCoreTests.xctest"
                BlueprintName = "CodePieceCoreTests"
-               ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1D13C8123CA14DD0016902A"
-               BuildableName = "CodePieceTests.xctest"
-               BlueprintName = "CodePieceTests"
                ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -84,33 +50,22 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1D13C6F23CA14DB0016902A"
-            BuildableName = "CodePiece.app"
-            BlueprintName = "CodePiece"
-            ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      savedToolIdentifier = "Zombies"
+      savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1D13C6F23CA14DB0016902A"
-            BuildableName = "CodePiece.app"
-            BlueprintName = "CodePiece"
+            BlueprintIdentifier = "B119A7092477E48D008505EE"
+            BuildableName = "CodePieceCore.framework"
+            BlueprintName = "CodePieceCore"
             ReferencedContainer = "container:CodePiece-Rev2.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
