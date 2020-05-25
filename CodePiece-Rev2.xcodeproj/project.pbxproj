@@ -46,7 +46,6 @@
 		B139E0C023EF350200EEA5BE /* DescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B139E0BF23EF350200EEA5BE /* DescriptionTests.swift */; };
 		B139E0C223F0063600EEA5BE /* RegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B139E0C123F0063600EEA5BE /* RegularExpressionExtension.swift */; };
 		B13CA7922478E9180059F306 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B13CA7912478E9180059F306 /* ESGists */; };
-		B13CA7942478E92A0059F306 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B13CA7932478E92A0059F306 /* ESGists */; };
 		B140C84F23E0820B0009D57C /* MediaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C84E23E0820B0009D57C /* MediaEntity.swift */; };
 		B140C85123E082960009D57C /* EntityUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C85023E082960009D57C /* EntityUnit.swift */; };
 		B1508BDB23E92E9800973728 /* TimelineKindState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDA23E92E9800973728 /* TimelineKindState.swift */; };
@@ -603,7 +602,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B119A7112477E48D008505EE /* CodePieceCore.framework in Frameworks */,
-				B13CA7942478E92A0059F306 /* ESGists in Frameworks */,
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B1627DE4244633C9005D1902 /* libCodePieceSupportLib.a in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
@@ -1403,7 +1401,6 @@
 				B15EE38923CE9FBB005B268A /* Reachability */,
 				B15EE38C23CEA03E005B268A /* KeychainAccess */,
 				B1FB161D23D36E6C002D4571 /* OAuth2 */,
-				B13CA7932478E92A0059F306 /* ESGists */,
 			);
 			productName = "CodePiece-Rev2";
 			productReference = B1D13C7023CA14DB0016902A /* CodePiece-Beta.app */;
@@ -2547,11 +2544,6 @@
 			productName = ESProgressHUD;
 		};
 		B13CA7912478E9180059F306 /* ESGists */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B1BCCD22243CC88C00F03577 /* XCRemoteSwiftPackageReference "ESGists" */;
-			productName = ESGists;
-		};
-		B13CA7932478E92A0059F306 /* ESGists */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B1BCCD22243CC88C00F03577 /* XCRemoteSwiftPackageReference "ESGists" */;
 			productName = ESGists;
