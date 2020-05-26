@@ -9,6 +9,7 @@
 import Foundation
 import ESGists
 import ESTwitter
+import CodePieceCore
 
 
 final class Settings {

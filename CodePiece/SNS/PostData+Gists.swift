@@ -9,10 +9,6 @@
 import ESGists
 import ESTwitter
 
-extension PostData {
-
-}
-
 extension PostDataContainer.GistsState {
 	
 	var isPosted: Bool {

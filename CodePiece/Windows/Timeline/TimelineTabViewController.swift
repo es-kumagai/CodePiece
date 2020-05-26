@@ -9,6 +9,7 @@
 import Cocoa
 import Ocean
 import ESTwitter
+import CodePieceCore
 
 @objc class TimelineTabViewController : NSViewController, NSTabViewDelegate, NotificationObservable {
 	

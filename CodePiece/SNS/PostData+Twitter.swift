@@ -8,9 +8,7 @@
 
 import ESGists
 import ESTwitter
-
-extension PostData {
-}
+import CodePieceCore
 
 extension PostDataContainer.TwitterState {
 	

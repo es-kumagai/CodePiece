@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import CodePieceCore
 
 @objcMembers
 final class BaseWindowController: NSWindowController {

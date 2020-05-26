@@ -9,6 +9,7 @@
 import AppKit
 import ESGists
 import ESTwitter
+import CodePieceCore
 
 protocol PostController {
 	

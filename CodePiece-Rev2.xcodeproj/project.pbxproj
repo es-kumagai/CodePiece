@@ -95,7 +95,7 @@
 		B15EE25F23CE7658005B268A /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE23D23CE7658005B268A /* Twitter.swift */; };
 		B15EE26023CE7658005B268A /* TwitterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE23E23CE7658005B268A /* TwitterController.swift */; };
 		B15EE26123CE7658005B268A /* SNSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE23F23CE7658005B268A /* SNSController.swift */; };
-		B15EE26223CE7658005B268A /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24023CE7658005B268A /* PostData.swift */; };
+		B15EE26223CE7658005B268A /* PostDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24023CE7658005B268A /* PostDataContainer.swift */; };
 		B15EE26323CE7658005B268A /* URLSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24223CE7658005B268A /* URLSchemeManager.swift */; };
 		B15EE26423CE7658005B268A /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24323CE7658005B268A /* URLScheme.swift */; };
 		B15EE26523CE7658005B268A /* GistScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24423CE7658005B268A /* GistScheme.swift */; };
@@ -206,6 +206,10 @@
 		DA23DBF1247A71A6007B023F /* CodePieceCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B119A70A2477E48D008505EE /* CodePieceCore.framework */; };
 		DA23DBF7247A71B6007B023F /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23DBE5247A7067007B023F /* DataTests.swift */; };
 		DA23DBF9247A74D8007B023F /* ReplacingTabToSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23DBF8247A74D8007B023F /* ReplacingTabToSpace.swift */; };
+		DA5B41D2247D162900B6CD68 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5B41D1247D162900B6CD68 /* PostData.swift */; };
+		DA5B41D5247D169B00B6CD68 /* DebugTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5B41D4247D169B00B6CD68 /* DebugTime.swift */; };
+		DA5B41D8247D179400B6CD68 /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
+		DA5B41D9247D179400B6CD68 /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -279,6 +283,13 @@
 			remoteGlobalIDString = B119A7092477E48D008505EE;
 			remoteInfo = CodePieceCore;
 		};
+		DA5B41DA247D179400B6CD68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1D13C6823CA14DB0016902A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B132D50A23CD08B800690C5F;
+			remoteInfo = ESTwitter;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -333,6 +344,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				B1CE4D0623E6F88C003D1399 /* ESTwitter.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA5B41DC247D179400B6CD68 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DA5B41D9247D179400B6CD68 /* ESTwitter.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,7 +451,7 @@
 		B15EE23D23CE7658005B268A /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		B15EE23E23CE7658005B268A /* TwitterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterController.swift; sourceTree = "<group>"; };
 		B15EE23F23CE7658005B268A /* SNSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNSController.swift; sourceTree = "<group>"; };
-		B15EE24023CE7658005B268A /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		B15EE24023CE7658005B268A /* PostDataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDataContainer.swift; sourceTree = "<group>"; };
 		B15EE24223CE7658005B268A /* URLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSchemeManager.swift; sourceTree = "<group>"; };
 		B15EE24323CE7658005B268A /* URLScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		B15EE24423CE7658005B268A /* GistScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistScheme.swift; sourceTree = "<group>"; };
@@ -553,6 +575,8 @@
 		DA23DBEE247A71A6007B023F /* CodePieceCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePieceCoreTests.swift; sourceTree = "<group>"; };
 		DA23DBF0247A71A6007B023F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA23DBF8247A74D8007B023F /* ReplacingTabToSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplacingTabToSpace.swift; sourceTree = "<group>"; };
+		DA5B41D1247D162900B6CD68 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		DA5B41D4247D169B00B6CD68 /* DebugTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugTime.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -569,6 +593,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA5B41D8247D179400B6CD68 /* ESTwitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +693,7 @@
 		B119A70B2477E48D008505EE /* CodePieceCore */ = {
 			isa = PBXGroup;
 			children = (
+				DA5B41D3247D169100B6CD68 /* NeedsRefactoring */,
 				DA23DBFA247A7503007B023F /* Basics */,
 				B119A7172477E4BE008505EE /* Data */,
 				B119A70C2477E48D008505EE /* CodePieceCore.h */,
@@ -680,6 +706,7 @@
 			isa = PBXGroup;
 			children = (
 				B119A6EA2477E101008505EE /* Code.swift */,
+				DA5B41D1247D162900B6CD68 /* PostData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -878,7 +905,7 @@
 				B1128CE323DED6A800DDA4EA /* SNSControllerPostError.swift */,
 				B1128CE523DED6E000DDA4EA /* SNSControllerAuthenticationError.swift */,
 				B1128CE723DED87D00DDA4EA /* SNSControllerService.swift */,
-				B15EE24023CE7658005B268A /* PostData.swift */,
+				B15EE24023CE7658005B268A /* PostDataContainer.swift */,
 				B1A2F60423DF94220065526F /* PostOptions.swift */,
 			);
 			path = SNS;
@@ -1257,6 +1284,14 @@
 			path = Basics;
 			sourceTree = "<group>";
 		};
+		DA5B41D3247D169100B6CD68 /* NeedsRefactoring */ = {
+			isa = PBXGroup;
+			children = (
+				DA5B41D4247D169B00B6CD68 /* DebugTime.swift */,
+			);
+			path = NeedsRefactoring;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1306,12 +1341,16 @@
 				B119A7062477E48D008505EE /* Sources */,
 				B119A7072477E48D008505EE /* Frameworks */,
 				B119A7082477E48D008505EE /* Resources */,
+				DA5B41DC247D179400B6CD68 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DA5B41DB247D179400B6CD68 /* PBXTargetDependency */,
 			);
 			name = CodePieceCore;
+			packageProductDependencies = (
+			);
 			productName = CodePieceCore;
 			productReference = B119A70A2477E48D008505EE /* CodePieceCore.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1607,7 +1646,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA5B41D5247D169B00B6CD68 /* DebugTime.swift in Sources */,
 				DA23DBF9247A74D8007B023F /* ReplacingTabToSpace.swift in Sources */,
+				DA5B41D2247D162900B6CD68 /* PostData.swift in Sources */,
 				B119A7162477E4BA008505EE /* Code.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1705,7 +1746,7 @@
 				B15EE25923CE7658005B268A /* Language.swift in Sources */,
 				B1F2C79123E57F2D008BBCA0 /* WebView.swift in Sources */,
 				B122599223EAB8F5006D819D /* TimelineTabViewItemInformation.swift in Sources */,
-				B15EE26223CE7658005B268A /* PostData.swift in Sources */,
+				B15EE26223CE7658005B268A /* PostDataContainer.swift in Sources */,
 				B15EE20A23CE7593005B268A /* TwitterText.swift in Sources */,
 				B15EE2A223CE7667005B268A /* TimelineStatusView.swift in Sources */,
 				B15EE20823CE7593005B268A /* TwitterOpenFeatures.swift in Sources */,
@@ -1863,6 +1904,11 @@
 			target = B119A7092477E48D008505EE /* CodePieceCore */;
 			targetProxy = DA23DBF2247A71A6007B023F /* PBXContainerItemProxy */;
 		};
+		DA5B41DB247D179400B6CD68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B132D50A23CD08B800690C5F /* ESTwitter */;
+			targetProxy = DA5B41DA247D179400B6CD68 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1936,7 +1982,7 @@
 		B119A7142477E48D008505EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1964,7 +2010,7 @@
 		B119A7152477E48D008505EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
