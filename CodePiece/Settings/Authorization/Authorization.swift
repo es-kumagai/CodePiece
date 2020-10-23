@@ -11,6 +11,7 @@ import ESGists
 import APIKit
 import ESTwitter
 import OAuth2
+import CodePieceCore
 
 enum AuthorizationState {
 	

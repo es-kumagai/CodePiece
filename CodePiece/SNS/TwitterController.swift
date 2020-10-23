@@ -11,6 +11,7 @@ import ESTwitter
 import ESGists
 import Ocean
 import Swim
+import CodePieceCore
 
 private let jsonDecoder = JSONDecoder()
 

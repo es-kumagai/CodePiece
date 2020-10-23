@@ -12,6 +12,7 @@ import Ocean
 import ESTwitter
 import ESGists
 import Dispatch
+import CodePieceCore
 
 private let TableViewInsertAnimationOptions: NSTableView.AnimationOptions = [.slideDown, .effectFade]
 

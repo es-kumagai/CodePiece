@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CodePieceCore
 
 final class GistScheme : URLScheme {
 	

@@ -9,6 +9,7 @@
 import Cocoa
 import ESTwitter
 import ESGists
+import CodePieceCore
 
 final class CodePieceScheme : URLScheme {
 	

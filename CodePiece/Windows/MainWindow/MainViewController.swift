@@ -13,6 +13,7 @@ import Ocean
 import Swim
 import ESProgressHUD
 import ESTwitter
+import CodePieceCore
 
 @objcMembers
 final class MainViewController: NSViewController, NotificationObservable {

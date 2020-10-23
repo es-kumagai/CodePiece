@@ -12,18 +12,6 @@ import CodePieceCore
 
 private let jsonDecoder = JSONDecoder()
 
-struct PostData {
-	
-	var code: Code
-	var description: String
-	var language: ESGists.Language
-	var hashtags: [Hashtag]
-	var usePublicGists: Bool
-	var replyTo: ESTwitter.Status?
-	
-	var appendAppTagToTwitter:Bool = false
-}
-
 enum PostDataError : Error {
 	
 	case TwitterRawObjectsParseError(rawObjects: [String : Any])

@@ -1240,16 +1240,6 @@ public extension NSAppleEventDescriptor {
 	}
 }
 
-public final class DebugTime {
-
-	public static func print(_ message: String) {
-
-		#if DEBUG
-		NSLog("%@", message)
-		#endif
-	}
-}
-
 public protocol AcknowledgementsIncluded {
 
 	var acknowledgementsName:String! { get }

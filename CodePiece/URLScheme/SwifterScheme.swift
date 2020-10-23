@@ -8,6 +8,7 @@
 
 import Cocoa
 import ESTwitter
+import CodePieceCore
 
 final class SwifterScheme : URLScheme {
 	
