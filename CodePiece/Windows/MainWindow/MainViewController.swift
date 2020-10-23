@@ -590,6 +590,13 @@ extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 		self.updateControlsDisplayText()
 	}
 	
+	/// Invoke this method when CodeTextView (NSTextView) did change.
+	func textDidChange(_ notification: Notification) {
+
+		self.withChangeValue(for: "canPost")
+		self.updateControlsDisplayText()
+	}
+	
 	func control(_ control: NSControl, textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {
 		
 		switch control {

@@ -2,6 +2,10 @@
 
 Change Logs.
 
+## 2.1.10
+
+* Update tweet text length when code did edit.
+
 ## 2.1.9
 
 * Remove the extra indent from a posted code.
