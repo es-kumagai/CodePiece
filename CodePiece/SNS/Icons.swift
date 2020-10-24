@@ -32,7 +32,7 @@ class TwitterIconLoader {
 	
 	func requestImage(for user: User) -> IconState {
 
-		processingQueue.sync {
+		processingQueue.sync { [unowned self] in
 
 			if let state = iconState[user] {
 				
@@ -43,7 +43,7 @@ class TwitterIconLoader {
 			
 			loadImage(for: user) {
 				
-				self.imageLoaded(for: user, image: $0)
+				imageLoaded(for: user, image: $0)
 			}
 			
 			return .nowLoading
@@ -73,10 +73,10 @@ private extension TwitterIconLoader {
 		switch image {
 			
 		case .some(let image):
-			self.iconState[user] = .image(image)
+			iconState[user] = .image(image)
 			
 		case .none:
-			self.iconState[user] = nil
+			iconState[user] = nil
 		}
 
 		DispatchQueue.main.async {
@@ -93,11 +93,11 @@ private extension TwitterIconLoader {
 			return
 		}
 		
-		DispatchQueue.global(qos: .background).async {
+		DispatchQueue.global(qos: .background).async { [unowned self] in
 			
 			let image = NSImage(contentsOf: url)
 			
-			self.processingQueue.async {
+			processingQueue.async {
 				
 				callback(image)
 			}

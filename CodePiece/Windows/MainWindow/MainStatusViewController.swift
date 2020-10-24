@@ -69,17 +69,17 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 			
 		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] _ in
 			
-			self.updateTwitterAccountStatus()
+			updateTwitterAccountStatus()
 		}
 		
 		observe(Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] _ in
 			
-			self.updateGistAccountStatus()
+			updateGistAccountStatus()
 		}
 		
 		observe(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] _ in
 			
-			self.updateReachability()
+			updateReachability()
 		}
 
 		updateReachability()
@@ -96,7 +96,7 @@ final class MainStatusViewController: NSViewController, NotificationObservable {
 		
 		let state = NSApp.reachabilityController.state
 		
-		self.reachabilityTextField.stringValue = state.description
-		self.reachabilityStatusImageView.status = StatusImageView.Status(reachabilityState: state)
+		reachabilityTextField.stringValue = state.description
+		reachabilityStatusImageView.status = StatusImageView.Status(reachabilityState: state)
 	}
 }

@@ -116,7 +116,7 @@ extension NSTableView {
 
 	func topObjectsInRegisteredNibByIdentifier(identifier: NSUserInterfaceItemIdentifier) -> [AnyObject]? {
 		
-		guard let nib = self.registeredNibsByIdentifier![identifier] else {
+		guard let nib = registeredNibsByIdentifier![identifier] else {
 			
 			return nil
 		}
@@ -184,37 +184,37 @@ extension MaskOperatable {
 	
 	func masked(reset values:Self...) -> Self {
 		
-		return self.masked(reset: values)
+		return masked(reset: values)
 	}
 	
 	func masked(set values:Self...) -> Self {
 		
-		return self.masked(set: values)
+		return masked(set: values)
 	}
 	
 	mutating func modifyMask(reset values:Self...) {
 		
-		self.modifyMask(reset: values)
+		modifyMask(reset: values)
 	}
 	
 	mutating func modifyMask(reset values:[Self]) {
 		
 		for value in values {
 			
-			self = self.masked(reset: value)
+			self = masked(reset: value)
 		}
 	}
 	
 	mutating func modifyMask(set values:Self...) {
 		
-		self.modifyMask(set: values)
+		modifyMask(set: values)
 	}
 	
 	mutating func modifyMask(set values:[Self]) {
 		
 		for value in values {
 			
-			self = self.masked(set: value)
+			self = masked(set: value)
 		}
 	}
 }
@@ -325,9 +325,9 @@ public class Semaphore : RawRepresentable {
 		semaphore = DispatchSemaphore(value: value)
 	}
 	
-	public required init(rawValue semaphore: DispatchSemaphore) {
+	public required init(rawValue rawSemaphore: DispatchSemaphore) {
 		
-		self.semaphore = semaphore
+		semaphore = rawSemaphore
 	}
 	
 	public var rawValue: DispatchSemaphore {
@@ -337,7 +337,7 @@ public class Semaphore : RawRepresentable {
 	
 	public func wait() {
 		
-		self.wait(timeout: .distantFuture)
+		wait(timeout: .distantFuture)
 	}
 	
 	@discardableResult
@@ -360,13 +360,13 @@ public class Semaphore : RawRepresentable {
 	
 	public func execute(timeout: DispatchTime = .distantFuture, body:() throws ->Void) rethrows -> WaitResult {
 
-		switch self.wait(timeout: timeout) {
+		switch wait(timeout: timeout) {
 			
 		case .Success:
 		
 			defer {
 			
-				self.signal()
+				signal()
 			}
 		
 			try body()
@@ -381,15 +381,15 @@ public class Semaphore : RawRepresentable {
 	
 	public func executeOnQueue(queue: DispatchQueue, timeout: DispatchTime = .distantFuture, body: @escaping (WaitResult) -> Void) {
 		
-		queue.async {
+		queue.async { [unowned self] in
 			
-			switch self.wait(timeout: timeout) {
+			switch wait(timeout: timeout) {
 				
 			case .Success:
 				
 				defer {
 					
-					self.signal()
+					signal()
 				}
 				
 				body(.Success)
@@ -621,12 +621,12 @@ extension MessageTypeIgnoreInQuickSuccession {
 	
 	public func messagePreAction(queue: Queue<Self>) -> Continuous {
 		
-		guard self.mayBlockInQuickSuccession else {
+		guard mayBlockInQuickSuccession else {
 		
 			return .continue
 		}
 		
-        if let lastMessage = queue.back, self.blockInQuickSuccession(lastMessage: lastMessage) {
+        if let lastMessage = queue.back, blockInQuickSuccession(lastMessage: lastMessage) {
 			
 			return .abort
 		}
@@ -766,30 +766,30 @@ public class MessageQueue<M: MessageType> : MessageQueueType {
 	
 	public func send(_ message: MessageQueueControl) {
 		
-		executeOnProcessingQueue {
+		executeOnProcessingQueue { [unowned self] in
 
 			switch message {
 				
 			case .start:
-				self._start()
+				_start()
 				
 			case .stop:
-				self._stop()
+				_stop()
 			}
 		}
 	}
 	
 	public func send(message: Message, preAction: @escaping (Queue<Message>, Message) -> Continuous) {
 		
-		executeOnProcessingQueue {
+		executeOnProcessingQueue { [unowned self] in
 
-			guard preAction(self.messageQueue, message) == .continue else {
+			guard preAction(messageQueue, message) == .continue else {
 		
 				message.messageBlocked()
 				return
 			}
 			
-			self.messageQueue.enqueue(message)
+			messageQueue.enqueue(message)
 			message.messageQueued()
 		}
 	}
@@ -1261,7 +1261,7 @@ extension AcknowledgementsIncluded {
 	
 	var acknowledgements:Acknowledgements {
 
-		return Acknowledgements(name: self.acknowledgementsName, bundle: self.acknowledgementsBundle)!
+		return Acknowledgements(name: acknowledgementsName, bundle: acknowledgementsBundle)!
 	}
 }
 
@@ -1302,20 +1302,20 @@ public struct Acknowledgements {
 			return nil
 		}
 		
-		self.pods = [Pod]()
+		pods = [Pod]()
 		
 		let header = items.first!
 		let footer = items.last!
 		
-		self.headerText = header["FooterText"]!
-		self.footerText = footer["FooterText"]!
+		headerText = header["FooterText"]!
+		footerText = footer["FooterText"]!
 		
 		for item in items[items.startIndex + 1 ..< items.endIndex - 1] {
 			
 			let name = item["Title"]!
 			let license = item["FooterText"]!
 			
-			self.pods.append(Pod(name: name, license: license))
+			pods.append(Pod(name: name, license: license))
 		}
 	}
 }
@@ -1326,16 +1326,16 @@ extension Acknowledgements : CustomStringConvertible {
 		
 		var results = [String]()
 		
-		results.append(self.headerText)
+		results.append(headerText)
 		results.append("")
 		
-		for pod in self.pods {
+		for pod in pods {
 			
 			results.append("\(pod.name) : \(pod.license)")
 		}
 		
 		results.append("")
-		results.append(self.footerText)
+		results.append(footerText)
 		
         return results.joined(separator: "\n")
 	}
@@ -1347,7 +1347,7 @@ extension Bundle {
 	
 	public var appName:String? {
 		
-		let info = self.infoDictionary!
+		let info = infoDictionary!
 		
 		if let name = info["CFBundleDisplayName"] as? String {
 			

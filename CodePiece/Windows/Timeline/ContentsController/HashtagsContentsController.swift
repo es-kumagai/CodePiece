@@ -53,7 +53,7 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		
 		observe(HashtagsDidChangeNotification.self) { [unowned self] notification in
 			
-			self.hashtags = notification.hashtags
+			hashtags = notification.hashtags
 		}
 		
 		// Following code is disabled because the tweet you posted cannnot detect immediately.
@@ -87,13 +87,13 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 			sinceId: dataSource.latestTweetIdForHashtags(hashtags: hashtags)
 		)
 		
-		NSApp.twitterController.search(tweetWith: query, options: options) { result in
+		NSApp.twitterController.search(tweetWith: query, options: options) { [unowned self] result in
 			
 			switch result {
 				
 			case .success(let statuses):
 				HashtagsTimelineDidUpdateNotification(statuses: statuses).post()
-				callback(.success((statuses, self.hashtags)))
+				callback(.success((statuses, hashtags)))
 				
 			case .failure(let error):
 				callback(.failure(error))

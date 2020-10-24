@@ -26,7 +26,7 @@ extension URLInfo {
 
 	public var effectiveUrl: TwitterUrl {
 		
-		return self.expandedUrl ?? self.url
+		return expandedUrl ?? url
 	}
 }
 
@@ -34,6 +34,6 @@ extension URLInfo : CustomStringConvertible {
 
 	public var description: String {
 	
-		return self.displayUrl ?? self.effectiveUrl.description
+		return displayUrl ?? effectiveUrl.description
 	}
 }

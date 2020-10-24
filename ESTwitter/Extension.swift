@@ -42,7 +42,7 @@ extension ReferenceDateConvertible {
 	
 	public func toFoundationDate() -> Foundation.Date {
 		
-		return Foundation.Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate)
+		return Foundation.Date(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
 	}
 	
 	public func toFoundationDateComponentsWithFlag(unitFlags: Set<Calendar.Component>) -> DateComponents {
@@ -188,49 +188,49 @@ extension DateCalculatable where Self : ReferenceDateConvertible, Self == DateTy
 	/// Returns a date which `years` years after from `self`.
 	public func yearsAfter(_ years:Int) -> DateType {
 		
-		return self.yearsAgo(-years)
+		return yearsAgo(-years)
 	}
 	
 	/// Returns a date which `months` months after from `self`.
 	public func monthsAfter(_ months:Int) -> DateType {
 		
-		return self.monthsAgo(-months)
+		return monthsAgo(-months)
 	}
 	
 	/// Returns a date which `days` days after from `self`.
 	public func daysAfter(_ days:Int) -> DateType {
 		
-		return self.daysAgo(-days)
+		return daysAgo(-days)
 	}
 	
 	/// Returns a date which `hours` hours after from `self`.
 	public func hoursAfter(_ hours:Int) -> DateType {
 		
-		return self.hoursAgo(-hours)
+		return hoursAgo(-hours)
 	}
 	
 	/// Returns a date which `minutes` minutes after from `self`.
 	public func minutesAfter(_ minutes:Int) -> DateType {
 		
-		return self.minutesAgo(-minutes)
+		return minutesAgo(-minutes)
 	}
 	
 	/// Returns a date which `seconds` seconds after from `self`.
 	public func secondsAfter(_ seconds:Int) -> DateType {
 		
-		return self.secondsAgo(-seconds)
+		return secondsAgo(-seconds)
 	}
 	
 	/// Returns a date which `nanoseconds` nanoseconds after from `self`.
 	public func nanosecondsAfter(_ nanoseconds:Int) -> DateType {
 		
-		return self.nanosecondsAgo(-nanoseconds)
+		return nanosecondsAgo(-nanoseconds)
 	}
 	
 	/// Returns a date which means yesterday (a second ago from midnight of `self`)
 	public var yesterday:DateType {
 		
-		return self.midnight.nanosecondsAgo(1)
+		return midnight.nanosecondsAgo(1)
 	}
 }
 

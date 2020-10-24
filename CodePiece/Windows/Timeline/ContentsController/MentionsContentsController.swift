@@ -50,13 +50,13 @@ final class MentionsContentsController : TimelineContentsController, Notificatio
 			sinceId: dataSource.lastTweetId
 		)
 		
-		NSApp.twitterController.mentions(options: options) { result in
+		NSApp.twitterController.mentions(options: options) { [unowned self] result in
 			
 			func success(_ statuses: [Status]) {
 			
 				if statuses.count > 0 {
 
-					MentionUpdatedNotification(mentions: statuses, includesNewMention: self.alreadyHasMentions).post()
+					MentionUpdatedNotification(mentions: statuses, includesNewMention: alreadyHasMentions).post()
 				}
 
 				callback(.success((statuses, [])))

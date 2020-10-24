@@ -11,8 +11,8 @@ import Cocoa
 @objcMembers
 @IBDesignable final class StatusImageView: NSImageView {
 
-	private let StatusCodingKey = "StatusImageViewStatusCoding"
-	private let StatusDefault = Status.none
+	private let statusCodingKey = "StatusImageViewStatusCoding"
+	private let statusDefault = Status.none
 	
 	@objc public enum Status : Int {
 
@@ -29,46 +29,46 @@ import Cocoa
 	
 	public override init(frame frameRect: NSRect) {
 		
-		self.status = StatusDefault
+		status = statusDefault
 		super.init(frame: frameRect)
 
-		self.updateStatusImage()
+		updateStatusImage()
 	}
 	
 	public required init?(coder: NSCoder) {
 
-		if coder.containsValue(forKey: StatusCodingKey), let status = Status(rawValue: coder.decodeInteger(forKey: StatusCodingKey)) {
+		if coder.containsValue(forKey: statusCodingKey), let status = Status(rawValue: coder.decodeInteger(forKey: statusCodingKey)) {
 			
 			self.status = status
 		}
 		else {
 			
-			self.status = self.StatusDefault
+			self.status = statusDefault
 		}
 
 		super.init(coder: coder)
 
-		self.updateStatusImage()
+		updateStatusImage()
 	}
 	
 	public override func encode(with aCoder: NSCoder) {
 		
 		super.encode(with: aCoder)
 		
-		aCoder.encode(status.rawValue, forKey: StatusCodingKey)
+		aCoder.encode(status.rawValue, forKey: statusCodingKey)
 	}
 	
 	@IBInspectable public var status: Status {
 	
 		didSet {
 
-			self.updateStatusImage()
+			updateStatusImage()
 		}
 	}
 	
 	private func updateStatusImage() {
 		
-		self.image = self.status.image
+		image = status.image
 	}
 }
 

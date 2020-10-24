@@ -138,7 +138,7 @@ extension MainViewController {
 	
 	var replyStyle: ReplyStyle {
 		
-		guard let status = self.statusForReplyTo else {
+		guard let status = statusForReplyTo else {
 			
 			return .NormalPost
 		}

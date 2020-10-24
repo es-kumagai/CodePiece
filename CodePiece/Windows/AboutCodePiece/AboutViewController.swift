@@ -21,16 +21,16 @@ final class AboutViewController: NSViewController {
 	
 	@IBAction public func pushShowAcknowledgementsButton(_ sender:AnyObject?) {
 	
-		let storyboard = NSStoryboard(name: AboutViewController.acknowledgementsStoryboardName, bundle: self.bundle)
+		let storyboard = NSStoryboard(name: AboutViewController.acknowledgementsStoryboardName, bundle: bundle)
 		let viewController = storyboard.instantiateInitialController() as! NSViewController
 		
 		if var viewController = viewController as? AcknowledgementsIncludedAndCustomizable {
 			
-			viewController.acknowledgementsName = self.acknowledgementsName!
-			viewController.acknowledgementsBundle = self.bundle
+			viewController.acknowledgementsName = acknowledgementsName!
+			viewController.acknowledgementsBundle = bundle
 		}
 		
-		self.presentAsModalWindow(viewController)
+		presentAsModalWindow(viewController)
 	}
 	
 	public override var title:String? {
@@ -50,7 +50,7 @@ final class AboutViewController: NSViewController {
 
 		didSet {
 			
-			self.appNameLabel?.stringValue = self.name ?? "(unknown)"
+			appNameLabel?.stringValue = name ?? "(unknown)"
 		}
 	}
 	
@@ -58,7 +58,7 @@ final class AboutViewController: NSViewController {
 		
 		didSet {
 			
-			self.appIconImageView?.image = self.icon
+			appIconImageView?.image = icon
 		}
 	}
 	
@@ -66,7 +66,7 @@ final class AboutViewController: NSViewController {
 	
 		didSet {
 			
-			self.appVersionLabel?.stringValue = self.version ?? ""
+			appVersionLabel?.stringValue = version ?? ""
 		}
 	}
 	
@@ -74,7 +74,7 @@ final class AboutViewController: NSViewController {
 		
 		didSet {
 			
-			self.appCopyrightLabel?.stringValue = self.copyright ?? ""
+			appCopyrightLabel?.stringValue = copyright ?? ""
 		}
 	}
 	
@@ -82,7 +82,7 @@ final class AboutViewController: NSViewController {
 	
 	public var hasAcnowledgements:Bool {
 		
-		return self.acknowledgementsName != nil
+		return acknowledgementsName != nil
 	}
 	
 	public var acknowledgements:Acknowledgements? {
@@ -92,30 +92,30 @@ final class AboutViewController: NSViewController {
 			(name: name, bundle: self.bundle)
 		}
 
-		return self.acknowledgementsName.map(info).flatMap(Acknowledgements.init)
+		return acknowledgementsName.map(info).flatMap(Acknowledgements.init)
 	}
 	
 	public var bundle:Bundle?
 	
 	private var targetBundle:Bundle {
 		
-		return self.bundle ?? Bundle.main
+		return bundle ?? Bundle.main
 	}
 	
     override public func viewDidLoad() {
 		
         super.viewDidLoad()
 		
-		let bundle = self.targetBundle
+		let bundle = targetBundle
 
-		self.icon = NSApp.applicationIconImage
-		self.name = bundle.appName
-		self.version = bundle.appVersionString
-		self.copyright = bundle.appCopyright
+		icon = NSApp.applicationIconImage
+		name = bundle.appName
+		version = bundle.appVersionString
+		copyright = bundle.appCopyright
     }
 	
 	public override func viewWillAppear() {
 		
-		self.showAcknowledgementsButton?.alphaValue = self.hasAcnowledgements ? 1.0 : 0.0
+		showAcknowledgementsButton?.alphaValue = hasAcnowledgements ? 1.0 : 0.0
 	}
 }

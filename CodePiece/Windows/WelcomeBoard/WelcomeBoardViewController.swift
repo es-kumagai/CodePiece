@@ -35,8 +35,8 @@ final class WelcomeBoardViewController: NSViewController {
 		
 		let bundle = Bundle.main
 		
-		self.iconView.image = NSApp.applicationIconImage
-		self.appNameLabel.stringValue = bundle.appName!
-		self.appVersionLabel.stringValue = bundle.appVersionString
+		iconView.image = NSApp.applicationIconImage
+		appNameLabel.stringValue = bundle.appName!
+		appVersionLabel.stringValue = bundle.appVersionString
     }
 }

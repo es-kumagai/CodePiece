@@ -84,12 +84,12 @@ final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObse
 
 		observe(TwitterIconLoader.TwitterIconDidLoadNotification.self) { [unowned self] notification in
 
-			guard self.item?.status.user == notification.user else {
+			guard item?.status.user == notification.user else {
 				
 				return
 			}
 
-			self.iconButton.image = notification.icon
+			iconButton.image = notification.icon
 			NSLog("%@", "\(notification.user.screenName)'s icon did load.")
 		}
 	}
@@ -100,7 +100,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObse
 
 			// NOTE: 🐬 CodePiece の Data を扱うときに HTMLText を介すると attributedText の実装が逆に複雑化する可能性があるため、一旦保留にします。
 //			let html = HTMLText(rawValue: status.text)
-//			self.textLabel.attributedStringValue = html.attributedText
+//			textLabel.attributedStringValue = html.attributedText
 
 			
 			
@@ -161,7 +161,7 @@ extension TimelineTableCellView : TimelineTableCellType {
 		let baseHeight: CGFloat = 61
 		let textLabelWidthAdjuster: CGFloat = 10.0
 
-		let cell = self.getCellForEstimateHeightForTableView(tableView: tableView)
+		let cell = getCellForEstimateHeightForTableView(tableView: tableView)
 		
 		cell.frame = tableView.rect(ofColumn: 0)
 
@@ -188,7 +188,7 @@ extension TimelineTableCellView : TimelineTableCellType {
 				.first!
 		}
 		
-		return self.cellForEstimateHeight
+		return cellForEstimateHeight
 	}
 }
 

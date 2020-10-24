@@ -137,12 +137,12 @@ final class Settings {
 
 		NSLog("Gist account information restored from data store. (\(account.username ?? "(null)"))")
 		
-		Authorization.GistAuthorizationStateDidChangeNotification(isValid: account.authorizationState == .authorized, username: self.account.username).post()
+		Authorization.GistAuthorizationStateDidChangeNotification(isValid: account.authorizationState == .authorized, username: account.username).post()
 	}
 
 	func saveGistAccount() {
 		
-		NSLog("Writing Gist account to data store. (\(self.account.username ?? "(null)"))")
+		NSLog("Writing Gist account to data store. (\(account.username ?? "(null)"))")
 		
 		_store.gist.authInfo.id = account.id
 		_store.gist.authInfo.username = account.username

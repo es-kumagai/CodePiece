@@ -14,7 +14,7 @@ final class AboutWindowControllerSegue : NSStoryboardSegue {
 	
 	override func perform() {
 		
-		applyingExpression(to: self.destinationController as! AboutWindowController) {
+		applyingExpression(to: destinationController as! AboutWindowController) {
 			
 			$0.acknowledgementsName = "Acknowledgements"
 		}

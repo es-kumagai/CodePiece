@@ -52,12 +52,12 @@ struct TimelineTweetItem : TimelineTableItem {
 	
 	var timelineItemTweetId: String? {
 		
-		return self.status.idStr
+		return status.idStr
 	}
 
 	var currentHashtags: HashtagSet {
 		
-		return self.hashtags
+		return hashtags
 	}
 	
 	var timelineCellType: TimelineTableCellType.Type {
@@ -86,7 +86,7 @@ extension Sequence where Element == TimelineTableItem {
 	
 	var timelineLatestTweetItem: TimelineTweetItem? {
 		
-		let validTweetItems = self.compactMap { $0 as? TimelineTweetItem }
+		let validTweetItems = compactMap { $0 as? TimelineTweetItem }
 		
 		return validTweetItems.first
 	}
@@ -96,6 +96,6 @@ extension Sequence where Element : TimelineTableItem {
 	
 	func timelineItemsAppend<S: Sequence>(items: S) -> [S.Element] where S.Element == TimelineTableItem {
 	
-		return self.map { $0 as TimelineTableItem } + items
+		return map { $0 as TimelineTableItem } + items
 	}
 }

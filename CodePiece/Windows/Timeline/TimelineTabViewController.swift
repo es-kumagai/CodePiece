@@ -80,17 +80,17 @@ import CodePieceCore
 
 		observe(CodePieceMainViewDidLoadNotification.self) { [unowned self] notification in
 
-			self.prepare()
+			prepare()
 		}
 
 		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
 			
-			self.timelineViewControllers.activate()
+			timelineViewControllers.activate()
 		}
 		
 		observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
 			
-			self.timelineViewControllers.deactivate()
+			timelineViewControllers.deactivate()
 		}
 	}
 	

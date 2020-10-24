@@ -36,7 +36,7 @@ final class SNSController : PostController {
 	
 	func post(container: PostDataContainer, completed: @escaping (PostDataContainer) -> Void) {
 		
-		self._post(container: container, capturedGistImage: nil, completed: completed)
+		_post(container: container, capturedGistImage: nil, completed: completed)
 	}
 	
 	func _post(container: PostDataContainer, capturedGistImage: NSImage?, completed: @escaping (PostDataContainer) -> Void) {
@@ -44,7 +44,7 @@ final class SNSController : PostController {
 		let callNextStageRecursively = { [unowned self] (image: NSImage?) in
 			
 			container.proceedToNextStage()
-			self._post(container: container, capturedGistImage: image, completed: completed)
+			_post(container: container, capturedGistImage: image, completed: completed)
 		}
 		
 		let exitWithFailure = { (error: SNSController.PostError) in

@@ -24,9 +24,9 @@ struct DataStore {
 
 	init() {
 		
-		self.appState = AppState()
-		self.twitter = TwitterStore()
-		self.gist = GistStore()
+		appState = AppState()
+		twitter = TwitterStore()
+		gist = GistStore()
 	}
 	
 	func save() throws {

@@ -177,7 +177,7 @@ final class TimelineViewController: NSViewController {
 			
 			precondition(Thread.isMainThread)
 			
-			self.updateDisplayControlsVisiblityForState()
+			updateDisplayControlsVisiblityForState()
 		}
 	}
 	
@@ -265,7 +265,7 @@ extension TimelineViewController {
 		
 		var isUpdateTimeOver: Bool {
 			
-			guard let nextUpdateTime = self.nextUpdateTime else {
+			guard let nextUpdateTime = nextUpdateTime else {
 				
 				return false
 			}
@@ -386,9 +386,9 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 		
 		autoUpdateState.updateNextUpdateTime()
 		
-		DispatchQueue.main.async {
+		DispatchQueue.main.async { [unowned self] in
 			
-			self.updateStatuses()
+			updateStatuses()
 		}
 	}
 	
@@ -500,22 +500,22 @@ extension TimelineViewController : NotificationObservable {
 
 		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			self.message.send(.updateStatuses)
+			message.send(.updateStatuses)
 		}
 		
 		observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
 			
-			self.message.send(.autoUpdate(enable: false))
+			message.send(.autoUpdate(enable: false))
 		}
 		
 		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
 			
-			self.message.send(.autoUpdate(enable: true))
+			message.send(.autoUpdate(enable: true))
 		}
 		
 		observe(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
 			
-			self.message.send(.setReachability(notification.state))
+			message.send(.setReachability(notification.state))
 		}
 
 		contentsController.timelineViewDidLoad(isTableViewAssigned: timelineTableView != nil)
@@ -686,7 +686,7 @@ extension TimelineViewController {
 			_debugTimeReportTableState()
 
 			let result = appendTweets(tweets: tweets, associatedHashtags: hashtags)
-			let nextSelectedStatuses = self.getNextTimelineSelection(insertedIndexes: result.insertedIndexes)
+			let nextSelectedStatuses = getNextTimelineSelection(insertedIndexes: result.insertedIndexes)
 
 			// FIXME: 複雑なデバッグ表示は DebugTime にメソッドとして載せて１業で表現しても良いかもしれない。
 			DebugTime.print("Tweet: \(tweets.count)")
@@ -703,9 +703,9 @@ extension TimelineViewController {
 		
 		DebugTime.print("Start updating contents of \(contentsKind).")
 		
-		contentsController.updateContents { result in
+		contentsController.updateContents { [unowned self] result in
 			
-			self.displayControlState = .updated
+			displayControlState = .updated
 			
 			switch result {
 				
@@ -713,17 +713,17 @@ extension TimelineViewController {
 				
 				update(tweets: statuses, associatedHashtags: hashtags)
 				
-				self.message.send(.resetAutoUpdateIntervalDeray)
-				self.contentsState = .ok("Last Update: \(Date().displayString)")
+				message.send(.resetAutoUpdateIntervalDeray)
+				contentsState = .ok("Last Update: \(Date().displayString)")
 				
 			case .failure(let error):
 				
 				if error.isRateLimitExceeded {
 
-					self.message.send(message: .addAutoUpdateIntervalDelay(bySecond: 7.0))
+					message.send(message: .addAutoUpdateIntervalDelay(bySecond: 7.0))
 				}
 				
-				self.contentsState = .error(error)
+				contentsState = .error(error)
 			}
 		}
 	}

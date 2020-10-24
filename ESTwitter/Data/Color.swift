@@ -75,7 +75,7 @@ extension Color {
 		let green = try toColorElement(getColorPart(.Green))
 		let blue = try toColorElement(getColorPart(.Blue))
 
-		self.rawValue = NSColor(red: red, green: green, blue: blue, alpha: 1.0)
+		rawValue = NSColor(red: red, green: green, blue: blue, alpha: 1.0)
 	}
 }
 

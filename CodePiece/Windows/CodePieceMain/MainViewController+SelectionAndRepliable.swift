@@ -88,7 +88,7 @@ extension MainViewController {
 		
 		setReplyToBySelectedStatuses()
 
-		if let status = self.statusForReplyTo, !twitterController.isMyTweet(status: status) {
+		if let status = statusForReplyTo, !twitterController.isMyTweet(status: status) {
 
 			descriptionTextField.readyForReplyTo(screenName: status.user.screenName)
 		}

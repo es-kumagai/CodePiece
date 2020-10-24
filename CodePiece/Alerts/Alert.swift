@@ -64,7 +64,7 @@ extension AlertDisplayable {
 		alert.addButton(withTitle: "OK")
 		alert.alertStyle = .warning
 		
-		self.showAlert(alert)
+		showAlert(alert)
 	}
 	
 	static func showErrorAlert(withTitle title: String, message: String, debugDescription: String? = nil) {
@@ -78,6 +78,6 @@ extension AlertDisplayable {
 		alert.addButton(withTitle: "OK")
 		alert.alertStyle = .critical
 
-		self.showAlert(alert)
+		showAlert(alert)
 	}
 }

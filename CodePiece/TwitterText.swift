@@ -36,7 +36,7 @@ extension TwitterTextType {
 		
 		let expression = try! NSRegularExpression(pattern: "(?<!\\w)@\\w+\\b", options: [])
 		
-		let text = self.twitterText
+		let text = twitterText
 		let options = NSRegularExpression.MatchingOptions(rawValue: 0)
 		let range = NSMakeRange(0, text.utf16.count)
 		
@@ -62,7 +62,7 @@ extension TwitterTextType {
 		
 		let expression = try! NSRegularExpression(pattern: "^@\\w+$", options: [])
 		
-		let text = self.twitterText
+		let text = twitterText
 		let options = NSRegularExpression.MatchingOptions(rawValue: 0)
 		let range = NSMakeRange(0, text.utf16.count)
 		

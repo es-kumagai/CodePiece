@@ -14,8 +14,8 @@ final class AppGlobalControllers {
 	
 	init() {
 		
-		self.sns = SNSController()
-		self.captureController = WebCaptureController()
-		self.reachabilityController = try! ReachabilityController()
+		sns = SNSController()
+		captureController = WebCaptureController()
+		reachabilityController = try! ReachabilityController()
 	}
 }

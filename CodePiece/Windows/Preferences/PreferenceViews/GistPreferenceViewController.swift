@@ -31,9 +31,9 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 	
 		authenticatingHUD.show()
 		
-		Authorization.authorizationWithGist { result in
+		Authorization.authorizationWithGist { [unowned self] result in
 			
-			self.authenticatingHUD.hide()
+			authenticatingHUD.hide()
 			
 			switch result {
 				
@@ -57,11 +57,11 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 			return
 		}
 		
-		self.removeAuthenticatingHUD.show()
+		removeAuthenticatingHUD.show()
 		
-		Authorization.resetAuthorizationOfGist(id: id) { result in
+		Authorization.resetAuthorizationOfGist(id: id) { [unowned self] result in
 			
-			self.removeAuthenticatingHUD.hide()
+			removeAuthenticatingHUD.hide()
 			
 			switch result {
 				
@@ -70,7 +70,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
 
 			case .failure(let error):
-				self.showWarningAlert(withTitle: "Failed to reset authentication", message: "Could't reset the current authentication information correctly. Reset authentication information force. (\(error))")
+				showWarningAlert(withTitle: "Failed to reset authentication", message: "Could't reset the current authentication information correctly. Reset authentication information force. (\(error))")
 			}
 		}
 	}
@@ -108,7 +108,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 
 		super.viewDidLoad()
 		
-		self.applyAuthorizedStatus()
+		applyAuthorizedStatus()
 
     }
 	
@@ -119,7 +119,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 		observe(Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			NSLog("Detect GitHub authorization state changed.")
 			
-			self.applyAuthorizedStatus()
+			applyAuthorizedStatus()
 		}
 	}
 	

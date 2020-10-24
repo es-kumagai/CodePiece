@@ -73,22 +73,22 @@ final class ReachabilityController : NotificationObservable {
 		
 		do {
 			
-			self.reachability = try Reachability()
+			reachability = try Reachability()
 		}
 		catch {
 			
-			self.reachability = nil
+			reachability = nil
 			throw error
 		}
 		
 		observe(notificationNamed: .reachabilityChanged, using: reachabilityDidChange)
 		
-		try self.reachability.startNotifier()
+		try reachability.startNotifier()
 	}
 	
 	deinit {
 		
-		self.notificationHandler.release()
+		notificationHandler.release()
 	}
 	
 	var state:State {

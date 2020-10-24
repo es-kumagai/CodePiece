@@ -106,7 +106,7 @@ extension Authorization {
 		
 		guard let authorization = NSApp.settings.account.authorization else {
 
-			self.showWarningAlert(withTitle: "Failed to reset authorization", message: "Could't get the current authentication information. Reset authentication information which saved in this app.")
+			showWarningAlert(withTitle: "Failed to reset authorization", message: "Could't get the current authentication information. Reset authentication information which saved in this app.")
 			
 			NSApp.settings.resetGistAccount(saveFinally: true)
 			GistAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()

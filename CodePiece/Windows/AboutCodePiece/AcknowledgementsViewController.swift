@@ -25,12 +25,12 @@ final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSou
 	
 	public func numberOfRows(in tableView: NSTableView) -> Int {
 		
-		return self.acknowledgements.pods.count
+		return acknowledgements.pods.count
 	}
 	
 	public func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
 		
-		guard let owner = self.owner else {
+		guard let owner = owner else {
 		
 			return nil
 		}
@@ -40,7 +40,7 @@ final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSou
 			return nil
 		}
 		
-		let pod = self.acknowledgements.pods[row]
+		let pod = acknowledgements.pods[row]
 		
 		switch tableColumn.identifier.rawValue {
 			
@@ -74,12 +74,12 @@ final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDelegate 
 		
 		let defaultCellHeight: CGFloat = tableView.rowHeight
 		
-		guard let owner = self.owner else {
+		guard let owner = owner else {
 			
 			return defaultCellHeight
 		}
 		
-		let pod = self.acknowledgements.pods[row]
+		let pod = acknowledgements.pods[row]
 		
 		let column = tableView.column(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: owner.licenseColumnIdentifier))
 		let columnView = tableView.tableColumn(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "license"))
@@ -173,6 +173,6 @@ class ESAcknowledgementsViewController: NSViewController, AcknowledgementsInclud
 		
 		super.viewDidLayout()
 		
-		self.acknowledgementsTableView.reloadData()
+		acknowledgementsTableView.reloadData()
 	}
 }

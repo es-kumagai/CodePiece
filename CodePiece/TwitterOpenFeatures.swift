@@ -21,7 +21,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		
 		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 
-			self.withChangeValue(for: "canOpenTwitterHome")
+			withChangeValue(for: "canOpenTwitterHome")
 		}		
 	}
 	
@@ -37,14 +37,14 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 	
 	@IBAction func openTwitterHomeAction(_ sender:AnyObject) {
 		
-		self.openTwitterHome()
+		openTwitterHome()
 	}
 	
 	func openTwitterHome() {
 		
 		guard let username = NSApp.twitterController.token?.screenName else {
 			
-			return self.showErrorAlert(withTitle: "Failed to open Twitter", message: "Twitter user is not set.")
+			return showErrorAlert(withTitle: "Failed to open Twitter", message: "Twitter user is not set.")
 		}
 		
 		do {
@@ -53,11 +53,11 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		}
 		catch ESTwitter.Browser.BrowseError.OperationFailure(reason: let reason) {
 			
-			self.showErrorAlert(withTitle: "Failed to open Twitter", message: reason)
+			showErrorAlert(withTitle: "Failed to open Twitter", message: reason)
 		}
 		catch {
 			
-			self.showErrorAlert(withTitle: "Failed to open Twitter", message: "Unknown Error : \(error)")
+			showErrorAlert(withTitle: "Failed to open Twitter", message: "Unknown Error : \(error)")
 		}
 	}
 }

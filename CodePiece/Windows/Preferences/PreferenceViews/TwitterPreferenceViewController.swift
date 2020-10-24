@@ -74,12 +74,12 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 	
 	@IBAction func pushResetAuthorizationButton(_ sender:NSButton) {
 	
-		self.resetAuthorization()
+		resetAuthorization()
 	}
 	
 	func resetAuthorization() {
 
-		self.withChangeValue(for: "hasAccount") {
+		withChangeValue(for: "hasAccount") {
 
 			NSApp.twitterController.resetAuthentication()
 		}
@@ -87,17 +87,17 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 			
 	func applyAuthorizedStatus() {
 		
-		self.selectedAccountName.stringValue = NSApp.twitterController.token?.screenName ?? ""
+		selectedAccountName.stringValue = NSApp.twitterController.token?.screenName ?? ""
 		
-		if self.credentialsNotVerified {
+		if credentialsNotVerified {
 			
-			self.credentialsVerificationStatusTextField.textColor = .authenticatedWithNoTokenForegroundColor
-			self.credentialsVerificationStatusTextField.stringValue = "Need to verify Credentials"
+			credentialsVerificationStatusTextField.textColor = .authenticatedWithNoTokenForegroundColor
+			credentialsVerificationStatusTextField.stringValue = "Need to verify Credentials"
 		}
 		else {
 			
-			self.credentialsVerificationStatusTextField.textColor = .authenticatedForegroundColor
-			self.credentialsVerificationStatusTextField.stringValue = "Credentials Verified"
+			credentialsVerificationStatusTextField.textColor = .authenticatedForegroundColor
+			credentialsVerificationStatusTextField.stringValue = "Credentials Verified"
 		}
 	}
 		
@@ -120,14 +120,14 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		
 		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			self.withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
-			self.applyAuthorizedStatus()
+			withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
+			applyAuthorizedStatus()
 		}
 		
 		observe(TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
 			
-			self.withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
-			self.applyAuthorizedStatus()
+			withChangeValue(for: "credentialsVerified", "credentialsNotVerified")
+			applyAuthorizedStatus()
 		}
 
 		applyAuthorizedStatus()
@@ -147,7 +147,7 @@ extension TwitterPreferenceViewController {
 	
 	func clearError() {
 		
-		self.reportError("")
+		reportError("")
 	}
 	
 	func reportError(_ message:String) {
@@ -157,7 +157,7 @@ extension TwitterPreferenceViewController {
 			NSLog(message)
 		}
 		
-		self.errorReportTextField?.stringValue = message
+		errorReportTextField?.stringValue = message
 	}
 }
 

@@ -40,7 +40,7 @@ public final class Browser {
 	
 	public static func openWithStatus(status:ESTwitter.Status) throws {
 		
-		let string = "\(self.baseUrl)/\(status.user.screenName)/status/\(status.idStr)"
+		let string = "\(baseUrl)/\(status.user.screenName)/status/\(status.idStr)"
 		
 		guard let url = URL(string: string) else {
 			
@@ -52,7 +52,7 @@ public final class Browser {
 	
 	public static func openWithUsername(username:String) throws {
 		
-		let string = "\(self.baseUrl)/\(username)"
+		let string = "\(baseUrl)/\(username)"
 		
 		guard let url = URL(string: string) else {
 			
@@ -65,7 +65,7 @@ public final class Browser {
 	public static func openWithQuery(query:String, language:String? = nil) throws {
 		
 		let language = language ?? ""
-		let string = try "\(self.searchUrl)?f=tweets&vertical=default&q=\(escape(string: query))&src=typd&lang=\(escape(string: language))"
+		let string = try "\(searchUrl)?f=tweets&vertical=default&q=\(escape(string: query))&src=typd&lang=\(escape(string: language))"
 		
 		guard let url = URL(string: string) else {
 			

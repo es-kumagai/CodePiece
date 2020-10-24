@@ -38,6 +38,6 @@ extension TwitterUrl : CustomStringConvertible {
 	
 	public var description:String {
 		
-		return self.rawValue
+		return rawValue
 	}
 }

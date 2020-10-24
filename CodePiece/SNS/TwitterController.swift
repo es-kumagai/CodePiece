@@ -112,7 +112,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 	
 	func isMyTweet(status: ESTwitter.Status) -> Bool {
 		
-		guard let token = self.token else {
+		guard let token = token else {
 			
 			return false
 		}
@@ -129,7 +129,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 			fatalError("You MUST specify id and key in `APIKeys.Twitter`.")
 		}
 		
-		if let token = self.token {
+		if let token = token {
 		
 			api = ESTwitter.API(consumerKey: consumerKey, tokenSecret: consumerSecret, oauthToken: token.key, oauthTokenSecret: token.secret)
 			DebugTime.print("API is prepared with token.")
@@ -143,7 +143,7 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 
 	func resetToken() {
 
-		let previousScreenName = self.token?.screenName
+		let previousScreenName = token?.screenName
 
 		token = nil
 		NSApp.settings.resetTwitterAccount(saveFinally: true)
@@ -153,12 +153,12 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 	
 	func resetAuthentication() {
 		
-		api.reset { result in
+		api.reset { [unowned self] result in
 			
 			switch result {
 				
 			case .success:
-				self.resetToken()
+				resetToken()
 				AuthorizationResetSucceededNotification().post()
 				
 			case .failure(let error):
@@ -208,12 +208,12 @@ final class TwitterController : NSObject, PostController, AlertDisplayable, Noti
 				
 		observe(AuthorizationResetFailureNotification.self) { [unowned self] notification in
 
-			self.showErrorAlert(withTitle: "Failed to reset authorization.", message: notification.error.localizedDescription)
+			showErrorAlert(withTitle: "Failed to reset authorization.", message: notification.error.localizedDescription)
 		}
 		
 		observe(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] _ in
 			
-			self.verifyCredentialsIfNeed()
+			verifyCredentialsIfNeed()
 		}
 	}
 	
@@ -780,11 +780,11 @@ extension TwitterController {
 		
 		DebugTime.print("📮 Try to verify credentials ... #3.4")
 		
-		DispatchQueue.main.async {
+		DispatchQueue.main.async { [unowned self] in
 
 			DebugTime.print("📮 Start verifying ... #3.4.1")
 			
-			self.api.authorize(withCallbackUrl: TwitterController.twitterCallbackUrl) { result in
+			api.authorize(withCallbackUrl: TwitterController.twitterCallbackUrl) { result in
 				
 				switch result {
 					

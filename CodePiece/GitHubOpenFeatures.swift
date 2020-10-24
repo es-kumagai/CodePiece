@@ -20,7 +20,7 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObserva
 		
 		observe(Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			self.withChangeValue(for: "canOpenGitHubHome")
+			withChangeValue(for: "canOpenGitHubHome")
 		}
 	}
 	
@@ -36,26 +36,26 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObserva
 	
 	@IBAction func openGitHubHomeAction(_ sender:AnyObject) {
 	
-		self.openGitHubHome()
+		openGitHubHome()
 	}
 	
 	func openGitHubHome() {
 		
 		guard let username = NSApp.settings.account.username else {
 			
-			return self.showErrorAlert(withTitle: "Failed to open GitHub", message: "GitHub user is not set.")
+			return showErrorAlert(withTitle: "Failed to open GitHub", message: "GitHub user is not set.")
 		}
 		
 		let urlString = "https://GitHub.com/\(username)"
 		
 		guard let url = URL(string: urlString) else {
 			
-			return self.showErrorAlert(withTitle: "Failed to open GitHub", message: "Invalid URL '\(urlString)'.")
+			return showErrorAlert(withTitle: "Failed to open GitHub", message: "Invalid URL '\(urlString)'.")
 		}
 		
 		NSWorkspace.shared.open(url).isFalse {
 			
-			self.showErrorAlert(withTitle: "Failed to open GitHub", message: "URL '\(url)' cannot open.")
+			showErrorAlert(withTitle: "Failed to open GitHub", message: "URL '\(url)' cannot open.")
 		}
 	}
 }

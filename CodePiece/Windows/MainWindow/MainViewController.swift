@@ -153,7 +153,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 	var selectedLanguage: Language {
 		
-		return self.languagePopUpButton.selectedItem.flatMap { Language(displayText: $0.title) }!
+		return languagePopUpButton.selectedItem.flatMap { Language(displayText: $0.title) }!
 	}
 
 	var customHashtags: [Hashtag] {
@@ -197,25 +197,25 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		guard NSApp.snsController.canPost else {
 		
-			self.showErrorAlert(withTitle: "Not ready to post", message: "Please set SNS accounts on the app's preferences. If you'd like to open the preference, type `⌘,`.)")
+			showErrorAlert(withTitle: "Not ready to post", message: "Please set SNS accounts on the app's preferences. If you'd like to open the preference, type `⌘,`.)")
 			return
 		}
 		
 		posting = true
 		postingHUD.show()
 		
-		post { result in
+		post { [unowned self] result in
 			
 			defer {
 				
-				self.posting = false
-				self.postingHUD.hide()
+				posting = false
+				postingHUD.hide()
 			}
 			
 			switch result {
 				
 			case .success(let container):
-				PostCompletelyNotification(container: container, postedStatus: container.twitterState.postedStatus, hashtags: self.hashTagTextField.hashtags).post()
+				PostCompletelyNotification(container: container, postedStatus: container.twitterState.postedStatus, hashtags: hashTagTextField.hashtags).post()
 				
 			case .failure(let error):
 				PostFailedNotification(error: error).post()
@@ -304,14 +304,14 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			let container = notification.container
 			
-			self.clearContents()
-			self.latestTweet = container.twitterState.postedStatus
+			clearContents()
+			latestTweet = container.twitterState.postedStatus
 
-			self.saveContents()
+			saveContents()
 
 			if let error = container.latestError {
 				
-				self.showErrorAlert(withTitle: "Finish posting, but ...", message: "\(error)")
+				showErrorAlert(withTitle: "Finish posting, but ...", message: "\(error)")
 			}
 			
 			NSLog("Posted completely \(notification.container.twitterState.postedStatus?.text ?? "(unknown)")")
@@ -319,34 +319,34 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		observe(PostFailedNotification.self) { [unowned self] notification in
 			
-			self.showErrorAlert(withTitle: "Failed to post", message: "\(notification.error)")
+			showErrorAlert(withTitle: "Failed to post", message: "\(notification.error)")
 		}
 		
 		observe(HashtagsChangeRequestNotification.self) { [unowned self] notification in
 			
-			self.hashTagTextField.hashtags = notification.hashtags
+			hashTagTextField.hashtags = notification.hashtags
 		}
 		
 		observe(LanguageSelectionChangeRequestNotification.self) { [unowned self] notification in
 			
-			self.languagePopUpDataSource.selectLanguage(notification.language)
+			languagePopUpDataSource.selectLanguage(notification.language)
 		}
 		
 		observe(CodeChangeRequestNotification.self) { [unowned self] notification in
 			
-			self.codeTextView.string = notification.code
+			codeTextView.string = notification.code
 		}
 		
 		observe(LanguagePopupDataSource.LanguageSelectionChanged.self) { [unowned self] notification in
 			
-			self.updateWatermark()
-			self.updateTweetTextCount()
-			self.saveContents()
+			updateWatermark()
+			updateTweetTextCount()
+			saveContents()
 		}
 		
 		observe(HashtagsDidChangeNotification.self) { [unowned self] notification in
 
-			self.saveContents()
+			saveContents()
 		}
 		
 		observe(TimelineSelectionChangedNotification.self) { notification in
@@ -358,7 +358,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		observe(TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
 			
-			self.setReplyTo(notification)
+			setReplyTo(notification)
 		}
 		
 		observe(TwitterController.AuthorizationStateInvalidNotification.self) { [unowned self] notification in
@@ -366,13 +366,13 @@ final class MainViewController: NSViewController, NotificationObservable {
 			if NSApp.settings.isReady {
 			
 				DebugTime.print("Authorization State is invalid. Try authenticating.")
-				self.twitterController.authorize()
+				twitterController.authorize()
 			}
 		}
 		
 		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			self.withChangeValue(for: "CanPost")
+			withChangeValue(for: "CanPost")
 		}
 
 		observe(TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
@@ -381,10 +381,10 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 			case .notAuthorized(let message):
 
-				self.showErrorAlert(withTitle: "Failed to authorization", message: message)
+				showErrorAlert(withTitle: "Failed to authorization", message: message)
 
 			default:
-				self.showErrorAlert(withTitle: "Failed to authorization", message: "\(notification.error)")
+				showErrorAlert(withTitle: "Failed to authorization", message: "\(notification.error)")
 			}
 		}
 	}
@@ -492,11 +492,11 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
 			
-			self.showErrorAlert(withTitle: "Failed to open browser", message: reason)
+			showErrorAlert(withTitle: "Failed to open browser", message: reason)
 		}
 		catch {
 
-			self.showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
+			showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
 		}
 	}
 
@@ -574,11 +574,11 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
 			
-			self.showErrorAlert(withTitle: "Failed to open browser", message: reason)
+			showErrorAlert(withTitle: "Failed to open browser", message: reason)
 		}
 		catch {
 
-			self.showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
+			showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
 		}
 	}
 }
@@ -587,15 +587,15 @@ extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
 	func controlTextDidChange(_ notification: Notification) {
 		
-		self.withChangeValue(for: "canPost")
-		self.updateControlsDisplayText()
+		withChangeValue(for: "canPost")
+		updateControlsDisplayText()
 	}
 	
 	/// Invoke this method when CodeTextView (NSTextView) did change.
 	func textDidChange(_ notification: Notification) {
 
-		self.withChangeValue(for: "canPost")
-		self.updateControlsDisplayText()
+		withChangeValue(for: "canPost")
+		updateControlsDisplayText()
 	}
 	
 	func control(_ control: NSControl, textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {

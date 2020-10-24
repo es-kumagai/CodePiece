@@ -20,7 +20,7 @@ final class LanguagePopupDataSource : NSObject {
 		
 		didSet {
 
-			popupButton.addItem(withTitle: self.defaultLanguage.description)
+			popupButton.addItem(withTitle: defaultLanguage.description)
 			
 			for language in languages.sort() {
 

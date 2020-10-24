@@ -41,19 +41,19 @@ final class PreferencesWindowController: NSWindowController {
 	
 	@IBAction func showGitHubPreference(_ sender:NSToolbarItem?) {
 
-		self.contentViewController = try! Storyboard.GistPreferenceView.getInitialController()
+		contentViewController = try! Storyboard.GistPreferenceView.getInitialController()
 	}
 	
 	@IBAction func showTwitterPreference(_ sender:NSToolbarItem?) {
 		
-		self.contentViewController = try! Storyboard.TwitterPreferenceView.getControllerByIdentifier(identifier: twitterPreferenceType.storyboardID)
+		contentViewController = try! Storyboard.TwitterPreferenceView.getControllerByIdentifier(identifier: twitterPreferenceType.storyboardID)
 	}
 	
     override func windowDidLoad() {
 
 		super.windowDidLoad()
 
-		self.contentViewController = try! Storyboard.GistPreferenceView.getInitialController()
+		contentViewController = try! Storyboard.GistPreferenceView.getInitialController()
     }
 	
 	override func flagsChanged(with theEvent: NSEvent) {
@@ -62,11 +62,11 @@ final class PreferencesWindowController: NSWindowController {
 
 		if theEvent.modifierFlags.contains(.option) {
 			
-			self.twitterPreferenceType = .OSAccount
+			twitterPreferenceType = .OSAccount
 		}
 		else {
 			
-			self.twitterPreferenceType = .OAuth
+			twitterPreferenceType = .OAuth
 		}
 		
 		super.flagsChanged(with: theEvent)

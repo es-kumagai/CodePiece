@@ -66,8 +66,8 @@ final class TimelineTableView: NSTableView {
 		
 		super.resize(withOldSuperviewSize: oldSize)
 		
-//		self.timelineTableDataSource().setNeedsEstimateHeight()
-		self.reloadData()
+//		timelineTableDataSource().setNeedsEstimateHeight()
+		reloadData()
 	}
 }
 

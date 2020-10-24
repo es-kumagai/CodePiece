@@ -70,14 +70,14 @@ final class TimelineKindStateController : NSObject, NotificationObservable {
 		
 		observe(MentionUpdatedNotification.self) { [unowned self] notification in
 			
-			self.timelineState[.mentions] = (notification.hasNewMention ? .havingNew : .neutral)
-			self.updateButtonState()
+			timelineState[.mentions] = (notification.hasNewMention ? .havingNew : .neutral)
+			updateButtonState()
 		}
 		
 		observe(TimelineSelectionChangedNotification.self) { [unowned self] notification in
 			
-			self.timelineState[notification.timelineViewController.contentsKind] = .neutral
-			self.updateButtonState()
+			timelineState[notification.timelineViewController.contentsKind] = .neutral
+			updateButtonState()
 		}
 	}
 	

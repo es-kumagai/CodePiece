@@ -24,7 +24,7 @@ public struct Hashtag : HashtagType {
 	
 	public init() {
 		
-		self.rawValue = ""
+		rawValue = ""
 	}
 	
 	public init?(hashtagValue: String) {
@@ -91,12 +91,12 @@ extension Hashtag {
 	
 	public var length:Int {
 		
-		return self.value.utf16.count
+		return value.utf16.count
 	}
 	
 	public var isEmpty:Bool {
 		
-		return self.value.isEmpty
+		return value.isEmpty
 	}
 	
 	public var url: URL {
@@ -116,7 +116,7 @@ extension Hashtag : CustomStringConvertible {
 	
 	public var description:String {
 		
-		return self.value
+		return value
 	}
 }
 

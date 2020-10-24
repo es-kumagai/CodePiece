@@ -103,9 +103,9 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 		
 		observe(HashtagsDidChangeNotification.self) { [unowned self] notification in
 			
-			self.relatedUsers = []
-			self.hashtags = notification.hashtags
-			self.needsUpdate = true
+			relatedUsers = []
+			hashtags = notification.hashtags
+			needsUpdate = true
 		}
 		
 		observe(HashtagsTimelineDidUpdateNotification.self) { [unowned self] notification in
@@ -116,8 +116,8 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			
 			if users.count > 0 {
 
-				self.relatedUsers.append(users: users)
-				self.needsUpdate = true
+				relatedUsers.append(users: users)
+				needsUpdate = true
 			}
 		}
 		
@@ -177,16 +177,16 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			sinceId: dataSource.latestTweetIdForHashtags(hashtags: hashtags)
 		)
 		
-		NSApp.twitterController.search(tweetWith: query, options: options) { result in
+		NSApp.twitterController.search(tweetWith: query, options: options) { [unowned self] result in
 			
 			switch result {
 				
 			case .success(let statuses):
-				callback(.success((statuses, self.hashtags)))
+				callback(.success((statuses, hashtags)))
 				
 			case .failure(.missingOrInvalidUrlParameter):
-				self.queryControl.reduce()
-				NSLog("Reducing max uplimit margin for searching related tweets query length to \(self.queryControl.lengthMargin)")
+				queryControl.reduce()
+				NSLog("Reducing max uplimit margin for searching related tweets query length to \(queryControl.lengthMargin)")
 				callback(.failure(.missingOrInvalidUrlParameter))
 				
 			case .failure(let error):

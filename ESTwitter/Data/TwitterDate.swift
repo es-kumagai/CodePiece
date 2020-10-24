@@ -40,7 +40,7 @@ extension TwitterDate {
 	
 	public init(_ date: Date) {
 		
-		self.rawValue = date
+		rawValue = date
 	}
 	
 	public init?(_ string: String) {
@@ -50,7 +50,7 @@ extension TwitterDate {
 			return nil
 		}
 		
-		self.rawValue = date
+		rawValue = date
 	}
 }
 
@@ -65,7 +65,7 @@ extension TwitterDate : DateCalculatable, ReferenceDateConvertible {
 
 	public var timeIntervalSinceReferenceDate: TimeInterval {
 	
-		return self.rawValue.timeIntervalSinceReferenceDate
+		return rawValue.timeIntervalSinceReferenceDate
 	}
 }
 

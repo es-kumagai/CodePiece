@@ -21,7 +21,7 @@ final class WebCaptureController {
 	
 	init() {
 
-		self.requests = [Request]()
+		requests = [Request]()
 	}
 	
 	func capture<CaptureInfo:CaptureInfoType>(url: String, of sourceFilename: String, captureInfo: CaptureInfo, completion: @escaping CaptureCompletionHandler) {
@@ -31,9 +31,9 @@ final class WebCaptureController {
 	
 	private func post(_ request: Request) {
 		
-		thread.async {
+		thread.async { [unowned self] in
 		
-			self.requests.append(request)
+			requests.append(request)
 			request.post()
 		}
 	}
@@ -62,7 +62,7 @@ extension WebCaptureController {
 			self.sourceFilename = sourceFilename
 			self.completionHandler = handler
 			
-			self.view = WKWebView(frame: NSRect(origin: .zero, size: captureInfo.frameSize))
+			view = WKWebView(frame: NSRect(origin: .zero, size: captureInfo.frameSize))
 			
 			super.init()
 			
@@ -72,12 +72,12 @@ extension WebCaptureController {
 		
 		func post() {
 			
-			DispatchQueue.main.async {
+			DispatchQueue.main.async { [unowned self] in
 				
 				let url = URL(string: self.url)!
 				let request = URLRequest(url: url)
 				
-				self.view.load(request)
+				view.load(request)
 			}
 		}
 	}
@@ -87,13 +87,13 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 	
 	private func fulfillRequest(for image: NSImage?) {
 		
-		self.completionHandler(image)
+		completionHandler(image)
 		
-		thread.async {
+		thread.async { [unowned self] in
 
-			if let index = self.owner.requests.firstIndex(of: self) {
+			if let index = owner.requests.firstIndex(of: self) {
 			
-				self.owner.requests.remove(at: index)
+				owner.requests.remove(at: index)
 			}
 		}
 	}
@@ -108,7 +108,7 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 
 			var containerNodeId: String {
 				
-				let targetName = self.sourceFilename
+				let targetName = sourceFilename
 					.replacingOccurrences(of: ".", with: "-")
 					.lowercased()
 				
@@ -127,9 +127,9 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 						node.style.tabSize = '4';
 						node.style.border = 'thin solid #f7f7f7';
 						node.style.padding = '6px';
-						node.style.width = '\(self.captureInfo.clientSize.width)px';
-						node.style.minHeight = '\(self.captureInfo.clientSize.height)px';
-						node.style.maxHeight = '\(self.captureInfo.maxHeight)px';
+						node.style.width = '\(captureInfo.clientSize.width)px';
+						node.style.minHeight = '\(captureInfo.clientSize.height)px';
+						node.style.maxHeight = '\(captureInfo.maxHeight)px';
 						node.style.overflow = 'auto';
 						break;
 					}
@@ -156,7 +156,7 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 				func finishEvaluating(with error: Error) {
 					
 					NSLog("Script evaluation error: \(error)")
-					self.fulfillRequest(for: nil)
+					fulfillRequest(for: nil)
 				}
 				
 				if case let .failure(error) = result {
@@ -172,7 +172,7 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 						
 						guard let results = object as? Array<Int> else {
 							
-							return self.fulfillRequest(for: nil)
+							return fulfillRequest(for: nil)
 						}
 						
 						let x = results[0]
@@ -182,11 +182,11 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 						let bodyWidth = results[4]
 						let bodyHeight = results[5]
 						
-						let maxWidth = max(height * 2, self.captureInfo.maxWidth)
+						let maxWidth = max(height * 2, captureInfo.maxWidth)
 						
 						let rect = NSRect(x: x, y: y, width: min(width, maxWidth), height: height)
 						
-						self.view.frame = NSRect(x: 0, y: 0, width: bodyWidth, height: bodyHeight)
+						view.frame = NSRect(x: 0, y: 0, width: bodyWidth, height: bodyHeight)
 						
 						print(rect)
 						
@@ -199,11 +199,11 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 							
 							guard let image = image else {
 								
-								self.fulfillRequest(for: nil)
+								fulfillRequest(for: nil)
 								return
 							}
 							
-							self.fulfillRequest(for: image)
+							fulfillRequest(for: image)
 						}
 					}
 					catch {
@@ -217,9 +217,9 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 	
 	func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
 				
-		DispatchQueue.main.async {
+		DispatchQueue.main.async { [unowned self] in
 			
-			self.fulfillRequest(for: nil)
+			fulfillRequest(for: nil)
 		}
 	}
 }
