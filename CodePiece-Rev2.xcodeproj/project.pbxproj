@@ -43,6 +43,8 @@
 		B132D51D23CD08B800690C5F /* ESTwitter.h in Headers */ = {isa = PBXBuildFile; fileRef = B132D50D23CD08B800690C5F /* ESTwitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
 		B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1360AF72544075500476C96 /* XcodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E213A82400AAB000DE511D /* XcodeKit.framework */; };
+		B1360AF82544075500476C96 /* XcodeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1E213A82400AAB000DE511D /* XcodeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B139E0C023EF350200EEA5BE /* DescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B139E0BF23EF350200EEA5BE /* DescriptionTests.swift */; };
 		B139E0C223F0063600EEA5BE /* RegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B139E0C123F0063600EEA5BE /* RegularExpressionExtension.swift */; };
 		B13CA7922478E9180059F306 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B13CA7912478E9180059F306 /* ESGists */; };
@@ -312,6 +314,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				B119A7192477E575008505EE /* CodePieceCore.framework in Embed Frameworks */,
+				B1360AF82544075500476C96 /* XcodeKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -585,6 +588,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1360AF72544075500476C96 /* XcodeKit.framework in Frameworks */,
 				B101B6FD23FF6CC90095DDC0 /* Cocoa.framework in Frameworks */,
 				B119A7182477E575008505EE /* CodePieceCore.framework in Frameworks */,
 			);
@@ -1976,6 +1980,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.XcodeSourceEditorExtension";
 				PRODUCT_NAME = "CodePiece Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -2012,7 +2017,7 @@
 		B119A7152477E48D008505EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2041,7 +2046,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2071,7 +2076,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2207,7 +2212,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2273,7 +2278,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
 				ENABLE_NS_ASSERTIONS = NO;
