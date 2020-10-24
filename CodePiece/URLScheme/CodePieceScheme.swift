@@ -31,7 +31,7 @@ final class CodePieceScheme : URLScheme {
 			
 			return
 		}
-		
+
 		NSApp.moveToFront()
 		
 		for item in items {

@@ -23,6 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NotificationObservable {
 		
 		super.awakeFromNib()
 
+		urlSchemeManager = URLSchemeManager()
 		NSApplication.readyForUse()
 	}
 
@@ -30,7 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NotificationObservable {
 
 		NSLog("Application launched.")
 		
-		urlSchemeManager = URLSchemeManager()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

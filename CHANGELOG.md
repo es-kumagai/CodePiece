@@ -5,6 +5,7 @@ Change Logs.
 ## 2.1.10
 
 * Update tweet text length when code did edit.
+* Fix a problem that sending codes by URL scheme is not applied when CodePiece launch.
 
 ## 2.1.9
 
