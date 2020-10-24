@@ -165,7 +165,7 @@ extension Status {
 	
 	private func applyingAttribute(to text: String, urlColor: NSColor, hashtagColor: NSColor, mentionColor: NSColor) -> NSAttributedString {
 		
-		var result = NSMutableAttributedString(string: text)
+		let result = NSMutableAttributedString(string: text)
 		
 		if let entities = normalizedEntities(for: text) {
 
