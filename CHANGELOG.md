@@ -2,6 +2,10 @@
 
 Change Logs.
 
+## 2.1.11
+
+* Fix a problem that empty lines are removed in the code when entered code is posted to Gist.
+
 ## 2.1.10
 
 * Update tweet text length when code did edit.

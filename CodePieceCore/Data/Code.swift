@@ -28,7 +28,7 @@ extension Code : LosslessStringConvertible {
 	/// - Parameter code: ソースコードです。
 	public init(_ code: String) {
 
-		newlineTerminatedLines = code.split(separator: "\n").map { $0 + "\n" }
+		newlineTerminatedLines = code.components(separatedBy: "\n").map { $0 + "\n" }
 	}
 	
 	/// コードが空だった時に `true` を返します。
