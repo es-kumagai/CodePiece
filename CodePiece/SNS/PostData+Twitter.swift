@@ -160,10 +160,8 @@ extension PostDataContainer {
 		}
 
 		let description = makeDescriptionWithEffectiveHashtags(hashtags: effectiveHashtagsForTwitter, appendString: gistPageUrl)
-		
 		let escapedDescription = replacingDescriptionWithPercentEscapingUrl(description)
 		
-		DebugTime.print("Escaped description: \(escapedDescription)")
 		switch forCountingLength {
 						
 		case true:
