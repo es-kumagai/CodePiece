@@ -50,7 +50,10 @@ extension Set where Element : HashtagType {
 	
 	public init(hashtagsDisplayText: String) {
 		
-		let hashtags = hashtagsDisplayText.split(separator: " ").compactMap(String.init).compactMap(Element.init)
+		let hashtags = hashtagsDisplayText
+			.split(whereSeparator: \.isWhitespace)
+			.compactMap(String.init)
+			.compactMap(Element.init)
 		
 		self.init(hashtags)
 	}

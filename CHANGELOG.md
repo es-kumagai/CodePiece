@@ -2,6 +2,10 @@
 
 Change Logs.
 
+## 2.1.12
+
+* Hashtags text which typed in Hashtag text field is now splited with not only single-byte space but also any other whitespaces. 
+
 ## 2.1.11
 
 * Fix a problem that empty lines are removed in the code when entered code is posted to Gist.
