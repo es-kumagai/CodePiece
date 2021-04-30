@@ -117,15 +117,18 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 			
 			let applyingStyleScript = """
 				const tableNode = document.getElementsByTagName('table')[0];
-				tableNode.style.tabSize = '4';
 				const containerNode = document.getElementById('\(containerNodeId)');
 				const searchNodes = containerNode.getElementsByTagName('div');
+
+				tableNode.style.tabSize = '4';
+				containerNode.style.borderRadius = '0px';
 
 				for (let i = 0; i != searchNodes.length; ++i) {
 					const node = searchNodes[i];
 					if (node.getAttribute('itemprop') == 'text') {
 						node.style.tabSize = '4';
-						node.style.border = 'thin solid #f7f7f7';
+						node.style.borderRadius = '0px';
+						node.style.border = 'thin solid var(--color-bg-canvas)';
 						node.style.padding = '6px';
 						node.style.width = '\(captureInfo.clientSize.width)px';
 						node.style.minHeight = '\(captureInfo.clientSize.height)px';
