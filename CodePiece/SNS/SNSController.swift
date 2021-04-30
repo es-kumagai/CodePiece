@@ -92,7 +92,7 @@ final class SNSController : PostController {
 			let gist = container.gistsState.gist!
 			DebugTime.print("📮 Capturing a gist (\(gist)) ... #2.2.1.1")
 			
-			let captureInfo = LinedCaptureInfo()
+			let captureInfo = CaptureInfo.lined
 			
 			NSApp.captureController.capture(url: gist.urls.htmlUrl.rawValue, of: container.filenameForGists, captureInfo: captureInfo) { image in
 				

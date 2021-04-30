@@ -9,20 +9,57 @@
 import WebKit
 
 // FIXME: ここでのキャプチャーサイズのカスタマイズ機能一式は廃止で良さそう。横幅と最大高さは設定画面で指定できても良さそう。
-protocol CaptureInfoType {
+struct CaptureInfo {
 	
-	var userAgent: String? { get }
-	var frameSize: NSSize { get }
-	var clientSize: NSSize { get }
-	var maxWidth: Int { get }
-	var maxHeight: Int { get }
+	var userAgent: String?
+	var minHeight: Int
+	var baseHeight: Int
+	var extendedHeight: Int
+	var aspectWidth: Int
+	var aspectHeight: Int
+	var clientHeightMargin: Int = 400
+	var clientFrameMargin: Int = 100
 }
 
-struct LinedCaptureInfo : CaptureInfoType {
+extension CaptureInfo {
 	
-	let userAgent: String? = nil
-	let frameSize: NSSize = NSMakeSize(560, 560)
-	let clientSize: NSSize = NSMakeSize(680, 40)
-	let maxWidth: Int = 380
-	let maxHeight: Int = 3000
+	func widthFor(height: Int) -> Int {
+	
+		return height * 16 / 9
+	}
+	
+	var minWidth: Int {
+		
+		widthFor(height: minHeight)
+	}
+	
+	var maxWidth: Int {
+
+		widthFor(height: baseHeight)
+	}
+	
+	var clientWidth: Int {
+	
+		widthFor(height: clientHeight)
+	}
+	
+	var clientHeight: Int {
+		
+		extendedHeight + clientHeightMargin
+	}
+
+	var clientFrameWidth: Int {
+	
+		widthFor(height: clientFrameHeight)
+	}
+	
+	var clientFrameHeight: Int {
+		
+		clientHeight + clientFrameMargin
+	}
+}
+
+extension CaptureInfo {
+
+	static let lined = CaptureInfo(userAgent: nil, minHeight: 240, baseHeight: 360, extendedHeight: 1200, aspectWidth: 16, aspectHeight: 9)
 }

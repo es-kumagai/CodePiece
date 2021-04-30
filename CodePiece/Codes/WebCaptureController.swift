@@ -24,7 +24,7 @@ final class WebCaptureController {
 		requests = [Request]()
 	}
 	
-	func capture<CaptureInfo:CaptureInfoType>(url: String, of sourceFilename: String, captureInfo: CaptureInfo, completion: @escaping CaptureCompletionHandler) {
+	func capture(url: String, of sourceFilename: String, captureInfo: CaptureInfo, completion: @escaping CaptureCompletionHandler) {
 	
 		post(Request(url: url, sourceFilename: sourceFilename, owner: self, captureInfo: captureInfo, handler: completion))
 	}
@@ -46,14 +46,14 @@ extension WebCaptureController {
 		
 		weak var owner: WebCaptureController!
 
-		var captureInfo: CaptureInfoType
+		var captureInfo: CaptureInfo
 		var url: String
 		var sourceFilename: String
 		var completionHandler: WebCaptureController.CaptureCompletionHandler
 		
 		var view: WKWebView
 		
-		init<CaptureInfo:CaptureInfoType>(url: String, sourceFilename: String, owner: WebCaptureController, captureInfo: CaptureInfo, handler: @escaping WebCaptureController.CaptureCompletionHandler) {
+		init(url: String, sourceFilename: String, owner: WebCaptureController, captureInfo: CaptureInfo, handler: @escaping WebCaptureController.CaptureCompletionHandler) {
 			
 			self.owner = owner
 			
@@ -62,7 +62,7 @@ extension WebCaptureController {
 			self.sourceFilename = sourceFilename
 			self.completionHandler = handler
 			
-			view = WKWebView(frame: NSRect(origin: .zero, size: captureInfo.frameSize))
+			view = WKWebView(frame: NSRect(x: 0, y: 0, width: captureInfo.clientFrameWidth, height: captureInfo.clientFrameHeight))
 			
 			super.init()
 			
@@ -115,103 +115,156 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 				return "file-\(targetName)"
 			}
 			
-			let applyingStyleScript = """
+			let specifyNodesScript = """
 				const tableNode = document.getElementsByTagName('table')[0];
 				const containerNode = document.getElementById('\(containerNodeId)');
 				const searchNodes = containerNode.getElementsByTagName('div');
-
+				const headerNode = Array.from(searchNodes).find(node => node.classList.contains('file-header'));
+				const contentNode = Array.from(searchNodes).find(node => node.getAttribute('itemprop') == 'text');
+				const numNodes = Array.from(contentNode.getElementsByTagName('td')).filter(node => node.classList.contains('blob-num'));
+				
+				if (headerNode)
+				{
+					containerNode.removeChild(headerNode);
+				}
+				
+				for (let numNode of numNodes)
+				{
+					numNode.style.minWidth = '0px';
+				}
+				
+				const freeNode = document.createElement('div');
+				
+				freeNode.style.width = '\(captureInfo.clientWidth)px';
+				freeNode.style.height = '\(captureInfo.clientHeight)px';
+				freeNode.appendChild(document.createTextNode(''));
+				
+				containerNode.insertBefore(freeNode, contentNode.nextSibling);
+				
+				true;
+				"""
+			
+			let applyingStyleScript = """
 				tableNode.style.tabSize = '4';
 				containerNode.style.borderRadius = '0px';
+				containerNode.style.border = 'thin solid var(--color-bg-canvas)';
 
-				for (let i = 0; i != searchNodes.length; ++i) {
-					const node = searchNodes[i];
-					if (node.getAttribute('itemprop') == 'text') {
-						node.style.tabSize = '4';
-						node.style.borderRadius = '0px';
-						node.style.border = 'thin solid var(--color-bg-canvas)';
-						node.style.padding = '6px';
-						node.style.width = '\(captureInfo.clientSize.width)px';
-						node.style.minHeight = '\(captureInfo.clientSize.height)px';
-						node.style.maxHeight = '\(captureInfo.maxHeight)px';
-						node.style.overflow = 'auto';
-						break;
-					}
-				}
+				contentNode.style.tabSize = '4';
+				contentNode.style.borderRadius = '0px';
+				contentNode.style.border = 'thin solid var(--color-bg-canvas)';
+				contentNode.style.padding = '6px 0px';
+				contentNode.style.overflow = 'auto';
 				"""
 			
 			let gettingBoundsScript = """
-				const targetNode = document.getElementsByClassName('data')[0];
-				const bounds = targetNode.getBoundingClientRect();
+				const containerBounds = containerNode.getBoundingClientRect();
+				const contentBounds = contentNode.getBoundingClientRect();
 
-				const x = bounds.left;
-				const y = bounds.top;
-				const width = bounds.width;
-				const height = bounds.height;
+				const x = containerBounds.left;
+				const y = containerBounds.top;
+				const width = containerBounds.width;
+				const height = containerBounds.height;
+				const contentWidth = contentBounds.width;
+				const contentHeight = contentBounds.height;
 
 				const bodyWidth = document.body.offsetWidth;
 				const bodyHeight = document.body.offsetHeight;
 
-				[x, y, width, height, bodyWidth, bodyHeight];
+				[x, y, width, height, bodyWidth, bodyHeight, contentWidth, contentHeight];
 				"""
 			
-			webView.evaluate(javaScript: applyingStyleScript) { result in
+			func finishEvaluating(with error: Error) {
 				
-				func finishEvaluating(with error: Error) {
+				switch error {
+				
+				case let error as WKWebView.InternalError:
 					
-					NSLog("Script evaluation error: \(error)")
-					fulfillRequest(for: nil)
+					switch error {
+					
+					case .unexpected(let message):
+						NSLog("Script evaluation error: unexpected error: \(message)")
+					}
+					
+				case let error as NSError:
+
+					if error.domain == "WKErrorDomain", let message = error.userInfo["WKJavaScriptExceptionMessage"] as? String {
+						
+						NSLog("Script evaluation error: \(message)")
+					}
+					else {
+						
+						NSLog("Script evaluation error: \(error)")
+					}
 				}
+				
+				fulfillRequest(for: nil)
+			}
+
+			webView.evaluate(javaScript: specifyNodesScript) { result in
 				
 				if case let .failure(error) = result {
-
-					finishEvaluating(with: error)
+					
+					return finishEvaluating(with: error)
 				}
 				
-				webView.evaluate(javaScript: gettingBoundsScript) { result in
+				webView.evaluate(javaScript: applyingStyleScript) { result in
+										
+					if case let .failure(error) = result {
+						
+						return finishEvaluating(with: error)
+					}
 					
-					do {
+					webView.evaluate(javaScript: gettingBoundsScript) { result in
 						
-						let object = try result.get()
-						
-						guard let results = object as? Array<Int> else {
+						do {
 							
-							return fulfillRequest(for: nil)
-						}
-						
-						let x = results[0]
-						let y = results[1]
-						let width = results[2]
-						let height = results[3]
-						let bodyWidth = results[4]
-						let bodyHeight = results[5]
-						
-						let maxWidth = max(height * 2, captureInfo.maxWidth)
-						
-						let rect = NSRect(x: x, y: y, width: min(width, maxWidth), height: height)
-						
-						view.frame = NSRect(x: 0, y: 0, width: bodyWidth, height: bodyHeight)
-						
-						print(rect)
-						
-						let configuration = instanceApplyingExpression(with: WKSnapshotConfiguration()) { settings in
+							let object = try result.get()
 							
-							settings.rect = rect
-						}
-						
-						webView.takeSnapshot(with: configuration) { image, error in
-							
-							guard let image = image else {
+							guard let results = object as? Array<NSNumber> else {
 								
-								fulfillRequest(for: nil)
-								return
+								return fulfillRequest(for: nil)
 							}
 							
-							fulfillRequest(for: image)
+							let x = results[0].intValue
+							let y = results[1].intValue
+							let containerWidth = results[2].intValue
+							let containerHeight = results[3].intValue
+							let bodyWidth = results[4].intValue
+							let bodyHeight = results[5].intValue
+							let contentWidth = results[6].intValue
+							let contentHeight = results[7].intValue
+							
+							let effectiveHeight = max(min(contentHeight, captureInfo.extendedHeight), captureInfo.minHeight)
+							let effectiveWidth = min(max(contentHeight * 16 / 9, captureInfo.minWidth), captureInfo.maxWidth)
+							
+							NSLog("Captured : (\(effectiveWidth), \(effectiveHeight)) { min: (\(captureInfo.minWidth), \(captureInfo.minHeight)), max: (\(captureInfo.maxWidth), \(captureInfo.extendedHeight)), container: (\(containerWidth), \(containerHeight)), content: (\(contentWidth), \(contentHeight)) }")
+							
+							let rect = NSRect(x: x, y: y, width: effectiveWidth, height: effectiveHeight)
+							
+							view.frame = NSRect(x: 0, y: 0, width: bodyWidth, height: bodyHeight)
+							
+							print(rect)
+							
+							let configuration = instanceApplyingExpression(with: WKSnapshotConfiguration()) { settings in
+								
+								settings.rect = rect
+							}
+							
+							webView.takeSnapshot(with: configuration) { image, error in
+								
+								guard let image = image else {
+									
+									fulfillRequest(for: nil)
+									return
+								}
+								
+								fulfillRequest(for: image)
+							}
 						}
-					}
-					catch {
-						
-						finishEvaluating(with: error)
+						catch {
+							
+							finishEvaluating(with: error)
+						}
 					}
 				}
 			}
