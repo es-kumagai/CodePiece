@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc protocol TimelineKindStateDelegate : class {
+@objc protocol TimelineKindStateDelegate : AnyObject {
 	
 	@objc optional func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKind)
 }

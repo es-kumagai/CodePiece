@@ -36,6 +36,19 @@
 		B122599023EA90F0006D819D /* MentionsContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122598F23EA90F0006D819D /* MentionsContentsController.swift */; };
 		B122599223EAB8F5006D819D /* TimelineTabViewItemInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */; };
 		B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1278B5B23D176C3003F3719 /* CodeText.swift */; };
+		B12CDB0D263C047000451738 /* libCodePieceSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12CDAFE263C047000451738 /* libCodePieceSupport.a */; };
+		B12CDB0E263C047000451738 /* arm64-apple-macos.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB00263C047000451738 /* arm64-apple-macos.swiftdoc */; };
+		B12CDB0F263C047000451738 /* x86_64-apple-macos.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB01263C047000451738 /* x86_64-apple-macos.swiftdoc */; };
+		B12CDB10263C047000451738 /* x86_64.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB02263C047000451738 /* x86_64.swiftdoc */; };
+		B12CDB11263C047000451738 /* arm64.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB03263C047000451738 /* arm64.swiftmodule */; };
+		B12CDB12263C047000451738 /* arm64-apple-macos.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB04263C047000451738 /* arm64-apple-macos.swiftmodule */; };
+		B12CDB13263C047000451738 /* x86_64.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB05263C047000451738 /* x86_64.swiftmodule */; };
+		B12CDB14263C047000451738 /* x86_64.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB07263C047000451738 /* x86_64.swiftsourceinfo */; };
+		B12CDB15263C047000451738 /* x86_64-apple-macos.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB08263C047000451738 /* x86_64-apple-macos.swiftsourceinfo */; };
+		B12CDB16263C047000451738 /* arm64-apple-macos.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB09263C047000451738 /* arm64-apple-macos.swiftsourceinfo */; };
+		B12CDB17263C047000451738 /* arm64.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB0A263C047000451738 /* arm64.swiftsourceinfo */; };
+		B12CDB18263C047000451738 /* x86_64-apple-macos.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB0B263C047000451738 /* x86_64-apple-macos.swiftmodule */; };
+		B12CDB19263C047000451738 /* arm64.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB0C263C047000451738 /* arm64.swiftdoc */; };
 		B131864623F28D7000BA9AA7 /* GetStatusesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB123F1540600772AA4 /* GetStatusesError.swift */; };
 		B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B132D50423CD078800690C5F /* ESProgressHUD */; };
 		B132D51423CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
@@ -169,8 +182,6 @@
 		B1A4729D23D09DB300F73658 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728723D09DB300F73658 /* Status.swift */; };
 		B1A4729E23D09DB300F73658 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728823D09DB300F73658 /* Color.swift */; };
 		B1A4729F23D09DB300F73658 /* PlaceBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */; };
-		B1A4D3B4257AB888004BC279 /* libCodePieceSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A4D3B2257AB887004BC279 /* libCodePieceSupport.a */; };
-		B1A4D3B5257AB888004BC279 /* CodePieceSupport.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B1A4D3B3257AB888004BC279 /* CodePieceSupport.swiftmodule */; };
 		B1C1F1C223EB0B420010C28F /* CodePieceScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */; };
 		B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A823E152A90039F4E6 /* ReachabilityController.swift */; };
 		B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C349DA23E285BF0039F4E6 /* APIKeys.plist */; };
@@ -398,6 +409,19 @@
 		B122598F23EA90F0006D819D /* MentionsContentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsContentsController.swift; sourceTree = "<group>"; };
 		B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTabViewItemInformation.swift; sourceTree = "<group>"; };
 		B1278B5B23D176C3003F3719 /* CodeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeText.swift; sourceTree = "<group>"; };
+		B12CDAFE263C047000451738 /* libCodePieceSupport.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCodePieceSupport.a; sourceTree = "<group>"; };
+		B12CDB00263C047000451738 /* arm64-apple-macos.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftdoc"; sourceTree = "<group>"; };
+		B12CDB01263C047000451738 /* x86_64-apple-macos.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "x86_64-apple-macos.swiftdoc"; sourceTree = "<group>"; };
+		B12CDB02263C047000451738 /* x86_64.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = x86_64.swiftdoc; sourceTree = "<group>"; };
+		B12CDB03263C047000451738 /* arm64.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = arm64.swiftmodule; sourceTree = "<group>"; };
+		B12CDB04263C047000451738 /* arm64-apple-macos.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftmodule"; sourceTree = "<group>"; };
+		B12CDB05263C047000451738 /* x86_64.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = x86_64.swiftmodule; sourceTree = "<group>"; };
+		B12CDB07263C047000451738 /* x86_64.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = x86_64.swiftsourceinfo; sourceTree = "<group>"; };
+		B12CDB08263C047000451738 /* x86_64-apple-macos.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "x86_64-apple-macos.swiftsourceinfo"; sourceTree = "<group>"; };
+		B12CDB09263C047000451738 /* arm64-apple-macos.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftsourceinfo"; sourceTree = "<group>"; };
+		B12CDB0A263C047000451738 /* arm64.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = arm64.swiftsourceinfo; sourceTree = "<group>"; };
+		B12CDB0B263C047000451738 /* x86_64-apple-macos.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = "x86_64-apple-macos.swiftmodule"; sourceTree = "<group>"; };
+		B12CDB0C263C047000451738 /* arm64.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = arm64.swiftdoc; sourceTree = "<group>"; };
 		B132D50B23CD08B800690C5F /* ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B132D50D23CD08B800690C5F /* ESTwitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESTwitter.h; sourceTree = "<group>"; };
 		B132D50E23CD08B800690C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -532,8 +556,6 @@
 		B1A4728723D09DB300F73658 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		B1A4728823D09DB300F73658 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBoundingBox.swift; sourceTree = "<group>"; };
-		B1A4D3B2257AB887004BC279 /* libCodePieceSupport.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCodePieceSupport.a; sourceTree = "<group>"; };
-		B1A4D3B3257AB888004BC279 /* CodePieceSupport.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CodePieceSupport.swiftmodule; sourceTree = "<group>"; };
 		B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodePieceScheme.swift; sourceTree = "<group>"; };
 		B1C349A823E152A90039F4E6 /* ReachabilityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityController.swift; sourceTree = "<group>"; };
 		B1C349DA23E285BF0039F4E6 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
@@ -636,7 +658,7 @@
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
 				B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */,
-				B1A4D3B4257AB888004BC279 /* libCodePieceSupport.a in Frameworks */,
+				B12CDB0D263C047000451738 /* libCodePieceSupport.a in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -734,6 +756,33 @@
 				B15EE28823CE7667005B268A /* TimelineViewController+MainWindow.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		B12CDAFF263C047000451738 /* CodePieceSupport.swiftmodule */ = {
+			isa = PBXGroup;
+			children = (
+				B12CDB00263C047000451738 /* arm64-apple-macos.swiftdoc */,
+				B12CDB01263C047000451738 /* x86_64-apple-macos.swiftdoc */,
+				B12CDB02263C047000451738 /* x86_64.swiftdoc */,
+				B12CDB03263C047000451738 /* arm64.swiftmodule */,
+				B12CDB04263C047000451738 /* arm64-apple-macos.swiftmodule */,
+				B12CDB05263C047000451738 /* x86_64.swiftmodule */,
+				B12CDB06263C047000451738 /* Project */,
+				B12CDB0B263C047000451738 /* x86_64-apple-macos.swiftmodule */,
+				B12CDB0C263C047000451738 /* arm64.swiftdoc */,
+			);
+			path = CodePieceSupport.swiftmodule;
+			sourceTree = "<group>";
+		};
+		B12CDB06263C047000451738 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				B12CDB07263C047000451738 /* x86_64.swiftsourceinfo */,
+				B12CDB08263C047000451738 /* x86_64-apple-macos.swiftsourceinfo */,
+				B12CDB09263C047000451738 /* arm64-apple-macos.swiftsourceinfo */,
+				B12CDB0A263C047000451738 /* arm64.swiftsourceinfo */,
+			);
+			path = Project;
 			sourceTree = "<group>";
 		};
 		B131864523F28D1700BA9AA7 /* Error */ = {
@@ -1004,8 +1053,8 @@
 		B1627DE224463324005D1902 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				B1A4D3B3257AB888004BC279 /* CodePieceSupport.swiftmodule */,
-				B1A4D3B2257AB887004BC279 /* libCodePieceSupport.a */,
+				B12CDAFF263C047000451738 /* CodePieceSupport.swiftmodule */,
+				B12CDAFE263C047000451738 /* libCodePieceSupport.a */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -1493,7 +1542,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Tomohiro Kumagai";
 				TargetAttributes = {
 					B101B6FB23FF6CC90095DDC0 = {
@@ -1602,20 +1651,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B12CDB17263C047000451738 /* arm64.swiftsourceinfo in Resources */,
 				B15EE29823CE7667005B268A /* WelcomeBoard.storyboard in Resources */,
+				B12CDB12263C047000451738 /* arm64-apple-macos.swiftmodule in Resources */,
 				B15EE29423CE7667005B268A /* AboutWindowController.storyboard in Resources */,
+				B12CDB0F263C047000451738 /* x86_64-apple-macos.swiftdoc in Resources */,
+				B12CDB13263C047000451738 /* x86_64.swiftmodule in Resources */,
 				B1C34A2723E363660039F4E6 /* Acknowledgements.plist in Resources */,
 				B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */,
+				B12CDB0E263C047000451738 /* arm64-apple-macos.swiftdoc in Resources */,
 				B1A105FD23CA1A4A00F9C4FD /* Assets.xcassets in Resources */,
+				B12CDB14263C047000451738 /* x86_64.swiftsourceinfo in Resources */,
+				B12CDB16263C047000451738 /* arm64-apple-macos.swiftsourceinfo in Resources */,
 				B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */,
 				B15EE29923CE7667005B268A /* AcknowledgementsViewController.storyboard in Resources */,
 				B15EE26B23CE7658005B268A /* TwitterPreferenceView.storyboard in Resources */,
 				B15EE26A23CE7658005B268A /* PreferencesWindow.storyboard in Resources */,
 				B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */,
 				B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */,
-				B1A4D3B5257AB888004BC279 /* CodePieceSupport.swiftmodule in Resources */,
 				B15EE29023CE7667005B268A /* Timeline.storyboard in Resources */,
 				B15EE26723CE7658005B268A /* GistPreferenceView.storyboard in Resources */,
+				B12CDB19263C047000451738 /* arm64.swiftdoc in Resources */,
+				B12CDB10263C047000451738 /* x86_64.swiftdoc in Resources */,
+				B12CDB18263C047000451738 /* x86_64-apple-macos.swiftmodule in Resources */,
+				B12CDB15263C047000451738 /* x86_64-apple-macos.swiftsourceinfo in Resources */,
+				B12CDB11263C047000451738 /* arm64.swiftmodule in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1940,7 +2000,7 @@
 		B101B70923FF6CC90095DDC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = XcodeSourceEditorExtension/XcodeSourceEditorExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1964,7 +2024,7 @@
 		B101B70A23FF6CC90095DDC0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = XcodeSourceEditorExtension/XcodeSourceEditorExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1989,6 +2049,7 @@
 		B119A7142477E48D008505EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2017,6 +2078,7 @@
 		B119A7152477E48D008505EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2045,6 +2107,7 @@
 		B132D52323CD08B800690C5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -2075,6 +2138,7 @@
 		B132D52423CD08B800690C5F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;

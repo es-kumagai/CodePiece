@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc protocol TimelineContentsControllerDelegate : class {
+@objc protocol TimelineContentsControllerDelegate : AnyObject {
 
 	@objc optional func timelineContentsNeedsUpdate(_ sender: TimelineContentsController)
 }
