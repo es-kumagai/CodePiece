@@ -703,6 +703,8 @@ extension TwitterController {
 	
 	func search(tweetWith query: String, options: API.SearchOptions = API.SearchOptions(), handler: @escaping (GetStatusesResult) -> Void) {
 
+		let query = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query
+		
 		api.search(usingQuery: query, options: options) { result in
 
 			switch result {

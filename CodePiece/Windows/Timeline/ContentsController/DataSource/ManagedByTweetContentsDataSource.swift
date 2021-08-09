@@ -23,6 +23,10 @@ final class ManagedByTweetContentsDataSource: NSObject, TimelineTableDataSource 
 				
 				lastTweetId = item.timelineItemTweetId
 			}
+			else {
+				
+				lastTweetId = nil
+			}
 		}
 	}
 }
