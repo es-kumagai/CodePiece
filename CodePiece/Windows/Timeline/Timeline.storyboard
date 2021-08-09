@@ -177,22 +177,14 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Av8-g6-xL0">
-                                <rect key="frame" x="0.0" y="364" width="300" height="61"/>
+                                <rect key="frame" x="0.0" y="388" width="300" height="37"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OBO-j0-3dn">
-                                        <rect key="frame" x="6" y="37" width="105" height="16"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Enter keywords :" id="eWe-bV-7lv">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LMT-E2-59d">
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LMT-E2-59d">
                                         <rect key="frame" x="8" y="8" width="284" height="21"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZPI-AG-y83">
                                                 <rect key="frame" x="0.0" y="0.0" width="213" height="21"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="KbM-zK-sMa">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter keywords" drawsBackground="YES" id="KbM-zK-sMa">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -225,15 +217,13 @@
                                 <edgeInsets key="edgeInsets" left="8" right="8" top="8" bottom="8"/>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
-                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="mSd-QD-oud">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="364"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="388"/>
                             </containerView>
                         </subviews>
                         <constraints>
