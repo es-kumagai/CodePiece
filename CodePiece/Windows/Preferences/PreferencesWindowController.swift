@@ -41,19 +41,19 @@ final class PreferencesWindowController: NSWindowController {
 	
 	@IBAction func showGitHubPreference(_ sender:NSToolbarItem?) {
 
-		contentViewController = try! Storyboard.GistPreferenceView.getInitialController()
+		contentViewController = try! Storyboard.gistPreferenceView.instantiateController()
 	}
 	
 	@IBAction func showTwitterPreference(_ sender:NSToolbarItem?) {
 		
-		contentViewController = try! Storyboard.TwitterPreferenceView.getControllerByIdentifier(identifier: twitterPreferenceType.storyboardID)
+		contentViewController = try! Storyboard.twitterPreferenceView.instantiateController(withIdentifier: twitterPreferenceType.storyboardID)
 	}
 	
     override func windowDidLoad() {
 
 		super.windowDidLoad()
 
-		contentViewController = try! Storyboard.GistPreferenceView.getInitialController()
+		contentViewController = try! Storyboard.gistPreferenceView.instantiateController()
     }
 	
 	override func flagsChanged(with theEvent: NSEvent) {

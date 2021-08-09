@@ -63,6 +63,11 @@
 		B13CA7922478E9180059F306 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B13CA7912478E9180059F306 /* ESGists */; };
 		B140C84F23E0820B0009D57C /* MediaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C84E23E0820B0009D57C /* MediaEntity.swift */; };
 		B140C85123E082960009D57C /* EntityUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C85023E082960009D57C /* EntityUnit.swift */; };
+		B14500ED26C13D9E00647476 /* SearchTweetsContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14500EC26C13D9E00647476 /* SearchTweetsContentsController.swift */; };
+		B14500EF26C14D6F00647476 /* SearchTweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14500EE26C14D6F00647476 /* SearchTweetsViewController.swift */; };
+		B14500F226C14E4600647476 /* SearchTweetsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14500F126C14E4600647476 /* SearchTweetsWindowController.swift */; };
+		B14500FB26C160EC00647476 /* SearchTweetsWindowControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14500FA26C160EC00647476 /* SearchTweetsWindowControllerDelegate.swift */; };
+		B14500FD26C168B900647476 /* SearchTweetsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14500FC26C168B900647476 /* SearchTweetsWindow.swift */; };
 		B1508BDB23E92E9800973728 /* TimelineKindState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDA23E92E9800973728 /* TimelineKindState.swift */; };
 		B1508BDD23E92F0C00973728 /* TimelineKindStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */; };
 		B1508BE023E9435600973728 /* HashtagsContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDF23E9435600973728 /* HashtagsContentsController.swift */; };
@@ -432,6 +437,11 @@
 		B139E0C123F0063600EEA5BE /* RegularExpressionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionExtension.swift; sourceTree = "<group>"; };
 		B140C84E23E0820B0009D57C /* MediaEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEntity.swift; sourceTree = "<group>"; };
 		B140C85023E082960009D57C /* EntityUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityUnit.swift; sourceTree = "<group>"; };
+		B14500EC26C13D9E00647476 /* SearchTweetsContentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTweetsContentsController.swift; sourceTree = "<group>"; };
+		B14500EE26C14D6F00647476 /* SearchTweetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTweetsViewController.swift; sourceTree = "<group>"; };
+		B14500F126C14E4600647476 /* SearchTweetsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTweetsWindowController.swift; sourceTree = "<group>"; };
+		B14500FA26C160EC00647476 /* SearchTweetsWindowControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTweetsWindowControllerDelegate.swift; sourceTree = "<group>"; };
+		B14500FC26C168B900647476 /* SearchTweetsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTweetsWindow.swift; sourceTree = "<group>"; };
 		B1508BDA23E92E9800973728 /* TimelineKindState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineKindState.swift; sourceTree = "<group>"; };
 		B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineKindStateController.swift; sourceTree = "<group>"; };
 		B1508BDF23E9435600973728 /* HashtagsContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagsContentsController.swift; sourceTree = "<group>"; };
@@ -754,6 +764,7 @@
 				B15EE28623CE7667005B268A /* TimelineViewController.swift */,
 				B15EE28723CE7667005B268A /* TimelineViewController+Display.swift */,
 				B15EE28823CE7667005B268A /* TimelineViewController+MainWindow.swift */,
+				B14500EE26C14D6F00647476 /* SearchTweetsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -833,6 +844,16 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		B14500F026C14E3500647476 /* WindowController */ = {
+			isa = PBXGroup;
+			children = (
+				B14500FC26C168B900647476 /* SearchTweetsWindow.swift */,
+				B14500F126C14E4600647476 /* SearchTweetsWindowController.swift */,
+				B14500FA26C160EC00647476 /* SearchTweetsWindowControllerDelegate.swift */,
+			);
+			path = WindowController;
+			sourceTree = "<group>";
+		};
 		B1508BDE23E9433000973728 /* ContentsController */ = {
 			isa = PBXGroup;
 			children = (
@@ -840,6 +861,7 @@
 				B1508BE323E9472000973728 /* TimelineContentsController.swift */,
 				B1508BEB23E9B3E000973728 /* TimelineContentsControllerDelegate.swift */,
 				B1508BDF23E9435600973728 /* HashtagsContentsController.swift */,
+				B14500EC26C13D9E00647476 /* SearchTweetsContentsController.swift */,
 				B191D86A23EC242C00590948 /* RelatedTweetsContentsController.swift */,
 				B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */,
 				B1508BE523E995E500973728 /* MyTweetsContentsController.swift */,
@@ -884,13 +906,6 @@
 				B15EE21723CE761C005B268A /* Colors.swift */,
 			);
 			path = Constants;
-			sourceTree = "<group>";
-		};
-		B15EE21C23CE762A005B268A /* Editors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Editors;
 			sourceTree = "<group>";
 		};
 		B15EE21D23CE7636005B268A /* Menu */ = {
@@ -1021,6 +1036,7 @@
 				B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */,
 				B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */,
 				B122598C23EA89F5006D819D /* ViewController */,
+				B14500F026C14E3500647476 /* WindowController */,
 				B1508BDE23E9433000973728 /* ContentsController */,
 				B122598B23EA89C8006D819D /* SupportTypes */,
 				B1C4410E23E0503C00C4715A /* Table */,
@@ -1233,7 +1249,6 @@
 				B15EE1DC23CE706C005B268A /* Alerts */,
 				B15EE20C23CE7612005B268A /* Codes */,
 				B15EE21323CE761C005B268A /* Constants */,
-				B15EE21C23CE762A005B268A /* Editors */,
 				B15EE22423CE7648005B268A /* Network */,
 				B15EE23223CE7658005B268A /* References */,
 				B15EE22723CE7658005B268A /* Settings */,
@@ -1814,6 +1829,7 @@
 				B122599223EAB8F5006D819D /* TimelineTabViewItemInformation.swift in Sources */,
 				B15EE26223CE7658005B268A /* PostDataContainer.swift in Sources */,
 				B15EE20A23CE7593005B268A /* TwitterText.swift in Sources */,
+				B14500ED26C13D9E00647476 /* SearchTweetsContentsController.swift in Sources */,
 				B15EE2A223CE7667005B268A /* TimelineStatusView.swift in Sources */,
 				B15EE20823CE7593005B268A /* TwitterOpenFeatures.swift in Sources */,
 				B1508BE423E9472000973728 /* TimelineContentsController.swift in Sources */,
@@ -1839,6 +1855,7 @@
 				B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */,
 				B15EE26823CE7658005B268A /* PreferencesWindowController.swift in Sources */,
 				B15EE21223CE7612005B268A /* CaptureInfo.swift in Sources */,
+				B14500F226C14E4600647476 /* SearchTweetsWindowController.swift in Sources */,
 				B15EE2A423CE7667005B268A /* TimelineViewController+Display.swift in Sources */,
 				B15EE25723CE7658005B268A /* Storyboard.swift in Sources */,
 				B1128CE423DED6A800DDA4EA /* SNSControllerPostError.swift in Sources */,
@@ -1847,7 +1864,9 @@
 				B15EE1FB23CE752D005B268A /* AppExtension.swift in Sources */,
 				B15EE20123CE757C005B268A /* DebugSupport.swift in Sources */,
 				B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */,
+				B14500FB26C160EC00647476 /* SearchTweetsWindowControllerDelegate.swift in Sources */,
 				B15EE25623CE7658005B268A /* AccountSeting.swift in Sources */,
+				B14500EF26C14D6F00647476 /* SearchTweetsViewController.swift in Sources */,
 				B1508BE023E9435600973728 /* HashtagsContentsController.swift in Sources */,
 				B15EE28F23CE7667005B268A /* LatestTweetManageable.swift in Sources */,
 				B17B938123CAB28C00E3B490 /* MainViewController.swift in Sources */,
@@ -1880,6 +1899,7 @@
 				B15EE29623CE7667005B268A /* AboutWindowController.swift in Sources */,
 				B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */,
 				B15EE25823CE7658005B268A /* PostData+Twitter.swift in Sources */,
+				B14500FD26C168B900647476 /* SearchTweetsWindow.swift in Sources */,
 				B1508BDD23E92F0C00973728 /* TimelineKindStateController.swift in Sources */,
 				B15EE1FF23CE7571005B268A /* BaseWindowController.swift in Sources */,
 				B1508BE623E995E500973728 /* MyTweetsContentsController.swift in Sources */,

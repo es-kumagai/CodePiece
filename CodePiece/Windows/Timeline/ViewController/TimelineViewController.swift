@@ -49,7 +49,7 @@ final class TimelineViewController: NSViewController {
 		}
 	}
 	
-	var contentsController: TimelineContentsController! {
+	unowned var contentsController: TimelineContentsController! {
 		
 		didSet {
 			

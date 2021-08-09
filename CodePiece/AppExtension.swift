@@ -108,8 +108,8 @@ extension NSApplication {
 	}
 }
 
-private let welcomeBoardWindowController = try! Storyboard.WelcomeBoard.getInitialController()
-private let preferencesWindowController = try! Storyboard.PreferencesWindow.getInitialController()
+private let welcomeBoardWindowController = try! Storyboard.welcomeBoard.instantiateController()
+private let preferencesWindowController = try! Storyboard.preferencesWindow.instantiateController()
 
 // MARK: - Windows
 

@@ -184,4 +184,9 @@ final class MenuController : NSObject {
 
 		timelineTabViewController?.currentTimelineKind = TimelineKind(rawValue: target.offset)
 	}
+	
+	@IBAction func openSearchTweetsWindow(_ sender: Any) {
+		
+		mainViewController?.openSearchTweetsWindow()
+	}
 }

@@ -49,6 +49,8 @@ final class MainViewController: NSViewController, NotificationObservable {
 	
 	private var postingHUD: ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
 	
+	private var activeSearchTweetsWindowController: SearchTweetsWindowController? = nil
+	
 	private(set) var latestTweet: ESTwitter.Status?
 	
 //	private(set) var selectedStatuses = Array<ESTwitter.Status>()
@@ -279,7 +281,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		NSApp.settings.saveAppState()
 	}
-		
+
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
@@ -420,6 +422,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		saveContents()
 		
 		notificationHandlers.releaseAll()
+		activeSearchTweetsWindowController?.close()
 		
 		super.viewWillDisappear()
 	}
@@ -551,6 +554,22 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 	}
 
+	func openSearchTweetsWindow() {
+		
+		guard activeSearchTweetsWindowController == nil else {
+			
+			activeSearchTweetsWindowController?.window?.makeKeyAndOrderFront(self)
+			return
+		}
+		
+		let controller = try! Storyboard.searchTweetsWindow.instantiateController()
+
+		controller.showWindow(self)
+		controller.delegate = self
+
+		activeSearchTweetsWindowController = controller
+	}
+	
 	func openBrowserWithRelatedTweets() {
 		
 		guard canOpenBrowserWithRelatedTweets else {
@@ -662,5 +681,13 @@ extension MainViewController {
 			
 			updateControlsDisplayText()
 		}
+	}
+}
+
+extension MainViewController : SearchTweetsWindowControllerDelegate {
+
+	func searchTweetsWindowControllerWillClose(_ sender: SearchTweetsWindowController) {
+
+		activeSearchTweetsWindowController = nil
 	}
 }

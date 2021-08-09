@@ -164,8 +164,8 @@ private extension TimelineTabViewController {
 	@discardableResult
 	func addTimelineViewController(with contentsController: TimelineContentsController, autoUpdateInterval interval: Double? = nil) -> TimelineViewController {
 		
-		let timelineViewController = (storyboard!.instantiateController(withIdentifier: "TimelineViewController") as! TimelineViewController)
-	
+		let timelineViewController = try! Storyboard.timelineViewController.instantiateController()
+
 		timelineViewController.contentsController = contentsController
 
 		if let interval = interval {

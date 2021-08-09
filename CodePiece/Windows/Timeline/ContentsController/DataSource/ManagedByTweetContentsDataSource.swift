@@ -34,33 +34,33 @@ extension ManagedByTweetContentsDataSource {
 		return items.count
 	}
 	
-	@discardableResult
-	func appendHashtags(hashtags: HashtagSet) -> ProcessExitStatus {
-		
-		let latestHashtags = items.first?.currentHashtags
-		let needAppending = { () -> Bool in
-			
-			switch latestHashtags {
-				
-			case .none:
-				return true
-				
-			case .some(let v):
-				return v != hashtags
-			}
-		}
-		
-		if needAppending() {
-			
-			let item = TimelineHashtagTableCellItem(previousHashtags: latestHashtags, currentHashtags: hashtags)
-			
-			items.insert(item, at: 0)
-			
-			return .passed
-		}
-		else {
-			
-			return .aborted(in: -1)
-		}
-	}
+//	@discardableResult
+//	func appendHashtags(hashtags: HashtagSet) -> ProcessExitStatus {
+//		
+//		let latestHashtags = items.first?.currentHashtags
+//		let needAppending = { () -> Bool in
+//			
+//			switch latestHashtags {
+//				
+//			case .none:
+//				return true
+//				
+//			case .some(let v):
+//				return v != hashtags
+//			}
+//		}
+//		
+//		if needAppending() {
+//			
+//			let item = TimelineHashtagTableCellItem(previousHashtags: latestHashtags, currentHashtags: hashtags)
+//			
+//			items.insert(item, at: 0)
+//			
+//			return .passed
+//		}
+//		else {
+//			
+//			return .aborted(in: -1)
+//		}
+//	}
 }

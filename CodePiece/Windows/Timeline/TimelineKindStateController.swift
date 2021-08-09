@@ -15,6 +15,8 @@ import Ocean
 	case myTweets = 1
 	case mentions = 2
 	case relatedTweets = 3
+	
+	case searchTweets = -1
 }
 
 enum TimelineState {
@@ -163,6 +165,9 @@ extension TimelineKind : CustomStringConvertible {
 			
 		case .relatedTweets:
 			return "Related Tweets"
+			
+		case .searchTweets:
+			return "Search Tweets"
 		}
 	}
 }

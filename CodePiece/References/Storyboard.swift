@@ -13,11 +13,13 @@ struct StoryboardItem<Controller> {
 	var name: String
 	var initialControllerType: Controller.Type
 	var bundle: Bundle?
+	var identifier: String?
 	
-	init(name:String, controllerType type: Controller.Type, bundle: Bundle? = nil) {
+	init(name:String, controllerType type: Controller.Type, identifier: String? = nil, bundle: Bundle? = nil) {
 		
 		self.name = name
 		self.initialControllerType = type
+		self.identifier = identifier
 		self.bundle = bundle
 	}
 	
@@ -26,7 +28,19 @@ struct StoryboardItem<Controller> {
 		return NSStoryboard(name: name, bundle: bundle)
 	}
 	
-	func getInitialController() throws -> Controller {
+	func instantiateController() throws -> Controller {
+	
+		if let identifier = identifier {
+			
+			return try instantiateController(withIdentifier: identifier)
+		}
+		else {
+			
+			return try instantiateInitialController()
+		}
+	}
+
+	func instantiateInitialController() throws -> Controller {
 		
 		guard let instance = storyboard.instantiateInitialController() else {
 			
@@ -41,7 +55,7 @@ struct StoryboardItem<Controller> {
 		return controller
 	}
 	
-	func getControllerByIdentifier(identifier: String) throws -> Controller {
+	func instantiateController(withIdentifier identifier: String) throws -> Controller {
 
 		let instance = storyboard.instantiateController(withIdentifier: identifier)
 		
@@ -62,8 +76,11 @@ enum StoryboardError : Error {
 
 struct Storyboard {
 	
-	static let WelcomeBoard = StoryboardItem(name: "WelcomeBoard", controllerType: WelcomeBoardWindowController.self)
-	static let PreferencesWindow = StoryboardItem(name: "PreferencesWindow", controllerType: PreferencesWindowController.self)
-	static let GistPreferenceView = StoryboardItem(name: "GistPreferenceView", controllerType: GistPreferenceViewController.self)
-	static let TwitterPreferenceView = StoryboardItem(name: "TwitterPreferenceView", controllerType: TwitterPreferenceViewController.self)
+	static let welcomeBoard = StoryboardItem(name: "WelcomeBoard", controllerType: WelcomeBoardWindowController.self)
+	static let preferencesWindow = StoryboardItem(name: "PreferencesWindow", controllerType: PreferencesWindowController.self)
+	static let gistPreferenceView = StoryboardItem(name: "GistPreferenceView", controllerType: GistPreferenceViewController.self)
+	static let twitterPreferenceView = StoryboardItem(name: "TwitterPreferenceView", controllerType: TwitterPreferenceViewController.self)
+	
+	static let timelineViewController = StoryboardItem(name: "Timeline", controllerType: TimelineViewController.self, identifier: "TimelineViewController")
+	static let searchTweetsWindow = StoryboardItem(name: "Timeline", controllerType: SearchTweetsWindowController.self, identifier: "SearchTweetsWindowController")
 }
