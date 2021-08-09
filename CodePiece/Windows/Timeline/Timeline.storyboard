@@ -195,6 +195,9 @@
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
+                                                <connections>
+                                                    <outlet property="delegate" destination="fCz-x6-ou8" id="V0f-gR-JCa"/>
+                                                </connections>
                                             </textField>
                                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iNb-9c-NCh">
                                                 <rect key="frame" x="196" y="-6" width="77" height="32"/>
@@ -244,6 +247,7 @@
                     <connections>
                         <outlet property="containerView" destination="mSd-QD-oud" id="wjb-nW-Cj6"/>
                         <outlet property="keywordsTextField" destination="ZPI-AG-y83" id="bmD-tR-VNf"/>
+                        <outlet property="searchButton" destination="iNb-9c-NCh" id="4Ta-m7-bn7"/>
                     </connections>
                 </viewController>
                 <customObject id="rar-yX-yKT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

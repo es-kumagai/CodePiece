@@ -761,10 +761,10 @@
 		B122598C23EA89F5006D819D /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B14500EE26C14D6F00647476 /* SearchTweetsViewController.swift */,
 				B15EE28623CE7667005B268A /* TimelineViewController.swift */,
 				B15EE28723CE7667005B268A /* TimelineViewController+Display.swift */,
 				B15EE28823CE7667005B268A /* TimelineViewController+MainWindow.swift */,
-				B14500EE26C14D6F00647476 /* SearchTweetsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -844,7 +844,7 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		B14500F026C14E3500647476 /* WindowController */ = {
+		B14500FF26C17F9E00647476 /* WindowController */ = {
 			isa = PBXGroup;
 			children = (
 				B14500FC26C168B900647476 /* SearchTweetsWindow.swift */,
@@ -858,14 +858,14 @@
 			isa = PBXGroup;
 			children = (
 				B191D87423EC6D9100590948 /* DataSource */,
-				B1508BE323E9472000973728 /* TimelineContentsController.swift */,
-				B1508BEB23E9B3E000973728 /* TimelineContentsControllerDelegate.swift */,
 				B1508BDF23E9435600973728 /* HashtagsContentsController.swift */,
-				B14500EC26C13D9E00647476 /* SearchTweetsContentsController.swift */,
+				B122598F23EA90F0006D819D /* MentionsContentsController.swift */,
+				B1508BE523E995E500973728 /* MyTweetsContentsController.swift */,
 				B191D86A23EC242C00590948 /* RelatedTweetsContentsController.swift */,
 				B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */,
-				B1508BE523E995E500973728 /* MyTweetsContentsController.swift */,
-				B122598F23EA90F0006D819D /* MentionsContentsController.swift */,
+				B14500EC26C13D9E00647476 /* SearchTweetsContentsController.swift */,
+				B1508BE323E9472000973728 /* TimelineContentsController.swift */,
+				B1508BEB23E9B3E000973728 /* TimelineContentsControllerDelegate.swift */,
 			);
 			path = ContentsController;
 			sourceTree = "<group>";
@@ -1035,8 +1035,8 @@
 				B1508BED23E9BCF100973728 /* TimelineTabViewController.swift */,
 				B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */,
 				B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */,
+				B14500FF26C17F9E00647476 /* WindowController */,
 				B122598C23EA89F5006D819D /* ViewController */,
-				B14500F026C14E3500647476 /* WindowController */,
 				B1508BDE23E9433000973728 /* ContentsController */,
 				B122598B23EA89C8006D819D /* SupportTypes */,
 				B1C4410E23E0503C00C4715A /* Table */,

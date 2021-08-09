@@ -12,6 +12,7 @@ class SearchTweetsViewController: NSViewController {
 
 	@IBOutlet weak var keywordsTextField: NSTextField!
 	@IBOutlet weak var containerView: NSView!
+	@IBOutlet weak var searchButton: NSButton!
 	
 	private(set) var timelineViewController: TimelineViewController!
 	private(set) var contentsController: SearchTweetsContentsController!
@@ -32,5 +33,13 @@ class SearchTweetsViewController: NSViewController {
 		let keywords = keywordsTextField.stringValue
 		
 		contentsController.searchQuery = keywords
+	}
+}
+
+extension SearchTweetsViewController : NSTextFieldDelegate {
+
+	func controlTextDidEndEditing(_ obj: Notification) {
+		
+		searchButton.performClick(self)
 	}
 }
