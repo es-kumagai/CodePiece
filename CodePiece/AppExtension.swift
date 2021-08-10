@@ -34,6 +34,21 @@ extension NSApplication {
 		return baseViewController?.timelineTabViewController
 	}
 	
+	var currentSelectedStatuses: [Status] {
+		
+		switch keyWindow?.contentViewController {
+		
+		case let viewController as BaseViewController:
+			return viewController.timelineTabViewController!.currentSelectedStatuses
+			
+		case let viewController as SearchTweetsViewController:
+			return viewController.currentSelectedStatuses
+			
+		default:
+			return []
+		}
+	}
+	
 	static func readyForUse() {
 		
 		guard !_isReadyForUse else {

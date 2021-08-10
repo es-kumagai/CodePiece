@@ -114,7 +114,7 @@ final class MenuController : NSObject {
 	}
 	
 	@IBAction func clearCode(_ sender: NSMenuItem?) {
-		
+
 		mainViewController?.clearCodeText()
 	}
 	
@@ -188,5 +188,28 @@ final class MenuController : NSObject {
 	@IBAction func openSearchTweetsWindow(_ sender: Any) {
 		
 		mainViewController?.openSearchTweetsWindow()
+	}
+}
+
+extension MenuController {
+	
+	var canReplyTo: Bool {
+		
+		return NSApp.currentSelectedStatuses.count == 1
+	}
+	
+	@IBAction func replyTo(_ sender: NSMenuItem) {
+		
+		TimelineReplyToSelectionRequestNotification().post()
+	}
+	
+	var canMakeThread: Bool {
+		
+		return mainViewController?.canMakeThread ?? false
+	}
+	
+	@IBAction func makeThread(_ sender: NSMenuItem) {
+		
+		mainViewController?.setMakeThread(sender)
 	}
 }

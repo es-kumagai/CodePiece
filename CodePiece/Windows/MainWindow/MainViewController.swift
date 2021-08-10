@@ -361,6 +361,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		observe(TimelineReplyToSelectionRequestNotification.self) { [unowned self] notification in
 			
 			setReplyTo(notification)
+			view.window?.makeKeyAndOrderFront(self)
 		}
 		
 		observe(TwitterController.AuthorizationStateInvalidNotification.self) { [unowned self] notification in
@@ -655,7 +656,7 @@ extension MainViewController {
 		
 		withChangeValue(for: "canPost") {
 		
-			statusForReplyTo = NSApp.timelineTabViewController.currentSelectedStatuses.first!
+			statusForReplyTo = NSApp.currentSelectedStatuses.first!
 			updateControlsDisplayText()
 		}
 	}

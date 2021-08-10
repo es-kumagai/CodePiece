@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ESTwitter
 
 class SearchTweetsViewController: NSViewController {
 
@@ -33,6 +34,26 @@ class SearchTweetsViewController: NSViewController {
 		let keywords = keywordsTextField.stringValue
 		
 		contentsController.searchQuery = keywords
+	}
+	
+	var currentSelectedCells: [TimelineViewController.SelectingStatusInfo] {
+	
+		return timelineViewController.timelineSelectedStatuses
+	}
+
+	var currentSelectedStatuses: [Status] {
+		
+		return currentSelectedCells.compactMap { $0.status }
+	}
+
+	var canReplyTo: Bool {
+	
+		return canReplyToSelectedStatuses
+	}
+
+	var canReplyToSelectedStatuses: Bool {
+		
+		return currentSelectedStatuses.count == 1
 	}
 }
 

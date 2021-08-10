@@ -35,7 +35,7 @@ extension MainViewController /*ViewControllerSelectable*/ {
 	
 	var canReplyToSelectedStatuses: Bool {
 		
-		return NSApp.timelineTabViewController.currentSelectedStatuses.count == 1
+		return NSApp.currentSelectedStatuses.count == 1
 	}
 }
 
@@ -57,11 +57,6 @@ extension MainViewController /*LatestTweetReplyable*/ {
 
 extension MainViewController {
 
-	var canReplyTo: Bool {
-	
-		return canReplyToSelectedStatuses
-	}
-	
 	var canMakeThread: Bool {
 	
 		return canReplyToLatestTweet
@@ -80,7 +75,7 @@ extension MainViewController {
 	
 	@IBAction func setReplyTo(_ sender: Any) {
 		
-		guard canReplyTo else {
+		guard canReplyToSelectedStatuses else {
 			
 			clearReplyingStatus()
 			return
@@ -95,29 +90,5 @@ extension MainViewController {
 
 		focusToDescription()
 		updateControlsDisplayText()
-	}
-}
-
-
-extension MenuController {
-	
-	var canReplyTo: Bool {
-		
-		return mainViewController?.canReplyTo ?? false
-	}
-	
-	@IBAction func replyTo(_ sender: NSMenuItem) {
-		
-		mainViewController?.setReplyTo(sender)
-	}
-	
-	var canMakeThread: Bool {
-		
-		return mainViewController?.canMakeThread ?? false
-	}
-	
-	@IBAction func makeThread(_ sender: NSMenuItem) {
-		
-		mainViewController?.setMakeThread(sender)
 	}
 }

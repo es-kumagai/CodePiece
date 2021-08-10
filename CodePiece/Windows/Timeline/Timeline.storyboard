@@ -179,7 +179,7 @@
                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Av8-g6-xL0">
                                 <rect key="frame" x="0.0" y="388" width="300" height="37"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LMT-E2-59d">
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LMT-E2-59d">
                                         <rect key="frame" x="8" y="8" width="284" height="21"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZPI-AG-y83">
@@ -270,7 +270,7 @@
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="271" minWidth="40" maxWidth="1000" id="Ivl-66-GC3">
+                                                        <tableColumn width="242" minWidth="40" maxWidth="1000" id="Ivl-66-GC3">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -283,14 +283,14 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="TimelineCell" verticalHuggingPriority="200" id="EPr-Vx-D5T" customClass="TimelineTableCellView" customModule="CodePiece" customModuleProvider="target">
-                                                                    <rect key="frame" x="1" y="1" width="280" height="65"/>
+                                                                    <rect key="frame" x="11" y="1" width="251" height="65"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="95K-Qn-5Fy">
-                                                                            <rect key="frame" x="4" y="-2" width="272" height="5"/>
+                                                                            <rect key="frame" x="4" y="-2" width="243" height="5"/>
                                                                         </box>
                                                                         <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tA6-7X-cfd" userLabel="Cell Stack View">
-                                                                            <rect key="frame" x="8" y="8" width="264" height="49"/>
+                                                                            <rect key="frame" x="8" y="8" width="235" height="49"/>
                                                                             <subviews>
                                                                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="4" horizontalStackHuggingPriority="220" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z2b-eM-lCF" userLabel="Symbol Stack View">
                                                                                     <rect key="frame" x="0.0" y="7" width="24" height="42"/>
@@ -329,10 +329,10 @@
                                                                                     </customSpacing>
                                                                                 </stackView>
                                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="11" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="noz-rg-DBN">
-                                                                                    <rect key="frame" x="32" y="6" width="232" height="43"/>
+                                                                                    <rect key="frame" x="32" y="6" width="203" height="43"/>
                                                                                     <subviews>
                                                                                         <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="O6Q-X3-JGv">
-                                                                                            <rect key="frame" x="-2" y="27" width="236" height="16"/>
+                                                                                            <rect key="frame" x="-2" y="27" width="207" height="16"/>
                                                                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="ODA-Iz-lxZ">
                                                                                                 <font key="font" metaFont="system"/>
                                                                                                 <color key="textColor" red="0.208450675" green="0.33309835199999999" blue="0.41607216000000002" alpha="1" colorSpace="deviceRGB"/>
@@ -340,10 +340,10 @@
                                                                                             </textFieldCell>
                                                                                         </textField>
                                                                                         <stackView distribution="equalSpacing" orientation="horizontal" alignment="firstBaseline" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rKX-Rp-fpk">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="232" height="16"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="203" height="16"/>
                                                                                             <subviews>
                                                                                                 <textField horizontalHuggingPriority="100" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="voY-Cq-wNS">
-                                                                                                    <rect key="frame" x="-2" y="0.0" width="204" height="16"/>
+                                                                                                    <rect key="frame" x="-2" y="0.0" width="175" height="16"/>
                                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Username" id="3rw-nA-foN">
                                                                                                         <font key="font" metaFont="systemBold"/>
                                                                                                         <color key="textColor" name="UsernameLabelColor"/>
@@ -351,7 +351,7 @@
                                                                                                     </textFieldCell>
                                                                                                 </textField>
                                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-M6-CoS">
-                                                                                                    <rect key="frame" x="206" y="0.0" width="28" height="14"/>
+                                                                                                    <rect key="frame" x="177" y="0.0" width="28" height="14"/>
                                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="date" id="bd7-Tg-lgn">
                                                                                                         <font key="font" metaFont="message" size="11"/>
                                                                                                         <color key="textColor" name="TimelineDateLabelColor"/>
@@ -407,11 +407,11 @@
                                                                     </connections>
                                                                 </tableCellView>
                                                                 <tableCellView identifier="TimelineHashtagCell" id="uqj-Bq-9BT" customClass="TimelineHashtagTableCellView" customModule="CodePiece" customModuleProvider="target">
-                                                                    <rect key="frame" x="1" y="68" width="280" height="20"/>
+                                                                    <rect key="frame" x="11" y="68" width="251" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <stackView distribution="equalSpacing" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qGW-9G-GJy">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="20"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="251" height="20"/>
                                                                             <subviews>
                                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a5O-QW-K0G">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="106" height="20"/>
@@ -461,7 +461,7 @@
                                                                                     </customSpacing>
                                                                                 </stackView>
                                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pgc-6W-tht">
-                                                                                    <rect key="frame" x="174" y="0.0" width="106" height="20"/>
+                                                                                    <rect key="frame" x="145" y="0.0" width="106" height="20"/>
                                                                                     <subviews>
                                                                                         <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4OO-ox-M3p">
                                                                                             <rect key="frame" x="0.0" y="3" width="98" height="14"/>
