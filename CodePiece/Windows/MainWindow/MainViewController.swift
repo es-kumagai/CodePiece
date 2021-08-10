@@ -504,57 +504,6 @@ final class MainViewController: NSViewController, NotificationObservable {
 		}
 	}
 
-	var canOpenBrowserWithCurrentTwitterStatus: Bool {
-		
-//		guard let tabViewController = NSApp.timelineTabViewController else {
-//
-//			assertionFailure("UNEXPECTED ERROR: TimelineTabViewController is not ready.")
-//			return false
-//		}
-		
-		return NSApp.timelineTabViewController.isCurrentSingleRowSelected
-	}
-	
-	func openBrowserWithCurrentTwitterStatus() {
-		
-		guard canOpenBrowserWithCurrentTwitterStatus else {
-			
-			let message = "UNEXPECTED ERROR: Try to open selection with browser, but not ready to open browser. (selection: \(NSApp.timelineTabViewController.currentSelectedCells.map { $0.row })"
-			
-			NSLog("%@", message)
-//			assertionFailure(message)
-			
-			return
-		}
-		
-		let selectedStatuses = NSApp.timelineTabViewController.currentSelectedStatuses
-
-		guard selectedStatuses.count > 0 else {
-			
-			let message = "UNEXPECTED ERROR: Try to open selection with browser, but don't ready to open current status. (selection: \(NSApp.timelineTabViewController.currentSelectedStatuses)"
-			
-			NSLog("%@", message)
-//			assertionFailure(message)
-			
-			return
-		}
-		
-		let status = selectedStatuses.first!
-		
-		do {
-			
-			try ESTwitter.Browser.openWithStatus(status: status)
-		}
-		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
-			
-			showErrorAlert(withTitle: "Failed to open browser", message: reason)
-		}
-		catch {
-			
-			showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
-		}
-	}
-
 	func openSearchTweetsWindow() {
 		
 		guard activeSearchTweetsWindowController == nil else {

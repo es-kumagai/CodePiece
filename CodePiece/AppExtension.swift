@@ -49,6 +49,21 @@ extension NSApplication {
 		}
 	}
 	
+	var currentSelectedCells: [TimelineViewController.SelectingStatusInfo] {
+		
+		switch keyWindow?.contentViewController {
+		
+		case let viewController as BaseViewController:
+			return viewController.timelineTabViewController!.currentSelectedCells
+			
+		case let viewController as SearchTweetsViewController:
+			return viewController.currentSelectedCells
+			
+		default:
+			return []
+		}
+	}
+	
 	static func readyForUse() {
 		
 		guard !_isReadyForUse else {
@@ -148,5 +163,50 @@ extension NSApplication {
 	func closePreferencesWindow() {
 
 		preferencesWindowController.close()
+	}
+	
+	var canOpenBrowserWithCurrentTwitterStatus: Bool {
+	
+		NSApp.currentSelectedStatuses.count == 1
+	}
+	
+	func openBrowserWithCurrentTwitterStatus() {
+		
+		guard canOpenBrowserWithCurrentTwitterStatus else {
+			
+			let message = "UNEXPECTED ERROR: Try to open selection with browser, but not ready to open browser. (selection: \(NSApp.currentSelectedCells.map { $0.row })"
+			
+			NSLog("%@", message)
+//			assertionFailure(message)
+			
+			return
+		}
+		
+		let selectedStatuses = NSApp.currentSelectedStatuses
+
+		guard selectedStatuses.count > 0 else {
+			
+			let message = "UNEXPECTED ERROR: Try to open selection with browser, but don't ready to open current status. (selection: \(NSApp.currentSelectedStatuses)"
+			
+			NSLog("%@", message)
+//			assertionFailure(message)
+			
+			return
+		}
+		
+		let status = selectedStatuses.first!
+		
+		do {
+			
+			try ESTwitter.Browser.openWithStatus(status: status)
+		}
+		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
+			
+			showErrorAlert(withTitle: "Failed to open browser", message: reason)
+		}
+		catch {
+			
+			showErrorAlert(withTitle: "Failed to open browser", message: "Unknown error : \(error)")
+		}
 	}
 }

@@ -135,7 +135,7 @@ final class MenuController : NSObject {
 	
 	var canOpenBrowserWithCurrentTwitterStatus: Bool {
 		
-		return mainViewController?.canOpenBrowserWithCurrentTwitterStatus ?? false
+		return NSApp.canOpenBrowserWithCurrentTwitterStatus
 	}
 	
 	var canOpenBrowserWithRelatedTweets: Bool {
@@ -160,7 +160,7 @@ final class MenuController : NSObject {
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {
 		
-		mainViewController?.openBrowserWithCurrentTwitterStatus()
+		NSApp.openBrowserWithCurrentTwitterStatus()
 	}
 
 	@IBAction func openBrowserWithRelatedStatuses(_ sender: AnyObject) {
