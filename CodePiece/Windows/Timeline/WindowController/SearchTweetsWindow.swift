@@ -10,4 +10,15 @@ import Cocoa
 
 final class SearchTweetsWindow: NSWindow {
 
+	override func becomeMain() {
+		
+		super.becomeMain()
+
+		guard let contentViewController = contentViewController as? SearchTweetsViewController else {
+			
+			return
+		}
+		
+		makeFirstResponder(contentViewController.keywordsTextField)
+	}
 }

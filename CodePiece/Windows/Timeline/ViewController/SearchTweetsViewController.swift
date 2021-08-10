@@ -11,6 +11,7 @@ import ESTwitter
 
 class SearchTweetsViewController: NSViewController {
 
+	@IBOutlet weak var searchView: NSView!
 	@IBOutlet weak var keywordsTextField: NSTextField!
 	@IBOutlet weak var containerView: NSView!
 	@IBOutlet weak var searchButton: NSButton!
@@ -26,14 +27,20 @@ class SearchTweetsViewController: NSViewController {
 		
 		timelineViewController.contentsController = contentsController
 
-		view.addSubview(timelineViewController.view)
+		timelineViewController.view.frame = containerView.bounds
+		containerView.addSubview(timelineViewController.view)
     }
-    
+
 	@IBAction func pushSearchButton(_ sender: NSButton) {
 		
 		let keywords = keywordsTextField.stringValue
 		
 		contentsController.searchQuery = keywords
+	}
+	
+	func focusToKeywordsTextField() {
+		
+		keywordsTextField.becomeFirstResponder()
 	}
 	
 	var currentSelectedCells: [TimelineViewController.SelectingStatusInfo] {

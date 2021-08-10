@@ -145,7 +145,7 @@
             <objects>
                 <windowController storyboardIdentifier="SearchTweetsWindowController" id="s81-pk-D4L" customClass="SearchTweetsWindowController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Search Tweets" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="gQJ-Ky-xtw" customClass="SearchTweetsWindow" customModule="CodePiece" customModuleProvider="target">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES" fullScreenDisallowsTiling="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="425" y="473" width="300" height="420"/>
@@ -173,78 +173,72 @@
             <objects>
                 <viewController title="Search Tweets" id="fCz-x6-ou8" customClass="SearchTweetsViewController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="c5X-q5-LQ0">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="425"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="501"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Av8-g6-xL0">
-                                <rect key="frame" x="0.0" y="388" width="300" height="37"/>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LMT-E2-59d">
+                                <rect key="frame" x="0.0" y="480" width="300" height="21"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LMT-E2-59d">
-                                        <rect key="frame" x="8" y="8" width="284" height="21"/>
-                                        <subviews>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZPI-AG-y83">
-                                                <rect key="frame" x="0.0" y="0.0" width="213" height="21"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter keywords" drawsBackground="YES" id="KbM-zK-sMa">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                                <connections>
-                                                    <outlet property="delegate" destination="fCz-x6-ou8" id="V0f-gR-JCa"/>
-                                                </connections>
-                                            </textField>
-                                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iNb-9c-NCh">
-                                                <rect key="frame" x="214" y="-6" width="77" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="J3x-q1-gs7">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="pushSearchButton:" target="fCz-x6-ou8" id="UGd-pl-I64"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZPI-AG-y83">
+                                        <rect key="frame" x="8" y="0.0" width="213" height="21"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter keywords" drawsBackground="YES" id="KbM-zK-sMa">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="fCz-x6-ou8" id="V0f-gR-JCa"/>
+                                        </connections>
+                                    </textField>
+                                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iNb-9c-NCh">
+                                        <rect key="frame" x="222" y="-6" width="77" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="J3x-q1-gs7">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="pushSearchButton:" target="fCz-x6-ou8" id="UGd-pl-I64"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="8" right="8" top="8" bottom="8"/>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="mSd-QD-oud">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="388"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="480"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="480" id="SlE-uX-0do"/>
+                                    <constraint firstAttribute="width" constant="300" id="vMz-er-YEp"/>
+                                </constraints>
                             </containerView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Av8-g6-xL0" firstAttribute="top" secondItem="c5X-q5-LQ0" secondAttribute="top" id="JHS-o1-M0x"/>
-                            <constraint firstItem="Av8-g6-xL0" firstAttribute="leading" secondItem="c5X-q5-LQ0" secondAttribute="leading" id="KBm-sD-gEN"/>
-                            <constraint firstItem="mSd-QD-oud" firstAttribute="top" secondItem="Av8-g6-xL0" secondAttribute="bottom" id="QG3-eE-AP0"/>
-                            <constraint firstItem="mSd-QD-oud" firstAttribute="leading" secondItem="c5X-q5-LQ0" secondAttribute="leading" id="RT3-Lh-bRk"/>
-                            <constraint firstAttribute="trailing" secondItem="mSd-QD-oud" secondAttribute="trailing" id="cUB-2q-mB3"/>
-                            <constraint firstAttribute="trailing" secondItem="Av8-g6-xL0" secondAttribute="trailing" id="hyz-CX-IG3"/>
-                            <constraint firstAttribute="bottom" secondItem="mSd-QD-oud" secondAttribute="bottom" id="kxl-q9-vGC"/>
+                            <constraint firstAttribute="trailing" secondItem="LMT-E2-59d" secondAttribute="trailing" id="2ah-bK-wpt"/>
+                            <constraint firstItem="LMT-E2-59d" firstAttribute="leading" secondItem="c5X-q5-LQ0" secondAttribute="leading" id="8uZ-c3-f3x"/>
+                            <constraint firstItem="mSd-QD-oud" firstAttribute="top" secondItem="LMT-E2-59d" secondAttribute="bottom" id="MUk-et-STF"/>
+                            <constraint firstItem="LMT-E2-59d" firstAttribute="top" secondItem="c5X-q5-LQ0" secondAttribute="top" id="YuS-ME-uQy"/>
+                            <constraint firstAttribute="bottom" secondItem="mSd-QD-oud" secondAttribute="bottom" id="abc-dV-VPu"/>
+                            <constraint firstAttribute="trailing" secondItem="mSd-QD-oud" secondAttribute="trailing" id="nMf-m6-BpO"/>
+                            <constraint firstItem="mSd-QD-oud" firstAttribute="leading" secondItem="c5X-q5-LQ0" secondAttribute="leading" id="zQm-Xb-XPy"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="containerView" destination="mSd-QD-oud" id="wjb-nW-Cj6"/>
+                        <outlet property="containerView" destination="mSd-QD-oud" id="SbV-Se-cX3"/>
                         <outlet property="keywordsTextField" destination="ZPI-AG-y83" id="bmD-tR-VNf"/>
                         <outlet property="searchButton" destination="iNb-9c-NCh" id="4Ta-m7-bn7"/>
+                        <outlet property="searchView" destination="LMT-E2-59d" id="yVW-Cq-xsZ"/>
                     </connections>
                 </viewController>
                 <customObject id="rar-yX-yKT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1256" y="911.5"/>
+            <point key="canvasLocation" x="1319" y="914"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="p39-Kx-Uwi">
