@@ -2,6 +2,10 @@
 
 Change Logs.
 
+## 2.1.13
+
+* Tweets can be found by any keywords using search tweets window.
+
 ## 2.1.12
 
 * Hashtags text which typed in Hashtag text field is now splited with not only single-byte space but also any other whitespaces.

@@ -2025,6 +2025,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_BUNDLE_NAME = "CodePiece-Beta";
@@ -2034,6 +2035,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 2.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.Beta.XcodeSourceEditorExtension";
 				PRODUCT_NAME = "CodePiece Extension";
 				SKIP_INSTALL = YES;
@@ -2049,6 +2051,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_BUNDLE_NAME = CodePiece;
@@ -2058,6 +2061,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 2.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.XcodeSourceEditorExtension";
 				PRODUCT_NAME = "CodePiece Extension";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2395,6 +2399,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
@@ -2408,6 +2413,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
+				MARKETING_VERSION = 2.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.Beta";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = "CodePiece-Beta";
@@ -2426,6 +2432,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
@@ -2439,6 +2446,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
+				MARKETING_VERSION = 2.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = CodePiece;
