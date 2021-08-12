@@ -2,6 +2,10 @@
 
 Change Logs.
 
+## 2.1.14
+
+* Fix a bug that tweets related to current hashtags were not shown.
+
 ## 2.1.13
 
 * Tweets can be found by any keywords using search tweets window.
