@@ -36,15 +36,9 @@ extension UserMention : EntityUnit {
 
 extension UserMention {
 	
-	var url: URL {
+	var url: TwitterURL {
 		
-		var components = URLComponents()
-		
-		components.scheme = "https"
-		components.host = "twitter.com"
-		components.path = "/\(screenName)"
-		
-		return components.url!
+		TwitterURL(rawValue: "https://twitter.com/\(screenName)")
 	}
 }
 

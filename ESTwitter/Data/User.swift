@@ -20,7 +20,7 @@ public struct User {
 	public var entities: UserEntities
 	public var defaultProfile: Bool
 	public var contributorsEnabled: Bool
-	public var url: TwitterUrl?
+	public var url: TwitterURL?
 	public var favouritesCount: Int
 	public var utcOffset: Int?
 	public var id: UInt64
@@ -114,7 +114,7 @@ extension User : Decodable {
 		entities = try container.decode(UserEntities.self, forKey: .entities)
 		defaultProfile = try container.decode(Bool.self, forKey: .defaultProfile)
 		contributorsEnabled = try container.decode(Bool.self, forKey: .contributorsEnabled)
-		url = try container.decode(TwitterUrl?.self, forKey: .url)
+		url = try container.decode(TwitterURL?.self, forKey: .url)
 		favouritesCount = try container.decode(Int.self, forKey: .favouritesCount)
 		utcOffset = try container.decode(Int?.self, forKey: .utcOffset)
 		id = try container.decode(UInt64.self, forKey: .id)

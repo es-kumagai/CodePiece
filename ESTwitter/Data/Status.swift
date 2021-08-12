@@ -189,14 +189,14 @@ extension Status {
 				var indices: Indices
 				var color: NSColor
 				var displayText: String
-				var link: URL
+				var link: TwitterURL
 
 				init(_ entity: URLEntity, color: NSColor) {
 
 					self.indices = entity.indices
 					self.color = color
 					self.displayText = entity.displayUrl
-					self.link = entity.expandedUrl.url!
+					self.link = entity.expandedUrl
 				}
 
 				init(_ entity: HashtagEntity, color: NSColor) {
@@ -212,7 +212,7 @@ extension Status {
 					self.indices = entity.indices
 					self.color = color
 					self.displayText = entity.displayUrl
-					self.link = entity.expandedUrl.url!
+					self.link = entity.expandedUrl
 				}
 
 				init(_ entity: UserMention, color: NSColor) {
@@ -238,7 +238,7 @@ extension Status {
 					var results = baseAttributes
 
 					// FIXME: link の色に邪魔されて foregroundColor が実質無効になる様子です。
-					results[.link] = link
+					results[.link] = link.description
 					results[.foregroundColor] = color
 					results[.underlineStyle] = 0
 					results[.underlineColor] = NSColor.clear

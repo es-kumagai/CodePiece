@@ -48,27 +48,11 @@ extension Set where Element == RelatedTweetsContentsController.RelatedUser {
 		formUnion(relatedUsers)
 	}
 
-	func tweetFromAllUsersQuery(withQueryLengthMargin queryLengthMargin: Int) -> String {
+	func queryForSearchingAllUsersTweets() -> API.SearchQuery {
 	
-		let maxQueryLength = 500 - queryLengthMargin
-
-		// FIXME: ここを first で result を初期化して、prefix(from:) で連結処理するようにすると、どういうコードになるんだろう。
-		var result = ""
-
-		for user in appeareDateDescendingOrderedUsers() {
-		
-			let query = "\(result)\(result.isEmpty ? "" : " OR ")from:\(user.screenName)"
+		appeareDateDescendingOrderedUsers().reduce(into: API.SearchQuery()) { query, user in
 			
-			guard query.count <= maxQueryLength else {
-				
-				NSLog("Query is truncated characters to %d/%d: %@", result.count, maxQueryLength, result)
-				
-				return result
-			}
-			
-			result = query
+			query.or("from:\(user.screenName)")
 		}
-		
-		return result
 	}
 }

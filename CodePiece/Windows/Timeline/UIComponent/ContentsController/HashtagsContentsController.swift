@@ -73,7 +73,7 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
 		
-		let query = hashtags.twitterQueryText
+		let query = hashtags.searchQuery
 		
 		guard !query.isEmpty else {
 			

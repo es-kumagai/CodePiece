@@ -20,7 +20,7 @@ final class SearchTweetsContentsController : TimelineContentsController, Notific
 	
 	var dataSource = SimpleTweetContentsDataSource()
 	
-	var searchQuery: String = "" {
+	var searchQuery = API.SearchQuery() {
 
 		didSet (previousSearchQuery) {
 			

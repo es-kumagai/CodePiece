@@ -50,7 +50,7 @@ public final class Browser {
 		try open(url: url)
 	}
 	
-	public static func openWithUsername(username:String) throws {
+	public static func openWithUsername(_ username: String) throws {
 		
 		let string = "\(baseUrl)/\(username)"
 		
@@ -62,10 +62,10 @@ public final class Browser {
 		try open(url: url)
 	}
 	
-	public static func openWithQuery(query:String, language:String? = nil) throws {
+	public static func openWithQuery(_ query: API.SearchQuery, language: String? = nil) throws {
 		
 		let language = language ?? ""
-		let string = try "\(searchUrl)?f=tweets&vertical=default&q=\(escape(string: query))&src=typd&lang=\(escape(string: language))"
+		let string = try "\(searchUrl)?f=tweets&vertical=default&q=\(query.queryString)&src=typd&lang=\(escape(string: language))"
 		
 		guard let url = URL(string: string) else {
 			

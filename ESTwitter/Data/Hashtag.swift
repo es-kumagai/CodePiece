@@ -20,7 +20,7 @@ public protocol HashtagType {
 
 public struct Hashtag : HashtagType {
 	
-	private var rawValue: String!
+	private var rawValue: String
 	
 	public init() {
 		
@@ -37,8 +37,9 @@ public struct Hashtag : HashtagType {
 		self.init(hashtagValue)
 	}
 
-	public init(_ value:String) {
+	public init(_ value: String) {
 		
+		self.init()
 		self.value = value
 	}
 	
@@ -99,16 +100,9 @@ extension Hashtag {
 		return value.isEmpty
 	}
 	
-	public var url: URL {
+	public var url: TwitterURL {
 		
-		var components = URLComponents()
-		
-		components.scheme = "https"
-		components.host = "twitter.com"
-		components.path = "/hashtag/\(valueWithoutPrefix)"
-		components.query = "f=tweets"
-
-		return components.url!
+		TwitterURL(rawValue: "https://twitter.com/hashtag/\(valueWithoutPrefix)?f=tweets")
 	}
 }
 

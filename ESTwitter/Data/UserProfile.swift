@@ -13,14 +13,14 @@ extension User {
 		public var sidebarBorderColor: Color
 		public var sidebarFillColor: Color
 		public var backgroundTile: Bool
-		public var imageUrl: TwitterUrl
+		public var imageUrl: TwitterURL
 		public var linkColor: Color
-		public var imageUrlHttps: TwitterUrl
+		public var imageUrlHttps: TwitterURL
 		public var useBackgroundImage: Bool
 		public var textColor: Color
-		public var backgroundImageUrlHttps: TwitterUrl?
+		public var backgroundImageUrlHttps: TwitterURL?
 		public var backgroundColor: Color
-		public var backgroundImageUrl: TwitterUrl?
+		public var backgroundImageUrl: TwitterURL?
 	}
 }
 

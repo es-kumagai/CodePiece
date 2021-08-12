@@ -701,11 +701,9 @@ extension TwitterController {
 		DebugTime.print("📮 Post requested by API ... #3.3.4")
 	}
 	
-	func search(tweetWith query: String, options: API.SearchOptions = API.SearchOptions(), handler: @escaping (GetStatusesResult) -> Void) {
-
-		let query = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query
+	func search(tweetWith query: API.SearchQuery, options: API.SearchOptions = API.SearchOptions(), handler: @escaping (GetStatusesResult) -> Void) {
 		
-		api.search(usingQuery: query, options: options) { result in
+		api.search(usingQuery: query.queryString, options: options) { result in
 
 			switch result {
 				

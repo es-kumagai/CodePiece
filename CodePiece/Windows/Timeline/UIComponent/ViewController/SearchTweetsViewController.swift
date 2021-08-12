@@ -33,9 +33,7 @@ class SearchTweetsViewController: NSViewController {
 
 	@IBAction func pushSearchButton(_ sender: NSButton) {
 		
-		let keywords = keywordsTextField.stringValue
-		
-		contentsController.searchQuery = keywords
+		contentsController.searchQuery = API.SearchQuery(keywordsTextField.stringValue)
 	}
 	
 	func focusToKeywordsTextField() {

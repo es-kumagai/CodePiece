@@ -492,7 +492,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		
 		do {
 
-			try ESTwitter.Browser.openWithQuery(query: hashTagTextField.hashtags.twitterQueryText)
+			try ESTwitter.Browser.openWithQuery(hashTagTextField.hashtags.searchQuery)
 		}
 		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
 			
@@ -539,7 +539,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 				fatalError("INTERNAL ERROR: Failed to get the Related Tweets Contents Controller.")
 			}
 			
-			try ESTwitter.Browser.openWithQuery(query: timelineContents.relatedUsers.tweetFromAllUsersQuery(withQueryLengthMargin: 0))
+			try ESTwitter.Browser.openWithQuery(timelineContents.relatedUsers.queryForSearchingAllUsersTweets())
 		}
 		catch let ESTwitter.Browser.BrowseError.OperationFailure(reason: reason) {
 			

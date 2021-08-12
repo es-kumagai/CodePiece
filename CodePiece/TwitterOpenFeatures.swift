@@ -49,7 +49,7 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		
 		do {
 			
-			try ESTwitter.Browser.openWithUsername(username: username)
+			try ESTwitter.Browser.openWithUsername(username)
 		}
 		catch ESTwitter.Browser.BrowseError.OperationFailure(reason: let reason) {
 			

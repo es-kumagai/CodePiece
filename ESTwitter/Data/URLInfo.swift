@@ -9,8 +9,8 @@
 public struct URLInfo : Decodable {
 	
 	public var displayUrl: String?
-	public var expandedUrl: TwitterUrl?
-	public var url: TwitterUrl
+	public var expandedUrl: TwitterURL?
+	public var url: TwitterURL
 	public var indices: Indices
 	
 	public enum CodingKeys : String, CodingKey {
@@ -24,7 +24,7 @@ public struct URLInfo : Decodable {
 
 extension URLInfo {
 
-	public var effectiveUrl: TwitterUrl {
+	public var effectiveUrl: TwitterURL {
 		
 		return expandedUrl ?? url
 	}

@@ -17,7 +17,7 @@ public struct Place {
 	public var id:String
 	public var name: String
 	public var placeType: String
-	public var url: TwitterUrl
+	public var url: TwitterURL
 }
 
 extension Place : Decodable {

@@ -12,17 +12,17 @@ extension Sequence where Element : HashtagType {
 
 	public func sorted() -> [Element] {
 		
-		return sorted { $0.value < $1.value }
+		sorted { $0.value < $1.value }
 	}
 	
-	public var twitterQueryText: String {
+	public var searchQuery: API.SearchQuery {
 		
-		return twitterDisplayText
+		API.SearchQuery(words: map(\.value))
 	}
 	
 	public var twitterDisplayText: String {
 		
-		return map { $0.value }.joined(separator: " ")
+		map { $0.value }.joined(separator: " ")
 	}
 }
 
