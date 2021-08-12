@@ -52,7 +52,7 @@ extension Set where Element == RelatedTweetsContentsController.RelatedUser {
 	
 		appeareDateDescendingOrderedUsers().reduce(into: API.SearchQuery()) { query, user in
 			
-			query.or("from:\(user.screenName)")
+			query.or(user)
 		}
 	}
 }

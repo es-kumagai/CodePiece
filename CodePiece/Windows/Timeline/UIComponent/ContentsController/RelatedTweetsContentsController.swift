@@ -28,7 +28,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 		return .relatedTweets
 	}
 	
-	var dataSource = GroupedTweetsContentsDataSource()
+	var dataSource = GroupedTweetContentsDataSource()
 	
 	private var needsUpdate = false {
 		

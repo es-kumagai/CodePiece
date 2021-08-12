@@ -65,7 +65,7 @@ public final class Browser {
 	public static func openWithQuery(_ query: API.SearchQuery, language: String? = nil) throws {
 		
 		let language = language ?? ""
-		let string = try "\(searchUrl)?f=tweets&vertical=default&q=\(query.queryString)&src=typd&lang=\(escape(string: language))"
+		let string = try "\(searchUrl)?f=tweets&vertical=default&q=\(query.urlQueryString)&src=typd&lang=\(escape(string: language))"
 		
 		guard let url = URL(string: string) else {
 			

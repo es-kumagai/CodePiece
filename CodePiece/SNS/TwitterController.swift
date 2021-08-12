@@ -703,7 +703,7 @@ extension TwitterController {
 	
 	func search(tweetWith query: API.SearchQuery, options: API.SearchOptions = API.SearchOptions(), handler: @escaping (GetStatusesResult) -> Void) {
 		
-		api.search(usingQuery: query.queryString, options: options) { result in
+ 		api.search(usingQuery: query.queryString, options: options) { result in
 
 			switch result {
 				

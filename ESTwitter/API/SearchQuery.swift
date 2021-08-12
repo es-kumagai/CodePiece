@@ -42,10 +42,10 @@ public extension API.SearchQuery {
 	var queryString: String {
 		
 		let escapedWords = words
+			.map { $0.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! }
 			.enumerated()
 			.map { $0 == 0 ? $1 : " \($1)" }
-			.map { $0.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! }
-		
+
 		return escapedWords.reduce(into: "") { result, word in
 		
 			guard result.count + word.count < Self.maxLength else {
@@ -55,6 +55,13 @@ public extension API.SearchQuery {
 			
 			result += word
 		}
+	}
+	
+	var urlQueryString: String {
+		
+		let queryString = self.queryString
+		
+		return queryString.replacingOccurrences(of: " ", with: "%20", options: .literal, range: queryString.startIndex ..< queryString.endIndex)
 	}
 	
 	var isEmpty: Bool {
@@ -92,6 +99,21 @@ public extension API.SearchQuery {
 	mutating func exclude<WORD: StringProtocol>(_ word: WORD) {
 		
 		append(word, wordPrefix: "-")
+	}
+	
+	mutating func and(_ user: User) {
+		
+		append("from:\(user.screenName)", wordOperator: "AND", inQuotationMarks: false)
+	}
+	
+	mutating func or(_ user: User) {
+		
+		append("from:\(user.screenName)", wordOperator: "OR", inQuotationMarks: false)
+	}
+	
+	mutating func exclude(_ user: User) {
+		
+		append("from:\(user.screenName)", wordPrefix: "-", inQuotationMarks: false)
 	}
 }
 

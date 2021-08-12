@@ -18,7 +18,7 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		return .hashtags
 	}
 	
-	var dataSource = GroupedTweetsContentsDataSource()
+	var dataSource = GroupedTweetContentsDataSource()
 	
 	var hashtags: HashtagSet = NSApp.settings.appState.hashtags ?? [] {
 		
