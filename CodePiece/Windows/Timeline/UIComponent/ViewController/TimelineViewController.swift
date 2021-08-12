@@ -714,7 +714,7 @@ extension TimelineViewController {
 				update(tweets: statuses, associatedHashtags: hashtags)
 				
 				message.send(.resetAutoUpdateIntervalDeray)
-				contentsState = .ok("Last Update: \(Date().displayString)")
+				contentsState = .ok("Last Update: \(Date())")
 				
 			case .failure(let error):
 				

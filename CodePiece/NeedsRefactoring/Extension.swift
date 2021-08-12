@@ -132,21 +132,6 @@ extension NSTableView {
 	}
 }
 
-extension Date {
-
-	var displayString: String {
-		
-        let calendar = NSCalendar.current
-        let formatter = DateFormatter()
-		
-		formatter.calendar = calendar
-		formatter.dateStyle = .short
-		formatter.timeStyle = .medium
-		
-        return formatter.string(from: self)
-	}
-}
-
 public func bundle<First,Second>(first: First) -> (Second) -> (First, Second) {
 
 	return { second in (first, second) }

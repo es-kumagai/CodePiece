@@ -6,7 +6,6 @@
 //  Copyright © 2020 Tomohiro Kumagai. All rights reserved.
 //
 
-import Foundation
 import ESTwitter
 
 extension RelatedTweetsContentsController {
