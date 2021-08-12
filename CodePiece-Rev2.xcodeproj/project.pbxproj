@@ -220,6 +220,7 @@
 		B1E213B22403AAAA00DE511D /* OpenCodePieceCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E213B12403AAAA00DE511D /* OpenCodePieceCommand.swift */; };
 		B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B1F2C78923E48B89008BBCA0 /* Fonts */; };
 		B1F2C79123E57F2D008BBCA0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F2C79023E57F2D008BBCA0 /* WebView.swift */; };
+		B1F5510226C4B9F400BBDF7A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F5510126C4B9F400BBDF7A /* Date.swift */; };
 		B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B1FB161D23D36E6C002D4571 /* OAuth2 */; };
 		DA23DBEF247A71A6007B023F /* CodePieceCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23DBEE247A71A6007B023F /* CodePieceCoreTests.swift */; };
 		DA23DBF1247A71A6007B023F /* CodePieceCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B119A70A2477E48D008505EE /* CodePieceCore.framework */; };
@@ -606,6 +607,7 @@
 		B1F2C78923E48B89008BBCA0 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		B1F2C78B23E48C9E008BBCA0 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		B1F2C79023E57F2D008BBCA0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		B1F5510126C4B9F400BBDF7A /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		DA23DBE5247A7067007B023F /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
 		DA23DBEC247A71A6007B023F /* CodePieceCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodePieceCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA23DBEE247A71A6007B023F /* CodePieceCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePieceCoreTests.swift; sourceTree = "<group>"; };
@@ -1256,8 +1258,9 @@
 				B15EE1FA23CE752D005B268A /* AppExtension.swift */,
 				B15EE1FC23CE7571005B268A /* BaseViewController.swift */,
 				B15EE1FD23CE7571005B268A /* BaseWindowController.swift */,
-				B15EE20023CE757C005B268A /* DebugSupport.swift */,
 				B1278B5B23D176C3003F3719 /* CodeText.swift */,
+				B15EE20023CE757C005B268A /* DebugSupport.swift */,
+				B1F5510126C4B9F400BBDF7A /* Date.swift */,
 				B15EE20423CE7593005B268A /* Environments.swift */,
 				B15EE20623CE7593005B268A /* GitHubOpenFeatures.swift */,
 				B15EE20323CE7593005B268A /* TwitterOpenFeatures.swift */,
@@ -1891,6 +1894,7 @@
 				B1D4D9A7245F4FBD00B80206 /* WatermarkStackView.swift in Sources */,
 				B1508BEC23E9B3E000973728 /* TimelineContentsControllerDelegate.swift in Sources */,
 				B15EE25F23CE7658005B268A /* Twitter.swift in Sources */,
+				B1F5510226C4B9F400BBDF7A /* Date.swift in Sources */,
 				B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */,
 				B15EE25423CE7658005B268A /* DataStore_AuthInfo.swift in Sources */,
 				B15EE1FE23CE7571005B268A /* BaseViewController.swift in Sources */,
