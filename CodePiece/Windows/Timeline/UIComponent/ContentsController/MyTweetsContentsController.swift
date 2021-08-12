@@ -1,5 +1,5 @@
 //
-//  HashtagsContentsController.swift
+//  MyTweetsContentsController.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on 2020/02/04.
@@ -11,30 +11,15 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class SearchTweetsContentsController : TimelineContentsController, NotificationObservable {
+final class MyTweetsContentsController : TimelineContentsController, NotificationObservable {
 	
 	override var kind: TimelineKind {
 		
-		return .searchTweets
+		return .myTweets
 	}
 	
-	var dataSource = ManagedByTweetContentsDataSource()
-	
-	var searchQuery: String = "" {
-
-		didSet (previousSearchQuery) {
-			
-			guard searchQuery != previousSearchQuery else {
-				
-				return
-			}
-
-			NSLog("Search query did change: \(searchQuery)")
-			dataSource.items.removeAll()
-			delegate?.timelineContentsNeedsUpdate?(self)
-		}
-	}
-	
+	var dataSource = SimpleTweetContentsDataSource()
+		
 	override var tableViewDataSource: TimelineTableDataSource {
 		
 		return dataSource
@@ -43,25 +28,28 @@ final class SearchTweetsContentsController : TimelineContentsController, Notific
 	override func activate() {
 		
 		super.activate()
+	
+		observe(PostCompletelyNotification.self) { [unowned self] notification in
+			
+			delegate?.timelineContentsNeedsUpdate?(self)
+		}
+	}
+
+	override func timelineViewDidAppear() {
+
+		super.timelineViewDidAppear()
 		
+		delegate?.timelineContentsNeedsUpdate?(self)
 	}
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
-		
-		let query = searchQuery
-		
-		guard !query.isEmpty else {
-			
-			callback(.success(([], associatedHashtags: [])))
-			return
-		}
-				
-		let options = API.SearchOptions(
+
+		let options = API.TimelineOptions(
 			
 			sinceId: dataSource.lastTweetId
 		)
 		
-		NSApp.twitterController.search(tweetWith: query, options: options) { result in
+		NSApp.twitterController.timeline(options: options) { result in
 			
 			switch result {
 				

@@ -1,5 +1,5 @@
 //
-//  MentionsContentsController.swift
+//  HashtagsContentsController.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on 2020/02/04.
@@ -11,18 +11,28 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class MentionsContentsController : TimelineContentsController, NotificationObservable {
+final class SearchTweetsContentsController : TimelineContentsController, NotificationObservable {
 	
 	override var kind: TimelineKind {
 		
-		return .mentions
+		return .searchTweets
 	}
 	
-	var dataSource = ManagedByTweetContentsDataSource()
-		
-	var alreadyHasMentions: Bool {
-		
-		return dataSource.lastTweetId != nil
+	var dataSource = SimpleTweetContentsDataSource()
+	
+	var searchQuery: String = "" {
+
+		didSet (previousSearchQuery) {
+			
+			guard searchQuery != previousSearchQuery else {
+				
+				return
+			}
+
+			NSLog("Search query did change: \(searchQuery)")
+			dataSource.items.removeAll()
+			delegate?.timelineContentsNeedsUpdate?(self)
+		}
 	}
 	
 	override var tableViewDataSource: TimelineTableDataSource {
@@ -33,39 +43,30 @@ final class MentionsContentsController : TimelineContentsController, Notificatio
 	override func activate() {
 		
 		super.activate()
-	
-	}
-
-	override func timelineViewDidAppear() {
-
-		super.timelineViewDidAppear()
 		
-		delegate?.timelineContentsNeedsUpdate?(self)
 	}
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
-
-		let options = API.MentionOptions(
+		
+		let query = searchQuery
+		
+		guard !query.isEmpty else {
+			
+			callback(.success(([], associatedHashtags: [])))
+			return
+		}
+				
+		let options = API.SearchOptions(
 			
 			sinceId: dataSource.lastTweetId
 		)
 		
-		NSApp.twitterController.mentions(options: options) { [unowned self] result in
-			
-			func success(_ statuses: [Status]) {
-			
-				if statuses.count > 0 {
-
-					MentionUpdatedNotification(mentions: statuses, includesNewMention: alreadyHasMentions).post()
-				}
-
-				callback(.success((statuses, [])))
-			}
+		NSApp.twitterController.search(tweetWith: query, options: options) { result in
 			
 			switch result {
 				
 			case .success(let statuses):
-				success(statuses)
+				callback(.success((statuses, [])))
 				
 			case .failure(let error):
 				callback(.failure(error))

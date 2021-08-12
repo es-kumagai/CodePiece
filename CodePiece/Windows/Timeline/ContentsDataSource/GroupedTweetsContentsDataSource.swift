@@ -11,7 +11,7 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class ManagedByHashtagsContentsDataSource: NSObject, TimelineTableDataSource {
+final class GroupedTweetsContentsDataSource: NSObject, TimelineTableDataSource {
 	
 	private var lastTweetId = Dictionary<HashtagSet, String>()
 	
@@ -25,7 +25,7 @@ final class ManagedByHashtagsContentsDataSource: NSObject, TimelineTableDataSour
 	
 }
 
-extension ManagedByHashtagsContentsDataSource {
+extension GroupedTweetsContentsDataSource {
 	
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		

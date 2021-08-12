@@ -11,7 +11,7 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class ManagedByTweetContentsDataSource: NSObject, TimelineTableDataSource {
+final class SimpleTweetContentsDataSource: NSObject, TimelineTableDataSource {
 	
 	var lastTweetId: String? = nil
 	
@@ -31,7 +31,7 @@ final class ManagedByTweetContentsDataSource: NSObject, TimelineTableDataSource 
 	}
 }
 
-extension ManagedByTweetContentsDataSource {
+extension SimpleTweetContentsDataSource {
 	
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		

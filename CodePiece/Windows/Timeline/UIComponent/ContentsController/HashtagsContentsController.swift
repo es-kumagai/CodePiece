@@ -11,56 +11,15 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class RelatedTweetsContentsController : TimelineContentsController, NotificationObservable {
-	
-	private struct QueryControl {
-		
-		var lengthMargin = 30
-		var step = 5
-		var upperLimit = 200
-		
-		mutating func reduce() {
-			
-			guard lengthMargin < upperLimit else {
-			
-				return
-			}
-			
-			lengthMargin = min(upperLimit, lengthMargin + step)
-		}
-	}
-
-	private var queryControl = QueryControl()
-	
-	var statusesAutoUpdateIntervalForAppeared: Double {
-		
-		return owner!.statusesAutoUpdateInterval
-	}
-	
-	var statusesAutoUpdateIntervalForDisappeared: Double {
-		
-		return owner!.statusesAutoUpdateInterval * 2.5
-	}
+final class HashtagsContentsController : TimelineContentsController, NotificationObservable {
 	
 	override var kind: TimelineKind {
 		
-		return .relatedTweets
+		return .hashtags
 	}
 	
-	var dataSource = ManagedByHashtagsContentsDataSource()
+	var dataSource = GroupedTweetsContentsDataSource()
 	
-	private var needsUpdate = false {
-		
-		didSet {
-			
-			if needsUpdate {
-				
-				DispatchQueue.main.async(execute: checkNeedsUpdates)
-			}
-		}
-	}
-	
-	var relatedUsers: Set<RelatedUser> = []
 	var hashtags: HashtagSet = NSApp.settings.appState.hashtags ?? [] {
 		
 		didSet (previousHashtags) {
@@ -73,17 +32,8 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			if dataSource.appendHashtags(hashtags: hashtags).passed {
 
 				NSLog("Hashtag did change: \(hashtags)")
-				needsUpdate = true
+				delegate?.timelineContentsNeedsUpdate?(self)
 			}
-		}
-	}
-	
-	private func checkNeedsUpdates() {
-		
-		if needsUpdate {
-			
-			needsUpdate = false
-			delegate?.timelineContentsNeedsUpdate?(self)
 		}
 	}
 	
@@ -103,25 +53,8 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 		
 		observe(HashtagsDidChangeNotification.self) { [unowned self] notification in
 			
-			relatedUsers = []
 			hashtags = notification.hashtags
-			needsUpdate = true
 		}
-		
-		observe(HashtagsTimelineDidUpdateNotification.self) { [unowned self] notification in
-			
-			let users = notification.statuses
-				.filter { $0.createdAt > $0.createdAt.yesterday }
-				.map { $0.user }
-			
-			if users.count > 0 {
-
-				relatedUsers.append(users: users)
-				needsUpdate = true
-			}
-		}
-		
-		owner!.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
 		
 		// Following code is disabled because the tweet you posted cannnot detect immediately.
 //		observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
@@ -138,33 +71,9 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 //		}
 	}
 	
-	override func timelineViewWillAppear(isTableViewAssigned: Bool) {
-	
-		super.timelineViewWillAppear(isTableViewAssigned: isTableViewAssigned)
-		
-		guard isTableViewAssigned, let owner = owner else {
-			
-			return
-		}
-		
-		owner.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForAppeared))
-	}
-	
-	override func timelineViewDidDisappear() {
-
-		super.timelineViewDidDisappear()
-		
-		guard let owner = owner else {
-			
-			return
-		}
-		
-		owner.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
-	}
-	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
 		
-		let query = relatedUsers.tweetFromAllUsersQuery(withQueryLengthMargin: queryControl.lengthMargin)
+		let query = hashtags.twitterQueryText
 		
 		guard !query.isEmpty else {
 			
@@ -172,6 +81,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			return
 		}
 		
+				
 		let options = API.SearchOptions(
 			
 			sinceId: dataSource.latestTweetIdForHashtags(hashtags: hashtags)
@@ -182,12 +92,8 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			switch result {
 				
 			case .success(let statuses):
+				HashtagsTimelineDidUpdateNotification(statuses: statuses).post()
 				callback(.success((statuses, hashtags)))
-				
-			case .failure(.missingOrInvalidUrlParameter):
-				queryControl.reduce()
-				NSLog("Reducing max uplimit margin for searching related tweets query length to \(queryControl.lengthMargin)")
-				callback(.failure(.missingOrInvalidUrlParameter))
 				
 			case .failure(let error):
 				callback(.failure(error))

@@ -1,5 +1,5 @@
 //
-//  MyTweetsContentsController.swift
+//  MentionsContentsController.swift
 //  CodePiece
 //
 //  Created by Tomohiro Kumagai on 2020/02/04.
@@ -11,15 +11,20 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class MyTweetsContentsController : TimelineContentsController, NotificationObservable {
+final class MentionsContentsController : TimelineContentsController, NotificationObservable {
 	
 	override var kind: TimelineKind {
 		
-		return .myTweets
+		return .mentions
 	}
 	
-	var dataSource = ManagedByTweetContentsDataSource()
+	var dataSource = SimpleTweetContentsDataSource()
 		
+	var alreadyHasMentions: Bool {
+		
+		return dataSource.lastTweetId != nil
+	}
+	
 	override var tableViewDataSource: TimelineTableDataSource {
 		
 		return dataSource
@@ -29,10 +34,6 @@ final class MyTweetsContentsController : TimelineContentsController, Notificatio
 		
 		super.activate()
 	
-		observe(PostCompletelyNotification.self) { [unowned self] notification in
-			
-			delegate?.timelineContentsNeedsUpdate?(self)
-		}
 	}
 
 	override func timelineViewDidAppear() {
@@ -44,17 +45,27 @@ final class MyTweetsContentsController : TimelineContentsController, Notificatio
 	
 	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
 
-		let options = API.TimelineOptions(
+		let options = API.MentionOptions(
 			
 			sinceId: dataSource.lastTweetId
 		)
 		
-		NSApp.twitterController.timeline(options: options) { result in
+		NSApp.twitterController.mentions(options: options) { [unowned self] result in
+			
+			func success(_ statuses: [Status]) {
+			
+				if statuses.count > 0 {
+
+					MentionUpdatedNotification(mentions: statuses, includesNewMention: alreadyHasMentions).post()
+				}
+
+				callback(.success((statuses, [])))
+			}
 			
 			switch result {
 				
 			case .success(let statuses):
-				callback(.success((statuses, [])))
+				success(statuses)
 				
 			case .failure(let error):
 				callback(.failure(error))
