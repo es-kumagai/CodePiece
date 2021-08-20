@@ -18,9 +18,8 @@ protocol URLScheme {
 
 extension URLScheme {
 	
-	static func match(url: URL) -> Bool {
+	static func matches(_ url: URL) -> Bool {
 		
-		return url.scheme == scheme && url.host == host
+		url.scheme == scheme && url.host == host
 	}
 }
-

@@ -32,16 +32,15 @@ final class URLSchemeManager {
 	
 	@objc func handleURLEvent(event: NSAppleEventDescriptor, withReply reply: NSAppleEventDescriptor) {
 		
-		if let url = event.url {
-			
-			for scheme in schemes where scheme.match(url: url) {
-
-				scheme.action(url: url)
-			}
-		}
-		else {
+		guard let url = event.url else {
 
 			NSLog("Invalid URL event=\(event), reply=\(reply). ")
+			return
+		}
+
+		for scheme in schemes where scheme.matches(url) {
+			
+			scheme.action(url: url)
 		}
 	}
 }

@@ -1221,7 +1221,7 @@ public extension NSAppleEventDescriptor {
 	
 	var url: URL? {
 		
-		paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue.flatMap { URL(string: $0) }
+		paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue.flatMap(URL.init(string:))
 	}
 }
 
