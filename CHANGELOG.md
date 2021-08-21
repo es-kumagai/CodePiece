@@ -2,29 +2,50 @@
 
 Change Logs.
 
+## 2.1.15
+
+### Internal changes
+
+* Moves features of URL Schemes into Sky_AppKit library; when just did, CodePiece could not be launched because of ProgressHUD framework is not signed, but the settings seem correctly, so set "Disable Library Validation Entitlement" enabled.
+
 ## 2.1.14
+
+### Fixes
 
 * Fix a bug that tweets related to current hashtags were not shown.
 
 ## 2.1.13
 
+### Enhancements
+
 * Tweets can be found by any keywords using search tweets window.
 
 ## 2.1.12
+
+### Updates
 
 * Hashtags text which typed in Hashtag text field is now splited with not only single-byte space but also any other whitespaces.
 * Captured codes are now displayed in a more optimal size.
 
 ## 2.1.11
 
+### Fixes
+
 * Fix a problem that empty lines are removed in the code when entered code is posted to Gist.
 
 ## 2.1.10
 
+### Updates
+
 * Update tweet text length when code did edit.
+
+### Fixes
+
 * Fix a problem that sending codes by URL scheme is not applied when CodePiece launch.
 
 ## 2.1.9
+
+### Updates
 
 * Remove the extra indent from a posted code.
 
