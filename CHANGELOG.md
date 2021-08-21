@@ -2,11 +2,12 @@
 
 Change Logs.
 
-## 2.1.15
+## 2.1.15 (Next Version)
 
 ### Internal changes
 
 * Moves features of URL Schemes into Sky_AppKit library; when just did, CodePiece could not be launched because of ProgressHUD framework is not signed, but the settings seem correctly, so set "Disable Library Validation Entitlement" enabled.
+* Removes a dependency on ProgressHUD package; the features in it are moved into Sky package.
 
 ## 2.1.14
 

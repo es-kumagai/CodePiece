@@ -8,7 +8,7 @@
 
 import Cocoa
 import Ocean
-import ESProgressHUD
+import Sky
 import ESTwitter
 import ESGists
 

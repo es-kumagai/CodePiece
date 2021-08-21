@@ -20,15 +20,6 @@
         }
       },
       {
-        "package": "ESProgressHUD",
-        "repositoryURL": "https://github.com/es-kumagai/ESProgressHUD.git",
-        "state": {
-          "branch": "master",
-          "revision": "a930123cdbb5fae5b11970dd97c053f24f39b266",
-          "version": null
-        }
-      },
-      {
         "package": "KeychainAccess",
         "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
         "state": {
@@ -69,7 +60,7 @@
         "repositoryURL": "git@github.com:es-kumagai/Sky.git",
         "state": {
           "branch": "master",
-          "revision": "043d0d6ebf4e6220c568717230ca47694400932c",
+          "revision": "30a6bb841b42036380f30374ebf0ca8a4a59c705",
           "version": null
         }
       },

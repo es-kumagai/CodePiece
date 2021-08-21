@@ -212,10 +212,8 @@
 		B1D8ED9426D0D5160028AF32 /* Ocean in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9226D0D5160028AF32 /* Ocean */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B1D8ED9626D0D5310028AF32 /* Swim in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9526D0D5310028AF32 /* Swim */; };
 		B1D8ED9726D0D5320028AF32 /* Swim in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9526D0D5310028AF32 /* Swim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		B1D8ED9926D0D54D0028AF32 /* Sky in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9826D0D54D0028AF32 /* Sky */; };
-		B1D8ED9A26D0D54D0028AF32 /* Sky in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9826D0D54D0028AF32 /* Sky */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		B1D8ED9C26D0D68E0028AF32 /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9B26D0D68E0028AF32 /* ESProgressHUD */; settings = {ATTRIBUTES = (Required, ); }; };
-		B1D8ED9D26D0D68E0028AF32 /* ESProgressHUD in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9B26D0D68E0028AF32 /* ESProgressHUD */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B1D8ED9F26D0E8290028AF32 /* Sky in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9E26D0E8290028AF32 /* Sky */; };
+		B1D8EDA026D0E8290028AF32 /* Sky in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9E26D0E8290028AF32 /* Sky */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */; };
 		B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4223D0D37700418A84 /* StatusImageView.swift */; };
 		B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4323D0D37700418A84 /* CodeTextView.swift */; };
@@ -352,12 +350,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B1D8ED9A26D0D54D0028AF32 /* Sky in Embed Frameworks */,
+				B1D8EDA026D0E8290028AF32 /* Sky in Embed Frameworks */,
 				B119A7122477E48D008505EE /* CodePieceCore.framework in Embed Frameworks */,
 				B1D8ED8E26D08D150028AF32 /* Sky-AppKit in Embed Frameworks */,
 				B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */,
 				B1D8ED9726D0D5320028AF32 /* Swim in Embed Frameworks */,
-				B1D8ED9D26D0D68E0028AF32 /* ESProgressHUD in Embed Frameworks */,
 				B1D8ED9426D0D5160028AF32 /* Ocean in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -685,12 +682,11 @@
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
-				B1D8ED9C26D0D68E0028AF32 /* ESProgressHUD in Frameworks */,
+				B1D8ED9F26D0E8290028AF32 /* Sky in Frameworks */,
 				B12CDB0D263C047000451738 /* libCodePieceSupport.a in Frameworks */,
 				B1D8ED9326D0D5160028AF32 /* Ocean in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
 				B1D8ED9626D0D5310028AF32 /* Swim in Frameworks */,
-				B1D8ED9926D0D54D0028AF32 /* Sky in Frameworks */,
 				B1D8ED8D26D08D150028AF32 /* Sky-AppKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1542,8 +1538,7 @@
 				B1D8ED8C26D08D150028AF32 /* Sky-AppKit */,
 				B1D8ED9226D0D5160028AF32 /* Ocean */,
 				B1D8ED9526D0D5310028AF32 /* Swim */,
-				B1D8ED9826D0D54D0028AF32 /* Sky */,
-				B1D8ED9B26D0D68E0028AF32 /* ESProgressHUD */,
+				B1D8ED9E26D0E8290028AF32 /* Sky */,
 			);
 			productName = "CodePiece-Rev2";
 			productReference = B1D13C7023CA14DB0016902A /* CodePiece-Beta.app */;
@@ -1634,7 +1629,6 @@
 			);
 			mainGroup = B1D13C6723CA14DB0016902A;
 			packageReferences = (
-				B132D50323CD078800690C5F /* XCRemoteSwiftPackageReference "ESProgressHUD" */,
 				B15EE33E23CE7959005B268A /* XCRemoteSwiftPackageReference "OAuth2" */,
 				B15EE38023CE9B40005B268A /* XCRemoteSwiftPackageReference "Swifter" */,
 				B15EE38823CE9FBB005B268A /* XCRemoteSwiftPackageReference "Reachability.swift" */,
@@ -2433,7 +2427,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 101;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
@@ -2447,7 +2441,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
-				MARKETING_VERSION = 2.1.14;
+				MARKETING_VERSION = 2.1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.Beta";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = "CodePiece-Beta";
@@ -2466,7 +2460,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 101;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
@@ -2480,7 +2474,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
-				MARKETING_VERSION = 2.1.14;
+				MARKETING_VERSION = 2.1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = CodePiece;
@@ -2652,14 +2646,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B132D50323CD078800690C5F /* XCRemoteSwiftPackageReference "ESProgressHUD" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/es-kumagai/ESProgressHUD.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		B15EE33E23CE7959005B268A /* XCRemoteSwiftPackageReference "OAuth2" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/p2/OAuth2";
@@ -2767,15 +2753,10 @@
 			package = B18B24C9243CC65000B824AD /* XCRemoteSwiftPackageReference "Swim" */;
 			productName = Swim;
 		};
-		B1D8ED9826D0D54D0028AF32 /* Sky */ = {
+		B1D8ED9E26D0E8290028AF32 /* Sky */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */;
 			productName = Sky;
-		};
-		B1D8ED9B26D0D68E0028AF32 /* ESProgressHUD */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B132D50323CD078800690C5F /* XCRemoteSwiftPackageReference "ESProgressHUD" */;
-			productName = ESProgressHUD;
 		};
 		B1FB161D23D36E6C002D4571 /* OAuth2 */ = {
 			isa = XCSwiftPackageProductDependency;

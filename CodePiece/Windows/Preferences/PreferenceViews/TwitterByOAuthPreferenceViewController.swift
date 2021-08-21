@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import ESProgressHUD
+import Sky
 
 @objcMembers
 final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewController {
