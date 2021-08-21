@@ -10,6 +10,7 @@ import Cocoa
 import ESTwitter
 import ESGists
 import CodePieceCore
+import Sky_AppKit
 
 final class CodePieceScheme : URLScheme {
 	

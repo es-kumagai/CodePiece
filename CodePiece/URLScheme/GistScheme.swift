@@ -8,6 +8,7 @@
 
 import Foundation
 import CodePieceCore
+import Sky_AppKit
 
 final class GistScheme : URLScheme {
 	
@@ -25,3 +26,4 @@ final class GistScheme : URLScheme {
 		Authorization.gist.oauth2.handleRedirectURL(url)
 	}
 }
+

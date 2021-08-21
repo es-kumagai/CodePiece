@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/es-kumagai/ESProgressHUD.git",
         "state": {
           "branch": "master",
-          "revision": "03e95cb365b56d5846f34ec2b6b7c37e057e6068",
+          "revision": "a930123cdbb5fae5b11970dd97c053f24f39b266",
           "version": null
         }
       },
@@ -51,7 +51,7 @@
         "repositoryURL": "git@github.com:es-kumagai/Ocean.git",
         "state": {
           "branch": "master",
-          "revision": "3f945f40cffc85b0fc3c1edc6220b2e4f4f89450",
+          "revision": "0174868b817d0306c42f19f9ec3c906a9ab16e48",
           "version": null
         }
       },
@@ -66,10 +66,10 @@
       },
       {
         "package": "Sky",
-        "repositoryURL": "https://github.com/es-kumagai/Sky",
+        "repositoryURL": "git@github.com:es-kumagai/Sky.git",
         "state": {
           "branch": "master",
-          "revision": "5d67d048910045ed5d75463baf6e797122868ce7",
+          "revision": "043d0d6ebf4e6220c568717230ca47694400932c",
           "version": null
         }
       },
@@ -87,7 +87,7 @@
         "repositoryURL": "git@github.com:es-kumagai/Swim.git",
         "state": {
           "branch": "master",
-          "revision": "74b08a98d407166759a0266c793929293ba11b90",
+          "revision": "c9cac424b37375426cf8b50e8b2dc4116bd0c797",
           "version": null
         }
       }

@@ -50,7 +50,6 @@
 		B12CDB18263C047000451738 /* x86_64-apple-macos.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB0B263C047000451738 /* x86_64-apple-macos.swiftmodule */; };
 		B12CDB19263C047000451738 /* arm64.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB0C263C047000451738 /* arm64.swiftdoc */; };
 		B131864623F28D7000BA9AA7 /* GetStatusesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB123F1540600772AA4 /* GetStatusesError.swift */; };
-		B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B132D50423CD078800690C5F /* ESProgressHUD */; };
 		B132D51423CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
 		B132D51B23CD08B800690C5F /* ESTwitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B132D51A23CD08B800690C5F /* ESTwitterTests.swift */; };
 		B132D51D23CD08B800690C5F /* ESTwitter.h in Headers */ = {isa = PBXBuildFile; fileRef = B132D50D23CD08B800690C5F /* ESTwitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -116,8 +115,6 @@
 		B15EE26023CE7658005B268A /* TwitterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE23E23CE7658005B268A /* TwitterController.swift */; };
 		B15EE26123CE7658005B268A /* SNSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE23F23CE7658005B268A /* SNSController.swift */; };
 		B15EE26223CE7658005B268A /* PostDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24023CE7658005B268A /* PostDataContainer.swift */; };
-		B15EE26323CE7658005B268A /* URLSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24223CE7658005B268A /* URLSchemeManager.swift */; };
-		B15EE26423CE7658005B268A /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24323CE7658005B268A /* URLScheme.swift */; };
 		B15EE26523CE7658005B268A /* GistScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24423CE7658005B268A /* GistScheme.swift */; };
 		B15EE26723CE7658005B268A /* GistPreferenceView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15EE24723CE7658005B268A /* GistPreferenceView.storyboard */; };
 		B15EE26823CE7658005B268A /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE24823CE7658005B268A /* PreferencesWindowController.swift */; };
@@ -207,6 +204,18 @@
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
 		B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */; };
 		B1D4D9A7245F4FBD00B80206 /* WatermarkStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D4D9A6245F4FBD00B80206 /* WatermarkStackView.swift */; };
+		B1D8ED8D26D08D150028AF32 /* Sky-AppKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED8C26D08D150028AF32 /* Sky-AppKit */; };
+		B1D8ED8E26D08D150028AF32 /* Sky-AppKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED8C26D08D150028AF32 /* Sky-AppKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B1D8ED9026D0D4F10028AF32 /* Swim in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED8F26D0D4F10028AF32 /* Swim */; };
+		B1D8ED9126D0D4F10028AF32 /* Swim in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED8F26D0D4F10028AF32 /* Swim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B1D8ED9326D0D5160028AF32 /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9226D0D5160028AF32 /* Ocean */; };
+		B1D8ED9426D0D5160028AF32 /* Ocean in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9226D0D5160028AF32 /* Ocean */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B1D8ED9626D0D5310028AF32 /* Swim in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9526D0D5310028AF32 /* Swim */; };
+		B1D8ED9726D0D5320028AF32 /* Swim in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9526D0D5310028AF32 /* Swim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B1D8ED9926D0D54D0028AF32 /* Sky in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9826D0D54D0028AF32 /* Sky */; };
+		B1D8ED9A26D0D54D0028AF32 /* Sky in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9826D0D54D0028AF32 /* Sky */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B1D8ED9C26D0D68E0028AF32 /* ESProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9B26D0D68E0028AF32 /* ESProgressHUD */; settings = {ATTRIBUTES = (Required, ); }; };
+		B1D8ED9D26D0D68E0028AF32 /* ESProgressHUD in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9B26D0D68E0028AF32 /* ESProgressHUD */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */; };
 		B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4223D0D37700418A84 /* StatusImageView.swift */; };
 		B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4323D0D37700418A84 /* CodeTextView.swift */; };
@@ -343,8 +352,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B1D8ED9A26D0D54D0028AF32 /* Sky in Embed Frameworks */,
 				B119A7122477E48D008505EE /* CodePieceCore.framework in Embed Frameworks */,
+				B1D8ED8E26D08D150028AF32 /* Sky-AppKit in Embed Frameworks */,
 				B132D52123CD08B800690C5F /* ESTwitter.framework in Embed Frameworks */,
+				B1D8ED9726D0D5320028AF32 /* Swim in Embed Frameworks */,
+				B1D8ED9D26D0D68E0028AF32 /* ESProgressHUD in Embed Frameworks */,
+				B1D8ED9426D0D5160028AF32 /* Ocean in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,6 +369,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B1D8ED9126D0D4F10028AF32 /* Swim in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,8 +507,6 @@
 		B15EE23E23CE7658005B268A /* TwitterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterController.swift; sourceTree = "<group>"; };
 		B15EE23F23CE7658005B268A /* SNSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNSController.swift; sourceTree = "<group>"; };
 		B15EE24023CE7658005B268A /* PostDataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDataContainer.swift; sourceTree = "<group>"; };
-		B15EE24223CE7658005B268A /* URLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSchemeManager.swift; sourceTree = "<group>"; };
-		B15EE24323CE7658005B268A /* URLScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		B15EE24423CE7658005B268A /* GistScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistScheme.swift; sourceTree = "<group>"; };
 		B15EE24723CE7658005B268A /* GistPreferenceView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GistPreferenceView.storyboard; sourceTree = "<group>"; };
 		B15EE24823CE7658005B268A /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
@@ -644,6 +657,7 @@
 			files = (
 				B15EE38723CE9C42005B268A /* Swifter in Frameworks */,
 				B13CA7922478E9180059F306 /* ESGists in Frameworks */,
+				B1D8ED9026D0D4F10028AF32 /* Swim in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,9 +685,13 @@
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
-				B132D50523CD078800690C5F /* ESProgressHUD in Frameworks */,
+				B1D8ED9C26D0D68E0028AF32 /* ESProgressHUD in Frameworks */,
 				B12CDB0D263C047000451738 /* libCodePieceSupport.a in Frameworks */,
+				B1D8ED9326D0D5160028AF32 /* Ocean in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
+				B1D8ED9626D0D5310028AF32 /* Swim in Frameworks */,
+				B1D8ED9926D0D54D0028AF32 /* Sky in Frameworks */,
+				B1D8ED8D26D08D150028AF32 /* Sky-AppKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,8 +1005,6 @@
 		B15EE24123CE7658005B268A /* URLScheme */ = {
 			isa = PBXGroup;
 			children = (
-				B15EE24223CE7658005B268A /* URLSchemeManager.swift */,
-				B15EE24323CE7658005B268A /* URLScheme.swift */,
 				B15EE24423CE7658005B268A /* GistScheme.swift */,
 				B1806CB723D6B50F006932F5 /* SwifterScheme.swift */,
 				B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */,
@@ -1456,6 +1472,7 @@
 			packageProductDependencies = (
 				B15EE38623CE9C42005B268A /* Swifter */,
 				B13CA7912478E9180059F306 /* ESGists */,
+				B1D8ED8F26D0D4F10028AF32 /* Swim */,
 			);
 			productName = ESTwitter;
 			productReference = B132D50B23CD08B800690C5F /* ESTwitter.framework */;
@@ -1519,10 +1536,14 @@
 			);
 			name = CodePiece;
 			packageProductDependencies = (
-				B132D50423CD078800690C5F /* ESProgressHUD */,
 				B15EE38923CE9FBB005B268A /* Reachability */,
 				B15EE38C23CEA03E005B268A /* KeychainAccess */,
 				B1FB161D23D36E6C002D4571 /* OAuth2 */,
+				B1D8ED8C26D08D150028AF32 /* Sky-AppKit */,
+				B1D8ED9226D0D5160028AF32 /* Ocean */,
+				B1D8ED9526D0D5310028AF32 /* Swim */,
+				B1D8ED9826D0D54D0028AF32 /* Sky */,
+				B1D8ED9B26D0D68E0028AF32 /* ESProgressHUD */,
 			);
 			productName = "CodePiece-Rev2";
 			productReference = B1D13C7023CA14DB0016902A /* CodePiece-Beta.app */;
@@ -1621,6 +1642,7 @@
 				B18B24C9243CC65000B824AD /* XCRemoteSwiftPackageReference "Swim" */,
 				B18B24D0243CC6D100B824AD /* XCRemoteSwiftPackageReference "Ocean" */,
 				B1BCCD22243CC88C00F03577 /* XCRemoteSwiftPackageReference "ESGists" */,
+				B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */,
 			);
 			productRefGroup = B1D13C7123CA14DB0016902A /* Products */;
 			projectDirPath = "";
@@ -1834,8 +1856,6 @@
 				B15EE21923CE761C005B268A /* Notifications.swift in Sources */,
 				B15EE2A323CE7667005B268A /* TimelineViewController.swift in Sources */,
 				B15EE21B23CE761C005B268A /* Colors.swift in Sources */,
-				B15EE26423CE7658005B268A /* URLScheme.swift in Sources */,
-				B15EE26323CE7658005B268A /* URLSchemeManager.swift in Sources */,
 				B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */,
 				B15EE24E23CE7658005B268A /* AppState.swift in Sources */,
 				B15EE25D23CE7658005B268A /* TwitterStatusAttributed.swift in Sources */,
@@ -2339,6 +2359,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2396,6 +2417,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -2694,14 +2716,17 @@
 				kind = branch;
 			};
 		};
+		B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:es-kumagai/Sky.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B132D50423CD078800690C5F /* ESProgressHUD */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B132D50323CD078800690C5F /* XCRemoteSwiftPackageReference "ESProgressHUD" */;
-			productName = ESProgressHUD;
-		};
 		B13CA7912478E9180059F306 /* ESGists */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B1BCCD22243CC88C00F03577 /* XCRemoteSwiftPackageReference "ESGists" */;
@@ -2721,6 +2746,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B15EE38B23CEA03E005B268A /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		B1D8ED8C26D08D150028AF32 /* Sky-AppKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */;
+			productName = "Sky-AppKit";
+		};
+		B1D8ED8F26D0D4F10028AF32 /* Swim */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B18B24C9243CC65000B824AD /* XCRemoteSwiftPackageReference "Swim" */;
+			productName = Swim;
+		};
+		B1D8ED9226D0D5160028AF32 /* Ocean */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B18B24D0243CC6D100B824AD /* XCRemoteSwiftPackageReference "Ocean" */;
+			productName = Ocean;
+		};
+		B1D8ED9526D0D5310028AF32 /* Swim */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B18B24C9243CC65000B824AD /* XCRemoteSwiftPackageReference "Swim" */;
+			productName = Swim;
+		};
+		B1D8ED9826D0D54D0028AF32 /* Sky */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */;
+			productName = Sky;
+		};
+		B1D8ED9B26D0D68E0028AF32 /* ESProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B132D50323CD078800690C5F /* XCRemoteSwiftPackageReference "ESProgressHUD" */;
+			productName = ESProgressHUD;
 		};
 		B1FB161D23D36E6C002D4571 /* OAuth2 */ = {
 			isa = XCSwiftPackageProductDependency;

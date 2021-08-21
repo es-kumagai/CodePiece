@@ -8,6 +8,7 @@
 
 import Cocoa
 import Ocean
+import Sky_AppKit
 
 // FIXME: 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整したいところです。
 @NSApplicationMain @objcMembers
@@ -23,7 +24,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NotificationObservable {
 		
 		super.awakeFromNib()
 
-		urlSchemeManager = URLSchemeManager()
+		let schemes: [URLScheme.Type] = [
+			
+			GistScheme.self,
+			SwifterScheme.self,
+			CodePieceScheme.self
+		]
+		
+		urlSchemeManager = URLSchemeManager(schemes: schemes)
 		NSApplication.readyForUse()
 	}
 

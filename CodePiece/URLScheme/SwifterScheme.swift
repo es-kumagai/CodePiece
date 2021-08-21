@@ -9,6 +9,7 @@
 import Cocoa
 import ESTwitter
 import CodePieceCore
+import Sky_AppKit
 
 final class SwifterScheme : URLScheme {
 	
