@@ -293,7 +293,7 @@
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="self.isMainViewControllerActive" id="Qye-5A-wcx"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Clear Description" keyEquivalent="T" id="dWd-q2-zPv">
+                                        <menuItem title="Clear Description" keyEquivalent="D" id="dWd-q2-zPv">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="clearTweetAndDescription:" target="p69-Rc-ib8" id="YSQ-s2-WSf"/>
