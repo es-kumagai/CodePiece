@@ -1,0 +1,2183 @@
+[
+  {
+    "truncated" : false,
+    "retweet_count" : 1.0,
+    "retweeted_status" : {
+      "in_reply_to_status_id" : null,
+      "truncated" : false,
+      "in_reply_to_user_id" : null,
+      "in_reply_to_user_id_str" : null,
+      "source" : "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+      "is_quote_status" : false,
+      "in_reply_to_screen_name" : null,
+      "entities" : {
+        "hashtags" : [
+          {
+            "text" : "yumemi_swift",
+            "indices" : [
+              55.0,
+              68.0
+            ]
+          }
+        ],
+        "user_mentions" : [
+
+        ],
+        "symbols" : [
+
+        ],
+        "urls" : [
+          {
+            "expanded_url" : "https://mercari.connpass.com/event/224432/",
+            "display_url" : "mercari.connpass.com/event/224432/",
+            "url" : "https://t.co/VG8Dkq4Qd6",
+            "indices" : [
+              70.0,
+              93.0
+            ]
+          }
+        ]
+      },
+      "possibly_sensitive" : false,
+      "coordinates" : null,
+      "user" : {
+        "has_extended_profile" : false,
+        "profile_link_color" : "FF691F",
+        "profile_image_url" : "http://pbs.twimg.com/profile_images/1297445775396335616/TxF-bbOh_normal.jpg",
+        "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "utc_offset" : null,
+        "default_profile_image" : false,
+        "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1297445775396335616/TxF-bbOh_normal.jpg",
+        "geo_enabled" : true,
+        "following" : false,
+        "favourites_count" : 40504.0,
+        "location" : "Tokyo",
+        "time_zone" : null,
+        "notifications" : false,
+        "profile_sidebar_fill_color" : "000000",
+        "id" : 35161715.0,
+        "id_str" : "35161715",
+        "lang" : null,
+        "screen_name" : "alligator_tama",
+        "verified" : false,
+        "name" : "🐊",
+        "entities" : {
+          "description" : {
+            "urls" : [
+
+            ]
+          }
+        },
+        "withheld_in_countries" : [
+
+        ],
+        "protected" : false,
+        "follow_request_sent" : false,
+        "profile_text_color" : "000000",
+        "profile_background_color" : "000000",
+        "is_translator" : false,
+        "listed_count" : 45.0,
+        "profile_sidebar_border_color" : "000000",
+        "default_profile" : false,
+        "is_translation_enabled" : false,
+        "profile_use_background_image" : false,
+        "friends_count" : 4756.0,
+        "contributors_enabled" : false,
+        "followers_count" : 2657.0,
+        "statuses_count" : 35325.0,
+        "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "description" : "本業はネタツィート、趣味でITに関するツィートをします。",
+        "url" : null,
+        "created_at" : "Sat Apr 25 06:05:12 +0000 2009",
+        "profile_background_tile" : false,
+        "translator_type" : "none"
+      },
+      "retweet_count" : 1.0,
+      "id_str" : "1442457962828550144",
+      "metadata" : {
+        "iso_language_code" : "ja",
+        "result_type" : "recent"
+      },
+      "text" : "先ほど案内したメルペイ・メルコインの採用説明会はこちらになります。もしご興味ありましたらぜひご参加ください！\n#yumemi_swift\n\nhttps://t.co/VG8Dkq4Qd6",
+      "contributors" : null,
+      "id" : 1.4424579628285501e+18,
+      "created_at" : "Mon Sep 27 11:55:52 +0000 2021",
+      "geo" : null,
+      "lang" : "ja",
+      "in_reply_to_status_id_str" : null,
+      "place" : null,
+      "favorited" : false,
+      "favorite_count" : 3.0,
+      "retweeted" : false
+    },
+    "possibly_sensitive" : false,
+    "user" : {
+      "default_profile" : false,
+      "protected" : false,
+      "id" : 13860672.0,
+      "geo_enabled" : true,
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile" : false,
+      "created_at" : "Sat Feb 23 10:40:44 +0000 2008",
+      "profile_background_color" : "FFFFFF",
+      "default_profile_image" : false,
+      "time_zone" : null,
+      "friends_count" : 2835.0,
+      "verified" : false,
+      "profile_link_color" : "0084B4",
+      "has_extended_profile" : true,
+      "profile_text_color" : "333333",
+      "notifications" : false,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "followers_count" : 2968.0,
+      "url" : "https://t.co/35fS5490pc",
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/13860672/1459522381",
+      "is_translator" : false,
+      "profile_sidebar_fill_color" : "FFFFFF",
+      "statuses_count" : 158818.0,
+      "location" : "日本 福岡",
+      "lang" : null,
+      "profile_use_background_image" : true,
+      "is_translation_enabled" : false,
+      "name" : "星野恵瑠#今日も1日フレンズ㌠",
+      "utc_offset" : null,
+      "profile_sidebar_border_color" : "FFFFFF",
+      "id_str" : "13860672",
+      "follow_request_sent" : false,
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        },
+        "url" : {
+          "urls" : [
+            {
+              "expanded_url" : "http://crazism.net/",
+              "display_url" : "crazism.net",
+              "url" : "https://t.co/35fS5490pc",
+              "indices" : [
+                0.0,
+                23.0
+              ]
+            }
+          ]
+        }
+      },
+      "favourites_count" : 16131.0,
+      "contributors_enabled" : false,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "description" : "自称チャイ語クラスタ同萌会会長／♭Map代表／HAKATA.swift共同運営者。iOSアプリQuickshaRe開発者。ほうえるは癒やし。Swift信者。ロードスター乗り。犬派なのに猫を保護した。Delighted to be Chinese 🇨🇳.",
+      "screen_name" : "lovee",
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "following" : false,
+      "listed_count" : 116.0,
+      "withheld_in_countries" : [
+
+      ],
+      "translator_type" : "none"
+    },
+    "in_reply_to_status_id_str" : null,
+    "in_reply_to_status_id" : null,
+    "geo" : null,
+    "lang" : "ja",
+    "coordinates" : null,
+    "favorite_count" : 0.0,
+    "place" : null,
+    "id_str" : "1442466901150420994",
+    "id" : 1.442466901150421e+18,
+    "favorited" : false,
+    "created_at" : "Mon Sep 27 12:31:23 +0000 2021",
+    "text" : "RT @alligator_tama: 先ほど案内したメルペイ・メルコインの採用説明会はこちらになります。もしご興味ありましたらぜひご参加ください！\n#yumemi_swift\n\nhttps://t.co/VG8Dkq4Qd6",
+    "in_reply_to_user_id_str" : null,
+    "in_reply_to_screen_name" : null,
+    "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+    "retweeted" : false,
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "contributors" : null,
+    "is_quote_status" : false,
+    "in_reply_to_user_id" : null,
+    "entities" : {
+      "urls" : [
+        {
+          "indices" : [
+            90.0,
+            113.0
+          ],
+          "display_url" : "mercari.connpass.com/event/224432/",
+          "expanded_url" : "https://mercari.connpass.com/event/224432/",
+          "url" : "https://t.co/VG8Dkq4Qd6"
+        }
+      ],
+      "hashtags" : [
+        {
+          "text" : "yumemi_swift",
+          "indices" : [
+            75.0,
+            88.0
+          ]
+        }
+      ],
+      "user_mentions" : [
+        {
+          "id" : 35161715.0,
+          "name" : "🐊",
+          "screen_name" : "alligator_tama",
+          "indices" : [
+            3.0,
+            18.0
+          ],
+          "id_str" : "35161715"
+        }
+      ],
+      "symbols" : [
+
+      ]
+    }
+  },
+  {
+    "created_at" : "Mon Sep 27 12:01:31 +0000 2021",
+    "geo" : null,
+    "user" : {
+      "name" : "k2moons",
+      "description" : "⚔️iOS Engineer ❤️Science Fiction ❤️Xcode 🌲Innovation and Entrepreneurship ⛏Golang/AWS/Firebase 🧑‍💻Working@YUMEMI 🍺🎾🏃",
+      "default_profile_image" : false,
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "friends_count" : 298.0,
+      "lang" : null,
+      "listed_count" : 4.0,
+      "is_translation_enabled" : false,
+      "protected" : false,
+      "notifications" : false,
+      "has_extended_profile" : false,
+      "profile_sidebar_border_color" : "EEEEEE",
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme14/bg.gif",
+      "url" : null,
+      "is_translator" : false,
+      "time_zone" : null,
+      "withheld_in_countries" : [
+
+      ],
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1033205971412168705/NqKFO6H5_normal.jpg",
+      "profile_sidebar_fill_color" : "EFEFEF",
+      "verified" : false,
+      "statuses_count" : 802.0,
+      "profile_text_color" : "333333",
+      "geo_enabled" : false,
+      "id" : 68990550.0,
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme14/bg.gif",
+      "followers_count" : 76.0,
+      "utc_offset" : null,
+      "id_str" : "68990550",
+      "default_profile" : false,
+      "screen_name" : "beowulf_tech",
+      "favourites_count" : 377.0,
+      "created_at" : "Wed Aug 26 14:26:38 +0000 2009",
+      "profile_use_background_image" : true,
+      "profile_background_color" : "131516",
+      "profile_background_tile" : true,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1033205971412168705/NqKFO6H5_normal.jpg",
+      "profile_link_color" : "009999",
+      "following" : false,
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/68990550/1561779296",
+      "translator_type" : "none",
+      "contributors_enabled" : false,
+      "follow_request_sent" : false,
+      "location" : "横浜"
+    },
+    "id" : 1.44245938630409e+18,
+    "is_quote_status" : false,
+    "entities" : {
+      "user_mentions" : [
+
+      ],
+      "hashtags" : [
+        {
+          "text" : "yumemi_swift",
+          "indices" : [
+            57.0,
+            70.0
+          ]
+        }
+      ],
+      "symbols" : [
+
+      ],
+      "urls" : [
+        {
+          "indices" : [
+            32.0,
+            55.0
+          ],
+          "expanded_url" : "https://forms.gle/ncc3GXMprxaE8jkS9",
+          "display_url" : "forms.gle/ncc3GXMprxaE8j…",
+          "url" : "https://t.co/lUalwNf8pk"
+        }
+      ]
+    },
+    "retweeted" : false,
+    "in_reply_to_status_id" : null,
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "contributors" : null,
+    "lang" : "ja",
+    "in_reply_to_screen_name" : null,
+    "in_reply_to_status_id_str" : null,
+    "possibly_sensitive" : true,
+    "in_reply_to_user_id_str" : null,
+    "text" : "YUMEMI.swift #13 のアンケートはこちらです。\n\nhttps://t.co/lUalwNf8pk\n\n#yumemi_swift",
+    "place" : null,
+    "source" : "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+    "favorited" : false,
+    "in_reply_to_user_id" : null,
+    "favorite_count" : 0.0,
+    "truncated" : false,
+    "id_str" : "1442459386304090117",
+    "retweet_count" : 0.0,
+    "coordinates" : null
+  },
+  {
+    "favorited" : false,
+    "created_at" : "Mon Sep 27 11:55:52 +0000 2021",
+    "truncated" : false,
+    "in_reply_to_user_id_str" : null,
+    "source" : "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "lang" : "ja",
+    "coordinates" : null,
+    "retweet_count" : 1.0,
+    "contributors" : null,
+    "user" : {
+      "profile_use_background_image" : false,
+      "profile_background_tile" : false,
+      "profile_background_color" : "000000",
+      "followers_count" : 2657.0,
+      "is_translation_enabled" : false,
+      "geo_enabled" : true,
+      "profile_sidebar_fill_color" : "000000",
+      "id_str" : "35161715",
+      "is_translator" : false,
+      "profile_text_color" : "000000",
+      "notifications" : false,
+      "description" : "本業はネタツィート、趣味でITに関するツィートをします。",
+      "contributors_enabled" : false,
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "withheld_in_countries" : [
+
+      ],
+      "follow_request_sent" : false,
+      "profile_sidebar_border_color" : "000000",
+      "id" : 35161715.0,
+      "translator_type" : "none",
+      "default_profile_image" : false,
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "time_zone" : null,
+      "verified" : false,
+      "screen_name" : "alligator_tama",
+      "url" : null,
+      "listed_count" : 45.0,
+      "lang" : null,
+      "has_extended_profile" : false,
+      "statuses_count" : 35325.0,
+      "friends_count" : 4756.0,
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1297445775396335616/TxF-bbOh_normal.jpg",
+      "name" : "🐊",
+      "default_profile" : false,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1297445775396335616/TxF-bbOh_normal.jpg",
+      "following" : false,
+      "protected" : false,
+      "favourites_count" : 40504.0,
+      "created_at" : "Sat Apr 25 06:05:12 +0000 2009",
+      "profile_link_color" : "FF691F",
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "location" : "Tokyo",
+      "utc_offset" : null
+    },
+    "text" : "先ほど案内したメルペイ・メルコインの採用説明会はこちらになります。もしご興味ありましたらぜひご参加ください！\n#yumemi_swift\n\nhttps://t.co/VG8Dkq4Qd6",
+    "is_quote_status" : false,
+    "id" : 1.4424579628285501e+18,
+    "in_reply_to_screen_name" : null,
+    "possibly_sensitive" : false,
+    "favorite_count" : 3.0,
+    "in_reply_to_status_id_str" : null,
+    "geo" : null,
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "id_str" : "1442457962828550144",
+    "in_reply_to_user_id" : null,
+    "entities" : {
+      "symbols" : [
+
+      ],
+      "user_mentions" : [
+
+      ],
+      "urls" : [
+        {
+          "indices" : [
+            70.0,
+            93.0
+          ],
+          "url" : "https://t.co/VG8Dkq4Qd6",
+          "display_url" : "mercari.connpass.com/event/224432/",
+          "expanded_url" : "https://mercari.connpass.com/event/224432/"
+        }
+      ],
+      "hashtags" : [
+        {
+          "indices" : [
+            55.0,
+            68.0
+          ],
+          "text" : "yumemi_swift"
+        }
+      ]
+    },
+    "retweeted" : false,
+    "place" : null,
+    "in_reply_to_status_id" : null
+  },
+  {
+    "user" : {
+      "default_profile" : true,
+      "is_translation_enabled" : false,
+      "statuses_count" : 22611.0,
+      "profile_background_tile" : false,
+      "time_zone" : null,
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "profile_use_background_image" : true,
+      "protected" : false,
+      "is_translator" : false,
+      "favourites_count" : 19286.0,
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "translator_type" : "none",
+      "lang" : null,
+      "id" : 11858092.0,
+      "profile_background_color" : "C0DEED",
+      "profile_text_color" : "333333",
+      "profile_link_color" : "1DA1F2",
+      "followers_count" : 435.0,
+      "location" : "",
+      "id_str" : "11858092",
+      "geo_enabled" : true,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "default_profile_image" : false,
+      "friends_count" : 1050.0,
+      "url" : null,
+      "utc_offset" : null,
+      "description" : "仕事は卒業済み☆彡 暇つぶしに旅行して絡んで 喜怒哀楽を表現して【道楽】を追求中♪「自分勝手、我がまま、いい加減、適当、自分の話をしても相手の話を聞かない、相手の言ってることで道理が合わなければ指摘し、聞こうとしなければ飲食店でも大声で言い合う」を実践中（怖い人からは逃げるｗ",
+      "profile_sidebar_border_color" : "C0DEED",
+      "has_extended_profile" : false,
+      "following" : false,
+      "created_at" : "Fri Jan 04 23:06:54 +0000 2008",
+      "name" : "chiitake",
+      "verified" : false,
+      "follow_request_sent" : false,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1247350370/c-chan_normal.Jpg",
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1247350370/c-chan_normal.Jpg",
+      "contributors_enabled" : false,
+      "notifications" : false,
+      "screen_name" : "chiitake",
+      "withheld_in_countries" : [
+
+      ],
+      "listed_count" : 15.0,
+      "profile_sidebar_fill_color" : "DDEEF6"
+    },
+    "favorited" : false,
+    "possibly_sensitive" : false,
+    "retweet_count" : 2.0,
+    "is_quote_status" : false,
+    "coordinates" : null,
+    "place" : null,
+    "created_at" : "Mon Sep 27 11:52:55 +0000 2021",
+    "geo" : null,
+    "entities" : {
+      "urls" : [
+        {
+          "display_url" : "speakerdeck.com/usamik26/combi…",
+          "expanded_url" : "https://speakerdeck.com/usamik26/combine-operator-guide",
+          "url" : "https://t.co/utCf1VtQk9",
+          "indices" : [
+            25.0,
+            48.0
+          ]
+        }
+      ],
+      "hashtags" : [
+        {
+          "indices" : [
+            50.0,
+            63.0
+          ],
+          "text" : "yumemi_swift"
+        }
+      ],
+      "user_mentions" : [
+        {
+          "indices" : [
+            3.0,
+            12.0
+          ],
+          "name" : "宇佐見 公輔",
+          "id" : 64012075.0,
+          "id_str" : "64012075",
+          "screen_name" : "usamik26"
+        }
+      ],
+      "symbols" : [
+
+      ]
+    },
+    "in_reply_to_user_id" : null,
+    "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "contributors" : null,
+    "id" : 1.442457221120422e+18,
+    "retweeted_status" : {
+      "entities" : {
+        "urls" : [
+          {
+            "display_url" : "speakerdeck.com/usamik26/combi…",
+            "indices" : [
+              11.0,
+              34.0
+            ],
+            "url" : "https://t.co/utCf1VtQk9",
+            "expanded_url" : "https://speakerdeck.com/usamik26/combine-operator-guide"
+          }
+        ],
+        "symbols" : [
+
+        ],
+        "user_mentions" : [
+
+        ],
+        "hashtags" : [
+          {
+            "indices" : [
+              36.0,
+              49.0
+            ],
+            "text" : "yumemi_swift"
+          }
+        ]
+      },
+      "is_quote_status" : false,
+      "favorited" : false,
+      "retweet_count" : 2.0,
+      "geo" : null,
+      "contributors" : null,
+      "user" : {
+        "utc_offset" : null,
+        "profile_background_tile" : false,
+        "contributors_enabled" : false,
+        "lang" : null,
+        "friends_count" : 1923.0,
+        "profile_text_color" : "000000",
+        "profile_image_url_https" : "https://pbs.twimg.com/profile_images/2263775527/profile_normal.jpg",
+        "has_extended_profile" : true,
+        "default_profile" : false,
+        "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme8/bg.gif",
+        "screen_name" : "usamik26",
+        "is_translator" : false,
+        "translator_type" : "none",
+        "profile_image_url" : "http://pbs.twimg.com/profile_images/2263775527/profile_normal.jpg",
+        "withheld_in_countries" : [
+
+        ],
+        "url" : "https://t.co/FPggJ1e2Sc",
+        "followers_count" : 2165.0,
+        "favourites_count" : 2515.0,
+        "listed_count" : 98.0,
+        "verified" : false,
+        "profile_use_background_image" : false,
+        "profile_sidebar_fill_color" : "000000",
+        "default_profile_image" : false,
+        "statuses_count" : 11993.0,
+        "name" : "宇佐見 公輔",
+        "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme8/bg.gif",
+        "profile_link_color" : "1B95E0",
+        "id_str" : "64012075",
+        "profile_banner_url" : "https://pbs.twimg.com/profile_banners/64012075/1621907186",
+        "is_translation_enabled" : false,
+        "entities" : {
+          "url" : {
+            "urls" : [
+              {
+                "url" : "https://t.co/FPggJ1e2Sc",
+                "expanded_url" : "https://usami-k.github.io",
+                "display_url" : "usami-k.github.io",
+                "indices" : [
+                  0.0,
+                  23.0
+                ]
+              }
+            ]
+          },
+          "description" : {
+            "urls" : [
+
+            ]
+          }
+        },
+        "follow_request_sent" : false,
+        "location" : "大阪 堺市 東区",
+        "id" : 64012075.0,
+        "profile_background_color" : "000000",
+        "protected" : false,
+        "profile_sidebar_border_color" : "000000",
+        "description" : "プログラミング / 数学 / 声楽",
+        "following" : false,
+        "created_at" : "Sat Aug 08 18:12:06 +0000 2009",
+        "notifications" : false,
+        "geo_enabled" : false,
+        "time_zone" : null
+      },
+      "coordinates" : null,
+      "possibly_sensitive" : false,
+      "in_reply_to_screen_name" : null,
+      "favorite_count" : 4.0,
+      "created_at" : "Mon Sep 27 11:24:17 +0000 2021",
+      "in_reply_to_status_id" : null,
+      "place" : null,
+      "text" : "今日の発表資料です。\nhttps://t.co/utCf1VtQk9\n #yumemi_swift",
+      "in_reply_to_user_id_str" : null,
+      "id" : 1.4424500159479235e+18,
+      "lang" : "ja",
+      "id_str" : "1442450015947923459",
+      "truncated" : false,
+      "retweeted" : false,
+      "metadata" : {
+        "result_type" : "recent",
+        "iso_language_code" : "ja"
+      },
+      "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+      "in_reply_to_user_id" : null,
+      "in_reply_to_status_id_str" : null
+    },
+    "retweeted" : false,
+    "in_reply_to_status_id" : null,
+    "favorite_count" : 0.0,
+    "in_reply_to_screen_name" : null,
+    "metadata" : {
+      "result_type" : "recent",
+      "iso_language_code" : "ja"
+    },
+    "lang" : "ja",
+    "id_str" : "1442457221120421897",
+    "in_reply_to_user_id_str" : null,
+    "in_reply_to_status_id_str" : null,
+    "truncated" : false,
+    "text" : "RT @usamik26: 今日の発表資料です。\nhttps://t.co/utCf1VtQk9\n #yumemi_swift"
+  },
+  {
+    "entities" : {
+      "user_mentions" : [
+
+      ],
+      "symbols" : [
+
+      ],
+      "hashtags" : [
+        {
+          "indices" : [
+            38.0,
+            51.0
+          ],
+          "text" : "yumemi_swift"
+        }
+      ],
+      "urls" : [
+
+      ]
+    },
+    "id" : 1.4424547886002586e+18,
+    "user" : {
+      "notifications" : false,
+      "id_str" : "35161715",
+      "geo_enabled" : true,
+      "verified" : false,
+      "profile_sidebar_fill_color" : "000000",
+      "has_extended_profile" : false,
+      "follow_request_sent" : false,
+      "is_translator" : false,
+      "translator_type" : "none",
+      "default_profile_image" : false,
+      "statuses_count" : 35325.0,
+      "utc_offset" : null,
+      "time_zone" : null,
+      "listed_count" : 45.0,
+      "created_at" : "Sat Apr 25 06:05:12 +0000 2009",
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "default_profile" : false,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1297445775396335616/TxF-bbOh_normal.jpg",
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "contributors_enabled" : false,
+      "followers_count" : 2657.0,
+      "location" : "Tokyo",
+      "is_translation_enabled" : false,
+      "profile_link_color" : "FF691F",
+      "profile_sidebar_border_color" : "000000",
+      "screen_name" : "alligator_tama",
+      "profile_background_color" : "000000",
+      "following" : false,
+      "name" : "🐊",
+      "id" : 35161715.0,
+      "favourites_count" : 40504.0,
+      "description" : "本業はネタツィート、趣味でITに関するツィートをします。",
+      "profile_background_tile" : false,
+      "url" : null,
+      "lang" : null,
+      "profile_text_color" : "000000",
+      "withheld_in_countries" : [
+
+      ],
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1297445775396335616/TxF-bbOh_normal.jpg",
+      "friends_count" : 4756.0,
+      "protected" : false,
+      "profile_use_background_image" : false
+    },
+    "favorited" : false,
+    "retweeted" : false,
+    "metadata" : {
+      "result_type" : "recent",
+      "iso_language_code" : "ja"
+    },
+    "id_str" : "1442454788600258572",
+    "retweet_count" : 0.0,
+    "in_reply_to_user_id" : null,
+    "created_at" : "Mon Sep 27 11:43:15 +0000 2021",
+    "coordinates" : null,
+    "in_reply_to_screen_name" : null,
+    "source" : "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "in_reply_to_status_id" : null,
+    "geo" : null,
+    "in_reply_to_status_id_str" : null,
+    "favorite_count" : 3.0,
+    "is_quote_status" : false,
+    "contributors" : null,
+    "truncated" : false,
+    "in_reply_to_user_id_str" : null,
+    "text" : "そう、わたしもasync/awaitを使うようになるんだろうなーって思った #yumemi_swift",
+    "lang" : "ja",
+    "place" : null
+  },
+  {
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "retweet_count" : 0.0,
+    "favorited" : false,
+    "geo" : null,
+    "in_reply_to_status_id_str" : null,
+    "created_at" : "Mon Sep 27 11:41:54 +0000 2021",
+    "text" : "flatMapは完全に把握するのは結構難しいよね\n#yumemi_swift",
+    "lang" : "ja",
+    "id_str" : "1442454447976636420",
+    "retweeted" : false,
+    "user" : {
+      "url" : "https://t.co/35fS5490pc",
+      "id_str" : "13860672",
+      "profile_background_tile" : false,
+      "profile_use_background_image" : true,
+      "following" : false,
+      "statuses_count" : 158818.0,
+      "favourites_count" : 16131.0,
+      "follow_request_sent" : false,
+      "verified" : false,
+      "profile_background_color" : "FFFFFF",
+      "notifications" : false,
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/13860672/1459522381",
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "translator_type" : "none",
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "default_profile_image" : false,
+      "profile_sidebar_border_color" : "FFFFFF",
+      "location" : "日本 福岡",
+      "listed_count" : 116.0,
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "friends_count" : 2835.0,
+      "utc_offset" : null,
+      "entities" : {
+        "url" : {
+          "urls" : [
+            {
+              "url" : "https://t.co/35fS5490pc",
+              "indices" : [
+                0.0,
+                23.0
+              ],
+              "display_url" : "crazism.net",
+              "expanded_url" : "http://crazism.net/"
+            }
+          ]
+        },
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "id" : 13860672.0,
+      "followers_count" : 2968.0,
+      "default_profile" : false,
+      "description" : "自称チャイ語クラスタ同萌会会長／♭Map代表／HAKATA.swift共同運営者。iOSアプリQuickshaRe開発者。ほうえるは癒やし。Swift信者。ロードスター乗り。犬派なのに猫を保護した。Delighted to be Chinese 🇨🇳.",
+      "profile_text_color" : "333333",
+      "is_translator" : false,
+      "screen_name" : "lovee",
+      "profile_link_color" : "0084B4",
+      "has_extended_profile" : true,
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "lang" : null,
+      "profile_sidebar_fill_color" : "FFFFFF",
+      "name" : "星野恵瑠#今日も1日フレンズ㌠",
+      "withheld_in_countries" : [
+
+      ],
+      "geo_enabled" : true,
+      "time_zone" : null,
+      "is_translation_enabled" : false,
+      "protected" : false,
+      "contributors_enabled" : false,
+      "created_at" : "Sat Feb 23 10:40:44 +0000 2008"
+    },
+    "truncated" : false,
+    "id" : 1.4424544479766364e+18,
+    "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+    "in_reply_to_status_id" : null,
+    "entities" : {
+      "symbols" : [
+
+      ],
+      "hashtags" : [
+        {
+          "indices" : [
+            25.0,
+            38.0
+          ],
+          "text" : "yumemi_swift"
+        }
+      ],
+      "user_mentions" : [
+
+      ],
+      "urls" : [
+
+      ]
+    },
+    "in_reply_to_user_id_str" : null,
+    "favorite_count" : 1.0,
+    "in_reply_to_user_id" : null,
+    "place" : null,
+    "is_quote_status" : false,
+    "coordinates" : null,
+    "in_reply_to_screen_name" : null,
+    "contributors" : null
+  },
+  {
+    "id_str" : "1442452941965717505",
+    "place" : null,
+    "contributors" : null,
+    "geo" : null,
+    "retweet_count" : 3.0,
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "in_reply_to_user_id" : null,
+    "favorite_count" : 0.0,
+    "text" : "RT @usamik26: 今日はYUMEMI.swiftのスタッフとして司会進行をします。登壇もします。よろしくお願いします。\n\n【オンライン開催】YUMEMI.swift #13 〜裏iOSDC〜 https://t.co/T3RVOamzAo #yumemi_swift",
+    "lang" : "ja",
+    "in_reply_to_status_id" : null,
+    "possibly_sensitive" : false,
+    "retweeted" : false,
+    "coordinates" : null,
+    "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "entities" : {
+      "hashtags" : [
+        {
+          "text" : "yumemi_swift",
+          "indices" : [
+            125.0,
+            138.0
+          ]
+        }
+      ],
+      "urls" : [
+        {
+          "url" : "https://t.co/T3RVOamzAo",
+          "expanded_url" : "https://yumemi.connpass.com/event/222372/",
+          "display_url" : "yumemi.connpass.com/event/222372/",
+          "indices" : [
+            101.0,
+            124.0
+          ]
+        }
+      ],
+      "symbols" : [
+
+      ],
+      "user_mentions" : [
+        {
+          "id_str" : "64012075",
+          "id" : 64012075.0,
+          "indices" : [
+            3.0,
+            12.0
+          ],
+          "name" : "宇佐見 公輔",
+          "screen_name" : "usamik26"
+        }
+      ]
+    },
+    "user" : {
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1247350370/c-chan_normal.Jpg",
+      "friends_count" : 1050.0,
+      "time_zone" : null,
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "profile_background_tile" : false,
+      "is_translator" : false,
+      "id" : 11858092.0,
+      "profile_text_color" : "333333",
+      "contributors_enabled" : false,
+      "profile_use_background_image" : true,
+      "profile_link_color" : "1DA1F2",
+      "profile_sidebar_border_color" : "C0DEED",
+      "following" : false,
+      "protected" : false,
+      "lang" : null,
+      "geo_enabled" : true,
+      "followers_count" : 435.0,
+      "notifications" : false,
+      "follow_request_sent" : false,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "screen_name" : "chiitake",
+      "url" : null,
+      "listed_count" : 15.0,
+      "created_at" : "Fri Jan 04 23:06:54 +0000 2008",
+      "default_profile" : true,
+      "is_translation_enabled" : false,
+      "profile_background_color" : "C0DEED",
+      "statuses_count" : 22611.0,
+      "favourites_count" : 19286.0,
+      "withheld_in_countries" : [
+
+      ],
+      "description" : "仕事は卒業済み☆彡 暇つぶしに旅行して絡んで 喜怒哀楽を表現して【道楽】を追求中♪「自分勝手、我がまま、いい加減、適当、自分の話をしても相手の話を聞かない、相手の言ってることで道理が合わなければ指摘し、聞こうとしなければ飲食店でも大声で言い合う」を実践中（怖い人からは逃げるｗ",
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "name" : "chiitake",
+      "id_str" : "11858092",
+      "utc_offset" : null,
+      "verified" : false,
+      "default_profile_image" : false,
+      "translator_type" : "none",
+      "profile_sidebar_fill_color" : "DDEEF6",
+      "has_extended_profile" : false,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1247350370/c-chan_normal.Jpg",
+      "location" : ""
+    },
+    "in_reply_to_status_id_str" : null,
+    "retweeted_status" : {
+      "coordinates" : null,
+      "favorited" : false,
+      "in_reply_to_status_id" : null,
+      "text" : "今日はYUMEMI.swiftのスタッフとして司会進行をします。登壇もします。よろしくお願いします。\n\n【オンライン開催】YUMEMI.swift #13 〜裏iOSDC〜 https://t.co/T3RVOamzAo #yumemi_swift",
+      "truncated" : false,
+      "is_quote_status" : false,
+      "retweeted" : false,
+      "entities" : {
+        "symbols" : [
+
+        ],
+        "urls" : [
+          {
+            "url" : "https://t.co/T3RVOamzAo",
+            "display_url" : "yumemi.connpass.com/event/222372/",
+            "expanded_url" : "https://yumemi.connpass.com/event/222372/",
+            "indices" : [
+              87.0,
+              110.0
+            ]
+          }
+        ],
+        "user_mentions" : [
+
+        ],
+        "hashtags" : [
+          {
+            "indices" : [
+              111.0,
+              124.0
+            ],
+            "text" : "yumemi_swift"
+          }
+        ]
+      },
+      "lang" : "ja",
+      "geo" : null,
+      "created_at" : "Mon Sep 27 06:17:04 +0000 2021",
+      "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "user" : {
+        "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme8/bg.gif",
+        "withheld_in_countries" : [
+
+        ],
+        "default_profile" : false,
+        "time_zone" : null,
+        "is_translation_enabled" : false,
+        "location" : "大阪 堺市 東区",
+        "utc_offset" : null,
+        "profile_banner_url" : "https://pbs.twimg.com/profile_banners/64012075/1621907186",
+        "lang" : null,
+        "geo_enabled" : false,
+        "profile_image_url_https" : "https://pbs.twimg.com/profile_images/2263775527/profile_normal.jpg",
+        "verified" : false,
+        "followers_count" : 2165.0,
+        "friends_count" : 1923.0,
+        "name" : "宇佐見 公輔",
+        "screen_name" : "usamik26",
+        "profile_background_color" : "000000",
+        "profile_sidebar_border_color" : "000000",
+        "url" : "https://t.co/FPggJ1e2Sc",
+        "protected" : false,
+        "profile_background_tile" : false,
+        "created_at" : "Sat Aug 08 18:12:06 +0000 2009",
+        "entities" : {
+          "url" : {
+            "urls" : [
+              {
+                "indices" : [
+                  0.0,
+                  23.0
+                ],
+                "url" : "https://t.co/FPggJ1e2Sc",
+                "display_url" : "usami-k.github.io",
+                "expanded_url" : "https://usami-k.github.io"
+              }
+            ]
+          },
+          "description" : {
+            "urls" : [
+
+            ]
+          }
+        },
+        "statuses_count" : 11993.0,
+        "id" : 64012075.0,
+        "notifications" : false,
+        "profile_image_url" : "http://pbs.twimg.com/profile_images/2263775527/profile_normal.jpg",
+        "follow_request_sent" : false,
+        "default_profile_image" : false,
+        "listed_count" : 98.0,
+        "description" : "プログラミング / 数学 / 声楽",
+        "is_translator" : false,
+        "has_extended_profile" : true,
+        "id_str" : "64012075",
+        "contributors_enabled" : false,
+        "translator_type" : "none",
+        "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme8/bg.gif",
+        "following" : false,
+        "profile_text_color" : "000000",
+        "profile_link_color" : "1B95E0",
+        "favourites_count" : 2515.0,
+        "profile_use_background_image" : false,
+        "profile_sidebar_fill_color" : "000000"
+      },
+      "in_reply_to_status_id_str" : null,
+      "retweet_count" : 3.0,
+      "contributors" : null,
+      "in_reply_to_user_id_str" : null,
+      "in_reply_to_screen_name" : null,
+      "id" : 1.4423726988064932e+18,
+      "id_str" : "1442372698806493189",
+      "possibly_sensitive" : false,
+      "in_reply_to_user_id" : null,
+      "place" : null,
+      "metadata" : {
+        "iso_language_code" : "ja",
+        "result_type" : "recent"
+      },
+      "favorite_count" : 7.0
+    },
+    "favorited" : false,
+    "id" : 1.4424529419657175e+18,
+    "created_at" : "Mon Sep 27 11:35:55 +0000 2021",
+    "truncated" : false,
+    "in_reply_to_user_id_str" : null,
+    "in_reply_to_screen_name" : null,
+    "is_quote_status" : false
+  },
+  {
+    "in_reply_to_user_id_str" : null,
+    "favorited" : false,
+    "in_reply_to_user_id" : null,
+    "entities" : {
+      "urls" : [
+
+      ],
+      "user_mentions" : [
+
+      ],
+      "symbols" : [
+
+      ],
+      "hashtags" : [
+        {
+          "text" : "yumemi_swift",
+          "indices" : [
+            99.0,
+            112.0
+          ]
+        }
+      ]
+    },
+    "in_reply_to_status_id_str" : null,
+    "coordinates" : null,
+    "contributors" : null,
+    "is_quote_status" : false,
+    "id" : 1.4424526348209562e+18,
+    "created_at" : "Mon Sep 27 11:34:42 +0000 2021",
+    "geo" : null,
+    "retweeted" : false,
+    "in_reply_to_screen_name" : null,
+    "truncated" : false,
+    "text" : "個人的にそのPublisherの型がOperator繋ぐと複雑になるCombineの仕様が結構好き、無理矢理にでも型消去させて購読側が最低限のことしか把握できないようにする鋼鉄の意志がクッソ好きw\n#yumemi_swift",
+    "retweet_count" : 0.0,
+    "lang" : "ja",
+    "user" : {
+      "profile_background_color" : "FFFFFF",
+      "statuses_count" : 158818.0,
+      "profile_background_tile" : false,
+      "id_str" : "13860672",
+      "created_at" : "Sat Feb 23 10:40:44 +0000 2008",
+      "id" : 13860672.0,
+      "is_translator" : false,
+      "lang" : null,
+      "contributors_enabled" : false,
+      "translator_type" : "none",
+      "verified" : false,
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "withheld_in_countries" : [
+
+      ],
+      "geo_enabled" : true,
+      "url" : "https://t.co/35fS5490pc",
+      "utc_offset" : null,
+      "follow_request_sent" : false,
+      "protected" : false,
+      "description" : "自称チャイ語クラスタ同萌会会長／♭Map代表／HAKATA.swift共同運営者。iOSアプリQuickshaRe開発者。ほうえるは癒やし。Swift信者。ロードスター乗り。犬派なのに猫を保護した。Delighted to be Chinese 🇨🇳.",
+      "following" : false,
+      "entities" : {
+        "url" : {
+          "urls" : [
+            {
+              "display_url" : "crazism.net",
+              "expanded_url" : "http://crazism.net/",
+              "url" : "https://t.co/35fS5490pc",
+              "indices" : [
+                0.0,
+                23.0
+              ]
+            }
+          ]
+        },
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "screen_name" : "lovee",
+      "default_profile" : false,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "listed_count" : 116.0,
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "favourites_count" : 16131.0,
+      "name" : "星野恵瑠#今日も1日フレンズ㌠",
+      "followers_count" : 2968.0,
+      "profile_link_color" : "0084B4",
+      "profile_sidebar_border_color" : "FFFFFF",
+      "notifications" : false,
+      "default_profile_image" : false,
+      "has_extended_profile" : true,
+      "profile_sidebar_fill_color" : "FFFFFF",
+      "location" : "日本 福岡",
+      "profile_text_color" : "333333",
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/13860672/1459522381",
+      "friends_count" : 2835.0,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "time_zone" : null,
+      "profile_use_background_image" : true,
+      "is_translation_enabled" : false
+    },
+    "in_reply_to_status_id" : null,
+    "id_str" : "1442452634820956162",
+    "favorite_count" : 2.0,
+    "place" : null,
+    "metadata" : {
+      "result_type" : "recent",
+      "iso_language_code" : "ja"
+    },
+    "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>"
+  },
+  {
+    "favorited" : false,
+    "geo" : null,
+    "place" : null,
+    "favorite_count" : 0.0,
+    "retweeted" : false,
+    "in_reply_to_user_id_str" : null,
+    "source" : "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "in_reply_to_screen_name" : null,
+    "contributors" : null,
+    "in_reply_to_status_id_str" : null,
+    "created_at" : "Mon Sep 27 11:29:19 +0000 2021",
+    "lang" : "ja",
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "user" : {
+      "has_extended_profile" : false,
+      "profile_sidebar_fill_color" : "000000",
+      "is_translator" : false,
+      "profile_sidebar_border_color" : "000000",
+      "screen_name" : "alligator_tama",
+      "id_str" : "35161715",
+      "statuses_count" : 35325.0,
+      "is_translation_enabled" : false,
+      "withheld_in_countries" : [
+
+      ],
+      "profile_background_tile" : false,
+      "favourites_count" : 40504.0,
+      "profile_link_color" : "FF691F",
+      "url" : null,
+      "protected" : false,
+      "default_profile_image" : false,
+      "default_profile" : false,
+      "followers_count" : 2657.0,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1297445775396335616/TxF-bbOh_normal.jpg",
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "name" : "🐊",
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_color" : "000000",
+      "location" : "Tokyo",
+      "friends_count" : 4756.0,
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1297445775396335616/TxF-bbOh_normal.jpg",
+      "profile_text_color" : "000000",
+      "created_at" : "Sat Apr 25 06:05:12 +0000 2009",
+      "contributors_enabled" : false,
+      "follow_request_sent" : false,
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "geo_enabled" : true,
+      "following" : false,
+      "listed_count" : 45.0,
+      "notifications" : false,
+      "verified" : false,
+      "description" : "本業はネタツィート、趣味でITに関するツィートをします。",
+      "lang" : null,
+      "utc_offset" : null,
+      "id" : 35161715.0,
+      "time_zone" : null,
+      "translator_type" : "none",
+      "profile_use_background_image" : false
+    },
+    "id" : 1.44245127962044e+18,
+    "truncated" : false,
+    "is_quote_status" : false,
+    "coordinates" : null,
+    "text" : "わかる... #yumemi_swift",
+    "retweet_count" : 0.0,
+    "in_reply_to_user_id" : null,
+    "in_reply_to_status_id" : null,
+    "entities" : {
+      "hashtags" : [
+        {
+          "indices" : [
+            7.0,
+            20.0
+          ],
+          "text" : "yumemi_swift"
+        }
+      ],
+      "urls" : [
+
+      ],
+      "user_mentions" : [
+
+      ],
+      "symbols" : [
+
+      ]
+    },
+    "id_str" : "1442451279620440064"
+  },
+  {
+    "text" : "すみません、私も記事後回しにしてます :innocent:\n#yumemi_swift",
+    "entities" : {
+      "urls" : [
+
+      ],
+      "user_mentions" : [
+
+      ],
+      "symbols" : [
+
+      ],
+      "hashtags" : [
+        {
+          "text" : "yumemi_swift",
+          "indices" : [
+            30.0,
+            43.0
+          ]
+        }
+      ]
+    },
+    "coordinates" : null,
+    "id_str" : "1442451264336371717",
+    "in_reply_to_user_id" : null,
+    "in_reply_to_user_id_str" : null,
+    "retweet_count" : 0.0,
+    "favorited" : false,
+    "place" : null,
+    "in_reply_to_screen_name" : null,
+    "truncated" : false,
+    "in_reply_to_status_id" : null,
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "user" : {
+      "statuses_count" : 158818.0,
+      "utc_offset" : null,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "time_zone" : null,
+      "profile_background_tile" : false,
+      "friends_count" : 2835.0,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "listed_count" : 116.0,
+      "profile_link_color" : "0084B4",
+      "description" : "自称チャイ語クラスタ同萌会会長／♭Map代表／HAKATA.swift共同運営者。iOSアプリQuickshaRe開発者。ほうえるは癒やし。Swift信者。ロードスター乗り。犬派なのに猫を保護した。Delighted to be Chinese 🇨🇳.",
+      "is_translation_enabled" : false,
+      "name" : "星野恵瑠#今日も1日フレンズ㌠",
+      "id_str" : "13860672",
+      "follow_request_sent" : false,
+      "profile_sidebar_fill_color" : "FFFFFF",
+      "profile_text_color" : "333333",
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "id" : 13860672.0,
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/13860672/1459522381",
+      "screen_name" : "lovee",
+      "protected" : false,
+      "geo_enabled" : true,
+      "default_profile_image" : false,
+      "profile_use_background_image" : true,
+      "withheld_in_countries" : [
+
+      ],
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        },
+        "url" : {
+          "urls" : [
+            {
+              "expanded_url" : "http://crazism.net/",
+              "indices" : [
+                0.0,
+                23.0
+              ],
+              "display_url" : "crazism.net",
+              "url" : "https://t.co/35fS5490pc"
+            }
+          ]
+        }
+      },
+      "profile_sidebar_border_color" : "FFFFFF",
+      "followers_count" : 2968.0,
+      "is_translator" : false,
+      "has_extended_profile" : true,
+      "verified" : false,
+      "profile_background_color" : "FFFFFF",
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "created_at" : "Sat Feb 23 10:40:44 +0000 2008",
+      "location" : "日本 福岡",
+      "url" : "https://t.co/35fS5490pc",
+      "default_profile" : false,
+      "favourites_count" : 16131.0,
+      "translator_type" : "none",
+      "notifications" : false,
+      "lang" : null,
+      "following" : false,
+      "contributors_enabled" : false
+    },
+    "retweeted" : false,
+    "created_at" : "Mon Sep 27 11:29:15 +0000 2021",
+    "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+    "geo" : null,
+    "is_quote_status" : false,
+    "favorite_count" : 3.0,
+    "id" : 1.4424512643363717e+18,
+    "lang" : "ja",
+    "contributors" : null,
+    "in_reply_to_status_id_str" : null
+  },
+  {
+    "place" : null,
+    "retweet_count" : 2.0,
+    "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+    "id_str" : "1442450532287713287",
+    "retweeted" : false,
+    "lang" : "ja",
+    "is_quote_status" : false,
+    "in_reply_to_status_id" : null,
+    "user" : {
+      "contributors_enabled" : false,
+      "location" : "日本 福岡",
+      "withheld_in_countries" : [
+
+      ],
+      "favourites_count" : 16131.0,
+      "profile_sidebar_fill_color" : "FFFFFF",
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/13860672/1459522381",
+      "is_translator" : false,
+      "profile_background_color" : "FFFFFF",
+      "listed_count" : 116.0,
+      "translator_type" : "none",
+      "id_str" : "13860672",
+      "geo_enabled" : true,
+      "follow_request_sent" : false,
+      "statuses_count" : 158818.0,
+      "created_at" : "Sat Feb 23 10:40:44 +0000 2008",
+      "utc_offset" : null,
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        },
+        "url" : {
+          "urls" : [
+            {
+              "url" : "https://t.co/35fS5490pc",
+              "display_url" : "crazism.net",
+              "expanded_url" : "http://crazism.net/",
+              "indices" : [
+                0.0,
+                23.0
+              ]
+            }
+          ]
+        }
+      },
+      "is_translation_enabled" : false,
+      "protected" : false,
+      "notifications" : false,
+      "lang" : null,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "friends_count" : 2835.0,
+      "verified" : false,
+      "url" : "https://t.co/35fS5490pc",
+      "id" : 13860672.0,
+      "profile_link_color" : "0084B4",
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "default_profile" : false,
+      "profile_background_tile" : false,
+      "profile_sidebar_border_color" : "FFFFFF",
+      "default_profile_image" : false,
+      "description" : "自称チャイ語クラスタ同萌会会長／♭Map代表／HAKATA.swift共同運営者。iOSアプリQuickshaRe開発者。ほうえるは癒やし。Swift信者。ロードスター乗り。犬派なのに猫を保護した。Delighted to be Chinese 🇨🇳.",
+      "profile_text_color" : "333333",
+      "name" : "星野恵瑠#今日も1日フレンズ㌠",
+      "time_zone" : null,
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "has_extended_profile" : true,
+      "profile_use_background_image" : true,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "screen_name" : "lovee",
+      "following" : false,
+      "followers_count" : 2968.0
+    },
+    "favorite_count" : 0.0,
+    "truncated" : false,
+    "retweeted_status" : {
+      "contributors" : null,
+      "in_reply_to_user_id_str" : null,
+      "user" : {
+        "screen_name" : "usamik26",
+        "location" : "大阪 堺市 東区",
+        "favourites_count" : 2515.0,
+        "profile_image_url_https" : "https://pbs.twimg.com/profile_images/2263775527/profile_normal.jpg",
+        "created_at" : "Sat Aug 08 18:12:06 +0000 2009",
+        "has_extended_profile" : true,
+        "utc_offset" : null,
+        "profile_image_url" : "http://pbs.twimg.com/profile_images/2263775527/profile_normal.jpg",
+        "geo_enabled" : false,
+        "default_profile_image" : false,
+        "follow_request_sent" : false,
+        "lang" : null,
+        "description" : "プログラミング / 数学 / 声楽",
+        "is_translation_enabled" : false,
+        "withheld_in_countries" : [
+
+        ],
+        "is_translator" : false,
+        "profile_text_color" : "000000",
+        "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme8/bg.gif",
+        "id_str" : "64012075",
+        "listed_count" : 98.0,
+        "entities" : {
+          "description" : {
+            "urls" : [
+
+            ]
+          },
+          "url" : {
+            "urls" : [
+              {
+                "indices" : [
+                  0.0,
+                  23.0
+                ],
+                "expanded_url" : "https://usami-k.github.io",
+                "display_url" : "usami-k.github.io",
+                "url" : "https://t.co/FPggJ1e2Sc"
+              }
+            ]
+          }
+        },
+        "followers_count" : 2165.0,
+        "translator_type" : "none",
+        "profile_use_background_image" : false,
+        "profile_banner_url" : "https://pbs.twimg.com/profile_banners/64012075/1621907186",
+        "friends_count" : 1923.0,
+        "profile_background_tile" : false,
+        "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme8/bg.gif",
+        "profile_link_color" : "1B95E0",
+        "profile_sidebar_fill_color" : "000000",
+        "statuses_count" : 11993.0,
+        "notifications" : false,
+        "profile_background_color" : "000000",
+        "url" : "https://t.co/FPggJ1e2Sc",
+        "following" : false,
+        "default_profile" : false,
+        "profile_sidebar_border_color" : "000000",
+        "id" : 64012075.0,
+        "verified" : false,
+        "protected" : false,
+        "name" : "宇佐見 公輔",
+        "time_zone" : null,
+        "contributors_enabled" : false
+      },
+      "is_quote_status" : false,
+      "in_reply_to_status_id_str" : null,
+      "geo" : null,
+      "truncated" : false,
+      "entities" : {
+        "user_mentions" : [
+
+        ],
+        "urls" : [
+          {
+            "url" : "https://t.co/utCf1VtQk9",
+            "indices" : [
+              11.0,
+              34.0
+            ],
+            "display_url" : "speakerdeck.com/usamik26/combi…",
+            "expanded_url" : "https://speakerdeck.com/usamik26/combine-operator-guide"
+          }
+        ],
+        "hashtags" : [
+          {
+            "text" : "yumemi_swift",
+            "indices" : [
+              36.0,
+              49.0
+            ]
+          }
+        ],
+        "symbols" : [
+
+        ]
+      },
+      "in_reply_to_user_id" : null,
+      "text" : "今日の発表資料です。\nhttps://t.co/utCf1VtQk9\n #yumemi_swift",
+      "in_reply_to_screen_name" : null,
+      "possibly_sensitive" : false,
+      "lang" : "ja",
+      "favorited" : false,
+      "coordinates" : null,
+      "metadata" : {
+        "result_type" : "recent",
+        "iso_language_code" : "ja"
+      },
+      "retweeted" : false,
+      "retweet_count" : 2.0,
+      "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+      "id" : 1.4424500159479235e+18,
+      "in_reply_to_status_id" : null,
+      "place" : null,
+      "created_at" : "Mon Sep 27 11:24:17 +0000 2021",
+      "favorite_count" : 4.0,
+      "id_str" : "1442450015947923459"
+    },
+    "in_reply_to_screen_name" : null,
+    "entities" : {
+      "user_mentions" : [
+        {
+          "indices" : [
+            3.0,
+            12.0
+          ],
+          "screen_name" : "usamik26",
+          "id" : 64012075.0,
+          "id_str" : "64012075",
+          "name" : "宇佐見 公輔"
+        }
+      ],
+      "symbols" : [
+
+      ],
+      "urls" : [
+        {
+          "url" : "https://t.co/utCf1VtQk9",
+          "expanded_url" : "https://speakerdeck.com/usamik26/combine-operator-guide",
+          "display_url" : "speakerdeck.com/usamik26/combi…",
+          "indices" : [
+            25.0,
+            48.0
+          ]
+        }
+      ],
+      "hashtags" : [
+        {
+          "text" : "yumemi_swift",
+          "indices" : [
+            50.0,
+            63.0
+          ]
+        }
+      ]
+    },
+    "in_reply_to_user_id_str" : null,
+    "favorited" : false,
+    "in_reply_to_user_id" : null,
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "text" : "RT @usamik26: 今日の発表資料です。\nhttps://t.co/utCf1VtQk9\n #yumemi_swift",
+    "possibly_sensitive" : false,
+    "created_at" : "Mon Sep 27 11:26:20 +0000 2021",
+    "coordinates" : null,
+    "geo" : null,
+    "contributors" : null,
+    "id" : 1.4424505322877133e+18,
+    "in_reply_to_status_id_str" : null
+  },
+  {
+    "coordinates" : null,
+    "retweet_count" : 0.0,
+    "source" : "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+    "in_reply_to_status_id_str" : null,
+    "in_reply_to_user_id_str" : null,
+    "created_at" : "Mon Sep 27 11:26:14 +0000 2021",
+    "id_str" : "1442450504227831814",
+    "favorite_count" : 0.0,
+    "geo" : null,
+    "contributors" : null,
+    "id" : 1.4424505042278318e+18,
+    "in_reply_to_status_id" : null,
+    "truncated" : false,
+    "metadata" : {
+      "result_type" : "recent",
+      "iso_language_code" : "ja"
+    },
+    "retweeted" : false,
+    "user" : {
+      "profile_sidebar_border_color" : "EEEEEE",
+      "default_profile_image" : false,
+      "profile_link_color" : "009999",
+      "verified" : false,
+      "name" : "k2moons",
+      "description" : "⚔️iOS Engineer ❤️Science Fiction ❤️Xcode 🌲Innovation and Entrepreneurship ⛏Golang/AWS/Firebase 🧑‍💻Working@YUMEMI 🍺🎾🏃",
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1033205971412168705/NqKFO6H5_normal.jpg",
+      "time_zone" : null,
+      "lang" : null,
+      "profile_background_tile" : true,
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/68990550/1561779296",
+      "profile_text_color" : "333333",
+      "contributors_enabled" : false,
+      "id_str" : "68990550",
+      "utc_offset" : null,
+      "created_at" : "Wed Aug 26 14:26:38 +0000 2009",
+      "profile_use_background_image" : true,
+      "withheld_in_countries" : [
+
+      ],
+      "is_translator" : false,
+      "profile_background_color" : "131516",
+      "followers_count" : 76.0,
+      "following" : false,
+      "has_extended_profile" : false,
+      "translator_type" : "none",
+      "is_translation_enabled" : false,
+      "favourites_count" : 377.0,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme14/bg.gif",
+      "statuses_count" : 802.0,
+      "profile_sidebar_fill_color" : "EFEFEF",
+      "url" : null,
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1033205971412168705/NqKFO6H5_normal.jpg",
+      "follow_request_sent" : false,
+      "location" : "横浜",
+      "notifications" : false,
+      "friends_count" : 298.0,
+      "listed_count" : 4.0,
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "id" : 68990550.0,
+      "geo_enabled" : false,
+      "protected" : false,
+      "screen_name" : "beowulf_tech",
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme14/bg.gif",
+      "default_profile" : false
+    },
+    "lang" : "ja",
+    "entities" : {
+      "user_mentions" : [
+        {
+          "id_str" : "64012075",
+          "id" : 64012075.0,
+          "screen_name" : "usamik26",
+          "name" : "宇佐見 公輔",
+          "indices" : [
+            7.0,
+            16.0
+          ]
+        }
+      ],
+      "urls" : [
+
+      ],
+      "hashtags" : [
+        {
+          "indices" : [
+            65.0,
+            78.0
+          ],
+          "text" : "yumemi_swift"
+        }
+      ],
+      "symbols" : [
+
+      ]
+    },
+    "in_reply_to_screen_name" : null,
+    "in_reply_to_user_id" : null,
+    "favorited" : false,
+    "place" : null,
+    "is_quote_status" : false,
+    "text" : "次の発表は、\n@usamik26 さん「パンフレット記事「Combine Operator ガイド」についての解説と補足」です！\n#yumemi_swift"
+  },
+  {
+    "favorite_count" : 4.0,
+    "id" : 1.4424500159479235e+18,
+    "entities" : {
+      "symbols" : [
+
+      ],
+      "urls" : [
+        {
+          "url" : "https://t.co/utCf1VtQk9",
+          "indices" : [
+            11.0,
+            34.0
+          ],
+          "display_url" : "speakerdeck.com/usamik26/combi…",
+          "expanded_url" : "https://speakerdeck.com/usamik26/combine-operator-guide"
+        }
+      ],
+      "user_mentions" : [
+
+      ],
+      "hashtags" : [
+        {
+          "text" : "yumemi_swift",
+          "indices" : [
+            36.0,
+            49.0
+          ]
+        }
+      ]
+    },
+    "possibly_sensitive" : false,
+    "in_reply_to_screen_name" : null,
+    "user" : {
+      "location" : "大阪 堺市 東区",
+      "contributors_enabled" : false,
+      "created_at" : "Sat Aug 08 18:12:06 +0000 2009",
+      "profile_sidebar_border_color" : "000000",
+      "profile_link_color" : "1B95E0",
+      "has_extended_profile" : true,
+      "id" : 64012075.0,
+      "url" : "https://t.co/FPggJ1e2Sc",
+      "default_profile_image" : false,
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/2263775527/profile_normal.jpg",
+      "verified" : false,
+      "lang" : null,
+      "withheld_in_countries" : [
+
+      ],
+      "is_translator" : false,
+      "protected" : false,
+      "default_profile" : false,
+      "notifications" : false,
+      "profile_sidebar_fill_color" : "000000",
+      "friends_count" : 1923.0,
+      "following" : false,
+      "profile_text_color" : "000000",
+      "id_str" : "64012075",
+      "geo_enabled" : false,
+      "is_translation_enabled" : false,
+      "statuses_count" : 11993.0,
+      "name" : "宇佐見 公輔",
+      "follow_request_sent" : false,
+      "screen_name" : "usamik26",
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/2263775527/profile_normal.jpg",
+      "favourites_count" : 2515.0,
+      "profile_use_background_image" : false,
+      "translator_type" : "none",
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme8/bg.gif",
+      "profile_background_tile" : false,
+      "followers_count" : 2165.0,
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/64012075/1621907186",
+      "profile_background_color" : "000000",
+      "listed_count" : 98.0,
+      "time_zone" : null,
+      "utc_offset" : null,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme8/bg.gif",
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        },
+        "url" : {
+          "urls" : [
+            {
+              "display_url" : "usami-k.github.io",
+              "indices" : [
+                0.0,
+                23.0
+              ],
+              "expanded_url" : "https://usami-k.github.io",
+              "url" : "https://t.co/FPggJ1e2Sc"
+            }
+          ]
+        }
+      },
+      "description" : "プログラミング / 数学 / 声楽"
+    },
+    "in_reply_to_user_id_str" : null,
+    "favorited" : false,
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+    "contributors" : null,
+    "retweet_count" : 2.0,
+    "in_reply_to_status_id" : null,
+    "lang" : "ja",
+    "retweeted" : false,
+    "coordinates" : null,
+    "in_reply_to_status_id_str" : null,
+    "truncated" : false,
+    "in_reply_to_user_id" : null,
+    "place" : null,
+    "is_quote_status" : false,
+    "geo" : null,
+    "text" : "今日の発表資料です。\nhttps://t.co/utCf1VtQk9\n #yumemi_swift",
+    "id_str" : "1442450015947923459",
+    "created_at" : "Mon Sep 27 11:24:17 +0000 2021"
+  },
+  {
+    "id_str" : "1442446742142668807",
+    "user" : {
+      "geo_enabled" : true,
+      "favourites_count" : 16131.0,
+      "has_extended_profile" : true,
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "withheld_in_countries" : [
+
+      ],
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "profile_sidebar_border_color" : "FFFFFF",
+      "profile_link_color" : "0084B4",
+      "translator_type" : "none",
+      "name" : "星野恵瑠#今日も1日フレンズ㌠",
+      "id_str" : "13860672",
+      "is_translation_enabled" : false,
+      "profile_text_color" : "333333",
+      "screen_name" : "lovee",
+      "followers_count" : 2968.0,
+      "following" : false,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "entities" : {
+        "url" : {
+          "urls" : [
+            {
+              "expanded_url" : "http://crazism.net/",
+              "indices" : [
+                0.0,
+                23.0
+              ],
+              "url" : "https://t.co/35fS5490pc",
+              "display_url" : "crazism.net"
+            }
+          ]
+        },
+        "description" : {
+          "urls" : [
+
+          ]
+        }
+      },
+      "is_translator" : false,
+      "created_at" : "Sat Feb 23 10:40:44 +0000 2008",
+      "follow_request_sent" : false,
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/13860672/1459522381",
+      "description" : "自称チャイ語クラスタ同萌会会長／♭Map代表／HAKATA.swift共同運営者。iOSアプリQuickshaRe開発者。ほうえるは癒やし。Swift信者。ロードスター乗り。犬派なのに猫を保護した。Delighted to be Chinese 🇨🇳.",
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "notifications" : false,
+      "url" : "https://t.co/35fS5490pc",
+      "time_zone" : null,
+      "utc_offset" : null,
+      "friends_count" : 2835.0,
+      "profile_background_tile" : false,
+      "contributors_enabled" : false,
+      "default_profile" : false,
+      "verified" : false,
+      "profile_background_color" : "FFFFFF",
+      "id" : 13860672.0,
+      "lang" : null,
+      "location" : "日本 福岡",
+      "profile_sidebar_fill_color" : "FFFFFF",
+      "profile_use_background_image" : true,
+      "listed_count" : 116.0,
+      "protected" : false,
+      "default_profile_image" : false,
+      "statuses_count" : 158818.0
+    },
+    "place" : null,
+    "favorited" : false,
+    "metadata" : {
+      "iso_language_code" : "ja",
+      "result_type" : "recent"
+    },
+    "id" : 1.4424467421426688e+18,
+    "in_reply_to_screen_name" : null,
+    "contributors" : null,
+    "in_reply_to_status_id_str" : null,
+    "coordinates" : null,
+    "is_quote_status" : false,
+    "lang" : "ja",
+    "favorite_count" : 0.0,
+    "text" : "動画欲しいですよね、わかる\n#yumemi_swift",
+    "geo" : null,
+    "created_at" : "Mon Sep 27 11:11:17 +0000 2021",
+    "truncated" : false,
+    "retweet_count" : 0.0,
+    "entities" : {
+      "hashtags" : [
+        {
+          "text" : "yumemi_swift",
+          "indices" : [
+            14.0,
+            27.0
+          ]
+        }
+      ],
+      "symbols" : [
+
+      ],
+      "urls" : [
+
+      ],
+      "user_mentions" : [
+
+      ]
+    },
+    "in_reply_to_status_id" : null,
+    "in_reply_to_user_id_str" : null,
+    "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+    "retweeted" : false,
+    "in_reply_to_user_id" : null
+  },
+  {
+    "in_reply_to_status_id" : null,
+    "id" : 1.4424465281702502e+18,
+    "source" : "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+    "coordinates" : null,
+    "lang" : "ja",
+    "text" : "merpay今UITestのカバレッジどれくらいだろ\n#yumemi_swift",
+    "in_reply_to_user_id" : null,
+    "in_reply_to_screen_name" : null,
+    "entities" : {
+      "user_mentions" : [
+
+      ],
+      "urls" : [
+
+      ],
+      "hashtags" : [
+        {
+          "text" : "yumemi_swift",
+          "indices" : [
+            27.0,
+            40.0
+          ]
+        }
+      ],
+      "symbols" : [
+
+      ]
+    },
+    "id_str" : "1442446528170250241",
+    "favorited" : false,
+    "retweeted" : false,
+    "is_quote_status" : false,
+    "place" : null,
+    "user" : {
+      "withheld_in_countries" : [
+
+      ],
+      "follow_request_sent" : false,
+      "verified" : false,
+      "profile_sidebar_border_color" : "FFFFFF",
+      "id_str" : "13860672",
+      "profile_banner_url" : "https://pbs.twimg.com/profile_banners/13860672/1459522381",
+      "is_translator" : false,
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "profile_text_color" : "333333",
+      "listed_count" : 116.0,
+      "geo_enabled" : true,
+      "time_zone" : null,
+      "statuses_count" : 158818.0,
+      "profile_background_tile" : false,
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "favourites_count" : 16131.0,
+      "is_translation_enabled" : false,
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1263598032165015552/W824_O85_normal.jpg",
+      "url" : "https://t.co/35fS5490pc",
+      "friends_count" : 2835.0,
+      "entities" : {
+        "description" : {
+          "urls" : [
+
+          ]
+        },
+        "url" : {
+          "urls" : [
+            {
+              "expanded_url" : "http://crazism.net/",
+              "indices" : [
+                0.0,
+                23.0
+              ],
+              "url" : "https://t.co/35fS5490pc",
+              "display_url" : "crazism.net"
+            }
+          ]
+        }
+      },
+      "profile_link_color" : "0084B4",
+      "profile_sidebar_fill_color" : "FFFFFF",
+      "translator_type" : "none",
+      "name" : "星野恵瑠#今日も1日フレンズ㌠",
+      "default_profile_image" : false,
+      "followers_count" : 2968.0,
+      "created_at" : "Sat Feb 23 10:40:44 +0000 2008",
+      "notifications" : false,
+      "screen_name" : "lovee",
+      "contributors_enabled" : false,
+      "location" : "日本 福岡",
+      "has_extended_profile" : true,
+      "id" : 13860672.0,
+      "profile_use_background_image" : true,
+      "protected" : false,
+      "following" : false,
+      "profile_background_color" : "FFFFFF",
+      "description" : "自称チャイ語クラスタ同萌会会長／♭Map代表／HAKATA.swift共同運営者。iOSアプリQuickshaRe開発者。ほうえるは癒やし。Swift信者。ロードスター乗り。犬派なのに猫を保護した。Delighted to be Chinese 🇨🇳.",
+      "utc_offset" : null,
+      "default_profile" : false,
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "lang" : null
+    },
+    "created_at" : "Mon Sep 27 11:10:26 +0000 2021",
+    "metadata" : {
+      "result_type" : "recent",
+      "iso_language_code" : "ja"
+    },
+    "truncated" : false,
+    "in_reply_to_user_id_str" : null,
+    "contributors" : null,
+    "geo" : null,
+    "retweet_count" : 0.0,
+    "favorite_count" : 0.0,
+    "in_reply_to_status_id_str" : null
+  }
+]

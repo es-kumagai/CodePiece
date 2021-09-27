@@ -2,7 +2,11 @@
 
 Change Logs.
 
-## 2.1.15 (Next Version)
+## 2.1.15
+
+### Fixes
+
+* Fix a problem that failed to parse tweets contain backspace characters. 
 
 ### Modifies
 

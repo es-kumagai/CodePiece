@@ -22,7 +22,7 @@ final class CodePieceScheme : URLScheme {
 	
 	static let host = "open"
 	
-	static func action(url: Foundation.URL) {
+	static func action(url: Foundation.URL) throws {
 		
 		DebugTime.print("❕ Detected URL scheme for CodePiece open.")
 

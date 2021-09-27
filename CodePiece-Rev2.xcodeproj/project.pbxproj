@@ -36,19 +36,6 @@
 		B122599023EA90F0006D819D /* MentionsContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122598F23EA90F0006D819D /* MentionsContentsController.swift */; };
 		B122599223EAB8F5006D819D /* TimelineTabViewItemInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */; };
 		B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1278B5B23D176C3003F3719 /* CodeText.swift */; };
-		B12CDB0D263C047000451738 /* libCodePieceSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12CDAFE263C047000451738 /* libCodePieceSupport.a */; };
-		B12CDB0E263C047000451738 /* arm64-apple-macos.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB00263C047000451738 /* arm64-apple-macos.swiftdoc */; };
-		B12CDB0F263C047000451738 /* x86_64-apple-macos.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB01263C047000451738 /* x86_64-apple-macos.swiftdoc */; };
-		B12CDB10263C047000451738 /* x86_64.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB02263C047000451738 /* x86_64.swiftdoc */; };
-		B12CDB11263C047000451738 /* arm64.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB03263C047000451738 /* arm64.swiftmodule */; };
-		B12CDB12263C047000451738 /* arm64-apple-macos.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB04263C047000451738 /* arm64-apple-macos.swiftmodule */; };
-		B12CDB13263C047000451738 /* x86_64.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB05263C047000451738 /* x86_64.swiftmodule */; };
-		B12CDB14263C047000451738 /* x86_64.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB07263C047000451738 /* x86_64.swiftsourceinfo */; };
-		B12CDB15263C047000451738 /* x86_64-apple-macos.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB08263C047000451738 /* x86_64-apple-macos.swiftsourceinfo */; };
-		B12CDB16263C047000451738 /* arm64-apple-macos.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB09263C047000451738 /* arm64-apple-macos.swiftsourceinfo */; };
-		B12CDB17263C047000451738 /* arm64.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB0A263C047000451738 /* arm64.swiftsourceinfo */; };
-		B12CDB18263C047000451738 /* x86_64-apple-macos.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB0B263C047000451738 /* x86_64-apple-macos.swiftmodule */; };
-		B12CDB19263C047000451738 /* arm64.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B12CDB0C263C047000451738 /* arm64.swiftdoc */; };
 		B131864623F28D7000BA9AA7 /* GetStatusesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB123F1540600772AA4 /* GetStatusesError.swift */; };
 		B132D51423CD08B800690C5F /* ESTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B132D50B23CD08B800690C5F /* ESTwitter.framework */; };
 		B132D51B23CD08B800690C5F /* ESTwitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B132D51A23CD08B800690C5F /* ESTwitterTests.swift */; };
@@ -67,6 +54,23 @@
 		B14500F226C14E4600647476 /* SearchTweetsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14500F126C14E4600647476 /* SearchTweetsWindowController.swift */; };
 		B14500FB26C160EC00647476 /* SearchTweetsWindowControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14500FA26C160EC00647476 /* SearchTweetsWindowControllerDelegate.swift */; };
 		B14500FD26C168B900647476 /* SearchTweetsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14500FC26C168B900647476 /* SearchTweetsWindow.swift */; };
+		B148EBE52701D3D60047E725 /* arm64-apple-macos.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B148EBD72701D3D50047E725 /* arm64-apple-macos.swiftdoc */; };
+		B148EBE62701D3D60047E725 /* x86_64-apple-macos.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B148EBD82701D3D50047E725 /* x86_64-apple-macos.swiftdoc */; };
+		B148EBE72701D3D60047E725 /* x86_64.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B148EBD92701D3D50047E725 /* x86_64.swiftdoc */; };
+		B148EBE82701D3D60047E725 /* arm64.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B148EBDA2701D3D50047E725 /* arm64.swiftmodule */; };
+		B148EBE92701D3D60047E725 /* arm64-apple-macos.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B148EBDB2701D3D50047E725 /* arm64-apple-macos.swiftmodule */; };
+		B148EBEA2701D3D60047E725 /* x86_64.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B148EBDC2701D3D50047E725 /* x86_64.swiftmodule */; };
+		B148EBEB2701D3D60047E725 /* x86_64.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B148EBDE2701D3D50047E725 /* x86_64.swiftsourceinfo */; };
+		B148EBEC2701D3D60047E725 /* x86_64-apple-macos.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B148EBDF2701D3D50047E725 /* x86_64-apple-macos.swiftsourceinfo */; };
+		B148EBED2701D3D60047E725 /* arm64-apple-macos.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B148EBE02701D3D50047E725 /* arm64-apple-macos.swiftsourceinfo */; };
+		B148EBEE2701D3D60047E725 /* arm64.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = B148EBE12701D3D50047E725 /* arm64.swiftsourceinfo */; };
+		B148EBEF2701D3D60047E725 /* x86_64-apple-macos.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = B148EBE22701D3D50047E725 /* x86_64-apple-macos.swiftmodule */; };
+		B148EBF02701D3D60047E725 /* arm64.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = B148EBE32701D3D50047E725 /* arm64.swiftdoc */; };
+		B148EBF12701D3D60047E725 /* libCodePieceSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B148EBE42701D3D50047E725 /* libCodePieceSupport.a */; };
+		B148EBF62701EAC20047E725 /* CodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B148EBF52701EAC20047E725 /* CodingTests.swift */; };
+		B148EBFF2701F7C60047E725 /* Tweets-Swifter.20210927.data in Resources */ = {isa = PBXBuildFile; fileRef = B148EBFD2701F7C50047E725 /* Tweets-Swifter.20210927.data */; };
+		B148EC002701F7C60047E725 /* Tweets-raw.20210927.data in Resources */ = {isa = PBXBuildFile; fileRef = B148EBFE2701F7C60047E725 /* Tweets-raw.20210927.data */; };
+		B148EC0627021A0C0047E725 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B148EC0527021A0C0047E725 /* Swifter */; };
 		B1508BDB23E92E9800973728 /* TimelineKindState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDA23E92E9800973728 /* TimelineKindState.swift */; };
 		B1508BDD23E92F0C00973728 /* TimelineKindStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */; };
 		B1508BE023E9435600973728 /* HashtagsContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDF23E9435600973728 /* HashtagsContentsController.swift */; };
@@ -147,7 +151,6 @@
 		B15EE2A623CE7667005B268A /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28923CE7667005B268A /* TimelineTableView.swift */; };
 		B15EE2A823CE7667005B268A /* TimelineTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28B23CE7667005B268A /* TimelineTableItem.swift */; };
 		B15EE2AA23CE7667005B268A /* WelcomeBoardWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE28D23CE7667005B268A /* WelcomeBoardWindowController.swift */; };
-		B15EE38723CE9C42005B268A /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38623CE9C42005B268A /* Swifter */; };
 		B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38923CE9FBB005B268A /* Reachability */; };
 		B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B15EE38C23CEA03E005B268A /* KeychainAccess */; };
 		B16CFCB823F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CFCB723F1961F00772AA4 /* RelatedTweetsContentsControllerRelatedUser.swift */; };
@@ -428,19 +431,6 @@
 		B122598F23EA90F0006D819D /* MentionsContentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsContentsController.swift; sourceTree = "<group>"; };
 		B122599123EAB8F5006D819D /* TimelineTabViewItemInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTabViewItemInformation.swift; sourceTree = "<group>"; };
 		B1278B5B23D176C3003F3719 /* CodeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeText.swift; sourceTree = "<group>"; };
-		B12CDAFE263C047000451738 /* libCodePieceSupport.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCodePieceSupport.a; sourceTree = "<group>"; };
-		B12CDB00263C047000451738 /* arm64-apple-macos.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftdoc"; sourceTree = "<group>"; };
-		B12CDB01263C047000451738 /* x86_64-apple-macos.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "x86_64-apple-macos.swiftdoc"; sourceTree = "<group>"; };
-		B12CDB02263C047000451738 /* x86_64.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = x86_64.swiftdoc; sourceTree = "<group>"; };
-		B12CDB03263C047000451738 /* arm64.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = arm64.swiftmodule; sourceTree = "<group>"; };
-		B12CDB04263C047000451738 /* arm64-apple-macos.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftmodule"; sourceTree = "<group>"; };
-		B12CDB05263C047000451738 /* x86_64.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = x86_64.swiftmodule; sourceTree = "<group>"; };
-		B12CDB07263C047000451738 /* x86_64.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = x86_64.swiftsourceinfo; sourceTree = "<group>"; };
-		B12CDB08263C047000451738 /* x86_64-apple-macos.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "x86_64-apple-macos.swiftsourceinfo"; sourceTree = "<group>"; };
-		B12CDB09263C047000451738 /* arm64-apple-macos.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftsourceinfo"; sourceTree = "<group>"; };
-		B12CDB0A263C047000451738 /* arm64.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = arm64.swiftsourceinfo; sourceTree = "<group>"; };
-		B12CDB0B263C047000451738 /* x86_64-apple-macos.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = "x86_64-apple-macos.swiftmodule"; sourceTree = "<group>"; };
-		B12CDB0C263C047000451738 /* arm64.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = arm64.swiftdoc; sourceTree = "<group>"; };
 		B132D50B23CD08B800690C5F /* ESTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B132D50D23CD08B800690C5F /* ESTwitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESTwitter.h; sourceTree = "<group>"; };
 		B132D50E23CD08B800690C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -456,6 +446,22 @@
 		B14500F126C14E4600647476 /* SearchTweetsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTweetsWindowController.swift; sourceTree = "<group>"; };
 		B14500FA26C160EC00647476 /* SearchTweetsWindowControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTweetsWindowControllerDelegate.swift; sourceTree = "<group>"; };
 		B14500FC26C168B900647476 /* SearchTweetsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTweetsWindow.swift; sourceTree = "<group>"; };
+		B148EBD72701D3D50047E725 /* arm64-apple-macos.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftdoc"; sourceTree = "<group>"; };
+		B148EBD82701D3D50047E725 /* x86_64-apple-macos.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "x86_64-apple-macos.swiftdoc"; sourceTree = "<group>"; };
+		B148EBD92701D3D50047E725 /* x86_64.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = x86_64.swiftdoc; sourceTree = "<group>"; };
+		B148EBDA2701D3D50047E725 /* arm64.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = arm64.swiftmodule; sourceTree = "<group>"; };
+		B148EBDB2701D3D50047E725 /* arm64-apple-macos.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftmodule"; sourceTree = "<group>"; };
+		B148EBDC2701D3D50047E725 /* x86_64.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = x86_64.swiftmodule; sourceTree = "<group>"; };
+		B148EBDE2701D3D50047E725 /* x86_64.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = x86_64.swiftsourceinfo; sourceTree = "<group>"; };
+		B148EBDF2701D3D50047E725 /* x86_64-apple-macos.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "x86_64-apple-macos.swiftsourceinfo"; sourceTree = "<group>"; };
+		B148EBE02701D3D50047E725 /* arm64-apple-macos.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftsourceinfo"; sourceTree = "<group>"; };
+		B148EBE12701D3D50047E725 /* arm64.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = arm64.swiftsourceinfo; sourceTree = "<group>"; };
+		B148EBE22701D3D50047E725 /* x86_64-apple-macos.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = "x86_64-apple-macos.swiftmodule"; sourceTree = "<group>"; };
+		B148EBE32701D3D50047E725 /* arm64.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = arm64.swiftdoc; sourceTree = "<group>"; };
+		B148EBE42701D3D50047E725 /* libCodePieceSupport.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCodePieceSupport.a; sourceTree = "<group>"; };
+		B148EBF52701EAC20047E725 /* CodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingTests.swift; sourceTree = "<group>"; };
+		B148EBFD2701F7C50047E725 /* Tweets-Swifter.20210927.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Tweets-Swifter.20210927.data"; sourceTree = "<group>"; };
+		B148EBFE2701F7C60047E725 /* Tweets-raw.20210927.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Tweets-raw.20210927.data"; sourceTree = "<group>"; };
 		B1508BDA23E92E9800973728 /* TimelineKindState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineKindState.swift; sourceTree = "<group>"; };
 		B1508BDC23E92F0C00973728 /* TimelineKindStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineKindStateController.swift; sourceTree = "<group>"; };
 		B1508BDF23E9435600973728 /* HashtagsContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagsContentsController.swift; sourceTree = "<group>"; };
@@ -652,7 +658,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B15EE38723CE9C42005B268A /* Swifter in Frameworks */,
+				B148EC0627021A0C0047E725 /* Swifter in Frameworks */,
 				B13CA7922478E9180059F306 /* ESGists in Frameworks */,
 				B1D8ED9026D0D4F10028AF32 /* Swim in Frameworks */,
 			);
@@ -683,11 +689,11 @@
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
 				B1D8ED9F26D0E8290028AF32 /* Sky in Frameworks */,
-				B12CDB0D263C047000451738 /* libCodePieceSupport.a in Frameworks */,
 				B1D8ED9326D0D5160028AF32 /* Ocean in Frameworks */,
 				B132D52023CD08B800690C5F /* ESTwitter.framework in Frameworks */,
 				B1D8ED9626D0D5310028AF32 /* Swim in Frameworks */,
 				B1D8ED8D26D08D150028AF32 /* Sky-AppKit in Frameworks */,
+				B148EBF12701D3D60047E725 /* libCodePieceSupport.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,33 +794,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		B12CDAFF263C047000451738 /* CodePieceSupport.swiftmodule */ = {
-			isa = PBXGroup;
-			children = (
-				B12CDB00263C047000451738 /* arm64-apple-macos.swiftdoc */,
-				B12CDB01263C047000451738 /* x86_64-apple-macos.swiftdoc */,
-				B12CDB02263C047000451738 /* x86_64.swiftdoc */,
-				B12CDB03263C047000451738 /* arm64.swiftmodule */,
-				B12CDB04263C047000451738 /* arm64-apple-macos.swiftmodule */,
-				B12CDB05263C047000451738 /* x86_64.swiftmodule */,
-				B12CDB06263C047000451738 /* Project */,
-				B12CDB0B263C047000451738 /* x86_64-apple-macos.swiftmodule */,
-				B12CDB0C263C047000451738 /* arm64.swiftdoc */,
-			);
-			path = CodePieceSupport.swiftmodule;
-			sourceTree = "<group>";
-		};
-		B12CDB06263C047000451738 /* Project */ = {
-			isa = PBXGroup;
-			children = (
-				B12CDB07263C047000451738 /* x86_64.swiftsourceinfo */,
-				B12CDB08263C047000451738 /* x86_64-apple-macos.swiftsourceinfo */,
-				B12CDB09263C047000451738 /* arm64-apple-macos.swiftsourceinfo */,
-				B12CDB0A263C047000451738 /* arm64.swiftsourceinfo */,
-			);
-			path = Project;
-			sourceTree = "<group>";
-		};
 		B131864523F28D1700BA9AA7 /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -844,8 +823,10 @@
 		B132D51923CD08B800690C5F /* ESTwitterTests */ = {
 			isa = PBXGroup;
 			children = (
+				B148EBF22701EA490047E725 /* Test Data */,
 				B132D51A23CD08B800690C5F /* ESTwitterTests.swift */,
 				B1CE4CD423E6F605003D1399 /* CharacterTests.swift */,
+				B148EBF52701EAC20047E725 /* CodingTests.swift */,
 				B132D51C23CD08B800690C5F /* Info.plist */,
 			);
 			path = ESTwitterTests;
@@ -871,6 +852,42 @@
 				B14500FA26C160EC00647476 /* SearchTweetsWindowControllerDelegate.swift */,
 			);
 			path = WindowController;
+			sourceTree = "<group>";
+		};
+		B148EBD62701D3D50047E725 /* CodePieceSupport.swiftmodule */ = {
+			isa = PBXGroup;
+			children = (
+				B148EBD72701D3D50047E725 /* arm64-apple-macos.swiftdoc */,
+				B148EBD82701D3D50047E725 /* x86_64-apple-macos.swiftdoc */,
+				B148EBD92701D3D50047E725 /* x86_64.swiftdoc */,
+				B148EBDA2701D3D50047E725 /* arm64.swiftmodule */,
+				B148EBDB2701D3D50047E725 /* arm64-apple-macos.swiftmodule */,
+				B148EBDC2701D3D50047E725 /* x86_64.swiftmodule */,
+				B148EBDD2701D3D50047E725 /* Project */,
+				B148EBE22701D3D50047E725 /* x86_64-apple-macos.swiftmodule */,
+				B148EBE32701D3D50047E725 /* arm64.swiftdoc */,
+			);
+			path = CodePieceSupport.swiftmodule;
+			sourceTree = "<group>";
+		};
+		B148EBDD2701D3D50047E725 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				B148EBDE2701D3D50047E725 /* x86_64.swiftsourceinfo */,
+				B148EBDF2701D3D50047E725 /* x86_64-apple-macos.swiftsourceinfo */,
+				B148EBE02701D3D50047E725 /* arm64-apple-macos.swiftsourceinfo */,
+				B148EBE12701D3D50047E725 /* arm64.swiftsourceinfo */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		B148EBF22701EA490047E725 /* Test Data */ = {
+			isa = PBXGroup;
+			children = (
+				B148EBFE2701F7C60047E725 /* Tweets-raw.20210927.data */,
+				B148EBFD2701F7C50047E725 /* Tweets-Swifter.20210927.data */,
+			);
+			path = "Test Data";
 			sourceTree = "<group>";
 		};
 		B1508BDE23E9433000973728 /* ContentsController */ = {
@@ -1082,8 +1099,8 @@
 		B1627DE224463324005D1902 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				B12CDAFF263C047000451738 /* CodePieceSupport.swiftmodule */,
-				B12CDAFE263C047000451738 /* libCodePieceSupport.a */,
+				B148EBD62701D3D50047E725 /* CodePieceSupport.swiftmodule */,
+				B148EBE42701D3D50047E725 /* libCodePieceSupport.a */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -1466,9 +1483,9 @@
 			);
 			name = ESTwitter;
 			packageProductDependencies = (
-				B15EE38623CE9C42005B268A /* Swifter */,
 				B13CA7912478E9180059F306 /* ESGists */,
 				B1D8ED8F26D0D4F10028AF32 /* Swim */,
+				B148EC0527021A0C0047E725 /* Swifter */,
 			);
 			productName = ESTwitter;
 			productReference = B132D50B23CD08B800690C5F /* ESTwitter.framework */;
@@ -1630,13 +1647,13 @@
 			mainGroup = B1D13C6723CA14DB0016902A;
 			packageReferences = (
 				B15EE33E23CE7959005B268A /* XCRemoteSwiftPackageReference "OAuth2" */,
-				B15EE38023CE9B40005B268A /* XCRemoteSwiftPackageReference "Swifter" */,
 				B15EE38823CE9FBB005B268A /* XCRemoteSwiftPackageReference "Reachability.swift" */,
 				B15EE38B23CEA03E005B268A /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				B18B24C9243CC65000B824AD /* XCRemoteSwiftPackageReference "Swim" */,
 				B18B24D0243CC6D100B824AD /* XCRemoteSwiftPackageReference "Ocean" */,
 				B1BCCD22243CC88C00F03577 /* XCRemoteSwiftPackageReference "ESGists" */,
 				B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */,
+				B148EC0427021A0C0047E725 /* XCRemoteSwiftPackageReference "Swifter" */,
 			);
 			productRefGroup = B1D13C7123CA14DB0016902A /* Products */;
 			projectDirPath = "";
@@ -1680,6 +1697,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B148EC002701F7C60047E725 /* Tweets-raw.20210927.data in Resources */,
+				B148EBFF2701F7C60047E725 /* Tweets-Swifter.20210927.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1696,18 +1715,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B12CDB17263C047000451738 /* arm64.swiftsourceinfo in Resources */,
+				B148EBEE2701D3D60047E725 /* arm64.swiftsourceinfo in Resources */,
 				B15EE29823CE7667005B268A /* WelcomeBoard.storyboard in Resources */,
-				B12CDB12263C047000451738 /* arm64-apple-macos.swiftmodule in Resources */,
+				B148EBE92701D3D60047E725 /* arm64-apple-macos.swiftmodule in Resources */,
 				B15EE29423CE7667005B268A /* AboutWindowController.storyboard in Resources */,
-				B12CDB0F263C047000451738 /* x86_64-apple-macos.swiftdoc in Resources */,
-				B12CDB13263C047000451738 /* x86_64.swiftmodule in Resources */,
+				B148EBE62701D3D60047E725 /* x86_64-apple-macos.swiftdoc in Resources */,
+				B148EBEA2701D3D60047E725 /* x86_64.swiftmodule in Resources */,
 				B1C34A2723E363660039F4E6 /* Acknowledgements.plist in Resources */,
 				B17B938323CAB2A800E3B490 /* MainWindow.storyboard in Resources */,
-				B12CDB0E263C047000451738 /* arm64-apple-macos.swiftdoc in Resources */,
+				B148EBE52701D3D60047E725 /* arm64-apple-macos.swiftdoc in Resources */,
 				B1A105FD23CA1A4A00F9C4FD /* Assets.xcassets in Resources */,
-				B12CDB14263C047000451738 /* x86_64.swiftsourceinfo in Resources */,
-				B12CDB16263C047000451738 /* arm64-apple-macos.swiftsourceinfo in Resources */,
+				B148EBEB2701D3D60047E725 /* x86_64.swiftsourceinfo in Resources */,
+				B148EBED2701D3D60047E725 /* arm64-apple-macos.swiftsourceinfo in Resources */,
 				B1F2C78A23E48B89008BBCA0 /* Fonts in Resources */,
 				B15EE29923CE7667005B268A /* AcknowledgementsViewController.storyboard in Resources */,
 				B15EE26B23CE7658005B268A /* TwitterPreferenceView.storyboard in Resources */,
@@ -1716,11 +1735,11 @@
 				B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */,
 				B15EE29023CE7667005B268A /* Timeline.storyboard in Resources */,
 				B15EE26723CE7658005B268A /* GistPreferenceView.storyboard in Resources */,
-				B12CDB19263C047000451738 /* arm64.swiftdoc in Resources */,
-				B12CDB10263C047000451738 /* x86_64.swiftdoc in Resources */,
-				B12CDB18263C047000451738 /* x86_64-apple-macos.swiftmodule in Resources */,
-				B12CDB15263C047000451738 /* x86_64-apple-macos.swiftsourceinfo in Resources */,
-				B12CDB11263C047000451738 /* arm64.swiftmodule in Resources */,
+				B148EBF02701D3D60047E725 /* arm64.swiftdoc in Resources */,
+				B148EBE72701D3D60047E725 /* x86_64.swiftdoc in Resources */,
+				B148EBEF2701D3D60047E725 /* x86_64-apple-macos.swiftmodule in Resources */,
+				B148EBEC2701D3D60047E725 /* x86_64-apple-macos.swiftsourceinfo in Resources */,
+				B148EBE82701D3D60047E725 /* arm64.swiftmodule in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1825,6 +1844,7 @@
 			files = (
 				B132D51B23CD08B800690C5F /* ESTwitterTests.swift in Sources */,
 				B1CE4CD523E6F605003D1399 /* CharacterTests.swift in Sources */,
+				B148EBF62701EAC20047E725 /* CodingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2055,7 +2075,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 101;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_BUNDLE_NAME = "CodePiece-Beta";
@@ -2065,7 +2085,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.14;
+				MARKETING_VERSION = 2.1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.Beta.XcodeSourceEditorExtension";
 				PRODUCT_NAME = "CodePiece Extension";
 				SKIP_INSTALL = YES;
@@ -2081,7 +2101,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 101;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_BUNDLE_NAME = CodePiece;
@@ -2091,7 +2111,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.14;
+				MARKETING_VERSION = 2.1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.XcodeSourceEditorExtension";
 				PRODUCT_NAME = "CodePiece Extension";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2427,7 +2447,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
@@ -2460,7 +2480,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
@@ -2646,20 +2666,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B148EC0427021A0C0047E725 /* XCRemoteSwiftPackageReference "Swifter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:es-kumagai/Swifter.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		B15EE33E23CE7959005B268A /* XCRemoteSwiftPackageReference "OAuth2" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/p2/OAuth2";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.1.1;
-			};
-		};
-		B15EE38023CE9B40005B268A /* XCRemoteSwiftPackageReference "Swifter" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mattdonnelly/Swifter.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 2.3.0;
 			};
 		};
 		B15EE38823CE9FBB005B268A /* XCRemoteSwiftPackageReference "Reachability.swift" */ = {
@@ -2718,9 +2738,9 @@
 			package = B1BCCD22243CC88C00F03577 /* XCRemoteSwiftPackageReference "ESGists" */;
 			productName = ESGists;
 		};
-		B15EE38623CE9C42005B268A /* Swifter */ = {
+		B148EC0527021A0C0047E725 /* Swifter */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B15EE38023CE9B40005B268A /* XCRemoteSwiftPackageReference "Swifter" */;
+			package = B148EC0427021A0C0047E725 /* XCRemoteSwiftPackageReference "Swifter" */;
 			productName = Swifter;
 		};
 		B15EE38923CE9FBB005B268A /* Reachability */ = {

@@ -24,13 +24,8 @@ extension JSON {
 			
 			throw SerializationError.invalidObject(self)
 		}
-		
-//		guard JSONSerialization.isValidJSONObject(jsonData as Any) else {
-//			
-//			throw SerializationError.invalidObject(self)
-//		}
-		
-		return jsonData
+
+		return jsonData.filter { $0 != 0x08 /*BS*/ }
 	}
 }
 

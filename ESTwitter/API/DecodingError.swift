@@ -6,45 +6,52 @@
 //  Copyright © 2020 Tomohiro Kumagai. All rights reserved.
 //
 
+import Swim
+
 extension DecodingError : CustomStringConvertible {
 	
 	public var description: String {
 		
-		let prefix = localizedDescription
-
-		func string(from context: DecodingError.Context) -> String {
-			
-			let message = context.debugDescription
-			let pathInfo = context.codingPath
-				.map { $0.stringValue }
-				.joined(separator: ".")
-
-			switch pathInfo.isEmpty {
-				
-			case true:
-				return "\(message)"
-
-			case false:
-				return "\(message) (\(pathInfo))"
-			}
-		}
-		
 		switch self {
 			
 		case let .typeMismatch(_, context):
-			return "\(prefix) \(string(from: context))"
+			return "\(context)"
 			
 		case let .valueNotFound(_, context):
-			return "\(prefix) \(string(from: context))"
+			return "\(context)"
 
 		case let .keyNotFound(_, context):
-			return "\(prefix) \(string(from: context))"
+			return "\(context)"
 
 		case let .dataCorrupted(context):
-			return "\(prefix) \(string(from: context))"
+			return "\(context)"
 
 		@unknown default:
-			return "\(prefix)"
+			return localizedDescription
+		}
+	}
+}
+
+extension DecodingError.Context : CustomStringConvertible {
+	
+	@StringConcat
+	public var description: String {
+		
+		debugDescription
+
+		if !codingPath.isEmpty {
+
+			" ("
+			codingPath
+				.map { $0.stringValue }
+				.joined(separator: ".")
+			")"
+		}
+		
+		if let error = underlyingError {
+
+			" "
+			error.localizedDescription
 		}
 	}
 }

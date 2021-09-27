@@ -11,6 +11,6 @@ import Swifter
 
 public func handle(openUrl url: URL) {
 	
-	Swifter.handleOpenURL(url)
+	Swifter.handleOpenURL(url, callbackURL: url)
 }
 
