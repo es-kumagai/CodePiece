@@ -16,6 +16,8 @@ Change Logs.
 
 * Moves features of URL Schemes into Sky_AppKit library; when just did, CodePiece could not be launched because of ProgressHUD framework is not signed, but the settings seem correctly, so set "Disable Library Validation Entitlement" enabled.
 * Removes a dependency on ProgressHUD package; the features in it are moved into Sky package.
+* Fix a problem that the Xcode Source Editor Extension is signinged with the host app's code sign with provisioning profile in Xcode 13.0.
+* To find CodePiece app signed frameworks embedded in CodePieceCore.framework, modified `Run Path Search Path` in CodePiece app.
 
 ## 2.1.14
 
