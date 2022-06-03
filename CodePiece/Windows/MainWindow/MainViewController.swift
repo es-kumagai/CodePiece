@@ -11,7 +11,7 @@ import ESGists
 import Ocean
 //import Quartz
 import Swim
-import Sky
+import Sky_AppKit
 import ESTwitter
 import CodePieceCore
 
@@ -48,7 +48,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 		NSApp.snsController.twitter
 	}
 	
-	private var postingHUD: ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
+	private var postingHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
 	
 	private var activeSearchTweetsWindowController: SearchTweetsWindowController? = nil
 	

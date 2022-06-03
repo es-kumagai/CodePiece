@@ -6,18 +6,18 @@
 //  Copyright © 2022 Tomohiro Kumagai. All rights reserved.
 //
 
-import Swim
+@preconcurrency import Swim
 import Dispatch
 import Foundation
 
 public let messageQueueDefaultProcessingInterval = Semaphore.Interval(second: 0.03)
 
-public actor MessageQueue2<Message : MessageType> {
+public actor MessageQueue<Message : MessageType> {
 	
 	public typealias Messages = Queue<Message>
-	public typealias PreAction = @Sendable (_ queue: MessageQueue2, _ message: Message) async -> Continuous
-	public typealias MessageHandler = @Sendable (_ queue: MessageQueue2, _ message: Message) async throws -> Void
-	public typealias ErrorHandler = @Sendable (_ queue: MessageQueue2, _ error: Error) async throws -> Void
+	public typealias PreAction = @Sendable (_ queue: MessageQueue, _ message: Message) async -> Continuous
+	public typealias MessageHandler = @Sendable (_ queue: MessageQueue, _ message: Message) async throws -> Void
+	public typealias ErrorHandler = @Sendable (_ queue: MessageQueue, _ error: Error) async throws -> Void
 
 	public var messageHandler: MessageHandler?
 	public var errorHandler: ErrorHandler?
@@ -86,7 +86,7 @@ public actor MessageQueue2<Message : MessageType> {
 	}
 }
 
-internal extension MessageQueue2 {
+internal extension MessageQueue {
 	
 	func start() {
 		
@@ -113,7 +113,7 @@ internal extension MessageQueue2 {
 	}
 }
 
-private extension MessageQueue2 {
+private extension MessageQueue {
 	
 	func messageLoop() {
 		
@@ -191,7 +191,7 @@ private extension MessageQueue2 {
 	}
 }
 
-extension MessageQueue2 where Message : PreActionMessageType {
+extension MessageQueue where Message : PreActionMessageType {
 	
 	public nonisolated func send(_ message: Message) {
 		

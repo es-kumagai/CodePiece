@@ -28,7 +28,6 @@ actor WebCaptureController : NSObject {
 		requests.remove(at: index)
 	}
 	
-	@available(*, deprecated, message: "Concurrency に対応させる必要があります。そうしないとコードを含むツイートが成功しても適切に完了したと認識できません。")
 	func capture(url: String, of sourceFilename: String, captureInfo: CaptureInfo) async throws -> NSImage {
 		
 		try await withCheckedThrowingContinuation { continuation in

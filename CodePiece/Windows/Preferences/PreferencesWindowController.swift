@@ -9,9 +9,6 @@
 import Cocoa
 import CodePieceCore
 
-#warning("このファイルとは関係ないが、UI 関係以外で @MainActor が多すぎるので要調査")
-
-
 enum PreferencesWindowModalResult : Int {
 
 	case Close = 0

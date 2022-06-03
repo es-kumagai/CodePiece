@@ -11,6 +11,7 @@ import ESTwitter
 import Swim
 import Ocean
 
+@MainActor
 final class RelatedTweetsContentsController : TimelineContentsController {
 	
 	var statusesAutoUpdateIntervalForAppeared: Double {
@@ -36,7 +37,7 @@ final class RelatedTweetsContentsController : TimelineContentsController {
 			
 			if needsUpdate {
 				
-				DispatchQueue.main.async(execute: checkNeedsUpdates)
+				checkNeedsUpdates()
 			}
 		}
 	}
@@ -59,15 +60,6 @@ final class RelatedTweetsContentsController : TimelineContentsController {
 		}
 	}
 	
-	@MainActor
-	override func awakeFromNib() {
-	
-		super.awakeFromNib()
-		
-		#warning("以前はプロパティーの初期値として指定していましたが、Concurrency の都合で代入できなくなりました。ここが呼び出されるか確認する必要があります。")
-		hashtags = NSApp.settings.appState.hashtags ?? []
-	}
-
 	private func checkNeedsUpdates() {
 		
 		if needsUpdate {
@@ -110,7 +102,9 @@ final class RelatedTweetsContentsController : TimelineContentsController {
 				needsUpdate = true
 			}
 		}
-		
+
+		hashtags = NSApp.settings.appState.hashtags ?? []
+
 		owner!.messageQueue.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
 		
 		// Following code is disabled because the tweet you posted cannnot detect immediately.

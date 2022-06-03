@@ -93,14 +93,6 @@ extension CodePieceApplication {
 
 // MARK: - Windows
 
-extension NSApplication : HavingScale {
-	
-	public var scale: CGScale {
-		
-		keyWindow?.scale ?? .actual
-	}
-}
-
 extension CodePieceApplication {
 
 	var currentSelectedStatuses: Statuses {

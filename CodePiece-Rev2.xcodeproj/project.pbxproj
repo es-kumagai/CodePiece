@@ -44,15 +44,12 @@
 		B132D51B23CD08B800690C5F /* ESTwitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B132D51A23CD08B800690C5F /* ESTwitterTests.swift */; };
 		B132D51D23CD08B800690C5F /* ESTwitter.h in Headers */ = {isa = PBXBuildFile; fileRef = B132D50D23CD08B800690C5F /* ESTwitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B133050D284A082C0083DAB1 /* Swim in Frameworks */ = {isa = PBXBuildFile; productRef = B133050C284A082C0083DAB1 /* Swim */; };
+		B133050F284A0DEA0083DAB1 /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B133050E284A0DEA0083DAB1 /* Ocean */; };
 		B1360AF72544075500476C96 /* XcodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E213A82400AAB000DE511D /* XcodeKit.framework */; };
 		B1360AF82544075500476C96 /* XcodeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1E213A82400AAB000DE511D /* XcodeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B139E0C023EF350200EEA5BE /* DescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B139E0BF23EF350200EEA5BE /* DescriptionTests.swift */; };
 		B139E0C223F0063600EEA5BE /* RegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B139E0C123F0063600EEA5BE /* RegularExpressionExtension.swift */; };
 		B13AC30F2752327900069915 /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B13AC30E2752327900069915 /* Ocean */; };
-		B13AC311275232BC00069915 /* Ocean in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9226D0D5160028AF32 /* Ocean */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		B13AC312275232BE00069915 /* Sky in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B14D26142702F65000399EFC /* Sky */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		B13AC313275232C000069915 /* Sky-AppKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED8C26D08D150028AF32 /* Sky-AppKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		B13AC3162752350C00069915 /* MaskOperatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13AC3152752350C00069915 /* MaskOperatable.swift */; };
 		B13AC31927523EF000069915 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13AC31727523E5200069915 /* Semaphore.swift */; };
 		B13CA7922478E9180059F306 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B13CA7912478E9180059F306 /* ESGists */; };
 		B13D351F2848F51600A8E546 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13D351D2848F51200A8E546 /* WebKit.framework */; };
@@ -70,11 +67,8 @@
 		B148EC002701F7C60047E725 /* Tweets-raw.20210927.data in Resources */ = {isa = PBXBuildFile; fileRef = B148EBFE2701F7C60047E725 /* Tweets-raw.20210927.data */; };
 		B148EC0627021A0C0047E725 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = B148EC0527021A0C0047E725 /* Swifter */; };
 		B148EC08270225370047E725 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B148EC07270225360047E725 /* CloudKit.framework */; };
-		B14D26112702F61A00399EFC /* Sky in Frameworks */ = {isa = PBXBuildFile; productRef = B14D26102702F61A00399EFC /* Sky */; };
-		B14D26152702F65000399EFC /* Sky in Frameworks */ = {isa = PBXBuildFile; productRef = B14D26142702F65000399EFC /* Sky */; };
 		B14D26182702F6BF00399EFC /* Swim in Frameworks */ = {isa = PBXBuildFile; productRef = B14D26172702F6BF00399EFC /* Swim */; };
 		B14D261B2702F6BF00399EFC /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B14D261A2702F6BF00399EFC /* Ocean */; };
-		B14D261E2702F6BF00399EFC /* Sky-AppKit in Frameworks */ = {isa = PBXBuildFile; productRef = B14D261D2702F6BF00399EFC /* Sky-AppKit */; };
 		B14D26252702F94A00399EFC /* Swim in Frameworks */ = {isa = PBXBuildFile; productRef = B14D26242702F94A00399EFC /* Swim */; };
 		B14D263227035C1000399EFC /* CodePiece Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B101B6FC23FF6CC90095DDC0 /* CodePiece Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B1508BDB23E92E9800973728 /* TimelineKindState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BDA23E92E9800973728 /* TimelineKindState.swift */; };
@@ -196,6 +190,12 @@
 		B1A4729D23D09DB300F73658 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728723D09DB300F73658 /* Status.swift */; };
 		B1A4729E23D09DB300F73658 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728823D09DB300F73658 /* Color.swift */; };
 		B1A4729F23D09DB300F73658 /* PlaceBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */; };
+		B1ABF0D9284A2043009A124B /* Sky in Frameworks */ = {isa = PBXBuildFile; productRef = B1ABF0D8284A2043009A124B /* Sky */; };
+		B1ABF0DB284A2043009A124B /* Sky-AppKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1ABF0DA284A2043009A124B /* Sky-AppKit */; };
+		B1ABF0DD284A2043009A124B /* Sky-Base in Frameworks */ = {isa = PBXBuildFile; productRef = B1ABF0DC284A2043009A124B /* Sky-Base */; };
+		B1ABF0DF284A204D009A124B /* Sky in Frameworks */ = {isa = PBXBuildFile; productRef = B1ABF0DE284A204D009A124B /* Sky */; };
+		B1ABF0E1284A204D009A124B /* Sky-AppKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1ABF0E0284A204D009A124B /* Sky-AppKit */; };
+		B1ABF0E3284A204D009A124B /* Sky-Base in Frameworks */ = {isa = PBXBuildFile; productRef = B1ABF0E2284A204D009A124B /* Sky-Base */; };
 		B1C1F1C223EB0B420010C28F /* CodePieceScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */; };
 		B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C349A823E152A90039F4E6 /* ReachabilityController.swift */; };
 		B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C349DA23E285BF0039F4E6 /* APIKeys.plist */; };
@@ -216,8 +216,6 @@
 		B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1D13C7923CA14DD0016902A /* Main.storyboard */; };
 		B1D13C8723CA14DD0016902A /* CodePiece_Rev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */; };
 		B1D4D9A7245F4FBD00B80206 /* WatermarkStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D4D9A6245F4FBD00B80206 /* WatermarkStackView.swift */; };
-		B1D6B9362812E2260046EFB0 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B9352812E2260046EFB0 /* Deprecated.swift */; };
-		B1D6B9382812E2870046EFB0 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B9372812E2870046EFB0 /* Deprecated.swift */; };
 		B1D6B93A281301970046EFB0 /* APIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B939281301970046EFB0 /* APIKit.swift */; };
 		B1D6B93D281360120046EFB0 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B93C281360120046EFB0 /* Task.swift */; };
 		B1D6B93F281378830046EFB0 /* MessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B93E281378830046EFB0 /* MessageQueue.swift */; };
@@ -226,8 +224,6 @@
 		B1D6B947281389B80046EFB0 /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B946281389B80046EFB0 /* MessageType.swift */; };
 		B1D6B94A28138A050046EFB0 /* PreActionMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B94928138A050046EFB0 /* PreActionMessageType.swift */; };
 		B1D6B94C28138AF40046EFB0 /* MessageTypeIgnoreInQuickSuccession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B94B28138AF40046EFB0 /* MessageTypeIgnoreInQuickSuccession.swift */; };
-		B1D8ED8D26D08D150028AF32 /* Sky-AppKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED8C26D08D150028AF32 /* Sky-AppKit */; };
-		B1D8ED9326D0D5160028AF32 /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B1D8ED9226D0D5160028AF32 /* Ocean */; };
 		B1DDCB4723D0D37700418A84 /* HashtagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4123D0D37700418A84 /* HashtagTextField.swift */; };
 		B1DDCB4823D0D37700418A84 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4223D0D37700418A84 /* StatusImageView.swift */; };
 		B1DDCB4923D0D37700418A84 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDCB4323D0D37700418A84 /* CodeTextView.swift */; };
@@ -354,10 +350,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B13AC311275232BC00069915 /* Ocean in Embed Frameworks */,
 				B119A7122477E48D008505EE /* CodePieceCore.framework in Embed Frameworks */,
-				B13AC312275232BE00069915 /* Sky in Embed Frameworks */,
-				B13AC313275232C000069915 /* Sky-AppKit in Embed Frameworks */,
 				B17AEA542702391500CC42F0 /* ESTwitter.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -441,7 +434,6 @@
 		B132D51C23CD08B800690C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B139E0BF23EF350200EEA5BE /* DescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTests.swift; sourceTree = "<group>"; };
 		B139E0C123F0063600EEA5BE /* RegularExpressionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionExtension.swift; sourceTree = "<group>"; };
-		B13AC3152752350C00069915 /* MaskOperatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskOperatable.swift; sourceTree = "<group>"; };
 		B13AC31727523E5200069915 /* Semaphore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semaphore.swift; sourceTree = "<group>"; };
 		B13D351D2848F51200A8E546 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		B13D3523284922BE00A8E546 /* WebCaptureControllerRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCaptureControllerRequestError.swift; sourceTree = "<group>"; };
@@ -608,14 +600,11 @@
 		B1D13C8623CA14DD0016902A /* CodePiece_Rev2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePiece_Rev2Tests.swift; sourceTree = "<group>"; };
 		B1D13C8823CA14DD0016902A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1D4D9A6245F4FBD00B80206 /* WatermarkStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatermarkStackView.swift; sourceTree = "<group>"; };
-		B1D6B9352812E2260046EFB0 /* Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
-		B1D6B9372812E2870046EFB0 /* Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
 		B1D6B939281301970046EFB0 /* APIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKit.swift; sourceTree = "<group>"; };
 		B1D6B93C281360120046EFB0 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		B1D6B93E281378830046EFB0 /* MessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQueue.swift; sourceTree = "<group>"; };
 		B1D6B940281378890046EFB0 /* MessageQueueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQueueDelegate.swift; sourceTree = "<group>"; };
 		B1D6B942281382B00046EFB0 /* MessageQueueControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQueueControl.swift; sourceTree = "<group>"; };
-		B1D6B944281388400046EFB0 /* _MessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _MessageQueue.swift; sourceTree = "<group>"; };
 		B1D6B946281389B80046EFB0 /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
 		B1D6B94928138A050046EFB0 /* PreActionMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreActionMessageType.swift; sourceTree = "<group>"; };
 		B1D6B94B28138AF40046EFB0 /* MessageTypeIgnoreInQuickSuccession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTypeIgnoreInQuickSuccession.swift; sourceTree = "<group>"; };
@@ -663,10 +652,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B14D26112702F61A00399EFC /* Sky in Frameworks */,
 				B196E8042752773300CF5A8D /* ESTwitter.framework in Frameworks */,
 				B14D26182702F6BF00399EFC /* Swim in Frameworks */,
-				B14D261E2702F6BF00399EFC /* Sky-AppKit in Frameworks */,
+				B1ABF0DF284A204D009A124B /* Sky in Frameworks */,
+				B1ABF0E3284A204D009A124B /* Sky-Base in Frameworks */,
+				B1ABF0E1284A204D009A124B /* Sky-AppKit in Frameworks */,
 				B14D261B2702F6BF00399EFC /* Ocean in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,15 +695,16 @@
 				B119A7112477E48D008505EE /* CodePieceCore.framework in Frameworks */,
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
 				B13D351F2848F51600A8E546 /* WebKit.framework in Frameworks */,
+				B133050F284A0DEA0083DAB1 /* Ocean in Frameworks */,
 				B1EA63AC280859C400297452 /* libCodePieceSupport.a in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
 				B15EE38D23CEA03E005B268A /* KeychainAccess in Frameworks */,
-				B1D8ED9326D0D5160028AF32 /* Ocean in Frameworks */,
+				B1ABF0DD284A2043009A124B /* Sky-Base in Frameworks */,
+				B1ABF0DB284A2043009A124B /* Sky-AppKit in Frameworks */,
 				B148EC08270225370047E725 /* CloudKit.framework in Frameworks */,
 				B133050D284A082C0083DAB1 /* Swim in Frameworks */,
-				B1D8ED8D26D08D150028AF32 /* Sky-AppKit in Frameworks */,
+				B1ABF0D9284A2043009A124B /* Sky in Frameworks */,
 				B17AEA532702391400CC42F0 /* ESTwitter.framework in Frameworks */,
-				B14D26152702F65000399EFC /* Sky in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,9 +903,7 @@
 			children = (
 				B15EE1F523CE747D005B268A /* Extension.swift */,
 				B1F2C79023E57F2D008BBCA0 /* WebView.swift */,
-				B13AC3152752350C00069915 /* MaskOperatable.swift */,
 				B13AC31727523E5200069915 /* Semaphore.swift */,
-				B1D6B9352812E2260046EFB0 /* Deprecated.swift */,
 			);
 			path = NeedsRefactoring;
 			sourceTree = "<group>";
@@ -1241,7 +1230,6 @@
 			children = (
 				B1CE4D0A23E7C3CC003D1399 /* CharacterExtension.swift */,
 				B139E0C123F0063600EEA5BE /* RegularExpressionExtension.swift */,
-				B1D6B9372812E2870046EFB0 /* Deprecated.swift */,
 			);
 			path = NeedsRefactor;
 			sourceTree = "<group>";
@@ -1345,7 +1333,6 @@
 		B1D6B948281389E50046EFB0 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				B1D6B944281388400046EFB0 /* _MessageQueue.swift */,
 				B1D6B93E281378830046EFB0 /* MessageQueue.swift */,
 				B1D6B946281389B80046EFB0 /* MessageType.swift */,
 				B1D6B94928138A050046EFB0 /* PreActionMessageType.swift */,
@@ -1503,10 +1490,11 @@
 			);
 			name = CodePieceCore;
 			packageProductDependencies = (
-				B14D26102702F61A00399EFC /* Sky */,
 				B14D26172702F6BF00399EFC /* Swim */,
 				B14D261A2702F6BF00399EFC /* Ocean */,
-				B14D261D2702F6BF00399EFC /* Sky-AppKit */,
+				B1ABF0DE284A204D009A124B /* Sky */,
+				B1ABF0E0284A204D009A124B /* Sky-AppKit */,
+				B1ABF0E2284A204D009A124B /* Sky-Base */,
 			);
 			productName = CodePieceCore;
 			productReference = B119A70A2477E48D008505EE /* CodePieceCore.framework */;
@@ -1598,10 +1586,11 @@
 				B15EE38923CE9FBB005B268A /* Reachability */,
 				B15EE38C23CEA03E005B268A /* KeychainAccess */,
 				B1FB161D23D36E6C002D4571 /* OAuth2 */,
-				B1D8ED8C26D08D150028AF32 /* Sky-AppKit */,
-				B1D8ED9226D0D5160028AF32 /* Ocean */,
-				B14D26142702F65000399EFC /* Sky */,
 				B133050C284A082C0083DAB1 /* Swim */,
+				B133050E284A0DEA0083DAB1 /* Ocean */,
+				B1ABF0D8284A2043009A124B /* Sky */,
+				B1ABF0DA284A2043009A124B /* Sky-AppKit */,
+				B1ABF0DC284A2043009A124B /* Sky-Base */,
 			);
 			productName = "CodePiece-Rev2";
 			productReference = B1D13C7023CA14DB0016902A /* CodePiece-Beta.app */;
@@ -1698,8 +1687,8 @@
 				B18B24C9243CC65000B824AD /* XCRemoteSwiftPackageReference "Swim" */,
 				B18B24D0243CC6D100B824AD /* XCRemoteSwiftPackageReference "Ocean" */,
 				B1BCCD22243CC88C00F03577 /* XCRemoteSwiftPackageReference "ESGists" */,
-				B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */,
 				B148EC0427021A0C0047E725 /* XCRemoteSwiftPackageReference "Swifter" */,
+				B1ABF0D7284A2009009A124B /* XCRemoteSwiftPackageReference "Sky" */,
 			);
 			productRefGroup = B1D13C7123CA14DB0016902A /* Products */;
 			projectDirPath = "";
@@ -1858,7 +1847,6 @@
 				B1A4728B23D09DB300F73658 /* Browser.swift in Sources */,
 				B1A4729523D09DB300F73658 /* UserProfile.swift in Sources */,
 				B139E0C223F0063600EEA5BE /* RegularExpressionExtension.swift in Sources */,
-				B1D6B9382812E2870046EFB0 /* Deprecated.swift in Sources */,
 				B1508BEA23E99E4900973728 /* TimelineOptions.swift in Sources */,
 				B1128CE023DE915000DDA4EA /* UsersTag.swift in Sources */,
 				B1CE4CD323E6F24C003D1399 /* Character.swift in Sources */,
@@ -1977,7 +1965,6 @@
 				B15EE1DE23CE706C005B268A /* Alert.swift in Sources */,
 				B15EE26D23CE7658005B268A /* TwitterPreferenceViewController.swift in Sources */,
 				B15EE21023CE7612005B268A /* LanguagePopupDataSource.swift in Sources */,
-				B13AC3162752350C00069915 /* MaskOperatable.swift in Sources */,
 				B100EE0F28095E4E008C43E8 /* SNSControlActor.swift in Sources */,
 				B15EE21A23CE761C005B268A /* Application.swift in Sources */,
 				B1D4D9A7245F4FBD00B80206 /* WatermarkStackView.swift in Sources */,
@@ -1986,7 +1973,6 @@
 				B13AC31927523EF000069915 /* Semaphore.swift in Sources */,
 				B1F5510226C4B9F400BBDF7A /* Date.swift in Sources */,
 				B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */,
-				B1D6B9362812E2260046EFB0 /* Deprecated.swift in Sources */,
 				B1EA63B028085C4300297452 /* WebCaptureControllerRequest.swift in Sources */,
 				B15EE25423CE7658005B268A /* DataStore_AuthInfo.swift in Sources */,
 				B15EE1FE23CE7571005B268A /* BaseViewController.swift in Sources */,
@@ -2131,6 +2117,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 109;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_BUNDLE_NAME = "CodePiece-Beta";
@@ -2140,11 +2127,11 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.Beta.XcodeSourceEditorExtension";
 				PRODUCT_NAME = "CodePiece Extension";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -2156,6 +2143,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 109;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_BUNDLE_NAME = CodePiece;
@@ -2165,11 +2153,11 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.XcodeSourceEditorExtension";
 				PRODUCT_NAME = "CodePiece Extension";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -2177,7 +2165,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -2196,7 +2184,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceCore";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2206,7 +2193,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -2225,7 +2212,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceCore";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2236,7 +2222,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2257,7 +2243,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2268,7 +2253,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2288,7 +2273,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.ESTwitter";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2308,7 +2292,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.ESTwitterTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ESTwitterTestsHost.app/Contents/MacOS/ESTwitterTestsHost";
 			};
 			name = Debug;
@@ -2327,7 +2310,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.ESTwitterTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ESTwitterTestsHost.app/Contents/MacOS/ESTwitterTestsHost";
 			};
 			name = Release;
@@ -2347,7 +2329,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.ESTwitterTestsHost";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -2366,7 +2347,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.ESTwitterTestsHost";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -2432,6 +2412,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -2490,6 +2471,7 @@
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -2502,6 +2484,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 109;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece-beta.authentication";
@@ -2516,13 +2499,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
+				MARKETING_VERSION = 2.2.0;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.Beta";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = "CodePiece-Beta";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INCLUDE_PATHS = "$(inherited) $(PROJECT_DIR)/Libraries";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -2535,6 +2518,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 109;
 				DEVELOPMENT_TEAM = 89282N6UM7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ES_URLSCHEME = "jp.ez-net.scheme.codepiece.authentication";
@@ -2549,13 +2533,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
+				MARKETING_VERSION = 2.2.0;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_MODULE_NAME = CodePiece;
 				PRODUCT_NAME = CodePiece;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INCLUDE_PATHS = "$(inherited) $(PROJECT_DIR)/Libraries";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -2566,16 +2550,15 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89282N6UM7;
 				INFOPLIST_FILE = CodePieceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceTests-Rev2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece-Beta.app/Contents/MacOS/CodePiece-Beta";
 			};
 			name = Debug;
@@ -2587,16 +2570,15 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89282N6UM7;
 				INFOPLIST_FILE = CodePieceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceTests-Rev2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodePiece-Beta.app/Contents/MacOS/CodePiece-Beta";
 			};
 			name = Release;
@@ -2606,6 +2588,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89282N6UM7;
 				INFOPLIST_FILE = CodePieceCoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2614,7 +2597,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceCoreTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -2623,6 +2605,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 89282N6UM7;
 				INFOPLIST_FILE = CodePieceCoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2631,7 +2614,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-net.CodePieceCoreTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -2770,17 +2752,17 @@
 				kind = branch;
 			};
 		};
-		B1BCCD22243CC88C00F03577 /* XCRemoteSwiftPackageReference "ESGists" */ = {
+		B1ABF0D7284A2009009A124B /* XCRemoteSwiftPackageReference "Sky" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:es-kumagai/ESGists.git";
+			repositoryURL = "https://github.com/es-kumagai/Sky.git";
 			requirement = {
 				branch = master;
 				kind = branch;
 			};
 		};
-		B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */ = {
+		B1BCCD22243CC88C00F03577 /* XCRemoteSwiftPackageReference "ESGists" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:es-kumagai/Sky.git";
+			repositoryURL = "git@github.com:es-kumagai/ESGists.git";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -2793,6 +2775,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B18B24C9243CC65000B824AD /* XCRemoteSwiftPackageReference "Swim" */;
 			productName = Swim;
+		};
+		B133050E284A0DEA0083DAB1 /* Ocean */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B18B24D0243CC6D100B824AD /* XCRemoteSwiftPackageReference "Ocean" */;
+			productName = Ocean;
 		};
 		B13AC30E2752327900069915 /* Ocean */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2809,16 +2796,6 @@
 			package = B148EC0427021A0C0047E725 /* XCRemoteSwiftPackageReference "Swifter" */;
 			productName = Swifter;
 		};
-		B14D26102702F61A00399EFC /* Sky */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */;
-			productName = Sky;
-		};
-		B14D26142702F65000399EFC /* Sky */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */;
-			productName = Sky;
-		};
 		B14D26172702F6BF00399EFC /* Swim */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B18B24C9243CC65000B824AD /* XCRemoteSwiftPackageReference "Swim" */;
@@ -2828,11 +2805,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B18B24D0243CC6D100B824AD /* XCRemoteSwiftPackageReference "Ocean" */;
 			productName = Ocean;
-		};
-		B14D261D2702F6BF00399EFC /* Sky-AppKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */;
-			productName = "Sky-AppKit";
 		};
 		B14D26242702F94A00399EFC /* Swim */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2849,15 +2821,35 @@
 			package = B15EE38B23CEA03E005B268A /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
 		};
-		B1D8ED8C26D08D150028AF32 /* Sky-AppKit */ = {
+		B1ABF0D8284A2043009A124B /* Sky */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B1D8ED8B26D08D150028AF32 /* XCRemoteSwiftPackageReference "Sky" */;
+			package = B1ABF0D7284A2009009A124B /* XCRemoteSwiftPackageReference "Sky" */;
+			productName = Sky;
+		};
+		B1ABF0DA284A2043009A124B /* Sky-AppKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1ABF0D7284A2009009A124B /* XCRemoteSwiftPackageReference "Sky" */;
 			productName = "Sky-AppKit";
 		};
-		B1D8ED9226D0D5160028AF32 /* Ocean */ = {
+		B1ABF0DC284A2043009A124B /* Sky-Base */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B18B24D0243CC6D100B824AD /* XCRemoteSwiftPackageReference "Ocean" */;
-			productName = Ocean;
+			package = B1ABF0D7284A2009009A124B /* XCRemoteSwiftPackageReference "Sky" */;
+			productName = "Sky-Base";
+		};
+		B1ABF0DE284A204D009A124B /* Sky */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1ABF0D7284A2009009A124B /* XCRemoteSwiftPackageReference "Sky" */;
+			productName = Sky;
+		};
+		B1ABF0E0284A204D009A124B /* Sky-AppKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1ABF0D7284A2009009A124B /* XCRemoteSwiftPackageReference "Sky" */;
+			productName = "Sky-AppKit";
+		};
+		B1ABF0E2284A204D009A124B /* Sky-Base */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1ABF0D7284A2009009A124B /* XCRemoteSwiftPackageReference "Sky" */;
+			productName = "Sky-Base";
 		};
 		B1FB161D23D36E6C002D4571 /* OAuth2 */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -11,6 +11,7 @@ import ESTwitter
 import Swim
 import Ocean
 
+@MainActor
 final class HashtagsContentsController : TimelineContentsController {
 	
 	override var kind: TimelineKind {
@@ -35,15 +36,6 @@ final class HashtagsContentsController : TimelineContentsController {
 				delegate?.timelineContentsNeedsUpdate?(self)
 			}
 		}
-	}
-	
-	@MainActor
-	override func awakeFromNib() {
-	
-		super.awakeFromNib()
-		
-		#warning("以前はプロパティーの初期値として指定していましたが、Concurrency の都合で代入できなくなりました。ここが呼び出されるか確認する必要があります。")
-		hashtags = NSApp.settings.appState.hashtags ?? []
 	}
 	
 	override var tableViewDataSource: TimelineTableDataSource {
@@ -78,6 +70,8 @@ final class HashtagsContentsController : TimelineContentsController {
 //				self.delegate?.timelineContentsNeedsUpdate?(self)
 //			}
 //		}
+		
+		hashtags = NSApp.settings.appState.hashtags ?? []
 	}
 	
 	override func updateContents() async throws -> Update {

@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Sky
+import Sky_AppKit
 import Ocean
 import Swim
 import ESTwitter
@@ -18,8 +18,8 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 
 	let notificationHandlers = Notification.Handlers()
 	
-	private(set) var waitingHUD:ProgressHUD = ProgressHUD(message: "Please wait...", useActivityIndicator: true)
-	private(set) var verifyingHUD:ProgressHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
+	private(set) var waitingHUD = ProgressHUD(message: "Please wait...", useActivityIndicator: true)
+	private(set) var verifyingHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
 
 	@IBOutlet var credentialsVerificationStatusImageView: NSImageView!
 	@IBOutlet var credentialsVerificationStatusTextField: NSTextField!

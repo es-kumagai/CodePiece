@@ -16,9 +16,14 @@ import Sky
 import Dispatch
 import OAuth2
 
-public var OutputStream = StandardOutputStream()
-public var ErrorStream = StandardErrorStream()
-public var NullStream = NullOutputStream()
+@MainActor
+public var outputStream = StandardOutputStream()
+
+@MainActor
+public var errorStream = StandardErrorStream()
+
+@MainActor
+public var nullStream = NullOutputStream()
 
 extension NotificationObservable {
 	
@@ -360,6 +365,7 @@ extension Bool {
 	}
 }
 
+@MainActor
 public class StandardOutputStream : OutputStream {
 	
 	public func write(string: String) {
@@ -368,6 +374,7 @@ public class StandardOutputStream : OutputStream {
 	}
 }
 
+@MainActor
 public class StandardErrorStream : OutputStream {
 	
 	public func write(string: String) {
@@ -376,6 +383,7 @@ public class StandardErrorStream : OutputStream {
 	}
 }
 
+@MainActor
 public class NullOutputStream : OutputStream {
 	
 	public func write(string: String) {
@@ -395,18 +403,21 @@ extension Optional {
 }
 
 /// Execute `exression`. If an error occurred, write the error to standard output stream.
+@MainActor
 public func handleError(expression: @autoclosure () throws -> Void) rethrows -> Void {
 	
-    try handleError(expression: expression(), to: &OutputStream)
+    try handleError(expression: expression(), to: &outputStream)
 }
 
 /// Execute `exression`. If an error occurred, write the error to standard output stream.
+@MainActor
 public func handleError<R>(expression: @autoclosure () throws -> R) rethrows -> R? {
 
-    return try handleError(expression: expression(), to: &OutputStream)
+    return try handleError(expression: expression(), to: &outputStream)
 }
 
 /// Execute `exression`. If an error occurred, write the error to `stream`.
+@MainActor
 public func handleError<STREAM: OutputStream>(expression: @autoclosure () throws -> Void, to stream: inout STREAM) rethrows -> Void {
 	
 	try handleError(expression: expression()) { (error:Error)->Void in
@@ -802,27 +813,11 @@ extension NSView : Captureable {
 	}
 }
 
-extension NSView : HavingScale {
-	
-	public var scale: CGScale {
-		
-		(window?.backingScaleFactor).map(Scale.init) ?? .actual
-	}
-}
-
 extension NSWindow : Captureable {
 	
 	public var captureTarget: NSWindow {
 		
 		self
-	}
-}
-
-extension NSWindow : HavingScale {
-	
-	public var scale: CGScale {
-		
-		Scale(backingScaleFactor)
 	}
 }
 

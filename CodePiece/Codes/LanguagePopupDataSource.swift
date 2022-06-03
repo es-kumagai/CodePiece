@@ -23,8 +23,7 @@ final class LanguagePopupDataSource : NSObject {
 
 			popupButton.addItem(withTitle: defaultLanguage.description)
 			
-			#warning("sorted に変更すると適切。")
-			for language in languages.sort() {
+			for language in languages.sorted() {
 
 				let menu = applyingExpression(to: NSMenuItem(title: language.description, action: #selector(LanguagePopupDataSource.popupSelected(_:)), keyEquivalent: "")) {
 					

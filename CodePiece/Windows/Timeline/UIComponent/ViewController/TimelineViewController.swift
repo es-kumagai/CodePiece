@@ -178,7 +178,7 @@ final class TimelineViewController: NSViewController, NotificationObservable {
 	
 	private var autoUpdateState = AutoUpdateState()
 	
-	private(set) var messageQueue: MessageQueue2<Message>! {
+	private(set) var messageQueue: MessageQueue<Message>! {
 		
 		didSet {
 		
@@ -200,12 +200,10 @@ final class TimelineViewController: NSViewController, NotificationObservable {
 		super.awakeFromNib()
 
 		Task {
-			#warning("viewWillAppear で notification を監視する前にこのタスク処理が回ってこないため、キューを初期化できない。activate でも同様。")
 
 			updateTimerSource = Dispatch.makeTimer(interval: .milliseconds(30), start: true, timerAction: autoUpdateAction)
 			
-			// FIXME: actor である MessageQueue2 の初期化が activate に間に合わないため、メッセージの管理方法または activate 方法を根本的に見直す必要がある。activate で行うメッセージの送信を非同期で行えば良いのかもしれない。send 自体を nonisolated にこだわる必要がないのかもしれない。
-			messageQueue = MessageQueue2<Message>(
+			messageQueue = MessageQueue<Message>(
 				
 				identifier: "CodePiece.Timeline.\(contentsKind)",
 				messageHandler: messageQueue(_:handlingMessage:),
@@ -401,7 +399,7 @@ extension TimelineViewController {
 extension TimelineViewController {
 	
 	@Sendable
-	func messageQueue(_ queue: MessageQueue2<Message>, handlingMessage message: Message) async throws {
+	func messageQueue(_ queue: MessageQueue<Message>, handlingMessage message: Message) async throws {
 		
 		switch message {
 			
@@ -429,7 +427,7 @@ extension TimelineViewController {
 	}
 
 	@Sendable
-	func messageQueue(_ queue: MessageQueue2<Message>, handlingError error: Error) async throws {
+	func messageQueue(_ queue: MessageQueue<Message>, handlingError error: Error) async throws {
 
 		throw error
 	}
@@ -813,7 +811,7 @@ extension TimelineViewController : NSTableViewDelegate {
 	}
 
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-		
+
 		return contentsController.estimateCellHeight(of: row)
 	}
 

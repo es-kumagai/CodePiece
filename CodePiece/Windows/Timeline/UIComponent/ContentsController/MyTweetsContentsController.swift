@@ -11,6 +11,7 @@ import ESTwitter
 import Swim
 import Ocean
 
+@MainActor
 final class MyTweetsContentsController : TimelineContentsController {
 	
 	override var kind: TimelineKind {

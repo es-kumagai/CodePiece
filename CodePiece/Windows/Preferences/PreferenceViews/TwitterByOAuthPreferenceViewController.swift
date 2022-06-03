@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Sky
+import Sky_AppKit
 
 @objcMembers
 @MainActor

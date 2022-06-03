@@ -8,7 +8,7 @@
 
 import Cocoa
 import Ocean
-import Sky
+import Sky_AppKit
 import ESTwitter
 import ESGists
 

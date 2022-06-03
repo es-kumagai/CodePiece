@@ -15,7 +15,7 @@
       "location" : "git@github.com:es-kumagai/ESGists.git",
       "state" : {
         "branch" : "master",
-        "revision" : "d9cc073a05d0f052c519ae93b2d71d0492fae47d"
+        "revision" : "e678fa4e98ecf88fb36ec8a8464d5b20d75453a6"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "git@github.com:es-kumagai/Ocean.git",
       "state" : {
         "branch" : "master",
-        "revision" : "43dafea067ea19a6175d2367aa0f1dc1a6383e39"
+        "revision" : "a2935f5a9522e1b72a0aa82f556a5a90e2e38beb"
       }
     },
     {
@@ -57,10 +57,10 @@
     {
       "identity" : "sky",
       "kind" : "remoteSourceControl",
-      "location" : "git@github.com:es-kumagai/Sky.git",
+      "location" : "https://github.com/es-kumagai/Sky.git",
       "state" : {
         "branch" : "master",
-        "revision" : "81e641dce66ea54cc32a03d7bf60cdba57a0e660"
+        "revision" : "2d7696d1701cf832acc81d020edb1c2711f9e44a"
       }
     },
     {
