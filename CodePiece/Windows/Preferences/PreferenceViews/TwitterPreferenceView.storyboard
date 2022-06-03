@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LAB-Zh-ZVS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LAB-Zh-ZVS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,7 +61,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wgp-Lj-DJT">
-                                <rect key="frame" x="300" y="189" width="166" height="32"/>
+                                <rect key="frame" x="307" y="189" width="160" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reset Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="odh-Yr-gqF">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -72,21 +72,21 @@
                                 </connections>
                             </button>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ETD-IP-fvo">
-                                <rect key="frame" x="20" y="33" width="440" height="125"/>
+                                <rect key="frame" x="20" y="34" width="440" height="124"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p97-xI-dsH">
-                                        <rect key="frame" x="-2" y="93" width="420" height="32"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece requires permission for read and write access on Twitter. Please authenticate from the button below." id="W5b-Af-zfY">
+                                        <rect key="frame" x="-2" y="92" width="415" height="32"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece requires permission to read and write access on Twitter. Please authenticate from the button below." id="W5b-Af-zfY">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgT-R6-FF5">
-                                        <rect key="frame" x="0.0" y="52" width="116" height="21"/>
+                                        <rect key="frame" x="0.0" y="52" width="108" height="20"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fF9-A5-6At">
-                                                <rect key="frame" x="-6" y="-7" width="128" height="32"/>
+                                                <rect key="frame" x="-7" y="-7" width="122" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Authentication" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1ht-15-Ptm">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -108,8 +108,8 @@ DQ
                                         </customSpacing>
                                     </stackView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SBH-V8-BW8">
-                                        <rect key="frame" x="-2" y="0.0" width="416" height="32"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When you push the button, default browser will be opend to access Twitter's authentication page." id="zr2-3x-WpK">
+                                        <rect key="frame" x="-2" y="0.0" width="415" height="32"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When you push the button above, Twitter's authentication page will be opend by default browser." id="zr2-3x-WpK">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

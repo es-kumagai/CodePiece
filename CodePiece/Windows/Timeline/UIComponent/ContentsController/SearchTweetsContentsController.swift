@@ -47,13 +47,13 @@ final class SearchTweetsContentsController : TimelineContentsController {
 		
 	}
 	
-	override func updateContents() async throws -> Update {
+	override func updateContents() async throws -> UpdateResult {
 		
 		let query = searchQuery
 		
 		guard !query.isEmpty else {
 			
-			return Update.nothing
+			return UpdateResult.nothing
 		}
 				
 		let options = API.SearchOptions(
@@ -63,7 +63,7 @@ final class SearchTweetsContentsController : TimelineContentsController {
 		
 		let statuses = try await NSApp.twitterController.search(tweetWith: query, options: options)
 		
-		return Update(statuses)
+		return UpdateResult(statuses)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

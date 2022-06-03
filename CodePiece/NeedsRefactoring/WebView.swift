@@ -32,10 +32,10 @@ extension WKWebView {
 					continuation.resume(throwing: error)
 
 				case let (value?, error?):
-					continuation.resume(throwing: InternalError.unexpected("Both value and error were found.\nValue: \(value), Error: \(error)"))
+					continuation.resume(throwing: InternalError.unexpected("Both a value and an error were found.\nValue: \(value), Error: \(error)"))
 
 				case (nil, nil):
-					continuation.resume(throwing: InternalError.unexpected("Both value and error couldn't be get."))
+					continuation.resume(throwing: InternalError.unexpected("Both a value and an error couldn't be get."))
 				}
 			}
 		}

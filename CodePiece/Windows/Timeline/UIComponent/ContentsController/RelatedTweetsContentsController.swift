@@ -146,13 +146,13 @@ final class RelatedTweetsContentsController : TimelineContentsController {
 		owner.messageQueue.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
 	}
 	
-	override func updateContents() async throws -> Update {
+	override func updateContents() async throws -> UpdateResult {
 		
 		let query = relatedUsers.queryForSearchingAllUsersTweets()
 		
 		guard !query.isEmpty else {
 			
-			return Update.nothing
+			return UpdateResult.nothing
 		}
 		
 		let options = API.SearchOptions(
@@ -162,7 +162,7 @@ final class RelatedTweetsContentsController : TimelineContentsController {
 		
 		let statuses = try await NSApp.twitterController.search(tweetWith: query, options: options)
 		
-		return Update(statuses, associatedHashtags: hashtags)
+		return UpdateResult(statuses, associatedHashtags: hashtags)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

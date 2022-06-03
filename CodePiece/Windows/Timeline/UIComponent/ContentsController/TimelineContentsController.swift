@@ -13,9 +13,6 @@ import Ocean
 @MainActor
 class TimelineContentsController : NSObject, NotificationObservable {
 	
-	@available(*, deprecated, message: "並行処理を導入したらいらなくなる型エイリアス")
-	typealias UpdateResult = Result<(Statuses, associatedHashtags: HashtagSet), GetStatusesError>
-	
 	let notificationHandlers = Notification.Handlers()
 
 	@IBOutlet var tableView: TimelineTableView? {
@@ -40,7 +37,7 @@ class TimelineContentsController : NSObject, NotificationObservable {
 	
 	func activate() {}
 	
-	func updateContents() async throws -> Update {
+	func updateContents() async throws -> UpdateResult {
 		
 		throw GetStatusesError.unexpectedWithDescription("Not implemented.")
 	}
@@ -158,8 +155,7 @@ class TimelineContentsController : NSObject, NotificationObservable {
 
 extension TimelineContentsController {
 	
-	@available(*, message: "名前が、更新結果を返すことが分かりづらいので変更する必要があります。")
-	struct Update : Sendable {
+	struct UpdateResult : Sendable {
 		
 		var statuses: Statuses
 		var associatedHashtags: HashtagSet
@@ -172,7 +168,7 @@ extension TimelineContentsController {
 	}
 }
 
-extension TimelineContentsController.Update {
+extension TimelineContentsController.UpdateResult {
 	
 	static var nothing = Self([])
 }

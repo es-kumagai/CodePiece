@@ -74,13 +74,13 @@ final class HashtagsContentsController : TimelineContentsController {
 		hashtags = NSApp.settings.appState.hashtags ?? []
 	}
 	
-	override func updateContents() async throws -> Update {
+	override func updateContents() async throws -> UpdateResult {
 		
 		let query = hashtags.searchQuery
 		
 		guard !query.isEmpty else {
 			
-			return Update.nothing
+			return UpdateResult.nothing
 		}
 		
 				
@@ -93,7 +93,7 @@ final class HashtagsContentsController : TimelineContentsController {
 
 		HashtagsTimelineDidUpdateNotification(statuses: statuses).post()
 		
-		return Update(statuses, associatedHashtags: hashtags)
+		return UpdateResult(statuses, associatedHashtags: hashtags)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

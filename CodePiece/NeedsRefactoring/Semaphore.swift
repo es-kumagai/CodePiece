@@ -17,42 +17,6 @@ public final class Semaphore : RawRepresentable, @unchecked Sendable {
 		case timeout
 	}
 	
-	@available(*, unavailable, message: "Use `DispatchTime` instead.")
-	public struct Time {
-	
-//		public var rawValue: dispatch_time_t
-//
-//		public init() {
-//
-//			self.rawValue = DISPATCH_TIME_NOW
-//		}
-//
-//		public init(rawValue time:dispatch_time_t) {
-//
-//			self.rawValue = time
-//		}
-//
-//		public func delta(second time:Double) -> Time {
-//
-//			return Time(rawValue: dispatch_time(self.rawValue, Interval(second: time).rawValue))
-//		}
-//
-//		public func delta(millisecond time:Double) -> Time {
-//
-//			return Time(rawValue: dispatch_time(self.rawValue, Interval(millisecond: time).rawValue))
-//		}
-//
-//		public func delta(microsecond time:Double) -> Time {
-//
-//			return Time(rawValue: dispatch_time(self.rawValue, Interval(microsecond: time).rawValue))
-//		}
-//
-//		public func delta(nanosecond time:Int64) -> Time {
-//
-//			return Time(rawValue: dispatch_time(self.rawValue, Interval(nanosecond: time).rawValue))
-//		}
-	}
-	
 	public struct Interval : Sendable {
 		
 		static var zero = Interval(nanosecond: 0)
@@ -180,29 +144,6 @@ public final class Semaphore : RawRepresentable, @unchecked Sendable {
 			return .timeout
 		}
 	}
-//	
-//	public func executeOnQueue(queue: DispatchQueue, timeout: DispatchTime = .distantFuture, body: @escaping (WaitResult) -> Void) {
-//		
-//		queue.async { [unowned self] in
-//			
-//			switch wait(timeout: timeout) {
-//				
-//			case .success:
-//				
-//				defer {
-//					
-//					signal()
-//				}
-//				
-//				body(.success)
-//				
-//				
-//			case .timeout:
-//			
-//				body(.timeout)
-//			}
-//		}
-//	}
 }
 
 private extension Semaphore {

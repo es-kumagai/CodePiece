@@ -43,13 +43,13 @@ final class MyTweetsContentsController : TimelineContentsController {
 		delegate?.timelineContentsNeedsUpdate?(self)
 	}
 	
-	override func updateContents() async throws -> Update {
+	override func updateContents() async throws -> UpdateResult {
 
 		let options = API.TimelineOptions(sinceId: dataSource.lastTweetId)
 
 		let statuses = try await NSApp.twitterController.timeline(options: options)
 		
-		return Update(statuses)
+		return UpdateResult(statuses)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

@@ -57,7 +57,7 @@ DQ
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MGG-vi-gmF">
                                 <rect key="frame" x="166" y="109" width="324" height="57"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece is an app that can post a source code to Gists and tweet the capture image and the link on Twitter." id="JlN-2t-oqz">
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="CodePiece is an app to post a program code to Gists and tweet the description with the capture image and the link on Twitter." id="JlN-2t-oqz">
                                     <font key="font" metaFont="system" size="15"/>
                                     <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -65,7 +65,7 @@ DQ
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yhz-aT-cXW">
                                 <rect key="frame" x="166" y="55" width="324" height="38"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="First, please register your Twitter account and GitHub account in Preferences." id="DNb-d8-MrU">
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="First, please register your Twitter account and GitHub account on Preferences." id="DNb-d8-MrU">
                                     <font key="font" metaFont="system" size="15"/>
                                     <color key="textColor" red="0.35825946930000002" green="0.35824874039999999" blue="0.35825482009999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

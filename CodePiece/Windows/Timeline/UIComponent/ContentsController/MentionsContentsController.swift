@@ -44,7 +44,7 @@ final class MentionsContentsController : TimelineContentsController {
 		delegate?.timelineContentsNeedsUpdate?(self)
 	}
 	
-	override func updateContents() async throws -> Update {
+	override func updateContents() async throws -> UpdateResult {
 
 		let options = API.MentionOptions(
 			
@@ -58,7 +58,7 @@ final class MentionsContentsController : TimelineContentsController {
 			MentionUpdatedNotification(mentions: statuses, hasNewMention: alreadyHasMentions).post()
 		}
 
-		return Update(statuses)
+		return UpdateResult(statuses)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

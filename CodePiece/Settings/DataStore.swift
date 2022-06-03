@@ -281,7 +281,7 @@ extension DataStore {
 			
 			guard NSApp.environment.useKeychain else {
 			
-				NSLog("Settings are not keep because to using keychain is disabled by CodePiece.")
+				NSLog("Settings are not persistent because to using keychain is disabled by CodePiece.")
 				return
 			}
 			

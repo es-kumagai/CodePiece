@@ -18,9 +18,6 @@ protocol TwitterTextType {
 
 struct TwitterTextPart {
 
-	@available(*, unavailable, renamed: "Kind")
-	enum `Type` {}
-	
 	enum Kind {
 	
 		case ScreenName

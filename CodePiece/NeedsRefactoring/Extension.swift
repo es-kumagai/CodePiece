@@ -772,55 +772,6 @@ private func ~= (pattern: DispatchQueue.Attributes, value: DispatchQueue.Attribu
 
 // MARK: - Capture
 
-@MainActor
-protocol Captureable {
-	
-	associatedtype CaptureTarget
-	
-	var captureTarget: CaptureTarget { get }
-	
-	func capture() -> NSImage
-}
-
-@MainActor
-extension Captureable where CaptureTarget == NSView {
-
-	func capture() -> NSImage {
-	
-        CodePiece.capture(view: captureTarget)
-	}
-	
-	func capture(rect: NSRect) -> NSImage {
-		
-        CodePiece.capture(view: captureTarget, rect: rect)
-	}
-}
-
-@MainActor
-extension Captureable where CaptureTarget == NSWindow {
-	
-	func capture() -> NSImage {
-		
-        CodePiece.capture(window: captureTarget)
-	}
-}
-
-extension NSView : Captureable {
-	
-	public var captureTarget: NSView {
-		
-		self
-	}
-}
-
-extension NSWindow : Captureable {
-	
-	public var captureTarget: NSWindow {
-		
-		self
-	}
-}
-
 extension NSView {
 	
 	var capturedImage: NSImage {
@@ -862,26 +813,6 @@ extension NSView {
 		return newImage
 	}
 }
-
-@available(*, renamed: "NSView.capturedImage")
-func capture(view: NSView) -> NSImage { fatalError() }
-
-@available(*, renamed: "NSView.capturedImage(inRect:)")
-func capture(view: NSView, rect: NSRect) -> NSImage { fatalError() }
-
-
-//extension Margin where Type : IntegerArithmeticType {
-//	
-//	public var horizontalTotal:Type {
-//		
-//		return self.left + self.right
-//	}
-//	
-//	public var verticalTotal:Type {
-//		
-//		return self.top + self.bottom
-//	}
-//}
 
 public func createImage(image: NSImage, margin: IntMargin) -> NSImage {
 
@@ -935,9 +866,6 @@ extension NSWindow {
 		return imageData
 	}
 }
-
-@available(*, renamed: "NSWindow.capturedImage")
-func capture(window: NSWindow) -> NSImage { fatalError() }
 
 // MARK: - String
 
