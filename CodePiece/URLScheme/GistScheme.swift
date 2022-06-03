@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+@preconcurrency import struct Foundation.URL
 import CodePieceCore
 import Sky_AppKit
 
@@ -22,8 +22,11 @@ final class GistScheme : URLScheme {
 	
 	static func action(url: URL) throws {
 		
-		DebugTime.print("🙋🏻‍♀️ Detected URL scheme for Gist authentication.")
-		Authorization.gist.oauth2.handleRedirectURL(url)
+		Task { @MainActor in
+			
+			DebugTime.print("🙋🏻‍♀️ Detected URL scheme for Gist authentication.")
+			Authorization.gist.oauth2.handleRedirectURL(url)
+		}
 	}
 }
 

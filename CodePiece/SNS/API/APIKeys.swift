@@ -13,14 +13,14 @@ import CodePieceSupport
 /// API Keys.
 ///
 /// This class load APIKeys file each time referencing a static property for key or secret.
-struct APIKeys {
+enum APIKeys {
 	
 	/**
 	A key and a initial vector for decryption.
 	**/
 	
 	/// APIKey data for GitHub.
-	struct Gist {
+	enum Gist {
 		
 		static var clientId: String? {
 			
@@ -34,7 +34,7 @@ struct APIKeys {
 	}
 	
 	/// APIKey data for Twitter.
-	struct Twitter {
+	enum Twitter {
 		
 		static var consumerKey: String? {
 			

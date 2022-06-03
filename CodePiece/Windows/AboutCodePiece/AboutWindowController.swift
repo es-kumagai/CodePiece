@@ -10,6 +10,7 @@ import Cocoa
 import Swim
 
 @objcMembers
+@MainActor
 class AboutWindowController: NSWindowController {
 
     override func windowDidLoad() {
@@ -28,12 +29,12 @@ class AboutWindowController: NSWindowController {
 	
 	static func instantiate(storyboard: NSStoryboard, identifier: String? = nil) -> AboutWindowController? {
 
-		if let identifier = identifier {
-
-            return storyboard.instantiateController(withIdentifier: identifier) as? AboutWindowController
-		}
-		else {
+		switch identifier {
 			
+		case let identifier?:
+			return storyboard.instantiateController(withIdentifier: identifier) as? AboutWindowController
+
+		case nil:
 			return storyboard.instantiateInitialController() as? AboutWindowController
 		}
 	}
@@ -42,7 +43,7 @@ class AboutWindowController: NSWindowController {
 	
 		get {
 			
-			return super.contentViewController
+			super.contentViewController
 		}
 		
 		set {
@@ -53,20 +54,20 @@ class AboutWindowController: NSWindowController {
 	
 	var aboutViewController: AboutViewController {
 	
-		return super.contentViewController as! AboutViewController
+		super.contentViewController as! AboutViewController
 	}
 	
-	var acknowledgementsName:String? {
+	var acknowledgementsName: String? {
 		
 		didSet {
 			
-			aboutViewController.acknowledgementsName = self.acknowledgementsName
+			aboutViewController.acknowledgementsName = acknowledgementsName
 		}
 	}
 	
-	var hasAcnowledgements:Bool {
+	var hasAcnowledgements: Bool {
 		
-		return acknowledgementsName != nil
+		acknowledgementsName != nil
 	}
 	
 	func showWindow() {
@@ -78,7 +79,7 @@ class AboutWindowController: NSWindowController {
 extension AboutWindowController : NSWindowDelegate {
 	
 	// FIXME: 😨 リサイズさせたくないのですが IB でリサイズを無効化してもできてしまいます。NSWindowDelegate での調整を試みましたが、呼ばれず、効果がないようでした。メニューからストーリーボードで直接インスタンス化しているのが問題なのかもしれません。
-	func windowShouldZoom(_ window: NSWindow, toFrame newFrame: NSRect) -> Bool {
+	nonisolated func windowShouldZoom(_ window: NSWindow, toFrame newFrame: NSRect) -> Bool {
 		
 		return false
 	}

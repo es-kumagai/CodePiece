@@ -10,6 +10,7 @@ import Cocoa
 import CodePieceCore
 
 @objcMembers
+@MainActor
 final class BaseWindowController: NSWindowController {
 
     override func windowDidLoad() {
@@ -21,16 +22,16 @@ final class BaseWindowController: NSWindowController {
 
 extension BaseWindowController : NSWindowDelegate {
 	
-	func windowShouldClose(_ sender: NSWindow) -> Bool {
+	nonisolated func windowShouldClose(_ sender: NSWindow) -> Bool {
 		
 		return true
 	}
 	
-	func windowWillClose(_ notification: Notification) {
+	nonisolated func windowWillClose(_ notification: Notification) {
 		
 		DebugTime.print("Closing window ...")
 
-		DispatchQueue.main.async {
+		Task { @MainActor in
 			
 			DebugTime.print("Application will terminate.")
 			NSApp.terminate(self)

@@ -6,17 +6,17 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct UserEntities : Decodable {
+public struct UserEntities : Decodable, Sendable {
 	
 	public var url: URLEntity?
 	public var description: DescriptionEntity
 	
-	public struct URLEntity : Decodable {
+	public struct URLEntity : Decodable, Sendable {
 		
 		public var urls: [URLInfo]
 	}
 	
-	public struct DescriptionEntity : Decodable {
+	public struct DescriptionEntity : Decodable, Sendable {
 		
 		public var urls: [URLInfo]
 	}

@@ -12,7 +12,7 @@ internal typealias SwifterUsersTag = UsersTag
 
 extension API {
 	
-	public enum UsersTag {
+	public enum UsersTag : Sendable {
 		
 		case id([String])
 		case screenName([String])

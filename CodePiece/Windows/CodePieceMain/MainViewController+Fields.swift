@@ -17,6 +17,7 @@ enum ReplyStyle {
 }
 
 // FIXME: プロトコルにする必要があるのか再検討。当初は MainViewController が肥大化するのをプロトコルで避けたのかもしれないが、今に思うと用途が違う印象。
+@MainActor
 protocol FieldsController {
 
 	var codeScrollView: NSScrollView! { get }
@@ -38,8 +39,6 @@ protocol FieldsController {
 
 	func updateLanguageWatermark()
 	func updateHashtagWatermark()
-	
-	func getPostButtonTitle() -> String
 	
 	func clearReplyingStatus()
 	func clearCodeText()
@@ -69,6 +68,14 @@ extension MainViewController : FieldsController {
 		let hashtags = customHashtagsExcludeLanguageHashtag + [selectedLanguage.hashtag]
 
 		hashtagWatermark.stringValue = hashtags.twitterDisplayText
+	}
+
+	func updatePostButtonTitle() {
+		
+		Task { @MainActor in
+			
+			postButton.title = await getPostButtonTitle()
+		}
 	}
 }
 
@@ -121,9 +128,9 @@ extension FieldsController where Self : PostDataManageable {
 // extension FieldsController where Self : ViewControllerSelectionAndRepliable {
 extension MainViewController {
 	
-	func getPostButtonTitle() -> String {
+	func getPostButtonTitle() async -> String {
 		
-		switch replyStyle {
+		switch await replyStyle {
 			
 		case .NormalPost:
 			return codeTextView.hasCode ? "Post Gist" : "Tweet"
@@ -138,33 +145,39 @@ extension MainViewController {
 	
 	var replyStyle: ReplyStyle {
 		
-		guard let status = statusForReplyTo else {
+		get async {
+
+			guard let status = statusForReplyTo else {
 			
-			return .NormalPost
-		}
-		
-		if NSApp.twitterController.isMyTweet(status: status) {
+				return .NormalPost
+			}
 			
-			return .ChainPost
-		}
-		else {
-			
-			return descriptionTextField.containsScreenName(screenName: status.user.screenName) ? .ReplyPost : .NormalPost
+			if await NSApp.twitterController.isMyTweet(status: status) {
+				
+				return .ChainPost
+			}
+			else {
+				
+				return descriptionTextField.containsScreenName(screenName: status.user.screenName) ? .ReplyPost : .NormalPost
+			}
 		}
 	}
 	
 	var isReplying: Bool {
 		
-		switch replyStyle {
-			
-		case .NormalPost:
-			return false
-			
-		case .ReplyPost:
-			return true
-			
-		case .ChainPost:
-			return true
+		get async {
+
+			switch await replyStyle {
+				
+			case .NormalPost:
+				return false
+				
+			case .ReplyPost:
+				return true
+				
+			case .ChainPost:
+				return true
+			}
 		}
 	}
 }
@@ -176,11 +189,6 @@ extension FieldsController where Self : KeyValueChangeable {
 		updateTweetTextCount()
 		updatePostButtonTitle()
 		updateWatermark()
-	}
-	
-	func updatePostButtonTitle() {
-		
-		postButton.title = getPostButtonTitle()
 	}
 	
 	func clearCodeText() {

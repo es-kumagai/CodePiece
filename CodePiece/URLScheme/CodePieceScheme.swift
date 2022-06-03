@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+@preconcurrency import struct Foundation.URL
 import ESTwitter
 import ESGists
 import CodePieceCore
@@ -23,41 +24,44 @@ final class CodePieceScheme : URLScheme {
 	static let host = "open"
 	
 	static func action(url: Foundation.URL) throws {
-		
-		DebugTime.print("❕ Detected URL scheme for CodePiece open.")
 
-		let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-		
-		guard let items = components.queryItems else {
+		Task {
 			
-			return
-		}
+			DebugTime.print("❕ Detected URL scheme for CodePiece open.")
 
-		NSApp.moveToFront()
-		
-		for item in items {
+			let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+			
+			guard let items = components.queryItems else {
+				
+				return
+			}
 
-			switch (item.name.lowercased(), item.value) {
-				
-			case ("hashtags", let value?):
-				
-				let hashtags = HashtagSet(hashtagsDisplayText: value)
-				HashtagsChangeRequestNotification(hashtags: hashtags).post()
-				
-			case ("language", let value?):
-				
-				if let language = Language(displayText: value) {
-					LanguageSelectionChangeRequestNotification(language: language).post()
+			await NSApp.moveToFront()
+			
+			for item in items {
+
+				switch (item.name.lowercased(), item.value) {
+					
+				case ("hashtags", let value?):
+					
+					let hashtags = HashtagSet(hashtagsDisplayText: value)
+					HashtagsChangeRequestNotification(hashtags: hashtags).post()
+					
+				case ("language", let value?):
+					
+					if let language = Language(displayText: value) {
+						LanguageSelectionChangeRequestNotification(language: language).post()
+					}
+					
+				case ("code", let value?):
+					
+					if let code = value.removingPercentEncoding {
+						CodeChangeRequestNotification(code: code).post()
+					}
+					
+				default:
+					break
 				}
-				
-			case ("code", let value?):
-				
-				if let code = value.removingPercentEncoding {
-					CodeChangeRequestNotification(code: code).post()
-				}
-				
-			default:
-				break
 			}
 		}
 	}

@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@MainActor
 @objcMembers
 final class WatermarkLabel: NSTextField {
 

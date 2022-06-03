@@ -6,11 +6,13 @@
 //  Copyright © 2021 Tomohiro Kumagai. All rights reserved.
 //
 
-import Foundation
+@preconcurrency import struct Foundation.Date
+import class Foundation.DateFormatter
+import struct Foundation.Calendar
 
 private let formatter: DateFormatter = {
 
-	let calendar = NSCalendar.current
+	let calendar = Calendar.current
 	let formatter = DateFormatter()
 	
 	formatter.calendar = calendar
@@ -21,7 +23,7 @@ private let formatter: DateFormatter = {
 }()
 
 /// A standard date type for CodePiece.
-struct Date {
+struct Date : Sendable {
 	
 	var rawDate: Foundation.Date
 	

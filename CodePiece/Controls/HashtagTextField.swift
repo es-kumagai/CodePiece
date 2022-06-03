@@ -9,6 +9,7 @@
 import Cocoa
 import ESTwitter
 
+@MainActor
 @objcMembers
 final class HashtagTextField : NSTextField {
 	
@@ -18,7 +19,7 @@ final class HashtagTextField : NSTextField {
 
 		get {
 
-			return HashtagSet(hashtagsDisplayText: super.stringValue)
+			HashtagSet(hashtagsDisplayText: super.stringValue)
 		}
 		
 		set (newHashtags) {
@@ -39,7 +40,7 @@ final class HashtagTextField : NSTextField {
 		
 		get {
 		
-			return hashtags.twitterDisplayText
+			hashtags.twitterDisplayText
 		}
 	}
 	
@@ -54,7 +55,6 @@ final class HashtagTextField : NSTextField {
 		if hashtags != hashtagsBeforeEditing {
 
 			hashtagsBeforeEditing = hashtags
-			
 			HashtagsDidChangeNotification(hashtags: hashtags).post()
 		}
 	}

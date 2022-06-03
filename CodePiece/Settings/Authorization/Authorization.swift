@@ -13,12 +13,12 @@ import ESTwitter
 import OAuth2
 import CodePieceCore
 
-enum AuthorizationState {
+enum AuthorizationState : Sendable {
 	
 	case authorized
 	case notAuthorized
 	
-	var isValid:Bool {
+	var isValid: Bool {
 		
 		switch self {
 			
@@ -31,6 +31,7 @@ enum AuthorizationState {
 	}
 }
 
+@MainActor
 final class Authorization : AlertDisplayable {
 
 	final class Gist {
@@ -56,25 +57,19 @@ final class Authorization : AlertDisplayable {
 
 	static var gist = Gist()
 //	static var twitter = Twitter()
-	
-	enum AuthorizationResult {
-
-		case Created
-		case Failed(Error)
-	}
 }
 
 // MARK: Twitter
 
-extension Authorization.AuthorizationResult {
+extension Authorization {
 
-	enum Error : Swift.Error {
-
+	enum AuthorizationError : Error {
+	
 		case message(String)
 	}
 }
 
-extension Authorization.AuthorizationResult.Error {
+extension Authorization.AuthorizationError {
 
 	init(_ error: NSError) {
 
@@ -86,7 +81,7 @@ extension Authorization.AuthorizationResult.Error {
 	}
 }
 
-extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
+extension Authorization.AuthorizationError : CustomStringConvertible {
 
 	var description: String {
 
@@ -102,7 +97,7 @@ extension Authorization.AuthorizationResult.Error : CustomStringConvertible {
 
 extension Authorization {
 
-	static func resetAuthorizationOfGist(id: ID, completion: @escaping (Result<Void, SessionTaskError>)->Void) {
+	static func resetAuthorizationOfGist(id: ID) async throws {
 		
 		guard let authorization = NSApp.settings.account.authorization else {
 
@@ -116,130 +111,114 @@ extension Authorization {
 		
 		let request = GitHubAPI.OAuthAuthorizations.DeleteAuthorization(authorization: authorization, id:id)
 		
-		GitHubAPI.send(request) { response in
-			
-			defer {
-				
-				GistAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
-			}
+		try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
 
-			switch response {
+			GitHubAPI.send(request) { response in
 				
-			case .success:
+				defer {
+					
+					GistAuthorizationStateDidChangeNotification(isValid: false, username: nil).post()
+				}
 				
-				// Token では削除できないようなので、403 で失敗しても認証情報を削除するだけにしています。
-				NSApp.settings.resetGistAccount(saveFinally: true)
-				gist.reset()
-				
-				completion(response)
-				
-			case .failure(_):
+				switch response {
+					
+				case .success:
+					
+					// Token では削除できないようなので、403 で失敗しても認証情報を削除するだけにしています。
+					NSApp.settings.resetGistAccount(saveFinally: true)
+					gist.reset()
+					
+					continuation.resume()
+					
+				case .failure(let error):
+					
+					NSApp.settings.resetGistAccount(saveFinally: true)
+					gist.reset()
 
-				NSApp.settings.resetGistAccount(saveFinally: true)
-				gist.reset()
-
-				completion(response)
+					continuation.resume(throwing: error)
+				}
 			}
 		}
 	}
-	
-	private static func _githubAuthorizationCreateSuccessfully(user: ESGists.Gist.User, authorization:GitHubAuthorization, completion:(AuthorizationResult)->Void) {
 		
-		let username = user.login
-		let id = user.id
-		
-		defer {
-			
-			GistAuthorizationStateDidChangeNotification(isValid: true, username: username).post()
-		}
-		
-		NSApp.settings.replaceGistAccount(username: username, id: id, authorization: authorization, saveFinally: true)
-		
-		completion(.Created)
-	}
-	
-	private static func _githubAuthorizationFailed(error: AuthorizationResult.Error, completion:(AuthorizationResult)->Void) {
-		
-		NSApp.settings.resetGistAccount(saveFinally: true)
-		completion(.Failed(error))
-	}
-	
 	// FIXME: Gists の認証処理は GistController が担えば良さそうです。Twitter はそうしています。
-	static func authorizationWithGist(completion: @escaping (AuthorizationResult) -> Void) {
+	static func authorizationWithGist() async throws {
 		
 		let oauth2 = gist.oauth2
 		
-		func onAuthorize(_ parameters: OAuth2JSON) {
-
-			var scopeAndTokenFromParameters: (scope: String?, token: String?) {
-				
-				var scope: String?
-				var accessToken: String?
-				
-				for (key, value) in parameters {
-					
-					switch key {
-						
-					case "access_token":
-						accessToken = value as? String
-						
-					case "scope":
-						scope = value as? String
-						
-					default:
-						break
-					}
-				}
-				
-				return (scope, accessToken)
-			}
-			
-			guard case let (scope?, accessToken?) = scopeAndTokenFromParameters else {
-
-				_githubAuthorizationFailed(error: AuthorizationResult.Error.message("Failed to get access token by GitHub. Please try again later"), completion: completion)
-
-				gist.reset()
-				return
-			}
-
-			NSLog("GitHub OAuth authentication did end successfully with scope=\(scope).")
-			DebugTime.print(" with parameters: \(parameters)")
-
-			let authorization = GitHubAuthorization.token(accessToken)
-			let request = GitHubAPI.Users.GetAuthenticatedUser(authorization: authorization)
-
-			GitHubAPI.send(request) { response in
-
-				switch response {
-
-				case .success(let user):
-					_githubAuthorizationCreateSuccessfully(user: user, authorization: authorization, completion: completion)
-
-				case .failure(let error):
-					_githubAuthorizationFailed(error: AuthorizationResult.Error.message("\(error)"), completion: completion)
-				}
-			}
-		}
-
-		func onFailure(_ error: OAuth2Error?) {
-
-			print("GitHub authorization went wrong" + (error.map { ": \($0)." } ?? "."))
-		}
-
 		NSLog("Trying authorization with GitHub OAuth.")
 		
 		oauth2.authConfig.authorizeEmbedded = false
 		oauth2.authConfig.authorizeContext = NSApp.keyWindow
 		
-		oauth2.authorize { json, error in
+		let parameters: OAuth2JSON
+		
+		do {
 			
-			guard let json = json else {
+			parameters = try await oauth2.authorize()
+		}
+		catch {
+
+			print("GitHub authorization went wrong: \(error)")
+			return
+		}
+
+		var scopeAndTokenFromParameters: (scope: String?, token: String?) {
+			
+			var scope: String?
+			var accessToken: String?
+			
+			for (key, value) in parameters {
 				
-				onFailure(error)
-				return
+				switch key {
+					
+				case "access_token":
+					accessToken = value as? String
+					
+				case "scope":
+					scope = value as? String
+					
+				default:
+					break
+				}
 			}
 			
-			onAuthorize(json)
+			return (scope, accessToken)
+		}
+		
+		guard case let (scope?, accessToken?) = scopeAndTokenFromParameters else {
+			
+			NSApp.settings.resetGistAccount(saveFinally: true)
+			gist.reset()
+			
+			throw AuthorizationError.message("Failed to get access token by GitHub. Please try again later")
+		}
+		
+		NSLog("GitHub OAuth authentication did end successfully with scope=\(scope).")
+		DebugTime.print(" with parameters: \(parameters)")
+		
+		let authorization = GitHubAuthorization.token(accessToken)
+		let request = GitHubAPI.Users.GetAuthenticatedUser(authorization: authorization)
+		
+		do {
+			
+			let user = try await GitHubAPI.send(request)
+			
+			let username = user.login
+			let id = user.id
+			
+			defer {
+				
+				GistAuthorizationStateDidChangeNotification(isValid: true, username: username).post()
+			}
+			
+			NSApp.settings.replaceGistAccount(username: username, id: id, authorization: authorization, saveFinally: true)
+		}
+		catch {
+			
+			NSApp.settings.resetGistAccount(saveFinally: true)
+			
+			throw AuthorizationError.message("\(error)")
 		}
 	}
 }

@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct User {
+public struct User : Sendable {
 	
 	public var name: String
 	public var profile: Profile

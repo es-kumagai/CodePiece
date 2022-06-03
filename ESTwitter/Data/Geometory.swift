@@ -6,7 +6,7 @@
 //  Copyright © 2020 Tomohiro Kumagai. All rights reserved.
 //
 
-public struct Geometory : Decodable {
+public struct Geometory : Decodable, Sendable {
 	
 	var type: String
 	var coordinates: CoordinatesElement

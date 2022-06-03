@@ -8,24 +8,12 @@
 
 import Cocoa
 
+@MainActor
 @objcMembers
 @IBDesignable final class StatusImageView: NSImageView {
 
 	private let statusCodingKey = "StatusImageViewStatusCoding"
 	private let statusDefault = Status.none
-	
-	@objc public enum Status : Int {
-
-		case none
-		case available
-		case partiallyAvailable
-		case unavailable
-		
-		var image: NSImage {
-			
-			return NSImage(self)
-		}
-	}
 	
 	public override init(frame frameRect: NSRect) {
 		

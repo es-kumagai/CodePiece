@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@MainActor
 @objcMembers
 final class DescriptionTextField: NSTextField {
 
@@ -29,6 +30,6 @@ extension DescriptionTextField : TwitterTextType {
 	
 	var twitterText: String {
 		
-		return stringValue.trimmingCharacters(in: .whitespaces)
+		stringValue.trimmingCharacters(in: .whitespaces)
 	}
 }

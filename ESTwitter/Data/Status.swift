@@ -14,7 +14,9 @@ import Swim
 //	indirect case Value(Status)
 //}
 
-public struct Status : Decodable {
+public typealias Statuses = [Status]
+
+public struct Status : Decodable, Sendable {
 	
 	public var coordinates: Coordinates?
 	public var favorited: Bool

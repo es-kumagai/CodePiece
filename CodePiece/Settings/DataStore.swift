@@ -13,6 +13,7 @@ import Ocean
 import Swim
 
 // FIXME: Twitter のデータストアが Keychain ではないため、Gists と合わせる必要あり
+@MainActor
 struct DataStore {
 	
 	static let service = "CodePiece App"
@@ -47,7 +48,7 @@ extension DataStore {
 
 extension DataStore.DataStoreError : CustomStringConvertible {
 	
-	var description:String {
+	var description: String {
 		
 		switch self {
 			
@@ -68,6 +69,7 @@ private extension UserDefaults {
 	static let twitterStoreAccountTokenScreenNameKey = "twitter:token-screenname"
 	static let twitterStoreAccountTokenUserIdKey = "twitter:token-userid"
 
+	@MainActor
 	var twitterStore: DataStore.TwitterStore {
 	
 		let identifier = twitterStoreAccountIdentifier
@@ -80,6 +82,7 @@ private extension UserDefaults {
 		return DataStore.TwitterStore(kind: kind, identifier: identifier, token: token, tokenSecret: tokenSecret, tokenScreenName: tokenScreenName, tokenUserId: tokenUserId)
 	}
 
+	@MainActor
 	func set(twitterStore store: DataStore.TwitterStore) {
 		
 		twitterStoreAccountIdentifier = store.identifier
@@ -94,7 +97,7 @@ private extension UserDefaults {
 		
 		get {
 			
-			return string(forKey: UserDefaults.twitterStoreAccountIdentifierKey) ?? ""
+			string(forKey: UserDefaults.twitterStoreAccountIdentifierKey) ?? ""
 		}
 		
 		set (identifier) {
@@ -107,7 +110,7 @@ private extension UserDefaults {
 		
 		get {
 			
-			return string(forKey: UserDefaults.twitterStoreAccountTokenKey) ?? ""
+			string(forKey: UserDefaults.twitterStoreAccountTokenKey) ?? ""
 		}
 		
 		set (token) {
@@ -120,7 +123,7 @@ private extension UserDefaults {
 		
 		get {
 			
-			return string(forKey: UserDefaults.twitterStoreAccountTokenSecretKey) ?? ""
+			string(forKey: UserDefaults.twitterStoreAccountTokenSecretKey) ?? ""
 		}
 		
 		set (secret) {
@@ -133,7 +136,7 @@ private extension UserDefaults {
 		
 		get {
 			
-			return string(forKey: UserDefaults.twitterStoreAccountTokenScreenNameKey) ?? ""
+			string(forKey: UserDefaults.twitterStoreAccountTokenScreenNameKey) ?? ""
 		}
 		
 		set (screenName) {
@@ -146,7 +149,7 @@ private extension UserDefaults {
 		
 		get {
 			
-			return string(forKey: UserDefaults.twitterStoreAccountTokenUserIdKey) ?? ""
+			string(forKey: UserDefaults.twitterStoreAccountTokenUserIdKey) ?? ""
 		}
 		
 		set (screenName) {
@@ -178,6 +181,7 @@ private extension UserDefaults {
 
 extension DataStore {
 
+	@MainActor
 	struct TwitterStore : UserDefaultAccessible {
 
 		enum Kind : String {
@@ -211,6 +215,7 @@ extension DataStore.TwitterStore {
 
 extension DataStore {
 	
+	@MainActor
 	struct GistStore {
 
 		#if DEBUG
@@ -219,12 +224,12 @@ extension DataStore {
 		static let AuthorizationKey = "github:auth-info"
 		#endif
 
-		var authInfo:AuthInfo
+		var authInfo: AuthInfo
 		
-		private static var keychain:Keychain {
+		private static var keychain: Keychain {
 			
 			// synchronizable すると署名なしのアーカイブ時に読み書きできなくなることがあるため、現在は無効化しています。
-			return Keychain(service: DataStore.service, accessGroup: DataStore.group)
+			Keychain(service: DataStore.service, accessGroup: DataStore.group)
 				.accessibility(Accessibility.whenUnlocked)
 //				.synchronizable(true)
 		}

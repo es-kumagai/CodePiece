@@ -15,10 +15,10 @@ public protocol HashtagType {
 	var length: Int { get }
 	var isEmpty: Bool { get }
 
-	init?(hashtagValue:String)
+	init?(hashtagValue: String)
 }
 
-public struct Hashtag : HashtagType {
+public struct Hashtag : HashtagType, Sendable {
 	
 	private var rawValue: String
 	

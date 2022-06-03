@@ -10,23 +10,24 @@ import AppKit
 import Ocean
 
 @objcMembers
-final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObservable {
+@MainActor
+final class GitHubOpenFeatures : NSObject, AlertDisplayable {
 
 	var notificationHandlers = Notification.Handlers()
-	
+
 	override init() {
 		
 		super.init()
-		
-		observe(Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+
+		notificationHandlers.observe(Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
 			withChangeValue(for: "canOpenGitHubHome")
 		}
 	}
 	
-	var canOpenGitHubHome:Bool {
+	dynamic var canOpenGitHubHome: Bool {
 		
-		guard NSApp.isReadyForUse else {
+		guard NSApp.isPrepared else {
 			
 			return false
 		}
@@ -40,17 +41,19 @@ final class GitHubOpenFeatures : NSObject, AlertDisplayable, NotificationObserva
 	}
 	
 	func openGitHubHome() {
-		
+
 		guard let username = NSApp.settings.account.username else {
 			
-			return showErrorAlert(withTitle: "Failed to open GitHub", message: "GitHub user is not set.")
+			showErrorAlert(withTitle: "Failed to open GitHub", message: "GitHub user is not set.")
+			return
 		}
 		
 		let urlString = "https://GitHub.com/\(username)"
 		
 		guard let url = URL(string: urlString) else {
 			
-			return showErrorAlert(withTitle: "Failed to open GitHub", message: "Invalid URL '\(urlString)'.")
+			showErrorAlert(withTitle: "Failed to open GitHub", message: "Invalid URL '\(urlString)'.")
+			return
 		}
 		
 		NSWorkspace.shared.open(url).isFalse {

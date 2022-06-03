@@ -6,53 +6,70 @@
 //  Copyright © 2020 Tomohiro Kumagai. All rights reserved.
 //
 
-import AppKit
+@preconcurrency import class AppKit.NSImage
 import ESTwitter
 import Ocean
 
 
 let twitterIconLoader = TwitterIconLoader()
 
-class TwitterIconLoader {
+// FIXME: 適切な非同期処理にする必要がある。現時点では Concurrency を活かせていない。
+actor TwitterIconLoader {
 
-	struct TwitterIconDidLoadNotification : NotificationProtocol {
+	private var iconState = Dictionary<User, IconState>()
+	
+	func requestImage(for user: User) -> IconState {
+
+		if let state = iconState[user] {
+			
+			return state
+		}
+		
+		iconState[user] = .nowLoading
+		
+		Task {
+			
+			let image: NSImage?
+			
+			if let url = user.profile.imageUrlHttps.url {
+			
+				image = NSImage(contentsOf: url)
+				iconState[user] = .image(image)
+			}
+			else {
+				
+				image = nil
+				iconState[user] = nil
+			}
+			
+			Task { @MainActor in
+
+				TwitterIconDidLoadNotification(user: user, icon: image).post()
+			}
+		}
+		
+		return .nowLoading
+	}
+}
+
+extension TwitterIconLoader {
+	
+	struct TwitterIconDidLoadNotification : NotificationProtocol, Sendable {
 	
 		var user: User
 		var icon: NSImage?
 	}
 	
-	enum IconState {
+	enum IconState : Sendable {
 	
-		case image(NSImage)
+		case image(NSImage?)
 		case nowLoading
-	}
-	
-	private var processingQueue = DispatchQueue(label: "jp.ez-net.codepiece.twitter.iconloader")
-	private var iconState = Dictionary<User, IconState>()
-	
-	func requestImage(for user: User) -> IconState {
-
-		processingQueue.sync { [unowned self] in
-
-			if let state = iconState[user] {
-				
-				return state
-			}
-			
-			iconState[user] = .nowLoading
-			
-			loadImage(for: user) {
-				
-				imageLoaded(for: user, image: $0)
-			}
-			
-			return .nowLoading
-		}
 	}
 }
 
 extension TwitterIconLoader.IconState {
 	
+	@MainActor
 	var image: NSImage? {
 		
 		switch self {
@@ -85,22 +102,18 @@ private extension TwitterIconLoader {
 		}
 	}
 	
-	func loadImage(for user: User, callback: @escaping (NSImage?) -> Void) {
+	func loadImage(for user: User) async -> NSImage? {
 		
 		guard let url = user.profile.imageUrlHttps.url else {
 		
-			callback(nil)
-			return
+			return nil
 		}
-		
-		DispatchQueue.global(qos: .background).async { [unowned self] in
+
+		return await withCheckedContinuation { continuation in
 			
 			let image = NSImage(contentsOf: url)
-			
-			processingQueue.async {
 				
-				callback(image)
-			}
+			continuation.resume(returning: image)
 		}
 	}
 }

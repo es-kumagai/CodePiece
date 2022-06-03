@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct InReplyTo : Decodable {
+public struct InReplyTo : Decodable, Sendable {
 	
 	public var userIdStr: String?
 	public var statusIdStr: String?

@@ -10,7 +10,7 @@ import Foundation
 
 extension API {
 	
-	public struct SearchQuery {
+	public struct SearchQuery : Sendable {
 
 		var words: [String]
 

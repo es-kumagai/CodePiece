@@ -16,36 +16,74 @@ import CodePieceCore
 
 private let TableViewInsertAnimationOptions: NSTableView.AnimationOptions = [.slideDown, .effectFade]
 
+@MainActor
 extension Sequence where Element : TimelineViewController {
 
-	func activate() {
+	func activate() async {
 		
-		forEach { $0.activate() }
+		await withTaskGroup(of: Void.self) { group in
+			
+			for controller in self {
+				
+				group.addTask {
+					
+					await controller.activate()
+				}
+			}
+			
+			await group.waitForAll()
+		}
 	}
 	
-	func deactivate() {
-		
-		forEach { $0.deactivate() }
+	func deactivate() async {
+
+		await withTaskGroup(of: Void.self) { group in
+			
+			for controller in self {
+				
+				group.addTask {
+					
+					await controller.deactivate()
+				}
+			}
+			
+			await group.waitForAll()
+		}
 	}
 }
 
 @objcMembers
-final class TimelineViewController: NSViewController {
-	
-	struct SelectingStatusInfo {
-	
-		var row: Int
-		var status: Status
-	}
+@MainActor
+final class TimelineViewController: NSViewController, NotificationObservable {
 	
 	@IBOutlet var menuController: MenuController!
-	
+
+	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
+	@IBOutlet var timelineRefreshButton: NSButton?
+
 	@IBOutlet var timelineTableView: TimelineTableView! {
 		
 		didSet {
 			
 			contentsController.tableView = timelineTableView
 			refreshDisplayState()
+		}
+	}
+
+	@IBOutlet var timelineStatusView: TimelineStatusView! {
+		
+		didSet {
+			
+			timelineStatusView.clearMessage()
+			refreshDisplayState()
+		}
+	}
+	
+	@IBOutlet var timelineUpdateIndicator: NSProgressIndicator? {
+		
+		didSet {
+			
+			timelineUpdateIndicator?.usesThreadedAnimation = true
 		}
 	}
 	
@@ -58,9 +96,7 @@ final class TimelineViewController: NSViewController {
 		}
 	}
 	
-	var notificationHandlers = Notification.Handlers()
-	
-	@IBOutlet var cellForEstimateHeight: TimelineTableCellView!
+	let notificationHandlers = Notification.Handlers()
 	
 	var isActive: Bool = false
 	var contentsState: TimelineStatusView.State = .ok("") {
@@ -109,12 +145,89 @@ final class TimelineViewController: NSViewController {
 	
 	var isTimelineSingleRowSelected: Bool {
 		
-		return timelineSelectedStatuses.count == 1
+		timelineSelectedStatuses.count == 1
 	}
 	
 	var isTimelineSingleOrMoreRowsSelected: Bool {
 		
-		return timelineSelectedStatuses.count > 0
+		timelineSelectedStatuses.count > 0
+	}
+		
+	var statusesAutoUpdateInterval: Double = 20 {
+		
+		didSet {
+
+			guard isActive else {
+				
+				return
+			}
+			
+			messageQueue.send(.setAutoUpdateInterval(statusesAutoUpdateInterval))
+		}
+	}
+	
+	private(set) var displayControlState = DisplayControlState.updated {
+		
+		didSet {
+			
+			precondition(Thread.isMainThread)
+			
+			updateDisplayControlsVisiblityForState()
+		}
+	}
+	
+	private var autoUpdateState = AutoUpdateState()
+	
+	private(set) var messageQueue: MessageQueue2<Message>! {
+		
+		didSet {
+		
+			DebugTime.print("Message Queue for Timeline of \(contentsKind) will be Initialize.")
+		}
+	}
+	
+	@available(*, message: "このタイマーが必要であるか検討する必要があります。")
+	private var updateTimerSource: DispatchSourceTimer!
+	
+	var isTimelineActive: Bool {
+		
+		return true
+	}
+
+	@MainActor
+	override func awakeFromNib() {
+		
+		super.awakeFromNib()
+
+		Task {
+			#warning("viewWillAppear で notification を監視する前にこのタスク処理が回ってこないため、キューを初期化できない。activate でも同様。")
+
+			updateTimerSource = Dispatch.makeTimer(interval: .milliseconds(30), start: true, timerAction: autoUpdateAction)
+			
+			// FIXME: actor である MessageQueue2 の初期化が activate に間に合わないため、メッセージの管理方法または activate 方法を根本的に見直す必要がある。activate で行うメッセージの送信を非同期で行えば良いのかもしれない。send 自体を nonisolated にこだわる必要がないのかもしれない。
+			messageQueue = MessageQueue2<Message>(
+				
+				identifier: "CodePiece.Timeline.\(contentsKind)",
+				messageHandler: messageQueue(_:handlingMessage:),
+				errorHandler: messageQueue(_:handlingError:)
+			)
+			
+			await messageQueue.prepare()
+		}
+	}
+
+	@IBAction func pushTimelineRefreshButton(_ sender: AnyObject!) {
+		
+		updateTimeline()
+	}
+}
+
+extension TimelineViewController {
+	
+	struct SelectingStatusInfo {
+	
+		var row: Int
+		var status: Status
 	}
 	
 	enum Message : MessageTypeIgnoreInQuickSuccession {
@@ -138,73 +251,6 @@ final class TimelineViewController: NSViewController {
 			}
 		}
 	}
-	
-	@IBOutlet var timelineStatusView: TimelineStatusView! {
-		
-		didSet {
-			
-			timelineStatusView.clearMessage()
-			refreshDisplayState()
-		}
-	}
-	
-	@IBOutlet var timelineUpdateIndicator: NSProgressIndicator? {
-		
-		didSet {
-			
-			timelineUpdateIndicator?.usesThreadedAnimation = true
-		}
-	}
-	
-	@IBOutlet var timelineRefreshButton: NSButton?
-	
-	var statusesAutoUpdateInterval: Double = 20 {
-		
-		didSet {
-
-			guard isActive else {
-				
-				return
-			}
-			
-			message.send(.setAutoUpdateInterval(statusesAutoUpdateInterval))
-		}
-	}
-	
-	private(set) var displayControlState = DisplayControlState.updated {
-		
-		didSet {
-			
-			precondition(Thread.isMainThread)
-			
-			updateDisplayControlsVisiblityForState()
-		}
-	}
-	
-	private var autoUpdateState = AutoUpdateState()
-	
-	private(set) lazy var message: MessageQueue<Message> = {
-		
-		DebugTime.print("Message Queue for Timeline of \(contentsKind) will be Initialize.")
-		
-		let queue = MessageQueue<Message>(identifier: "CodePiece.Timeline.\(contentsKind)", handler: self)
-
-		updateTimerSource = queue.makeTimerSource(interval: Semaphore.Interval(second: 0.03), start: true, timerAction: autoUpdateAction)
-		
-		return queue
-	}()
-	
-	private var updateTimerSource: DispatchSourceTimer!
-	
-	var isTimelineActive: Bool {
-		
-		return true
-	}
-	
-	@IBAction func pushTimelineRefreshButton(_ sender: AnyObject!) {
-		
-		updateTimeline()
-	}
 }
 
 extension TimelineViewController {
@@ -222,6 +268,7 @@ extension TimelineViewController {
 }
 // MARK: - Message Handler
 
+@MainActor
 extension TimelineViewController {
 	
 	struct AutoUpdateState {
@@ -326,31 +373,35 @@ extension TimelineViewController {
 		}
 	}
 	
-	func autoUpdateAction() {
+	nonisolated func autoUpdateAction() {
 		
-		guard autoUpdateState.enabled else {
+		Task { @MainActor in
 			
-			return
-		}
-		
-		if autoUpdateState.isUpdateTimeOver {
-			
-			guard autoUpdateState.hasInternetConnection else {
+			guard autoUpdateState.enabled else {
 				
-				NSLog("No internet connection found.")
-				autoUpdateState.updateNextUpdateTime()
 				return
 			}
 			
-			autoUpdateState.setUpdated()
-			message.send(.updateStatuses)
+			if autoUpdateState.isUpdateTimeOver {
+				
+				guard autoUpdateState.hasInternetConnection else {
+					
+					NSLog("No internet connection found.")
+					autoUpdateState.updateNextUpdateTime()
+					return
+				}
+				
+				autoUpdateState.setUpdated()
+				messageQueue.send(.updateStatuses)
+			}
 		}
 	}
 }
 
-extension TimelineViewController : MessageQueueHandlerProtocol {
+extension TimelineViewController {
 	
-	func messageQueue(queue: MessageQueue<Message>, handlingMessage message: Message) throws {
+	@Sendable
+	func messageQueue(_ queue: MessageQueue2<Message>, handlingMessage message: Message) async throws {
 		
 		switch message {
 			
@@ -376,20 +427,17 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 			//			_changeHashtags(hashtags: hashtags)
 		}
 	}
-	
-	func messageQueue<Queue : MessageQueueType>(queue: Queue, handlingError error: Error) throws {
-		
-		fatalError(error.localizedDescription)
+
+	@Sendable
+	func messageQueue(_ queue: MessageQueue2<Message>, handlingError error: Error) async throws {
+
+		throw error
 	}
 	
 	private func _updateStatuses() {
 		
 		autoUpdateState.updateNextUpdateTime()
-		
-		DispatchQueue.main.async { [unowned self] in
-			
-			updateStatuses()
-		}
+		updateStatuses()
 	}
 	
 	//	private func _changeHashtags(hashtags: Set<Hashtag>) {
@@ -457,9 +505,9 @@ extension TimelineViewController : MessageQueueHandlerProtocol {
 
 // MARK: - View Control
 
-extension TimelineViewController : NotificationObservable {
+extension TimelineViewController {
 	
-	func activate() {
+	func activate() async {
 		
 		guard !isActive else {
 			
@@ -472,14 +520,14 @@ extension TimelineViewController : NotificationObservable {
 		
 		contentsController.activate()
 		
-		message.send(.setAutoUpdateInterval(statusesAutoUpdateInterval))
-		message.send(.setReachability(NSApp.reachabilityController.state))
-		message.send(.autoUpdate(enable: true))
+		messageQueue.send(.setAutoUpdateInterval(statusesAutoUpdateInterval))
+		messageQueue.send(.setReachability(NSApp.reachabilityController.state))
+		messageQueue.send(.autoUpdate(enable: true))
 
-		message.send(.start)
+		messageQueue.send(.start)
 	}
 	
-	func deactivate() {
+	func deactivate() async {
 		
 		guard isActive else {
 			
@@ -490,33 +538,13 @@ extension TimelineViewController : NotificationObservable {
 
 		isActive = false
 		
-		message.send(.autoUpdate(enable: false))
-		message.send(.stop)
+		messageQueue.send(.autoUpdate(enable: false))
+		messageQueue.send(.stop)
 	}
 	
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
-
-		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
-			
-			message.send(.updateStatuses)
-		}
-		
-		observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
-			
-			message.send(.autoUpdate(enable: false))
-		}
-		
-		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
-			
-			message.send(.autoUpdate(enable: true))
-		}
-		
-		observe(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
-			
-			message.send(.setReachability(notification.state))
-		}
 
 		contentsController.timelineViewDidLoad(isTableViewAssigned: timelineTableView != nil)
 	}
@@ -524,6 +552,33 @@ extension TimelineViewController : NotificationObservable {
 	override func viewWillAppear() {
 		
 		super.viewWillAppear()
+
+		// To wait for preparing a message queue on first time, invoke following codes by a task.
+		Task {
+			
+			NSLog("Start observing notifications on \(self).")
+
+			observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
+				
+				messageQueue.send(.updateStatuses)
+			}
+			
+			observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
+				
+				messageQueue.send(.autoUpdate(enable: false))
+			}
+			
+			observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
+				
+				messageQueue.send(.autoUpdate(enable: true))
+			}
+			
+			observe(ReachabilityController.ReachabilityChangedNotification.self) { [unowned self] notification in
+				
+				messageQueue.send(.setReachability(notification.state))
+			}
+		}
+
 		contentsController.timelineViewWillAppear(isTableViewAssigned: timelineTableView != nil)
 
 		updateDisplayControlsVisiblityForState()
@@ -550,11 +605,13 @@ extension TimelineViewController : NotificationObservable {
 		
 		super.viewDidDisappear()
 		contentsController.timelineViewDidDisappear()
+		
+		notificationHandlers.releaseAll()
 	}
 	
 	func updateTimeline() {
 		
-		message.send(.updateStatuses)
+		messageQueue.send(.updateStatuses)
 	}
 }
 
@@ -664,36 +721,37 @@ extension TimelineViewController {
 			return
 		}
 		
+		@MainActor @Sendable
 		func update(tweets: [Status], associatedHashtags hashtags: HashtagSet) {
 			
 			func _debugTimeReportTableState() {
-
-				#if DEBUG
-				guard let timelineTableView = timelineTableView else {
 				
+#if DEBUG
+				guard let timelineTableView = timelineTableView else {
+					
 					NSLog("%@", "Table view for '\(contentsKind)' is still inactive.")
 					return
 				}
 				
 				DebugTime.print("""
-				Current Selection:
-					CurrentTimelineSelectedRows: \(timelineSelectedStatuses.map { $0.row })
-					Native: \(timelineTableView.selectedRowIndexes)")
-				""")
-				#endif
+Current Selection:
+ CurrentTimelineSelectedRows: \(timelineSelectedStatuses.map { $0.row })
+ Native: \(timelineTableView.selectedRowIndexes)")
+""")
+#endif
 			}
 			
 			_debugTimeReportTableState()
-
+			
 			let result = appendTweets(tweets: tweets, associatedHashtags: hashtags)
 			let nextSelectedStatuses = getNextTimelineSelection(insertedIndexes: result.insertedIndexes)
-
-			// FIXME: 複雑なデバッグ表示は DebugTime にメソッドとして載せて１業で表現しても良いかもしれない。
+			
+			// FIXME: 複雑なデバッグ表示は DebugTime にメソッドとして載せて１行で表現しても良いかもしれない。
 			DebugTime.print("Tweet: \(tweets.count)")
 			DebugTime.print("Inserted: \(result.insertedIndexes)")
 			DebugTime.print("Ignored: \(result.ignoredIndexes)")
 			DebugTime.print("Removed: \(result.removedIndexes)")
-
+			
 			timelineSelectedStatuses = nextSelectedStatuses
 			
 			_debugTimeReportTableState()
@@ -703,32 +761,45 @@ extension TimelineViewController {
 		
 		DebugTime.print("Start updating contents of \(contentsKind).")
 		
-		contentsController.updateContents { [unowned self] result in
+		Task { @MainActor in
 			
-			displayControlState = .updated
-			
-			switch result {
+			do {
 				
-			case .success(let (statuses, hashtags)):
+				let updated = try await contentsController.updateContents()
+				
+				defer {
+					
+					Task { @MainActor in
+						displayControlState = .updated
+					}
+				}
+				
+				let statuses = updated.statuses
+				let hashtags = updated.associatedHashtags
 				
 				update(tweets: statuses, associatedHashtags: hashtags)
 				
-				message.send(.resetAutoUpdateIntervalDeray)
+				messageQueue.send(.resetAutoUpdateIntervalDeray)
 				contentsState = .ok("Last Update: \(Date())")
-				
-			case .failure(let error):
+			}
+			catch let error as GetStatusesError {
 				
 				if error.isRateLimitExceeded {
-
-					message.send(message: .addAutoUpdateIntervalDelay(bySecond: 7.0))
+					
+					messageQueue.send(.addAutoUpdateIntervalDelay(bySecond: 7.0))
 				}
 				
 				contentsState = .error(error)
+			}
+			catch {
+				
+				contentsState = .unexpected(error)
 			}
 		}
 	}
 }
 
+#warning("nonisolated で MainActor の戻り値を取得したいがわからない。")
 extension TimelineViewController : NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -746,43 +817,62 @@ extension TimelineViewController : NSTableViewDelegate {
 		return contentsController.estimateCellHeight(of: row)
 	}
 
-    func tableViewSelectionIsChanging(_ notification: Notification) {
+    nonisolated func tableViewSelectionIsChanging(_ notification: Notification) {
 		
-		guard let tableView = notification.object as? TimelineTableView, tableView === timelineTableView else {
+		guard let tableView = notification.object as? TimelineTableView else {
 			
 			return
+		}
+
+		Task { @MainActor in
+						
+			guard tableView === timelineTableView else {
+				
+				return
+			}
 		}
 	}
 	
-    func tableViewSelectionDidChange(_ notification: Notification) {
+    nonisolated func tableViewSelectionDidChange(_ notification: Notification) {
 		
-		guard let tableView = notification.object as? TimelineTableView, tableView === timelineTableView else {
+		guard let tableView = notification.object as? TimelineTableView else {
 			
 			return
 		}
 		
-		timelineSelectedStatuses = tableView.selectedCells.compactMap {
-			
-			guard let status = $0.cell?.item?.status else {
+		Task { @MainActor in
+						
+			guard tableView === timelineTableView else {
 				
-				return nil
+				return
 			}
+			
+			timelineSelectedStatuses = tableView.selectedCells.compactMap {
+				
+				guard let status = $0.cell?.item?.status else {
+					
+					return nil
+				}
 
-			return SelectingStatusInfo(row: $0.row, status: status)
+				return SelectingStatusInfo(row: $0.row, status: status)
+			}
 		}
 	}
 }
 
 extension TimelineViewController : TimelineContentsControllerDelegate {
 	
-	func timelineContentsNeedsUpdate(_ sender: TimelineContentsController) {
+	nonisolated func timelineContentsNeedsUpdate(_ sender: TimelineContentsController) {
 		
-		if isViewLoaded, contentsController.items.count > 0 {
+		Task { @MainActor in
 			
-			timelineTableView.insertRows(at: IndexSet(integer: 0), withAnimation: TableViewInsertAnimationOptions)
+			if isViewLoaded, contentsController.items.count > 0 {
+				
+				timelineTableView.insertRows(at: IndexSet(integer: 0), withAnimation: TableViewInsertAnimationOptions)
+			}
+			
+			messageQueue.send(.updateStatuses)
 		}
-		
-		message.send(.updateStatuses)
 	}
 }
 

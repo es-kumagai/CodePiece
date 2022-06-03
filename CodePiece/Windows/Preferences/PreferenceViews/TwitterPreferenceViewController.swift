@@ -13,9 +13,10 @@ import Swim
 import ESTwitter
 
 @objcMembers
+@MainActor
 class TwitterPreferenceViewController: NSViewController, NotificationObservable {
 
-	var notificationHandlers = Notification.Handlers()
+	let notificationHandlers = Notification.Handlers()
 	
 	private(set) var waitingHUD:ProgressHUD = ProgressHUD(message: "Please wait...", useActivityIndicator: true)
 	private(set) var verifyingHUD:ProgressHUD = ProgressHUD(message: "Verifying...", useActivityIndicator: true)
@@ -33,7 +34,7 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		}
 	}
 	
-	var verifying:Bool = false {
+	dynamic var verifying: Bool = false {
 		
 		willSet {
 			
@@ -56,20 +57,20 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 		}
 	}
 	
-	var hasToken: Bool {
+	dynamic var hasToken: Bool {
 
-		return NSApp.twitterController.token != nil
+		NSApp.twitterController.token != nil
 	}
 	
-	var credentialsNotVerified: Bool {
+	dynamic var credentialsNotVerified: Bool {
 
-		// FIXME: 🌙 モーダル画面でベリファイしようとすると、メインスレッドで実行しているからか、閉じるまでベリファイ作業が継続されない。
-		return !NSApp.twitterController.credentialsVerified
+		// FIXME: 🌙 モーダル画面でベリファイしようとすると、メインスレッドで実行しているからか、閉じるまでベリファイ作業が継続されない。Concurrency になれば大丈夫かもしれない。
+		!NSApp.twitterController.credentialsVerified
 	}
 	
-	var credentialsVerified: Bool {
+	dynamic var credentialsVerified: Bool {
 
-		return NSApp.twitterController.credentialsVerified
+		NSApp.twitterController.credentialsVerified
 	}
 	
 	@IBAction func pushResetAuthorizationButton(_ sender:NSButton) {
@@ -81,7 +82,10 @@ class TwitterPreferenceViewController: NSViewController, NotificationObservable 
 
 		withChangeValue(for: "hasAccount") {
 
-			NSApp.twitterController.resetAuthentication()
+			Task { @MainActor in
+				
+				await NSApp.twitterController.resetAuthentication()
+			}
 		}
 	}
 			
@@ -167,22 +171,25 @@ extension TwitterPreferenceViewController {
 	
 	@IBAction func pushVerifyCredentialsButton(_ sender:NSButton) {
 
-		verifyCredentials()
+		Task {
+			
+			await verifyCredentials()
+		}
 	}
 	
-	var canVerify: Bool {
+	dynamic var canVerify: Bool {
 		
 		return hasToken && credentialsNotVerified
 	}
 	
-	func verifyCredentials() {
+	func verifyCredentials() async {
 
 		guard canVerify else {
 
 			return
 		}
 
-		NSApp.twitterController.verifyCredentialsIfNeed()
+		await NSApp.twitterController.verifyCredentialsIfNeed()
 //		self.verifying = NSApp.twitterController.verifyCredentialsIfNeed { result in
 //
 //			self.verifying = false

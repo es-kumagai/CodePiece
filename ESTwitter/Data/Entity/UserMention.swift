@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct UserMention : Decodable, HasIndices {
+public struct UserMention : Decodable, HasIndices, Sendable {
 	
 	public var id: UInt64
 	public var idStr: String

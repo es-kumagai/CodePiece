@@ -10,6 +10,7 @@ import Cocoa
 import Sky
 
 @objcMembers
+@MainActor
 final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewController {
 	
 	private var authenticatingHUD = ProgressHUD(message: "Please authenticate with the launched browser.\n", useActivityIndicator: true)
@@ -55,7 +56,7 @@ final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewContro
 
 extension TwitterByOAuthPreferenceViewController : NSTextFieldDelegate {
 	
-	func controlTextDidChange(_ obj: Notification) {
+	nonisolated func controlTextDidChange(_ obj: Notification) {
 
 //		guard let object = obj.object as? NSTextField, object === self.pinTextField else {
 //			
@@ -71,10 +72,11 @@ extension TwitterByOAuthPreferenceViewController : NSTextFieldDelegate {
 extension TwitterByOAuthPreferenceViewController {
 	
 	@IBAction func doAuthentication(_ sender:NSButton) {
-		
-		authenticatingHUD.show()
-		
-		NSApp.twitterController.authorize()
+				
+		Task {
+			authenticatingHUD.show()
+			await NSApp.twitterController.authorize()
+		}
 
 //		Authorization.authorizationWithTwitter { result in
 //

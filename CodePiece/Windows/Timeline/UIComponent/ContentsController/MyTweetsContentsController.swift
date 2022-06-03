@@ -11,18 +11,18 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class MyTweetsContentsController : TimelineContentsController, NotificationObservable {
+final class MyTweetsContentsController : TimelineContentsController {
 	
 	override var kind: TimelineKind {
 		
-		return .myTweets
+		.myTweets
 	}
 	
 	var dataSource = SimpleTweetContentsDataSource()
 		
 	override var tableViewDataSource: TimelineTableDataSource {
 		
-		return dataSource
+		dataSource
 	}
 	
 	override func activate() {
@@ -42,24 +42,13 @@ final class MyTweetsContentsController : TimelineContentsController, Notificatio
 		delegate?.timelineContentsNeedsUpdate?(self)
 	}
 	
-	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
+	override func updateContents() async throws -> Update {
 
-		let options = API.TimelineOptions(
-			
-			sinceId: dataSource.lastTweetId
-		)
+		let options = API.TimelineOptions(sinceId: dataSource.lastTweetId)
+
+		let statuses = try await NSApp.twitterController.timeline(options: options)
 		
-		NSApp.twitterController.timeline(options: options) { result in
-			
-			switch result {
-				
-			case .success(let statuses):
-				callback(.success((statuses, [])))
-				
-			case .failure(let error):
-				callback(.failure(error))
-			}
-		}
+		return Update(statuses)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

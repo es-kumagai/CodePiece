@@ -11,16 +11,16 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class HashtagsContentsController : TimelineContentsController, NotificationObservable {
+final class HashtagsContentsController : TimelineContentsController {
 	
 	override var kind: TimelineKind {
 		
-		return .hashtags
+		.hashtags
 	}
 	
 	var dataSource = GroupedTweetContentsDataSource()
 	
-	var hashtags: HashtagSet = NSApp.settings.appState.hashtags ?? [] {
+	var hashtags: HashtagSet = [] {
 		
 		didSet (previousHashtags) {
 			
@@ -37,14 +37,23 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 		}
 	}
 	
+	@MainActor
+	override func awakeFromNib() {
+	
+		super.awakeFromNib()
+		
+		#warning("以前はプロパティーの初期値として指定していましたが、Concurrency の都合で代入できなくなりました。ここが呼び出されるか確認する必要があります。")
+		hashtags = NSApp.settings.appState.hashtags ?? []
+	}
+	
 	override var tableViewDataSource: TimelineTableDataSource {
 		
-		return dataSource
+		dataSource
 	}
 	
 	override var associatedHashtags: HashtagSet {
 	
-		return hashtags
+		hashtags
 	}
 	
 	override func activate() {
@@ -71,14 +80,13 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 //		}
 	}
 	
-	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
+	override func updateContents() async throws -> Update {
 		
 		let query = hashtags.searchQuery
 		
 		guard !query.isEmpty else {
 			
-			callback(.success(([], associatedHashtags: [])))
-			return
+			return Update.nothing
 		}
 		
 				
@@ -87,18 +95,11 @@ final class HashtagsContentsController : TimelineContentsController, Notificatio
 			sinceId: dataSource.latestTweetIdForHashtags(hashtags: hashtags)
 		)
 		
-		NSApp.twitterController.search(tweetWith: query, options: options) { [unowned self] result in
-			
-			switch result {
-				
-			case .success(let statuses):
-				HashtagsTimelineDidUpdateNotification(statuses: statuses).post()
-				callback(.success((statuses, hashtags)))
-				
-			case .failure(let error):
-				callback(.failure(error))
-			}
-		}
+		let statuses = try await NSApp.twitterController.search(tweetWith: query, options: options)
+
+		HashtagsTimelineDidUpdateNotification(statuses: statuses).post()
+		
+		return Update(statuses, associatedHashtags: hashtags)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

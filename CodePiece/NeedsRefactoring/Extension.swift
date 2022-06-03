@@ -14,25 +14,46 @@ import Ocean
 import Swim
 import Sky
 import Dispatch
+import OAuth2
 
 public var OutputStream = StandardOutputStream()
 public var ErrorStream = StandardErrorStream()
 public var NullStream = NullOutputStream()
 
-extension APIKit.SessionTaskError : CustomStringConvertible {
+extension NotificationObservable {
 	
-	public var description: String {
+	public func observe<T: NotificationProtocol & Sendable>(_ notification: T.Type, object: Any? = nil, queue: OperationQueue? = nil, using handler: @escaping @Sendable @MainActor (T) async -> Void) {
 		
-		switch self {
+		notificationHandlers.observe(notification, object: object, queue: queue) { notification in
 			
-		case .connectionError(let error):
-			return "\(error)"
+			Task { @MainActor in
+				
+				await handler(notification)
+			}
+		}
+	}
+}
+
+extension OAuth2 {
+	
+	func authorize(params: OAuth2StringDict? = nil) async throws -> OAuth2JSON {
+		
+		try await withCheckedThrowingContinuation { continuation in
 			
-		case .requestError(let error):
-			 return "\(error)"
-			
-		case .responseError(let error):
-			return "\(error)"
+			authorize(params: params) { json, error in
+
+				switch (json, error) {
+					
+				case (let json?, nil):
+					continuation.resume(returning: json)
+
+				case (_, let error?):
+					continuation.resume(throwing: error)
+					
+				case (nil, nil):
+					fatalError("Unexpected error in OAuth2.authorize(params:).")
+				}
+			}
 		}
 	}
 }
@@ -134,330 +155,22 @@ extension NSTableView {
 
 public func bundle<First,Second>(first: First) -> (Second) -> (First, Second) {
 
-	return { second in (first, second) }
+	{ second in (first, second) }
 }
 
 public func bundle<First,Second>(first: First, second: Second) -> (First, Second) {
 	
-	return (first, second)
+	(first, second)
 }
 
 func mask(mask:Int, reset values:Int...) -> Int {
 	
-	return values.reduce(mask) { $0 & ~$1 }
+	values.reduce(mask) { $0 & ~$1 }
 }
 
 func mask( mask: inout Int, reset values: Int...) {
 	
 	values.forEach { mask = mask & ~$0 }
-}
-
-protocol MaskOperatable {
-	
-	func masked(reset values:Self...) -> Self
-	func masked(reset values:[Self]) -> Self
-	func masked(set values:Self...) -> Self
-	func masked(set values:[Self]) -> Self
-	
-	mutating func modifyMask(reset values:Self...)
-	mutating func modifyMask(reset values:[Self])
-	mutating func modifyMask(set values:Self...)
-	mutating func modifyMask(set values:[Self])
-}
-
-extension MaskOperatable {
-	
-	func masked(reset values:Self...) -> Self {
-		
-		return masked(reset: values)
-	}
-	
-	func masked(set values:Self...) -> Self {
-		
-		return masked(set: values)
-	}
-	
-	mutating func modifyMask(reset values:Self...) {
-		
-		modifyMask(reset: values)
-	}
-	
-	mutating func modifyMask(reset values:[Self]) {
-		
-		for value in values {
-			
-			self = masked(reset: value)
-		}
-	}
-	
-	mutating func modifyMask(set values:Self...) {
-		
-		modifyMask(set: values)
-	}
-	
-	mutating func modifyMask(set values:[Self]) {
-		
-		for value in values {
-			
-			self = masked(set: value)
-		}
-	}
-}
-
-extension Int : MaskOperatable {
-	
-	func masked(reset values: [Int]) -> Int {
-		
-		return values.reduce(self) { $0 & ~$1 }
-	}
-	
-	func masked(set values: [Int]) -> Int {
-		
-		return values.reduce(self) { $0 | $1 }
-	}
-}
-
-public class Semaphore : RawRepresentable {
-
-	public enum WaitResult {
-	
-		case Success
-		case Timeout
-	}
-	
-	@available(*, unavailable, message: "Use `DispatchTime` instead.")
-	public struct Time {
-	
-//		public var rawValue: dispatch_time_t
-//
-//		public init() {
-//
-//			self.rawValue = DISPATCH_TIME_NOW
-//		}
-//
-//		public init(rawValue time:dispatch_time_t) {
-//
-//			self.rawValue = time
-//		}
-//
-//		public func delta(second time:Double) -> Time {
-//
-//			return Time(rawValue: dispatch_time(self.rawValue, Interval(second: time).rawValue))
-//		}
-//
-//		public func delta(millisecond time:Double) -> Time {
-//
-//			return Time(rawValue: dispatch_time(self.rawValue, Interval(millisecond: time).rawValue))
-//		}
-//
-//		public func delta(microsecond time:Double) -> Time {
-//
-//			return Time(rawValue: dispatch_time(self.rawValue, Interval(microsecond: time).rawValue))
-//		}
-//
-//		public func delta(nanosecond time:Int64) -> Time {
-//
-//			return Time(rawValue: dispatch_time(self.rawValue, Interval(nanosecond: time).rawValue))
-//		}
-	}
-	
-	public struct Interval {
-		
-		static var zero = Interval(nanosecond: 0)
-		
-		public var nanoseconds: Int
-		
-		public init(second value: Double) {
-			
-			nanoseconds = Int(value * Double(NSEC_PER_SEC))
-		}
-		
-		public init(millisecond value: Double) {
-			
-			nanoseconds = Int(value * Double(NSEC_PER_MSEC))
-		}
-		
-		public init(microsecond value:Double) {
-			
-			nanoseconds = Int(value * Double(NSEC_PER_USEC))
-		}
-		
-		public init(nanosecond value: Int) {
-			
-			nanoseconds = value
-		}
-		
-		public var second: Double {
-			
-			return Double(nanoseconds) / Double(NSEC_PER_SEC)
-		}
-		
-		public var millisecond: Double {
-			
-			return Double(nanoseconds) / Double(NSEC_PER_MSEC)
-		}
-		
-		public var microsecond: Double {
-			
-			return Double(nanoseconds) / Double(NSEC_PER_USEC)
-		}
-	}
-	
-	private var semaphore: DispatchSemaphore
-	
-	public init(value: Int = 1) {
-		
-		semaphore = DispatchSemaphore(value: value)
-	}
-	
-	public required init(rawValue rawSemaphore: DispatchSemaphore) {
-		
-		semaphore = rawSemaphore
-	}
-	
-	public var rawValue: DispatchSemaphore {
-		
-		return semaphore
-	}
-	
-	public func wait() {
-		
-		wait(timeout: .distantFuture)
-	}
-	
-	@discardableResult
-	public func wait(timeout: DispatchTime) -> WaitResult {
-		
-		switch semaphore.wait(timeout: timeout) {
-			
-		case .success:
-			return .Success
-			
-		case .timedOut:
-			return .Timeout
-		}
-	}
-	
-	public func signal() {
-		
-		semaphore.signal()
-	}
-	
-	public func execute(timeout: DispatchTime = .distantFuture, body:() throws ->Void) rethrows -> WaitResult {
-
-		switch wait(timeout: timeout) {
-			
-		case .Success:
-		
-			defer {
-			
-				signal()
-			}
-		
-			try body()
-		
-			return .Success
-			
-		case .Timeout:
-		
-			return .Timeout
-		}
-	}
-	
-	public func executeOnQueue(queue: DispatchQueue, timeout: DispatchTime = .distantFuture, body: @escaping (WaitResult) -> Void) {
-		
-		queue.async { [unowned self] in
-			
-			switch wait(timeout: timeout) {
-				
-			case .Success:
-				
-				defer {
-					
-					signal()
-				}
-				
-				body(.Success)
-				
-				
-			case .Timeout:
-			
-				body(.Timeout)
-			}
-		}
-	}
-}
-
-extension Semaphore.Interval {
-	
-	static func +(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Semaphore.Interval {
-		
-		return Semaphore.Interval(nanosecond: lhs.nanoseconds + rhs.nanoseconds)
-	}
-	
-	static func -(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Semaphore.Interval {
-		
-		return Semaphore.Interval(nanosecond: lhs.nanoseconds - rhs.nanoseconds)
-	}
-	
-	static func *(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Semaphore.Interval {
-		
-		return Semaphore.Interval(nanosecond: lhs.nanoseconds * rhs.nanoseconds)
-	}
-	
-	static func /(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Semaphore.Interval {
-		
-		return Semaphore.Interval(nanosecond: lhs.nanoseconds / rhs.nanoseconds)
-	}
-}
-
-extension Semaphore.Interval : Comparable {
-
-	public static func ==(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
-		
-		return lhs.nanoseconds == rhs.nanoseconds
-	}
-
-	public static func !=(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
-		
-		return lhs.nanoseconds != rhs.nanoseconds
-	}
-
-	public static func <(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
-		
-		return lhs.nanoseconds < rhs.nanoseconds
-	}
-
-	public static func >(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
-		
-		return lhs.nanoseconds > rhs.nanoseconds
-	}
-
-	public static func <=(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
-		
-		return lhs.nanoseconds <= rhs.nanoseconds
-	}
-
-	public static func >=(lhs: Semaphore.Interval, rhs: Semaphore.Interval) -> Bool {
-		
-		return lhs.nanoseconds >= rhs.nanoseconds
-	}
-}
-
-extension Semaphore.Interval : CustomStringConvertible {
-
-	public var description: String {
-		
-		return String(second)
-	}
-}
-
-extension DispatchTime {
-	
-	static func +(lhs: DispatchTime, rhs: Semaphore.Interval) -> DispatchTime {
-		
-		return lhs + DispatchTimeInterval.nanoseconds(rhs.nanoseconds)
-	}
 }
 
 public protocol UnsignedIntegerConvertible {
@@ -488,16 +201,16 @@ public protocol UnsignedIntegerConvertible {
 
 public final class Dispatch {
 
-	public static func makeTimer(interval: DispatchTimeInterval, queue: DispatchQueue, start:Bool, eventHandler: @escaping () -> Void) -> DispatchSourceTimer {
+	public static func makeTimer(interval: DispatchTimeInterval, queue: DispatchQueue? = nil, start: Bool, timerAction: @escaping () -> Void) -> DispatchSourceTimer {
 		
-		makeTimer(interval: interval, queue: queue, start: start, eventHandler: eventHandler, cancelHandler: nil)
+		makeTimer(interval: interval, queue: queue, start: start, timerAction: timerAction, cancelHandler: nil)
 	}
 	
-	public static func makeTimer(interval: DispatchTimeInterval, queue: DispatchQueue, start:Bool, eventHandler: @escaping () -> Void, cancelHandler: (() -> Void)?) -> DispatchSourceTimer {
-		
+	public static func makeTimer(interval: DispatchTimeInterval, queue: DispatchQueue? = nil, start: Bool, timerAction: @escaping () -> Void, cancelHandler: (() -> Void)?) -> DispatchSourceTimer {
+
 		let source = DispatchSource.makeTimerSource(flags: [], queue: queue)
 
-		source.setEventHandler(handler: eventHandler)
+		source.setEventHandler(handler: timerAction)
 		
 		if let cancelHandler = cancelHandler {
 			
@@ -523,400 +236,6 @@ extension DispatchSource {
 	}
 }
 
-internal enum MessageQueueHandler<Message : MessageType> {
-
-	typealias Queue = MessageQueue<Message>
-	typealias MessageHandler = Queue.MessageHandler
-	typealias MessageErrorHandler = Queue.MessageErrorHandler?
-	
-	case Closure(messageHandler: MessageHandler, errorHandler: MessageErrorHandler)
-	case Delegate(handler: _MessageQueueHandlerProtocol)
-	
-	func handlingMessage(message: Message, byQueue queue: Queue) throws {
-		
-		switch self {
-			
-		case let .Closure(messageHandler: handler, errorHandler: _):
-			try handler(message)
-			
-		case let .Delegate(handler):
-			try handler._messageQueue(queue: queue, handlingMessage: message)
-		}
-	}
-	
-	func handlingError(error: Error, byQueue queue: Queue) throws {
-		
-		switch self {
-
-		case let .Closure(messageHandler: _, errorHandler: handler):
-			try handler?(error)
-			
-		case let .Delegate(handler):
-			try handler._messageQueue(queue: queue, handlingError: error)
-		}
-	}
-}
-
-public protocol MessageQueueType : AnyObject {
-	
-	associatedtype Message : MessageType
-}
-
-public protocol MessageType {
-	
-	/// Call when the message send completely.
-	func messageQueued()
-	
-	/// Call when the message blocked.
-	func messageBlocked()
-}
-
-extension MessageType {
-	
-	/// Call when the message send completely.
-	public func messageQueued() {
-		
-	}
-	
-	/// Call when the message blocked.
-	public func messageBlocked() {
-		
-	}
-}
-
-public protocol PreActionMessageType : MessageType {
-	
-	func messagePreAction(queue: Queue<Self>) -> Continuous
-}
-
-public protocol MessageTypeIgnoreInQuickSuccession : PreActionMessageType {
-	
-	/// Returns true if the message may block in quick succession.
-	var mayBlockInQuickSuccession: Bool { get }
-	
-	func blockInQuickSuccession(lastMessage:Self) -> Bool
-}
-
-extension MessageTypeIgnoreInQuickSuccession {
-	
-	public var mayBlockInQuickSuccession:Bool {
-		
-		return true
-	}
-	
-	public func messagePreAction(queue: Queue<Self>) -> Continuous {
-		
-		guard mayBlockInQuickSuccession else {
-		
-			return .continue
-		}
-		
-        if let lastMessage = queue.back, blockInQuickSuccession(lastMessage: lastMessage) {
-			
-			return .abort
-		}
-		else {
-			
-			return .continue
-		}
-	}
-}
-
-extension MessageTypeIgnoreInQuickSuccession where Self : Equatable {
-	
-	public func blockInQuickSuccession(lastMessage: Self) -> Bool {
-		
-		return self == lastMessage
-	}
-}
-
-public class MessageQueue<M: MessageType> : MessageQueueType {
-	
-	public static var defaultProcessingInterval: Double {
-	
-		return 0.03
-	}
-	
-	public typealias Message = M
-	public typealias MessageErrorHandler = (Error) throws -> Void
-	public typealias MessageHandler = (Message) throws -> Void
-	public typealias MessageHandlerNoThrows = (Message) -> Void
-	
-	private(set) var identifier: String
-	
-	private var handler: MessageQueueHandler<Message>
-	private var messageQueue: Queue<Message>
-	
-	private var messageProcessingQueue: DispatchQueue
-	private var messageHandlerExecutionQueue: DispatchQueue
-	private var messageLoopSource: DispatchSourceTimer!
-	
-	public private(set) var isRunning: Bool
-
-	internal init(identifier:String, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueue.defaultProcessingInterval, handler:MessageQueueHandler<Message>) {
-		
-		self.identifier = identifier
-		self.handler = handler
-		
-		let queue = DispatchQueue(label: "\(identifier)")
-		
-		messageProcessingQueue = queue
-		messageHandlerExecutionQueue = executionQueue ?? queue
-		
-		messageQueue = []
-		isRunning = false
-
-		messageLoopSource = makeTimerSource(interval: Semaphore.Interval(second: processingInterval), start: true, timerAction: _messageLoopBody)
-	}
-
-	public convenience init(identifier:String, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueue.defaultProcessingInterval, messageHandler: @escaping MessageHandler, errorHandler: MessageErrorHandler?) {
-
-		let handler = MessageQueueHandler.Closure(messageHandler: messageHandler, errorHandler: errorHandler)
-		
-		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
-	}
-
-	public convenience init(identifier:String, executionQueue: DispatchQueue? = nil, processingInterval:Double = MessageQueue.defaultProcessingInterval, messageHandler: @escaping MessageHandlerNoThrows) {
-		
-		let handler = MessageQueueHandler.Closure(messageHandler: messageHandler, errorHandler: nil)
-		
-		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
-	}
-	
-	public convenience init<T:_MessageQueueHandlerProtocol>(identifier: String, handler: T, executionQueue: DispatchQueue? = nil, processingInterval: Double = MessageQueue.defaultProcessingInterval) {
-		
-		let handler = MessageQueueHandler<Message>.Delegate(handler: handler)
-		
-		self.init(identifier: identifier, executionQueue: executionQueue, processingInterval: processingInterval, handler: handler)
-	}
-	
-	deinit {
-		
-		messageLoopSource.cancel()
-		_stop()
-	}
-
-//	public func makeTimerSource(interval: Semaphore.Interval, start: Bool, timerAction: @escaping () -> Void) -> DispatchSourceTimer {
-//
-//		let source = DispatchSource.makeTimerSource(flags: [], queue: messageProcessingQueue)
-//
-//
-//		return DispatchSource.makeTimerSource(interval: .never, queue: messageProcessingQueue, start: start, eventHandler: timerAction, cancelHandler: nil)
-//	}
-
-	public func makeTimerSource(interval: Semaphore.Interval, start: Bool, cancelAction: (() -> Void)? = nil, timerAction: @escaping () -> Void) -> DispatchSourceTimer {
-
-		let source = DispatchSource.makeTimerSource(flags: [], queue: messageProcessingQueue)
-		
-		source.schedule(deadline: .now(), repeating: interval.second)
-		source.setEventHandler(handler: timerAction)
-		source.setCancelHandler(handler: cancelAction)
-		
-		if start {
-			
-			source.resume()
-			isRunning = true
-		}
-		
-		return source
-	}
-	
-	public func start() {
-	
-		send(.start)
-	}
-	
-	public func stop() {
-		
-		send(.stop)
-	}
-	
-	private func _start() {
-		
-		if !isRunning {
-
-			messageLoopSource.resume()
-			isRunning = true
-		}
-	}
-	
-	private func _stop() {
-		
-		if isRunning {
-
-			messageLoopSource.suspend()
-			isRunning = false
-		}
-	}
-	
-	public func send(_ message: MessageQueueControl) {
-		
-		executeOnProcessingQueue { [unowned self] in
-
-			switch message {
-				
-			case .start:
-				_start()
-				
-			case .stop:
-				_stop()
-			}
-		}
-	}
-	
-	public func send(message: Message, preAction: @escaping (Queue<Message>, Message) -> Continuous) {
-		
-		executeOnProcessingQueue { [unowned self] in
-
-			guard preAction(messageQueue, message) == .continue else {
-		
-				message.messageBlocked()
-				return
-			}
-			
-			messageQueue.enqueue(message)
-			message.messageQueued()
-		}
-	}
-}
-
-extension MessageQueue where M : MessageType {
-	
-	public func send(message: Message) {
-		
-		send(message: message) { (queue, message) -> Continuous in .continue }
-	}
-	
-//	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> DispatchSourceTimer {
-//
-//		return makeTimerSource(interval: interval, start: true) { [weak self] () -> Void in
-//
-//			self?.send(message: message)
-//		}
-//	}
-}
-
-extension MessageQueue where M : PreActionMessageType {
-	
-	public func send(_ message: Message) {
-		
-        send(message: message) { (queue, message) -> Continuous in
-			
-            return message.messagePreAction(queue: queue)
-		}
-	}
-	
-//	public func sendContinuously(message: Message, interval:Semaphore.Interval) -> DispatchSourceTimer {
-//
-//		return makeTimerSource(interval: interval, start: true) { [weak self] () -> Void in
-//
-//			self?.send(message: message)
-//		}
-//	}
-}
-
-/// If you want to manage queue handlers using Cocoa style,
-/// let conforms to the protocol, then the instance pass to MessageQueue's initializer.
-public protocol _MessageQueueHandlerProtocol {
-	
-	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingMessage:Queue.Message) throws
-	func _messageQueue<Queue:MessageQueueType>(queue:Queue, handlingError:Error) throws
-}
-
-public protocol MessageQueueHandlerProtocol : _MessageQueueHandlerProtocol {
-	
-	associatedtype Message : MessageType
-
-	func messageQueue(queue: MessageQueue<Message>, handlingMessage: Message) throws
-	func messageQueue(queue: MessageQueue<Message>, handlingError: Error) throws
-}
-
-extension MessageQueueHandlerProtocol {
-	
-	func _messageQueue<Queue>(queue: Queue, handlingMessage message: Queue.Message) throws where Queue: MessageQueueType {
-
-		let queue = queue as! MessageQueue<Message>
-		let message = message as! Message
-		
-        try messageQueue(queue: queue, handlingMessage: message)
-	}
-	
-	func _messageQueue<Queue>(queue: Queue, handlingError error: Error) throws where Queue: MessageQueueType {
-		
-		let queue = queue as! MessageQueue<Message>
-		
-        try messageQueue(queue: queue, handlingError: error)
-	}
-}
-
-public enum MessageQueueControl {
-	
-	case start
-	case stop
-}
-
-extension MessageQueue {
-
-	public func executeSyncOnProcessingQueue<R>(execute: ()->R) -> R {
-
-		return messageProcessingQueue.sync(execute: execute)
-	}
-
-	public func executeOnProcessingQueue(execute: @escaping () -> ()) {
-		
-		messageProcessingQueue.async(execute: execute)
-	}
-	
-	public func executeSyncOnHandlerExecutionQueue<R>(execute: ()->R) -> R {
-		
-		return messageHandlerExecutionQueue.sync(execute: execute)
-	}
-	
-	public func executeOnHandlerExecutionQueue(execute: @escaping () -> ()) {
-		
-		messageHandlerExecutionQueue.async(execute: execute)
-	}
-	
-	func _messageLoopBody() {
-	
-		guard isRunning else {
-			
-			return
-		}
-		
-		guard let message = messageQueue.dequeue() else {
-			
-			return
-		}
-		
-		let handler = self.handler
-		
-		executeOnHandlerExecutionQueue {
-
-			func executeErrorHandlerIfNeeds(error:Error) {
-				
-				do {
-					
-					try handler.handlingError(error: error, byQueue: self)
-				}
-				catch {
-					
-					fatalError("An error occurred during executing message handler. \(error)")
-				}
-			}
-			
-			do {
-				
-				try handler.handlingMessage(message: message, byQueue: self)
-			}
-			catch {
-
-				executeErrorHandlerIfNeeds(error: error)
-			}
-		}
-	}
-}
-
 public struct Repeater<Element> : Sequence {
 
 	private var generator: RepeaterGenerator<Element>
@@ -933,17 +252,17 @@ public struct Repeater<Element> : Sequence {
 	
 	public func makeIterator() -> RepeaterGenerator<Element> {
 		
-		return generator
+		generator
 	}
 	
 	public func zipLeftOf<S:Sequence>(s:S) -> Zip2Sequence<Repeater,S> {
 		
-		return zip(self, s)
+		zip(self, s)
 	}
 	
 	public func zipRightOf<S:Sequence>(s:S) -> Zip2Sequence<S,Repeater> {
 		
-		return zip(s, self)
+		zip(s, self)
 	}
 }
 
@@ -963,11 +282,12 @@ public struct RepeaterGenerator<Element> : IteratorProtocol {
 	
 	public func next() -> Element? {
 		
-		return _generate()
+		_generate()
 	}
 }
 
 
+@MainActor
 public protocol Selectable : AnyObject {
 	
 	var selected: Bool { get set }
@@ -977,22 +297,24 @@ extension Selectable {
 	
 	public static func selected(instance: Self) -> () -> Bool {
 		
-		return { instance.selected }
+		{ instance.selected }
 	}
 	
 	public static func setSelected(instance: Self) -> (Bool) -> Void {
 		
-		return { instance.selected = $0 }
+		{ instance.selected = $0 }
 	}
 }
 
 extension Sequence where Element : Selectable {
 
+	@MainActor
 	public mutating func selectAll() {
 		
 		forEach { $0.selected = true }
 	}
 	
+	@MainActor
 	public mutating func deselectAll() {
 		
 		forEach { $0.selected = false }
@@ -1001,9 +323,9 @@ extension Sequence where Element : Selectable {
 
 extension Sequence where Element : AnyObject {
 	
-	public var selectableElementsOnly:[Selectable] {
+	public var selectableElementsOnly: [Selectable] {
 		
-		return map { $0 as? Selectable }.compactMap { $0 }
+		compactMap { $0 as? Selectable }
 	}
 }
 
@@ -1096,7 +418,7 @@ public func handleError<STREAM: OutputStream>(expression: @autoclosure () throws
 /// Execute `exression`. If an error occurred, write the error to `stream`.
 public func handleError<R,STREAM: OutputStream>(expression: @autoclosure () throws -> R, to stream: inout STREAM) rethrows -> R? {
 	
-	return try handleError(expression: expression()) { (error: Error)->Void in
+	try handleError(expression: expression()) { (error: Error)->Void in
 		
 		stream.write("Error Handling: \(error)", maxLength: Int.max)
 	}
@@ -1225,45 +547,47 @@ public extension NSAppleEventDescriptor {
 	}
 }
 
+@MainActor
 public protocol AcknowledgementsIncluded {
 
-	var acknowledgementsName:String! { get }
-	var acknowledgementsBundle:Bundle? { get }
+	var acknowledgementsName: String! { get }
+	var acknowledgementsBundle: Bundle? { get }
 }
 
+@MainActor
 public protocol AcknowledgementsIncludedAndCustomizable : AcknowledgementsIncluded {
 	
-	var acknowledgementsName:String! { get set }
-	var acknowledgementsBundle:Bundle? { get set }
+	var acknowledgementsName: String! { get set }
+	var acknowledgementsBundle: Bundle? { get set }
 }
 
 extension AcknowledgementsIncluded {
 
-	var acknowledgementsBundle:Bundle? {
+	var acknowledgementsBundle: Bundle? {
 
-		return nil
+		nil
 	}
 	
-	var acknowledgements:Acknowledgements {
+	var acknowledgements: Acknowledgements {
 
-		return Acknowledgements(name: acknowledgementsName, bundle: acknowledgementsBundle)!
+		Acknowledgements(name: acknowledgementsName, bundle: acknowledgementsBundle)!
 	}
 }
 
 /// Acknowledgements for CocoaPods.
-public struct Acknowledgements {
+public struct Acknowledgements : Sendable {
 
-	public struct Pod {
+	public struct Pod : Sendable {
 	
-		public var name:String
-		public var license:String
+		public var name: String
+		public var license: String
 	}
 	
-	public var pods:[Pod]
-	public var headerText:String
-	public var footerText:String
+	public var pods: [Pod]
+	public var headerText: String
+	public var footerText: String
 	
-	public init?(name:String, bundle:Bundle?) {
+	public init?(name: String, bundle: Bundle?) {
 	
 		let bundle = bundle ?? Bundle.main
 		
@@ -1330,7 +654,7 @@ extension Acknowledgements : CustomStringConvertible {
 
 extension Bundle {
 	
-	public var appName:String? {
+	public var appName: String? {
 		
 		let info = infoDictionary!
 		
@@ -1347,7 +671,7 @@ extension Bundle {
 		return nil
 	}
 	
-	public var appVersion:(main:String?, build:String?) {
+	public var appVersion:(main: String?, build: String?) {
 		
 		let info = infoDictionary!
 
@@ -1357,12 +681,12 @@ extension Bundle {
 		return (main: main, build: build)
 	}
 	
-	public var appCopyright:String? {
+	public var appCopyright: String? {
 		
-		return infoDictionary!["NSHumanReadableCopyright"] as? String
+		infoDictionary!["NSHumanReadableCopyright"] as? String
 	}
 	
-	public var appVersionString:String {
+	public var appVersionString: String {
 		
 		let version = appVersion
 		
@@ -1379,7 +703,7 @@ extension Bundle {
 
 private func ~= (pattern: DispatchQueue.Attributes, value: DispatchQueue.Attributes) -> Bool {
 	
-	return pattern == value
+	pattern == value
 }
 
 //public struct Thread {
@@ -1437,6 +761,7 @@ private func ~= (pattern: DispatchQueue.Attributes, value: DispatchQueue.Attribu
 
 // MARK: - Capture
 
+@MainActor
 protocol Captureable {
 	
 	associatedtype CaptureTarget
@@ -1446,24 +771,26 @@ protocol Captureable {
 	func capture() -> NSImage
 }
 
+@MainActor
 extension Captureable where CaptureTarget == NSView {
 
 	func capture() -> NSImage {
 	
-        return CodePiece.capture(view: captureTarget)
+        CodePiece.capture(view: captureTarget)
 	}
 	
 	func capture(rect: NSRect) -> NSImage {
 		
-        return CodePiece.capture(view: captureTarget, rect: rect)
+        CodePiece.capture(view: captureTarget, rect: rect)
 	}
 }
 
+@MainActor
 extension Captureable where CaptureTarget == NSWindow {
 	
 	func capture() -> NSImage {
 		
-        return CodePiece.capture(window: captureTarget)
+        CodePiece.capture(window: captureTarget)
 	}
 }
 
@@ -1471,7 +798,7 @@ extension NSView : Captureable {
 	
 	public var captureTarget: NSView {
 		
-		return self
+		self
 	}
 }
 
@@ -1479,7 +806,7 @@ extension NSView : HavingScale {
 	
 	public var scale: CGScale {
 		
-		return (window?.backingScaleFactor).map(Scale.init) ?? .actual
+		(window?.backingScaleFactor).map(Scale.init) ?? .actual
 	}
 }
 
@@ -1487,7 +814,7 @@ extension NSWindow : Captureable {
 	
 	public var captureTarget: NSWindow {
 		
-		return self
+		self
 	}
 }
 
@@ -1495,56 +822,57 @@ extension NSWindow : HavingScale {
 	
 	public var scale: CGScale {
 		
-		return Scale(backingScaleFactor)
+		Scale(backingScaleFactor)
 	}
 }
 
-extension NSApplication : HavingScale {
+extension NSView {
 	
-	public var scale: CGScale {
+	var capturedImage: NSImage {
 		
-		return keyWindow?.scale ?? .actual
+		capturedImage(inRect: bounds)
+	}
+	
+	func capturedImage(inRect rect: NSRect) -> NSImage {
+		
+		guard rect != .zero else {
+
+			fatalError("Bounds is Zero.")
+		}
+
+		let viewRect = bounds
+		
+		// Retina が混在した環境ではどの画面でも、サイズ情報はそのまま、ピクセルが倍解像度で得られるようです。
+		// imageRep や、ここから生成した NSImage に対する操作は scale を加味しない座標系で問題ありませんが、
+		// CGImage に対する処理は、スケールを加味した座標指定が必要になるようです。
+		let imageRep = bitmapImageRepForCachingDisplay(in: viewRect)!
+
+		cacheDisplay(in: viewRect, to: imageRep)
+		
+		let cgImage = imageRep.cgImage!
+		let cgImageScale = cgImage.widthScale(of: viewRect.size)
+		let scaledRect = rect.scaled(by: cgImageScale).rounded()
+		
+		let clippedImage = cgImage.cropping(to: scaledRect)!
+
+		let image = NSImage(cgImage: clippedImage, size: scaledRect.size)
+
+		// TODO: 画像の見やすさを考えて余白を作れたら良さそう。
+		let horizontal = 0 // Int(max(image.size.height - image.size.width, 0) / 2.0)
+		let vertical = 0 // Int(max(image.size.width - image.size.height, 0) / 2.0)
+		
+		let margin = Margin(vertical: vertical, horizontal: horizontal)
+		let newImage = createImage(image: image, margin: margin)
+
+		return newImage
 	}
 }
 
-func capture(view: NSView) -> NSImage {
+@available(*, renamed: "NSView.capturedImage")
+func capture(view: NSView) -> NSImage { fatalError() }
 
-    return capture(view: view, rect: view.bounds)
-}
-
-func capture(view: NSView, rect: NSRect) -> NSImage {
-	
-    guard rect != .zero else {
-
-		fatalError("Bounds is Zero.")
-	}
-
-	let viewRect = view.bounds
-	
-	// Retina が混在した環境ではどの画面でも、サイズ情報はそのまま、ピクセルが倍解像度で得られるようです。
-	// imageRep や、ここから生成した NSImage に対する操作は scale を加味しない座標系で問題ありませんが、
-	// CGImage に対する処理は、スケールを加味した座標指定が必要になるようです。
-    let imageRep = view.bitmapImageRepForCachingDisplay(in: viewRect)!
-
-    view.cacheDisplay(in: viewRect, to: imageRep)
-	
-    let cgImage = imageRep.cgImage!
-    let cgImageScale = cgImage.widthScale(of: viewRect.size)
-    let scaledRect = rect.scaled(by: cgImageScale).rounded()
-	
-	let clippedImage = cgImage.cropping(to: scaledRect)!
-
-    let image = NSImage(cgImage: clippedImage, size: scaledRect.size)
-
-	// TODO: 画像の見やすさを考えて余白を作れたら良さそう。
-	let horizontal = 0 // Int(max(image.size.height - image.size.width, 0) / 2.0)
-	let vertical = 0 // Int(max(image.size.width - image.size.height, 0) / 2.0)
-	
-	let margin = Margin(vertical: vertical, horizontal: horizontal)
-    let newImage = createImage(image: image, margin: margin)
-
-	return newImage
-}
+@available(*, renamed: "NSView.capturedImage(inRect:)")
+func capture(view: NSView, rect: NSRect) -> NSImage { fatalError() }
 
 
 //extension Margin where Type : IntegerArithmeticType {
@@ -1600,15 +928,21 @@ public func createImage(image: NSImage, margin: IntMargin) -> NSImage {
 	return newImage
 }
 
-func capture(window: NSWindow) -> NSImage {
-	
-	let windowId = CGWindowID(window.windowNumber)
+extension NSWindow {
 
-    let imageRef = CGWindowListCreateImage(.zero, .optionIncludingWindow, windowId, [])
-    let imageData = NSImage(cgImage: imageRef!, size: window.contentView!.bounds.size)
-	
-	return imageData
+	var capturedImage: NSImage {
+		
+		let windowId = CGWindowID(windowNumber)
+
+		let imageRef = CGWindowListCreateImage(.zero, .optionIncludingWindow, windowId, [])
+		let imageData = NSImage(cgImage: imageRef!, size: contentView!.bounds.size)
+		
+		return imageData
+	}
 }
+
+@available(*, renamed: "NSWindow.capturedImage")
+func capture(window: NSWindow) -> NSImage { fatalError() }
 
 // MARK: - String
 
@@ -1698,7 +1032,7 @@ extension NSRegularExpression {
 		
 		try replaceAllMatches(onto: &text) { text, _, _ in
 
-			return try replacement(text)
+			try replacement(text)
 		}
 	}
 	

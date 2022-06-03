@@ -6,11 +6,11 @@
 //  Copyright © 2020 Tomohiro Kumagai. All rights reserved.
 //
 
-import Foundation
+@preconcurrency import struct Foundation.URL
 
 extension API {
 
-	public struct PostOption {
+	public struct PostOption : Sendable {
 		
 		public var inReplyTo: StatusId?
 		public var mediaIDs: [MediaId]

@@ -9,11 +9,12 @@
 import ESGists
 import ESTwitter
 
-public struct PostData {
+public struct PostData : Sendable {
 	
 	public var code: Code
 	public var description: String
 	public var language: ESGists.Language
+	@available(*, message: "HashtagSet に置き換えられるかもしれません。")
 	public var hashtags: [Hashtag]
 	public var usePublicGists: Bool
 	public var replyTo: ESTwitter.Status?

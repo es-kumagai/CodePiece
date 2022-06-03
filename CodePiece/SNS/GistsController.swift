@@ -10,50 +10,46 @@ import Cocoa
 import ESGists
 import ESTwitter
 
-final class GistsController : PostController, AlertDisplayable {
+@objcMembers
+@MainActor
+final class GistsController : NSObject, AlertDisplayable {
 
 	let filename = "CodePiece"
 
 	var canPost: Bool {
 	
-		return NSApp.settings.account.authorizationState.isValid
+		NSApp.settings.account.authorizationState.isValid
 	}
 	
-	func post(container: PostDataContainer, completed: @escaping (SNSController.PostResult)->Void) throws {
+	func post(container: PostDataContainer) async throws {
 
 		guard let authorization = NSApp.settings.account.authorization else {
 			
 			throw SNSController.AuthenticationError.notAuthorized(service: .gist)
 		}
 
-		let filename = container.filenameForGists
-		let description = container.descriptionForGists()
-		let publicGist = container.data.usePublicGists
-
-		let file = GistFile(name: filename, content: container.data.code.description)
-
-		let request = GitHubAPI.Gists.CreateGist(authorization: authorization, files: [file], description: description, publicGist: publicGist)
+		async let filename = container.filenameForGists
+		async let description = container.descriptionForGists()
+		async let publicGist = container.data.usePublicGists
 		
-		NSLog("Public=\(publicGist), File=\(filename), description=\(description)")
+		let file = await GistFile(name: filename, content: String(container.data.code))
+		let request = await GitHubAPI.Gists.CreateGist(authorization: authorization, files: [file], description: description, publicGist: publicGist)
+		
+		await NSLog("Public=\(publicGist), File=\(filename), description=\(description)")
+
 		NSLog("Try to send request: base url = \(request.baseURL), path = \(request.path).")
 		
-		GitHubAPI.send(request) { response in
+		do {
+			let response = try await GitHubAPI.send(request)
+			let gist = response.gist
 			
-			switch response {
-				
-			case .success(let created):
-				
-				let gist = created.gist
-				
-				container.postedToGist(gist: gist)
-				
-				NSLog("A Gist posted successfully. \(gist)")
-				completed(.success(container))
-
-			case .failure(let error):
-
-				completed(.failure(.description("Failed to post a gist. \(error)", state: .postGistDirectly)))
-			}
+			await container.postedToGist(gist: gist)
+			
+			NSLog("A Gist posted successfully. \(gist)")
+		}
+		catch {
+			
+			throw SNSController.PostError.description("Failed to post a gist. \(error)", state: .postGistDirectly)
 		}
 	}
 }

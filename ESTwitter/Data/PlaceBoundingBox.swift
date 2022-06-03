@@ -8,7 +8,7 @@
 
 extension Place {
 
-	public struct BoundingBox : Decodable {
+	public struct BoundingBox : Decodable, Sendable {
 	
 		var coordinates: [Polygon]
 		var type: String

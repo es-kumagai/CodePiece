@@ -9,15 +9,16 @@
 import Cocoa
 
 @objcMembers
+@MainActor
 final class AboutViewController: NSViewController {
 
 	public static var acknowledgementsStoryboardName = "AcknowledgementsViewController"
 	
-	@IBOutlet public weak var appIconImageView:NSImageView?
-	@IBOutlet public weak var appNameLabel:NSTextField?
-	@IBOutlet public weak var appVersionLabel:NSTextField?
-	@IBOutlet public weak var appCopyrightLabel:NSTextField?
-	@IBOutlet public weak var showAcknowledgementsButton:NSButton?
+	@IBOutlet public weak var appIconImageView: NSImageView?
+	@IBOutlet public weak var appNameLabel: NSTextField?
+	@IBOutlet public weak var appVersionLabel: NSTextField?
+	@IBOutlet public weak var appCopyrightLabel: NSTextField?
+	@IBOutlet public weak var showAcknowledgementsButton: NSButton?
 	
 	@IBAction public func pushShowAcknowledgementsButton(_ sender:AnyObject?) {
 	

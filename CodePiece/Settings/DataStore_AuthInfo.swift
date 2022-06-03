@@ -9,14 +9,14 @@
 import Foundation
 import ESGists
 
-private struct ArchiveKey {
+private struct ArchiveKey : Sendable {
 	
 	static let ID = "ID"
 	static let Username = "Username"
 	static let Token = "Token"
 }
 
-struct AuthInfo : Codable {
+struct AuthInfo : Codable, Sendable {
 	
 	var id: ID?
 	var username: String?
@@ -32,10 +32,9 @@ struct AuthInfo : Codable {
 		self.id = id
 		self.username = username
 		self.token = token
-
 	}
 	
-	var noData:Bool {
+	var noData: Bool {
 		
 		if case (.none, .none, .none) = (id, username, token) {
 			

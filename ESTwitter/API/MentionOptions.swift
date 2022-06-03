@@ -8,7 +8,7 @@
 
 extension API {
 	
-	public struct MentionOptions {
+	public struct MentionOptions : Sendable {
 		
 		var sinceId: String?
 		var maxId: String?

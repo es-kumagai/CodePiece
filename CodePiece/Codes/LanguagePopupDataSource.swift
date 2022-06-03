@@ -12,6 +12,7 @@ import Ocean
 import Swim
 
 @objcMembers
+@MainActor
 final class LanguagePopupDataSource : NSObject {
 	
 	let defaultLanguage = Language.swift
@@ -22,6 +23,7 @@ final class LanguagePopupDataSource : NSObject {
 
 			popupButton.addItem(withTitle: defaultLanguage.description)
 			
+			#warning("sorted に変更すると適切。")
 			for language in languages.sort() {
 
 				let menu = applyingExpression(to: NSMenuItem(title: language.description, action: #selector(LanguagePopupDataSource.popupSelected(_:)), keyEquivalent: "")) {
@@ -34,37 +36,37 @@ final class LanguagePopupDataSource : NSObject {
 		}
 	}
 	
-	let languages: Set<Language> = { () -> Set<Language> in
+	private(set) var languages: Set<Language>!
+	
+	@MainActor
+	override func awakeFromNib() {
 		
-		let populars = Set(PopularLanguage.allCases.map(Language.init))
-		let others = [ .text, .kotlin ] as Set<Language>
+		super.awakeFromNib()
+
+		let popularLanguages = PopularLanguage.allCases.map(Language.init)
+		let popularLanguageSet = LanguageSet(popularLanguages)
+		let others: LanguageSet = [ .text, .kotlin ]
 		
-		return populars.union(others)
-	}()
+		languages = popularLanguageSet.union(others)
+	}
 	
 	func selectLanguage(_ language: Language) {
 	
 		popupButton.selectItem(withTitle: language.description)
-		popupButton.selectedItem.executeIfExists(popupSelected)
+		popupButton.selectedItem.executeIfExists { popupSelected($0) }
 	}
 	
-	@objc func popupSelected(_ item: NSMenuItem) {
+	func popupSelected(_ item: NSMenuItem) {
 		
 		popupButton.title = item.title
-		
 		Language(displayText: item.title).map(LanguageSelectionChanged.init)!.post()
 	}
 }
 
 extension LanguagePopupDataSource {
 	
-	final class LanguageSelectionChanged : NotificationProtocol {
+	struct LanguageSelectionChanged : NotificationProtocol {
 		
-		var language:Language
-		
-		init(language: Language) {
-			
-			self.language = language
-		}
+		let language: Language
 	}
 }

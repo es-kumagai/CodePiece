@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 protocol TwitterTextType {
 	
 	var twitterText: String { get }

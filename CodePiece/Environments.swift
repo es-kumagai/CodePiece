@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 struct Environment {
 	
 	var debugOnXcodeServer: Bool

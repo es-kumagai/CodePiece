@@ -6,9 +6,9 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import AppKit
+@preconcurrency import class AppKit.NSColor
 
-public struct Color : RawRepresentable {
+public struct Color : RawRepresentable, Sendable {
 	
 	public var rawValue: NSColor
 	

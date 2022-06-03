@@ -9,6 +9,7 @@
 import Foundation
 import CodePieceCore
 
+@MainActor
 protocol CodeTextType {
 	
 	var code: Code { get }
@@ -17,9 +18,9 @@ protocol CodeTextType {
 }
 
 extension CodeTextType {
-	
+
 	var hasCode: Bool {
 		
-		return !code.isEmpty
+		!code.isEmpty
 	}
 }

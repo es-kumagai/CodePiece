@@ -11,6 +11,7 @@ import ESTwitter
 
 
 @objcMembers
+@MainActor
 final class TimelineStatusView: NSView {
 
 	@IBOutlet var statusLabel: NSTextField? {
@@ -26,6 +27,7 @@ final class TimelineStatusView: NSView {
 		
 		case ok(String)
 		case error(GetStatusesError)
+		case unexpected(Error)
 	}
 	
 	var state: State = .ok("") {
@@ -59,6 +61,9 @@ final class TimelineStatusView: NSView {
 			
 		case .error(let error):
 			return "\(error)"
+			
+		case .unexpected(let error):
+			return "Unexpected: \(error)"
 		}
 	}
 	
@@ -74,7 +79,7 @@ final class TimelineStatusView: NSView {
 		case .ok:
             return .statusOkTextColor
 			
-		case .error:
+		case .error, .unexpected:
 			return .statusErrorTextColor
 		}
 	}
@@ -86,7 +91,7 @@ final class TimelineStatusView: NSView {
 		case .ok:
             return .statusOkBackgroundColor
 			
-		case .error:
+		case .error, .unexpected:
 			return .statusErrorBackgroundColor
 		}
 	}

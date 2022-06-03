@@ -9,12 +9,16 @@
 import Cocoa
 import CodePieceCore
 
+#warning("このファイルとは関係ないが、UI 関係以外で @MainActor が多すぎるので要調査")
+
+
 enum PreferencesWindowModalResult : Int {
 
 	case Close = 0
 }
 
 @objcMembers
+@MainActor
 final class PreferencesWindowController: NSWindowController {
 
 	enum TwitterPreferenceType {
@@ -37,14 +41,14 @@ final class PreferencesWindowController: NSWindowController {
 	
 	private var twitterPreferenceType: TwitterPreferenceType = .OAuth
 	
-	@IBOutlet var toolbar:NSToolbar!
+	@IBOutlet var toolbar: NSToolbar!
 	
-	@IBAction func showGitHubPreference(_ sender:NSToolbarItem?) {
+	@IBAction func showGitHubPreference(_ sender: NSToolbarItem?) {
 
 		contentViewController = try! Storyboard.gistPreferenceView.instantiateController()
 	}
 	
-	@IBAction func showTwitterPreference(_ sender:NSToolbarItem?) {
+	@IBAction func showTwitterPreference(_ sender: NSToolbarItem?) {
 		
 		contentViewController = try! Storyboard.twitterPreferenceView.instantiateController(withIdentifier: twitterPreferenceType.storyboardID)
 	}
@@ -52,6 +56,10 @@ final class PreferencesWindowController: NSWindowController {
     override func windowDidLoad() {
 
 		super.windowDidLoad()
+
+		// runModal だと認証時の URL Scheme アクセスを受信できなくなるため Floating で対応します。
+		window!.hidesOnDeactivate = true
+		window!.level = .floating
 
 		contentViewController = try! Storyboard.gistPreferenceView.instantiateController()
     }
@@ -79,21 +87,23 @@ extension PreferencesWindowController {
 
 		super.showWindow(sender)
 //		NSApp.runModal(for: window!)
+	}
+	
+	override func close() {
 		
-		// runModal だと認証時の URL Scheme アクセスを受信できなくなるため Floating で対応します。
-		if let window = window {
-
-			window.hidesOnDeactivate = true
-			window.level = .floating
-		}
+//		NSApp.stopModal(withCode: .OK)
+		super.close()
 	}
 }
 
 extension PreferencesWindowController : NSWindowDelegate {
 	
-	func windowWillClose(_ notification: Notification) {
-		
-//		NSApp.stopModal(withCode: .OK)
+	nonisolated func windowWillClose(_ notification: Notification) {
+
+//		Task { @MainActor in
+//
+//			NSApp.stopModal(withCode: .OK)
+//		}
 //		NSApp.twitterController.verifyCredentialsIfNeed { result in
 //			
 //			if case .failure(let error) = result {

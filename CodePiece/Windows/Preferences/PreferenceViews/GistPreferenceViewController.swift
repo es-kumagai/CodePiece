@@ -13,9 +13,10 @@ import ESTwitter
 import ESGists
 
 @objcMembers
+@MainActor
 final class GistPreferenceViewController: NSViewController, NotificationObservable {
 
-	var notificationHandlers = Notification.Handlers()
+	let notificationHandlers = Notification.Handlers()
 	
 	private var authenticatingHUD = ProgressHUD(message: "Please authenticate with the launched browser.\n", useActivityIndicator: true)
 	private var removeAuthenticatingHUD = ProgressHUD(message: "Authenticating...", useActivityIndicator: true)
@@ -29,47 +30,61 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 	
 	@IBAction func doAuthentication(_ sender:NSButton) {
 	
-		authenticatingHUD.show()
-		
-		Authorization.authorizationWithGist { [unowned self] result in
-			
-			authenticatingHUD.hide()
-			
-			switch result {
+		Task {
+
+			authenticatingHUD.show()
+
+			defer {
 				
-			case .Created:
+				Task { @MainActor in
+					authenticatingHUD.hide()
+				}
+			}
+
+			do {
+
+				try await Authorization.authorizationWithGist()
+				
+				
 				NSLog("%@", "GitHub authentication succeeded.")
+			}
+			catch {
 				
-			case .Failed(let error):
 				NSLog("Failed to authentication. %@", "\(error)")
 				
-//			case .PinRequired:
-//				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")
+				//			case .PinRequired:
+				//				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")
 			}
 		}
 	}
 	
 	@IBAction func doReset(_ sender:NSButton) {
 		
-		guard let id = NSApp.settings.account.id else {
-			
-			NSApp.settings.resetGistAccount(saveFinally: true)
-			return
-		}
-		
-		removeAuthenticatingHUD.show()
-		
-		Authorization.resetAuthorizationOfGist(id: id) { [unowned self] result in
-			
-			removeAuthenticatingHUD.hide()
-			
-			switch result {
-				
-			case .success:
-				NSLog("Reset successfully. Please authenticate before you post to Gist again.")
-				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
+		Task {
 
-			case .failure(let error):
+			guard let id = NSApp.settings.account.id else {
+				
+				NSApp.settings.resetGistAccount(saveFinally: true)
+				return
+			}
+			
+			removeAuthenticatingHUD.show()
+			
+			defer {
+				Task { @MainActor in
+					removeAuthenticatingHUD.hide()
+				}
+			}
+			
+			do {
+
+				try await Authorization.resetAuthorizationOfGist(id: id)
+
+				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
+				NSLog("Reset successfully. Please authenticate before you post to Gist again.")
+			}
+			catch {
+				
 				showWarningAlert(withTitle: "Failed to reset authentication", message: "Could't reset the current authentication information correctly. Reset authentication information force. (\(error))")
 			}
 		}

@@ -8,15 +8,19 @@
 
 import Cocoa
 import ESTwitter
+import Ocean
 
-class TimelineContentsController : NSObject {
+@MainActor
+class TimelineContentsController : NSObject, NotificationObservable {
 	
-	typealias UpdateResult = Result<([Status], associatedHashtags: HashtagSet), GetStatusesError>
+	@available(*, deprecated, message: "並行処理を導入したらいらなくなる型エイリアス")
+	typealias UpdateResult = Result<(Statuses, associatedHashtags: HashtagSet), GetStatusesError>
 	
-	var notificationHandlers = Notification.Handlers()
+	let notificationHandlers = Notification.Handlers()
 
 	@IBOutlet var tableView: TimelineTableView? {
 		
+		@MainActor
 		didSet {
 			
 			tableView?.dataSource = tableViewDataSource
@@ -24,6 +28,7 @@ class TimelineContentsController : NSObject {
 	}
 	
 	@IBOutlet weak var delegate: TimelineContentsControllerDelegate?
+	
 	weak var owner: TimelineViewController?
 	
 	var items = Array<TimelineTableItem>()
@@ -34,7 +39,11 @@ class TimelineContentsController : NSObject {
 	}
 	
 	func activate() {}
-	func updateContents(callback: @escaping (UpdateResult) -> Void) {}
+	
+	func updateContents() async throws -> Update {
+		
+		throw GetStatusesError.unexpectedWithDescription("Not implemented.")
+	}
 	
 	func deactivate() {
 		
@@ -42,8 +51,11 @@ class TimelineContentsController : NSObject {
 	}
 	
 	deinit {
-		
-		deactivate()
+
+		Task { @MainActor in
+
+			deactivate()
+		}
 	}
 
 //	var canReplyRequest: Bool {
@@ -142,4 +154,25 @@ class TimelineContentsController : NSObject {
 		
 		fatalError("Not implemented yet.")
 	}
+}
+
+extension TimelineContentsController {
+	
+	@available(*, message: "名前が、更新結果を返すことが分かりづらいので変更する必要があります。")
+	struct Update : Sendable {
+		
+		var statuses: Statuses
+		var associatedHashtags: HashtagSet
+		
+		init(_ statuses: Statuses, associatedHashtags hashtags: HashtagSet = []) {
+			
+			self.statuses = statuses
+			self.associatedHashtags = hashtags
+		}
+	}
+}
+
+extension TimelineContentsController.Update {
+	
+	static var nothing = Self([])
 }

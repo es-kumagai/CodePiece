@@ -12,24 +12,29 @@ import CodePieceCore
 
 private let jsonDecoder = JSONDecoder()
 
-enum PostDataError : Error {
-	
-	case TwitterRawObjectsParseError(rawObjects: [String : Any])
-}
+//enum PostDataError : Error {
+//	
+//	case TwitterRawObjectsParseError(rawObjects: [String : Any])
+//}
 
-final class PostDataContainer {
+actor PostDataContainer {
 
 	var data: PostData
 	
 	private(set) var stage = PostStage.initialized
 	private(set) var gistsState = GistsState()
 	private(set) var twitterState = TwitterState()
+	
+	@available(*, message: "Concurrency に対応したら、エラーを状態としてもたなくても throwing で済むかもしれません。")
 	private(set) var errors: [SNSController.PostError] = []
 	
 	init(_ data: PostData) {
 		
 		self.data = data
 	}
+}
+
+extension PostDataContainer {
 
 	struct TwitterState {
 		
@@ -164,7 +169,7 @@ extension PostDataContainer {
 		
 		if withAppTag {
 			
-			let appTag = CodePieceApp.hashtag
+			let appTag = CodePieceApplication.hashtag
 			
 			hashtags.removeAll { $0 == appTag }
 			hashtags.append(appTag)

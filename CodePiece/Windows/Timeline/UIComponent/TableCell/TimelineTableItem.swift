@@ -22,14 +22,15 @@ extension NSUserInterfaceItemIdentifier {
 	static var timeLineCell = NSUserInterfaceItemIdentifier("TimelineCell")
 }
 
+@MainActor
 protocol TimelineTableCellType : Selectable {
 	
 	static var userInterfaceItemIdentifier: NSUserInterfaceItemIdentifier { get }
-	static func estimateCellHeightForItem(item:TimelineTableItem, tableView:NSTableView) -> CGFloat
+	static func estimateCellHeightForItem(item: TimelineTableItem, tableView:NSTableView) -> CGFloat
 
 	func toTimelineView() -> NSView
 	
-	static func makeCellWithItem(item:TimelineTableItem, tableView: NSTableView, owner: AnyObject?) -> NSTableCellView
+	static func makeCellWithItem(item: TimelineTableItem, tableView: NSTableView, owner: AnyObject?) -> NSTableCellView
 }
 
 extension TimelineTableCellType {
@@ -45,7 +46,7 @@ extension TimelineTableCellType {
 	}
 }
 
-struct TimelineTweetItem : TimelineTableItem {
+struct TimelineTweetItem : TimelineTableItem, Sendable {
 	
 	var status: Status
 	var hashtags: HashtagSet

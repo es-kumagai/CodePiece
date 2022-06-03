@@ -13,6 +13,7 @@ public enum AuthorizationError : Error {
 	case apiError(APIError)
 	case notAuthorized(message: String)
 	case failedToGetAccessToken(URLResponse)
+	case unknownError(Error)
 }
 
 extension AuthorizationError : CustomStringConvertible {
@@ -29,6 +30,9 @@ extension AuthorizationError : CustomStringConvertible {
 			
 		case .failedToGetAccessToken(let response):
 			return "Failed to get an access token. \(response.description)"
+			
+		case .unknownError(let error):
+			return "Unknown error: \(error.localizedDescription)"
 		}
 	}
 }

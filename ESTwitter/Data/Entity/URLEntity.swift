@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct URLEntity : HasIndices {
+public struct URLEntity : HasIndices, Sendable {
 	
 	public var url: TwitterURL
 	public var indices: Indices

@@ -12,9 +12,10 @@ import Ocean
 private let none = "----"
 
 @objcMembers
+@MainActor
 final class MainStatusViewController: NSViewController, NotificationObservable {
 
-	var notificationHandlers = Notification.Handlers()
+	let notificationHandlers = Notification.Handlers()
 	
 	@IBOutlet var gistAccountNameTextField:NSTextField!
 	@IBOutlet var twitterAccountNameTextField:NSTextField!

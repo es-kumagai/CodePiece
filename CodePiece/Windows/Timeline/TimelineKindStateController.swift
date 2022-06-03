@@ -25,9 +25,10 @@ enum TimelineState {
 	case neutral
 }
 
+@MainActor
 final class TimelineKindStateController : NSObject, NotificationObservable {
 
-	var notificationHandlers = Notification.Handlers()
+	let notificationHandlers = Notification.Handlers()
 
 	var tabInformations: Set<TabInformation> = [] {
 		

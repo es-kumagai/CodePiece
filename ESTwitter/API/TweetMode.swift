@@ -12,7 +12,7 @@ internal typealias SwifterTweetMode = TweetMode
 
 extension API {
 
-	public enum TweetMode {
+	public enum TweetMode : Sendable {
     
 		case `default`
 		case extended

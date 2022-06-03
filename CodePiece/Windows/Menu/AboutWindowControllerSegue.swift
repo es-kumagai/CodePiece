@@ -10,8 +10,10 @@ import Cocoa
 import Swim
 
 @objcMembers
+@MainActor
 final class AboutWindowControllerSegue : NSStoryboardSegue {
 	
+	@MainActor
 	override func perform() {
 		
 		applyingExpression(to: destinationController as! AboutWindowController) {

@@ -10,7 +10,7 @@ import Cocoa
 import Swim
 import ESTwitter
 
-struct TimelineHashtagTableCellItem{
+struct TimelineHashtagTableCellItem {
 
 	var previousHashtags: HashtagSet?
 	var currentHashtags: HashtagSet
@@ -37,6 +37,7 @@ extension TimelineHashtagTableCellItem : TimelineTableItem  {
 	
 @IBDesignable
 @objcMembers
+@MainActor
 final class TimelineHashtagTableCellView: NSTableCellView {
 
 	var item = TimelineHashtagTableCellItem(previousHashtags: nil, currentHashtags: []) {

@@ -11,9 +11,11 @@ import Ocean
 import ESTwitter
 import CodePieceCore
 
-@objc class TimelineTabViewController : NSViewController, NSTabViewDelegate, NotificationObservable {
+@MainActor
+@objcMembers
+class TimelineTabViewController : NSViewController, NSTabViewDelegate, NotificationObservable {
 	
-	var notificationHandlers = Notification.Handlers()
+	let notificationHandlers = Notification.Handlers()
 	var timelineViewControllers: [TimelineViewController] = []
 
 	@IBOutlet var tabView: NSTabView!
@@ -58,7 +60,7 @@ import CodePieceCore
 		return currentSelectedCells.count > 0
 	}
 	
-	private func prepare() {
+	private func prepare() async {
 		
 		timelineKindStateController.prepare()
 
@@ -69,7 +71,9 @@ import CodePieceCore
 			addTimelineViewController(with: information.controller, autoUpdateInterval: information.autoUpdateInterval)
 		}
 		
-		timelineViewControllers.activate()
+//		Task {
+			await timelineViewControllers.activate()
+//		}
 	}
 	
 	override func viewDidLoad() {
@@ -78,19 +82,24 @@ import CodePieceCore
 
 		DebugTime.print("Timeline Tab View Controller did load.")
 
-		observe(CodePieceMainViewDidLoadNotification.self) { [unowned self] notification in
+		observe(CodePieceMainViewDidLoadNotification.self) { @MainActor
+			[unowned self] notification in
 
-			prepare()
+			await prepare()
 		}
 
 		observe(notificationNamed: NSWorkspace.didWakeNotification) { [unowned self] notification in
-			
-			timelineViewControllers.activate()
+
+			Task {
+				await timelineViewControllers.activate()
+			}
 		}
 		
 		observe(notificationNamed: NSWorkspace.willSleepNotification) { [unowned self] notification in
 			
-			timelineViewControllers.deactivate()
+			Task {
+				await timelineViewControllers.deactivate()
+			}
 		}
 	}
 	
@@ -104,20 +113,23 @@ import CodePieceCore
 
 extension TimelineTabViewController : TimelineKindStateDelegate {
 	
-	@objc func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKind) {
+	nonisolated func timelineKindStateChanged(_ sender: TimelineKindStateController, kind: TimelineKind) {
 		
-		NSLog("Change timeline tag to '\(kind)'.")
-		let foundTarget = timelineViewControllers.enumerated().first { offset, controller in
+		Task { @MainActor in
+
+			NSLog("Change timeline tag to '\(kind)'.")
+			let foundTarget = timelineViewControllers.enumerated().first { offset, controller in
+				
+				controller.contentsKind == kind
+			}
 			
-			controller.contentsKind == kind
-		}
-		
-		guard let target = foundTarget else {
+			guard let target = foundTarget else {
+				
+				fatalError("INTERNAL ERROR: Specified Timeline View Controller that is kind of `\(kind)` is not found.")
+			}
 			
-			fatalError("INTERNAL ERROR: Specified Timeline View Controller that is kind of `\(kind)` is not found.")
+			tabView.selectTabViewItem(at: target.offset)
 		}
-		
-		tabView.selectTabViewItem(at: target.offset)
 	}
 }
 

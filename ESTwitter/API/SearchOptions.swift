@@ -8,7 +8,7 @@
 
 extension API {
 	
-	public struct SearchOptions {
+	public struct SearchOptions : Sendable {
 		
 		var geocode: String?
 		var language: String?

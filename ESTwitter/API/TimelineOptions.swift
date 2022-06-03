@@ -8,7 +8,7 @@
 
 extension API {
 	
-	public struct TimelineOptions {
+	public struct TimelineOptions : Sendable {
 		
 		var sinceId: String?
 		var maxId: String?

@@ -8,7 +8,7 @@
 
 extension User {
 	
-	public struct Profile {
+	public struct Profile : Sendable {
 		
 		public var sidebarBorderColor: Color
 		public var sidebarFillColor: Color

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Tomohiro Kumagai. All rights reserved.
 //
 
-public struct Polygon {
+public struct Polygon : Sendable {
 	
 	var points: [CoordinatesElement]
 }

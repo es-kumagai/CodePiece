@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct HashtagEntity {
+public struct HashtagEntity : Sendable {
 	
 	public var value: Hashtag
 	public var indices: Indices

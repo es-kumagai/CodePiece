@@ -10,7 +10,7 @@ import ESTwitter
 
 extension API.PostOption {
 	
-	init(from container: PostDataContainer) {
+	init(from container: isolated PostDataContainer) {
 		
 		self = API.PostOption(
 			inReplyTo: container.data.replyTo?.idStr,

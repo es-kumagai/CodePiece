@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TwitterURL : RawRepresentable {
+public struct TwitterURL : RawRepresentable, Sendable {
 	
 	public var rawValue: String
 	

@@ -11,7 +11,7 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class MentionsContentsController : TimelineContentsController, NotificationObservable {
+final class MentionsContentsController : TimelineContentsController {
 	
 	override var kind: TimelineKind {
 		
@@ -43,34 +43,21 @@ final class MentionsContentsController : TimelineContentsController, Notificatio
 		delegate?.timelineContentsNeedsUpdate?(self)
 	}
 	
-	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
+	override func updateContents() async throws -> Update {
 
 		let options = API.MentionOptions(
 			
 			sinceId: dataSource.lastTweetId
 		)
 		
-		NSApp.twitterController.mentions(options: options) { [unowned self] result in
+		let statuses = try await NSApp.twitterController.mentions(options: options)
 			
-			func success(_ statuses: [Status]) {
+		if statuses.count > 0 {
 			
-				if statuses.count > 0 {
-
-					MentionUpdatedNotification(mentions: statuses, includesNewMention: alreadyHasMentions).post()
-				}
-
-				callback(.success((statuses, [])))
-			}
-			
-			switch result {
-				
-			case .success(let statuses):
-				success(statuses)
-				
-			case .failure(let error):
-				callback(.failure(error))
-			}
+			MentionUpdatedNotification(mentions: statuses, hasNewMention: alreadyHasMentions).post()
 		}
+
+		return Update(statuses)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

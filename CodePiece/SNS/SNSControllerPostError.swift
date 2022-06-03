@@ -12,16 +12,7 @@ extension SNSController {
 	
 	/// This means a error which may occur when post.
 	enum PostError : Error {
-		
-		enum State {
-			
-			case occurred(on: PostDataContainer.PostStage)
-			case postGistDirectly
-			case postMediaDirectly
-			case postTweetDirectly
-			case unidentifiable
-		}
-		
+				
 		case unexpected(Error, state: State)
 		case systemError(String, state: State)
 		case description(String, state: State)
@@ -30,6 +21,18 @@ extension SNSController {
 		case failedToUploadMedia(reason: String, state: State)
 		case twitterError(ESTwitter.PostError, state: State)
 		case postError(String, state: State)
+	}
+}
+
+extension SNSController.PostError {
+	
+	enum State {
+		
+		case occurred(on: PostDataContainer.PostStage)
+		case postGistDirectly
+		case postMediaDirectly
+		case postTweetDirectly
+		case unidentifiable
 	}
 }
 

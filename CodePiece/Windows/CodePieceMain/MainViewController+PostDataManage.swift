@@ -9,6 +9,7 @@
 import Foundation
 import CodePieceCore
 
+@MainActor
 protocol PostDataManageable {
 	
 	func makePostData() -> PostData
@@ -41,6 +42,6 @@ extension PostDataManageable {
 	
 	func makePostDataContainer() -> PostDataContainer {
 		
-		return PostDataContainer(makePostData())
+		PostDataContainer(makePostData())
 	}
 }

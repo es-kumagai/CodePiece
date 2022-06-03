@@ -11,18 +11,18 @@ import Ocean
 import Sky_AppKit
 
 // FIXME: 現在は ATS を無効化しています。OSX 10.11 になったら ATS ありでも動くように調整したいところです。
-@NSApplicationMain @objcMembers
-class AppDelegate: NSObject, NSApplicationDelegate, NotificationObservable {
+@NSApplicationMain
+@objcMembers
+@MainActor
+final class AppDelegate: NSObject, NSApplicationDelegate, NotificationObservable {
 
 	var urlSchemeManager: URLSchemeManager!
-	var notificationHandlers = Notification.Handlers()
-	
-	
-	override func awakeFromNib() {
+	let notificationHandlers = Notification.Handlers()
+
+	@MainActor
+	override init() {
 		
-		NSLog("Application awoke.")
-		
-		super.awakeFromNib()
+		super.init()
 
 		let schemes: [URLScheme.Type] = [
 			
@@ -30,18 +30,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, NotificationObservable {
 			SwifterScheme.self,
 			CodePieceScheme.self
 		]
-		
+
 		urlSchemeManager = URLSchemeManager(schemes: schemes)
-		NSApplication.readyForUse()
+		NSApp.prepare()
+	}
+	
+	@MainActor
+	override func awakeFromNib() {
+		
+		NSLog("Application awoke.")
+		
+		super.awakeFromNib()
+
 	}
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    nonisolated func applicationDidFinishLaunching(_ aNotification: Notification) {
 
 		NSLog("Application launched.")
 		
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
+    nonisolated func applicationWillTerminate(_ aNotification: Notification) {
 
 		NSLog("Application terminated.")
     }

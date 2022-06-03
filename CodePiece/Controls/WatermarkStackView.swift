@@ -8,6 +8,8 @@
 
 import Cocoa
 
+@MainActor
+@objcMembers
 class WatermarkStackView: NSStackView {
 
 	@IBOutlet var transparentResponder: NSView?

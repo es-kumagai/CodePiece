@@ -9,6 +9,7 @@
 import Cocoa
 
 @objcMembers
+@MainActor
 final class TimelineTableView: NSTableView {
 
 	// Infomation which tha table view has. if the cell for row is not maked yet, cell is set to nil.
@@ -71,11 +72,12 @@ final class TimelineTableView: NSTableView {
 	}
 }
 
+@MainActor
 extension TimelineTableView.CellInfo {
 	
 	var isCellExists: Bool {
 		
-		return cell != nil
+		cell != nil
 	}
 	
 	func applySelection() {

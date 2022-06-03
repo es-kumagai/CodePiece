@@ -13,13 +13,13 @@ extension TwitterController {
 	
 	struct AuthorizationStateDidChangeNotification : NotificationProtocol {
 		
-		var isCredentialVerified: Bool
-		var screenName: String?
+		let isCredentialVerified: Bool
+		let screenName: String?
 	}
 	
 	struct AuthorizationStateDidChangeWithErrorNotification : NotificationProtocol {
 		
-		var error: AuthorizationError
+		let error: AuthorizationError
 	}
 	
 	struct AuthorizationStateInvalidNotification : NotificationProtocol {		
@@ -31,7 +31,7 @@ extension TwitterController {
 	
 	struct AuthorizationResetFailureNotification : NotificationProtocol {
 		
-		public var error: APIError
+		let error: APIError
 	}
 	
 	struct CredentialsVerifySucceededNotification : NotificationProtocol {
@@ -40,6 +40,6 @@ extension TwitterController {
 	
 	struct CredentialsVerifyFailureNotification : NotificationProtocol {
 		
-		public var error: APIError
+		let error: APIError
 	}
 }

@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct Place {
+public struct Place : Sendable {
 	
 	public var attributes: [String : String]
 	public var boundingBox: BoundingBox

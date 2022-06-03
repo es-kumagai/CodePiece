@@ -6,9 +6,9 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+@preconcurrency import struct Foundation.Date
 
-public struct TwitterDate : RawRepresentable {
+public struct TwitterDate : RawRepresentable, Sendable {
 	
 	public var rawValue: Date
 	

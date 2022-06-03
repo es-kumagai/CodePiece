@@ -11,9 +11,10 @@ import ESTwitter
 import Ocean
 
 @objcMembers
+@MainActor
 final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObservable {
 	
-	var notificationHandlers = Notification.Handlers()
+	let notificationHandlers = Notification.Handlers()
 	
 	override init() {
 		
@@ -25,9 +26,9 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		}		
 	}
 	
-	var canOpenTwitterHome: Bool {
+	dynamic var canOpenTwitterHome: Bool {
 		
-		guard NSApp.isReadyForUse else {
+		guard NSApp.isPrepared else {
 			
 			return false
 		}
@@ -44,12 +45,14 @@ final class TwitterOpenFeatures : NSObject, AlertDisplayable, NotificationObserv
 		
 		guard let username = NSApp.twitterController.token?.screenName else {
 			
-			return showErrorAlert(withTitle: "Failed to open Twitter", message: "Twitter user is not set.")
+			showErrorAlert(withTitle: "Failed to open Twitter", message: "Twitter user is not set.")
+			return
 		}
 		
 		do {
 			
 			try ESTwitter.Browser.openWithUsername(username)
+			
 		}
 		catch ESTwitter.Browser.BrowseError.OperationFailure(reason: let reason) {
 			

@@ -11,7 +11,7 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class RelatedTweetsContentsController : TimelineContentsController, NotificationObservable {
+final class RelatedTweetsContentsController : TimelineContentsController {
 	
 	var statusesAutoUpdateIntervalForAppeared: Double {
 		
@@ -42,7 +42,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 	}
 	
 	var relatedUsers: Set<RelatedUser> = []
-	var hashtags: HashtagSet = NSApp.settings.appState.hashtags ?? [] {
+	var hashtags: HashtagSet = [] {
 		
 		didSet (previousHashtags) {
 			
@@ -59,6 +59,15 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 		}
 	}
 	
+	@MainActor
+	override func awakeFromNib() {
+	
+		super.awakeFromNib()
+		
+		#warning("以前はプロパティーの初期値として指定していましたが、Concurrency の都合で代入できなくなりました。ここが呼び出されるか確認する必要があります。")
+		hashtags = NSApp.settings.appState.hashtags ?? []
+	}
+
 	private func checkNeedsUpdates() {
 		
 		if needsUpdate {
@@ -102,7 +111,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			}
 		}
 		
-		owner!.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
+		owner!.messageQueue.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
 		
 		// Following code is disabled because the tweet you posted cannnot detect immediately.
 //		observe(notification: PostCompletelyNotification.self) { [unowned self] notification in
@@ -128,7 +137,7 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			return
 		}
 		
-		owner.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForAppeared))
+		owner.messageQueue.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForAppeared))
 	}
 	
 	override func timelineViewDidDisappear() {
@@ -140,17 +149,16 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			return
 		}
 		
-		owner.message.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
+		owner.messageQueue.send(.setAutoUpdateInterval(statusesAutoUpdateIntervalForDisappeared))
 	}
 	
-	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
+	override func updateContents() async throws -> Update {
 		
 		let query = relatedUsers.queryForSearchingAllUsersTweets()
 		
 		guard !query.isEmpty else {
 			
-			callback(.success(([], associatedHashtags: [])))
-			return
+			return Update.nothing
 		}
 		
 		let options = API.SearchOptions(
@@ -158,17 +166,9 @@ final class RelatedTweetsContentsController : TimelineContentsController, Notifi
 			sinceId: dataSource.latestTweetIdForHashtags(hashtags: hashtags)
 		)
 		
-		NSApp.twitterController.search(tweetWith: query, options: options) { [unowned self] result in
-			
-			switch result {
-				
-			case .success(let statuses):
-				callback(.success((statuses, hashtags)))
-				
-			case .failure(let error):
-				callback(.failure(error))
-			}
-		}
+		let statuses = try await NSApp.twitterController.search(tweetWith: query, options: options)
+		
+		return Update(statuses, associatedHashtags: hashtags)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

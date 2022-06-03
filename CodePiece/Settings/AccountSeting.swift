@@ -10,7 +10,7 @@ import Foundation
 import ESGists
 import ESTwitter
 
-struct AccountSetting {
+struct AccountSetting : Sendable {
 	
 	var id: ID?
 	var username: String?
@@ -22,15 +22,15 @@ struct AccountSetting {
 extension AccountSetting {
 
 	// 設定がされていることを確認します。認証の正当性などは判定しません。
-	var isReady:Bool {
+	var isReady: Bool {
 		
-		let isGistReady: ()->Bool = {
+		let isGistReady: () -> Bool = {
 
 			// GitHub は Token が設定されているかで設定が有効かを判定します。
 			authorization != nil
 		}
 		
-		let isTwitterReady: ()->Bool = {
+		let isTwitterReady: () -> Bool = {
 
 			//  Twitter はトークンが設定されていれば準備完了とします。その有効性は判定していません。
 			return twitterToken != nil
@@ -42,7 +42,7 @@ extension AccountSetting {
 
 extension AccountSetting {
 	
-	var authorizationState:AuthorizationState {
+	var authorizationState: AuthorizationState {
 		
 		if authorization != nil {
 

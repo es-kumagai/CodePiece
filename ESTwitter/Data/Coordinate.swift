@@ -6,13 +6,13 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct CoordinatesElement {
+public struct CoordinatesElement : Sendable {
 
 	var latitude: Double
 	var longitude: Double
 }
 
-public struct Coordinates {
+public struct Coordinates : Sendable {
 	
 	var coordinates: CoordinatesElement
 	var type: String

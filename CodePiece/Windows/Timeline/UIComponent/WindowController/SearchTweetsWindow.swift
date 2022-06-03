@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@MainActor
 final class SearchTweetsWindow: NSWindow {
 
 	override func becomeMain() {

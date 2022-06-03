@@ -17,7 +17,7 @@ extension StringProtocol {
 	/// - Returns: タブをスペースに置き換えた後の文字列です。
 	public func replacingTabToSpace(spacesPerTab: Int) -> String {
 
-		return replacingOccurrences(of: "\t", with: String(repeating: " ", count: spacesPerTab))
+		replacingOccurrences(of: "\t", with: String(repeating: " ", count: spacesPerTab))
 	}
 }
 
@@ -28,6 +28,6 @@ extension Sequence where Element : StringProtocol {
 	/// - Returns: タブをスペースに置き換えた後の文字列です。
 	public func replacingTabToSpace(spacesPerTab: Int) -> [String] {
 		
-		return map { $0.replacingTabToSpace(spacesPerTab: spacesPerTab) }
+		map { $0.replacingTabToSpace(spacesPerTab: spacesPerTab) }
 	}
 }

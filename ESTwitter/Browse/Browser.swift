@@ -8,7 +8,7 @@
 
 import Cocoa
 
-public final class Browser {
+public enum Browser {
 	
 	public static let baseUrl = "https://twitter.com"
 	public static let searchUrl = "https://twitter.com/search"

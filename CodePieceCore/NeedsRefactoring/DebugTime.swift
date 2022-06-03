@@ -10,10 +10,18 @@ import Foundation
 
 public final class DebugTime {
 
-	public static func print(_ message: String) {
+	public static func print(_ message: @autoclosure () -> String) {
 
 		#if DEBUG
-		NSLog("%@", message)
+		NSLog("%@", message())
+		#endif
+	}
+
+	public static func printAsync(_ message: @autoclosure () async -> String) async {
+
+		#if DEBUG
+		let messageQueue = await message()
+		print(messageQueue)
 		#endif
 	}
 }

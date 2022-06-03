@@ -9,28 +9,6 @@
 import Cocoa
 import ESTwitter
 
-//protocol ViewControllerSelectable : class {
-//
-//	var selectedStatuses: Array<ESTwitter.Status> { get }
-//}
-
-//protocol ViewControllerRepliable : class {
-//	
-//	var statusForReplyTo: ESTwitter.Status? { get }
-//	
-//	var canReplyTo: Bool { get }
-//}
-
-//protocol ViewControllerSelectionAndRepliable : ViewControllerSelectable, ViewControllerRepliable {
-//
-//	func setReplyToBySelectedStatuses()
-//}
-//
-//protocol LatestTweetReplyable : LatestTweetManageable {
-//
-//	func setReplyToByLatestTweet()
-//}
-
 extension MainViewController /*ViewControllerSelectable*/ {
 	
 	var canReplyToSelectedStatuses: Bool {
@@ -74,21 +52,24 @@ extension MainViewController {
 	}
 	
 	@IBAction func setReplyTo(_ sender: Any) {
-		
-		guard canReplyToSelectedStatuses else {
+	
+		Task { @MainActor in
 			
-			clearReplyingStatus()
-			return
+			guard canReplyToSelectedStatuses else {
+				
+				clearReplyingStatus()
+				return
+			}
+			
+			setReplyToBySelectedStatuses()
+
+			if let status = statusForReplyTo, await !twitterController.isMyTweet(status: status) {
+
+				descriptionTextField.readyForReplyTo(screenName: status.user.screenName)
+			}
+
+			focusToDescription()
+			updateControlsDisplayText()
 		}
-		
-		setReplyToBySelectedStatuses()
-
-		if let status = statusForReplyTo, !twitterController.isMyTweet(status: status) {
-
-			descriptionTextField.readyForReplyTo(screenName: status.user.screenName)
-		}
-
-		focusToDescription()
-		updateControlsDisplayText()
 	}
 }

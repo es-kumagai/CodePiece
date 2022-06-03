@@ -6,16 +6,17 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Cocoa
 import Sky
+
+@preconcurrency import Cocoa
 
 @objcMembers
 final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSource {
 	
-	public private(set) weak var owner:ESAcknowledgementsViewController?
-	public var acknowledgements:Acknowledgements
+	public private(set) weak var owner: ESAcknowledgementsViewController?
+	public var acknowledgements: Acknowledgements
 	
-	public init(owner:ESAcknowledgementsViewController, acknowledgements:Acknowledgements) {
+	public init(owner: ESAcknowledgementsViewController, acknowledgements: Acknowledgements) {
 		
 		self.owner = owner
 		self.acknowledgements = acknowledgements
@@ -25,11 +26,11 @@ final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSou
 	
 	public func numberOfRows(in tableView: NSTableView) -> Int {
 		
-		return acknowledgements.pods.count
+		acknowledgements.pods.count
 	}
 	
 	public func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-		
+
 		guard let owner = owner else {
 		
 			return nil
@@ -39,19 +40,24 @@ final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSou
 			
 			return nil
 		}
-		
+
 		let pod = acknowledgements.pods[row]
+		let identifier = tableColumn.identifier
 		
-		switch tableColumn.identifier.rawValue {
+		#warning("blocking を Main Thread 限定にしてでも安定性を向上させたい。")
+		return Task.blocking { () -> String? in
 			
-		case owner.nameColumnIdentifier:
-			return pod.name
-			
-		case owner.licenseColumnIdentifier:
-			return pod.license
-			
-		default:
-			fatalError("Unknown column identifier (\(tableColumn.identifier))")
+			switch identifier.rawValue {
+				
+			case await owner.nameColumnIdentifier:
+				return pod.name
+				
+			case await owner.licenseColumnIdentifier:
+				return pod.license
+				
+			default:
+				fatalError("Unknown column identifier (\(identifier))")
+			}
 		}
 	}
 }
@@ -59,7 +65,7 @@ final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSou
 @objcMembers
 final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDelegate {
 	
-	public private(set) weak var owner:ESAcknowledgementsViewController?
+	public private(set) weak var owner: ESAcknowledgementsViewController?
 	public var acknowledgements:Acknowledgements
 	
 	public init(owner:ESAcknowledgementsViewController, acknowledgements:Acknowledgements) {
@@ -72,7 +78,10 @@ final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDelegate 
 	
 	public func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		
-		let defaultCellHeight: CGFloat = tableView.rowHeight
+		let defaultCellHeight: CGFloat = Task.blocking { @MainActor in
+			
+			tableView.rowHeight
+		}
 		
 		guard let owner = owner else {
 			
@@ -81,17 +90,21 @@ final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDelegate 
 		
 		let pod = acknowledgements.pods[row]
 		
-		let column = tableView.column(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: owner.licenseColumnIdentifier))
-		let columnView = tableView.tableColumn(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "license"))
-		let columnRect = tableView.rect(ofColumn: column)
-
-		if let cell = columnView!.dataCell as? NSTextFieldCell {
-
-			return pod.license.size(with: cell.font, lineBreakMode: .byWordWrapping, maxWidth: columnRect.width).height
-		}
-		else {
+#warning("blocking を Main Thread 限定にしてでも安定性を向上させたい。")
+		return Task.blocking { @MainActor in
 			
-			return columnRect.height
+			let column = tableView.column(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: owner.licenseColumnIdentifier))
+			let columnView = tableView.tableColumn(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "license"))
+			let columnRect = tableView.rect(ofColumn: column)
+
+			if let cell = columnView!.dataCell as? NSTextFieldCell {
+
+				return pod.license.size(with: cell.font, lineBreakMode: .byWordWrapping, maxWidth: columnRect.width).height
+			}
+			else {
+				
+				return columnRect.height
+			}
 		}
 	}
 }
@@ -104,13 +117,14 @@ final class ESAcknowledgementsTableViewDelegate : NSObject, NSTableViewDelegate 
 //}
 
 @objcMembers
-class ESAcknowledgementsViewController: NSViewController, AcknowledgementsIncludedAndCustomizable {
+@MainActor
+final class ESAcknowledgementsViewController: NSViewController, AcknowledgementsIncludedAndCustomizable {
 
-	@IBInspectable public var nameColumnIdentifier:String = "name"
-	@IBInspectable public var licenseColumnIdentifier:String = "license"
+	@IBInspectable public dynamic var nameColumnIdentifier: String = "name"
+	@IBInspectable public dynamic var licenseColumnIdentifier: String = "license"
 	
-	public var acknowledgementsName:String!
-	public var acknowledgementsBundle:Bundle?
+	public var acknowledgementsName: String!
+	public var acknowledgementsBundle: Bundle?
 	
 	private var acknowledgementsTableViewDataSource:ESAcknowledgementsTableViewDataSource! {
 		

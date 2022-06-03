@@ -9,6 +9,7 @@
 import Cocoa
 import CodePieceCore
 
+@MainActor
 @objcMembers
 final class CodeTextView: NSTextView {
 
@@ -18,7 +19,7 @@ extension CodeTextView : CodeTextType {
 	
 	var code: Code {
 
-		return Code(string)
+		Code(string)
 	}
 	
 	func clearCodeText() {

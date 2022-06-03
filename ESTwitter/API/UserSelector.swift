@@ -10,7 +10,7 @@ import Swifter
 
 extension API {
 
-	public enum UserSelector {
+	public enum UserSelector : Sendable {
 
 		case id(String)
 		case screenName(String)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Twitter {
+enum Twitter {
 	
 	enum SpecialCounting {
 		

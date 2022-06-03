@@ -6,148 +6,122 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import AppKit
+@preconcurrency import class AppKit.NSImage
 import ESGists
 import ESTwitter
 import CodePieceCore
 
-protocol PostController {
+@objcMembers
+@MainActor
+final class SNSController : NSObject {
 	
-	var canPost:Bool { get }
+	let gists: GistsController
+	let twitter: TwitterController
+	
+	weak var captureController: WebCaptureController!
+	
+	init(captureController: WebCaptureController) {
+		
+		self.gists = GistsController()
+		self.twitter = TwitterController()
+		self.captureController = captureController
+	}
+	
+	dynamic var canPost: Bool {
+		
+		gists.canPost && twitter.canPost
+	}
+	
+	@available(*, message: "Concurrency に対応したら、エラーを状態としてもたなくても throwing で済むかもしれません。")
+	func post(container: PostDataContainer) async {
+		
+		await _post(container: container, capturedGistImage: nil)
+	}
 }
 
-final class SNSController : PostController {
-	
-	var gists: GistsController
-	var twitter: TwitterController
-	
-	typealias PostResult = Result<PostDataContainer, PostError>
-	
-	init() {
+private extension SNSController {
+
+	func _post(container: PostDataContainer, capturedGistImage: NSImage?) async {
 		
-		gists = GistsController()
-		twitter = TwitterController()
-	}
-	
-	var canPost:Bool {
-		
-		return gists.canPost && twitter.canPost
-	}
-	
-	func post(container: PostDataContainer, completed: @escaping (PostDataContainer) -> Void) {
-		
-		_post(container: container, capturedGistImage: nil, completed: completed)
-	}
-	
-	func _post(container: PostDataContainer, capturedGistImage: NSImage?, completed: @escaping (PostDataContainer) -> Void) {
-		
-		let callNextStageRecursively = { [unowned self] (image: NSImage?) in
+		@Sendable func callNextStageRecursively(image: NSImage?) async {
 			
-			container.proceedToNextStage()
-			_post(container: container, capturedGistImage: image, completed: completed)
+			await container.proceedToNextStage()
+			await _post(container: container, capturedGistImage: image)
 		}
 		
-		let exitWithFailure = { (error: SNSController.PostError) in
+		do {
 			
-			DebugTime.print("📮 Posted with failure (stage:\(container.stage), error:\(error)) ... #2.0.2")
-			container.setError(error)
-			completed(container)
-		}
-		
-		switch container.stage {
-			
-		case .initialized:
-			
-			container.clearErrors()
-			callNextStageRecursively(capturedGistImage)
-			
-		case .postToGists:
-			
-			DebugTime.print("📮 Try posting by Gists ... #2.2")
-			
-			do {
-				try gists.post(container: container) { result in
-					
-					switch result {
-						
-					case .success:
-						callNextStageRecursively(capturedGistImage)
-						
-					case .failure(let error):
-						exitWithFailure(error)
-					}
-				}
-			}
-			catch let error as AuthenticationError {
+			switch await container.stage {
 				
-				exitWithFailure(.authentication(error, state: .occurred(on: .postToGists)))
-			}
-			catch let error as NSError {
+			case .initialized:
 				
-				exitWithFailure(.unexpected(error, state: .occurred(on: .postToGists)))
-			}
-			
-		case .captureGists:
-			
-			let gist = container.gistsState.gist!
-			DebugTime.print("📮 Capturing a gist (\(gist)) ... #2.2.1.1")
-			
-			let captureInfo = CaptureInfo.twitterGeneric
-			
-			NSApp.captureController.capture(url: gist.urls.htmlUrl.rawValue, of: container.filenameForGists, captureInfo: captureInfo) { image in
+				await container.clearErrors()
+				await callNextStageRecursively(image: capturedGistImage)
+				
+			case .postToGists:
+				
+				DebugTime.print("📮 Try posting by Gists ... #2.2")
+				
+				try await gists.post(container: container)
+				await callNextStageRecursively(image: capturedGistImage)
+				
+			case .captureGists:
+				
+				let gist = await container.gistsState.gist!
+				DebugTime.print("📮 Capturing a gist (\(gist)) ... #2.2.1.1")
+				
+				let captureInfo = CaptureInfo.twitterGeneric
+				let image = try await captureController.capture(url: gist.urls.htmlUrl.rawValue, of: container.filenameForGists, captureInfo: captureInfo)
 				
 				DebugTime.print("📮 A gist captured ... #2.2.1.1.1")
-				callNextStageRecursively(image)
-			}
-			
-		case .postProcessToTwitter:
-			
-			callNextStageRecursively(capturedGistImage)
-			
-		case .postToTwitterMedia:
-			
-			if let image = capturedGistImage {
+				await callNextStageRecursively(image: image)
+
+			case .postProcessToTwitter:
+				await callNextStageRecursively(image: capturedGistImage)
 				
-				twitter.post(image: image, container: container) { result in
+			case .postToTwitterMedia:
+
+				if let image = capturedGistImage {
 					
-					switch result {
-						
-					case .success:
-						callNextStageRecursively(capturedGistImage)
-						
-					case .failure(let error):
-						exitWithFailure(error)
-					}
+					await twitter.post(image: image, container: container)
+					await callNextStageRecursively(image: capturedGistImage)
 				}
-			}
-			else {
-				
-				container.setError(.failedToUploadMedia(reason: "Failed to take Gist capture image.", state: .occurred(on: .postToTwitterMedia)))
-				callNextStageRecursively(capturedGistImage)
-			}
-			
-		case .postToTwitterStatus:
-			
-			DebugTime.print("📮 Try posting by Twitter ... #2.1")
-			
-			twitter.post(statusUsing: container) { result in
-				
-				DebugTime.print("📮 Posted by Twitter (\(result)) ... #2.1.1")
-				
-				switch result {
+				else {
 					
-				case .success:
-					DebugTime.print("📮 Posted successfully (stage:\(container.stage)) ... #2.0.1")
-					callNextStageRecursively(capturedGistImage)
-					
-				case .failure(let error):
-					exitWithFailure(error)
+					await container.setError(.failedToUploadMedia(reason: "Failed to take Gist capture image.", state: .occurred(on: .postToTwitterMedia)))
+					await callNextStageRecursively(image: capturedGistImage)
 				}
+				
+			case .postToTwitterStatus:
+				
+				DebugTime.print("📮 Try posting by Twitter ... #2.1")
+				try await twitter.post(statusUsing: container)
+					
+				await DebugTime.printAsync("📮 Posted successfully (stage:\(await container.stage)) ... #2.0.1")
+				await callNextStageRecursively(image: capturedGistImage)
+				
+			case .posted:
+				break
+			}
+		}
+		catch {
+			
+			var throwingError: SNSController.PostError
+			
+			switch error {
+				
+			case let error as AuthenticationError:
+				throwingError = .authentication(error, state: .occurred(on: .postToGists))
+				
+			case let error as SNSController.PostError:
+				throwingError = error
+				
+			case let error as NSError:
+				throwingError = .unexpected(error, state: .occurred(on: .postToGists))
 			}
 			
-		case .posted:
-			
-			completed(container)
+			await DebugTime.printAsync("📮 Posted with failure (stage:\(await container.stage), error:\(throwingError)) ... #2.0.2")
+			await container.setError(throwingError)
 		}
 	}
 }

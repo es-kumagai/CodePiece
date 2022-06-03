@@ -9,7 +9,7 @@
 import Foundation
 
 /// プログラムコードを保持するデータ型です。
-public struct Code {
+public struct Code : Sendable {
 	
 	/// プログラムコードを行単位で保持します。各行は開業で終わります。
 	public var newlineTerminatedLines: Array<String>

@@ -6,15 +6,8 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct MediaEntity : HasIndices {
-	
-	public struct Size {
+public struct MediaEntity : HasIndices, Sendable {
 		
-		public var width: Int
-		public var height: Int
-		public var resize: String
-	}
-	
 	public var idStr: String
 	public var mediaUrlHttps: TwitterURL
 	public var expandedUrl: TwitterURL
@@ -25,6 +18,16 @@ public struct MediaEntity : HasIndices {
 	public var indices: Indices
 	public var mediaUrl: TwitterURL
 	public var url: TwitterURL
+}
+
+extension MediaEntity {
+	
+	public struct Size : Sendable {
+		
+		public var width: Int
+		public var height: Int
+		public var resize: String
+	}
 }
 
 extension MediaEntity : EntityUnit {

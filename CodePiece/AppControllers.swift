@@ -6,16 +6,24 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-final class AppGlobalControllers {
+import Foundation
+
+@MainActor
+final class AppGlobalControllers : NSObject {
 	
-	private(set) var sns:SNSController!
-	private(set) var captureController:WebCaptureController!
-	private(set) var reachabilityController:ReachabilityController!
+	private(set) var sns: SNSController!
+	private(set) var captureController: WebCaptureController!
+	private(set) var reachabilityController: ReachabilityController!
 	
-	init() {
+	@MainActor
+	override init() {
 		
-		sns = SNSController()
-		captureController = WebCaptureController()
-		reachabilityController = try! ReachabilityController()
+		super.init()
+		
+		let captureController = WebCaptureController()
+		
+		self.sns = SNSController(captureController: captureController)
+		self.captureController = captureController
+		self.reachabilityController = try! ReachabilityController()
 	}
 }

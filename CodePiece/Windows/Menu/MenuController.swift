@@ -9,6 +9,7 @@
 import AppKit
 import Ocean
 
+@MainActor
 @objcMembers
 final class MenuController : NSObject {
 
@@ -27,24 +28,24 @@ final class MenuController : NSObject {
 		]
 	}
 	
-	var application: NSApplication {
+	var application: CodePieceApplication {
 		
-		return NSApp
+		NSApp
 	}
 	
 	var mainViewController: MainViewController? {
 		
-		return application.baseViewController?.mainViewController
+		application.baseViewController?.mainViewController
 	}
 	
 	var timelineTabViewController: TimelineTabViewController? {
 		
-		return application.baseViewController?.timelineTabViewController
+		application.baseViewController?.timelineTabViewController
 	}
 	
 	var currentTimelineViewController: TimelineViewController? {
 		
-		return application.timelineTabViewController?.currentTimelineViewController
+		application.timelineTabViewController?.currentTimelineViewController
 	}
 	
 	override init() {
@@ -54,22 +55,26 @@ final class MenuController : NSObject {
 	
 	var isMainViewControllerActive: Bool {
 	
-		return mainViewController != nil
+		mainViewController != nil
 	}
 	
-	var canPostToSNS: Bool {
+	dynamic var canPostToSNS: Bool {
 		
-		return mainViewController?.canPost ?? false
+		mainViewController?.canPost ?? false
+//		Task.blocking { [unowned self] in
+//
+//			await mainViewController?.canPost ?? false
+//		}
 	}
 	
 	@IBAction func showPreferences(_ sender: NSMenuItem?) {
 		
-		NSApp.showPreferencesWindow()
+		application.showPreferencesWindow()
 	}
 
 	@IBAction func showWelcomeBoard(_ sender: NSMenuItem?) {
 		
-		NSApp.showWelcomeBoard()
+		application.showWelcomeBoard()
 	}
 	
 	@IBAction func moveFocusToCodeArea(_ sender: NSObject?) {
@@ -94,7 +99,9 @@ final class MenuController : NSObject {
 	
 	@IBAction func postToSNS(_ sender: NSMenuItem?) {
 		
-		mainViewController?.postToSNS()
+		Task {
+			await mainViewController?.postToSNS()
+		}
 	}
 	
 	@IBAction func clearTweetAndDescription(_ sender: NSMenuItem?) {
@@ -135,17 +142,17 @@ final class MenuController : NSObject {
 	
 	var canOpenBrowserWithCurrentTwitterStatus: Bool {
 		
-		return NSApp.canOpenBrowserWithCurrentTwitterStatus
+		application.canOpenBrowserWithCurrentTwitterStatus
 	}
 	
 	var canOpenBrowserWithRelatedTweets: Bool {
 		
-		return mainViewController?.canOpenBrowserWithRelatedTweets ?? false
+		mainViewController?.canOpenBrowserWithRelatedTweets ?? false
 	}
 	
 	var isTimelineActive: Bool {
 	
-		return currentTimelineViewController?.isTimelineActive ?? false
+		currentTimelineViewController?.isTimelineActive ?? false
 	}
 	
 	@IBAction func reloadTimeline(_ sender: NSMenuItem?) {
@@ -160,7 +167,7 @@ final class MenuController : NSObject {
 	
 	@IBAction func openBrowserWithCurrentTwitterStatus(_ sender: AnyObject) {
 		
-		NSApp.openBrowserWithCurrentTwitterStatus()
+		application.openBrowserWithCurrentTwitterStatus()
 	}
 
 	@IBAction func openBrowserWithRelatedStatuses(_ sender: AnyObject) {
@@ -195,7 +202,7 @@ extension MenuController {
 	
 	var canReplyTo: Bool {
 		
-		return NSApp.currentSelectedStatuses.count == 1
+		application.currentSelectedStatuses.count == 1
 	}
 	
 	@IBAction func replyTo(_ sender: NSMenuItem) {
@@ -205,7 +212,7 @@ extension MenuController {
 	
 	var canMakeThread: Bool {
 		
-		return mainViewController?.canMakeThread ?? false
+		mainViewController?.canMakeThread ?? false
 	}
 	
 	@IBAction func makeThread(_ sender: NSMenuItem) {

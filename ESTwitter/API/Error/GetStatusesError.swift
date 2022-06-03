@@ -60,6 +60,21 @@ extension GetStatusesError {
 		
 		self = .apiError(.init(from: error))
 	}
+	
+	init(error: Error) {
+		
+		switch error {
+			
+		case let error as SwifterError:
+			self = .init(tweetError: error)
+			
+		case let error as NSError:
+			self = .init(nsError: error)
+			
+		default:
+			self = .unexpected(error)
+		}
+	}
 }
 
 extension GetStatusesError {

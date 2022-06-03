@@ -13,9 +13,10 @@ import Swim
 
 extension DataStore {
 
+	@MainActor
 	struct AppState {
 		
-		enum Key : String {
+		enum Key : String, Sendable {
 			
 			case selectedLanguage = "codepiece:selected-language"
 			case hashtag = "codepiece:hashtag"
@@ -33,7 +34,7 @@ extension DataStore {
 			
 			get {
 				
-				return userDefaults.string(forKey: Key.selectedLanguage.rawValue).flatMap { Language(rawValue: $0) }
+				userDefaults.string(forKey: Key.selectedLanguage.rawValue).flatMap { Language(rawValue: $0) }
 			}
 			
 			set {
@@ -46,7 +47,7 @@ extension DataStore {
 			
 			get {
 				
-				return userDefaults.string(forKey: Key.hashtag.rawValue).map { ESTwitter.HashtagSet(hashtagsDisplayText: $0) }
+				userDefaults.string(forKey: Key.hashtag.rawValue).map { ESTwitter.HashtagSet(hashtagsDisplayText: $0) }
 			}
 			
 			set (newHashtags) {
@@ -59,7 +60,7 @@ extension DataStore {
 			
 			get {
 				
-				return userDefaults.string(forKey: Key.description.rawValue)
+				userDefaults.string(forKey: Key.description.rawValue)
 			}
 			
 			set (newCode) {
@@ -72,7 +73,7 @@ extension DataStore {
 			
 			get {
 				
-				return userDefaults.string(forKey: Key.code.rawValue)
+				userDefaults.string(forKey: Key.code.rawValue)
 			}
 			
 			set (newCode) {

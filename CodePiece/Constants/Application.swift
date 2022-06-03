@@ -8,7 +8,7 @@
 
 import ESTwitter
 
-final class CodePieceApp {
+extension CodePieceApplication {
 	
-	static let hashtag:ESTwitter.Hashtag = "CodePiece"
+	static let hashtag: ESTwitter.Hashtag = "CodePiece"
 }

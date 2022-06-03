@@ -11,35 +11,32 @@ import WebKit
 
 extension WKWebView {
 	
-	typealias EvalueateResult = Result<Any, Error>
-	
 	enum InternalError : Error {
-		
+	
 		case unexpected(String)
 	}
-	
-	func evaluate(javaScript string: String, completionHandler handler: ((EvalueateResult) -> Void)? = nil) {
 
-		evaluateJavaScript(string) { value, error in
+	@discardableResult
+	func evaluate(javaScript string: String) async throws -> Any {
 
-			guard let handler = handler else {
-				
-				return
-			}
+		try await withCheckedThrowingContinuation { continuation in
 			
-			switch (value, error) {
-				
-			case let (value?, nil):
-				handler(.success(value))
+			evaluateJavaScript(string) { value, error in
 
-			case let (nil, error?):
-				handler(.failure(error))
+				switch (value, error) {
+					
+				case let (value?, nil):
+					continuation.resume(returning: value)
 
-			case let (value?, error?):
-				handler(.failure(InternalError.unexpected("Both value and error were found.\nValue: \(value), Error: \(error)")))
+				case let (nil, error?):
+					continuation.resume(throwing: error)
 
-			case (nil, nil):
-				handler(.failure(InternalError.unexpected("Both value and error couldn't be get.")))
+				case let (value?, error?):
+					continuation.resume(throwing: InternalError.unexpected("Both value and error were found.\nValue: \(value), Error: \(error)"))
+
+				case (nil, nil):
+					continuation.resume(throwing: InternalError.unexpected("Both value and error couldn't be get."))
+				}
 			}
 		}
 	}

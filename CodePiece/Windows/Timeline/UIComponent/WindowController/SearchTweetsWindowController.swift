@@ -8,6 +8,8 @@
 
 import Cocoa
 
+@objcMembers
+@MainActor
 class SearchTweetsWindowController: NSWindowController, NSWindowDelegate {
 
 	@IBOutlet weak var delegate: SearchTweetsWindowControllerDelegate?
@@ -29,12 +31,15 @@ class SearchTweetsWindowController: NSWindowController, NSWindowDelegate {
 //		targetTextField?.becomeFirstResponder()
 //	}
 	
-	func windowDidBecomeKey(_ notification: Notification) {
+	nonisolated func windowDidBecomeKey(_ notification: Notification) {
 		
 	}
 	
-	func windowWillClose(_ notification: Notification) {
+	nonisolated func windowWillClose(_ notification: Notification) {
 		
-		delegate?.searchTweetsWindowControllerWillClose(self)
+		Task { @MainActor in
+			
+			delegate?.searchTweetsWindowControllerWillClose(self)
+		}
 	}
 }

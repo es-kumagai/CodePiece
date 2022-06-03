@@ -16,6 +16,7 @@ import ESTwitter
 import CodePieceCore
 
 @objcMembers
+@MainActor
 final class MainViewController: NSViewController, NotificationObservable {
 
 	let maxDescriptionLength = 140
@@ -40,11 +41,11 @@ final class MainViewController: NSViewController, NotificationObservable {
 //		}
 //	}
 	
-	var notificationHandlers = Notification.Handlers()
+	let notificationHandlers = Notification.Handlers()
 	
 	var twitterController: TwitterController {
 		
-		return NSApp.snsController.twitter
+		NSApp.snsController.twitter
 	}
 	
 	private var postingHUD: ProgressHUD = ProgressHUD(message: "Posting...", useActivityIndicator: true)
@@ -148,9 +149,13 @@ final class MainViewController: NSViewController, NotificationObservable {
 	var descriptionCountForPost: Int {
 		
 		let includesGistsLink = codeTextView.hasCode
-		let totalCount = makePostDataContainer().descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
+		let container = makePostDataContainer()
 		
-		return totalCount
+#warning("blocking を Main Thread 限定にしてでも安定性を向上させたい。")
+		return Task.blocking {
+			
+			await container.descriptionLengthForTwitter(includesGistsLink: includesGistsLink)
+		}
 	}
 	
 	var selectedLanguage: Language {
@@ -187,10 +192,13 @@ final class MainViewController: NSViewController, NotificationObservable {
 	@IBAction func pushPostButton(_ sender:NSObject?) {
 	
 		saveContents()
-		postToSNS()
+		
+		Task {
+			await postToSNS()
+		}
 	}
 	
-	func postToSNS() {
+	func postToSNS() async {
 
 		guard canPost else {
 			
@@ -206,56 +214,60 @@ final class MainViewController: NSViewController, NotificationObservable {
 		posting = true
 		postingHUD.show()
 		
-		post { [unowned self] result in
+		do {
 			
 			defer {
 				
 				posting = false
 				postingHUD.hide()
 			}
+		
+			let container = try await post()
+			let postedStatus = await container.twitterState.postedStatus
 			
-			switch result {
-				
-			case .success(let container):
-				PostCompletelyNotification(container: container, postedStatus: container.twitterState.postedStatus, hashtags: hashTagTextField.hashtags).post()
-				
-			case .failure(let error):
-				PostFailedNotification(error: error).post()
-			}
+			PostCompletelyNotification(container: container, postedStatus: postedStatus, hashtags: hashTagTextField.hashtags).post()
+		}
+		catch let error as SNSController.PostError {
+
+			PostFailedNotification(error: error).post()
+		}
+		catch {
+			
+			let error = SNSController.PostError.unexpected(error, state: .unidentifiable)
+			PostFailedNotification(error: error).post()
 		}
 	}
 	
-	func post(callback: @escaping (SNSController.PostResult) -> Void) {
+	func post() async throws -> PostDataContainer {
 		
 		DebugTime.print("📮 Try to post ... #1")
 		
-		NSApp.snsController.post(container: makePostDataContainer()) { container in
+		let container = makePostDataContainer()
+		await NSApp.snsController.post(container: container)
+		
+		await DebugTime.printAsync("📮 Posted \(await container.twitterState.postedStatus?.text ?? "(unknown)") ... #1.1.1")
+		
+		if await container.posted {
 			
-			
-			DebugTime.print("📮 Posted \(container.twitterState.postedStatus?.text ?? "(unknown)") ... #1.1.1")
-			
-			if container.posted {
+			switch await container.latestError {
 				
-				switch container.latestError {
-
-				case .some(let error):
-					container.setError(.postError(error.descriptionWithoutState, state: .occurred(on: .posted)))
-					callback(.success(container))
-
-				case .none:
-					callback(.success(container))
-				}
+			case .some(let error):
+				await container.setError(.postError(error.descriptionWithoutState, state: .occurred(on: .posted)))
+				return container
+				
+			case .none:
+				return container
 			}
-			else {
+		}
+		else {
+			
+			switch await container.latestError {
 				
-				switch container.latestError {
-					
-				case .some(let error):
-					callback(.failure(error))
-					
-				case .none:
-					callback(.failure(.systemError("Unknown error.", state: .unidentifiable)))
-				}
+			case .some(let error):
+				throw error
+				
+			case .none:
+				throw SNSController.PostError.systemError("Unknown error.", state: .unidentifiable)
 			}
 		}
 	}
@@ -264,7 +276,11 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 		DebugTime.print("Restoring contents in main window.")
 		
-		NSApp.settings.appState.selectedLanguage.executeIfExists(languagePopUpDataSource.selectLanguage)
+		NSApp.settings.appState.selectedLanguage.executeIfExists {
+			
+			languagePopUpDataSource.selectLanguage($0)
+		}
+
 		NSApp.settings.appState.hashtags.executeIfExists { hashTagTextField.hashtags = $0 }
 		NSApp.settings.appState.description.executeIfExists { descriptionTextField.stringValue = $0 }
 		NSApp.settings.appState.code.executeIfExists { codeTextView.string = $0 }
@@ -287,7 +303,11 @@ final class MainViewController: NSViewController, NotificationObservable {
 		super.viewDidLoad()
 		
 		DebugTime.print("Main window loaded.")
-		twitterController.prepareApi()
+		
+		Task {
+			
+			await twitterController.prepareApi()
+		}
 	}
 	
 	override func viewWillAppear() {
@@ -307,16 +327,16 @@ final class MainViewController: NSViewController, NotificationObservable {
 			let container = notification.container
 			
 			clearContents()
-			latestTweet = container.twitterState.postedStatus
-
+			latestTweet = await container.twitterState.postedStatus
+			
 			saveContents()
-
-			if let error = container.latestError {
+			
+			if let error = await container.latestError {
 				
 				showErrorAlert(withTitle: "Finish posting, but ...", message: "\(error)")
 			}
 			
-			NSLog("Posted completely \(notification.container.twitterState.postedStatus?.text ?? "(unknown)")")
+			await NSLog("Posted completely \(notification.container.twitterState.postedStatus?.text ?? "(unknown)")")
 		}
 		
 		observe(PostFailedNotification.self) { [unowned self] notification in
@@ -367,9 +387,9 @@ final class MainViewController: NSViewController, NotificationObservable {
 		observe(TwitterController.AuthorizationStateInvalidNotification.self) { [unowned self] notification in
 			
 			if NSApp.settings.isReady {
-			
+				
 				DebugTime.print("Authorization State is invalid. Try authenticating.")
-				twitterController.authorize()
+				await twitterController.authorize()
 			}
 		}
 		
@@ -401,16 +421,18 @@ final class MainViewController: NSViewController, NotificationObservable {
 		updateWatermark()
 		updateTweetTextCount()
 
-		
-		if NSApp.settings.isReady {
+		Task {
 			
-			twitterController.verifyCredentialsIfNeed()
-		}
-		else {
-			
-			if NSApp.environment.showWelcomeBoardOnStartup {
+			if NSApp.settings.isReady {
 				
-				NSApp.showWelcomeBoard()
+				await twitterController.verifyCredentialsIfNeed()
+			}
+			else {
+				
+				if NSApp.environment.showWelcomeBoardOnStartup {
+					
+					NSApp.showWelcomeBoard()
+				}
 			}
 		}
 	}
@@ -441,14 +463,14 @@ final class MainViewController: NSViewController, NotificationObservable {
 		NSLog("🌴 restoreStateWithCoder Passed.")
 	}
 
-	func verifyCredentials() {
+	func verifyCredentials() async {
 
-		guard NSApp.isReadyForUse else {
+		guard NSApp.isPrepared else {
 		
 			return
 		}
 		
-		twitterController.verifyCredentialsIfNeed()
+		await twitterController.verifyCredentialsIfNeed()
 //		twitterController.verifyCredentialsIfNeed { result in
 //
 //			switch result {
@@ -554,20 +576,24 @@ final class MainViewController: NSViewController, NotificationObservable {
 
 extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 	
-	func controlTextDidChange(_ notification: Notification) {
+	nonisolated func controlTextDidChange(_ notification: Notification) {
 		
-		withChangeValue(for: "canPost")
-		updateControlsDisplayText()
+		Task { @MainActor in
+			withChangeValue(for: "canPost")
+			updateControlsDisplayText()
+		}
 	}
 	
 	/// Invoke this method when CodeTextView (NSTextView) did change.
-	func textDidChange(_ notification: Notification) {
+	nonisolated func textDidChange(_ notification: Notification) {
 
-		withChangeValue(for: "canPost")
-		updateControlsDisplayText()
+		Task { @MainActor in
+			withChangeValue(for: "canPost")
+			updateControlsDisplayText()
+		}
 	}
 	
-	func control(_ control: NSControl, textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {
+	nonisolated func control(_ control: NSControl, textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {
 		
 		switch control {
 			
@@ -579,7 +605,7 @@ extension MainViewController : NSTextFieldDelegate, NSTextViewDelegate {
 		}
 	}
 	
-	func textView(_ textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>?) -> [String] {
+	nonisolated func textView(_ textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>?) -> [String] {
 		
 		return []
 	}
@@ -637,6 +663,11 @@ extension MainViewController {
 extension MainViewController : SearchTweetsWindowControllerDelegate {
 
 	func searchTweetsWindowControllerWillClose(_ sender: SearchTweetsWindowController) {
+
+		guard activeSearchTweetsWindowController === sender else {
+
+			return
+		}
 
 		activeSearchTweetsWindowController = nil
 	}

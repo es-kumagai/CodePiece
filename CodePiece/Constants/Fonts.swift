@@ -14,7 +14,7 @@ extension NSFont {
 	static let codeFont = SystemFont.forCode.font(size: 14.0)!
 }
 
-private enum SystemFont {
+private enum SystemFont : Sendable {
 	
 	case forText
 	case forCode

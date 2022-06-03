@@ -9,7 +9,9 @@
 import Cocoa
 import ESTwitter
 
-class SearchTweetsViewController: NSViewController {
+@MainActor
+@objcMembers
+final class SearchTweetsViewController: NSViewController {
 
 	@IBOutlet weak var searchView: NSView!
 	@IBOutlet weak var keywordsTextField: NSTextField!
@@ -43,29 +45,32 @@ class SearchTweetsViewController: NSViewController {
 	
 	var currentSelectedCells: [TimelineViewController.SelectingStatusInfo] {
 	
-		return timelineViewController.timelineSelectedStatuses
+		timelineViewController.timelineSelectedStatuses
 	}
 
 	var currentSelectedStatuses: [Status] {
 		
-		return currentSelectedCells.compactMap { $0.status }
+		currentSelectedCells.compactMap { $0.status }
 	}
 
-	var canReplyTo: Bool {
+	dynamic var canReplyTo: Bool {
 	
-		return canReplyToSelectedStatuses
+		canReplyToSelectedStatuses
 	}
 
-	var canReplyToSelectedStatuses: Bool {
+	dynamic var canReplyToSelectedStatuses: Bool {
 		
-		return currentSelectedStatuses.count == 1
+		currentSelectedStatuses.count == 1
 	}
 }
 
 extension SearchTweetsViewController : NSTextFieldDelegate {
 
-	func controlTextDidEndEditing(_ obj: Notification) {
+	nonisolated func controlTextDidEndEditing(_ obj: Notification) {
 		
-		searchButton.performClick(self)
+		Task { @MainActor in
+			
+			searchButton.performClick(self)
+		}
 	}
 }

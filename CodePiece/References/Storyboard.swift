@@ -25,9 +25,10 @@ struct StoryboardItem<Controller> {
 	
 	var storyboard: NSStoryboard {
 		
-		return NSStoryboard(name: name, bundle: bundle)
+		NSStoryboard(name: name, bundle: bundle)
 	}
 	
+	@MainActor
 	func instantiateController() throws -> Controller {
 	
 		if let identifier = identifier {
@@ -40,6 +41,7 @@ struct StoryboardItem<Controller> {
 		}
 	}
 
+	@MainActor
 	func instantiateInitialController() throws -> Controller {
 		
 		guard let instance = storyboard.instantiateInitialController() else {
@@ -55,11 +57,10 @@ struct StoryboardItem<Controller> {
 		return controller
 	}
 	
+	@MainActor
 	func instantiateController(withIdentifier identifier: String) throws -> Controller {
 
-		let instance = storyboard.instantiateController(withIdentifier: identifier)
-		
-		guard let controller = instance as? Controller else {
+		guard let controller = storyboard.instantiateController(withIdentifier: identifier) as? Controller else {
 			
 			throw StoryboardError.UnexpectedControllerType
 		}

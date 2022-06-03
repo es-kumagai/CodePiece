@@ -1,88 +1,86 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "APIKit",
-        "repositoryURL": "https://github.com/ishkawa/APIKit",
-        "state": {
-          "branch": null,
-          "revision": "c8f5320d84c4c34c0fd965da3c7957819a1ccdd4",
-          "version": "5.2.0"
-        }
-      },
-      {
-        "package": "ESGists",
-        "repositoryURL": "git@github.com:es-kumagai/ESGists.git",
-        "state": {
-          "branch": "master",
-          "revision": "e8d1d14a1b63d25fea36d3eb1df926396cd16593",
-          "version": null
-        }
-      },
-      {
-        "package": "KeychainAccess",
-        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
-        "state": {
-          "branch": null,
-          "revision": "84e546727d66f1adc5439debad16270d0fdd04e7",
-          "version": "4.2.2"
-        }
-      },
-      {
-        "package": "OAuth2",
-        "repositoryURL": "https://github.com/p2/OAuth2",
-        "state": {
-          "branch": null,
-          "revision": "30f46ad74bcbe7013fb340e54f41bc9e6d2ce994",
-          "version": "5.3.2"
-        }
-      },
-      {
-        "package": "Ocean",
-        "repositoryURL": "git@github.com:es-kumagai/Ocean.git",
-        "state": {
-          "branch": "master",
-          "revision": "0174868b817d0306c42f19f9ec3c906a9ab16e48",
-          "version": null
-        }
-      },
-      {
-        "package": "Reachability",
-        "repositoryURL": "https://github.com/ashleymills/Reachability.swift.git",
-        "state": {
-          "branch": null,
-          "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
-          "version": "5.1.0"
-        }
-      },
-      {
-        "package": "Sky",
-        "repositoryURL": "git@github.com:es-kumagai/Sky.git",
-        "state": {
-          "branch": "master",
-          "revision": "388415c7960a4590ec1beecb8d8bdc4697bae4f9",
-          "version": null
-        }
-      },
-      {
-        "package": "Swifter",
-        "repositoryURL": "git@github.com:es-kumagai/Swifter.git",
-        "state": {
-          "branch": null,
-          "revision": "50682ebe64e4c08f18957ccfd16888f035c20755",
-          "version": "2.5.0"
-        }
-      },
-      {
-        "package": "Swim",
-        "repositoryURL": "git@github.com:es-kumagai/Swim.git",
-        "state": {
-          "branch": "master",
-          "revision": "c9cac424b37375426cf8b50e8b2dc4116bd0c797",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "apikit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ishkawa/APIKit",
+      "state" : {
+        "revision" : "4e7f42d93afb787b0bc502171f9b5c12cf49d0ca",
+        "version" : "5.3.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "esgists",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:es-kumagai/ESGists.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "d9cc073a05d0f052c519ae93b2d71d0492fae47d"
+      }
+    },
+    {
+      "identity" : "keychainaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/KeychainAccess.git",
+      "state" : {
+        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
+        "version" : "4.2.2"
+      }
+    },
+    {
+      "identity" : "oauth2",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/p2/OAuth2",
+      "state" : {
+        "revision" : "30f46ad74bcbe7013fb340e54f41bc9e6d2ce994",
+        "version" : "5.3.2"
+      }
+    },
+    {
+      "identity" : "ocean",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:es-kumagai/Ocean.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "43dafea067ea19a6175d2367aa0f1dc1a6383e39"
+      }
+    },
+    {
+      "identity" : "reachability.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ashleymills/Reachability.swift.git",
+      "state" : {
+        "revision" : "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
+        "version" : "5.1.0"
+      }
+    },
+    {
+      "identity" : "sky",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:es-kumagai/Sky.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "81e641dce66ea54cc32a03d7bf60cdba57a0e660"
+      }
+    },
+    {
+      "identity" : "swifter",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:es-kumagai/Swifter.git",
+      "state" : {
+        "revision" : "50682ebe64e4c08f18957ccfd16888f035c20755",
+        "version" : "2.5.0"
+      }
+    },
+    {
+      "identity" : "swim",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:es-kumagai/Swim.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "08b83bc5765aeffa86f00b868c0af487428dc6b3"
+      }
+    }
+  ],
+  "version" : 2
 }

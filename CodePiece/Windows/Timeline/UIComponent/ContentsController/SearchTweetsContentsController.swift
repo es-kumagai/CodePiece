@@ -11,7 +11,7 @@ import ESTwitter
 import Swim
 import Ocean
 
-final class SearchTweetsContentsController : TimelineContentsController, NotificationObservable {
+final class SearchTweetsContentsController : TimelineContentsController {
 	
 	override var kind: TimelineKind {
 		
@@ -46,14 +46,13 @@ final class SearchTweetsContentsController : TimelineContentsController, Notific
 		
 	}
 	
-	override func updateContents(callback: @escaping (UpdateResult) -> Void) {
+	override func updateContents() async throws -> Update {
 		
 		let query = searchQuery
 		
 		guard !query.isEmpty else {
 			
-			callback(.success(([], associatedHashtags: [])))
-			return
+			return Update.nothing
 		}
 				
 		let options = API.SearchOptions(
@@ -61,17 +60,9 @@ final class SearchTweetsContentsController : TimelineContentsController, Notific
 			sinceId: dataSource.lastTweetId
 		)
 		
-		NSApp.twitterController.search(tweetWith: query, options: options) { result in
-			
-			switch result {
-				
-			case .success(let statuses):
-				callback(.success((statuses, [])))
-				
-			case .failure(let error):
-				callback(.failure(error))
-			}
-		}
+		let statuses = try await NSApp.twitterController.search(tweetWith: query, options: options)
+		
+		return Update(statuses)
 	}
 	
 	override func estimateCellHeight(of row: Int) -> CGFloat {

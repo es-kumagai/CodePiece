@@ -9,6 +9,7 @@
 import Cocoa
 
 @objcMembers
+@MainActor
 final class AboutWindow: NSWindow {
 
 }

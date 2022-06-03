@@ -8,7 +8,7 @@
 
 extension Status {
 	
-	public struct Entities {
+	public struct Entities : Sendable {
 				
 		public var urls: [URLEntity]?
 		public var hashtags: [HashtagEntity]?

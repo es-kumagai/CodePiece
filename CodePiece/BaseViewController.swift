@@ -9,12 +9,13 @@
 import Cocoa
 
 @objcMembers
+@MainActor
 final class BaseViewController: NSSplitViewController {
 
 	private(set) weak var mainSplitViewItem: NSSplitViewItem? {
 		
 		didSet {
-			
+
 			mainViewController = mainSplitViewItem.map { $0.viewController as! MainViewController }
 		}
 	}
@@ -30,6 +31,12 @@ final class BaseViewController: NSSplitViewController {
 	private(set) weak var mainViewController: MainViewController?
 	private(set) weak var timelineTabViewController: TimelineTabViewController?
 	
+	override func awakeFromNib() {
+
+		super.awakeFromNib()
+
+	}
+
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
@@ -57,6 +64,6 @@ final class BaseViewController: NSSplitViewController {
 	
 	override func splitView(_ splitView: NSSplitView, effectiveRect proposedEffectiveRect: NSRect, forDrawnRect drawnRect: NSRect, ofDividerAt dividerIndex: Int) -> NSRect {
 		
-		return .zero
+		.zero
 	}
 }

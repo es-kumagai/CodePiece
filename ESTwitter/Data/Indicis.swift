@@ -48,7 +48,7 @@ extension Collection where Element : HasIndices {
 	}
 }
 
-public struct Indices {
+public struct Indices : Sendable {
 	
 	public var startIndex: Int
 	public var endIndex: Int

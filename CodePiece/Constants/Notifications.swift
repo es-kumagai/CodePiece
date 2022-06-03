@@ -16,133 +16,66 @@ import ESGists
 
 extension Authorization {
 
-	final class GistAuthorizationStateDidChangeNotification : NotificationProtocol {
+	struct GistAuthorizationStateDidChangeNotification : NotificationProtocol, Sendable {
 		
-		private(set) var isValid:Bool
-		private(set) var username:String?
-		
-		init(isValid:Bool, username:String?) {
-			
-			self.isValid = isValid
-			self.username = username
-		}
-	}
-
-//	final class TwitterAuthorizationStateDidChangeNotification : NotificationProtocol {
-//		
-//		private(set) var isValid:Bool
-//		private(set) var username:String?
-//		
-//		init(isValid:Bool, username:String?) {
-//			
-//			self.isValid = isValid
-//			self.username = username
-//		}		
-//	}
-}
-
-final class PostCompletelyNotification : NotificationProtocol {
-	
-	var container: PostDataContainer
-	var postedStatus: Status?
-	var hashtags: HashtagSet
-	
-	init(container: PostDataContainer, postedStatus status: Status?, hashtags: HashtagSet) {
-		
-		self.container = container
-		self.postedStatus = status
-		self.hashtags = hashtags
+		let isValid: Bool
+		let username: String?
 	}
 }
 
-final class PostFailedNotification : NotificationProtocol {
+struct PostCompletelyNotification : NotificationProtocol, Sendable {
 	
-	var error: SNSController.PostError
-	
-	init(error: SNSController.PostError) {
-		
-		self.error = error
-	}
+	let container: PostDataContainer
+	let postedStatus: Status?
+	let hashtags: HashtagSet
 }
 
-final class HashtagsChangeRequestNotification : NotificationProtocol {
+struct PostFailedNotification : NotificationProtocol, Sendable {
 	
-	private(set) var hashtags: HashtagSet
-	
-	init(hashtags: HashtagSet) {
-		
-		self.hashtags = hashtags
-	}
+	let error: SNSController.PostError
 }
 
-final class LanguageSelectionChangeRequestNotification : NotificationProtocol {
+struct HashtagsChangeRequestNotification : NotificationProtocol, Sendable {
 	
-	private(set) var language: Language
-	
-	init(language: Language) {
-		
-		self.language = language
-	}
+	let hashtags: HashtagSet
 }
 
-final class CodeChangeRequestNotification : NotificationProtocol {
+struct LanguageSelectionChangeRequestNotification : NotificationProtocol, Sendable {
 	
-	private(set) var code: String
-	
-	init(code: String) {
-		
-		self.code = code
-	}
+	let language: Language
 }
 
-final class HashtagsDidChangeNotification : NotificationProtocol {
+struct CodeChangeRequestNotification : NotificationProtocol, Sendable {
 	
-	private(set) var hashtags: HashtagSet
-	
-	init(hashtags: HashtagSet) {
-		
-		self.hashtags = hashtags
-	}
+	let code: String
 }
 
-final class HashtagsTimelineDidUpdateNotification : NotificationProtocol {
+struct HashtagsDidChangeNotification : NotificationProtocol, Sendable {
 	
-	private(set) var statuses: [Status]
-	
-	init(statuses: [Status]) {
-		
-		self.statuses = statuses
-	}
+	let hashtags: HashtagSet
 }
 
-final class TimelineSelectionChangedNotification : NotificationProtocol {
+struct HashtagsTimelineDidUpdateNotification : NotificationProtocol, Sendable {
 	
-	private(set) unowned var timelineViewController: TimelineViewController
-	private(set) var selectedCells: [TimelineTableView.CellInfo]
-	
-	init(timelineViewController: TimelineViewController, selectedCells: [TimelineTableView.CellInfo]) {
-		
-		self.timelineViewController = timelineViewController
-		self.selectedCells = selectedCells
-	}
+	let statuses: [Status]
 }
 
-final class TimelineReplyToSelectionRequestNotification : NotificationProtocol {
+struct TimelineSelectionChangedNotification : NotificationProtocol, Sendable {
+	
+	let timelineViewController: TimelineViewController
+	let selectedCells: [TimelineTableView.CellInfo]
+}
+
+struct TimelineReplyToSelectionRequestNotification : NotificationProtocol, Sendable {
 	
 }
 
-final class MentionUpdatedNotification : NotificationProtocol {
+struct MentionUpdatedNotification : NotificationProtocol, Sendable {
 	
-	var mentions: [Status]
-	var hasNewMention: Bool
-	
-	init(mentions: [Status], includesNewMention: Bool) {
-		
-		self.mentions = mentions
-		self.hasNewMention = includesNewMention
-	}
+	let mentions: [Status]
+	let hasNewMention: Bool
 }
 
-final class CodePieceMainViewDidLoadNotification : NotificationProtocol {
+struct CodePieceMainViewDidLoadNotification : NotificationProtocol, Sendable {
 	
 }

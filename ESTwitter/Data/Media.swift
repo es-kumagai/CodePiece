@@ -6,14 +6,17 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct Media {
+public struct Media : Sendable {
 	
 	public var id: UInt64
 	public var idString: String
 	public var size: Int
 	public var image: Image
+}
+
+extension Media {
 	
-	public struct Image {
+	public struct Image : Sendable {
 		
 		public var width: Int
 		public var height: Int

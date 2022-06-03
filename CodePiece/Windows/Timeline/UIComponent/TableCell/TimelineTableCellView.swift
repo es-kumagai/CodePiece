@@ -13,11 +13,12 @@ import ESTwitter
 import ESGists
 
 @objcMembers
+@MainActor
 final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObservable {
 
 	private static var cellForEstimateHeight: TimelineTableCellView!
 	
-	var notificationHandlers = Notification.Handlers()
+	let notificationHandlers = Notification.Handlers()
 	
 	enum Style {
 	
@@ -31,7 +32,9 @@ final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObse
 			
 			if item != oldValue {
 
-				applyItem()
+				Task {
+					await applyItem()
+				}
 			}
 		}
 	}
@@ -82,7 +85,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObse
 		
 		super.awakeFromNib()
 
-		observe(TwitterIconLoader.TwitterIconDidLoadNotification.self) { [unowned self] notification in
+		observe(TwitterIconLoader.TwitterIconDidLoadNotification.self) { @MainActor [unowned self] notification in
 
 			guard item?.status.user == notification.user else {
 				
@@ -94,15 +97,13 @@ final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObse
 		}
 	}
 	
-	private func applyItem() {
+	private func applyItem() async{
 
 		if let status = item?.status {
 
 			// NOTE: 🐬 CodePiece の Data を扱うときに HTMLText を介すると attributedText の実装が逆に複雑化する可能性があるため、一旦保留にします。
 //			let html = HTMLText(rawValue: status.text)
 //			textLabel.attributedStringValue = html.attributedText
-
-			
 			
 			textLabel.attributedStringValue = status.attributedText { text in
 
@@ -116,7 +117,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObse
 			dateLabel.stringValue = status.createdAt.description
 			retweetMark.isHidden = !status.isQuoteStatus
 			style = (status.createdAt > TwitterDate(NSDate().daysAgo(1) as Foundation.Date) ? .Recent : .Past)
-			iconButton.image = twitterIconLoader.requestImage(for: status.user).image
+			iconButton.image = await twitterIconLoader.requestImage(for: status.user).image
 		}
 		else {
 

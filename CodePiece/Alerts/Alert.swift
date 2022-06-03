@@ -16,32 +16,35 @@ extension NSViewController : AlertDisplayable {
 	
 }
 
+@MainActor
 extension AlertDisplayable {
 
-	func showInformationAlert(withTitle title: String, message: String) {
+	@discardableResult
+	func showInformationAlert(withTitle title: String, message: String) -> NSApplication.ModalResponse {
 		
 		Self.showInformationAlert(withTitle: title, message: message)
 	}
 	
-	func showWarningAlert(withTitle title: String, message: String, debugDescription: String? = nil) {
+	@discardableResult
+	func showWarningAlert(withTitle title: String, message: String, debugDescription: String? = nil) -> NSApplication.ModalResponse {
 		
 		Self.showWarningAlert(withTitle: title, message: message, debugDescription: debugDescription)
 	}
 	
-	func showErrorAlert(withTitle title: String, message: String, debugDescription: String? = nil) {
+	@discardableResult
+	func showErrorAlert(withTitle title: String, message: String, debugDescription: String? = nil) -> NSApplication.ModalResponse {
 		
 		Self.showErrorAlert(withTitle: title, message: message, debugDescription: debugDescription)
 	}
 	
-	private static func showAlert(_ alert: NSAlert) {
-	
-		DispatchQueue.main.async {
-			
-			alert.runModal()
-		}
+	@discardableResult
+	private static func showAlert(_ alert: NSAlert) -> NSApplication.ModalResponse {
+
+		alert.runModal()
 	}
 	
-	static func showInformationAlert(withTitle title: String, message: String) {
+	@discardableResult
+	static func showInformationAlert(withTitle title: String, message: String) -> NSApplication.ModalResponse {
 		
 		let alert = NSAlert()
 		
@@ -49,11 +52,12 @@ extension AlertDisplayable {
 		alert.informativeText = message
 		alert.addButton(withTitle: "OK")
 		alert.alertStyle = .informational
-	
-		showAlert(alert)
+		
+		return showAlert(alert)
 	}
 	
-	static func showWarningAlert(withTitle title: String, message: String, debugDescription: String? = nil) {
+	@discardableResult
+	static func showWarningAlert(withTitle title: String, message: String, debugDescription: String? = nil) -> NSApplication.ModalResponse {
 		
 		NSLog("Warning: \(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
 		
@@ -64,10 +68,11 @@ extension AlertDisplayable {
 		alert.addButton(withTitle: "OK")
 		alert.alertStyle = .warning
 		
-		showAlert(alert)
+		return showAlert(alert)
 	}
 	
-	static func showErrorAlert(withTitle title: String, message: String, debugDescription: String? = nil) {
+	@discardableResult
+	static func showErrorAlert(withTitle title: String, message: String, debugDescription: String? = nil) -> NSApplication.ModalResponse {
 
 		NSLog("Error: \(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
 		
@@ -78,6 +83,6 @@ extension AlertDisplayable {
 		alert.addButton(withTitle: "OK")
 		alert.alertStyle = .critical
 
-		showAlert(alert)
+		return showAlert(alert)
 	}
 }

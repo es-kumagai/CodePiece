@@ -6,7 +6,7 @@
 //  Copyright © 2016 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+import class Foundation.UserDefaults
 
 // I must gethering the features to other module and remove the namespace.
 struct UserDefaultAccessibleNamespace {

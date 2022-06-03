@@ -6,15 +6,15 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-import Foundation
+import AppKit
 import ESGists
 import ESTwitter
 import CodePieceCore
 
-
+@MainActor
 final class Settings {
 	
-	private var _store = DataStore()	// FIXME: 存在が冗長な印象
+	private var _store: DataStore	// FIXME: 存在が冗長な印象
 	
 	var appState = AppState()
 	var account = AccountSetting()
@@ -22,11 +22,13 @@ final class Settings {
 
 	init() {
 	
+		_store = DataStore()
+		
 		loadSettings()
 	}
 	
 	// 設定がされていることを確認します。有効性は判定しません。
-	var isReady:Bool {
+	var isReady: Bool {
 	
 		return account.isReady && project.isReady
 	}

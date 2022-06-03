@@ -6,7 +6,7 @@
 //  Copyright © 平成27年 EasyStyle G.K. All rights reserved.
 //
 
-public struct URLInfo : Decodable {
+public struct URLInfo : Decodable, Sendable {
 	
 	public var displayUrl: String?
 	public var expandedUrl: TwitterURL?

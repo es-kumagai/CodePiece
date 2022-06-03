@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 @objc protocol SearchTweetsWindowControllerDelegate : AnyObject {
 	
 	@objc func searchTweetsWindowControllerWillClose(_ sender: SearchTweetsWindowController)

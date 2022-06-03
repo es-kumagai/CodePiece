@@ -9,6 +9,7 @@
 import Cocoa
 
 @objcMembers
+@MainActor
 final class WelcomeBoardWindowController: NSWindowController, NSWindowDelegate {
 
     override func windowDidLoad() {
@@ -22,8 +23,17 @@ final class WelcomeBoardWindowController: NSWindowController, NSWindowDelegate {
 		NSApp.runModal(for: window!)
 	}
 
-	func windowWillClose(_ notification: Notification) {
-	
+	override func close() {
+		
 		NSApp.stopModal(withCode: .OK)
+		super.close()
+	}
+	
+	nonisolated func windowWillClose(_ notification: Notification) {
+	
+//		Task { @MainActor in
+//
+//			NSApp.stopModal(withCode: .OK)
+//		}
 	}
 }

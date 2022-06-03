@@ -32,11 +32,43 @@ final class ReachabilityController : NotificationObservable {
 	
 	let notificationHandlers = Notification.Handlers()
 	
-	private var notificationHandler: Notification.Token!
+	private let reachability: Reachability!
 	
-	private let reachability:Reachability!
+	/// - throws: ReachabilityError
+	init() throws {
+		
+		do {
+			
+			reachability = try Reachability()
+		}
+		catch {
+			
+			reachability = nil
+			throw error
+		}
+		
+		observe(notificationNamed: .reachabilityChanged) { [unowned self] notification in
+			
+			ReachabilityChangedNotification(state: state).post()
+		}
+		
+		try reachability.startNotifier()
+	}
 	
-	enum State {
+	deinit {
+		
+		notificationHandlers.releaseAll()
+	}
+	
+	var state: State {
+		
+		State(reachability.connection)
+	}
+}
+
+extension ReachabilityController {
+	
+	enum State : Sendable {
 		
 		case viaWiFi
 		case viaCellular
@@ -58,52 +90,9 @@ final class ReachabilityController : NotificationObservable {
 		}
 	}
 	
-	final class ReachabilityChangedNotification : NotificationProtocol {
+	struct ReachabilityChangedNotification : NotificationProtocol, Sendable {
 		
-		private(set) var state:State
-		
-		init(_ state:State) {
-			
-			self.state = state
-		}
-	}
-
-	/// - throws: ReachabilityError
-	init() throws {
-		
-		do {
-			
-			reachability = try Reachability()
-		}
-		catch {
-			
-			reachability = nil
-			throw error
-		}
-		
-		observe(notificationNamed: .reachabilityChanged, using: reachabilityDidChange)
-		
-		try reachability.startNotifier()
-	}
-	
-	deinit {
-		
-		notificationHandler.release()
-	}
-	
-	var state:State {
-		
-		return State(reachability.connection)
-	}
-	
-	func reachabilityDidChange(notification: Notification) {
-		
-//		guard notification.object === self.reachability else {
-//			
-//			fatalError("Reachability notification posted with unknown reachability object (\(notification.object))")
-//		}
-
-		ReachabilityChangedNotification(state).post()
+		let state: State
 	}
 }
 

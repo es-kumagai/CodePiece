@@ -6,7 +6,7 @@
 //  Copyright © 2020 Tomohiro Kumagai. All rights reserved.
 //
 
-public struct Token {
+public struct Token : Sendable {
 	
 	public var key: String
 	public var secret: String
