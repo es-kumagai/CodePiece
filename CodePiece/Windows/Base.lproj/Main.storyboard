@@ -343,11 +343,18 @@ DQ
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="canReplyTo" id="Vne-po-qbr"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Cancel Replying Mode" keyEquivalent="R" id="nRV-hm-BNs">
+                                        <menuItem title="Cancel Replying to My Last Tweet Mode" keyEquivalent="T" id="nRV-hm-BNs">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
                                                 <action selector="clearReplyingToStatusID:" target="p69-Rc-ib8" id="F8S-WX-GsU"/>
                                                 <binding destination="p69-Rc-ib8" name="enabled" keyPath="hasReplyingToStatusID" id="Ot2-JR-ML1"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Cancel Replying to Selection Mode" keyEquivalent="R" id="WOz-Xp-Jsk">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="clearReplyingToStatusID:" target="p69-Rc-ib8" id="GOZ-wL-Mwj"/>
+                                                <binding destination="p69-Rc-ib8" name="enabled" keyPath="hasReplyingToStatusID" id="tJ5-HG-CEP"/>
                                             </connections>
                                         </menuItem>
                                     </items>
