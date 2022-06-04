@@ -199,7 +199,7 @@ final class TimelineViewController: NSViewController, NotificationObservable {
 		
 		super.awakeFromNib()
 
-		Task {
+		Task.detached { @MainActor [unowned self] in
 
 			updateTimerSource = Dispatch.makeTimer(interval: .milliseconds(30), start: true, timerAction: autoUpdateAction)
 			
@@ -210,6 +210,19 @@ final class TimelineViewController: NSViewController, NotificationObservable {
 				errorHandler: messageQueue(_:handlingError:)
 			)
 			
+			/*
+			 Task.detached での実行にしないと、
+			 エクスポートしたアプリバイナリーの実行時に
+			 次のクラッシュが発生することがありました。
+
+			 実行スレッドが初期化用なのと、タイミングの問題？
+
+			 Thread 1 Crashed::  Dispatch queue: com.apple.root.user-initiated-qos.cooperative
+			 0   libdispatch.dylib             	       0x1be6d2b3c _os_object_retain + 64
+			 1   CodePiece                     	       0x1028121c4 specialized MessageQueue.prepare() + 292
+			 2   CodePiece                     	       0x102808a28 (2) suspend resume partial function for closure #1 in TimelineViewController.awakeFromNib() + 36 (TimelineViewController.swift:213)
+			 3   CodePiece                     	       0x1028166ed (1) await resume partial function for partial apply for closure #1 in TimelineViewController.awakeFromNib() + 1
+			*/
 			await messageQueue.prepare()
 		}
 	}
