@@ -52,7 +52,6 @@
 		B13AC30F2752327900069915 /* Ocean in Frameworks */ = {isa = PBXBuildFile; productRef = B13AC30E2752327900069915 /* Ocean */; };
 		B13AC31927523EF000069915 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13AC31727523E5200069915 /* Semaphore.swift */; };
 		B13CA7922478E9180059F306 /* ESGists in Frameworks */ = {isa = PBXBuildFile; productRef = B13CA7912478E9180059F306 /* ESGists */; };
-		B13D351F2848F51600A8E546 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13D351D2848F51200A8E546 /* WebKit.framework */; };
 		B13D3524284922BE00A8E546 /* WebCaptureControllerRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13D3523284922BE00A8E546 /* WebCaptureControllerRequestError.swift */; };
 		B13D352628492FED00A8E546 /* WebCaptureControllerCaptureError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13D352528492FED00A8E546 /* WebCaptureControllerCaptureError.swift */; };
 		B140C84F23E0820B0009D57C /* MediaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140C84E23E0820B0009D57C /* MediaEntity.swift */; };
@@ -219,7 +218,6 @@
 		B1D6B93A281301970046EFB0 /* APIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B939281301970046EFB0 /* APIKit.swift */; };
 		B1D6B93D281360120046EFB0 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B93C281360120046EFB0 /* Task.swift */; };
 		B1D6B93F281378830046EFB0 /* MessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B93E281378830046EFB0 /* MessageQueue.swift */; };
-		B1D6B941281378890046EFB0 /* MessageQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B940281378890046EFB0 /* MessageQueueDelegate.swift */; };
 		B1D6B943281382B00046EFB0 /* MessageQueueControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B942281382B00046EFB0 /* MessageQueueControl.swift */; };
 		B1D6B947281389B80046EFB0 /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B946281389B80046EFB0 /* MessageType.swift */; };
 		B1D6B94A28138A050046EFB0 /* PreActionMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6B94928138A050046EFB0 /* PreActionMessageType.swift */; };
@@ -603,7 +601,6 @@
 		B1D6B939281301970046EFB0 /* APIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKit.swift; sourceTree = "<group>"; };
 		B1D6B93C281360120046EFB0 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		B1D6B93E281378830046EFB0 /* MessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQueue.swift; sourceTree = "<group>"; };
-		B1D6B940281378890046EFB0 /* MessageQueueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQueueDelegate.swift; sourceTree = "<group>"; };
 		B1D6B942281382B00046EFB0 /* MessageQueueControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQueueControl.swift; sourceTree = "<group>"; };
 		B1D6B946281389B80046EFB0 /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
 		B1D6B94928138A050046EFB0 /* PreActionMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreActionMessageType.swift; sourceTree = "<group>"; };
@@ -694,7 +691,6 @@
 			files = (
 				B119A7112477E48D008505EE /* CodePieceCore.framework in Frameworks */,
 				B1FB161E23D36E6C002D4571 /* OAuth2 in Frameworks */,
-				B13D351F2848F51600A8E546 /* WebKit.framework in Frameworks */,
 				B133050F284A0DEA0083DAB1 /* Ocean in Frameworks */,
 				B1EA63AC280859C400297452 /* libCodePieceSupport.a in Frameworks */,
 				B15EE38A23CE9FBB005B268A /* Reachability in Frameworks */,
@@ -1337,7 +1333,6 @@
 				B1D6B946281389B80046EFB0 /* MessageType.swift */,
 				B1D6B94928138A050046EFB0 /* PreActionMessageType.swift */,
 				B1D6B942281382B00046EFB0 /* MessageQueueControl.swift */,
-				B1D6B940281378890046EFB0 /* MessageQueueDelegate.swift */,
 				B1D6B94B28138AF40046EFB0 /* MessageTypeIgnoreInQuickSuccession.swift */,
 			);
 			path = Message;
@@ -1939,7 +1934,6 @@
 				B1DDCB4A23D0D37700418A84 /* WatermarkLabel.swift in Sources */,
 				B15EE26823CE7658005B268A /* PreferencesWindowController.swift in Sources */,
 				B15EE21223CE7612005B268A /* CaptureInfo.swift in Sources */,
-				B1D6B941281378890046EFB0 /* MessageQueueDelegate.swift in Sources */,
 				B14500F226C14E4600647476 /* SearchTweetsWindowController.swift in Sources */,
 				B1D6B94C28138AF40046EFB0 /* MessageTypeIgnoreInQuickSuccession.swift in Sources */,
 				B15EE2A423CE7667005B268A /* TimelineViewController+Display.swift in Sources */,
@@ -2127,7 +2121,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.Beta.XcodeSourceEditorExtension";
 				PRODUCT_NAME = "CodePiece Extension";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2153,7 +2147,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.XcodeSourceEditorExtension";
 				PRODUCT_NAME = "CodePiece Extension";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2384,7 +2378,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 108;
+				CURRENT_PROJECT_VERSION = 109;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2393,7 +2387,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -2450,7 +2444,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 108;
+				CURRENT_PROJECT_VERSION = 109;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2458,6 +2452,7 @@
 				ES_BUILD_TYPE = Regular;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2499,7 +2494,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.1.16;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece.Beta";
 				PRODUCT_MODULE_NAME = CodePiece;
@@ -2533,7 +2528,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.1.16;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ez-style.appid.CodePiece";
 				PRODUCT_MODULE_NAME = CodePiece;

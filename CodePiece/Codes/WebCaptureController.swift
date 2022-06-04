@@ -11,7 +11,6 @@ import WebKit
 import Ocean
 import Swim
 
-// FIXME: キャプチャーの Concurrency 対応が難関なので、ひとまずコールバックのままにしておく。
 actor WebCaptureController : NSObject {
 	
 	private(set) var requests: [Request]
@@ -54,11 +53,6 @@ actor WebCaptureController : NSObject {
 
 private extension WebCaptureController {
 
-//	func request(_ request: Request) async -> NSImage? {
-//		
-//		
-//	}
-	
 	func post(_ request: Request) {
 		
 		requests.append(request)
