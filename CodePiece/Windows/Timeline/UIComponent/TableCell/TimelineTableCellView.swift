@@ -85,7 +85,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObse
 		
 		super.awakeFromNib()
 
-		observe(TwitterIconLoader.TwitterIconDidLoadNotification.self) { @MainActor [unowned self] notification in
+		observe(TwitterIconLoader.TwitterIconDidLoadNotification.self) { [unowned self] notification in
 
 			guard item?.status.user == notification.user else {
 				

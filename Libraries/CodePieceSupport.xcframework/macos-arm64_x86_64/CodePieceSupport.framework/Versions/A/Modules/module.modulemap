@@ -1,0 +1,11 @@
+framework module CodePieceSupport {
+  umbrella header "CodePieceSupport.h"
+
+  export *
+  module * { export * }
+}
+
+module CodePieceSupport.Swift {
+  header "CodePieceSupport-Swift.h"
+  requires objc
+}

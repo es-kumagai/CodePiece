@@ -8,7 +8,7 @@
 
 import Sky
 
-@preconcurrency import Cocoa
+import Cocoa
 
 @objcMembers
 final class ESAcknowledgementsTableViewDataSource : NSObject, NSTableViewDataSource {

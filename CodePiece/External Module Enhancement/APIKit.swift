@@ -17,7 +17,7 @@ extension APIKit.Session {
 	/// - parameter handler: The closure that receives result of the request.
 	/// - returns: The new session task.
 	@discardableResult
-	open class func send<Request: APIKit.Request>(_ request: Request) async throws -> Request.Response {
+	public class func send<Request: APIKit.Request>(_ request: Request) async throws -> Request.Response {
 
 		try await withCheckedThrowingContinuation { continuation in
 			

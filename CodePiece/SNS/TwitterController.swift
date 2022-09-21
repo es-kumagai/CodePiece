@@ -178,7 +178,7 @@ final class TwitterController : NSObject, AlertDisplayable, NotificationObservab
 //
 //		self.autoVerifyingQueue.start()
 		
-		observe(AuthorizationResetFailureNotification.self) { @MainActor [unowned self] notification in
+		observe(AuthorizationResetFailureNotification.self) { [unowned self] notification in
 
 			showErrorAlert(withTitle: "Failed to reset authorization.", message: notification.error.localizedDescription)
 		}

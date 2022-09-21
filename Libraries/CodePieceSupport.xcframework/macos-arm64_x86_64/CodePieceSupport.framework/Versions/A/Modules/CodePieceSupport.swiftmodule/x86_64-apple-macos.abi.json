@@ -1,0 +1,88 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "CodePieceSupport",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Ocean",
+        "printedName": "Ocean",
+        "declKind": "Import",
+        "moduleName": "CodePieceSupport"
+      },
+      {
+        "kind": "Var",
+        "name": "cipher",
+        "printedName": "cipher",
+        "children": [
+          {
+            "kind": "TypeNominal",
+            "name": "Cipher",
+            "printedName": "Ocean.Cipher",
+            "usr": "s:5Ocean6CipherP"
+          }
+        ],
+        "declKind": "Var",
+        "usr": "s:16CodePieceSupport6cipher5Ocean6Cipher_pvp",
+        "mangledName": "$s16CodePieceSupport6cipher5Ocean6Cipher_pvp",
+        "moduleName": "CodePieceSupport",
+        "declAttributes": [
+          "HasInitialValue",
+          "HasStorage",
+          "AccessControl"
+        ],
+        "isLet": true,
+        "hasStorage": true,
+        "accessors": [
+          {
+            "kind": "Accessor",
+            "name": "Get",
+            "printedName": "Get()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Cipher",
+                "printedName": "Ocean.Cipher",
+                "usr": "s:5Ocean6CipherP"
+              }
+            ],
+            "declKind": "Accessor",
+            "usr": "s:16CodePieceSupport6cipher5Ocean6Cipher_pvg",
+            "mangledName": "$s16CodePieceSupport6cipher5Ocean6Cipher_pvg",
+            "moduleName": "CodePieceSupport",
+            "implicit": true,
+            "accessorKind": "get"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/tomohiro\/Developer\/Applications\/CodePieceSupport\/CodePieceSupport\/Cryption.swift",
+      "kind": "Array",
+      "offset": 245,
+      "length": 94,
+      "value": "[0x8C, 0x3, 0x20, 0x6C, 0xCD, 0xC, 0xE4, 0x17, 0xA7, 0x9D, 0x73, 0x19, 0x7A, 0x1F, 0x73, 0xDE]"
+    },
+    {
+      "filePath": "\/Users\/tomohiro\/Developer\/Applications\/CodePieceSupport\/CodePieceSupport\/Cryption.swift",
+      "kind": "Array",
+      "offset": 366,
+      "length": 95,
+      "value": "[0x41, 0x72, 0x84, 0xE6, 0x40, 0x6E, 0x3, 0x42, 0xC0, 0x10, 0x69, 0xCD, 0x63, 0x31, 0x45, 0xD0]"
+    }
+  ]
+}

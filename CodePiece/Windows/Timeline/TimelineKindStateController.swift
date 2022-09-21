@@ -175,8 +175,10 @@ extension TimelineKind : CustomStringConvertible {
 
 private extension Set where Element == TimelineKindStateController.TabInformation {
 	
+	@MainActor
 	static var nextTabOrder = 0
 	
+	@MainActor
 	mutating func register<T: TimelineContentsController>(_ controller: T.Type, for kind: TimelineKind, button: NSButton, state: TimelineState = .neutral, autoUpdateInterval interval: Double? = nil) {
 
 		insert(Element(kind: kind, button: button, state: state, controller: T.init(), autoUpdateInterval: interval, tabOrder: Self.nextTabOrder))
