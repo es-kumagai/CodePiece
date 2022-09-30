@@ -12,14 +12,14 @@ import Ocean
 @MainActor
 @objcMembers
 final class MenuController : NSObject {
-
+	
 	@IBOutlet var timelineHashtagsMenuItem: NSMenuItem!
 	@IBOutlet var timelineMyTweetsMenuItem: NSMenuItem!
 	@IBOutlet var timelineMentionsMenuItem: NSMenuItem!
 	@IBOutlet var timelineRelatedTweetsMenuItem: NSMenuItem!
-
+	
 	var timelineMenuItemsOrderedByTimelineIndex: [NSMenuItem] {
-
+		
 		return [
 			timelineHashtagsMenuItem,
 			timelineMyTweetsMenuItem,
@@ -54,24 +54,24 @@ final class MenuController : NSObject {
 	}
 	
 	var isMainViewControllerActive: Bool {
-	
+		
 		mainViewController != nil
 	}
 	
 	dynamic var canPostToSNS: Bool {
 		
 		mainViewController?.canPost ?? false
-//		Task.blocking { [unowned self] in
-//
-//			await mainViewController?.canPost ?? false
-//		}
+		//		Task.blocking { [unowned self] in
+		//
+		//			await mainViewController?.canPost ?? false
+		//		}
 	}
 	
 	@IBAction func showPreferences(_ sender: NSMenuItem?) {
 		
 		application.showPreferencesWindow()
 	}
-
+	
 	@IBAction func showWelcomeBoard(_ sender: NSMenuItem?) {
 		
 		application.showWelcomeBoard()
@@ -110,7 +110,7 @@ final class MenuController : NSObject {
 	}
 	
 	@IBAction func clearCodeAndDescription(_ sender: NSMenuItem?) {
-	
+		
 		mainViewController?.clearCodeText()
 		mainViewController?.clearDescriptionText()
 	}
@@ -121,7 +121,7 @@ final class MenuController : NSObject {
 	}
 	
 	@IBAction func clearCode(_ sender: NSMenuItem?) {
-
+		
 		mainViewController?.clearCodeText()
 	}
 	
@@ -136,7 +136,7 @@ final class MenuController : NSObject {
 	}
 	
 	var canOpenBrowserWithSearchHashtagPage: Bool {
-	
+		
 		return mainViewController?.canOpenBrowserWithRelatedTweets ?? false
 	}
 	
@@ -151,7 +151,7 @@ final class MenuController : NSObject {
 	}
 	
 	var isTimelineActive: Bool {
-	
+		
 		currentTimelineViewController?.isTimelineActive ?? false
 	}
 	
@@ -169,7 +169,7 @@ final class MenuController : NSObject {
 		
 		application.openBrowserWithCurrentTwitterStatus()
 	}
-
+	
 	@IBAction func openBrowserWithRelatedStatuses(_ sender: AnyObject) {
 		
 		mainViewController?.openBrowserWithRelatedTweets()
@@ -184,11 +184,11 @@ final class MenuController : NSObject {
 		
 		guard let target = timelineMenuItemsOrderedByTimelineIndex.enumerated()
 			.first(where: { $0.element === menuItem }) else {
-				
-				NSLog("%@", "Unknown timeline is selected. (\(type(of: menuItem))")
-				return
+			
+			Log.warning("Unknown timeline is selected. (\(type(of: menuItem))")
+			return
 		}
-
+		
 		timelineTabViewController?.currentTimelineKind = TimelineKind(rawValue: target.offset)
 	}
 	

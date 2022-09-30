@@ -56,7 +56,7 @@ extension PostDataContainer {
 			#if DEBUG
 			fatalError(message)
 			#else
-			NSLog("INTERNAL ERROR: %@", message)
+			log.error("INTERNAL ERROR: %@", message)
 			return result()
 			#endif
 		}

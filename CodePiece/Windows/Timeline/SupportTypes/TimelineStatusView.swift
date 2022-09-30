@@ -41,7 +41,7 @@ final class TimelineStatusView: NSView {
 			
 			#if DEBUG
 			if case .error = state {
-				NSLog("An error occurres when updating timeline: \(message)")
+				Log.error("An error occurres when updating timeline: \(message)")
 			}
 			#endif
 		}

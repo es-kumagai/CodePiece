@@ -146,7 +146,7 @@ extension Authorization {
 		
 		let oauth2 = gist.oauth2
 		
-		NSLog("Trying authorization with GitHub OAuth.")
+		Log.debug("Trying authorization with GitHub OAuth.")
 		
 		oauth2.authConfig.authorizeEmbedded = false
 		oauth2.authConfig.authorizeContext = NSApp.keyWindow
@@ -159,7 +159,7 @@ extension Authorization {
 		}
 		catch {
 
-			print("GitHub authorization went wrong: \(error)")
+			Log.error("GitHub authorization went wrong: \(error)")
 			return
 		}
 
@@ -194,7 +194,7 @@ extension Authorization {
 			throw AuthorizationError.message("Failed to get access token by GitHub. Please try again later")
 		}
 		
-		NSLog("GitHub OAuth authentication did end successfully with scope=\(scope).")
+		Log.information("GitHub OAuth authentication did end successfully with scope=\(scope).")
 		DebugTime.print(" with parameters: \(parameters)")
 		
 		let authorization = GitHubAuthorization.token(accessToken)

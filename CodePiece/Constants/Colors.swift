@@ -7,6 +7,7 @@
 //
 
 import AppKit
+import SwiftUI
 
 extension NSColor {
 	
@@ -20,6 +21,7 @@ extension NSColor {
 	static let attentionColor = NSColor(named: "AttentionColor")!
 	
 	static let textColor = NSColor(named: "TextColor")!
+	static let optionTextColor = NSColor(named: "OptionTextColor")!
 	static let recentBackgroundColor = NSColor(named: "RecentBackgroundColor")!
 	static let pastBackgroundColor = NSColor(named: "PastBackgroundColor")!
 	static let recentSelectionBackgroundColor = NSColor(named: "RecentSelectionBackgroundColor")!
@@ -31,4 +33,14 @@ extension NSColor {
 	static let statusErrorTextColor = NSColor(named: "StatusErrorTextColor")!
 	static let statusOkBackgroundColor = NSColor(named: "StatusOkBackgroundColor")!
 	static let statusErrorBackgroundColor = NSColor(named: "StatusErrorBackgroundColor")!
+}
+
+extension Color {
+	
+	static let textColor = Color("TextColor")
+	static let debugTextColor = Color("NeutralColor")
+	static let warningColor = Color("WarningColor")
+	static let errorColor = Color("ErrorColor")
+	static let tryingColor = Color("TryingColor")
+	static let successColor = Color("SuccessColor")
 }

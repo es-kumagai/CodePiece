@@ -161,7 +161,7 @@ extension CodePieceApplication {
 			
 			let message = "UNEXPECTED ERROR: Try to open selection with browser, but not ready to open browser. (selection: \(currentSelectedCells.map { $0.row })"
 			
-			NSLog("%@", message)
+			Log.error(message)
 //			assertionFailure(message)
 			
 			return
@@ -173,7 +173,7 @@ extension CodePieceApplication {
 			
 			let message = "UNEXPECTED ERROR: Try to open selection with browser, but don't ready to open current status. (selection: \(currentSelectedStatuses)"
 			
-			NSLog("%@", message)
+			Log.error(message)
 //			assertionFailure(message)
 			
 			return

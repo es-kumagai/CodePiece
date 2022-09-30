@@ -93,7 +93,7 @@ final class TimelineTableCellView: NSTableCellView, Selectable, NotificationObse
 			}
 
 			iconButton.image = notification.icon
-			NSLog("%@", "\(notification.user.screenName)'s icon did load.")
+			Log.debug("\(notification.user.screenName)'s icon did load.")
 		}
 	}
 	

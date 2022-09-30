@@ -203,7 +203,7 @@ extension WebCaptureController.Request : WKNavigationDelegate {
 				let effectiveHeight = max(min(bounds.contentHeight, captureInfo.extendedHeight), captureInfo.minHeight)
 				let effectiveWidth = min(max(bounds.contentHeight * 16 / 9, captureInfo.minWidth), captureInfo.maxWidth)
 				
-				NSLog("Captured : (\(effectiveWidth), \(effectiveHeight)) { min: (\(captureInfo.minWidth), \(captureInfo.minHeight)), max: (\(captureInfo.maxWidth), \(captureInfo.extendedHeight)), container: (\(bounds.containerWidth), \(bounds.containerHeight)), content: (\(bounds.contentWidth), \(bounds.contentHeight)) }")
+				Log.debug("Captured : (\(effectiveWidth), \(effectiveHeight)) { min: (\(captureInfo.minWidth), \(captureInfo.minHeight)), max: (\(captureInfo.maxWidth), \(captureInfo.extendedHeight)), container: (\(bounds.containerWidth), \(bounds.containerHeight)), content: (\(bounds.contentWidth), \(bounds.contentHeight)) }")
 				
 				view.frame = NSRect(x: 0, y: 0, width: bounds.bodyWidth, height: bounds.bodyHeight)
 				

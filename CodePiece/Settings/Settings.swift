@@ -94,20 +94,20 @@ final class Settings {
 		
 		let token = ESTwitter.Token(key: tokenKey, secret: tokenSecret, userId: tokenUserId, screenName: tokenScreenName)
 		
-		NSLog("Twitter account which authenticated by OAuth restored from data store. (\(token.screenName))")
+		Log.information("Twitter account which authenticated by OAuth restored from data store. (\(token.screenName))")
 		
 		account.twitterToken = token
 	}
 	
 	private func loadTwitterAccountDefault() {
 
-		NSLog("No Twitter account specified.")
+		Log.warning("No Twitter account specified.")
 		account.twitterToken = nil
 	}
 
 	func saveTwitterAccount() {
 		
-		NSLog("Writing Twitter account to data store. (\(account.twitterToken?.screenName ?? "(null)"))")
+		Log.information("Writing Twitter account to data store. (\(account.twitterToken?.screenName ?? "(null)"))")
 		
 		if let token = account.twitterToken {
 
@@ -137,14 +137,14 @@ final class Settings {
 		account.username = _store.gist.authInfo.username
 		account.authorization = _store.gist.authInfo.token.map(GitHubAuthorization.init)
 
-		NSLog("Gist account information restored from data store. (\(account.username ?? "(null)"))")
+		Log.information("Gist account information restored from data store. (\(account.username ?? "(null)"))")
 		
 		Authorization.GistAuthorizationStateDidChangeNotification(isValid: account.authorizationState == .authorized, username: account.username).post()
 	}
 
 	func saveGistAccount() {
 		
-		NSLog("Writing Gist account to data store. (\(account.username ?? "(null)"))")
+		Log.information("Writing Gist account to data store. (\(account.username ?? "(null)"))")
 		
 		_store.gist.authInfo.id = account.id
 		_store.gist.authInfo.username = account.username

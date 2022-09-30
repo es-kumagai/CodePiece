@@ -33,13 +33,13 @@ final class TwitterByOAuthPreferenceViewController : TwitterPreferenceViewContro
 		
 		observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 			
-			NSLog("%@", "Twitter authorization is finished successfully.")
+			Log.success("Twitter authorization is finished successfully.")
 			authenticatingHUD.hide()
 		}
 		
 		observe(TwitterController.AuthorizationStateDidChangeWithErrorNotification.self) { [unowned self] notification in
 
-			NSLog("Twitter authorization failure. %@", "\(notification.error)")
+			Log.error("Twitter authorization failure. \(notification.error)")
 			authenticatingHUD.hide()
 		}
 	}

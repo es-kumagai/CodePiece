@@ -38,21 +38,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NotificationObservable
 	@MainActor
 	override func awakeFromNib() {
 		
-		NSLog("Application awoke.")
+		Log.debug("Application awoke.")
 		
 		super.awakeFromNib()
-
 	}
 
     nonisolated func applicationDidFinishLaunching(_ aNotification: Notification) {
 
-		NSLog("Application launched.")
-		
+		Log.debug("Application has launched.")
     }
 
     nonisolated func applicationWillTerminate(_ aNotification: Notification) {
 
-		NSLog("Application terminated.")
+		Log.debug("Application has terminated.")
     }
 }
 

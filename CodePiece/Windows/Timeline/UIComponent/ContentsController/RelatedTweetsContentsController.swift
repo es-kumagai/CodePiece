@@ -54,7 +54,7 @@ final class RelatedTweetsContentsController : TimelineContentsController {
 
 			if dataSource.appendHashtags(hashtags: hashtags).passed {
 
-				NSLog("Hashtag did change: \(hashtags)")
+				Log.information("Hashtag did change: \(hashtags)")
 				needsUpdate = true
 			}
 		}

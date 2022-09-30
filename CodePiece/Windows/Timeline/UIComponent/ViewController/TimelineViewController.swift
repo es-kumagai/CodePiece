@@ -397,7 +397,7 @@ extension TimelineViewController {
 				
 				guard autoUpdateState.hasInternetConnection else {
 					
-					NSLog("No internet connection found.")
+					Log.warning("No internet connection found.")
 					autoUpdateState.updateNextUpdateTime()
 					return
 				}
@@ -473,7 +473,7 @@ extension TimelineViewController {
 		
 		autoUpdateState.addUpdateIntervalDelay(bySecond: interval)
 		
-		NSLog("Next timeline update will delay %@ seconds.", autoUpdateState.updateIntervalDelay.description)
+		Log.debug("Next timeline updating will delay \(autoUpdateState.updateIntervalDelay) seconds.")
 	}
 	
 	private func _resetAutoUpdateIntervalDelay() {
@@ -484,13 +484,13 @@ extension TimelineViewController {
 		}
 		
 		autoUpdateState.resetUpdateIntervalDelay()
-		NSLog("Delay for timeline update turns to neutral.")
+		Log.debug("Delay for timeline update turns to neutral.")
 	}
 	
 	private func _changeAutoUpdateState(enable: Bool) {
 		
 		autoUpdateState.enabled = enable
-		NSLog("Timeline update automatically is \(enable ? "enabled" : "disabled").")
+		Log.information("Automatic timeline update is \(enable ? "enabled" : "disabled").")
 		
 		if enable {
 			
@@ -503,12 +503,12 @@ extension TimelineViewController {
 		switch state {
 			
 		case .viaWiFi, .viaCellular:
-			NSLog("CodePiece has get internet connection.")
+			Log.success("CodePiece has got internet connection.")
 			autoUpdateState.hasInternetConnection = true
 			autoUpdateState.setNeedsUpdate()
 			
 		case .unreachable:
-			NSLog("CodePiece has lost internet connection.")
+			Log.warning("CodePiece has lost internet connection.")
 			autoUpdateState.hasInternetConnection = false
 		}
 	}
@@ -567,7 +567,7 @@ extension TimelineViewController {
 		// To wait for preparing a message queue on first time, invoke following codes by a task.
 		Task {
 			
-			NSLog("Start observing notifications on \(self).")
+			DebugTime.print("Start observing notifications on \(self).")
 
 			observe(TwitterController.AuthorizationStateDidChangeNotification.self) { [unowned self] notification in
 				
@@ -728,7 +728,7 @@ extension TimelineViewController {
 		
 		guard displayControlState != .updating else {
 			
-			NSLog("%@", "Skip update \(contentsKind) contents because other updating process still running.")
+			Log.debug("Skip update \(contentsKind) contents because other updating process still running.")
 			return
 		}
 		
@@ -740,7 +740,7 @@ extension TimelineViewController {
 #if DEBUG
 				guard let timelineTableView = timelineTableView else {
 					
-					NSLog("%@", "Table view for '\(contentsKind)' is still inactive.")
+					DebugTime.print("Table view for '\(contentsKind)' is still inactive.")
 					return
 				}
 				

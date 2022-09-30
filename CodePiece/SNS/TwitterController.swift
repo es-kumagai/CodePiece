@@ -43,12 +43,12 @@ final class TwitterController : NSObject, AlertDisplayable, NotificationObservab
 		
 		fileprivate func messageBlocked() {
 
-			NSLog("Ignoring duplicated `Request Verification` message.")
+			Log.warning("Ignoring duplicated `Request Verification` message.")
 		}
 		
 		fileprivate func messageQueued() {
 			
-			NSLog("queued")
+			Log.debug("queued")
 		}
 	}
 	
@@ -254,14 +254,14 @@ final class TwitterController : NSObject, AlertDisplayable, NotificationObservab
 		DebugTime.print("📮 Passed verify-credentials #2")
 		guard hasToken else {
 
-			NSLog("Twitter controller has not token. Skip verifying the credentials.")
+			Log.warning("Twitter controller has not token. Skip verifying the credentials.")
 			return
 		}
 
 		DebugTime.print("📮 Passed verify-credentials #3")
 		guard !credentialsVerified else {
 
-			NSLog("Credentials already verifyed in Twitter.")
+			Log.debug("Credentials already verifyed in Twitter.")
 			return
 		}
 

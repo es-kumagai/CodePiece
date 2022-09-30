@@ -336,7 +336,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 				showErrorAlert(withTitle: "Finish posting, but ...", message: "\(error)")
 			}
 			
-			await NSLog("Posted completely \(notification.container.twitterState.postedStatus?.text ?? "(unknown)")")
+			await Log.success("Posted completely \(notification.container.twitterState.postedStatus?.text ?? "(unknown)")")
 		}
 		
 		observe(PostFailedNotification.self) { [unowned self] notification in
@@ -460,7 +460,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 	override func restoreState(with coder: NSCoder) {
 		
 		super.restoreState(with: coder)
-		NSLog("🌴 restoreStateWithCoder Passed.")
+		DebugTime.print("🌴 restoreStateWithCoder Passed.")
 	}
 
 	func verifyCredentials() async {
@@ -506,7 +506,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			let message = "UNEXPECTED ERROR: Try to open related tweets with browser, but don't ready to open it. (hashtags: \(hashTagTextField.hashtags))"
 			
-			NSLog("%@", message)
+			Log.error(message)
 			assertionFailure(message)
 			
 			return
@@ -548,7 +548,7 @@ final class MainViewController: NSViewController, NotificationObservable {
 			
 			let message = "UNEXPECTED ERROR: Try to open related tweets with browser, but don't ready to open it. (hashtags: \(hashTagTextField.hashtags))"
 			
-			NSLog("%@", message)
+			Log.error(message)
 //			assertionFailure(message)
 			
 			return

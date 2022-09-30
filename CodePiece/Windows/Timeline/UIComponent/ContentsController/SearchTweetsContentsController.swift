@@ -30,7 +30,7 @@ final class SearchTweetsContentsController : TimelineContentsController {
 				return
 			}
 
-			NSLog("Search query did change: \(searchQuery)")
+			Log.information("Search query did change: \(searchQuery)")
 			dataSource.items.removeAll()
 			delegate?.timelineContentsNeedsUpdate?(self)
 		}

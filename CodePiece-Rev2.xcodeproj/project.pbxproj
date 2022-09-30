@@ -79,6 +79,7 @@
 		B1508BEA23E99E4900973728 /* TimelineOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BE923E99E4900973728 /* TimelineOptions.swift */; };
 		B1508BEC23E9B3E000973728 /* TimelineContentsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BEB23E9B3E000973728 /* TimelineContentsControllerDelegate.swift */; };
 		B1508BEE23E9BCF100973728 /* TimelineTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508BED23E9BCF100973728 /* TimelineTabViewController.swift */; };
+		B15E5C0F28E5C65400F6C2E0 /* LogItemKindSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15E5C0E28E5C65400F6C2E0 /* LogItemKindSymbolView.swift */; };
 		B15EE1DE23CE706C005B268A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1DD23CE706C005B268A /* Alert.swift */; };
 		B15EE1F623CE747D005B268A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F523CE747D005B268A /* Extension.swift */; };
 		B15EE1F923CE7522005B268A /* AppControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15EE1F823CE7522005B268A /* AppControllers.swift */; };
@@ -195,6 +196,9 @@
 		B1ABF0DF284A204D009A124B /* Sky in Frameworks */ = {isa = PBXBuildFile; productRef = B1ABF0DE284A204D009A124B /* Sky */; };
 		B1ABF0E1284A204D009A124B /* Sky-AppKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1ABF0E0284A204D009A124B /* Sky-AppKit */; };
 		B1ABF0E3284A204D009A124B /* Sky-Base in Frameworks */ = {isa = PBXBuildFile; productRef = B1ABF0E2284A204D009A124B /* Sky-Base */; };
+		B1AC77CC28E6F90900C83DE7 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC77CB28E6F90900C83DE7 /* LogViewController.swift */; };
+		B1AC77CE28E6FA7500C83DE7 /* LogWindowController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1AC77CD28E6FA7500C83DE7 /* LogWindowController.storyboard */; };
+		B1AC77D028E6FF8B00C83DE7 /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC77CF28E6FF8B00C83DE7 /* LogWindowController.swift */; };
 		B1BDF1EE28DB390A00C17DA8 /* CodePieceSupport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BDF1ED28DB390A00C17DA8 /* CodePieceSupport.xcframework */; };
 		B1BDF1EF28DB390A00C17DA8 /* CodePieceSupport.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1BDF1ED28DB390A00C17DA8 /* CodePieceSupport.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1C1F1C223EB0B420010C28F /* CodePieceScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */; };
@@ -204,6 +208,10 @@
 		B1C34A2423E355DA0039F4E6 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C34A2323E355DA0039F4E6 /* Polygon.swift */; };
 		B1C34A2723E363660039F4E6 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C34A2623E363660039F4E6 /* Acknowledgements.plist */; };
 		B1C4410C23E033BE00C4715A /* TimelineMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */; };
+		B1CCAF2C28E4539A008AF625 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCAF2B28E4539A008AF625 /* LogView.swift */; };
+		B1CCAF4928E45447008AF625 /* LogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCAF4828E45447008AF625 /* LogItem.swift */; };
+		B1CCAF5128E46CD8008AF625 /* LogItemKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCAF5028E46CD8008AF625 /* LogItemKind.swift */; };
+		B1CCAF5328E47A81008AF625 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCAF5228E47A81008AF625 /* Log.swift */; };
 		B1CE4CD323E6F24C003D1399 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE4CD223E6F24C003D1399 /* Character.swift */; };
 		B1CE4CD523E6F605003D1399 /* CharacterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE4CD423E6F605003D1399 /* CharacterTests.swift */; };
 		B1CE4CE823E6F83A003D1399 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE4CE723E6F83A003D1399 /* AppDelegate.swift */; };
@@ -459,6 +467,7 @@
 		B1508BE923E99E4900973728 /* TimelineOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineOptions.swift; sourceTree = "<group>"; };
 		B1508BEB23E9B3E000973728 /* TimelineContentsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineContentsControllerDelegate.swift; sourceTree = "<group>"; };
 		B1508BED23E9BCF100973728 /* TimelineTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTabViewController.swift; sourceTree = "<group>"; };
+		B15E5C0E28E5C65400F6C2E0 /* LogItemKindSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogItemKindSymbolView.swift; sourceTree = "<group>"; };
 		B15EE1DD23CE706C005B268A /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		B15EE1F523CE747D005B268A /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B15EE1F823CE7522005B268A /* AppControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppControllers.swift; sourceTree = "<group>"; };
@@ -572,6 +581,9 @@
 		B1A4728723D09DB300F73658 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		B1A4728823D09DB300F73658 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B1A4728923D09DB300F73658 /* PlaceBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBoundingBox.swift; sourceTree = "<group>"; };
+		B1AC77CB28E6F90900C83DE7 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		B1AC77CD28E6FA7500C83DE7 /* LogWindowController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogWindowController.storyboard; sourceTree = "<group>"; };
+		B1AC77CF28E6FF8B00C83DE7 /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		B1BDF1EC28DB38AD00C17DA8 /* Libraries */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Libraries; sourceTree = "<group>"; };
 		B1BDF1ED28DB390A00C17DA8 /* CodePieceSupport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CodePieceSupport.xcframework; path = Libraries/CodePieceSupport.xcframework; sourceTree = "<group>"; };
 		B1C1F1C123EB0B420010C28F /* CodePieceScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodePieceScheme.swift; sourceTree = "<group>"; };
@@ -582,6 +594,10 @@
 		B1C34A2623E363660039F4E6 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		B1C34A2B23E37ECF0039F4E6 /* PrivacyPolicy */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PrivacyPolicy; sourceTree = "<group>"; };
 		B1C4410B23E033BE00C4715A /* TimelineMessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineMessageQueue.swift; sourceTree = "<group>"; };
+		B1CCAF2B28E4539A008AF625 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		B1CCAF4828E45447008AF625 /* LogItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogItem.swift; sourceTree = "<group>"; };
+		B1CCAF5028E46CD8008AF625 /* LogItemKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogItemKind.swift; sourceTree = "<group>"; };
+		B1CCAF5228E47A81008AF625 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		B1CE4CD223E6F24C003D1399 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		B1CE4CD423E6F605003D1399 /* CharacterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTests.swift; sourceTree = "<group>"; };
 		B1CE4CE523E6F83A003D1399 /* ESTwitterTestsHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ESTwitterTestsHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1035,6 +1051,7 @@
 				B17B937F23CAB1EC00E3B490 /* MainWindow */,
 				B15EE26F23CE7667005B268A /* CodePieceMain */,
 				B15EE27F23CE7667005B268A /* Timeline */,
+				B1CCAF2A28E45350008AF625 /* Log */,
 			);
 			path = Windows;
 			sourceTree = "<group>";
@@ -1199,6 +1216,21 @@
 				B15EE28323CE7667005B268A /* TimelineTableDataSource.swift */,
 			);
 			path = Table;
+			sourceTree = "<group>";
+		};
+		B1CCAF2A28E45350008AF625 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				B1AC77CD28E6FA7500C83DE7 /* LogWindowController.storyboard */,
+				B1CCAF5228E47A81008AF625 /* Log.swift */,
+				B1CCAF2B28E4539A008AF625 /* LogView.swift */,
+				B1CCAF4828E45447008AF625 /* LogItem.swift */,
+				B1CCAF5028E46CD8008AF625 /* LogItemKind.swift */,
+				B15E5C0E28E5C65400F6C2E0 /* LogItemKindSymbolView.swift */,
+				B1AC77CB28E6F90900C83DE7 /* LogViewController.swift */,
+				B1AC77CF28E6FF8B00C83DE7 /* LogWindowController.swift */,
+			);
+			path = Log;
 			sourceTree = "<group>";
 		};
 		B1CE4CE623E6F83A003D1399 /* ESTwitterTestsHost */ = {
@@ -1747,6 +1779,7 @@
 				B15EE29923CE7667005B268A /* AcknowledgementsViewController.storyboard in Resources */,
 				B15EE26B23CE7658005B268A /* TwitterPreferenceView.storyboard in Resources */,
 				B15EE26A23CE7658005B268A /* PreferencesWindow.storyboard in Resources */,
+				B1AC77CE28E6FA7500C83DE7 /* LogWindowController.storyboard in Resources */,
 				B1D13C7B23CA14DD0016902A /* Main.storyboard in Resources */,
 				B1C349DB23E285BF0039F4E6 /* APIKeys.plist in Resources */,
 				B15EE29023CE7667005B268A /* Timeline.storyboard in Resources */,
@@ -1873,6 +1906,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B15E5C0F28E5C65400F6C2E0 /* LogItemKindSymbolView.swift in Sources */,
 				B15EE25023CE7658005B268A /* UserDefaultsAccessible.swift in Sources */,
 				B15EE29B23CE7667005B268A /* MainStatusViewController.swift in Sources */,
 				B15EE22323CE7636005B268A /* MenuController.swift in Sources */,
@@ -1914,6 +1948,7 @@
 				B15EE2AA23CE7667005B268A /* WelcomeBoardWindowController.swift in Sources */,
 				B15EE2A523CE7667005B268A /* TimelineViewController+MainWindow.swift in Sources */,
 				B191D87123EC6C7E00590948 /* SimpleTweetContentsDataSource.swift in Sources */,
+				B1AC77D028E6FF8B00C83DE7 /* LogWindowController.swift in Sources */,
 				B15EE20B23CE7593005B268A /* GitHubOpenFeatures.swift in Sources */,
 				B1A1060323CA217F00F9C4FD /* APIKeys.swift in Sources */,
 				B1D6B943281382B00046EFB0 /* MessageQueueControl.swift in Sources */,
@@ -1947,6 +1982,7 @@
 				B15EE26523CE7658005B268A /* GistScheme.swift in Sources */,
 				B122599023EA90F0006D819D /* MentionsContentsController.swift in Sources */,
 				B1C349A923E152A90039F4E6 /* ReachabilityController.swift in Sources */,
+				B1AC77CC28E6F90900C83DE7 /* LogViewController.swift in Sources */,
 				B15EE29A23CE7667005B268A /* AcknowledgementsViewController.swift in Sources */,
 				B15EE1DE23CE706C005B268A /* Alert.swift in Sources */,
 				B15EE26D23CE7658005B268A /* TwitterPreferenceViewController.swift in Sources */,
@@ -1960,22 +1996,26 @@
 				B1F5510226C4B9F400BBDF7A /* Date.swift in Sources */,
 				B1278B5C23D176C3003F3719 /* CodeText.swift in Sources */,
 				B1EA63B028085C4300297452 /* WebCaptureControllerRequest.swift in Sources */,
+				B1CCAF4928E45447008AF625 /* LogItem.swift in Sources */,
 				B15EE25423CE7658005B268A /* DataStore_AuthInfo.swift in Sources */,
 				B15EE1FE23CE7571005B268A /* BaseViewController.swift in Sources */,
 				B15EE25523CE7658005B268A /* Authorization.swift in Sources */,
 				B15EE29123CE7667005B268A /* MainViewController+PostDataManage.swift in Sources */,
+				B1CCAF5128E46CD8008AF625 /* LogItemKind.swift in Sources */,
 				B15EE21123CE7612005B268A /* WebCaptureController.swift in Sources */,
 				B1D13C7423CA14DB0016902A /* AppDelegate.swift in Sources */,
 				B15EE25323CE7658005B268A /* Settings.swift in Sources */,
 				B1255554276F80E800EFC894 /* CodePieceApplication.swift in Sources */,
 				B15EE24F23CE7658005B268A /* ProjectSetting.swift in Sources */,
 				B15EE1F923CE7522005B268A /* AppControllers.swift in Sources */,
+				B1CCAF2C28E4539A008AF625 /* LogView.swift in Sources */,
 				B1D6B947281389B80046EFB0 /* MessageType.swift in Sources */,
 				B15EE2A823CE7667005B268A /* TimelineTableItem.swift in Sources */,
 				B15EE25223CE7658005B268A /* DataStoreForApp.swift in Sources */,
 				B191D86D23EC6C1600590948 /* GroupedTweetContentsDataSource.swift in Sources */,
 				B15EE29623CE7667005B268A /* AboutWindowController.swift in Sources */,
 				B1806CB823D6B50F006932F5 /* SwifterScheme.swift in Sources */,
+				B1CCAF5328E47A81008AF625 /* Log.swift in Sources */,
 				B15EE25823CE7658005B268A /* PostData+Twitter.swift in Sources */,
 				B14500FD26C168B900647476 /* SearchTweetsWindow.swift in Sources */,
 				B1508BDD23E92F0C00973728 /* TimelineKindStateController.swift in Sources */,

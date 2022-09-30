@@ -46,6 +46,8 @@ extension AlertDisplayable {
 	@discardableResult
 	static func showInformationAlert(withTitle title: String, message: String) -> NSApplication.ModalResponse {
 		
+		Log.debug("\(title) : \(message)")
+		
 		let alert = NSAlert()
 		
 		alert.messageText = title
@@ -59,7 +61,7 @@ extension AlertDisplayable {
 	@discardableResult
 	static func showWarningAlert(withTitle title: String, message: String, debugDescription: String? = nil) -> NSApplication.ModalResponse {
 		
-		NSLog("Warning: \(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
+		Log.warning("\(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
 		
 		let alert = NSAlert()
 		
@@ -74,7 +76,7 @@ extension AlertDisplayable {
 	@discardableResult
 	static func showErrorAlert(withTitle title: String, message: String, debugDescription: String? = nil) -> NSApplication.ModalResponse {
 
-		NSLog("Error: \(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
+		Log.error("\(title) : \(message)\(debugDescription.map { " \($0)" } ?? "")")
 		
 		let alert = NSAlert()
 		

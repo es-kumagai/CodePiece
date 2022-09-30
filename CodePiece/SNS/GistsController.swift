@@ -35,9 +35,9 @@ final class GistsController : NSObject, AlertDisplayable {
 		let file = await GistFile(name: filename, content: String(container.data.code))
 		let request = await GitHubAPI.Gists.CreateGist(authorization: authorization, files: [file], description: description, publicGist: publicGist)
 		
-		await NSLog("Public=\(publicGist), File=\(filename), description=\(description)")
+		await Log.debug("Public=\(publicGist), File=\(filename), description=\(description)")
 
-		NSLog("Try to send request: base url = \(request.baseURL), path = \(request.path).")
+		Log.trying("Try to send request: base url = \(request.baseURL), path = \(request.path).")
 		
 		do {
 			let response = try await GitHubAPI.send(request)
@@ -45,7 +45,7 @@ final class GistsController : NSObject, AlertDisplayable {
 			
 			await container.postedToGist(gist: gist)
 			
-			NSLog("A Gist posted successfully. \(gist)")
+			Log.success("A Gist posted successfully. \(gist)")
 		}
 		catch {
 			

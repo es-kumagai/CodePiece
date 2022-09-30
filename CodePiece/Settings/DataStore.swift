@@ -248,7 +248,7 @@ extension DataStore {
 		
 		private init(unuseKeychain: Void) {
 			
-			NSLog("To using keychain is disabled by CodePiece.")
+			Log.warning("Keychain is currently disabled by CodePiece.")
 			authInfo = AuthInfo()
 		}
 		
@@ -264,7 +264,7 @@ extension DataStore {
 					return
 				}
 				
-				NSLog("Restoring authentication information from Keychain.")
+				Log.information("Restoring authentication information from Keychain.")
 								
 				let info = try JSONDecoder().decode(AuthInfo.self, from: data)
 									
@@ -272,7 +272,7 @@ extension DataStore {
 			}
 			catch {
 				
-				NSLog("Failed to get a gist store. Ignoring.")
+				Log.error("Failed to get a gist store. Ignoring.")
 				authInfo = AuthInfo()
 			}
 		}
@@ -281,14 +281,14 @@ extension DataStore {
 			
 			guard NSApp.environment.useKeychain else {
 			
-				NSLog("Settings are not persistent because to using keychain is disabled by CodePiece.")
+				Log.warning("Settings are not persistent because to using keychain is disabled by CodePiece.")
 				return
 			}
 			
 			let keychain = GistStore.keychain
 			let keyForAuthInfo = GistStore.AuthorizationKey
 
-			NSLog("Will save authentication information to Keychain.")
+			Log.information("Authentication information will be saved to Keychain.")
 			
 			do {
 
@@ -298,7 +298,7 @@ extension DataStore {
 			}
 			catch {
 
-				NSLog("Failed to save the git store.")
+				Log.error("Failed to save the git store.")
 				try keychain.remove(keyForAuthInfo)
 				throw DataStoreError.failedToSave(error.localizedDescription)
 			}

@@ -144,7 +144,7 @@ private extension MessageQueue {
 				}
 				catch {
 					
-					NSLog("An error occurred during executing message handler: \(error)")
+					Log.error("An error occurred during executing message handler: \(error)")
 				}
 			}
 		}
@@ -159,7 +159,7 @@ private extension MessageQueue {
 			}
 			catch {
 				
-				NSLog("An error occurred during executing message handler: \(error)")
+				Log.error("An error occurred during executing message handler: \(error)")
 			}
 		}
 	}

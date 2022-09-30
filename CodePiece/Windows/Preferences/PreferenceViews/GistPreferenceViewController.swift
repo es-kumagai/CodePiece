@@ -45,12 +45,11 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 
 				try await Authorization.authorizationWithGist()
 				
-				
-				NSLog("%@", "GitHub authentication succeeded.")
+				Log.success("GitHub authentication succeeded.")
 			}
 			catch {
 				
-				NSLog("Failed to authentication. %@", "\(error)")
+				Log.error("Failed to authentication. \(error)")
 				
 				//			case .PinRequired:
 				//				self.showErrorAlert(withTitle: "Failed to authentication", message: "Unexpected Process (Pin Required).")
@@ -81,7 +80,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 				try await Authorization.resetAuthorizationOfGist(id: id)
 
 				// self.showInformationAlert("Reset successfully", message: "Please perform authentication before you post to Gist again.")
-				NSLog("Reset successfully. Please authenticate before you post to Gist again.")
+				Log.success("Reset successfully. Please authenticate before you post to Gist again.")
 			}
 			catch {
 				
@@ -132,7 +131,7 @@ final class GistPreferenceViewController: NSViewController, NotificationObservab
 		super.viewWillAppear()
 		
 		observe(Authorization.GistAuthorizationStateDidChangeNotification.self) { [unowned self] notification in
-			NSLog("Detect GitHub authorization state changed.")
+			Log.debug("Detect GitHub authorization state changed.")
 			
 			applyAuthorizedStatus()
 		}

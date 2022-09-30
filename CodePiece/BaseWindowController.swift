@@ -16,7 +16,7 @@ final class BaseWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
 		
-		NSLog("Base window did load.")
+		DebugTime.print("Base window did load.")
     }
 }
 

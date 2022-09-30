@@ -117,7 +117,7 @@ extension TimelineTabViewController : TimelineKindStateDelegate {
 		
 		Task { @MainActor in
 
-			NSLog("Change timeline tag to '\(kind)'.")
+			Log.information("Change timeline tag to '\(kind)'.")
 			let foundTarget = timelineViewControllers.enumerated().first { offset, controller in
 				
 				controller.contentsKind == kind

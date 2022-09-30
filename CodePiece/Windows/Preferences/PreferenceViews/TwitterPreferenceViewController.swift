@@ -158,7 +158,7 @@ extension TwitterPreferenceViewController {
 		
 		if !message.isEmpty {
 			
-			NSLog(message)
+			Log.error(message)
 		}
 		
 		errorReportTextField?.stringValue = message
