@@ -58,6 +58,7 @@ extension LogItem : CustomStringConvertible {
 			Text(date.description)
 			kind.symbolView
 			Text(message).foregroundColor(kind.symbolColor)
+			Spacer()
 		}
 		
 	}

@@ -10,11 +10,12 @@
         <scene sceneID="Mrd-qh-Oby">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="Lyp-Pq-YWg" customClass="LogWindowController" customModule="CodePiece" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="CodePiece Activity Log" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="GTV-QC-5bh">
+                    <window key="window" title="CodePiece Activity Log" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="ActivityLogWindow" animationBehavior="default" id="GTV-QC-5bh">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="425" y="462" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
+                        <value key="minSize" type="size" width="480" height="270"/>
                         <view key="contentView" id="QbI-OK-XPM">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             <autoresizingMask key="autoresizingMask"/>

@@ -12,8 +12,13 @@ import SwiftUI
 @MainActor
 final class LogViewController : NSHostingController<LogView> {
 
-	convenience init(size: NSSize) {
+	init(minSize: NSSize) {
 		
-		self.init(rootView: LogView(size: size))
+		super.init(rootView: LogView(minSize: minSize))
+	}
+	
+	required init?(coder: NSCoder) {
+		
+		super.init(coder: coder)
 	}
 }

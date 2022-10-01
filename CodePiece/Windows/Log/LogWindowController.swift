@@ -12,15 +12,16 @@ import AppKit
 @objcMembers
 final class LogWindowController : NSWindowController {
 
-	override func awakeFromNib() {
-		
-		super.awakeFromNib()
-		window?.setFrameAutosaveName("ActivityLogWindow")
-	}
-	
 	override func windowDidLoad() {
 		
 		super.windowDidLoad()
-		contentViewController = LogViewController(size: window!.frame.size)
+
+		// For some reason, this method is called twice,
+		// so the initialization of the content view controller is
+		// made to executed only once.
+		if contentViewController == nil {
+
+			contentViewController = LogViewController(minSize: window!.minSize)
+		}
 	}
 }

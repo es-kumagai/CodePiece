@@ -9,41 +9,34 @@
 import SwiftUI
 
 struct LogView : View {
-	
+		
 	@MainActor
 	@StateObject var log: Log = .standard
-	
-	@State var size: NSSize
-	
-	init(size: NSSize) {
 
-		self.size = size
-	}
+	@State var minSize = NSSize(width: 100, height: 100)
 	
-	init(size: NSSize, log: Log) {
-		
-		self.init(size: size)
-		self.log.append(log: log)
-	}
-
 	var body: some View {
 		
-		ScrollViewReader { reader in
-			ScrollView {
-				VStack(alignment: .leading, spacing: 3) {
-					ForEach(log.items, content: \.view)
+		GeometryReader { geometory in
+			
+			ScrollViewReader { reader in
+				ScrollView {
+					VStack(alignment: .leading, spacing: 3) {
+						ForEach(log.items, content: \.view)
+					}
 				}
-			}
-			.padding()
-			.onAppear {
-				if let id = log.lastId {
-					withAnimation {
-						reader.scrollTo(id)
+				.padding()
+				.onAppear {
+					if let id = log.lastId {
+						withAnimation {
+							reader.scrollTo(id)
+						}
 					}
 				}
 			}
+			.frame(width: geometory.size.width, height: geometory.size.height)
 		}
-		.frame(minWidth: size.width, minHeight: size.height)
+		.frame(minWidth: minSize.width, minHeight: minSize.height)
 	}
 }
 
@@ -93,6 +86,6 @@ struct ContentView_Previews : PreviewProvider {
 			LogItem.information("最後のテストメッセージ"),
 		])
 		
-		LogView(size: NSSize(width: 100, height: 200), log: log)
+		LogView(log: log)
 	}
 }
